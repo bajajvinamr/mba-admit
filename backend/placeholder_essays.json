@@ -1,0 +1,26 @@
+[
+  {
+    "id": "essay_001",
+    "school": "Stanford GSB",
+    "prompt": "What matters most to you, and why?",
+    "text": "What matters most to me is democratizing access to education for underprivileged communities. Growing up in a rural region, I experienced firsthand the disparity in educational resources. This drove me to establish a non-profit tutoring center during my undergraduate years. At Stanford GSB, I hope to refine my leadership skills to scale this model globally...",
+    "category": "Social Impact / Leadership",
+    "word_count": 645
+  },
+  {
+    "id": "essay_002",
+    "school": "Harvard Business School",
+    "prompt": "As we review your application, what more would you like us to know as we consider your candidacy for the Harvard Business School MBA program?",
+    "text": "I want the admissions committee to understand the grit I developed while turning around my family's failing manufacturing business. After a sudden illness incapacitated my father, I stepped into the CEO role at 24. It was overwhelming, but by leaning on data-driven inventory management and renegotiating supplier contracts, we returned to profitability within 18 months...",
+    "category": "Overcoming Adversity / Operations",
+    "word_count": 890
+  },
+  {
+    "id": "essay_003",
+    "school": "Wharton",
+    "prompt": "How do you plan to use the Wharton MBA program to help you achieve your future professional goals?",
+    "text": "My goal is to transition from traditional investment banking to impact investing, specifically focusing on renewable energy in emerging markets. Wharton's ESG initiative and the specific coursework in Climate Finance align perfectly with my aspirations. I intend to leverage the network to source deals and understand regulatory frameworks...",
+    "category": "Career Pivot / Finance",
+    "word_count": 480
+  }
+]

@@ -1,0 +1,271 @@
+INFO:     Will watch for changes in these directories: ['/Users/vinamr/.gemini/antigravity/playground/radiant-feynman/mba-admissions-ai/backend']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [63796] using StatReload
+INFO:     Started server process [63799]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Loaded 1195 schools from /Users/vinamr/.gemini/antigravity/playground/radiant-feynman/mba-admissions-ai/backend/data/school_db_full.json
+INFO:     127.0.0.1:64959 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65461 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65465 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65465 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65461 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49295 - "OPTIONS /api/submit_profile HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49295 - "POST /api/submit_profile HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49408 - "GET /api/schools/gsb HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49408 - "POST /api/submit_profile HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49431 - "POST /api/submit_profile HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49683 - "POST /api/submit_profile HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49898 - "OPTIONS /api/submit_profile HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49895 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49900 - "POST /api/submit_profile HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49898 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49900 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49898 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49898 - "GET /api/schools/gsb HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50013 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50044 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50115 - "GET /api/schools/hbs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50115 - "GET /api/schools/hbs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50588 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50590 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50590 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50668 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50668 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53958 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53960 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53958 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53960 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53958 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53958 - "OPTIONS /api/submit_profile HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53960 - "POST /api/submit_profile HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54000 - "POST /api/submit_profile HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54448 - "POST /api/submit_profile HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54450 - "GET /api/schools/gsb HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56069 - "OPTIONS /api/submit_profile HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56069 - "POST /api/submit_profile HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56071 - "POST /api/submit_profile HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56473 - "OPTIONS /api/submit_profile HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56473 - "POST /api/submit_profile HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56479 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56473 - "GET /api/schools/gsb HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56482 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56473 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56482 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56473 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59051 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59077 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59077 - "GET /api/schools HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [63799]
+INFO:     Started server process [68775]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Loaded 1195 schools from /Users/vinamr/.gemini/antigravity/playground/radiant-feynman/mba-admissions-ai/backend/data/school_db_full.json
+INFO:     127.0.0.1:59674 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59676 - "POST /api/calculate_odds HTTP/1.1" 200 OK
+[Interviewer] Calling Claude...
+⚠️ Interviewer LLM failed: Connection error.. Using fallback.
+INFO:     127.0.0.1:59678 - "POST /api/start_session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59686 - "POST /api/chat HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'pm_agent.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [68775]
+INFO:     Started server process [69626]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Loaded 1195 schools from /Users/vinamr/.gemini/antigravity/playground/radiant-feynman/mba-admissions-ai/backend/data/school_db_full.json
+INFO:     127.0.0.1:59721 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59723 - "POST /api/calculate_odds HTTP/1.1" 200 OK
+[Interviewer] Calling Claude...
+⚠️ Interviewer LLM failed: Connection error.. Using fallback.
+INFO:     127.0.0.1:59725 - "POST /api/start_session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59730 - "POST /api/chat HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'pm_agent.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [69626]
+INFO:     Started server process [70041]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Loaded 1195 schools from /Users/vinamr/.gemini/antigravity/playground/radiant-feynman/mba-admissions-ai/backend/data/school_db_full.json
+INFO:     127.0.0.1:59898 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59900 - "POST /api/calculate_odds HTTP/1.1" 200 OK
+[Interviewer] Calling Claude...
+⚠️ Interviewer LLM failed: Connection error.. Using fallback.
+INFO:     127.0.0.1:59902 - "POST /api/start_session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59930 - "POST /api/chat HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'pm_agent.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [70041]
+INFO:     Started server process [70456]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Loaded 1195 schools from /Users/vinamr/.gemini/antigravity/playground/radiant-feynman/mba-admissions-ai/backend/data/school_db_full.json
+INFO:     127.0.0.1:60023 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60025 - "POST /api/calculate_odds HTTP/1.1" 200 OK
+[Interviewer] Calling Claude...
+⚠️ Interviewer LLM failed: Connection error.. Using fallback.
+INFO:     127.0.0.1:60027 - "POST /api/start_session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60032 - "POST /api/chat HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'pm_agent.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [70456]
+INFO:     Started server process [70860]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Loaded 1195 schools from /Users/vinamr/.gemini/antigravity/playground/radiant-feynman/mba-admissions-ai/backend/data/school_db_full.json
+INFO:     127.0.0.1:60062 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60064 - "POST /api/calculate_odds HTTP/1.1" 200 OK
+[Interviewer] Calling Claude...
+⚠️ Interviewer LLM failed: Connection error.. Using fallback.
+INFO:     127.0.0.1:60066 - "POST /api/start_session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60077 - "POST /api/chat HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'pm_agent.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [70860]
+INFO:     Started server process [71262]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Loaded 1195 schools from /Users/vinamr/.gemini/antigravity/playground/radiant-feynman/mba-admissions-ai/backend/data/school_db_full.json
+INFO:     127.0.0.1:60120 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60122 - "POST /api/calculate_odds HTTP/1.1" 200 OK
+[Interviewer] Calling Claude...
+⚠️ Interviewer LLM failed: Connection error.. Using fallback.
+INFO:     127.0.0.1:60124 - "POST /api/start_session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60133 - "POST /api/chat HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'pm_agent.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [71262]
+INFO:     Started server process [71663]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Loaded 1195 schools from /Users/vinamr/.gemini/antigravity/playground/radiant-feynman/mba-admissions-ai/backend/data/school_db_full.json
+INFO:     127.0.0.1:60157 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60159 - "POST /api/calculate_odds HTTP/1.1" 200 OK
+[Interviewer] Calling Claude...
+⚠️ Interviewer LLM failed: Connection error.. Using fallback.
+INFO:     127.0.0.1:60161 - "POST /api/start_session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60173 - "POST /api/chat HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'pm_agent.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [71663]
+INFO:     Started server process [72075]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'pm_agent.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [72075]
+INFO:     Started server process [72662]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Loaded 1195 schools from /Users/vinamr/.gemini/antigravity/playground/radiant-feynman/mba-admissions-ai/backend/data/school_db_full.json
+INFO:     127.0.0.1:60314 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60316 - "POST /api/calculate_odds HTTP/1.1" 200 OK
+[Interviewer] Calling Claude...
+⚠️ Interviewer LLM failed: Connection error.. Using fallback.
+INFO:     127.0.0.1:60318 - "POST /api/start_session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60327 - "POST /api/chat HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'pm_agent.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [72662]
+INFO:     Started server process [73077]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'pm_agent.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [73077]
+INFO:     Started server process [73080]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'pm_agent.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [73080]
+INFO:     Started server process [73082]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'pm_agent.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [73082]
+INFO:     Started server process [73088]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'pm_agent.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [73088]
+INFO:     Started server process [73090]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Loaded 1195 schools from /Users/vinamr/.gemini/antigravity/playground/radiant-feynman/mba-admissions-ai/backend/data/school_db_full.json
+INFO:     127.0.0.1:60445 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60447 - "POST /api/calculate_odds HTTP/1.1" 200 OK
+[Interviewer] Calling Claude...
+⚠️ Interviewer LLM failed: Connection error.. Using fallback.
+INFO:     127.0.0.1:60449 - "POST /api/start_session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60454 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63106 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63198 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63198 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63198 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63263 - "GET /api/schools/isb HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63263 - "GET /api/schools/isb HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [73090]
+INFO:     Started server process [74325]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Loaded 1195 schools from /Users/vinamr/.gemini/antigravity/playground/radiant-feynman/mba-admissions-ai/backend/data/school_db_full.json
+INFO:     127.0.0.1:63338 - "OPTIONS /api/start_session HTTP/1.1" 200 OK
+[Interviewer] Calling Claude...
+[Interviewer] Calling Claude...
+[Interviewer] Calling Claude...
+[Interviewer] Calling Claude...
+INFO:     127.0.0.1:64119 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64151 - "GET /api/decisions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64238 - "GET /api/schools HTTP/1.1" 200 OK
+⚠️ Interviewer LLM failed: Connection error.. Using fallback.
+INFO:     127.0.0.1:63338 - "POST /api/start_session HTTP/1.1" 200 OK
+⚠️ Interviewer LLM failed: Connection error.. Using fallback.
+INFO:     127.0.0.1:63341 - "POST /api/start_session HTTP/1.1" 200 OK
+⚠️ Interviewer LLM failed: Connection error.. Using fallback.
+INFO:     127.0.0.1:63344 - "POST /api/start_session HTTP/1.1" 200 OK
+⚠️ Interviewer LLM failed: Connection error.. Using fallback.
+INFO:     127.0.0.1:63347 - "POST /api/start_session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64432 - "OPTIONS /api/calculate_odds HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64432 - "POST /api/calculate_odds HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [74325]
+INFO:     Stopping reloader process [63796]

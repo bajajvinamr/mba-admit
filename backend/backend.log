@@ -1,0 +1,7 @@
+INFO:     Started server process [94897]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+✅ Loaded 1198 schools from /Users/vinamr/.gemini/antigravity/playground/radiant-feynman/mba-admissions-ai/backend/data/school_db_full.json
+INFO:     127.0.0.1:53714 - "GET /api/schools HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54279 - "GET /api/schools HTTP/1.1" 200 OK

@@ -1,0 +1,1202 @@
+[
+  {
+    "school_id": "gsb",
+    "gmat": 760,
+    "gpa": 3.94,
+    "status": "admitted",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 730,
+    "gpa": 3.7,
+    "status": "waitlisted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 740,
+    "gpa": 3.91,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 750,
+    "gpa": 3.69,
+    "status": "admitted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 730,
+    "gpa": 3.88,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 730,
+    "gpa": 3.86,
+    "status": "admitted",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 720,
+    "gpa": 3.71,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 720,
+    "gpa": 3.82,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 740,
+    "gpa": 3.69,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 750,
+    "gpa": 3.69,
+    "status": "waitlisted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 740,
+    "gpa": 3.72,
+    "status": "waitlisted",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 740,
+    "gpa": 3.63,
+    "status": "admitted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 730,
+    "gpa": 3.82,
+    "status": "denied",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 740,
+    "gpa": 3.63,
+    "status": "admitted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 720,
+    "gpa": 3.69,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 740,
+    "gpa": 3.73,
+    "status": "admitted",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 760,
+    "gpa": 3.93,
+    "status": "admitted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 730,
+    "gpa": 3.9,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 740,
+    "gpa": 3.8,
+    "status": "waitlisted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 750,
+    "gpa": 3.86,
+    "status": "admitted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 720,
+    "gpa": 3.91,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 720,
+    "gpa": 3.94,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 720,
+    "gpa": 3.76,
+    "status": "denied",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 740,
+    "gpa": 3.87,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 720,
+    "gpa": 3.97,
+    "status": "denied",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 730,
+    "gpa": 3.87,
+    "status": "denied",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 720,
+    "gpa": 3.87,
+    "status": "denied",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 760,
+    "gpa": 3.99,
+    "status": "admitted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 760,
+    "gpa": 3.78,
+    "status": "waitlisted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 740,
+    "gpa": 3.8,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 760,
+    "gpa": 3.92,
+    "status": "admitted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 750,
+    "gpa": 3.63,
+    "status": "admitted",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 760,
+    "gpa": 3.79,
+    "status": "admitted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 740,
+    "gpa": 3.95,
+    "status": "admitted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 720,
+    "gpa": 3.98,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 740,
+    "gpa": 3.88,
+    "status": "waitlisted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 740,
+    "gpa": 3.71,
+    "status": "admitted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 720,
+    "gpa": 3.61,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 730,
+    "gpa": 3.6,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 730,
+    "gpa": 3.61,
+    "status": "waitlisted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 750,
+    "gpa": 3.84,
+    "status": "admitted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 740,
+    "gpa": 3.78,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 740,
+    "gpa": 3.63,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 750,
+    "gpa": 3.63,
+    "status": "waitlisted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 720,
+    "gpa": 3.74,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 760,
+    "gpa": 3.85,
+    "status": "admitted",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 730,
+    "gpa": 3.62,
+    "status": "admitted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 750,
+    "gpa": 3.61,
+    "status": "denied",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 730,
+    "gpa": 3.76,
+    "status": "waitlisted",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "gsb",
+    "gmat": 740,
+    "gpa": 3.85,
+    "status": "waitlisted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 710,
+    "gpa": 3.67,
+    "status": "denied",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 710,
+    "gpa": 3.75,
+    "status": "denied",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 730,
+    "gpa": 3.77,
+    "status": "waitlisted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 720,
+    "gpa": 3.61,
+    "status": "waitlisted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 730,
+    "gpa": 3.6,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 750,
+    "gpa": 3.67,
+    "status": "waitlisted",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 750,
+    "gpa": 3.75,
+    "status": "interviewed",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 750,
+    "gpa": 3.51,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 710,
+    "gpa": 3.79,
+    "status": "denied",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 740,
+    "gpa": 3.53,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 720,
+    "gpa": 3.68,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 720,
+    "gpa": 3.87,
+    "status": "admitted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 730,
+    "gpa": 3.67,
+    "status": "waitlisted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 720,
+    "gpa": 3.64,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 720,
+    "gpa": 3.9,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 710,
+    "gpa": 3.66,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 730,
+    "gpa": 3.55,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 730,
+    "gpa": 3.65,
+    "status": "waitlisted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 710,
+    "gpa": 3.68,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 710,
+    "gpa": 3.64,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 740,
+    "gpa": 3.65,
+    "status": "admitted",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 710,
+    "gpa": 3.78,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 710,
+    "gpa": 3.65,
+    "status": "denied",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 730,
+    "gpa": 3.87,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 750,
+    "gpa": 3.57,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 720,
+    "gpa": 3.89,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 730,
+    "gpa": 3.77,
+    "status": "waitlisted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 710,
+    "gpa": 3.82,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 750,
+    "gpa": 3.75,
+    "status": "admitted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 720,
+    "gpa": 3.77,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 740,
+    "gpa": 3.76,
+    "status": "interviewed",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 730,
+    "gpa": 3.64,
+    "status": "admitted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 750,
+    "gpa": 3.78,
+    "status": "interviewed",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 750,
+    "gpa": 3.71,
+    "status": "admitted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 710,
+    "gpa": 3.64,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 750,
+    "gpa": 3.76,
+    "status": "admitted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 710,
+    "gpa": 3.53,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 740,
+    "gpa": 3.72,
+    "status": "admitted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 730,
+    "gpa": 3.68,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 740,
+    "gpa": 3.57,
+    "status": "waitlisted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 750,
+    "gpa": 3.63,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 750,
+    "gpa": 3.51,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 720,
+    "gpa": 3.82,
+    "status": "admitted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 740,
+    "gpa": 3.6,
+    "status": "denied",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 720,
+    "gpa": 3.87,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 710,
+    "gpa": 3.71,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 750,
+    "gpa": 3.62,
+    "status": "admitted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 740,
+    "gpa": 3.64,
+    "status": "denied",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 740,
+    "gpa": 3.89,
+    "status": "denied",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "hbs",
+    "gmat": 740,
+    "gpa": 3.76,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.72,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 730,
+    "gpa": 3.83,
+    "status": "admitted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.85,
+    "status": "waitlisted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 740,
+    "gpa": 3.8,
+    "status": "admitted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.79,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 700,
+    "gpa": 3.61,
+    "status": "denied",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 730,
+    "gpa": 3.68,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 720,
+    "gpa": 3.77,
+    "status": "waitlisted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 740,
+    "gpa": 3.67,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.72,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 700,
+    "gpa": 3.61,
+    "status": "denied",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 740,
+    "gpa": 3.63,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 700,
+    "gpa": 3.8,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.87,
+    "status": "waitlisted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 740,
+    "gpa": 3.62,
+    "status": "waitlisted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 700,
+    "gpa": 3.81,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.63,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 730,
+    "gpa": 3.81,
+    "status": "interviewed",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 720,
+    "gpa": 3.55,
+    "status": "waitlisted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 740,
+    "gpa": 3.73,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 730,
+    "gpa": 3.79,
+    "status": "admitted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 720,
+    "gpa": 3.56,
+    "status": "waitlisted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.62,
+    "status": "admitted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 720,
+    "gpa": 3.8,
+    "status": "admitted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 740,
+    "gpa": 3.62,
+    "status": "waitlisted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 720,
+    "gpa": 3.71,
+    "status": "waitlisted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.63,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 740,
+    "gpa": 3.89,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 700,
+    "gpa": 3.77,
+    "status": "denied",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 730,
+    "gpa": 3.78,
+    "status": "admitted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 720,
+    "gpa": 3.65,
+    "status": "admitted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.51,
+    "status": "waitlisted",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.75,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 740,
+    "gpa": 3.71,
+    "status": "interviewed",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.86,
+    "status": "admitted",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 720,
+    "gpa": 3.79,
+    "status": "admitted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.75,
+    "status": "denied",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 720,
+    "gpa": 3.74,
+    "status": "admitted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.72,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.69,
+    "status": "waitlisted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 730,
+    "gpa": 3.64,
+    "status": "waitlisted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 720,
+    "gpa": 3.79,
+    "status": "admitted",
+    "industry": "Finance",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 740,
+    "gpa": 3.82,
+    "status": "admitted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 720,
+    "gpa": 3.54,
+    "status": "waitlisted",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.54,
+    "status": "waitlisted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.61,
+    "status": "waitlisted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 740,
+    "gpa": 3.54,
+    "status": "denied",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 720,
+    "gpa": 3.86,
+    "status": "admitted",
+    "industry": "Non-Profit",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 700,
+    "gpa": 3.84,
+    "status": "denied",
+    "industry": "Consulting",
+    "source": "gmatclub_synthetic_fallback"
+  },
+  {
+    "school_id": "wharton",
+    "gmat": 710,
+    "gpa": 3.59,
+    "status": "admitted",
+    "industry": "Tech",
+    "source": "gmatclub_synthetic_fallback"
+  }
+]

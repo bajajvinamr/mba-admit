@@ -1,0 +1,59 @@
+{
+  "timestamp": 1773236442.485565,
+  "profiles_tested": 2,
+  "scores": {
+    "consultant": [
+      4,
+      4
+    ],
+    "interviewer": [
+      4,
+      4
+    ],
+    "writer": [
+      4,
+      4
+    ]
+  },
+  "logs": [
+    {
+      "profile_id": "profile_1_tech_pm",
+      "scores": {
+        "consultant": {
+          "score": 4,
+          "reasoning": "This is a mocked good score for the consultant."
+        },
+        "interviewer": {
+          "score": 4,
+          "reasoning": "This is a mocked good score for the consultant."
+        },
+        "writer": {
+          "score": 4,
+          "reasoning": "This is a mocked good score for the consultant."
+        }
+      }
+    },
+    {
+      "profile_id": "profile_2_consultant",
+      "scores": {
+        "consultant": {
+          "score": 4,
+          "reasoning": "This is a mocked good score for the consultant."
+        },
+        "interviewer": {
+          "score": 4,
+          "reasoning": "This is a mocked good score for the consultant."
+        },
+        "writer": {
+          "score": 4,
+          "reasoning": "This is a mocked good score for the consultant."
+        }
+      }
+    }
+  ],
+  "averages": {
+    "consultant": 4.0,
+    "interviewer": 4.0,
+    "writer": 4.0
+  }
+}
