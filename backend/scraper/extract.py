@@ -6,7 +6,11 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+from dotenv import load_dotenv
 from anthropic import Anthropic
+
+# Load .env from backend/ directory
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 from scraper.config import (
     ANTHROPIC_MODEL,
@@ -157,7 +161,13 @@ def extract_school(school_id: str, school_name: str) -> dict:
     prompt = build_extraction_prompt(school_name, combined_text)
 
     # Call Claude
-    client = Anthropic()
+    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+    if not api_key or not api_key.startswith("sk-"):
+        raise RuntimeError(
+            "ANTHROPIC_API_KEY not set. Add it to backend/.env or export it:\n"
+            "  export ANTHROPIC_API_KEY=sk-ant-..."
+        )
+    client = Anthropic(api_key=api_key)
     response = client.messages.create(
         model=ANTHROPIC_MODEL,
         max_tokens=EXTRACT_MAX_TOKENS,
