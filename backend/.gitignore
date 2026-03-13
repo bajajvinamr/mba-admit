@@ -24,3 +24,4 @@ venv/
 
 # Data (large files)
 data/qdrant_db/
+data/raw_html/

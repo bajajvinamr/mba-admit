@@ -1,0 +1,37 @@
+[
+  {
+    "id": "hbs",
+    "name": "Harvard Business School",
+    "location": "Boston, MA",
+    "country": "USA",
+    "website": "https://www.hbs.edu/mba"
+  },
+  {
+    "id": "gsb",
+    "name": "Stanford GSB",
+    "location": "Stanford, CA",
+    "country": "USA",
+    "website": "https://www.gsb.stanford.edu"
+  },
+  {
+    "id": "wharton",
+    "name": "The Wharton School",
+    "location": "Philadelphia, PA",
+    "country": "USA",
+    "website": "https://mba.wharton.upenn.edu"
+  },
+  {
+    "id": "insead",
+    "name": "INSEAD",
+    "location": "Fontainebleau, France",
+    "country": "France",
+    "website": "https://www.insead.edu/programmes/mba"
+  },
+  {
+    "id": "iima",
+    "name": "IIM Ahmedabad",
+    "location": "Ahmedabad, India",
+    "country": "India",
+    "website": "https://www.iima.ac.in"
+  }
+]

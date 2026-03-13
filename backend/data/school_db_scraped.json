@@ -1,0 +1,30 @@
+{
+  "hbs": {
+    "_meta": {
+      "school_id": "hbs",
+      "school_name": "Harvard Business School",
+      "error": "\"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\""
+    }
+  },
+  "gsb": {
+    "_meta": {
+      "school_id": "gsb",
+      "school_name": "Stanford GSB",
+      "error": "\"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\""
+    }
+  },
+  "wharton": {
+    "_meta": {
+      "school_id": "wharton",
+      "school_name": "The Wharton School",
+      "error": "\"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\""
+    }
+  },
+  "iima": {
+    "_meta": {
+      "school_id": "iima",
+      "school_name": "IIM Ahmedabad",
+      "error": "\"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\""
+    }
+  }
+}

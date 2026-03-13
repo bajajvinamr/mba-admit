@@ -32,30 +32,122 @@ class AgentType(str, Enum):
     INTERVIEWER = "interviewer"
     WRITER = "writer"
 
-# ── School Database — loaded from generated JSON ──────────────────────────
-_SCHOOL_DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "school_db_full.json")
+# ── School Database — loaded from generated JSON + scraped overlay ────────
+_DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+_SCHOOL_DB_PATH = os.path.join(_DATA_DIR, "school_db_full.json")
+_SCRAPED_DB_PATH = os.path.join(_DATA_DIR, "school_db_scraped.json")
+
+import re
+_HEX_PATTERN = re.compile(r'^[0-9a-f]{6,}$')
+
 
 def _load_school_db():
-    """Load school DB from JSON, filtering out AI-generated placeholder schools.
+    """Load school DB from JSON, filtering out AI-generated placeholder schools,
+    then overlay any scraped data on top.
 
     Real schools have human-readable IDs (e.g. 'hbs', 'insead', 'iim_mumbai').
     Fake/generated schools have hex-hash IDs (e.g. '5495916da71a').
+    Scraped data from the pipeline takes priority over synthetic data.
     """
     if os.path.exists(_SCHOOL_DB_PATH):
         with open(_SCHOOL_DB_PATH, "r") as f:
             raw_db = json.load(f)
-        # Filter: keep only schools with non-hex IDs (real, curated entries)
-        import re
-        hex_pattern = re.compile(r'^[0-9a-f]{6,}$')
-        db = {sid: school for sid, school in raw_db.items() if not hex_pattern.match(sid)}
+        db = {sid: school for sid, school in raw_db.items() if not _HEX_PATTERN.match(sid)}
         logger.info("Loaded %d real schools (filtered from %d total) from %s", len(db), len(raw_db), _SCHOOL_DB_PATH)
-        return db
     else:
         logger.warning("school_db_full.json not found, using minimal fallback")
-        return {
+        db = {
             "hbs": {"name": "Harvard Business School", "location": "Boston, MA, USA", "country": "USA", "gmat_avg": 730, "acceptance_rate": 9.5, "class_size": 945, "tuition_usd": 74910, "median_salary": "$175,000", "specializations": ["General Management", "Finance", "Entrepreneurship"], "essay_prompts": ["As we review your application, what more would you like us to know?"]},
             "gsb": {"name": "Stanford GSB", "location": "Stanford, CA, USA", "country": "USA", "gmat_avg": 738, "acceptance_rate": 6.2, "class_size": 436, "tuition_usd": 76950, "median_salary": "$182,500", "specializations": ["Entrepreneurship", "Social Innovation", "Tech"], "essay_prompts": ["What matters most to you, and why?", "Why Stanford?"]},
         }
+
+    # Overlay scraped data — real values from the scraper pipeline take priority
+    scraped_count = _overlay_scraped_data(db)
+    if scraped_count:
+        logger.info("Overlaid scraped data for %d schools", scraped_count)
+
+    return db
+
+
+def _overlay_scraped_data(db: dict) -> int:
+    """Merge scraped school data on top of the base DB in-place.
+
+    Returns the number of schools that received scraped data.
+    """
+    if not os.path.exists(_SCRAPED_DB_PATH):
+        return 0
+
+    try:
+        with open(_SCRAPED_DB_PATH, "r") as f:
+            scraped = json.load(f)
+    except (json.JSONDecodeError, IOError) as e:
+        logger.warning("Could not load scraped DB: %s", e)
+        return 0
+
+    if not isinstance(scraped, dict):
+        return 0
+
+    count = 0
+    for school_id, scraped_fields in scraped.items():
+        if not isinstance(scraped_fields, dict):
+            continue
+
+        # Skip entries that are just error records
+        meta = scraped_fields.get("_meta", {})
+        if meta.get("error"):
+            continue
+        if "error" in scraped_fields and len(scraped_fields) <= 3:
+            continue
+
+        if school_id not in db:
+            db[school_id] = {k: v for k, v in scraped_fields.items() if k != "_meta"}
+            count += 1
+            continue
+
+        # Selective overwrite: scraped non-null values win
+        for key, value in scraped_fields.items():
+            if key == "_meta":
+                continue
+            if key == "data_quality":
+                db[school_id][key] = value
+            elif value is not None:
+                db[school_id][key] = value
+        count += 1
+
+    return count
+
+
+def get_school_data_quality(school_id: str) -> dict:
+    """Return data quality metadata for a school.
+
+    Returns dict with:
+        - source: 'scraped' | 'synthetic'
+        - verified_fields: list of field names verified by scraping
+        - confidence: 0.0-1.0 overall confidence score
+        - last_scraped: ISO date or None
+    """
+    school = SCHOOL_DB.get(school_id)
+    if not school:
+        return {"source": "unknown", "verified_fields": [], "confidence": 0.0, "last_scraped": None}
+
+    dq = school.get("data_quality", {})
+    if dq and dq.get("last_scraped"):
+        return {
+            "source": "scraped",
+            "verified_fields": dq.get("verified_fields", []),
+            "confidence": dq.get("confidence", 0.0),
+            "last_scraped": dq.get("last_scraped"),
+            "source_urls": dq.get("source_urls", []),
+            "estimated_fields": dq.get("estimated_fields", []),
+        }
+
+    return {
+        "source": "synthetic",
+        "verified_fields": [],
+        "confidence": 0.0,
+        "last_scraped": None,
+    }
+
 
 SCHOOL_DB = _load_school_db()
 

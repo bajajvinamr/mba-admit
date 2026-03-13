@@ -1,7 +1,7 @@
 """School directory and odds calculator endpoints."""
 
 from fastapi import APIRouter, HTTPException, Query
-from agents import SCHOOL_DB, SCHOOL_ALIASES
+from agents import SCHOOL_DB, SCHOOL_ALIASES, get_school_data_quality
 from models import OddsRequest
 
 router = APIRouter(prefix="/api", tags=["schools"])
@@ -9,6 +9,7 @@ router = APIRouter(prefix="/api", tags=["schools"])
 
 def _school_summary(sid: str, school: dict) -> dict:
     """Standard school summary dict used by list and search endpoints."""
+    dq = get_school_data_quality(sid)
     return {
         "id": sid,
         "name": school["name"],
@@ -22,6 +23,8 @@ def _school_summary(sid: str, school: dict) -> dict:
         "tuition_usd": school.get("tuition_usd", "N/A"),
         "program_duration": school.get("program_details", {}).get("duration", "N/A"),
         "stem_designated": school.get("program_details", {}).get("stem_designated", False),
+        "data_source": dq["source"],
+        "data_confidence": dq["confidence"],
     }
 
 
@@ -57,11 +60,12 @@ def list_schools(q: str = Query(default=None, description="Search query — matc
 
 @router.get("/schools/{school_id}")
 def get_school(school_id: str):
-    """Returns detail for a single school including essay prompts."""
+    """Returns detail for a single school including essay prompts and data quality."""
     if school_id not in SCHOOL_DB:
         raise HTTPException(status_code=404, detail="School not found")
     school = SCHOOL_DB[school_id]
-    return {"id": school_id, **school}
+    dq = get_school_data_quality(school_id)
+    return {"id": school_id, **school, "data_quality_summary": dq}
 
 
 @router.post("/calculate_odds")

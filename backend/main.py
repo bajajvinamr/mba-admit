@@ -41,6 +41,7 @@ from routers.sessions import router as sessions_router
 from routers.tools import router as tools_router
 from routers.user import router as user_router
 from routers.features import router as features_router
+from routers.scraper import router as scraper_router
 
 app.include_router(auth_router)
 app.include_router(schools_router)
@@ -48,6 +49,7 @@ app.include_router(sessions_router)
 app.include_router(tools_router)
 app.include_router(user_router)
 app.include_router(features_router)
+app.include_router(scraper_router)
 
 
 @app.get("/")
