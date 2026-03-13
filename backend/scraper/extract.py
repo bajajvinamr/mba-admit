@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 from anthropic import Anthropic
 
 # Load .env from backend/ directory
-load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+load_dotenv(Path(__file__).resolve().parent.parent / ".env", override=True)
 
 from scraper.config import (
     ANTHROPIC_MODEL,

@@ -33,7 +33,7 @@ def deduplicate_schools(schools: list[dict], threshold: int = 80) -> list[dict]:
                     if len(school) > len(existing_school):
                         seen[i] = (norm, school)
                         result[i] = school
-                    for key in ["ft_rank", "qs_rank", "usn_rank", "pq_rank"]:
+                    for key in ["ft_rank", "qs_rank", "usn_rank", "pq_rank", "website"]:
                         if key in school and key not in result[i]:
                             result[i][key] = school[key]
                     is_dup = True

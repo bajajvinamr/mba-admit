@@ -1,9 +1,258 @@
 [
   {
+    "name": "IIM Ahmedabad",
+    "location": "Ahmedabad, Gujarat",
+    "country": "India",
+    "website": "https://www.iima.ac.in",
+    "source": "seed",
+    "id": "iim_ahmedabad"
+  },
+  {
+    "name": "IIM Bangalore",
+    "location": "Bangalore, Karnataka",
+    "country": "India",
+    "website": "https://www.iimb.ac.in",
+    "source": "seed",
+    "id": "iim_bangalore"
+  },
+  {
+    "name": "IIM Calcutta",
+    "location": "Kolkata, West Bengal",
+    "country": "India",
+    "website": "https://www.iimcal.ac.in",
+    "source": "seed",
+    "id": "iim_calcutta"
+  },
+  {
+    "name": "IIM Lucknow",
+    "location": "Lucknow, Uttar Pradesh",
+    "country": "India",
+    "website": "https://www.iiml.ac.in",
+    "source": "seed",
+    "id": "iim_lucknow"
+  },
+  {
+    "name": "IIM Indore",
+    "location": "Indore, Madhya Pradesh",
+    "country": "India",
+    "website": "https://www.iimidr.ac.in",
+    "source": "seed",
+    "id": "iim_indore"
+  },
+  {
+    "name": "IIM Kozhikode",
+    "location": "Kozhikode, Kerala",
+    "country": "India",
+    "website": "https://www.iimk.ac.in",
+    "source": "seed",
+    "id": "iim_kozhikode"
+  },
+  {
+    "name": "IIM Shillong",
+    "location": "Shillong, Meghalaya",
+    "country": "India",
+    "website": "https://www.iimshillong.ac.in",
+    "source": "seed",
+    "id": "iim_shillong"
+  },
+  {
+    "name": "IIM Trichy",
+    "location": "Tiruchirappalli, Tamil Nadu",
+    "country": "India",
+    "website": "https://www.iimtrichy.ac.in",
+    "source": "seed",
+    "id": "iim_trichy"
+  },
+  {
+    "name": "IIM Udaipur",
+    "location": "Udaipur, Rajasthan",
+    "country": "India",
+    "website": "https://www.iimu.ac.in",
+    "source": "seed",
+    "id": "iim_udaipur"
+  },
+  {
+    "name": "IIM Ranchi",
+    "location": "Ranchi, Jharkhand",
+    "country": "India",
+    "website": "https://www.iimranchi.ac.in",
+    "source": "seed",
+    "id": "iim_ranchi"
+  },
+  {
+    "name": "IIM Kashipur",
+    "location": "Kashipur, Uttarakhand",
+    "country": "India",
+    "website": "https://www.iimkashipur.ac.in",
+    "source": "seed",
+    "id": "iim_kashipur"
+  },
+  {
+    "name": "IIM Rohtak",
+    "location": "Rohtak, Haryana",
+    "country": "India",
+    "website": "https://www.iimrohtak.ac.in",
+    "source": "seed",
+    "id": "iim_rohtak"
+  },
+  {
+    "name": "Indian School of Business",
+    "location": "Hyderabad, Telangana",
+    "country": "India",
+    "website": "https://www.isb.edu",
+    "source": "seed",
+    "id": "indian_school_of_business"
+  },
+  {
+    "name": "XLRI Jamshedpur",
+    "location": "Jamshedpur, Jharkhand",
+    "country": "India",
+    "website": "https://www.xlri.ac.in",
+    "source": "seed",
+    "id": "xlri_jamshedpur"
+  },
+  {
+    "name": "SP Jain Institute of Management and Research",
+    "location": "Mumbai, Maharashtra",
+    "country": "India",
+    "website": "https://www.spjimr.org",
+    "source": "seed",
+    "id": "sp_jain_institute_of_management_and_research"
+  },
+  {
+    "name": "Management Development Institute",
+    "location": "Gurugram, Haryana",
+    "country": "India",
+    "website": "https://www.mdi.ac.in",
+    "source": "seed",
+    "id": "management_development_institute"
+  },
+  {
+    "name": "Faculty of Management Studies, Delhi",
+    "location": "New Delhi, Delhi",
+    "country": "India",
+    "website": "https://fms.edu",
+    "source": "seed",
+    "id": "faculty_of_management_studies_delhi"
+  },
+  {
+    "name": "Indian Institute of Foreign Trade",
+    "location": "New Delhi, Delhi",
+    "country": "India",
+    "website": "https://www.iift.ac.in",
+    "source": "seed",
+    "id": "indian_institute_of_foreign_trade"
+  },
+  {
+    "name": "NITIE Mumbai",
+    "location": "Mumbai, Maharashtra",
+    "country": "India",
+    "website": "https://www.nitie.ac.in",
+    "source": "seed",
+    "id": "nitie_mumbai"
+  },
+  {
+    "name": "Great Lakes Institute of Management",
+    "location": "Chennai, Tamil Nadu",
+    "country": "India",
+    "website": "https://www.greatlakes.edu.in",
+    "source": "seed",
+    "id": "great_lakes_institute_of_management"
+  },
+  {
+    "name": "NMIMS School of Business Management",
+    "location": "Mumbai, Maharashtra",
+    "country": "India",
+    "website": "https://www.nmims.edu",
+    "source": "seed",
+    "id": "nmims_school_of_business_management"
+  },
+  {
+    "name": "CEIBS",
+    "location": "Shanghai",
+    "country": "China",
+    "website": "https://www.ceibs.edu",
+    "source": "seed",
+    "id": "ceibs"
+  },
+  {
+    "name": "HKUST Business School",
+    "location": "Hong Kong",
+    "country": "Hong Kong",
+    "website": "https://www.bm.ust.hk",
+    "source": "seed",
+    "id": "hkust_business_school"
+  },
+  {
+    "name": "Melbourne Business School",
+    "location": "Melbourne, Victoria",
+    "country": "Australia",
+    "website": "https://mbs.edu",
+    "source": "seed",
+    "id": "melbourne_business_school"
+  },
+  {
+    "name": "Schulich School of Business",
+    "location": "Toronto, Ontario",
+    "country": "Canada",
+    "website": "https://schulich.yorku.ca",
+    "source": "seed",
+    "id": "schulich_school_of_business"
+  },
+  {
+    "name": "Rotman School of Management",
+    "location": "Toronto, Ontario",
+    "country": "Canada",
+    "website": "https://www.rotman.utoronto.ca",
+    "source": "seed",
+    "id": "rotman_school_of_management"
+  },
+  {
+    "name": "Ivey Business School",
+    "location": "London, Ontario",
+    "country": "Canada",
+    "website": "https://www.ivey.uwo.ca",
+    "source": "seed",
+    "id": "ivey_business_school"
+  },
+  {
+    "name": "Desautels Faculty of Management",
+    "location": "Montreal, Quebec",
+    "country": "Canada",
+    "website": "https://www.mcgill.ca/desautels",
+    "source": "seed",
+    "id": "desautels_faculty_of_management"
+  },
+  {
+    "name": "Sauder School of Business",
+    "location": "Vancouver, BC",
+    "country": "Canada",
+    "website": "https://www.sauder.ubc.ca",
+    "source": "seed",
+    "id": "sauder_school_of_business"
+  },
+  {
+    "name": "FGV EAESP",
+    "location": "Sao Paulo",
+    "country": "Brazil",
+    "website": "https://eaesp.fgv.br",
+    "source": "seed",
+    "id": "fgv_eaesp"
+  },
+  {
+    "name": "African Leadership University School of Business",
+    "location": "Kigali",
+    "country": "Rwanda",
+    "website": "https://www.alueducation.com",
+    "source": "seed",
+    "id": "african_leadership_university_school_of_business"
+  },
+  {
     "id": "hbs",
     "name": "Harvard Business School",
     "location": "Boston, MA",
     "country": "USA",
+    "source": "existing_db",
     "website": "https://www.hbs.edu/mba"
   },
   {
@@ -11,6 +260,7 @@
     "name": "Stanford GSB",
     "location": "Stanford, CA",
     "country": "USA",
+    "source": "existing_db",
     "website": "https://www.gsb.stanford.edu"
   },
   {
@@ -18,20 +268,1383 @@
     "name": "The Wharton School",
     "location": "Philadelphia, PA",
     "country": "USA",
+    "source": "existing_db",
     "website": "https://mba.wharton.upenn.edu"
+  },
+  {
+    "id": "booth",
+    "name": "Chicago Booth",
+    "location": "Chicago, IL",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.chicagobooth.edu"
+  },
+  {
+    "id": "kellogg",
+    "name": "Northwestern Kellogg",
+    "location": "Evanston, IL",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.kellogg.northwestern.edu"
+  },
+  {
+    "id": "sloan",
+    "name": "MIT Sloan",
+    "location": "Cambridge, MA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://mitsloan.mit.edu/mba"
+  },
+  {
+    "id": "cbs",
+    "name": "Columbia Business School",
+    "location": "New York, NY",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://business.columbia.edu/mba"
+  },
+  {
+    "id": "tuck",
+    "name": "Dartmouth Tuck",
+    "location": "Hanover, NH",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.tuck.dartmouth.edu"
+  },
+  {
+    "id": "haas",
+    "name": "UC Berkeley Haas",
+    "location": "Berkeley, CA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://haas.berkeley.edu/mba"
+  },
+  {
+    "id": "fuqua",
+    "name": "Duke Fuqua",
+    "location": "Durham, NC",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.fuqua.duke.edu"
+  },
+  {
+    "id": "darden",
+    "name": "UVA Darden",
+    "location": "Charlottesville, VA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.darden.virginia.edu"
+  },
+  {
+    "id": "ross",
+    "name": "Michigan Ross",
+    "location": "Ann Arbor, MI",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://michiganross.umich.edu/mba"
+  },
+  {
+    "id": "stern",
+    "name": "NYU Stern",
+    "location": "New York, NY",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.stern.nyu.edu/programs/mba"
+  },
+  {
+    "id": "yale_som",
+    "name": "Yale SOM",
+    "location": "New Haven, CT",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://som.yale.edu/programs/mba"
+  },
+  {
+    "id": "anderson",
+    "name": "UCLA Anderson",
+    "location": "Los Angeles, CA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.anderson.ucla.edu/mba"
+  },
+  {
+    "id": "mccombs",
+    "name": "UT Austin McCombs",
+    "location": "Austin, TX",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.mccombs.utexas.edu/mba"
+  },
+  {
+    "id": "tepper",
+    "name": "Carnegie Mellon Tepper",
+    "location": "Pittsburgh, PA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.cmu.edu/tepper/mba"
+  },
+  {
+    "id": "johnson",
+    "name": "Cornell Johnson",
+    "location": "Ithaca, NY",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.johnson.cornell.edu/mba"
+  },
+  {
+    "id": "kenan_flagler",
+    "name": "UNC Kenan-Flagler",
+    "location": "Chapel Hill, NC",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.kenan-flagler.unc.edu/mba"
+  },
+  {
+    "id": "marshall",
+    "name": "USC Marshall",
+    "location": "Los Angeles, CA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.marshall.usc.edu/mba"
+  },
+  {
+    "id": "kelley",
+    "name": "Indiana Kelley",
+    "location": "Bloomington, IN",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://kelley.iu.edu/programs/mba"
+  },
+  {
+    "id": "foster",
+    "name": "UW Foster",
+    "location": "Seattle, WA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://foster.uw.edu/academics/mba"
+  },
+  {
+    "id": "goizueta",
+    "name": "Emory Goizueta",
+    "location": "Atlanta, GA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://goizueta.emory.edu/mba"
+  },
+  {
+    "id": "olin",
+    "name": "WashU Olin",
+    "location": "St. Louis, MO",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://olin.wustl.edu/mba"
+  },
+  {
+    "id": "scheller",
+    "name": "Georgia Tech Scheller",
+    "location": "Atlanta, GA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://scheller.gatech.edu/mba"
+  },
+  {
+    "id": "smith",
+    "name": "Maryland Smith",
+    "location": "College Park, MD",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.rhsmith.umd.edu/mba"
+  },
+  {
+    "id": "owen",
+    "name": "Vanderbilt Owen",
+    "location": "Nashville, TN",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://business.vanderbilt.edu/mba"
+  },
+  {
+    "id": "mays",
+    "name": "Texas A&M Mays",
+    "location": "College Station, TX",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://mays.tamu.edu/mba"
+  },
+  {
+    "id": "jones",
+    "name": "Rice Jones",
+    "location": "Houston, TX",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://business.rice.edu/mba"
+  },
+  {
+    "id": "questrom",
+    "name": "Boston University Questrom",
+    "location": "Boston, MA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.bu.edu/questrom/mba"
+  },
+  {
+    "id": "broad",
+    "name": "Michigan State Broad",
+    "location": "East Lansing, MI",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://broad.msu.edu/mba"
+  },
+  {
+    "id": "fisher",
+    "name": "Ohio State Fisher",
+    "location": "Columbus, OH",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://fisher.osu.edu/mba"
+  },
+  {
+    "id": "carlson",
+    "name": "Minnesota Carlson",
+    "location": "Minneapolis, MN",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://carlsonschool.umn.edu/mba"
+  },
+  {
+    "id": "simon",
+    "name": "Rochester Simon",
+    "location": "Rochester, NY",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://simon.rochester.edu/mba"
+  },
+  {
+    "id": "whitman",
+    "name": "Syracuse Whitman",
+    "location": "Syracuse, NY",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://whitman.syracuse.edu/mba"
+  },
+  {
+    "id": "krannert",
+    "name": "Purdue Krannert",
+    "location": "West Lafayette, IN",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://krannert.purdue.edu/mba"
+  },
+  {
+    "id": "warrington",
+    "name": "Florida Warrington",
+    "location": "Gainesville, FL",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://warrington.ufl.edu/mba"
+  },
+  {
+    "id": "isenberg",
+    "name": "UMass Isenberg",
+    "location": "Amherst, MA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.isenberg.umass.edu/mba"
+  },
+  {
+    "id": "smeal",
+    "name": "Penn State Smeal",
+    "location": "University Park, PA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.smeal.psu.edu/mba"
+  },
+  {
+    "id": "eller",
+    "name": "Arizona Eller",
+    "location": "Tucson, AZ",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://eller.arizona.edu/mba"
+  },
+  {
+    "id": "cox",
+    "name": "SMU Cox",
+    "location": "Dallas, TX",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.smu.edu/cox/mba"
+  },
+  {
+    "id": "pamplin",
+    "name": "Virginia Tech Pamplin",
+    "location": "Blacksburg, VA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://mba.pamplin.vt.edu"
+  },
+  {
+    "id": "mendoza",
+    "name": "Notre Dame Mendoza",
+    "location": "Notre Dame, IN",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://mendoza.nd.edu/mba"
+  },
+  {
+    "id": "mcdonough",
+    "name": "Georgetown McDonough",
+    "location": "Washington, DC",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://mcdonough.georgetown.edu/mba"
+  },
+  {
+    "id": "kogod",
+    "name": "American University Kogod",
+    "location": "Washington, DC",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://kogod.american.edu/mba"
+  },
+  {
+    "id": "henry",
+    "name": "George Washington",
+    "location": "Washington, DC",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://business.gwu.edu/mba"
+  },
+  {
+    "id": "babson_olin",
+    "name": "Babson Olin",
+    "location": "Babson Park, MA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.babson.edu/mba"
+  },
+  {
+    "id": "lerner",
+    "name": "Delaware Lerner",
+    "location": "Newark, DE",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://lerner.udel.edu/mba"
+  },
+  {
+    "id": "willam_mary",
+    "name": "William & Mary Mason",
+    "location": "Williamsburg, VA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://mason.wm.edu/mba"
+  },
+  {
+    "id": "lehigh",
+    "name": "Lehigh College of Business",
+    "location": "Bethlehem, PA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://business.lehigh.edu/mba"
+  },
+  {
+    "id": "thunderbird",
+    "name": "Thunderbird School of Global Management",
+    "location": "Glendale, AZ",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://thunderbird.asu.edu/mba"
+  },
+  {
+    "id": "iowa_tippie",
+    "name": "Iowa Tippie",
+    "location": "Iowa City, IA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://tippie.uiowa.edu/mba"
+  },
+  {
+    "id": "wash_foster",
+    "name": "Washington Foster",
+    "location": "Seattle, WA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://foster.uw.edu/academics/mba"
+  },
+  {
+    "id": "pittsburgh_katz",
+    "name": "Pittsburgh Katz",
+    "location": "Pittsburgh, PA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://business.pitt.edu/mba"
+  },
+  {
+    "id": "northeastern_dmore",
+    "name": "Northeastern D'Amore-McKim",
+    "location": "Boston, MA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://damore-mckim.northeastern.edu/mba"
+  },
+  {
+    "id": "temple_fox",
+    "name": "Temple Fox",
+    "location": "Philadelphia, PA",
+    "country": "USA",
+    "source": "existing_db",
+    "website": "https://www.fox.temple.edu/mba"
   },
   {
     "id": "insead",
     "name": "INSEAD",
-    "location": "Fontainebleau, France",
+    "location": "Fontainebleau, France / Singapore",
     "country": "France",
-    "website": "https://www.insead.edu/programmes/mba"
+    "source": "existing_db",
+    "website": "https://www.insead.edu/master-programmes/mba"
   },
   {
-    "id": "iima",
-    "name": "IIM Ahmedabad",
-    "location": "Ahmedabad, India",
+    "id": "hec_paris",
+    "name": "HEC Paris",
+    "location": "Paris",
+    "country": "France",
+    "source": "existing_db",
+    "website": "https://www.hec.edu/en/mba-programs/mba"
+  },
+  {
+    "id": "said",
+    "name": "Oxford Saïd",
+    "location": "Oxford",
+    "country": "UK",
+    "source": "existing_db",
+    "website": "https://www.sbs.ox.ac.uk/programmes/mba"
+  },
+  {
+    "id": "judge",
+    "name": "Cambridge Judge",
+    "location": "Cambridge",
+    "country": "UK",
+    "source": "existing_db",
+    "website": "https://www.jbs.cam.ac.uk/programmes/mba"
+  },
+  {
+    "id": "sda_bocconi",
+    "name": "SDA Bocconi",
+    "location": "Milan",
+    "country": "Italy",
+    "source": "existing_db",
+    "website": "https://www.sdabocconi.it/en/mba"
+  },
+  {
+    "id": "imds",
+    "name": "IMD",
+    "location": "Lausanne",
+    "country": "Switzerland",
+    "source": "existing_db",
+    "website": "https://www.imd.org/mba"
+  },
+  {
+    "id": "mannheim",
+    "name": "Mannheim Business School",
+    "location": "Mannheim",
+    "country": "Germany",
+    "source": "existing_db",
+    "website": "https://www.mannheim-business-school.com/mba"
+  },
+  {
+    "id": "st_gallen",
+    "name": "University of St. Gallen",
+    "location": "St. Gallen",
+    "country": "Switzerland",
+    "source": "existing_db",
+    "website": "https://www.unisg.ch/en/programmes/mba"
+  },
+  {
+    "id": "imperial",
+    "name": "Imperial College Business School",
+    "location": "London",
+    "country": "UK",
+    "source": "existing_db",
+    "website": "https://www.imperial.ac.uk/business-school/mba"
+  },
+  {
+    "id": "warwick",
+    "name": "Warwick Business School",
+    "location": "Coventry",
+    "country": "UK",
+    "source": "existing_db",
+    "website": "https://www.wbs.ac.uk/courses/mba"
+  },
+  {
+    "id": "cranfield",
+    "name": "Cranfield School of Management",
+    "location": "Bedford",
+    "country": "UK",
+    "source": "existing_db",
+    "website": "https://www.cranfield.ac.uk/som/mba"
+  },
+  {
+    "id": "cass_bayes",
+    "name": "Bayes Business School (City London)",
+    "location": "London",
+    "country": "UK",
+    "source": "existing_db",
+    "website": "https://www.bayes.city.ac.uk/study/mba"
+  },
+  {
+    "id": "strathclyde",
+    "name": "Strathclyde Business School",
+    "location": "Glasgow",
+    "country": "UK",
+    "source": "existing_db",
+    "website": "https://www.strath.ac.uk/business/mba"
+  },
+  {
+    "id": "bath",
+    "name": "University of Bath School of Management",
+    "location": "Bath",
+    "country": "UK",
+    "source": "existing_db",
+    "website": "https://www.bath.ac.uk/management/mba"
+  },
+  {
+    "id": "durham",
+    "name": "Durham University Business School",
+    "location": "Durham",
+    "country": "UK",
+    "source": "existing_db",
+    "website": "https://www.dur.ac.uk/business/mba"
+  },
+  {
+    "id": "aalto",
+    "name": "Aalto University School of Business",
+    "location": "Helsinki",
+    "country": "Finland",
+    "source": "existing_db",
+    "website": "https://www.aalto.fi/en/aalto-mba"
+  },
+  {
+    "id": "copenhagen",
+    "name": "Copenhagen Business School",
+    "location": "Copenhagen",
+    "country": "Denmark",
+    "source": "existing_db",
+    "website": "https://www.cbs.dk/en/executive/mba"
+  },
+  {
+    "id": "ssc_stockholm",
+    "name": "Stockholm School of Economics",
+    "location": "Stockholm",
+    "country": "Sweden",
+    "source": "existing_db",
+    "website": "https://www.hhs.se/en/education/mba"
+  },
+  {
+    "id": "nhh",
+    "name": "NHH Norwegian School of Economics",
+    "location": "Bergen",
+    "country": "Norway",
+    "source": "existing_db",
+    "website": "https://www.nhh.no/en/studies/mba"
+  },
+  {
+    "id": "bsg_lisbon",
+    "name": "Nova SBE",
+    "location": "Lisbon",
+    "country": "Portugal",
+    "source": "existing_db",
+    "website": "https://www.novasbe.pt/en/mba"
+  },
+  {
+    "id": "tbs",
+    "name": "Toulouse Business School",
+    "location": "Toulouse",
+    "country": "France",
+    "source": "existing_db",
+    "website": "https://www.tbs-education.com/mba"
+  },
+  {
+    "id": "whu",
+    "name": "WHU – Otto Beisheim School of Management",
+    "location": "Vallendar",
+    "country": "Germany",
+    "source": "existing_db",
+    "website": "https://www.whu.edu/en/programs/mba"
+  },
+  {
+    "id": "esmt",
+    "name": "ESMT Berlin",
+    "location": "Berlin",
+    "country": "Germany",
+    "source": "existing_db",
+    "website": "https://esmt.berlin/mba"
+  },
+  {
+    "id": "kozminski",
+    "name": "Kozminski University",
+    "location": "Warsaw",
+    "country": "Poland",
+    "source": "existing_db",
+    "website": "https://www.kozminski.edu.pl/en/mba"
+  },
+  {
+    "id": "cem",
+    "name": "Central European Management Institute (CEMI)",
+    "location": "Prague",
+    "country": "Czech Republic",
+    "source": "existing_db",
+    "website": "https://www.cemi.cz/mba"
+  },
+  {
+    "id": "iimt",
+    "name": "IIM Tiruchirappalli",
+    "location": "Tiruchirappalli",
     "country": "India",
-    "website": "https://www.iima.ac.in"
+    "source": "existing_db",
+    "website": "https://www.iimtrichy.ac.in"
+  },
+  {
+    "id": "spjimr",
+    "name": "SP Jain (SPJIMR)",
+    "location": "Mumbai",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.spjimr.org"
+  },
+  {
+    "id": "fms",
+    "name": "FMS Delhi",
+    "location": "Delhi",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://fms.edu"
+  },
+  {
+    "id": "mdi",
+    "name": "MDI Gurgaon",
+    "location": "Gurgaon",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.mdi.ac.in"
+  },
+  {
+    "id": "nmims",
+    "name": "NMIMS Mumbai",
+    "location": "Mumbai",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.nmims.edu"
+  },
+  {
+    "id": "great_lakes",
+    "name": "Great Lakes Institute",
+    "location": "Chennai / Gurgaon",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.greatlakes.edu.in"
+  },
+  {
+    "id": "tapmi",
+    "name": "T.A. Pai Management Institute",
+    "location": "Manipal",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.tapmi.edu.in"
+  },
+  {
+    "id": "imt",
+    "name": "IMT Ghaziabad",
+    "location": "Ghaziabad",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.imt.edu"
+  },
+  {
+    "id": "peking_gsm",
+    "name": "Peking Guanghua School of Management",
+    "location": "Beijing",
+    "country": "China",
+    "source": "existing_db",
+    "website": "https://en.gsm.pku.edu.cn"
+  },
+  {
+    "id": "tsinghua_sem",
+    "name": "Tsinghua SEM",
+    "location": "Beijing",
+    "country": "China",
+    "source": "existing_db",
+    "website": "https://www.sem.tsinghua.edu.cn/en"
+  },
+  {
+    "id": "sjtu_antai",
+    "name": "Shanghai Jiao Tong Antai",
+    "location": "Shanghai",
+    "country": "China",
+    "source": "existing_db",
+    "website": "https://www.acem.sjtu.edu.cn/en"
+  },
+  {
+    "id": "hitotsubashi",
+    "name": "Hitotsubashi ICS",
+    "location": "Tokyo",
+    "country": "Japan",
+    "source": "existing_db",
+    "website": "https://www.ics.hub.hit-u.ac.jp"
+  },
+  {
+    "id": "agsm",
+    "name": "AGSM at UNSW",
+    "location": "Sydney",
+    "country": "Australia",
+    "source": "existing_db",
+    "website": "https://www.unsw.edu.au/business/agsm/mba"
+  },
+  {
+    "id": "abs",
+    "name": "Australian Graduate School of Management",
+    "location": "Sydney",
+    "country": "Australia",
+    "source": "existing_db",
+    "website": "https://www.unsw.edu.au/business/agsm"
+  },
+  {
+    "id": "aut",
+    "name": "Auckland University of Technology",
+    "location": "Auckland",
+    "country": "New Zealand",
+    "source": "existing_db",
+    "website": "https://www.aut.ac.nz/mba"
+  },
+  {
+    "id": "skku",
+    "name": "Sungkyunkwan GSB",
+    "location": "Seoul",
+    "country": "South Korea",
+    "source": "existing_db",
+    "website": "https://gsb.skku.edu/eng"
+  },
+  {
+    "id": "gibs",
+    "name": "Gordon Institute of Business Science",
+    "location": "Johannesburg",
+    "country": "South Africa",
+    "source": "existing_db",
+    "website": "https://www.gibs.co.za"
+  },
+  {
+    "id": "ucgsb",
+    "name": "UCT GSB",
+    "location": "Cape Town",
+    "country": "South Africa",
+    "source": "existing_db",
+    "website": "https://www.gsb.uct.ac.za"
+  },
+  {
+    "id": "aud",
+    "name": "American University in Dubai",
+    "location": "Dubai",
+    "country": "UAE",
+    "source": "existing_db",
+    "website": "https://www.aud.edu"
+  },
+  {
+    "id": "insead_ad",
+    "name": "INSEAD Abu Dhabi",
+    "location": "Abu Dhabi",
+    "country": "UAE",
+    "source": "existing_db",
+    "website": "https://www.insead.edu/campuses/abu-dhabi"
+  },
+  {
+    "id": "sbs_oxford_mena",
+    "name": "Said Business School - MENA Programs",
+    "location": "Oxford / Dubai",
+    "country": "UK/UAE",
+    "source": "existing_db",
+    "website": "https://www.sbs.ox.ac.uk/programmes/mba"
+  },
+  {
+    "id": "egade",
+    "name": "EGADE Business School (Tec de Monterrey)",
+    "location": "Monterrey",
+    "country": "Mexico",
+    "source": "existing_db",
+    "website": "https://egade.tec.mx/en/mba"
+  },
+  {
+    "id": "insper",
+    "name": "Insper",
+    "location": "São Paulo",
+    "country": "Brazil",
+    "source": "existing_db",
+    "website": "https://www.insper.edu.br/en/mba"
+  },
+  {
+    "id": "iag_puc",
+    "name": "IAG PUC-Rio",
+    "location": "Rio de Janeiro",
+    "country": "Brazil",
+    "source": "existing_db",
+    "website": "https://iag.puc-rio.br/en/mba"
+  },
+  {
+    "id": "uai",
+    "name": "Universidad Adolfo Ibáñez",
+    "location": "Santiago",
+    "country": "Chile",
+    "source": "existing_db",
+    "website": "https://www.uai.cl/mba"
+  },
+  {
+    "id": "esan",
+    "name": "ESAN Graduate School of Business",
+    "location": "Lima",
+    "country": "Peru",
+    "source": "existing_db",
+    "website": "https://www.esan.edu.pe/mba"
+  },
+  {
+    "id": "uit_argentina",
+    "name": "Universidad Torcuato Di Tella",
+    "location": "Buenos Aires",
+    "country": "Argentina",
+    "source": "existing_db",
+    "website": "https://www.utdt.edu/mba"
+  },
+  {
+    "id": "desautels",
+    "name": "McGill Desautels",
+    "location": "Montreal",
+    "country": "Canada",
+    "source": "existing_db",
+    "website": "https://www.mcgill.ca/desautels/mba"
+  },
+  {
+    "id": "sauder",
+    "name": "UBC Sauder",
+    "location": "Vancouver",
+    "country": "Canada",
+    "source": "existing_db",
+    "website": "https://www.sauder.ubc.ca/mba"
+  },
+  {
+    "id": "smith_queens",
+    "name": "Smith School of Business (Queen's)",
+    "location": "Kingston, ON",
+    "country": "Canada",
+    "source": "existing_db",
+    "website": "https://smith.queensu.ca/mba"
+  },
+  {
+    "id": "schulich",
+    "name": "York Schulich",
+    "location": "Toronto",
+    "country": "Canada",
+    "source": "existing_db",
+    "website": "https://schulich.yorku.ca/mba"
+  },
+  {
+    "id": "haskayne",
+    "name": "Calgary Haskayne",
+    "location": "Calgary",
+    "country": "Canada",
+    "source": "existing_db",
+    "website": "https://haskayne.ucalgary.ca/mba"
+  },
+  {
+    "id": "alberta",
+    "name": "Alberta School of Business",
+    "location": "Edmonton",
+    "country": "Canada",
+    "source": "existing_db",
+    "website": "https://www.ualberta.ca/business/mba"
+  },
+  {
+    "id": "iim_nagpur",
+    "name": "IIM Nagpur",
+    "location": "Nagpur",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.iimnagpur.ac.in"
+  },
+  {
+    "id": "iim_bodh",
+    "name": "IIM Bodh Gaya",
+    "location": "Bodh Gaya",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.iimbg.ac.in"
+  },
+  {
+    "id": "iim_sambalpur",
+    "name": "IIM Sambalpur",
+    "location": "Sambalpur",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.iimsambalpur.ac.in"
+  },
+  {
+    "id": "iim_jammu",
+    "name": "IIM Jammu",
+    "location": "Jammu",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.iimj.ac.in"
+  },
+  {
+    "id": "iim_amritsar",
+    "name": "IIM Amritsar",
+    "location": "Amritsar",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.iimamritsar.ac.in"
+  },
+  {
+    "id": "iim_vizag",
+    "name": "IIM Visakhapatnam",
+    "location": "Visakhapatnam",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.iimv.ac.in"
+  },
+  {
+    "id": "iim_sirmaur",
+    "name": "IIM Sirmaur",
+    "location": "Sirmaur",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.iimsirmaur.ac.in"
+  },
+  {
+    "id": "iim_mumbai",
+    "name": "IIM Mumbai",
+    "location": "Mumbai",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.iimmumbai.ac.in"
+  },
+  {
+    "id": "sibm",
+    "name": "SIBM Pune",
+    "location": "Pune",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.sibm.edu"
+  },
+  {
+    "id": "scmhrd",
+    "name": "SCMHRD",
+    "location": "Pune",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.scmhrd.edu"
+  },
+  {
+    "id": "tiss",
+    "name": "TISS Mumbai (HRM)",
+    "location": "Mumbai",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.tiss.edu"
+  },
+  {
+    "id": "kjsimsr",
+    "name": "KJ Somaiya",
+    "location": "Mumbai",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://simsr.somaiya.edu"
+  },
+  {
+    "id": "liba",
+    "name": "LIBA Chennai",
+    "location": "Chennai",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.liba.edu"
+  },
+  {
+    "id": "xim",
+    "name": "Xavier Institute of Management Bhubaneswar",
+    "location": "Bhubaneswar",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.ximb.ac.in"
+  },
+  {
+    "id": "ibs",
+    "name": "IBS Hyderabad",
+    "location": "Hyderabad",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://ibsindia.org"
+  },
+  {
+    "id": "bimtech",
+    "name": "BIMTECH Greater Noida",
+    "location": "Greater Noida",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.bimtech.ac.in"
+  },
+  {
+    "id": "imi",
+    "name": "IMI Delhi",
+    "location": "Delhi",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.imi.edu"
+  },
+  {
+    "id": "welingkar",
+    "name": "Welingkar Institute",
+    "location": "Mumbai",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.welingkar.org"
+  },
+  {
+    "id": "alliance",
+    "name": "Alliance University",
+    "location": "Bangalore",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.alliance.edu.in"
+  },
+  {
+    "id": "christ",
+    "name": "Christ University",
+    "location": "Bangalore",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://christuniversity.in"
+  },
+  {
+    "id": "woxsen",
+    "name": "Woxsen University",
+    "location": "Hyderabad",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://woxsen.edu.in"
+  },
+  {
+    "id": "solvay",
+    "name": "Solvay Brussels School",
+    "location": "Brussels",
+    "country": "Belgium",
+    "source": "existing_db",
+    "website": "https://www.solvay.edu/mba"
+  },
+  {
+    "id": "smurfit",
+    "name": "UCD Michael Smurfit",
+    "location": "Dublin",
+    "country": "Ireland",
+    "source": "existing_db",
+    "website": "https://www.smurfitschool.ie/mba"
+  },
+  {
+    "id": "tias",
+    "name": "Tilburg TIAS",
+    "location": "Tilburg",
+    "country": "Netherlands",
+    "source": "existing_db",
+    "website": "https://www.tias.edu/en/mba"
+  },
+  {
+    "id": "nyenrode",
+    "name": "Nyenrode Business University",
+    "location": "Breukelen",
+    "country": "Netherlands",
+    "source": "existing_db",
+    "website": "https://www.nyenrode.nl/en/mba"
+  },
+  {
+    "id": "grenoble",
+    "name": "Grenoble Ecole de Management",
+    "location": "Grenoble",
+    "country": "France",
+    "source": "existing_db",
+    "website": "https://en.grenoble-em.com/mba"
+  },
+  {
+    "id": "polimi",
+    "name": "Politecnico di Milano GSoM",
+    "location": "Milan",
+    "country": "Italy",
+    "source": "existing_db",
+    "website": "https://www.gsom.polimi.it/mba"
+  },
+  {
+    "id": "mib",
+    "name": "MIB Trieste School of Management",
+    "location": "Trieste",
+    "country": "Italy",
+    "source": "existing_db",
+    "website": "https://www.mib.edu/mba"
+  },
+  {
+    "id": "aston",
+    "name": "Aston Business School",
+    "location": "Birmingham",
+    "country": "UK",
+    "source": "existing_db",
+    "website": "https://www.aston.ac.uk/abs/mba"
+  },
+  {
+    "id": "coppead",
+    "name": "COPPEAD UFRJ",
+    "location": "Rio de Janeiro",
+    "country": "Brazil",
+    "source": "existing_db",
+    "website": "https://www.coppead.ufrj.br/en/mba"
+  },
+  {
+    "id": "fundacao_dom_cabral",
+    "name": "Fundação Dom Cabral",
+    "location": "Nova Lima",
+    "country": "Brazil",
+    "source": "existing_db",
+    "website": "https://www.fdc.org.br/mba"
+  },
+  {
+    "id": "uniandes",
+    "name": "Universidad de los Andes",
+    "location": "Bogotá",
+    "country": "Colombia",
+    "source": "existing_db",
+    "website": "https://administracion.uniandes.edu.co/mba"
+  },
+  {
+    "id": "eafit",
+    "name": "EAFIT University",
+    "location": "Medellin",
+    "country": "Colombia",
+    "source": "existing_db",
+    "website": "https://www.eafit.edu.co/mba"
+  },
+  {
+    "id": "itam",
+    "name": "ITAM",
+    "location": "Mexico City",
+    "country": "Mexico",
+    "source": "existing_db",
+    "website": "https://www.itam.mx/mba"
+  },
+  {
+    "id": "stellenbosch",
+    "name": "Stellenbosch Business School",
+    "location": "Stellenbosch",
+    "country": "South Africa",
+    "source": "existing_db",
+    "website": "https://www.usb.ac.za"
+  },
+  {
+    "id": "kbs_nagoya",
+    "name": "Nagoya University of Commerce & Business",
+    "location": "Nagoya",
+    "country": "Japan",
+    "source": "existing_db",
+    "website": "https://www.nucba.ac.jp/en"
+  },
+  {
+    "id": "sasin",
+    "name": "Sasin School of Management (Chula)",
+    "location": "Bangkok",
+    "country": "Thailand",
+    "source": "existing_db",
+    "website": "https://www.sasin.edu"
+  },
+  {
+    "id": "apm",
+    "name": "Asian Institute of Management",
+    "location": "Manila",
+    "country": "Philippines",
+    "source": "existing_db",
+    "website": "https://www.aim.edu"
+  },
+  {
+    "id": "sp_jain_global",
+    "name": "SP Jain School of Global Management",
+    "location": "Dubai / Singapore / Sydney",
+    "country": "UAE",
+    "source": "existing_db",
+    "website": "https://www.spjain.org"
+  },
+  {
+    "id": "bits_pilani",
+    "name": "BITS Pilani (MBA/EMBA)",
+    "location": "Pilani",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.bits-pilani.ac.in"
+  },
+  {
+    "id": "iit_bombay_sjmsom",
+    "name": "IIT Bombay SJMSOM",
+    "location": "Mumbai",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.som.iitb.ac.in"
+  },
+  {
+    "id": "iit_delhi_dms",
+    "name": "IIT Delhi DMS",
+    "location": "Delhi",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://dms.iitd.ac.in"
+  },
+  {
+    "id": "iit_kharagpur_vgsom",
+    "name": "IIT Kharagpur VGSoM",
+    "location": "Kharagpur",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.som.iitkgp.ac.in"
+  },
+  {
+    "id": "iit_madras_dom",
+    "name": "IIT Madras DoMS",
+    "location": "Chennai",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://doms.iitm.ac.in"
+  },
+  {
+    "id": "iit_kanpur",
+    "name": "IIT Kanpur (MBA)",
+    "location": "Kanpur",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.iitk.ac.in/ime"
+  },
+  {
+    "id": "iit_roorkee",
+    "name": "IIT Roorkee (MBA)",
+    "location": "Roorkee",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.iitr.ac.in/departments/DM"
+  },
+  {
+    "id": "narsee_monjee",
+    "name": "SVKM's NMIMS Narsee Monjee",
+    "location": "Mumbai",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.nmims.edu"
+  },
+  {
+    "id": "isb_pgpmax",
+    "name": "ISB PGPmax",
+    "location": "Hyderabad",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.isb.edu"
+  },
+  {
+    "id": "adelaide",
+    "name": "University of Adelaide MBA",
+    "location": "Adelaide",
+    "country": "Australia",
+    "source": "existing_db",
+    "website": "https://www.adelaide.edu.au/mba"
+  },
+  {
+    "id": "kfupm",
+    "name": "KFUPM College of Business",
+    "location": "Dhahran",
+    "country": "Saudi Arabia",
+    "source": "existing_db",
+    "website": "https://www.kfupm.edu.sa/cob"
+  },
+  {
+    "id": "koc",
+    "name": "Koç University GSB",
+    "location": "Istanbul",
+    "country": "Turkey",
+    "source": "existing_db",
+    "website": "https://gsb.ku.edu.tr"
+  },
+  {
+    "id": "bilkent",
+    "name": "Bilkent University MBA",
+    "location": "Ankara",
+    "country": "Turkey",
+    "source": "existing_db",
+    "website": "https://www.bilkent.edu.tr/mba"
+  },
+  {
+    "id": "bosphorus",
+    "name": "Boğaziçi University MBA",
+    "location": "Istanbul",
+    "country": "Turkey",
+    "source": "existing_db",
+    "website": "https://www.boun.edu.tr/mba"
+  },
+  {
+    "id": "technion",
+    "name": "Technion MBA",
+    "location": "Haifa",
+    "country": "Israel",
+    "source": "existing_db",
+    "website": "https://www.technion.ac.il/en/mba"
+  },
+  {
+    "id": "tau",
+    "name": "Tel Aviv University MBA",
+    "location": "Tel Aviv",
+    "country": "Israel",
+    "source": "existing_db",
+    "website": "https://en-coller.tau.ac.il/mba"
+  },
+  {
+    "id": "hebrew",
+    "name": "Hebrew University MBA",
+    "location": "Jerusalem",
+    "country": "Israel",
+    "source": "existing_db",
+    "website": "https://en.business.huji.ac.il/mba"
+  },
+  {
+    "id": "sunway",
+    "name": "Sunway University Business School",
+    "location": "Kuala Lumpur",
+    "country": "Malaysia",
+    "source": "existing_db",
+    "website": "https://university.sunway.edu.my/mba"
+  },
+  {
+    "id": "mahidol",
+    "name": "Mahidol University CMMU",
+    "location": "Bangkok",
+    "country": "Thailand",
+    "source": "existing_db",
+    "website": "https://www.cmmu.mahidol.ac.th"
+  },
+  {
+    "id": "dlsu",
+    "name": "De La Salle University COB",
+    "location": "Manila",
+    "country": "Philippines",
+    "source": "existing_db",
+    "website": "https://www.dlsu.edu.ph"
+  },
+  {
+    "id": "vnu",
+    "name": "VNU University of Economics and Business",
+    "location": "Hanoi",
+    "country": "Vietnam",
+    "source": "existing_db",
+    "website": "https://ueb.vnu.edu.vn/en"
+  },
+  {
+    "id": "isb_deferred_mba",
+    "name": "Indian School of Business (PGP YL (Young Leaders))",
+    "location": "Hyderabad / Mohali",
+    "country": "India",
+    "source": "existing_db",
+    "website": "https://www.isb.edu"
   }
 ]

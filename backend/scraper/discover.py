@@ -339,7 +339,18 @@ async def discover_all(
         if "id" not in school:
             school["id"] = slugify(school["name"])
 
-    # 6. Save
+    # 6. Fill in missing URLs from hardcoded mapping
+    from scraper.school_urls import match_school_url
+    filled = 0
+    for school in unique:
+        if not school.get("website"):
+            url = match_school_url(school["name"])
+            if url:
+                school["website"] = url
+                filled += 1
+    logger.info(f"Filled {filled} URLs from hardcoded mapping")
+
+    # 7. Save
     save_json(unique, DISCOVERY_LIST_FILE)
     return unique
 
