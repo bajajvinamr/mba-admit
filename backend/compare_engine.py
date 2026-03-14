@@ -24,6 +24,47 @@ def load_gmatclub_data() -> list[dict]:
     return _GMATCLUB_DATA
 
 
+# ── School ID mapping (school_db slug → GMAT Club school_id) ─────────────────
+
+SCHOOL_ID_TO_GMATCLUB = {
+    "hbs": "hbs",
+    "gsb": "gsb",
+    "wharton": "wharton",
+    "kellogg": "kellogg",
+    "insead": "insead",
+    "isb": "isb",
+    "booth": "chicago_booth",
+    "sloan": "mit_sloan",
+    "cbs": "columbia_business_school",
+    "columbia": "columbia_business_school",
+    "tuck": "dartmouth_tuck",
+    "haas": "uc_berkeley_haas",
+    "ross": "michigan_ross",
+    "fuqua": "duke_fuqua",
+    "darden": "uva_darden",
+    "stern": "nyu_stern",
+    "yale_som": "yale_som",
+    "yale": "yale_som",
+    "johnson": "cornell_johnson",
+    "kenan_flagler": "unc_kenanflagler",
+    "kenan-flagler": "unc_kenanflagler",
+    "anderson": "ucla_anderson",
+    "ucla-anderson": "ucla_anderson",
+    "kelley": "indiana_kelley",
+    "goizueta": "emory_goizueta",
+    "lbs": "london_business_school",
+}
+
+# Build reverse mapping too
+GMATCLUB_TO_SCHOOL_ID = {v: k for k, v in SCHOOL_ID_TO_GMATCLUB.items()}
+
+
+def get_decisions_for_school(all_decisions: list[dict], school_id: str) -> list[dict]:
+    """Filter decisions for a school, handling ID mismatches between school DB and GMAT Club."""
+    gmatclub_id = SCHOOL_ID_TO_GMATCLUB.get(school_id, school_id)
+    return [d for d in all_decisions if d.get("school_id") == gmatclub_id]
+
+
 # ── Constants ─────────────────────────────────────────────────────────────────
 
 ADMIT_KEYWORDS = ("admitted", "admit")

@@ -21,7 +21,7 @@ from models import (
     SculptGoalRequest,
     StorytellerRequest,
 )
-from compare_engine import load_gmatclub_data, compute_school_outcomes, compute_profile_fit
+from compare_engine import load_gmatclub_data, compute_school_outcomes, compute_profile_fit, get_decisions_for_school
 from run_evals import run_eval_pipeline
 import db
 
@@ -41,8 +41,8 @@ def compare_schools(req: CompareSchoolsRequest):
         if not school:
             continue
 
-        # Filter decisions for this school
-        school_decisions = [d for d in all_decisions if d.get("school_id") == sid]
+        # Filter decisions for this school (handles ID mapping, e.g. "booth" → "chicago_booth")
+        school_decisions = get_decisions_for_school(all_decisions, sid)
 
         # Compute outcomes from GMAT Club data
         outcomes = compute_school_outcomes(school_decisions) if school_decisions else None
