@@ -23,6 +23,8 @@ def _school_summary(sid: str, school: dict) -> dict:
         "tuition_usd": school.get("tuition_usd", "N/A"),
         "program_duration": school.get("program_details", {}).get("duration", "N/A"),
         "stem_designated": school.get("program_details", {}).get("stem_designated", False),
+        "essay_count": len(school.get("essay_prompts") or []),
+        "admission_deadlines": school.get("admission_deadlines") or [],
         "data_source": dq["source"],
         "data_confidence": dq["confidence"],
     }
@@ -184,7 +186,7 @@ def calculate_odds(req: OddsRequest):
 
         result = {
             "school_id": sid,
-            "school": school["name"],
+            "school": school.get("name", sid),
             "tier": final_tier,
             "prob": final_prob,
         }
