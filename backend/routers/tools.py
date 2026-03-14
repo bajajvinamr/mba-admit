@@ -136,43 +136,77 @@ def get_waitlist_strategy(request: Request, req: WaitlistStrategyRequest):
     return generate_waitlist_strategy(req.school_id, req.profile_updates, req.previous_essay_themes)
 
 
-# ── Decisions (real DB with seed fallback) ────────────────────────────────────
+# ── Decisions (GMAT Club scraped data) ────────────────────────────────────────
+
+import json
+from pathlib import Path
+from fastapi import Query
+
+_GMATCLUB_DATA: list[dict] | None = None
+
+def _load_gmatclub_data() -> list[dict]:
+    global _GMATCLUB_DATA
+    if _GMATCLUB_DATA is not None:
+        return _GMATCLUB_DATA
+    path = Path(__file__).resolve().parent.parent / "data" / "gmatclub_decisions.json"
+    if path.exists():
+        with open(path) as f:
+            _GMATCLUB_DATA = json.load(f)
+    else:
+        _GMATCLUB_DATA = []
+    return _GMATCLUB_DATA
+
 
 @router.get("/decisions")
-def get_recent_decisions():
-    """Returns recent community admission decisions from the database.
-    Falls back to seed data if the community tracker is empty."""
-    import db as database
+def get_decisions(
+    school_id: str = None,
+    status: str = None,
+    round: str = None,
+    year: str = None,
+    offset: int = Query(default=0, ge=0),
+    limit: int = Query(default=50, le=200),
+):
+    """Returns GMAT Club decision tracker data with optional filters."""
+    data = _load_gmatclub_data()
 
-    real_decisions = database.get_community_decisions(limit=30)
-    if real_decisions:
-        return {"decisions": real_decisions}
+    if school_id:
+        data = [d for d in data if d.get("school_id") == school_id]
+    if status:
+        data = [d for d in data if status.lower() in d.get("status", "").lower()]
+    if round:
+        data = [d for d in data if round.lower() in d.get("round", "").lower()]
+    if year:
+        data = [d for d in data if d.get("year") == year]
 
-    # Seed data for cold-start (no community submissions yet)
-    from datetime import datetime, timedelta
-    statuses = ["Admitted", "Admitted", "Admitted", "Waitlisted", "Dinged"]
-    roles = ["Consultant", "Product Manager", "Software Engineer", "IB Analyst", "Military Officer", "Founder"]
-    schools_map = {
-        "hbs": "Harvard (HBS)", "gsb": "Stanford GSB", "wharton": "Wharton",
-        "kellogg": "Kellogg", "booth": "Booth", "sloan": "MIT Sloan",
-        "cbs": "Columbia (CBS)", "insead": "INSEAD", "lbs": "LBS"
+    total = len(data)
+    page = data[offset : offset + limit]
+
+    return {
+        "decisions": page,
+        "total": total,
+        "offset": offset,
+        "limit": limit,
     }
-    decisions = []
-    for i in range(12):
-        days_ago = random.randint(0, 21)
-        sid = list(schools_map.keys())[i % len(schools_map)]
-        gmat = random.choice([710, 720, 730, 740, 750, 760, 770])
-        decisions.append({
-            "id": f"seed_{i}",
-            "school_id": sid,
-            "school": schools_map[sid],
-            "round": random.choice(["R1", "R2", "R3"]),
-            "status": statuses[i % len(statuses)],
-            "gmat": gmat,
-            "gpa": round(random.uniform(3.2, 3.95), 2),
-            "work_years": random.choice([3, 4, 5, 6]),
-            "industry": random.choice(roles),
-            "is_anonymous": True,
-            "created_at": (datetime.now() - timedelta(days=days_ago)).isoformat(),
-        })
-    return {"decisions": decisions}
+
+
+@router.get("/decisions/stats")
+def get_decision_stats():
+    """Aggregate stats across all scraped decisions."""
+    data = _load_gmatclub_data()
+    from collections import Counter
+
+    school_counts = Counter(d.get("school_id", "") for d in data)
+    status_counts = Counter(d.get("status", "") for d in data)
+
+    # Compute averages
+    gmat_scores = [d.get("gmat") or d.get("gmat_focus") for d in data if d.get("gmat") or d.get("gmat_focus")]
+    gpa_scores = [d["gpa"] for d in data if d.get("gpa")]
+
+    return {
+        "total_decisions": len(data),
+        "schools": len(school_counts),
+        "by_school": dict(school_counts.most_common()),
+        "by_status": dict(status_counts.most_common()),
+        "avg_gmat": round(sum(gmat_scores) / len(gmat_scores)) if gmat_scores else None,
+        "avg_gpa": round(sum(gpa_scores) / len(gpa_scores), 2) if gpa_scores else None,
+    }

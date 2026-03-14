@@ -40,25 +40,28 @@ def test_decisions_returns_list(client):
     assert resp.status_code == 200
     data = resp.json()
     assert "decisions" in data
-    assert len(data["decisions"]) >= 10  # seed data has 12
-    d = data["decisions"][0]
-    assert "school" in d
-    assert d["status"] in ("Admitted", "Waitlisted", "Dinged")
+    assert "total" in data
+    assert "offset" in data
+    assert "limit" in data
 
 
-def test_decisions_have_required_fields(client):
-    """Each decision has the expected schema fields."""
-    resp = client.get("/api/decisions")
+def test_decisions_filter_by_school(client):
+    """Decisions can be filtered by school_id."""
+    resp = client.get("/api/decisions?school_id=hbs&limit=5")
+    assert resp.status_code == 200
     data = resp.json()
     for d in data["decisions"]:
-        assert "id" in d
-        assert "school" in d
-        assert "round" in d
-        assert "status" in d
-        assert "gmat" in d
-        assert "gpa" in d
-        assert "work_years" in d
-        assert "industry" in d
+        assert d.get("school_id") == "hbs"
+
+
+def test_decisions_stats(client):
+    """Stats endpoint returns aggregate data."""
+    resp = client.get("/api/decisions/stats")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "total_decisions" in data
+    assert "by_school" in data
+    assert "by_status" in data
 
 
 def test_control_center_init(client):
