@@ -12,7 +12,7 @@ def _school_summary(sid: str, school: dict) -> dict:
     dq = get_school_data_quality(sid)
     return {
         "id": sid,
-        "name": school["name"],
+        "name": school.get("name", sid),
         "location": school.get("location", "Unknown Location"),
         "country": school.get("country", "Unknown"),
         "gmat_avg": school.get("gmat_avg", 730),
@@ -49,7 +49,7 @@ def list_schools(q: str = Query(default=None, description="Search query — matc
 
         # 2. Check school names and IDs directly
         for sid, school in SCHOOL_DB.items():
-            if q_lower in school["name"].lower() or q_lower in sid.lower():
+            if q_lower in school.get("name", "").lower() or q_lower in sid.lower():
                 matched_ids.add(sid)
 
         return [_school_summary(sid, SCHOOL_DB[sid]) for sid in sorted(matched_ids)]
