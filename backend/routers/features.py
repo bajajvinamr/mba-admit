@@ -28,6 +28,54 @@ import db
 router = APIRouter(prefix="/api", tags=["features"])
 
 
+# ── School Insights (per-school outcome data + profile fit) ──────────────────
+
+@router.get("/schools/{school_id}/insights")
+def get_school_insights(
+    school_id: str,
+    gmat: int = Query(default=None, ge=200, le=800),
+    gpa: float = Query(default=None, ge=0.0, le=4.0),
+    yoe: int = Query(default=None, ge=0, le=30),
+):
+    """Personalized insights for a single school using GMAT Club outcome data."""
+    school = SCHOOL_DB.get(school_id)
+    if not school:
+        raise HTTPException(status_code=404, detail=f"School '{school_id}' not found")
+
+    all_decisions = load_gmatclub_data()
+    decisions = get_decisions_for_school(all_decisions, school_id)
+
+    if not decisions:
+        return {
+            "school_id": school_id,
+            "has_data": False,
+            "outcomes": None,
+            "profile_fit": None,
+        }
+
+    outcomes = compute_school_outcomes(decisions)
+
+    # Build profile for fit computation if user provided any params
+    profile = None
+    if gmat or gpa or yoe:
+        profile = {}
+        if gmat:
+            profile["gmat"] = gmat
+        if gpa:
+            profile["gpa"] = gpa
+        if yoe:
+            profile["yoe"] = yoe
+
+    profile_fit = compute_profile_fit(decisions, profile) if profile else None
+
+    return {
+        "school_id": school_id,
+        "has_data": True,
+        "outcomes": outcomes,
+        "profile_fit": profile_fit,
+    }
+
+
 # ── School Comparison ────────────────────────────────────────────────────────
 
 @router.post("/schools/compare")
@@ -161,7 +209,7 @@ def analyze_profile(request: Request, req: ProfileAnalysisRequest):
         fit = max(10, min(95, 50 + gmat_diff + (overall - 50) // 3))
         school_fits.append({
             "school_id": sid,
-            "school_name": school["name"],
+            "school_name": school.get("name", sid),
             "fit_score": fit,
             "strongest": max(dimensions, key=dimensions.get),
             "weakest": min(dimensions, key=dimensions.get),
