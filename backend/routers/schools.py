@@ -15,7 +15,7 @@ def _school_summary(sid: str, school: dict) -> dict:
         "name": school.get("name", sid),
         "location": school.get("location", "Unknown Location"),
         "country": school.get("country", "Unknown"),
-        "gmat_avg": school.get("gmat_avg", 730),
+        "gmat_avg": school.get("gmat_avg"),
         "median_salary": school.get("median_salary", "N/A"),
         "acceptance_rate": school.get("acceptance_rate", "N/A"),
         "class_size": school.get("class_size", "N/A"),
