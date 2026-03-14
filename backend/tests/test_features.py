@@ -11,6 +11,25 @@ def test_compare_schools(client):
     names = [s["name"] for s in data["schools"]]
     assert "Harvard Business School" in names
     assert "Stanford GSB" in names
+    # Check new response structure
+    hbs = data["schools"][0]
+    assert "static" in hbs
+    assert "outcomes" in hbs
+    assert hbs["profile_fit"] is None  # no profile provided
+
+
+def test_compare_schools_with_profile(client):
+    resp = client.post("/api/schools/compare", json={
+        "school_ids": ["hbs", "gsb"],
+        "profile": {"gmat": 740, "gpa": 3.7, "yoe": 4}
+    })
+    assert resp.status_code == 200
+    data = resp.json()
+    hbs = data["schools"][0]
+    if hbs["outcomes"]:  # only if GMAT Club data exists for test env
+        assert hbs["profile_fit"] is not None
+        assert "gmat_percentile" in hbs["profile_fit"]
+        assert "verdict" in hbs["profile_fit"]
 
 
 def test_compare_schools_too_few(client):

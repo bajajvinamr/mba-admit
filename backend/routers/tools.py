@@ -138,23 +138,8 @@ def get_waitlist_strategy(request: Request, req: WaitlistStrategyRequest):
 
 # ── Decisions (GMAT Club scraped data) ────────────────────────────────────────
 
-import json
-from pathlib import Path
 from fastapi import Query
-
-_GMATCLUB_DATA: list[dict] | None = None
-
-def _load_gmatclub_data() -> list[dict]:
-    global _GMATCLUB_DATA
-    if _GMATCLUB_DATA is not None:
-        return _GMATCLUB_DATA
-    path = Path(__file__).resolve().parent.parent / "data" / "gmatclub_decisions.json"
-    if path.exists():
-        with open(path) as f:
-            _GMATCLUB_DATA = json.load(f)
-    else:
-        _GMATCLUB_DATA = []
-    return _GMATCLUB_DATA
+from compare_engine import load_gmatclub_data
 
 
 @router.get("/decisions")
@@ -167,7 +152,7 @@ def get_decisions(
     limit: int = Query(default=50, le=200),
 ):
     """Returns GMAT Club decision tracker data with optional filters."""
-    data = _load_gmatclub_data()
+    data = load_gmatclub_data()
 
     if school_id:
         data = [d for d in data if d.get("school_id") == school_id]
@@ -192,7 +177,7 @@ def get_decisions(
 @router.get("/decisions/stats")
 def get_decision_stats():
     """Aggregate stats across all scraped decisions."""
-    data = _load_gmatclub_data()
+    data = load_gmatclub_data()
     from collections import Counter
 
     school_counts = Counter(d.get("school_id", "") for d in data)

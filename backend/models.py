@@ -169,6 +169,7 @@ class UpdateSchoolStatusRequest(BaseModel):
 
 class CompareSchoolsRequest(BaseModel):
     school_ids: List[str] = Field(min_length=2, max_length=4)
+    profile: Optional[dict] = Field(default=None, description="User profile: {gmat, gpa, yoe}")
 
 
 # ── Profile Strength Report (Phase 6) ────────────────────────────────────────

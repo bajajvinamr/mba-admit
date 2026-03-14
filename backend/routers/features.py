@@ -21,6 +21,7 @@ from models import (
     SculptGoalRequest,
     StorytellerRequest,
 )
+from compare_engine import load_gmatclub_data, compute_school_outcomes, compute_profile_fit
 from run_evals import run_eval_pipeline
 import db
 
@@ -31,28 +32,47 @@ router = APIRouter(prefix="/api", tags=["features"])
 
 @router.post("/schools/compare")
 def compare_schools(req: CompareSchoolsRequest):
-    """Side-by-side comparison of 2-4 schools."""
+    """Side-by-side comparison of 2-4 schools with outcome data and profile fit."""
+    all_decisions = load_gmatclub_data()
     schools = []
+
     for sid in req.school_ids:
         school = SCHOOL_DB.get(sid)
         if not school:
             continue
-        schools.append({
-            "id": sid,
-            "name": school.get("name"),
-            "location": school.get("location", ""),
-            "country": school.get("country", ""),
-            "gmat_avg": school.get("gmat_avg", 0),
-            "acceptance_rate": school.get("acceptance_rate", 0),
-            "class_size": school.get("class_size", 0),
-            "tuition_usd": school.get("tuition_usd", 0),
-            "median_salary": school.get("median_salary", "N/A"),
+
+        # Filter decisions for this school
+        school_decisions = [d for d in all_decisions if d.get("school_id") == sid]
+
+        # Compute outcomes from GMAT Club data
+        outcomes = compute_school_outcomes(school_decisions) if school_decisions else None
+
+        # Compute profile fit if user provided profile
+        profile_fit = compute_profile_fit(school_decisions, req.profile) if school_decisions else None
+
+        # Static data from school DB
+        static = {
+            "tuition_usd": school.get("tuition_usd"),
+            "class_size": school.get("class_size"),
+            "acceptance_rate": school.get("acceptance_rate"),
+            "median_salary": school.get("median_salary"),
+            "gmat_avg": school.get("gmat_avg"),
+            "stem_designated": school.get("program_details", {}).get("stem_designated"),
+            "program_duration": school.get("program_details", {}).get("duration"),
+            "international_pct": school.get("program_details", {}).get("international_percentage"),
+            "employment_rate": school.get("placement_stats", {}).get("employment_rate_3_months"),
             "specializations": school.get("specializations", []),
             "essay_count": len(school.get("essay_prompts", [])),
-            "program_duration": school.get("program_details", {}).get("duration", "N/A"),
-            "stem_designated": school.get("program_details", {}).get("stem_designated", False),
-            "international_pct": school.get("program_details", {}).get("international_percentage", "N/A"),
-            "employment_rate": school.get("placement_stats", {}).get("employment_rate_3_months", "N/A"),
+            "deadlines": school.get("admission_deadlines", []),
+        }
+
+        schools.append({
+            "school_id": sid,
+            "name": school.get("name"),
+            "location": school.get("location", ""),
+            "static": static,
+            "outcomes": outcomes,
+            "profile_fit": profile_fit,
         })
 
     if len(schools) < 2:
