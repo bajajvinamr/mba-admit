@@ -138,6 +138,28 @@ def test_filter_decisions_by_status(client):
 
 # ── Email Capture / Waitlist ─────────────────────────────────────────────────
 
+def test_insights_returns_similar_applicants(client):
+    """School insights endpoint returns similar applicants when profile is provided."""
+    resp = client.get("/api/schools/booth/insights?gmat=730&gpa=3.6&yoe=5")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "similar_applicants" in data
+    # May be empty if no GMAT Club data matches, but key must exist
+    assert isinstance(data["similar_applicants"], list)
+    if data["similar_applicants"]:
+        a = data["similar_applicants"][0]
+        assert "outcome" in a
+        assert a["outcome"] in ["Admitted", "Denied", "Waitlisted", "Interview"]
+
+
+def test_insights_no_similar_without_profile(client):
+    """School insights without profile returns empty similar_applicants."""
+    resp = client.get("/api/schools/booth/insights")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["similar_applicants"] == []
+
+
 def test_subscribe_email(client, tmp_path, monkeypatch):
     """Email capture endpoint stores email and returns success."""
     import routers.features as feat_mod

@@ -27,7 +27,7 @@ from models import (
     SculptGoalRequest,
     StorytellerRequest,
 )
-from compare_engine import load_gmatclub_data, compute_school_outcomes, compute_profile_fit, get_decisions_for_school
+from compare_engine import load_gmatclub_data, compute_school_outcomes, compute_profile_fit, get_decisions_for_school, find_similar_applicants
 from run_evals import run_eval_pipeline
 import db
 
@@ -74,11 +74,15 @@ def get_school_insights(
 
     profile_fit = compute_profile_fit(decisions, profile) if profile else None
 
+    # Find similar applicants if profile provided
+    similar = find_similar_applicants(decisions, gmat=gmat, gpa=gpa, yoe=yoe) if profile else []
+
     return {
         "school_id": school_id,
         "has_data": True,
         "outcomes": outcomes,
         "profile_fit": profile_fit,
+        "similar_applicants": similar,
     }
 
 

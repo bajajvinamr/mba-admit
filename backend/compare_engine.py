@@ -223,3 +223,101 @@ def compute_profile_fit(decisions: list[dict], profile: dict | None) -> dict | N
         "yoe_percentile": yoe_pct,
         "verdict": verdict,
     }
+
+
+def find_similar_applicants(
+    decisions: list[dict],
+    gmat: int | None = None,
+    gpa: float | None = None,
+    yoe: int | None = None,
+    limit: int = 8,
+) -> list[dict]:
+    """Find applicants with similar profiles and return anonymized summaries.
+
+    Similarity: |GMAT diff| ≤ 30, |GPA diff| ≤ 0.3, |YOE diff| ≤ 2.
+    Results sorted by similarity (closest first), then by status (admits first).
+    """
+    if not decisions or not (gmat or gpa or yoe):
+        return []
+
+    scored: list[tuple[float, dict]] = []
+    for d in decisions:
+        d_gmat = _get_gmat(d)
+        d_gpa = d.get("gpa")
+        d_yoe = d.get("yoe")
+
+        # Must have at least one matching stat dimension
+        if not (d_gmat or d_gpa or d_yoe):
+            continue
+
+        distance = 0.0
+        dims = 0
+
+        if gmat and d_gmat:
+            gmat_diff = abs(gmat - d_gmat)
+            if gmat_diff > 30:
+                continue  # too different
+            distance += gmat_diff / 30  # normalize to 0-1
+            dims += 1
+
+        if gpa and d_gpa:
+            gpa_diff = abs(gpa - d_gpa)
+            if gpa_diff > 0.3:
+                continue
+            distance += gpa_diff / 0.3
+            dims += 1
+
+        if yoe and d_yoe:
+            yoe_diff = abs(yoe - d_yoe)
+            if yoe_diff > 2:
+                continue
+            distance += yoe_diff / 2
+            dims += 1
+
+        if dims == 0:
+            continue
+
+        distance /= dims  # average normalized distance
+        scored.append((distance, d))
+
+    # Sort by distance (closest first), then admits first for ties
+    status_order = {"admitted": 0, "interview": 1, "waitlist": 2, "denied": 3}
+
+    def sort_key(item: tuple[float, dict]) -> tuple[float, int]:
+        dist, d = item
+        st = d.get("status", "").lower()
+        order = 3
+        for keyword, rank in status_order.items():
+            if keyword in st:
+                order = rank
+                break
+        return (dist, order)
+
+    scored.sort(key=sort_key)
+
+    # Anonymize and return
+    results = []
+    for _, d in scored[:limit]:
+        status = d.get("status", "Unknown")
+        # Classify status
+        if _status_match(status, ADMIT_KEYWORDS):
+            outcome = "Admitted"
+        elif _status_match(status, DENY_KEYWORDS):
+            outcome = "Denied"
+        elif _status_match(status, WAITLIST_KEYWORDS):
+            outcome = "Waitlisted"
+        elif _is_interview(status):
+            outcome = "Interview"
+        else:
+            outcome = status
+
+        results.append({
+            "gmat": _get_gmat(d),
+            "gpa": d.get("gpa"),
+            "yoe": d.get("yoe"),
+            "industry": d.get("industry"),
+            "outcome": outcome,
+            "round": d.get("round"),
+        })
+
+    return results
