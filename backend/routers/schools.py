@@ -25,6 +25,8 @@ def _school_summary(sid: str, school: dict) -> dict:
         "stem_designated": school.get("program_details", {}).get("stem_designated", False),
         "essay_count": len(school.get("essay_prompts") or []),
         "admission_deadlines": school.get("admission_deadlines") or [],
+        "primary_admission_test": school.get("primary_admission_test"),
+        "program_count": len(school.get("programs") or []),
         "data_source": dq["source"],
         "data_confidence": dq["confidence"],
     }
