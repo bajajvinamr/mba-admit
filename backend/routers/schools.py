@@ -31,8 +31,12 @@ def _school_summary(sid: str, school: dict) -> dict:
 
 
 @router.get("/schools")
-def list_schools(q: str = Query(default=None, description="Search query — matches name, ID, or common abbreviations")):
-    """Returns the school directory, optionally filtered by search query.
+def list_schools(
+    q: str = Query(default=None, description="Search query — matches name, ID, or common abbreviations"),
+    country: str = Query(default=None, description="Filter by country name (case-insensitive)"),
+    city: str = Query(default=None, description="Filter by city name (substring match, case-insensitive)"),
+):
+    """Returns the school directory, optionally filtered by search query, country, or city.
 
     Search matches against:
     - School name (e.g. 'London Business School')
@@ -54,10 +58,51 @@ def list_schools(q: str = Query(default=None, description="Search query — matc
             if q_lower in school.get("name", "").lower() or q_lower in sid.lower():
                 matched_ids.add(sid)
 
-        return [_school_summary(sid, SCHOOL_DB[sid]) for sid in sorted(matched_ids)]
+        results = [_school_summary(sid, SCHOOL_DB[sid]) for sid in sorted(matched_ids)]
+    else:
+        # No query — return all schools
+        results = [_school_summary(sid, school) for sid, school in SCHOOL_DB.items()]
 
-    # No query — return all schools
-    return [_school_summary(sid, school) for sid, school in SCHOOL_DB.items()]
+    # Apply geo filters
+    if country:
+        country_lower = country.strip().lower()
+        results = [s for s in results if s.get("country", "").lower() == country_lower]
+    if city:
+        city_lower = city.strip().lower()
+        results = [s for s in results if city_lower in s.get("location", "").lower()]
+
+    return results
+
+
+@router.get("/schools/geo-meta")
+def geo_meta():
+    """Returns unique countries and cities with school counts for geo page generation."""
+    from collections import Counter
+    countries: Counter[str] = Counter()
+    cities: Counter[str] = Counter()
+    for school in SCHOOL_DB.values():
+        c = school.get("country", "Unknown")
+        if c and c not in ("?", "Unknown"):
+            countries[c] += 1
+        loc = school.get("location", "")
+        if loc and loc not in ("?", "Unknown", "Unknown Location"):
+            city_name = loc.split(",")[0].strip()
+            if city_name:
+                cities[city_name] += 1
+
+    def slugify(s: str) -> str:
+        return s.lower().replace(" ", "-").replace(".", "")
+
+    return {
+        "countries": sorted(
+            [{"name": c, "slug": slugify(c), "count": n} for c, n in countries.items()],
+            key=lambda x: -x["count"],
+        ),
+        "cities": sorted(
+            [{"name": c, "slug": slugify(c), "count": n} for c, n in cities.items() if n >= 2],
+            key=lambda x: -x["count"],
+        ),
+    }
 
 
 @router.get("/schools/{school_id}")
