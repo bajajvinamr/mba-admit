@@ -69,6 +69,53 @@ def _score_school(
     return {"prob": final_prob, "tier": tier}
 
 
+def _generate_fit_reason(
+    tier: str,
+    prob: int,
+    fit: dict | None,
+    similar_admits: int,
+    total_decisions: int,
+    school: dict,
+    gmat_value: int,
+    gpa_normalized: float,
+) -> str:
+    """Generate a concise, data-driven fit reason (no LLM needed)."""
+    school_gmat = school.get("gmat_avg")
+
+    # Priority 1: Strong social proof from similar admits
+    if similar_admits >= 50:
+        return f"{similar_admits} applicants with your stats were admitted"
+    if similar_admits >= 20:
+        return f"{similar_admits} similar profiles got in — solid match"
+
+    # Priority 2: GMAT comparison when we have school data
+    if school_gmat and gmat_value:
+        diff = gmat_value - school_gmat
+        if diff >= 20:
+            return f"Your GMAT is {diff} points above their {school_gmat} average"
+        if diff >= 0:
+            return f"Your GMAT matches their {school_gmat} average — competitive"
+        if diff >= -15:
+            return f"Your GMAT is close to their {school_gmat} average — within range"
+        if tier == "Reach":
+            return f"Their {school_gmat} avg GMAT is above yours — strong story needed"
+
+    # Priority 3: Percentile-based from profile fit
+    if fit:
+        gmat_pct = fit.get("gmat_percentile", 50)
+        if gmat_pct >= 70:
+            return f"Your stats rank in the top {100 - gmat_pct}% of admitted applicants"
+        if gmat_pct >= 40:
+            return "Your profile is competitive with recent admits"
+
+    # Priority 4: Tier-based fallback
+    if tier == "Safety":
+        return "Strong profile match — high confidence"
+    if tier == "Target":
+        return "Good alignment with admitted class profile"
+    return "Aspirational — differentiation will be key"
+
+
 @router.get("/recommendations")
 def get_recommendations(
     gmat: Optional[int] = Query(default=None, ge=200, le=800),
@@ -170,6 +217,12 @@ def get_recommendations(
                 and d.get("gmat") and abs(d["gmat"] - gmat) <= 30
             )
 
+        # Generate a concise fit reason from available data
+        fit_reason = _generate_fit_reason(
+            result["tier"], result["prob"], fit, similar_admits,
+            total_decisions, school, gmat_value, gpa_normalized,
+        )
+
         scored.append({
             "school_id": sid,
             "name": school.get("name", sid),
@@ -189,6 +242,7 @@ def get_recommendations(
             "admit_count": admit_count,
             "similar_admits": similar_admits,
             "profile_fit": fit,
+            "fit_reason": fit_reason,
         })
 
     # Sort by probability descending within each tier group

@@ -91,6 +91,16 @@ def test_recommendations_with_industry(client):
     assert any(d != 0 for d in diffs), "Industry modifier should change probabilities"
 
 
+def test_recommendations_fit_reason(client):
+    """Each recommendation should have a non-empty fit_reason."""
+    resp = client.get("/api/recommendations?gmat=720&gpa=3.6&yoe=4&limit=8")
+    data = resp.json()
+    for rec in data["recommendations"]:
+        assert "fit_reason" in rec
+        assert isinstance(rec["fit_reason"], str)
+        assert len(rec["fit_reason"]) > 5, f"Fit reason too short for {rec['school_id']}"
+
+
 def test_recommendations_validation(client):
     """Should reject invalid params."""
     resp = client.get("/api/recommendations?gmat=1000")
