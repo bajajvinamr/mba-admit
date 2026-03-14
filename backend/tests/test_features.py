@@ -134,3 +134,31 @@ def test_filter_decisions_by_status(client):
     assert resp.status_code == 200
     assert len(resp.json()["decisions"]) == 1
     assert resp.json()["decisions"][0]["status"] == "Admitted"
+
+
+# ── Email Capture / Waitlist ─────────────────────────────────────────────────
+
+def test_subscribe_email(client, tmp_path, monkeypatch):
+    """Email capture endpoint stores email and returns success."""
+    import routers.features as feat_mod
+    monkeypatch.setattr(feat_mod, "WAITLIST_FILE", tmp_path / "waitlist.json")
+    resp = client.post("/api/subscribe", json={"email": "test@example.com", "source": "test"})
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["status"] == "subscribed"
+
+
+def test_subscribe_email_dedupe(client, tmp_path, monkeypatch):
+    """Subscribing the same email twice returns already_subscribed."""
+    import routers.features as feat_mod
+    monkeypatch.setattr(feat_mod, "WAITLIST_FILE", tmp_path / "waitlist.json")
+    client.post("/api/subscribe", json={"email": "dupe@test.com", "source": "test"})
+    resp = client.post("/api/subscribe", json={"email": "dupe@test.com", "source": "test"})
+    assert resp.status_code == 200
+    assert resp.json()["status"] == "already_subscribed"
+
+
+def test_subscribe_email_invalid(client):
+    """Invalid email format returns 422."""
+    resp = client.post("/api/subscribe", json={"email": "not-an-email", "source": "test"})
+    assert resp.status_code == 422

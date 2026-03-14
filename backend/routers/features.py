@@ -1,6 +1,10 @@
 """Phase 6 feature endpoints — comparison, profile analysis, essay versions, community decisions."""
 
+import json
 import logging
+import os
+from datetime import datetime, timezone
+from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Depends, Query, Request
 from typing import Dict
@@ -12,6 +16,8 @@ from agents import (
 )
 from auth import get_current_user, get_optional_user
 from middleware import rate_limit
+from pydantic import BaseModel, Field as PydanticField, field_validator
+import re
 from models import (
     CompareSchoolsRequest,
     ProfileAnalysisRequest,
@@ -334,3 +340,53 @@ def storyteller_chat(request: Request, req: StorytellerRequest):
         chat_history=req.chat_history,
         new_message=req.new_message
     )
+
+
+# ── Email Capture / Waitlist ─────────────────────────────────────────────────
+
+WAITLIST_FILE = Path(__file__).parent.parent / "data" / "waitlist_emails.json"
+
+
+class EmailCaptureRequest(BaseModel):
+    email: str = PydanticField(min_length=5, max_length=254)
+    source: str = PydanticField(default="unknown", max_length=50)
+
+    @field_validator("email")
+    @classmethod
+    def validate_email(cls, v: str) -> str:
+        v = v.strip().lower()
+        if not re.match(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", v):
+            raise ValueError("Invalid email address")
+        return v
+
+
+@router.post("/subscribe")
+@rate_limit("5/minute")
+def subscribe_email(request: Request, req: EmailCaptureRequest):
+    """Capture email for pre-launch waitlist. Stores to local JSON file."""
+    entries: list = []
+    try:
+        if WAITLIST_FILE.exists():
+            entries = json.loads(WAITLIST_FILE.read_text())
+    except Exception:
+        entries = []
+
+    # Dedupe
+    existing_emails = {e.get("email") for e in entries}
+    if req.email in existing_emails:
+        return {"status": "already_subscribed", "message": "You're already on the list!"}
+
+    entries.append({
+        "email": req.email,
+        "source": req.source,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    })
+
+    try:
+        WAITLIST_FILE.parent.mkdir(parents=True, exist_ok=True)
+        WAITLIST_FILE.write_text(json.dumps(entries, indent=2))
+    except Exception as e:
+        logging.error("Failed to save waitlist email: %s", e)
+        raise HTTPException(status_code=500, detail="Failed to save — please try again")
+
+    return {"status": "subscribed", "message": "Welcome aboard! We'll be in touch."}
