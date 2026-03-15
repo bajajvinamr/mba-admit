@@ -2555,3 +2555,339 @@ def generate_application_checklist(req: ChecklistGeneratorRequest):
         })
 
     return {"schools": results, "total_schools": len(results)}
+
+
+# ── Application Fee Calculator ────────────────────────────────────────
+
+from pydantic import BaseModel as _BaseModel  # noqa: E402
+
+
+class FeeCalcRequest(_BaseModel):
+    school_ids: list[str]
+
+
+_APPLICATION_FEES: dict[str, int] = {
+    "hbs": 250,
+    "gsb": 275,
+    "wharton": 275,
+    "booth": 275,
+    "kellogg": 250,
+    "cbs": 250,
+    "sloan": 250,
+    "tuck": 275,
+    "haas": 275,
+    "ross": 250,
+    "fuqua": 250,
+    "darden": 250,
+    "stern": 275,
+    "yale_som": 250,
+    "anderson": 275,
+    "tepper": 250,
+    "johnson": 250,
+    "kenan_flagler": 225,
+    "marshall": 275,
+    "mccombs": 200,
+    "kelley": 225,
+    "foster": 200,
+    "goizueta": 220,
+    "georgetown_msb": 225,
+    "rice_jones": 200,
+    "vanderbilt_owen": 225,
+    "olin": 225,
+    "fisher": 200,
+    "mendoza": 200,
+    "scheller": 200,
+    "iima": 50,
+    "iimb": 50,
+    "iimc": 50,
+    "isb": 100,
+    "lbs": 175,
+    "insead": 275,
+    "said": 150,
+    "judge": 150,
+    "hec_paris": 200,
+    "iese": 175,
+    "esade": 150,
+    "ie": 150,
+    "rotman": 175,
+    "ivey": 150,
+}
+
+_GMAT_SCORE_REPORT_FEE = 35
+
+_TRANSCRIPT_FEES: dict[str, int] = {
+    "hbs": 25,
+    "gsb": 20,
+    "wharton": 25,
+    "booth": 20,
+    "kellogg": 15,
+    "cbs": 25,
+    "sloan": 20,
+    "tuck": 15,
+    "haas": 20,
+    "ross": 15,
+    "fuqua": 15,
+    "darden": 15,
+    "stern": 25,
+    "yale_som": 15,
+    "anderson": 20,
+}
+
+_WAIVER_PROGRAMS: dict[str, list[str]] = {
+    "hbs": ["HBS 2+2 fee waiver", "Need-based waiver (request via AdCom)"],
+    "gsb": ["Stanford fee waiver (financial hardship)", "Military/AmeriCorps service waiver"],
+    "wharton": ["Wharton application fee waiver (campus visit)", "Military service waiver"],
+    "booth": ["Booth merit waiver (info sessions)", "Consortium fee waiver"],
+    "kellogg": ["Kellogg campus visit waiver", "Military service waiver", "Consortium fee waiver"],
+    "cbs": ["CBS Hermes Society waiver", "Military/Peace Corps waiver", "Consortium fee waiver"],
+    "sloan": ["MIT Sloan fee waiver (financial need)", "Military service waiver"],
+    "tuck": ["Tuck diversity conference waiver", "Military service waiver"],
+    "haas": ["Haas Consortium waiver", "Military service waiver"],
+    "ross": ["Ross fee waiver (info session attendance)", "Military service waiver", "Consortium fee waiver"],
+    "fuqua": ["Fuqua fee waiver (campus visit)", "Military service waiver"],
+    "darden": ["Darden fee waiver (preview weekend)", "Military service waiver", "Consortium fee waiver"],
+    "stern": ["Stern campus visit waiver", "Military service waiver"],
+    "yale_som": ["SOM need-based waiver", "Military service waiver", "Consortium fee waiver"],
+    "anderson": ["Anderson fee waiver (info session)", "Military service waiver"],
+    "insead": ["INSEAD need-based waiver"],
+    "lbs": ["LBS financial hardship waiver"],
+}
+
+
+@router.post("/fee-calculator")
+def fee_calculator(req: FeeCalcRequest):
+    """Calculate total application fees across selected schools with per-school breakdown."""
+    if not req.school_ids:
+        raise HTTPException(status_code=400, detail="At least one school_id is required.")
+    if len(req.school_ids) > 20:
+        raise HTTPException(status_code=400, detail="Maximum 20 schools per request.")
+
+    schools_breakdown: list[dict] = []
+    grand_total = 0
+
+    for sid in req.school_ids:
+        sid_lower = sid.strip().lower()
+        school = SCHOOL_DB.get(sid_lower)
+        school_name = school.get("name", sid_lower) if school else sid_lower.upper()
+
+        app_fee = _APPLICATION_FEES.get(sid_lower, 250)  # default $250
+        gmat_fee = _GMAT_SCORE_REPORT_FEE
+        transcript_fee = _TRANSCRIPT_FEES.get(sid_lower, 15)
+        total = app_fee + gmat_fee + transcript_fee
+
+        waivers = _WAIVER_PROGRAMS.get(sid_lower, [])
+
+        schools_breakdown.append({
+            "school_id": sid_lower,
+            "school_name": school_name,
+            "application_fee": app_fee,
+            "gmat_score_report_fee": gmat_fee,
+            "transcript_fee": transcript_fee,
+            "total_per_school": total,
+            "potential_waivers": waivers,
+        })
+        grand_total += total
+
+    return {
+        "schools": schools_breakdown,
+        "grand_total": grand_total,
+        "total_schools": len(schools_breakdown),
+    }
+
+
+# ── Exchange Programs ──────────────────────────────────────────────────
+
+_EXCHANGE_DB = {
+    "hbs": [
+        {"partner": "INSEAD", "country": "France/Singapore", "region": "europe", "duration": "1 quarter", "focus": ["General Management", "Entrepreneurship"], "language": "English"},
+        {"partner": "IESE Business School", "country": "Spain", "region": "europe", "duration": "1 semester", "focus": ["General Management", "Entrepreneurship"], "language": "English/Spanish"},
+        {"partner": "Tsinghua SEM", "country": "China", "region": "asia", "duration": "1 quarter", "focus": ["Technology", "China Business"], "language": "English"},
+    ],
+    "gsb": [
+        {"partner": "London Business School", "country": "UK", "region": "europe", "duration": "1 quarter", "focus": ["Finance", "Strategy"], "language": "English"},
+        {"partner": "NUS Business School", "country": "Singapore", "region": "asia", "duration": "1 quarter", "focus": ["Asian Business", "Finance"], "language": "English"},
+    ],
+    "wharton": [
+        {"partner": "INSEAD", "country": "France/Singapore", "region": "europe", "duration": "1 semester", "focus": ["Finance", "General Management"], "language": "English"},
+        {"partner": "HEC Paris", "country": "France", "region": "europe", "duration": "1 semester", "focus": ["Luxury", "Entrepreneurship"], "language": "English/French"},
+        {"partner": "CEIBS", "country": "China", "region": "asia", "duration": "1 semester", "focus": ["China Business"], "language": "English"},
+    ],
+    "booth": [
+        {"partner": "London Business School", "country": "UK", "region": "europe", "duration": "1 quarter", "focus": ["Finance", "Economics"], "language": "English"},
+        {"partner": "HEC Paris", "country": "France", "region": "europe", "duration": "1 quarter", "focus": ["General Management"], "language": "English"},
+    ],
+    "kellogg": [
+        {"partner": "WHU Otto Beisheim", "country": "Germany", "region": "europe", "duration": "1 quarter", "focus": ["Innovation", "Entrepreneurship"], "language": "English"},
+        {"partner": "HKUST Business School", "country": "Hong Kong", "region": "asia", "duration": "1 quarter", "focus": ["Asian Markets", "Finance"], "language": "English"},
+        {"partner": "Tel Aviv University", "country": "Israel", "region": "europe", "duration": "1 quarter", "focus": ["Technology", "Entrepreneurship"], "language": "English"},
+    ],
+    "sloan": [
+        {"partner": "Tsinghua SEM", "country": "China", "region": "asia", "duration": "1 semester", "focus": ["Technology", "Innovation"], "language": "English"},
+        {"partner": "INSEAD", "country": "France/Singapore", "region": "europe", "duration": "1 semester", "focus": ["General Management"], "language": "English"},
+    ],
+    "insead": [
+        {"partner": "Wharton", "country": "USA", "region": "americas", "duration": "1 semester", "focus": ["Finance"], "language": "English"},
+        {"partner": "Kellogg", "country": "USA", "region": "americas", "duration": "1 period", "focus": ["Marketing", "Management"], "language": "English"},
+    ],
+}
+
+
+@router.get("/exchange-programs")
+def get_exchange_programs(school_id: str | None = None, region: str | None = None):
+    """Get MBA exchange and study abroad programs."""
+    programs = []
+
+    if school_id:
+        ids = [s.strip().lower() for s in school_id.split(",") if s.strip()]
+    else:
+        ids = list(_EXCHANGE_DB.keys())
+
+    for sid in ids:
+        school = SCHOOL_DB.get(sid)
+        school_name = school.get("name", sid) if school else sid.upper()
+        exchanges = _EXCHANGE_DB.get(sid, [])
+        for ex in exchanges:
+            programs.append({
+                "school_id": sid,
+                "school_name": school_name,
+                **ex,
+            })
+
+    if region:
+        programs = [p for p in programs if p.get("region") == region.lower()]
+
+    return {"programs": programs, "total": len(programs)}
+
+
+# ── Specialty Rankings ─────────────────────────────────────────────────
+
+_SPECIALTY_RANKINGS = {
+    "finance": {
+        "display_name": "Finance",
+        "schools": [
+            {"rank": 1, "school_id": "wharton", "score": 98, "features": ["Largest finance faculty", "150+ finance electives", "Wall Street pipeline"], "centers": ["Wharton Financial Institutions Center"]},
+            {"rank": 2, "school_id": "booth", "score": 96, "features": ["Nobel laureate faculty", "Quant-heavy curriculum", "Strong trading culture"], "centers": ["Fama-Miller Center for Research in Finance"]},
+            {"rank": 3, "school_id": "cbs", "score": 93, "features": ["NYC location", "Value investing heritage", "Buffett connection"], "centers": ["Heilbrunn Center for Graham & Dodd Investing"]},
+            {"rank": 4, "school_id": "stern", "score": 90, "features": ["Wall Street proximity", "Strong PE/hedge fund placement"], "centers": ["Salomon Center"]},
+            {"rank": 5, "school_id": "hbs", "score": 88, "features": ["PE/VC placement", "Case method for finance"], "centers": ["Rock Center for Entrepreneurship"]},
+            {"rank": 6, "school_id": "gsb", "score": 86, "features": ["VC focus", "Silicon Valley finance"], "centers": ["Center for Entrepreneurial Studies"]},
+            {"rank": 7, "school_id": "sloan", "score": 84, "features": ["Quant finance", "Fintech innovation"], "centers": ["MIT Laboratory for Financial Engineering"]},
+            {"rank": 8, "school_id": "kellogg", "score": 81, "features": ["Asset management focus", "Strong alumni network in finance"], "centers": ["Kellogg Finance Department"]},
+        ],
+    },
+    "consulting": {
+        "display_name": "Management Consulting",
+        "schools": [
+            {"rank": 1, "school_id": "hbs", "score": 97, "features": ["30%+ class enters consulting", "Case method = consulting prep"], "centers": ["HBS Case Writing Program"]},
+            {"rank": 2, "school_id": "kellogg", "score": 95, "features": ["Team-based culture", "Highest consulting placement %"], "centers": ["Kellogg Consulting Club"]},
+            {"rank": 3, "school_id": "booth", "score": 93, "features": ["Analytical rigor", "Strong MBB pipeline"], "centers": ["Management Consulting Group"]},
+            {"rank": 4, "school_id": "wharton", "score": 91, "features": ["Strategy focus", "Dual-degree options"], "centers": ["Mack Institute"]},
+            {"rank": 5, "school_id": "gsb", "score": 89, "features": ["Selective placement", "West Coast consulting"], "centers": ["Stanford Consulting Partnership"]},
+            {"rank": 6, "school_id": "tuck", "score": 87, "features": ["Small class, strong community", "High MBB conversion"], "centers": ["Center for Business, Government & Society"]},
+            {"rank": 7, "school_id": "fuqua", "score": 85, "features": ["Team Fuqua culture", "Strong Deloitte pipeline"], "centers": ["Fuqua Client Consulting Practicum"]},
+            {"rank": 8, "school_id": "ross", "score": 83, "features": ["MAP program (real consulting)", "Action-based learning"], "centers": ["Multidisciplinary Action Projects"]},
+        ],
+    },
+    "technology": {
+        "display_name": "Technology & Product Management",
+        "schools": [
+            {"rank": 1, "school_id": "gsb", "score": 98, "features": ["Silicon Valley hub", "35%+ enter tech", "VC ecosystem"], "centers": ["Stanford Technology Ventures Program"]},
+            {"rank": 2, "school_id": "sloan", "score": 96, "features": ["MIT integration", "Deep tech focus", "AI/ML curriculum"], "centers": ["Martin Trust Center for MIT Entrepreneurship"]},
+            {"rank": 3, "school_id": "haas", "score": 93, "features": ["Bay Area location", "Innovation focus", "Tech trek"], "centers": ["Berkeley SkyDeck"]},
+            {"rank": 4, "school_id": "hbs", "score": 90, "features": ["Tech placement growing", "HBX digital platform"], "centers": ["Digital Initiative"]},
+            {"rank": 5, "school_id": "booth", "score": 87, "features": ["Polsky Center", "Data analytics"], "centers": ["Polsky Center for Entrepreneurship"]},
+            {"rank": 6, "school_id": "kellogg", "score": 85, "features": ["MMM dual degree (design+MBA)", "Tech club"], "centers": ["Kellogg Innovation & Entrepreneurship"]},
+            {"rank": 7, "school_id": "anderson", "score": 83, "features": ["LA tech scene", "Entertainment tech"], "centers": ["Price Center for Entrepreneurship"]},
+            {"rank": 8, "school_id": "tepper", "score": 81, "features": ["Quantitative + tech", "Carnegie Mellon CS access"], "centers": ["Swartz Center for Entrepreneurship"]},
+        ],
+    },
+    "entrepreneurship": {
+        "display_name": "Entrepreneurship",
+        "schools": [
+            {"rank": 1, "school_id": "gsb", "score": 98, "features": ["16%+ start companies", "$300B+ alumni company value"], "centers": ["Center for Entrepreneurial Studies"]},
+            {"rank": 2, "school_id": "hbs", "score": 96, "features": ["Largest startup ecosystem", "Rock Center", "New Venture Competition"], "centers": ["Arthur Rock Center"]},
+            {"rank": 3, "school_id": "sloan", "score": 94, "features": ["MIT ecosystem", "$100K competition", "Deep tech startups"], "centers": ["Martin Trust Center"]},
+            {"rank": 4, "school_id": "haas", "score": 91, "features": ["Bay Area startup scene", "Lean Launchpad"], "centers": ["Berkeley SkyDeck"]},
+            {"rank": 5, "school_id": "babson_olin", "score": 89, "features": ["#1 undergrad entrepreneurship", "FME program"], "centers": ["Arthur M. Blank Center"]},
+            {"rank": 6, "school_id": "booth", "score": 87, "features": ["Polsky Center", "New Venture Challenge"], "centers": ["Polsky Center"]},
+            {"rank": 7, "school_id": "kellogg", "score": 85, "features": ["Zell Fellows", "NVC competition"], "centers": ["Kellogg Innovation & Entrepreneurship"]},
+            {"rank": 8, "school_id": "wharton", "score": 83, "features": ["Venture Initiation Program", "Penn ecosystem"], "centers": ["Wharton Entrepreneurship"]},
+        ],
+    },
+    "social_impact": {
+        "display_name": "Social Impact & Nonprofit",
+        "schools": [
+            {"rank": 1, "school_id": "yale_som", "score": 97, "features": ["Mission-driven culture", "Broad curriculum with social focus"], "centers": ["Program on Social Enterprise"]},
+            {"rank": 2, "school_id": "hbs", "score": 94, "features": ["Social Enterprise Initiative", "Largest nonprofit case library"], "centers": ["Social Enterprise Initiative"]},
+            {"rank": 3, "school_id": "gsb", "score": 92, "features": ["PACS center", "Social innovation"], "centers": ["Center for Social Innovation"]},
+            {"rank": 4, "school_id": "fuqua", "score": 89, "features": ["CASE i3", "Impact investing"], "centers": ["Center for Advancement of Social Entrepreneurship"]},
+            {"rank": 5, "school_id": "haas", "score": 87, "features": ["Center for Social Sector Leadership"], "centers": ["CSSL"]},
+        ],
+    },
+    "healthcare": {
+        "display_name": "Healthcare Management",
+        "schools": [
+            {"rank": 1, "school_id": "wharton", "score": 96, "features": ["Health Care Management Dept", "Penn Med integration"], "centers": ["Wharton Healthcare Management"]},
+            {"rank": 2, "school_id": "hbs", "score": 93, "features": ["Health care initiative", "Case method for healthcare"], "centers": ["Health Care Initiative"]},
+            {"rank": 3, "school_id": "kellogg", "score": 90, "features": ["Health Enterprise Management Center"], "centers": ["HEMC"]},
+            {"rank": 4, "school_id": "fuqua", "score": 87, "features": ["Health Sector Management concentration"], "centers": ["Duke Health"]},
+            {"rank": 5, "school_id": "ross", "score": 84, "features": ["Michigan Medicine partnership"], "centers": ["Tauber Institute"]},
+        ],
+    },
+    "marketing": {
+        "display_name": "Marketing",
+        "schools": [
+            {"rank": 1, "school_id": "kellogg", "score": 97, "features": ["Marketing birthplace (Kotler)", "Strongest marketing faculty"], "centers": ["Kellogg Marketing Department"]},
+            {"rank": 2, "school_id": "wharton", "score": 93, "features": ["Large marketing faculty", "Analytics + marketing"], "centers": ["Wharton Customer Analytics"]},
+            {"rank": 3, "school_id": "hbs", "score": 90, "features": ["Brand management cases", "CPG placement"], "centers": ["Digital Initiative"]},
+            {"rank": 4, "school_id": "booth", "score": 88, "features": ["Quantitative marketing", "Kilts Center"], "centers": ["Kilts Center for Marketing"]},
+            {"rank": 5, "school_id": "stern", "score": 86, "features": ["NYC media/advertising", "Luxury marketing"], "centers": ["Center for Digital Economy"]},
+        ],
+    },
+    "international_business": {
+        "display_name": "International Business",
+        "schools": [
+            {"rank": 1, "school_id": "insead", "score": 98, "features": ["3 campuses", "90+ nationalities", "True global MBA"], "centers": ["INSEAD Global"]},
+            {"rank": 2, "school_id": "lbs", "score": 95, "features": ["London hub", "90%+ international class"], "centers": ["Institute of Innovation & Entrepreneurship"]},
+            {"rank": 3, "school_id": "iese", "score": 92, "features": ["5 campuses globally", "Strong LatAm + EU network"], "centers": ["Center for International Finance"]},
+            {"rank": 4, "school_id": "hec_paris", "score": 89, "features": ["European leadership", "Strong luxury/strategy"], "centers": ["HEC Paris International"]},
+            {"rank": 5, "school_id": "hbs", "score": 86, "features": ["Global immersion", "Research centers worldwide"], "centers": ["Global Initiative"]},
+        ],
+    },
+}
+
+
+@router.get("/rankings/specialty")
+def get_specialty_rankings(specialty: str | None = None):
+    """Get MBA rankings by specialty area."""
+    if specialty:
+        sp = specialty.strip().lower()
+        if sp not in _SPECIALTY_RANKINGS:
+            raise HTTPException(status_code=404, detail=f"Specialty '{specialty}' not found")
+        data = _SPECIALTY_RANKINGS[sp]
+        # Enrich with school names
+        schools = []
+        for entry in data["schools"]:
+            school = SCHOOL_DB.get(entry["school_id"])
+            schools.append({
+                **entry,
+                "school_name": school.get("name", entry["school_id"]) if school else entry["school_id"].upper(),
+            })
+        return {
+            "specialty": sp,
+            "display_name": data["display_name"],
+            "schools": schools,
+            "total": len(schools),
+        }
+
+    # Return all specialties with summary
+    result = []
+    for key, data in _SPECIALTY_RANKINGS.items():
+        top3 = [e["school_id"] for e in data["schools"][:3]]
+        result.append({
+            "specialty": key,
+            "display_name": data["display_name"],
+            "top_3_schools": top3,
+            "total_ranked": len(data["schools"]),
+        })
+    return {"specialties": result, "total": len(result)}
