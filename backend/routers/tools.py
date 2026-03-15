@@ -2557,6 +2557,223 @@ def generate_application_checklist(req: ChecklistGeneratorRequest):
     return {"schools": results, "total_schools": len(results)}
 
 
+# ── Exchange Program Finder ──────────────────────────────────────────
+
+from pydantic import BaseModel as _BaseModel  # noqa: E811
+
+EXCHANGE_PROGRAMS: list[dict] = [
+    # HBS
+    {"school_id": "hbs", "school_name": "Harvard Business School", "partner_school": "INSEAD", "partner_country": "France / Singapore", "region": "Europe", "duration": "1 quarter", "focus_areas": ["General Management", "Strategy", "International Business"], "language": "English"},
+    {"school_id": "hbs", "school_name": "Harvard Business School", "partner_school": "Tsinghua University SEM", "partner_country": "China", "region": "Asia", "duration": "1 quarter", "focus_areas": ["Emerging Markets", "Technology", "Entrepreneurship"], "language": "English / Mandarin"},
+    {"school_id": "hbs", "school_name": "Harvard Business School", "partner_school": "IESE Business School", "partner_country": "Spain", "region": "Europe", "duration": "1 quarter", "focus_areas": ["Entrepreneurship", "General Management"], "language": "English / Spanish"},
+    # GSB
+    {"school_id": "gsb", "school_name": "Stanford GSB", "partner_school": "London Business School", "partner_country": "United Kingdom", "region": "Europe", "duration": "1 quarter", "focus_areas": ["Finance", "Strategy", "Leadership"], "language": "English"},
+    {"school_id": "gsb", "school_name": "Stanford GSB", "partner_school": "NUS Business School", "partner_country": "Singapore", "region": "Asia", "duration": "1 quarter", "focus_areas": ["Innovation", "Technology", "Asia Business"], "language": "English"},
+    # Wharton
+    {"school_id": "wharton", "school_name": "Wharton School", "partner_school": "INSEAD", "partner_country": "France / Singapore", "region": "Europe", "duration": "1 semester", "focus_areas": ["Finance", "International Business", "Strategy"], "language": "English"},
+    {"school_id": "wharton", "school_name": "Wharton School", "partner_school": "HEC Paris", "partner_country": "France", "region": "Europe", "duration": "1 semester", "focus_areas": ["Luxury Management", "Finance", "Strategy"], "language": "English / French"},
+    {"school_id": "wharton", "school_name": "Wharton School", "partner_school": "Hong Kong UST", "partner_country": "Hong Kong", "region": "Asia", "duration": "1 semester", "focus_areas": ["Finance", "Asia Markets", "Technology"], "language": "English"},
+    # INSEAD
+    {"school_id": "insead", "school_name": "INSEAD", "partner_school": "Wharton School", "partner_country": "United States", "region": "Americas", "duration": "1 semester", "focus_areas": ["Finance", "Health Care", "Analytics"], "language": "English"},
+    {"school_id": "insead", "school_name": "INSEAD", "partner_school": "Kellogg School of Management", "partner_country": "United States", "region": "Americas", "duration": "1 semester", "focus_areas": ["Marketing", "Management", "Operations"], "language": "English"},
+    # LBS
+    {"school_id": "lbs", "school_name": "London Business School", "partner_school": "Columbia Business School", "partner_country": "United States", "region": "Americas", "duration": "1 semester", "focus_areas": ["Finance", "Media", "Real Estate"], "language": "English"},
+    {"school_id": "lbs", "school_name": "London Business School", "partner_school": "HEC Paris", "partner_country": "France", "region": "Europe", "duration": "1 semester", "focus_areas": ["Strategy", "Luxury", "Entrepreneurship"], "language": "English / French"},
+    {"school_id": "lbs", "school_name": "London Business School", "partner_school": "Chinese University of Hong Kong", "partner_country": "Hong Kong", "region": "Asia", "duration": "1 semester", "focus_areas": ["Finance", "Asia Business"], "language": "English"},
+    # Booth
+    {"school_id": "booth", "school_name": "Chicago Booth", "partner_school": "London Business School", "partner_country": "United Kingdom", "region": "Europe", "duration": "1 quarter", "focus_areas": ["Finance", "Economics", "Entrepreneurship"], "language": "English"},
+    {"school_id": "booth", "school_name": "Chicago Booth", "partner_school": "Barcelona School of Economics", "partner_country": "Spain", "region": "Europe", "duration": "1 quarter", "focus_areas": ["Economics", "Data Science", "Policy"], "language": "English / Spanish"},
+    # Kellogg
+    {"school_id": "kellogg", "school_name": "Kellogg School of Management", "partner_school": "WHU Otto Beisheim", "partner_country": "Germany", "region": "Europe", "duration": "1 quarter", "focus_areas": ["Marketing", "Operations", "Strategy"], "language": "English / German"},
+    {"school_id": "kellogg", "school_name": "Kellogg School of Management", "partner_school": "HKUST Business School", "partner_country": "Hong Kong", "region": "Asia", "duration": "1 quarter", "focus_areas": ["Technology", "Finance", "Consulting"], "language": "English"},
+    {"school_id": "kellogg", "school_name": "Kellogg School of Management", "partner_school": "Tel Aviv University", "partner_country": "Israel", "region": "Europe", "duration": "1 quarter", "focus_areas": ["Entrepreneurship", "Technology", "Innovation"], "language": "English"},
+]
+
+
+@router.get("/exchange-programs")
+def get_exchange_programs(
+    school_id: str | None = Query(default=None, description="Filter by school ID"),
+    region: str | None = Query(default=None, description="Filter by region: Americas, Europe, Asia"),
+):
+    """Return study abroad / exchange partnership data for top MBA programs."""
+    results = EXCHANGE_PROGRAMS
+
+    if school_id:
+        sid = school_id.strip().lower()
+        results = [p for p in results if p["school_id"] == sid]
+
+    if region:
+        reg = region.strip().capitalize()
+        results = [p for p in results if p["region"] == reg]
+
+    schools_represented = list({p["school_id"] for p in results})
+    return {
+        "programs": results,
+        "total": len(results),
+        "schools": schools_represented,
+        "regions": ["Americas", "Europe", "Asia"],
+    }
+
+
+# ── MBA Rankings by Specialty ────────────────────────────────────────
+
+SPECIALTY_RANKINGS: dict[str, list[dict]] = {
+    "finance": [
+        {"rank": 1, "school_id": "wharton", "school_name": "Wharton School", "specialty_score": 99, "notable_features": ["Largest finance faculty in the world", "150+ electives in finance", "Wall Street pipeline"], "key_faculty_or_centers": ["Jacobs Levy Equity Management Center", "Stevens Center for Innovation in Finance"]},
+        {"rank": 2, "school_id": "booth", "school_name": "Chicago Booth", "specialty_score": 97, "notable_features": ["Efficient Markets birthplace", "Strongest quant finance program", "Flexible curriculum"], "key_faculty_or_centers": ["Fama-Miller Center for Research in Finance", "Polsky Center"]},
+        {"rank": 3, "school_id": "columbia", "school_name": "Columbia Business School", "specialty_score": 95, "notable_features": ["NYC location — direct Wall Street access", "Value Investing program", "Strong PE/HF placement"], "key_faculty_or_centers": ["Heilbrunn Center for Graham & Dodd Investing"]},
+        {"rank": 4, "school_id": "stern", "school_name": "NYU Stern", "specialty_score": 92, "notable_features": ["NYC location", "Deep derivatives and risk management curriculum", "Strong fintech focus"], "key_faculty_or_centers": ["Volatility and Risk Institute", "Salomon Center"]},
+        {"rank": 5, "school_id": "gsb", "school_name": "Stanford GSB", "specialty_score": 90, "notable_features": ["Venture capital leadership", "Small class — high access to faculty", "Silicon Valley VC network"], "key_faculty_or_centers": ["Center for Entrepreneurial Studies"]},
+        {"rank": 6, "school_id": "hbs", "school_name": "Harvard Business School", "specialty_score": 89, "notable_features": ["Case method mastery", "Strongest alumni network globally", "PE and growth equity placement"], "key_faculty_or_centers": ["Rock Center for Entrepreneurship"]},
+        {"rank": 7, "school_id": "sloan", "school_name": "MIT Sloan", "specialty_score": 87, "notable_features": ["Quantitative rigor", "Fintech and crypto research", "Action Learning labs"], "key_faculty_or_centers": ["MIT Laboratory for Financial Engineering"]},
+        {"rank": 8, "school_id": "lbs", "school_name": "London Business School", "specialty_score": 86, "notable_features": ["Top European finance program", "Global finance network", "City of London access"], "key_faculty_or_centers": ["Institute of Finance and Accounting"]},
+        {"rank": 9, "school_id": "haas", "school_name": "UC Berkeley Haas", "specialty_score": 83, "notable_features": ["Strong VC/PE west coast network", "Real estate and sustainable finance"], "key_faculty_or_centers": ["Fisher Center for Real Estate"]},
+        {"rank": 10, "school_id": "tuck", "school_name": "Tuck School of Business", "specialty_score": 81, "notable_features": ["Tight-knit alumni network", "Strong general management + finance hybrid", "Center for Private Equity"], "key_faculty_or_centers": ["Center for Private Equity and Venture Capital"]},
+    ],
+    "consulting": [
+        {"rank": 1, "school_id": "hbs", "school_name": "Harvard Business School", "specialty_score": 99, "notable_features": ["#1 feeder to MBB", "Case method ideal for consulting", "Largest alumni network in consulting"], "key_faculty_or_centers": ["Institute for Strategy and Competitiveness"]},
+        {"rank": 2, "school_id": "wharton", "school_name": "Wharton School", "specialty_score": 97, "notable_features": ["30%+ class enters consulting", "McNulty Leadership Program", "Analytical rigor"], "key_faculty_or_centers": ["Mack Institute for Innovation Management"]},
+        {"rank": 3, "school_id": "booth", "school_name": "Chicago Booth", "specialty_score": 95, "notable_features": ["Strong analytical training", "Flexible curriculum", "High MBB placement rate"], "key_faculty_or_centers": ["Kilts Center for Marketing"]},
+        {"rank": 4, "school_id": "kellogg", "school_name": "Kellogg School of Management", "specialty_score": 94, "notable_features": ["Team-based culture ideal for consulting", "Marketing + strategy strength", "Collaborative learning"], "key_faculty_or_centers": ["Kellogg Markets and Customers Initiative"]},
+        {"rank": 5, "school_id": "columbia", "school_name": "Columbia Business School", "specialty_score": 91, "notable_features": ["NYC location for boutique firms", "Strong case competition culture", "Management consulting club"], "key_faculty_or_centers": ["Deming Center"]},
+        {"rank": 6, "school_id": "gsb", "school_name": "Stanford GSB", "specialty_score": 90, "notable_features": ["Small class — high personal attention", "Strategy focus", "West Coast consulting network"], "key_faculty_or_centers": ["Center for Social Innovation"]},
+        {"rank": 7, "school_id": "insead", "school_name": "INSEAD", "specialty_score": 89, "notable_features": ["Global consulting powerhouse", "1-year program — faster ROI", "30%+ to consulting"], "key_faculty_or_centers": ["INSEAD Strategy Initiative"]},
+        {"rank": 8, "school_id": "tuck", "school_name": "Tuck School of Business", "specialty_score": 87, "notable_features": ["Highest per-capita MBB placement", "Small class — tight bonds", "Strong alumni mentorship"], "key_faculty_or_centers": ["Center for Leadership"]},
+        {"rank": 9, "school_id": "sloan", "school_name": "MIT Sloan", "specialty_score": 85, "notable_features": ["Tech consulting specialization", "Action Learning projects", "Data-driven approach"], "key_faculty_or_centers": ["MIT Leadership Center"]},
+        {"rank": 10, "school_id": "lbs", "school_name": "London Business School", "specialty_score": 84, "notable_features": ["European consulting leader", "Global network", "Diverse cohort"], "key_faculty_or_centers": ["Leadership Institute"]},
+    ],
+    "technology": [
+        {"rank": 1, "school_id": "gsb", "school_name": "Stanford GSB", "specialty_score": 99, "notable_features": ["Silicon Valley epicenter", "35%+ enter tech", "Deepest VC network"], "key_faculty_or_centers": ["Center for Entrepreneurial Studies", "Stanford Technology Ventures Program"]},
+        {"rank": 2, "school_id": "sloan", "school_name": "MIT Sloan", "specialty_score": 97, "notable_features": ["MIT ecosystem — AI, robotics, biotech", "Action Learning", "Strong product management placement"], "key_faculty_or_centers": ["MIT Initiative on the Digital Economy"]},
+        {"rank": 3, "school_id": "haas", "school_name": "UC Berkeley Haas", "specialty_score": 94, "notable_features": ["Bay Area location", "Innovation culture", "Strong PM pipeline"], "key_faculty_or_centers": ["Sutardja Center for Entrepreneurship & Technology"]},
+        {"rank": 4, "school_id": "hbs", "school_name": "Harvard Business School", "specialty_score": 91, "notable_features": ["Growing tech placement", "Strong VC/PE for tech investing", "MS/MBA program"], "key_faculty_or_centers": ["Digital Initiative", "Rock Center"]},
+        {"rank": 5, "school_id": "booth", "school_name": "Chicago Booth", "specialty_score": 88, "notable_features": ["Analytics strength", "Polsky Center for entrepreneurship", "Growing tech hub in Chicago"], "key_faculty_or_centers": ["Polsky Center for Entrepreneurship and Innovation"]},
+        {"rank": 6, "school_id": "wharton", "school_name": "Wharton School", "specialty_score": 87, "notable_features": ["Strong data analytics", "AI for Business initiative", "San Francisco campus"], "key_faculty_or_centers": ["Wharton AI for Business", "Mack Institute"]},
+        {"rank": 7, "school_id": "kellogg", "school_name": "Kellogg School of Management", "specialty_score": 85, "notable_features": ["Tech marketing strength", "Innovation & Entrepreneurship initiative", "Design thinking"], "key_faculty_or_centers": ["Kellogg Innovation and Entrepreneurship Initiative"]},
+        {"rank": 8, "school_id": "anderson", "school_name": "UCLA Anderson", "specialty_score": 83, "notable_features": ["LA tech and media ecosystem", "Entertainment + tech intersection", "Strong PM placement"], "key_faculty_or_centers": ["Price Center for Entrepreneurship"]},
+        {"rank": 9, "school_id": "columbia", "school_name": "Columbia Business School", "specialty_score": 81, "notable_features": ["NYC fintech hub", "Media & tech convergence", "Growing startup scene"], "key_faculty_or_centers": ["Eugene Lang Entrepreneurship Center"]},
+        {"rank": 10, "school_id": "insead", "school_name": "INSEAD", "specialty_score": 79, "notable_features": ["Global tech network", "1-year accelerated format", "Singapore tech hub access"], "key_faculty_or_centers": ["INSEAD elab"]},
+    ],
+    "entrepreneurship": [
+        {"rank": 1, "school_id": "gsb", "school_name": "Stanford GSB", "specialty_score": 99, "notable_features": ["16%+ launch startups at graduation", "VC ecosystem unmatched", "Startup Garage"], "key_faculty_or_centers": ["Center for Entrepreneurial Studies", "Stanford Venture Studio"]},
+        {"rank": 2, "school_id": "hbs", "school_name": "Harvard Business School", "specialty_score": 96, "notable_features": ["New Venture Competition", "Rock Center", "Case method for founders"], "key_faculty_or_centers": ["Arthur Rock Center for Entrepreneurship"]},
+        {"rank": 3, "school_id": "sloan", "school_name": "MIT Sloan", "specialty_score": 94, "notable_features": ["MIT $100K Competition", "Deep tech + biotech startups", "Action learning"], "key_faculty_or_centers": ["Martin Trust Center for MIT Entrepreneurship"]},
+        {"rank": 4, "school_id": "wharton", "school_name": "Wharton School", "specialty_score": 91, "notable_features": ["Venture Initiation Program", "Strong venture funding access", "Entrepreneurship through Acquisition"], "key_faculty_or_centers": ["Wharton Entrepreneurship"]},
+        {"rank": 5, "school_id": "haas", "school_name": "UC Berkeley Haas", "specialty_score": 89, "notable_features": ["Bay Area startup ecosystem", "Lean LaunchPad", "Social impact entrepreneurship"], "key_faculty_or_centers": ["Sutardja Center", "LAUNCH accelerator"]},
+        {"rank": 6, "school_id": "booth", "school_name": "Chicago Booth", "specialty_score": 86, "notable_features": ["Polsky Center incubator", "New Venture Challenge", "Growing Midwest tech scene"], "key_faculty_or_centers": ["Polsky Center for Entrepreneurship and Innovation"]},
+        {"rank": 7, "school_id": "kellogg", "school_name": "Kellogg School of Management", "specialty_score": 84, "notable_features": ["Zell Fellows program", "The Garage at Northwestern", "Social enterprise focus"], "key_faculty_or_centers": ["Kellogg Innovation and Entrepreneurship Initiative"]},
+        {"rank": 8, "school_id": "columbia", "school_name": "Columbia Business School", "specialty_score": 82, "notable_features": ["NYC startup ecosystem", "Greenhouse incubator", "Media and tech ventures"], "key_faculty_or_centers": ["Eugene Lang Entrepreneurship Center"]},
+        {"rank": 9, "school_id": "insead", "school_name": "INSEAD", "specialty_score": 80, "notable_features": ["Global entrepreneur network", "Venture competition", "Cross-campus startups"], "key_faculty_or_centers": ["INSEAD elab"]},
+        {"rank": 10, "school_id": "tuck", "school_name": "Tuck School of Business", "specialty_score": 78, "notable_features": ["Entrepreneurship through Acquisition focus", "Small class — strong bonds", "TuckLAB"], "key_faculty_or_centers": ["Center for Private Equity and Entrepreneurship"]},
+    ],
+    "healthcare": [
+        {"rank": 1, "school_id": "wharton", "school_name": "Wharton School", "specialty_score": 98, "notable_features": ["Largest MBA healthcare program", "Health Care Management major", "Penn Medicine integration"], "key_faculty_or_centers": ["Leonard Davis Institute of Health Economics"]},
+        {"rank": 2, "school_id": "hbs", "school_name": "Harvard Business School", "specialty_score": 95, "notable_features": ["Harvard Medical School synergy", "Health care initiative", "Case studies on health systems"], "key_faculty_or_centers": ["Health Care Initiative"]},
+        {"rank": 3, "school_id": "kellogg", "school_name": "Kellogg School of Management", "specialty_score": 92, "notable_features": ["Health Enterprise Management Center", "Northwestern Medicine collaboration", "MMM dual degree"], "key_faculty_or_centers": ["Health Enterprise Management Center"]},
+        {"rank": 4, "school_id": "fuqua", "school_name": "Duke Fuqua", "specialty_score": 90, "notable_features": ["Health Sector Management concentration", "Duke Health integration", "Strong biotech pipeline"], "key_faculty_or_centers": ["Duke Health Sector Management"]},
+        {"rank": 5, "school_id": "sloan", "school_name": "MIT Sloan", "specialty_score": 87, "notable_features": ["Biotech and pharma focus", "MIT biomedical enterprise", "Health systems innovation"], "key_faculty_or_centers": ["MIT Healthcare Initiative"]},
+        {"rank": 6, "school_id": "gsb", "school_name": "Stanford GSB", "specialty_score": 85, "notable_features": ["Digital health innovation", "Stanford Medicine partnership", "Health startup ecosystem"], "key_faculty_or_centers": ["Stanford Healthcare Innovation Lab"]},
+        {"rank": 7, "school_id": "ross", "school_name": "Michigan Ross", "specialty_score": 83, "notable_features": ["Tauber Institute", "Strong hospital administration track", "Action-based learning"], "key_faculty_or_centers": ["Center for Value-Based Insurance Design"]},
+        {"rank": 8, "school_id": "booth", "school_name": "Chicago Booth", "specialty_score": 81, "notable_features": ["Health economics research", "UChicago Medicine affiliation", "Policy-oriented approach"], "key_faculty_or_centers": ["Becker Friedman Institute"]},
+        {"rank": 9, "school_id": "columbia", "school_name": "Columbia Business School", "specialty_score": 79, "notable_features": ["NYC health tech ecosystem", "Columbia Medical Center", "Healthcare private equity focus"], "key_faculty_or_centers": ["Healthcare and Pharmaceutical Management Program"]},
+        {"rank": 10, "school_id": "yale", "school_name": "Yale SOM", "specialty_score": 77, "notable_features": ["Yale New Haven Hospital", "Nonprofit health focus", "Public health dual degree"], "key_faculty_or_centers": ["Program on Social Enterprise"]},
+    ],
+    "marketing": [
+        {"rank": 1, "school_id": "kellogg", "school_name": "Kellogg School of Management", "specialty_score": 99, "notable_features": ["#1 marketing program globally", "Philip Kotler legacy", "Brand management powerhouse"], "key_faculty_or_centers": ["Kellogg Markets and Customers Initiative"]},
+        {"rank": 2, "school_id": "wharton", "school_name": "Wharton School", "specialty_score": 94, "notable_features": ["Marketing analytics pioneer", "Consumer behavior research", "Jay H. Baker Retailing Center"], "key_faculty_or_centers": ["Wharton Customer Analytics Initiative"]},
+        {"rank": 3, "school_id": "hbs", "school_name": "Harvard Business School", "specialty_score": 91, "notable_features": ["Brand and product management", "Case method for marketing strategy", "Digital marketing focus"], "key_faculty_or_centers": ["Digital Initiative"]},
+        {"rank": 4, "school_id": "columbia", "school_name": "Columbia Business School", "specialty_score": 89, "notable_features": ["Media and tech marketing", "NYC ad/media capital access", "Consumer analytics strength"], "key_faculty_or_centers": ["Center on Global Brand Leadership"]},
+        {"rank": 5, "school_id": "booth", "school_name": "Chicago Booth", "specialty_score": 87, "notable_features": ["Kilts Center for Marketing", "Data-driven marketing approach", "Behavioral science integration"], "key_faculty_or_centers": ["Kilts Center for Marketing"]},
+        {"rank": 6, "school_id": "gsb", "school_name": "Stanford GSB", "specialty_score": 85, "notable_features": ["Consumer behavior research", "Tech marketing focus", "Small class — high access"], "key_faculty_or_centers": ["Center for Social Innovation"]},
+        {"rank": 7, "school_id": "stern", "school_name": "NYU Stern", "specialty_score": 83, "notable_features": ["Luxury and retail marketing", "NYC media ecosystem", "Entertainment marketing"], "key_faculty_or_centers": ["Center for Business Analytics"]},
+        {"rank": 8, "school_id": "fuqua", "school_name": "Duke Fuqua", "specialty_score": 81, "notable_features": ["Marketing analytics strength", "Consumer behavior focus", "Team-based learning"], "key_faculty_or_centers": ["Fuqua Client Consulting Practicum"]},
+        {"rank": 9, "school_id": "anderson", "school_name": "UCLA Anderson", "specialty_score": 79, "notable_features": ["Entertainment marketing", "LA brand ecosystem", "Consumer psychology"], "key_faculty_or_centers": ["Center for Management of Enterprise in Media"]},
+        {"rank": 10, "school_id": "insead", "school_name": "INSEAD", "specialty_score": 77, "notable_features": ["Global brand strategy", "Cross-cultural consumer insights", "Luxury brand management"], "key_faculty_or_centers": ["INSEAD Marketing Area"]},
+    ],
+    "operations": [
+        {"rank": 1, "school_id": "sloan", "school_name": "MIT Sloan", "specialty_score": 98, "notable_features": ["Operations Research birthplace", "Supply chain analytics leader", "Leaders for Global Operations program"], "key_faculty_or_centers": ["Center for Transportation and Logistics"]},
+        {"rank": 2, "school_id": "wharton", "school_name": "Wharton School", "specialty_score": 95, "notable_features": ["OPIM department excellence", "Supply chain management depth", "Analytics integration"], "key_faculty_or_centers": ["Fishman-Davidson Center for Service and Operations"]},
+        {"rank": 3, "school_id": "booth", "school_name": "Chicago Booth", "specialty_score": 92, "notable_features": ["Operations management research", "Quantitative rigor", "Process optimization"], "key_faculty_or_centers": ["Operations Management Group"]},
+        {"rank": 4, "school_id": "kellogg", "school_name": "Kellogg School of Management", "specialty_score": 89, "notable_features": ["Operations + strategy integration", "Managerial analytics", "Supply chain innovation"], "key_faculty_or_centers": ["Kellogg Operations Department"]},
+        {"rank": 5, "school_id": "ross", "school_name": "Michigan Ross", "specialty_score": 87, "notable_features": ["Tauber Institute for Global Operations", "Auto industry ties", "Action-based learning"], "key_faculty_or_centers": ["Tauber Institute for Global Operations"]},
+        {"rank": 6, "school_id": "hbs", "school_name": "Harvard Business School", "specialty_score": 85, "notable_features": ["Technology and operations management unit", "Case method for ops decisions", "Supply chain strategy"], "key_faculty_or_centers": ["Technology and Operations Management Unit"]},
+        {"rank": 7, "school_id": "tepper", "school_name": "Carnegie Mellon Tepper", "specialty_score": 83, "notable_features": ["Operations research heritage", "Quantitative decision-making", "AI and optimization"], "key_faculty_or_centers": ["Tepper Operations Research Group"]},
+        {"rank": 8, "school_id": "gsb", "school_name": "Stanford GSB", "specialty_score": 81, "notable_features": ["Operations and IT focus", "Tech supply chain", "Small class — high access"], "key_faculty_or_centers": ["Operations, Information, and Technology Group"]},
+        {"rank": 9, "school_id": "columbia", "school_name": "Columbia Business School", "specialty_score": 79, "notable_features": ["Decision, Risk, and Operations division", "Strong analytics faculty", "NYC logistics access"], "key_faculty_or_centers": ["Decision, Risk, and Operations Division"]},
+        {"rank": 10, "school_id": "insead", "school_name": "INSEAD", "specialty_score": 77, "notable_features": ["Global supply chain focus", "Cross-border operations", "Humanitarian logistics"], "key_faculty_or_centers": ["INSEAD Humanitarian Research Group"]},
+    ],
+    "social_impact": [
+        {"rank": 1, "school_id": "hbs", "school_name": "Harvard Business School", "specialty_score": 98, "notable_features": ["Social Enterprise Initiative pioneer", "Largest social impact career placements", "Cross-sector leadership"], "key_faculty_or_centers": ["Social Enterprise Initiative"]},
+        {"rank": 2, "school_id": "gsb", "school_name": "Stanford GSB", "specialty_score": 96, "notable_features": ["Center for Social Innovation", "Public management program", "Impact investing focus"], "key_faculty_or_centers": ["Center for Social Innovation"]},
+        {"rank": 3, "school_id": "yale", "school_name": "Yale SOM", "specialty_score": 94, "notable_features": ["Mission-driven culture", "Program on Social Enterprise", "Nonprofit board placements"], "key_faculty_or_centers": ["Program on Social Enterprise"]},
+        {"rank": 4, "school_id": "haas", "school_name": "UC Berkeley Haas", "specialty_score": 91, "notable_features": ["Beyond Yourself principle", "Social sector leadership", "Center for Social Sector Leadership"], "key_faculty_or_centers": ["Center for Social Sector Leadership"]},
+        {"rank": 5, "school_id": "kellogg", "school_name": "Kellogg School of Management", "specialty_score": 88, "notable_features": ["Social impact lab", "Global health focus", "Board Fellows program"], "key_faculty_or_centers": ["Social Impact at Kellogg"]},
+        {"rank": 6, "school_id": "wharton", "school_name": "Wharton School", "specialty_score": 86, "notable_features": ["Social impact investing", "Impact-weighted accounts", "Wharton Social Impact Initiative"], "key_faculty_or_centers": ["Wharton Social Impact Initiative"]},
+        {"rank": 7, "school_id": "fuqua", "school_name": "Duke Fuqua", "specialty_score": 84, "notable_features": ["CASE i3 impact investing", "Social entrepreneurship focus", "Global health programs"], "key_faculty_or_centers": ["Center for the Advancement of Social Entrepreneurship"]},
+        {"rank": 8, "school_id": "ross", "school_name": "Michigan Ross", "specialty_score": 82, "notable_features": ["Social Venture Fund", "Nonprofit and government focus", "Action-based learning"], "key_faculty_or_centers": ["Center for Social Impact"]},
+        {"rank": 9, "school_id": "sloan", "school_name": "MIT Sloan", "specialty_score": 80, "notable_features": ["Sustainability initiative", "System dynamics for social systems", "MIT D-Lab"], "key_faculty_or_centers": ["MIT Sloan Sustainability Initiative"]},
+        {"rank": 10, "school_id": "insead", "school_name": "INSEAD", "specialty_score": 78, "notable_features": ["Global social innovation", "Humanitarian research", "Cross-cultural impact"], "key_faculty_or_centers": ["INSEAD Social Innovation Centre"]},
+    ],
+    "international_business": [
+        {"rank": 1, "school_id": "insead", "school_name": "INSEAD", "specialty_score": 99, "notable_features": ["90%+ international students", "Campuses in 3 continents", "Global perspective by design"], "key_faculty_or_centers": ["INSEAD Global Leadership Centre"]},
+        {"rank": 2, "school_id": "lbs", "school_name": "London Business School", "specialty_score": 96, "notable_features": ["90%+ international class", "London global hub", "Global exchange network"], "key_faculty_or_centers": ["Wheeler Institute for Business and Development"]},
+        {"rank": 3, "school_id": "hbs", "school_name": "Harvard Business School", "specialty_score": 92, "notable_features": ["Global research centers", "FIELD immersion (emerging markets)", "Case studies from 100+ countries"], "key_faculty_or_centers": ["Global Initiative"]},
+        {"rank": 4, "school_id": "wharton", "school_name": "Wharton School", "specialty_score": 90, "notable_features": ["Lauder Institute dual degree", "Global modular courses", "San Francisco campus"], "key_faculty_or_centers": ["Lauder Institute", "Penn Wharton China Center"]},
+        {"rank": 5, "school_id": "gsb", "school_name": "Stanford GSB", "specialty_score": 88, "notable_features": ["Global Study Trips", "SEED program for emerging markets", "International student body"], "key_faculty_or_centers": ["Center for Global Business and the Economy"]},
+        {"rank": 6, "school_id": "kellogg", "school_name": "Kellogg School of Management", "specialty_score": 86, "notable_features": ["Global Hub network", "International exchange partnerships", "Emerging markets focus"], "key_faculty_or_centers": ["Kellogg Markets and Customers Initiative"]},
+        {"rank": 7, "school_id": "iese", "school_name": "IESE Business School", "specialty_score": 84, "notable_features": ["Campuses on 3 continents", "Bilingual curriculum", "Global alumni network"], "key_faculty_or_centers": ["Center for International Finance"]},
+        {"rank": 8, "school_id": "columbia", "school_name": "Columbia Business School", "specialty_score": 82, "notable_features": ["Jerome A. Chazen Institute", "NYC — global business capital", "Diverse international class"], "key_faculty_or_centers": ["Jerome A. Chazen Institute for Global Business"]},
+        {"rank": 9, "school_id": "booth", "school_name": "Chicago Booth", "specialty_score": 80, "notable_features": ["London and Hong Kong campuses", "Global economics faculty", "International MBA program"], "key_faculty_or_centers": ["Becker Friedman Institute"]},
+        {"rank": 10, "school_id": "sloan", "school_name": "MIT Sloan", "specialty_score": 78, "notable_features": ["Global Entrepreneurship Lab", "China Lab, India Lab", "MISTI programs"], "key_faculty_or_centers": ["MIT Sloan Global Programs"]},
+    ],
+    "real_estate": [
+        {"rank": 1, "school_id": "wharton", "school_name": "Wharton School", "specialty_score": 99, "notable_features": ["Largest MBA real estate program", "Samuel Zell & Robert Lurie Real Estate Center", "60+ years of real estate education"], "key_faculty_or_centers": ["Zell/Lurie Real Estate Center"]},
+        {"rank": 2, "school_id": "columbia", "school_name": "Columbia Business School", "specialty_score": 95, "notable_features": ["Paul Milstein Center", "NYC real estate market access", "Strong REIT and development network"], "key_faculty_or_centers": ["Paul Milstein Center for Real Estate"]},
+        {"rank": 3, "school_id": "sloan", "school_name": "MIT Sloan", "specialty_score": 92, "notable_features": ["MIT Center for Real Estate", "Commercial real estate analytics", "Real estate development focus"], "key_faculty_or_centers": ["MIT Center for Real Estate"]},
+        {"rank": 4, "school_id": "haas", "school_name": "UC Berkeley Haas", "specialty_score": 88, "notable_features": ["Fisher Center for Real Estate", "Bay Area market exposure", "Sustainable development focus"], "key_faculty_or_centers": ["Fisher Center for Real Estate and Urban Economics"]},
+        {"rank": 5, "school_id": "hbs", "school_name": "Harvard Business School", "specialty_score": 85, "notable_features": ["Real estate case studies", "Joint Center for Housing Studies", "Institutional real estate focus"], "key_faculty_or_centers": ["Joint Center for Housing Studies"]},
+        {"rank": 6, "school_id": "stern", "school_name": "NYU Stern", "specialty_score": 83, "notable_features": ["Schack Institute of Real Estate", "NYC commercial real estate access", "REIT research"], "key_faculty_or_centers": ["NYU Schack Institute of Real Estate"]},
+        {"rank": 7, "school_id": "anderson", "school_name": "UCLA Anderson", "specialty_score": 81, "notable_features": ["Ziman Center for Real Estate", "LA development market", "Multifamily and hospitality focus"], "key_faculty_or_centers": ["Richard S. Ziman Center for Real Estate"]},
+        {"rank": 8, "school_id": "booth", "school_name": "Chicago Booth", "specialty_score": 79, "notable_features": ["Real estate finance courses", "Chicago development projects", "Private equity real estate"], "key_faculty_or_centers": ["Booth Real Estate Group"]},
+        {"rank": 9, "school_id": "kellogg", "school_name": "Kellogg School of Management", "specialty_score": 77, "notable_features": ["Real estate management and development", "Center for Real Estate", "Guthrie Center"], "key_faculty_or_centers": ["Guthrie Center for Real Estate Research"]},
+        {"rank": 10, "school_id": "lbs", "school_name": "London Business School", "specialty_score": 75, "notable_features": ["European real estate focus", "London property market access", "Global real estate network"], "key_faculty_or_centers": ["LBS Real Estate Club"]},
+    ],
+}
+
+VALID_SPECIALTIES = list(SPECIALTY_RANKINGS.keys())
+
+
+@router.get("/rankings/specialty")
+def get_specialty_rankings(
+    specialty: str | None = Query(default=None, description="Filter by specialty (e.g., finance, consulting, technology)"),
+):
+    """Return MBA school rankings by specialty area."""
+    if specialty:
+        key = specialty.strip().lower().replace(" ", "_").replace("-", "_")
+        if key not in SPECIALTY_RANKINGS:
+            raise HTTPException(
+                400,
+                f"Unknown specialty '{specialty}'. Available: {', '.join(VALID_SPECIALTIES)}",
+            )
+        return {
+            "specialty": key,
+            "rankings": SPECIALTY_RANKINGS[key],
+            "total": len(SPECIALTY_RANKINGS[key]),
+        }
+
+    # Return all specialties with their top-3 as a summary
+    summary = {}
+    for spec, schools in SPECIALTY_RANKINGS.items():
+        summary[spec] = {
+            "top_3": [{"rank": s["rank"], "school_name": s["school_name"], "specialty_score": s["specialty_score"]} for s in schools[:3]],
+            "total_ranked": len(schools),
+        }
+
+    return {
+        "specialties": VALID_SPECIALTIES,
+        "summary": summary,
+    }
+
 # ── Application Fee Calculator ────────────────────────────────────────
 
 from pydantic import BaseModel as _BaseModel  # noqa: E402
@@ -2891,3 +3108,370 @@ def get_specialty_rankings(specialty: str | None = None):
             "total_ranked": len(data["schools"]),
         })
     return {"specialties": result, "total": len(result)}
+
+
+# ── MBA Salary Database ───────────────────────────────────────────────────────
+
+_SALARY_INDUSTRIES = [
+    "consulting", "finance", "tech", "healthcare",
+    "consumer_goods", "energy", "nonprofit",
+]
+
+_SALARY_DB: list[dict] = [
+    {
+        "school_id": "hbs",
+        "school_name": "Harvard Business School",
+        "median_base_salary": 175000,
+        "median_signing_bonus": 30000,
+        "median_total_comp": 220000,
+        "top_industries": [
+            {"industry": "consulting", "pct_of_class": 26, "median_salary": 190000},
+            {"industry": "finance", "pct_of_class": 22, "median_salary": 185000},
+            {"industry": "tech", "pct_of_class": 20, "median_salary": 195000},
+            {"industry": "healthcare", "pct_of_class": 8, "median_salary": 160000},
+            {"industry": "consumer_goods", "pct_of_class": 7, "median_salary": 155000},
+            {"industry": "energy", "pct_of_class": 5, "median_salary": 165000},
+            {"industry": "nonprofit", "pct_of_class": 4, "median_salary": 105000},
+        ],
+    },
+    {
+        "school_id": "gsb",
+        "school_name": "Stanford GSB",
+        "median_base_salary": 180000,
+        "median_signing_bonus": 32000,
+        "median_total_comp": 228000,
+        "top_industries": [
+            {"industry": "tech", "pct_of_class": 30, "median_salary": 200000},
+            {"industry": "finance", "pct_of_class": 20, "median_salary": 190000},
+            {"industry": "consulting", "pct_of_class": 16, "median_salary": 192000},
+            {"industry": "healthcare", "pct_of_class": 7, "median_salary": 165000},
+            {"industry": "consumer_goods", "pct_of_class": 6, "median_salary": 160000},
+            {"industry": "energy", "pct_of_class": 5, "median_salary": 170000},
+            {"industry": "nonprofit", "pct_of_class": 8, "median_salary": 110000},
+        ],
+    },
+    {
+        "school_id": "wharton",
+        "school_name": "Wharton School",
+        "median_base_salary": 175000,
+        "median_signing_bonus": 30000,
+        "median_total_comp": 220000,
+        "top_industries": [
+            {"industry": "finance", "pct_of_class": 32, "median_salary": 195000},
+            {"industry": "consulting", "pct_of_class": 24, "median_salary": 190000},
+            {"industry": "tech", "pct_of_class": 18, "median_salary": 188000},
+            {"industry": "healthcare", "pct_of_class": 8, "median_salary": 160000},
+            {"industry": "consumer_goods", "pct_of_class": 6, "median_salary": 152000},
+            {"industry": "energy", "pct_of_class": 4, "median_salary": 162000},
+            {"industry": "nonprofit", "pct_of_class": 3, "median_salary": 100000},
+        ],
+    },
+    {
+        "school_id": "booth",
+        "school_name": "Chicago Booth",
+        "median_base_salary": 170000,
+        "median_signing_bonus": 28000,
+        "median_total_comp": 212000,
+        "top_industries": [
+            {"industry": "consulting", "pct_of_class": 28, "median_salary": 185000},
+            {"industry": "finance", "pct_of_class": 28, "median_salary": 182000},
+            {"industry": "tech", "pct_of_class": 16, "median_salary": 180000},
+            {"industry": "healthcare", "pct_of_class": 7, "median_salary": 155000},
+            {"industry": "consumer_goods", "pct_of_class": 8, "median_salary": 150000},
+            {"industry": "energy", "pct_of_class": 5, "median_salary": 160000},
+            {"industry": "nonprofit", "pct_of_class": 3, "median_salary": 98000},
+        ],
+    },
+    {
+        "school_id": "kellogg",
+        "school_name": "Kellogg School of Management",
+        "median_base_salary": 168000,
+        "median_signing_bonus": 27000,
+        "median_total_comp": 210000,
+        "top_industries": [
+            {"industry": "consulting", "pct_of_class": 30, "median_salary": 185000},
+            {"industry": "tech", "pct_of_class": 20, "median_salary": 178000},
+            {"industry": "finance", "pct_of_class": 16, "median_salary": 175000},
+            {"industry": "consumer_goods", "pct_of_class": 12, "median_salary": 155000},
+            {"industry": "healthcare", "pct_of_class": 8, "median_salary": 152000},
+            {"industry": "energy", "pct_of_class": 4, "median_salary": 158000},
+            {"industry": "nonprofit", "pct_of_class": 4, "median_salary": 95000},
+        ],
+    },
+    {
+        "school_id": "sloan",
+        "school_name": "MIT Sloan",
+        "median_base_salary": 170000,
+        "median_signing_bonus": 28000,
+        "median_total_comp": 215000,
+        "top_industries": [
+            {"industry": "tech", "pct_of_class": 28, "median_salary": 190000},
+            {"industry": "consulting", "pct_of_class": 24, "median_salary": 188000},
+            {"industry": "finance", "pct_of_class": 18, "median_salary": 180000},
+            {"industry": "healthcare", "pct_of_class": 8, "median_salary": 155000},
+            {"industry": "energy", "pct_of_class": 6, "median_salary": 165000},
+            {"industry": "consumer_goods", "pct_of_class": 5, "median_salary": 148000},
+            {"industry": "nonprofit", "pct_of_class": 4, "median_salary": 100000},
+        ],
+    },
+    {
+        "school_id": "cbs",
+        "school_name": "Columbia Business School",
+        "median_base_salary": 172000,
+        "median_signing_bonus": 30000,
+        "median_total_comp": 218000,
+        "top_industries": [
+            {"industry": "finance", "pct_of_class": 34, "median_salary": 195000},
+            {"industry": "consulting", "pct_of_class": 22, "median_salary": 185000},
+            {"industry": "tech", "pct_of_class": 16, "median_salary": 182000},
+            {"industry": "healthcare", "pct_of_class": 7, "median_salary": 155000},
+            {"industry": "consumer_goods", "pct_of_class": 6, "median_salary": 150000},
+            {"industry": "energy", "pct_of_class": 4, "median_salary": 160000},
+            {"industry": "nonprofit", "pct_of_class": 5, "median_salary": 102000},
+        ],
+    },
+    {
+        "school_id": "haas",
+        "school_name": "UC Berkeley Haas",
+        "median_base_salary": 165000,
+        "median_signing_bonus": 25000,
+        "median_total_comp": 205000,
+        "top_industries": [
+            {"industry": "tech", "pct_of_class": 35, "median_salary": 185000},
+            {"industry": "consulting", "pct_of_class": 18, "median_salary": 178000},
+            {"industry": "finance", "pct_of_class": 14, "median_salary": 172000},
+            {"industry": "healthcare", "pct_of_class": 8, "median_salary": 150000},
+            {"industry": "energy", "pct_of_class": 7, "median_salary": 160000},
+            {"industry": "consumer_goods", "pct_of_class": 6, "median_salary": 148000},
+            {"industry": "nonprofit", "pct_of_class": 6, "median_salary": 95000},
+        ],
+    },
+    {
+        "school_id": "tuck",
+        "school_name": "Dartmouth Tuck",
+        "median_base_salary": 167000,
+        "median_signing_bonus": 27000,
+        "median_total_comp": 208000,
+        "top_industries": [
+            {"industry": "consulting", "pct_of_class": 32, "median_salary": 185000},
+            {"industry": "finance", "pct_of_class": 20, "median_salary": 178000},
+            {"industry": "tech", "pct_of_class": 18, "median_salary": 180000},
+            {"industry": "healthcare", "pct_of_class": 8, "median_salary": 152000},
+            {"industry": "consumer_goods", "pct_of_class": 8, "median_salary": 150000},
+            {"industry": "energy", "pct_of_class": 5, "median_salary": 158000},
+            {"industry": "nonprofit", "pct_of_class": 4, "median_salary": 96000},
+        ],
+    },
+    {
+        "school_id": "darden",
+        "school_name": "UVA Darden",
+        "median_base_salary": 165000,
+        "median_signing_bonus": 25000,
+        "median_total_comp": 204000,
+        "top_industries": [
+            {"industry": "consulting", "pct_of_class": 30, "median_salary": 182000},
+            {"industry": "finance", "pct_of_class": 22, "median_salary": 175000},
+            {"industry": "tech", "pct_of_class": 16, "median_salary": 176000},
+            {"industry": "healthcare", "pct_of_class": 9, "median_salary": 150000},
+            {"industry": "consumer_goods", "pct_of_class": 8, "median_salary": 148000},
+            {"industry": "energy", "pct_of_class": 6, "median_salary": 155000},
+            {"industry": "nonprofit", "pct_of_class": 4, "median_salary": 92000},
+        ],
+    },
+]
+
+
+@router.get("/salary-database")
+def salary_database(school_id: str | None = None, industry: str | None = None):
+    """MBA salary database — median comp and industry breakdown for top programs."""
+    data = _SALARY_DB
+
+    if school_id:
+        sid = school_id.strip().lower()
+        data = [s for s in data if s["school_id"] == sid]
+        if not data:
+            raise HTTPException(status_code=404, detail=f"School '{school_id}' not found in salary database")
+
+    if industry:
+        ind = industry.strip().lower()
+        if ind not in _SALARY_INDUSTRIES:
+            raise HTTPException(status_code=400, detail=f"Invalid industry. Choose from: {', '.join(_SALARY_INDUSTRIES)}")
+        filtered = []
+        for school in data:
+            match = [i for i in school["top_industries"] if i["industry"] == ind]
+            if match:
+                filtered.append({**school, "_industry_salary": match[0]["median_salary"]})
+        filtered.sort(key=lambda x: x["_industry_salary"], reverse=True)
+        # Remove internal sort key
+        data = [{k: v for k, v in s.items() if k != "_industry_salary"} for s in filtered]
+
+    return {
+        "schools": data,
+        "total": len(data),
+        "industries": _SALARY_INDUSTRIES,
+    }
+
+
+# ── Admission Stats Trends ───────────────────────────────────────────────────
+
+_ADMISSION_TRENDS: dict[str, dict] = {
+    "hbs": {
+        "school_name": "Harvard Business School",
+        "years": {
+            2022: {"acceptance_rate": 11.0, "class_size": 930, "median_gmat": 730, "avg_gpa": 3.70, "applications_received": 8665},
+            2023: {"acceptance_rate": 10.5, "class_size": 930, "median_gmat": 733, "avg_gpa": 3.71, "applications_received": 9050},
+            2024: {"acceptance_rate": 10.0, "class_size": 935, "median_gmat": 738, "avg_gpa": 3.73, "applications_received": 9520},
+            2025: {"acceptance_rate": 9.7, "class_size": 940, "median_gmat": 740, "avg_gpa": 3.74, "applications_received": 9840},
+            2026: {"acceptance_rate": 9.3, "class_size": 940, "median_gmat": 742, "avg_gpa": 3.75, "applications_received": 10200},
+        },
+    },
+    "gsb": {
+        "school_name": "Stanford GSB",
+        "years": {
+            2022: {"acceptance_rate": 6.2, "class_size": 420, "median_gmat": 738, "avg_gpa": 3.78, "applications_received": 7300},
+            2023: {"acceptance_rate": 5.9, "class_size": 420, "median_gmat": 740, "avg_gpa": 3.80, "applications_received": 7600},
+            2024: {"acceptance_rate": 5.7, "class_size": 424, "median_gmat": 742, "avg_gpa": 3.81, "applications_received": 7850},
+            2025: {"acceptance_rate": 5.5, "class_size": 424, "median_gmat": 744, "avg_gpa": 3.82, "applications_received": 8100},
+            2026: {"acceptance_rate": 5.2, "class_size": 425, "median_gmat": 746, "avg_gpa": 3.83, "applications_received": 8400},
+        },
+    },
+    "wharton": {
+        "school_name": "Wharton School",
+        "years": {
+            2022: {"acceptance_rate": 18.5, "class_size": 860, "median_gmat": 733, "avg_gpa": 3.60, "applications_received": 7200},
+            2023: {"acceptance_rate": 17.8, "class_size": 860, "median_gmat": 735, "avg_gpa": 3.62, "applications_received": 7500},
+            2024: {"acceptance_rate": 17.2, "class_size": 870, "median_gmat": 738, "avg_gpa": 3.64, "applications_received": 7800},
+            2025: {"acceptance_rate": 16.5, "class_size": 870, "median_gmat": 740, "avg_gpa": 3.65, "applications_received": 8100},
+            2026: {"acceptance_rate": 15.9, "class_size": 875, "median_gmat": 742, "avg_gpa": 3.66, "applications_received": 8500},
+        },
+    },
+    "booth": {
+        "school_name": "Chicago Booth",
+        "years": {
+            2022: {"acceptance_rate": 21.0, "class_size": 590, "median_gmat": 730, "avg_gpa": 3.60, "applications_received": 4700},
+            2023: {"acceptance_rate": 20.3, "class_size": 590, "median_gmat": 732, "avg_gpa": 3.62, "applications_received": 4900},
+            2024: {"acceptance_rate": 19.8, "class_size": 595, "median_gmat": 734, "avg_gpa": 3.63, "applications_received": 5100},
+            2025: {"acceptance_rate": 19.2, "class_size": 598, "median_gmat": 736, "avg_gpa": 3.64, "applications_received": 5300},
+            2026: {"acceptance_rate": 18.6, "class_size": 600, "median_gmat": 738, "avg_gpa": 3.65, "applications_received": 5500},
+        },
+    },
+    "kellogg": {
+        "school_name": "Kellogg School of Management",
+        "years": {
+            2022: {"acceptance_rate": 20.0, "class_size": 500, "median_gmat": 727, "avg_gpa": 3.60, "applications_received": 4600},
+            2023: {"acceptance_rate": 19.5, "class_size": 505, "median_gmat": 729, "avg_gpa": 3.62, "applications_received": 4800},
+            2024: {"acceptance_rate": 19.0, "class_size": 508, "median_gmat": 731, "avg_gpa": 3.63, "applications_received": 5000},
+            2025: {"acceptance_rate": 18.4, "class_size": 510, "median_gmat": 733, "avg_gpa": 3.64, "applications_received": 5200},
+            2026: {"acceptance_rate": 17.8, "class_size": 510, "median_gmat": 735, "avg_gpa": 3.65, "applications_received": 5450},
+        },
+    },
+    "sloan": {
+        "school_name": "MIT Sloan",
+        "years": {
+            2022: {"acceptance_rate": 12.5, "class_size": 410, "median_gmat": 730, "avg_gpa": 3.62, "applications_received": 5600},
+            2023: {"acceptance_rate": 12.0, "class_size": 410, "median_gmat": 732, "avg_gpa": 3.64, "applications_received": 5800},
+            2024: {"acceptance_rate": 11.5, "class_size": 415, "median_gmat": 735, "avg_gpa": 3.66, "applications_received": 6100},
+            2025: {"acceptance_rate": 11.0, "class_size": 418, "median_gmat": 738, "avg_gpa": 3.67, "applications_received": 6400},
+            2026: {"acceptance_rate": 10.5, "class_size": 420, "median_gmat": 740, "avg_gpa": 3.68, "applications_received": 6700},
+        },
+    },
+    "cbs": {
+        "school_name": "Columbia Business School",
+        "years": {
+            2022: {"acceptance_rate": 15.0, "class_size": 750, "median_gmat": 729, "avg_gpa": 3.58, "applications_received": 6400},
+            2023: {"acceptance_rate": 14.5, "class_size": 755, "median_gmat": 731, "avg_gpa": 3.60, "applications_received": 6700},
+            2024: {"acceptance_rate": 14.0, "class_size": 760, "median_gmat": 733, "avg_gpa": 3.62, "applications_received": 7000},
+            2025: {"acceptance_rate": 13.5, "class_size": 760, "median_gmat": 735, "avg_gpa": 3.63, "applications_received": 7300},
+            2026: {"acceptance_rate": 13.0, "class_size": 765, "median_gmat": 738, "avg_gpa": 3.65, "applications_received": 7600},
+        },
+    },
+    "haas": {
+        "school_name": "UC Berkeley Haas",
+        "years": {
+            2022: {"acceptance_rate": 14.0, "class_size": 290, "median_gmat": 726, "avg_gpa": 3.65, "applications_received": 3800},
+            2023: {"acceptance_rate": 13.5, "class_size": 291, "median_gmat": 728, "avg_gpa": 3.67, "applications_received": 4000},
+            2024: {"acceptance_rate": 13.0, "class_size": 293, "median_gmat": 730, "avg_gpa": 3.68, "applications_received": 4200},
+            2025: {"acceptance_rate": 12.5, "class_size": 295, "median_gmat": 732, "avg_gpa": 3.69, "applications_received": 4400},
+            2026: {"acceptance_rate": 12.0, "class_size": 296, "median_gmat": 734, "avg_gpa": 3.70, "applications_received": 4600},
+        },
+    },
+    "tuck": {
+        "school_name": "Dartmouth Tuck",
+        "years": {
+            2022: {"acceptance_rate": 23.0, "class_size": 280, "median_gmat": 724, "avg_gpa": 3.55, "applications_received": 2800},
+            2023: {"acceptance_rate": 22.3, "class_size": 281, "median_gmat": 726, "avg_gpa": 3.57, "applications_received": 2950},
+            2024: {"acceptance_rate": 21.5, "class_size": 282, "median_gmat": 728, "avg_gpa": 3.59, "applications_received": 3100},
+            2025: {"acceptance_rate": 20.8, "class_size": 284, "median_gmat": 730, "avg_gpa": 3.60, "applications_received": 3250},
+            2026: {"acceptance_rate": 20.0, "class_size": 285, "median_gmat": 732, "avg_gpa": 3.62, "applications_received": 3400},
+        },
+    },
+    "darden": {
+        "school_name": "UVA Darden",
+        "years": {
+            2022: {"acceptance_rate": 24.0, "class_size": 340, "median_gmat": 720, "avg_gpa": 3.52, "applications_received": 3300},
+            2023: {"acceptance_rate": 23.2, "class_size": 342, "median_gmat": 722, "avg_gpa": 3.54, "applications_received": 3500},
+            2024: {"acceptance_rate": 22.5, "class_size": 345, "median_gmat": 724, "avg_gpa": 3.56, "applications_received": 3700},
+            2025: {"acceptance_rate": 21.8, "class_size": 348, "median_gmat": 726, "avg_gpa": 3.58, "applications_received": 3900},
+            2026: {"acceptance_rate": 21.0, "class_size": 350, "median_gmat": 728, "avg_gpa": 3.60, "applications_received": 4100},
+        },
+    },
+}
+
+
+def _compute_trend(values: list[float]) -> str:
+    """Compute trend direction from a list of chronological values."""
+    if len(values) < 2:
+        return "stable"
+    first_half = sum(values[: len(values) // 2]) / (len(values) // 2)
+    second_half = sum(values[len(values) // 2 :]) / (len(values) - len(values) // 2)
+    pct_change = (second_half - first_half) / first_half * 100 if first_half else 0
+    if pct_change > 2:
+        return "up"
+    elif pct_change < -2:
+        return "down"
+    return "stable"
+
+
+@router.get("/admission-trends")
+def admission_trends(school_id: str | None = None):
+    """Historical admission trends (2022-2026) for top MBA programs."""
+    if school_id:
+        ids = [s.strip().lower() for s in school_id.split(",")]
+    else:
+        ids = list(_ADMISSION_TRENDS.keys())
+
+    results = []
+    for sid in ids:
+        school_data = _ADMISSION_TRENDS.get(sid)
+        if not school_data:
+            continue
+
+        years_data = []
+        metrics_by_name: dict[str, list[float]] = {
+            "acceptance_rate": [],
+            "class_size": [],
+            "median_gmat": [],
+            "avg_gpa": [],
+            "applications_received": [],
+        }
+
+        for year in sorted(school_data["years"].keys()):
+            entry = school_data["years"][year]
+            years_data.append({"year": year, **entry})
+            for metric in metrics_by_name:
+                metrics_by_name[metric].append(float(entry[metric]))
+
+        trends = {metric: _compute_trend(vals) for metric, vals in metrics_by_name.items()}
+
+        results.append({
+            "school_id": sid,
+            "school_name": school_data["school_name"],
+            "years": years_data,
+            "trends": trends,
+        })
+
+    return {
+        "schools": results,
+        "total": len(results),
+        "available_metrics": ["acceptance_rate", "class_size", "median_gmat", "avg_gpa", "applications_received"],
+    }
