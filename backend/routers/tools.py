@@ -4994,3 +4994,344 @@ def get_acceptance_rate_history(
         results = list(_ACCEPTANCE_RATE_DATA)
 
     return {"schools": results, "total": len(results)}
+
+
+# ── Employment Report Browser ────────────────────────────────────────────────
+
+from pydantic import BaseModel as _BaseModel  # noqa: E811
+
+
+class _IndustryBreakdown(_BaseModel):
+    industry: str
+    pct: float
+
+
+class _FunctionBreakdown(_BaseModel):
+    function: str
+    pct: float
+
+
+class _EmploymentReport(_BaseModel):
+    school_id: str
+    school_name: str
+    year: int
+    employment_rate_at_3_months: float
+    median_base_salary: int
+    median_signing_bonus: int
+    top_industries: list[_IndustryBreakdown]
+    top_employers: list[str]
+    top_functions: list[_FunctionBreakdown]
+
+
+class _EmploymentReportsResponse(_BaseModel):
+    schools: list[_EmploymentReport]
+    total: int
+    industries: list[str]
+    functions: list[str]
+
+
+_EMPLOYMENT_REPORT_DATA: list[dict] = [
+    {
+        "school_id": "hbs",
+        "school_name": "Harvard Business School",
+        "year": 2025,
+        "employment_rate_at_3_months": 96.2,
+        "median_base_salary": 175000,
+        "median_signing_bonus": 30000,
+        "top_industries": [
+            {"industry": "consulting", "pct": 25},
+            {"industry": "technology", "pct": 22},
+            {"industry": "financial_services", "pct": 20},
+            {"industry": "pe_vc", "pct": 15},
+            {"industry": "healthcare", "pct": 8},
+        ],
+        "top_employers": ["McKinsey", "BCG", "Bain", "Amazon", "Google", "Goldman Sachs"],
+        "top_functions": [
+            {"function": "consulting", "pct": 25},
+            {"function": "finance", "pct": 24},
+            {"function": "general_management", "pct": 16},
+            {"function": "marketing", "pct": 12},
+            {"function": "operations", "pct": 8},
+        ],
+    },
+    {
+        "school_id": "gsb",
+        "school_name": "Stanford GSB",
+        "year": 2025,
+        "employment_rate_at_3_months": 95.8,
+        "median_base_salary": 180000,
+        "median_signing_bonus": 30000,
+        "top_industries": [
+            {"industry": "technology", "pct": 30},
+            {"industry": "pe_vc", "pct": 18},
+            {"industry": "consulting", "pct": 14},
+            {"industry": "financial_services", "pct": 12},
+            {"industry": "entrepreneurship", "pct": 10},
+        ],
+        "top_employers": ["Google", "Apple", "McKinsey", "Bain", "KKR", "Sequoia"],
+        "top_functions": [
+            {"function": "general_management", "pct": 22},
+            {"function": "finance", "pct": 20},
+            {"function": "consulting", "pct": 14},
+            {"function": "product_management", "pct": 13},
+            {"function": "entrepreneurship", "pct": 12},
+        ],
+    },
+    {
+        "school_id": "wharton",
+        "school_name": "Wharton School",
+        "year": 2025,
+        "employment_rate_at_3_months": 97.1,
+        "median_base_salary": 175000,
+        "median_signing_bonus": 30000,
+        "top_industries": [
+            {"industry": "financial_services", "pct": 32},
+            {"industry": "consulting", "pct": 24},
+            {"industry": "technology", "pct": 18},
+            {"industry": "pe_vc", "pct": 12},
+            {"industry": "healthcare", "pct": 6},
+        ],
+        "top_employers": ["McKinsey", "BCG", "Goldman Sachs", "JP Morgan", "Amazon", "Google"],
+        "top_functions": [
+            {"function": "finance", "pct": 34},
+            {"function": "consulting", "pct": 24},
+            {"function": "general_management", "pct": 14},
+            {"function": "marketing", "pct": 10},
+            {"function": "operations", "pct": 7},
+        ],
+    },
+    {
+        "school_id": "booth",
+        "school_name": "Chicago Booth",
+        "year": 2025,
+        "employment_rate_at_3_months": 96.8,
+        "median_base_salary": 170000,
+        "median_signing_bonus": 30000,
+        "top_industries": [
+            {"industry": "consulting", "pct": 28},
+            {"industry": "financial_services", "pct": 26},
+            {"industry": "technology", "pct": 18},
+            {"industry": "pe_vc", "pct": 10},
+            {"industry": "consumer_goods", "pct": 6},
+        ],
+        "top_employers": ["McKinsey", "BCG", "Bain", "Citadel", "Amazon", "Google"],
+        "top_functions": [
+            {"function": "consulting", "pct": 28},
+            {"function": "finance", "pct": 26},
+            {"function": "general_management", "pct": 14},
+            {"function": "marketing", "pct": 11},
+            {"function": "operations", "pct": 8},
+        ],
+    },
+    {
+        "school_id": "kellogg",
+        "school_name": "Kellogg School of Management",
+        "year": 2025,
+        "employment_rate_at_3_months": 96.5,
+        "median_base_salary": 165000,
+        "median_signing_bonus": 30000,
+        "top_industries": [
+            {"industry": "consulting", "pct": 30},
+            {"industry": "technology", "pct": 22},
+            {"industry": "financial_services", "pct": 14},
+            {"industry": "consumer_goods", "pct": 12},
+            {"industry": "healthcare", "pct": 8},
+        ],
+        "top_employers": ["McKinsey", "BCG", "Bain", "Google", "Amazon", "Deloitte"],
+        "top_functions": [
+            {"function": "consulting", "pct": 30},
+            {"function": "marketing", "pct": 18},
+            {"function": "general_management", "pct": 16},
+            {"function": "finance", "pct": 14},
+            {"function": "operations", "pct": 9},
+        ],
+    },
+    {
+        "school_id": "cbs",
+        "school_name": "Columbia Business School",
+        "year": 2025,
+        "employment_rate_at_3_months": 95.9,
+        "median_base_salary": 170000,
+        "median_signing_bonus": 30000,
+        "top_industries": [
+            {"industry": "financial_services", "pct": 34},
+            {"industry": "consulting", "pct": 20},
+            {"industry": "technology", "pct": 16},
+            {"industry": "pe_vc", "pct": 12},
+            {"industry": "media_entertainment", "pct": 6},
+        ],
+        "top_employers": ["Goldman Sachs", "JP Morgan", "McKinsey", "BCG", "Amazon", "Blackstone"],
+        "top_functions": [
+            {"function": "finance", "pct": 36},
+            {"function": "consulting", "pct": 20},
+            {"function": "general_management", "pct": 14},
+            {"function": "marketing", "pct": 10},
+            {"function": "operations", "pct": 7},
+        ],
+    },
+    {
+        "school_id": "sloan",
+        "school_name": "MIT Sloan",
+        "year": 2025,
+        "employment_rate_at_3_months": 96.0,
+        "median_base_salary": 165000,
+        "median_signing_bonus": 27500,
+        "top_industries": [
+            {"industry": "technology", "pct": 28},
+            {"industry": "consulting", "pct": 24},
+            {"industry": "financial_services", "pct": 16},
+            {"industry": "pe_vc", "pct": 10},
+            {"industry": "healthcare", "pct": 8},
+        ],
+        "top_employers": ["McKinsey", "BCG", "Google", "Amazon", "Apple", "Microsoft"],
+        "top_functions": [
+            {"function": "consulting", "pct": 24},
+            {"function": "product_management", "pct": 16},
+            {"function": "finance", "pct": 16},
+            {"function": "general_management", "pct": 14},
+            {"function": "operations", "pct": 10},
+        ],
+    },
+    {
+        "school_id": "tuck",
+        "school_name": "Tuck School of Business",
+        "year": 2025,
+        "employment_rate_at_3_months": 97.5,
+        "median_base_salary": 165000,
+        "median_signing_bonus": 30000,
+        "top_industries": [
+            {"industry": "consulting", "pct": 32},
+            {"industry": "technology", "pct": 18},
+            {"industry": "financial_services", "pct": 16},
+            {"industry": "consumer_goods", "pct": 12},
+            {"industry": "healthcare", "pct": 8},
+        ],
+        "top_employers": ["McKinsey", "Bain", "BCG", "Deloitte", "Amazon", "Microsoft"],
+        "top_functions": [
+            {"function": "consulting", "pct": 32},
+            {"function": "general_management", "pct": 18},
+            {"function": "finance", "pct": 16},
+            {"function": "marketing", "pct": 14},
+            {"function": "operations", "pct": 8},
+        ],
+    },
+    {
+        "school_id": "haas",
+        "school_name": "UC Berkeley Haas",
+        "year": 2025,
+        "employment_rate_at_3_months": 95.5,
+        "median_base_salary": 165000,
+        "median_signing_bonus": 28000,
+        "top_industries": [
+            {"industry": "technology", "pct": 34},
+            {"industry": "consulting", "pct": 18},
+            {"industry": "financial_services", "pct": 12},
+            {"industry": "entrepreneurship", "pct": 10},
+            {"industry": "healthcare", "pct": 8},
+        ],
+        "top_employers": ["Google", "Amazon", "Apple", "Meta", "McKinsey", "BCG"],
+        "top_functions": [
+            {"function": "product_management", "pct": 20},
+            {"function": "consulting", "pct": 18},
+            {"function": "general_management", "pct": 16},
+            {"function": "finance", "pct": 14},
+            {"function": "marketing", "pct": 12},
+        ],
+    },
+    {
+        "school_id": "stern",
+        "school_name": "NYU Stern",
+        "year": 2025,
+        "employment_rate_at_3_months": 95.2,
+        "median_base_salary": 160000,
+        "median_signing_bonus": 28000,
+        "top_industries": [
+            {"industry": "financial_services", "pct": 30},
+            {"industry": "consulting", "pct": 22},
+            {"industry": "technology", "pct": 18},
+            {"industry": "media_entertainment", "pct": 10},
+            {"industry": "consumer_goods", "pct": 7},
+        ],
+        "top_employers": ["Goldman Sachs", "JP Morgan", "McKinsey", "BCG", "Google", "Deloitte"],
+        "top_functions": [
+            {"function": "finance", "pct": 30},
+            {"function": "consulting", "pct": 22},
+            {"function": "marketing", "pct": 14},
+            {"function": "general_management", "pct": 12},
+            {"function": "operations", "pct": 8},
+        ],
+    },
+    {
+        "school_id": "ross",
+        "school_name": "Michigan Ross",
+        "year": 2025,
+        "employment_rate_at_3_months": 96.3,
+        "median_base_salary": 160000,
+        "median_signing_bonus": 27500,
+        "top_industries": [
+            {"industry": "consulting", "pct": 28},
+            {"industry": "technology", "pct": 20},
+            {"industry": "financial_services", "pct": 16},
+            {"industry": "consumer_goods", "pct": 12},
+            {"industry": "healthcare", "pct": 8},
+        ],
+        "top_employers": ["McKinsey", "BCG", "Bain", "Amazon", "Google", "Ford"],
+        "top_functions": [
+            {"function": "consulting", "pct": 28},
+            {"function": "general_management", "pct": 16},
+            {"function": "finance", "pct": 16},
+            {"function": "marketing", "pct": 14},
+            {"function": "operations", "pct": 10},
+        ],
+    },
+    {
+        "school_id": "fuqua",
+        "school_name": "Duke Fuqua",
+        "year": 2025,
+        "employment_rate_at_3_months": 96.0,
+        "median_base_salary": 160000,
+        "median_signing_bonus": 27500,
+        "top_industries": [
+            {"industry": "consulting", "pct": 30},
+            {"industry": "technology", "pct": 20},
+            {"industry": "financial_services", "pct": 14},
+            {"industry": "healthcare", "pct": 12},
+            {"industry": "consumer_goods", "pct": 8},
+        ],
+        "top_employers": ["McKinsey", "BCG", "Deloitte", "Amazon", "Google", "Microsoft"],
+        "top_functions": [
+            {"function": "consulting", "pct": 30},
+            {"function": "general_management", "pct": 16},
+            {"function": "marketing", "pct": 14},
+            {"function": "finance", "pct": 14},
+            {"function": "operations", "pct": 10},
+        ],
+    },
+]
+
+_ALL_INDUSTRIES = sorted({ind["industry"] for s in _EMPLOYMENT_REPORT_DATA for ind in s["top_industries"]})
+_ALL_FUNCTIONS = sorted({fn["function"] for s in _EMPLOYMENT_REPORT_DATA for fn in s["top_functions"]})
+
+
+@router.get("/employment-reports")
+def get_employment_reports(
+    school_id: str | None = Query(default=None, description="Filter by school ID"),
+    industry: str | None = Query(default=None, description="Filter by industry"),
+):
+    """Return employment outcome data for top MBA programs."""
+    results = list(_EMPLOYMENT_REPORT_DATA)
+
+    if school_id:
+        ids = [s.strip().lower() for s in school_id.split(",") if s.strip()]
+        results = [s for s in results if s["school_id"] in ids]
+        if not results:
+            raise HTTPException(404, f"No employment data for: {school_id}")
+
+    if industry:
+        ind_lower = industry.strip().lower()
+        results = [
+            s for s in results
+            if any(i["industry"] == ind_lower for i in s["top_industries"])
+        ]
+
+    return {"schools": results, "total": len(results), "industries": _ALL_INDUSTRIES, "functions": _ALL_FUNCTIONS}
