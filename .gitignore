@@ -42,3 +42,6 @@ yarn-debug.log*
 
 # Logs
 *.log
+
+# Worktrees
+.worktrees/
