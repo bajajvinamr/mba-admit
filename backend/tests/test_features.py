@@ -1,5 +1,6 @@
 """Tests for Phase 6 feature endpoints — compare, profile, essays, decisions."""
 
+from unittest.mock import patch
 import db
 
 
@@ -217,3 +218,133 @@ def test_analytics_event_empty_batch(client):
     resp = client.post("/api/analytics/event", json={"events": []})
     assert resp.status_code == 200
     assert resp.json()["ok"] is True
+
+
+# ── Essay Versioning Edge Cases ──────────────────────────────────────────────
+
+
+def test_essay_version_auto_increments(client, seeded_session):
+    """Version numbers auto-increment from 1."""
+    base = "/api/essays/test-session-1/hbs/0/versions"
+    for i in range(1, 4):
+        resp = client.post(base, json={"content": f"Draft {i}.", "source": "user_edit"})
+        assert resp.json()["version"] == i
+
+    versions = client.get(base).json()["versions"]
+    assert [v["version"] for v in versions] == [1, 2, 3]
+
+
+def test_essay_version_preserves_source(client, seeded_session):
+    """Source field distinguishes AI-generated from user edits."""
+    base = "/api/essays/test-session-1/hbs/0/versions"
+    client.post(base, json={"content": "AI wrote this.", "source": "ai_generated"})
+    client.post(base, json={"content": "I edited this.", "source": "user_edit"})
+
+    versions = client.get(base).json()["versions"]
+    assert versions[0]["source"] == "ai_generated"
+    assert versions[1]["source"] == "user_edit"
+
+
+def test_essay_versions_isolated_per_prompt(client, seeded_session):
+    """Versions for different prompt indices are independent."""
+    client.post("/api/essays/test-session-1/hbs/0/versions", json={"content": "Prompt 0 essay."})
+    client.post("/api/essays/test-session-1/hbs/1/versions", json={"content": "Prompt 1 essay."})
+
+    v0 = client.get("/api/essays/test-session-1/hbs/0/versions").json()["versions"]
+    v1 = client.get("/api/essays/test-session-1/hbs/1/versions").json()["versions"]
+    assert len(v0) == 1
+    assert len(v1) == 1
+    assert v0[0]["content"] == "Prompt 0 essay."
+    assert v1[0]["content"] == "Prompt 1 essay."
+
+
+# ── Profile Analysis Edge Cases ──────────────────────────────────────────────
+
+
+def test_profile_analysis_5_scale_gpa(client):
+    """German 5.0 scale GPA (1.0 = best) inverts correctly."""
+    resp = client.post("/api/profile/analyze", json={
+        "gmat": 720,
+        "gpa": 1.5,
+        "gpa_scale": "5.0",
+        "industry": "consulting",
+        "years_experience": 4,
+    })
+    assert resp.status_code == 200
+    dims = resp.json()["dimensions"]
+    assert dims["academics"] > 70  # 1.5/5.0 is excellent on German scale
+
+
+def test_profile_analysis_high_exp_caps_at_100(client):
+    """Work experience score caps at 100 regardless of years."""
+    resp = client.post("/api/profile/analyze", json={
+        "gmat": 700,
+        "gpa": 3.5,
+        "industry": "consulting",
+        "years_experience": 15,
+    })
+    assert resp.status_code == 200
+    dims = resp.json()["dimensions"]
+    assert dims["work_experience"] == 100
+
+
+def test_profile_analysis_dimension_range(client):
+    """All dimension scores are between 0 and 100."""
+    resp = client.post("/api/profile/analyze", json={
+        "gmat": 780,
+        "gpa": 4.0,
+        "industry": "tech",
+        "years_experience": 6,
+        "undergrad_tier": "top_10",
+        "leadership_roles": "cxo",
+        "intl_experience": True,
+        "community_service": True,
+    })
+    assert resp.status_code == 200
+    dims = resp.json()["dimensions"]
+    for dim, score in dims.items():
+        assert 0 <= score <= 100, f"{dim} = {score} out of range"
+
+
+# ── Insights Edge Cases ──────────────────────────────────────────────────────
+
+
+def test_insights_nonexistent_school(client):
+    """Insights for unknown school returns 404."""
+    resp = client.get("/api/schools/totally_fake_school/insights")
+    assert resp.status_code == 404
+
+
+# ── Evaluate Essay (mocked LLM) ──────────────────────────────────────────────
+
+
+def test_evaluate_essay_mocked(client):
+    """Evaluate essay returns structured response with mocked LLM."""
+    mock_result = {
+        "overall_score": 7,
+        "authenticity": 8,
+        "specificity": 6,
+        "structure": 7,
+        "feedback": "Good narrative arc.",
+        "rewrite_suggestions": ["Add a concrete example."],
+    }
+    with patch("routers.tools.evaluate_essay_draft", return_value=mock_result):
+        resp = client.post("/api/evaluate_essay", json={
+            "school_id": "hbs",
+            "prompt": "What is your post-MBA goal?",
+            "essay_text": "I want to transform healthcare in India by building an AI diagnostics platform. " * 5,
+        })
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["overall_score"] == 7
+    assert "feedback" in data
+
+
+def test_evaluate_essay_too_short(client):
+    """Essay under 50 chars should be rejected by validation."""
+    resp = client.post("/api/evaluate_essay", json={
+        "school_id": "hbs",
+        "prompt": "Why MBA?",
+        "essay_text": "Short.",
+    })
+    assert resp.status_code == 422
