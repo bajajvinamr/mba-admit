@@ -1206,3 +1206,389 @@ def analyze_essay_themes(req: ThemeAnalysisRequest):
         "gaps": gaps,
         "tips": tips,
     }
+
+
+# ── Admit Probability Simulator ──────────────────────────────────────
+
+from pydantic import BaseModel as _BaseModel
+
+
+class SimulatorRequest(_BaseModel):
+    gmat: int = 700
+    gpa: float = 3.5
+    work_years: int = 4
+    school_ids: list[str] = []
+    is_urm: bool = False
+    is_international: bool = False
+    is_military: bool = False
+    has_nonprofit: bool = False
+
+
+_M7_IDS = ["hbs", "gsb", "wharton", "booth", "kellogg", "cbs", "sloan"]
+
+_US_SCHOOL_COUNTRIES = {"USA", "United States", "US"}
+
+
+@router.post("/admit-simulator")
+def admit_simulator(req: SimulatorRequest):
+    """Monte-Carlo-style admit probability simulator.
+
+    For each school, calculates a base probability from GMAT/GPA relative
+    to the school average, applies profile modifiers, runs 100 simulation
+    rounds with +-5% noise, and returns per-school results.
+    """
+    school_ids = req.school_ids if req.school_ids else list(_M7_IDS)
+    # Cap to 8
+    school_ids = school_ids[:8]
+
+    results = []
+
+    for sid in school_ids:
+        school = SCHOOL_DB.get(sid)
+        if not school:
+            # Try alias
+            resolved = SCHOOL_ALIASES.get(sid, "")
+            school = SCHOOL_DB.get(resolved) if resolved else None
+            if school:
+                sid = resolved
+        if not school:
+            continue
+
+        school_gmat = school.get("gmat_avg", 720)
+        school_name = school.get("name", sid)
+        country = school.get("country", "Unknown")
+
+        # ── 1. Base probability from GMAT + GPA ──────────────────────
+        # GMAT component: each point above/below avg shifts probability
+        gmat_diff = req.gmat - school_gmat
+        gmat_factor = gmat_diff * 0.3  # 30 points above → +9%
+
+        # GPA component: compare to expected ~3.6
+        expected_gpa = 3.6
+        gpa_diff = req.gpa - expected_gpa
+        gpa_factor = gpa_diff * 15  # 0.2 above → +3%
+
+        # Acceptance rate as difficulty baseline
+        accept_rate = 30.0
+        try:
+            accept_rate = float(school.get("acceptance_rate", 30))
+        except (ValueError, TypeError):
+            pass
+
+        # Base: start from acceptance rate scaled to profile
+        base = accept_rate + gmat_factor + gpa_factor
+
+        # ── 2. Profile modifiers ─────────────────────────────────────
+        if req.is_urm:
+            base += 8
+        if req.is_military:
+            base += 5
+        if req.has_nonprofit:
+            base += 3
+        if req.is_international and country in _US_SCHOOL_COUNTRIES:
+            base -= 3
+
+        # ── 3. Work experience curve (sweet spot 3-5 years) ─────────
+        if 3 <= req.work_years <= 5:
+            base += 4
+        elif 2 <= req.work_years < 3 or 5 < req.work_years <= 7:
+            base += 1
+        elif req.work_years < 2:
+            base -= 5
+        elif req.work_years > 7:
+            base -= 3
+
+        # Clamp base before simulation
+        base = max(3.0, min(95.0, base))
+
+        # ── 4. Run 100 simulation rounds with +-5% noise ────────────
+        num_rounds = 100
+        accepted = 0
+        probs: list[float] = []
+
+        for _ in range(num_rounds):
+            noise = random.uniform(-5.0, 5.0)
+            sim_prob = max(1.0, min(99.0, base + noise))
+            probs.append(sim_prob)
+            if random.random() * 100 < sim_prob:
+                accepted += 1
+
+        rejected = num_rounds - accepted
+        probability_pct = round(sum(probs) / len(probs), 1)
+
+        # Confidence interval: 5th and 95th percentile of sim probs
+        sorted_probs = sorted(probs)
+        ci_low = round(sorted_probs[4], 1)   # 5th percentile
+        ci_high = round(sorted_probs[94], 1)  # 95th percentile
+
+        # ── 5. Verdict ───────────────────────────────────────────────
+        if probability_pct >= 60:
+            verdict = "Safety"
+        elif probability_pct >= 30:
+            verdict = "Target"
+        else:
+            verdict = "Reach"
+
+        results.append({
+            "school_id": sid,
+            "school_name": school_name,
+            "probability_pct": probability_pct,
+            "confidence_interval": [ci_low, ci_high],
+            "verdict": verdict,
+            "simulations": {"accepted": accepted, "rejected": rejected},
+        })
+
+    # Sort by probability descending
+    results.sort(key=lambda r: -r["probability_pct"])
+
+    return {"results": results, "simulation_rounds": 100}
+
+
+# ── Salary Negotiation Calculator ─────────────────────────────────────
+
+
+class SalaryNegRequest(_BaseModel):
+    current_salary: int
+    target_role: str = "consulting"  # consulting, finance, tech, general
+    school_id: str | None = None
+    years_exp: int = 5
+    location: str = "new york"
+
+
+SALARY_RANGES = {
+    "consulting": {"p25": 165000, "p50": 175000, "p75": 190000, "signing_bonus": 30000},
+    "finance": {"p25": 150000, "p50": 175000, "p75": 200000, "signing_bonus": 50000},
+    "tech": {"p25": 140000, "p50": 165000, "p75": 195000, "signing_bonus": 25000},
+    "general": {"p25": 120000, "p50": 145000, "p75": 170000, "signing_bonus": 15000},
+}
+
+_LOCATION_ADJUSTERS: dict[str, float] = {
+    "new york": 1.0,
+    "nyc": 1.0,
+    "san francisco": 1.05,
+    "sf": 1.05,
+    "chicago": 0.85,
+    "boston": 0.90,
+    "los angeles": 0.95,
+    "la": 0.95,
+}
+_DEFAULT_LOC_ADJUSTER = 0.80
+
+_M7_SET = {"hbs", "gsb", "wharton", "booth", "kellogg", "cbs", "sloan"}
+_T15_SET = {"tuck", "haas", "ross", "fuqua", "darden", "stern", "yale-som", "johnson"}
+
+
+def _loc_adjuster(location: str) -> float:
+    loc = location.strip().lower()
+    for key, val in _LOCATION_ADJUSTERS.items():
+        if key in loc or loc in key:
+            return val
+    return _DEFAULT_LOC_ADJUSTER
+
+
+def _school_premium(school_id: str | None) -> float | None:
+    if not school_id:
+        return None
+    sid = school_id.strip().lower()
+    if sid in _M7_SET:
+        return 0.05
+    if sid in _T15_SET:
+        return 0.03
+    return 0.0
+
+
+@router.post("/salary-negotiation")
+def salary_negotiation(req: SalaryNegRequest):
+    """Post-MBA salary negotiation calculator with market ranges, tips, and school premium."""
+    role = req.target_role.lower()
+    if role not in SALARY_RANGES:
+        raise HTTPException(400, f"Invalid target_role. Choose from: {', '.join(SALARY_RANGES.keys())}")
+
+    base = SALARY_RANGES[role]
+    adjuster = _loc_adjuster(req.location)
+
+    market_range = {k: base[k] for k in ("p25", "p50", "p75")}
+    adjusted_range = {k: round(base[k] * adjuster) for k in ("p25", "p50", "p75")}
+
+    # Apply school premium
+    premium = _school_premium(req.school_id)
+    if premium:
+        adjusted_range = {k: round(v * (1 + premium)) for k, v in adjusted_range.items()}
+
+    signing_bonus = base["signing_bonus"]
+    salary_increase_pct = round(((adjusted_range["p50"] - req.current_salary) / max(req.current_salary, 1)) * 100, 1)
+    total_comp_first_year = adjusted_range["p50"] + signing_bonus
+
+    # Negotiation tips
+    tips: list[str] = []
+    if req.years_exp >= 7:
+        tips.append("With 7+ years of experience, emphasize your leadership track record to negotiate above the median.")
+    elif req.years_exp >= 4:
+        tips.append("Your experience level is typical for post-MBA roles — use competing offers to push past the median.")
+    else:
+        tips.append("With less than 4 years of experience, focus on unique skills and internship performance during negotiation.")
+
+    if role == "consulting":
+        tips.append("MBB firms have structured pay bands — negotiate on signing bonus and location rather than base salary.")
+    elif role == "finance":
+        tips.append("In finance, total compensation matters most — negotiate performance bonus guarantees for year one.")
+    elif role == "tech":
+        tips.append("Tech offers often include equity — make sure to factor RSU vesting schedule into total compensation.")
+    else:
+        tips.append("Research the specific company's pay bands on Glassdoor and Levels.fyi before your negotiation call.")
+
+    if premium and premium > 0:
+        tips.append(f"Your school's brand carries a {int(premium * 100)}% premium — leverage alumni placement data in your negotiation.")
+    else:
+        tips.append("Always negotiate — 87% of employers expect it, and the worst they can say is the offer stands.")
+
+    return {
+        "market_range": market_range,
+        "adjusted_range": adjusted_range,
+        "signing_bonus": signing_bonus,
+        "salary_increase_pct": salary_increase_pct,
+        "total_comp_first_year": total_comp_first_year,
+        "negotiation_tips": tips,
+        "school_premium": premium,
+    }
+
+
+# ── Visa & Work Permit Info ─────────────────────────────────────────────
+
+VISA_INFO: dict = {
+    "united states": {
+        "student_visa": "F-1",
+        "work_permit": "OPT (12 months, 36 months for STEM)",
+        "stem_extension": True,
+        "spouse_work": "H-4 EAD (with H-1B sponsor)",
+        "post_grad_options": ["OPT", "H-1B lottery", "O-1 (extraordinary ability)"],
+        "tips": ["STEM-designated programs give 3x longer OPT", "Start H-1B search by fall of 2nd year"],
+    },
+    "united kingdom": {
+        "student_visa": "Student Visa (Tier 4)",
+        "work_permit": "Graduate Route (2 years)",
+        "stem_extension": False,
+        "spouse_work": "Dependant visa allows full-time work",
+        "post_grad_options": ["Graduate Route", "Skilled Worker Visa", "Innovator Founder"],
+        "tips": ["Graduate Route: 2 years work without sponsorship", "No lottery — employer visas are predictable"],
+    },
+    "singapore": {
+        "student_visa": "Student Pass",
+        "work_permit": "Employment Pass (EP)",
+        "stem_extension": False,
+        "spouse_work": "Dependant Pass (Letter of Consent for work)",
+        "post_grad_options": ["Employment Pass", "S Pass", "EntrePass"],
+        "tips": ["EP minimum salary rising — check COMPASS framework", "Strong fintech/startup ecosystem"],
+    },
+    "france": {
+        "student_visa": "VLS-TS (long-stay student visa)",
+        "work_permit": "APS — 1 year post-graduation",
+        "stem_extension": False,
+        "spouse_work": "Spouse visa allows work",
+        "post_grad_options": ["APS", "Passeport Talent", "Salarié"],
+        "tips": ["APS gives 1 year to find work", "EU Blue Card available for high-skill roles"],
+    },
+    "canada": {
+        "student_visa": "Study Permit",
+        "work_permit": "PGWP (up to 3 years)",
+        "stem_extension": False,
+        "spouse_work": "Open Work Permit for spouse",
+        "post_grad_options": ["PGWP", "Express Entry PR", "Provincial Nominee"],
+        "tips": ["PGWP length matches program length", "Express Entry PR is fastest globally"],
+    },
+    "india": {
+        "student_visa": "Student Visa",
+        "work_permit": "Employment Visa (employer-sponsored)",
+        "stem_extension": False,
+        "spouse_work": "Dependent visa does not allow work",
+        "post_grad_options": ["Employment Visa", "Business Visa"],
+        "tips": ["No formal post-study work permit", "Strong domestic placement at IIMs"],
+    },
+    "spain": {
+        "student_visa": "Visado de Estudiante",
+        "work_permit": "Job search residence permit (1 year)",
+        "stem_extension": False,
+        "spouse_work": "Family reunification visa allows work",
+        "post_grad_options": ["Job Search Permit", "Highly Qualified Professional Visa", "Entrepreneur Visa"],
+        "tips": ["1-year job search permit after graduation", "Digital Nomad Visa also available"],
+    },
+}
+
+
+@router.get("/visa-info")
+def get_visa_info(country: str = "united states"):
+    """Get visa and work permit info for a specific country."""
+    country_lower = country.lower().strip()
+    info = VISA_INFO.get(country_lower)
+    if not info:
+        for key, val in VISA_INFO.items():
+            if country_lower in key or key in country_lower:
+                info = val
+                country_lower = key
+                break
+    if not info:
+        return {
+            "country": country, "available": False,
+            "message": f"Visa info not yet available for {country}.",
+            "countries_available": list(VISA_INFO.keys()),
+        }
+    return {"country": country_lower.title(), "available": True, **info}
+
+
+@router.get("/visa-info/countries")
+def get_visa_countries():
+    """List countries with visa info."""
+    return {"countries": [c.title() for c in VISA_INFO.keys()]}
+
+
+# ── Fee Waiver Finder ───────────────────────────────────────────────────
+
+FEE_WAIVER_DATA: dict = {
+    "hbs": {"waivers": ["Diversity waiver (Consortium members)", "Need-based waiver (request via admissions)"], "consortium": True, "auto_waiver": False},
+    "gsb": {"waivers": ["Need-based waiver (online form)", "Diversity/military waiver"], "consortium": False, "auto_waiver": False},
+    "wharton": {"waivers": ["Need-based waiver", "Military/AmeriCorps auto-waiver", "Consortium auto-waiver"], "consortium": True, "auto_waiver": True},
+    "booth": {"waivers": ["Need-based waiver", "Diversity conference waiver", "Consortium waiver"], "consortium": True, "auto_waiver": False},
+    "kellogg": {"waivers": ["Need-based waiver", "Military auto-waiver", "Consortium waiver"], "consortium": True, "auto_waiver": True},
+    "cbs": {"waivers": ["Need-based waiver", "Campus visit waiver", "Military waiver"], "consortium": True, "auto_waiver": False},
+    "sloan": {"waivers": ["Need-based waiver", "Military/Peace Corps waiver"], "consortium": False, "auto_waiver": True},
+    "tuck": {"waivers": ["Need-based waiver", "Diversity conference waiver", "Military waiver"], "consortium": True, "auto_waiver": False},
+    "haas": {"waivers": ["Need-based waiver", "Consortium waiver", "Military waiver"], "consortium": True, "auto_waiver": False},
+    "ross": {"waivers": ["Need-based waiver", "Consortium waiver", "Military/AmeriCorps waiver"], "consortium": True, "auto_waiver": True},
+    "fuqua": {"waivers": ["Need-based waiver", "Consortium waiver", "Campus visit waiver"], "consortium": True, "auto_waiver": False},
+    "darden": {"waivers": ["Need-based waiver", "Consortium waiver", "Military waiver"], "consortium": True, "auto_waiver": False},
+    "stern": {"waivers": ["Need-based waiver", "Consortium waiver", "Military waiver"], "consortium": True, "auto_waiver": False},
+    "yale_som": {"waivers": ["Need-based waiver", "Military waiver", "Nonprofit/public sector waiver"], "consortium": False, "auto_waiver": True},
+    "anderson": {"waivers": ["Need-based waiver", "Consortium waiver", "Military waiver"], "consortium": True, "auto_waiver": False},
+}
+
+
+@router.get("/fee-waivers")
+def get_fee_waivers(school_ids: str | None = None, is_military: bool = False, is_consortium: bool = False):
+    """Find application fee waiver opportunities."""
+    ids = [s.strip().lower() for s in school_ids.split(",") if s.strip()] if school_ids else list(FEE_WAIVER_DATA.keys())
+    results = []
+    for sid in ids:
+        waiver = FEE_WAIVER_DATA.get(sid)
+        school = SCHOOL_DB.get(sid)
+        school_name = school.get("name", sid) if school else sid
+        if waiver:
+            results.append({
+                "school_id": sid, "school_name": school_name,
+                "waivers": waiver["waivers"],
+                "consortium": waiver["consortium"],
+                "auto_waiver": waiver["auto_waiver"],
+                "qualifies_military": is_military and any("military" in w.lower() for w in waiver["waivers"]),
+                "qualifies_consortium": is_consortium and waiver["consortium"],
+            })
+        else:
+            results.append({
+                "school_id": sid, "school_name": school_name,
+                "waivers": ["Contact admissions directly"],
+                "consortium": False, "auto_waiver": False,
+                "qualifies_military": False, "qualifies_consortium": False,
+            })
+    return {
+        "waivers": results, "total_schools": len(results),
+        "consortium_eligible": sum(1 for r in results if r["qualifies_consortium"]),
+        "military_eligible": sum(1 for r in results if r["qualifies_military"]),
+    }

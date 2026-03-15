@@ -205,6 +205,102 @@ def get_gmat_targets():
     }
 
 
+# ── Culture Matcher ───────────────────────────────────────────────────────
+
+from pydantic import BaseModel as _BaseModel
+
+
+class CultureMatchRequest(_BaseModel):
+    priorities: dict[str, int]  # e.g. {"collaboration": 5, "entrepreneurship": 4}
+    school_ids: list[str] | None = None  # optional filter, defaults to top 30
+
+
+SCHOOL_CULTURE = {
+    "hbs": {"case_method": 95, "collaboration": 80, "entrepreneurship": 90, "global": 85, "social_impact": 75, "innovation": 85, "networking": 95, "diversity": 80},
+    "gsb": {"case_method": 50, "collaboration": 90, "entrepreneurship": 95, "global": 80, "social_impact": 85, "innovation": 95, "networking": 90, "diversity": 85},
+    "wharton": {"case_method": 40, "collaboration": 75, "entrepreneurship": 80, "global": 85, "social_impact": 60, "innovation": 80, "networking": 90, "diversity": 80},
+    "booth": {"case_method": 30, "collaboration": 80, "entrepreneurship": 75, "global": 75, "social_impact": 55, "innovation": 80, "networking": 85, "diversity": 75},
+    "kellogg": {"case_method": 35, "collaboration": 95, "entrepreneurship": 70, "global": 80, "social_impact": 65, "innovation": 75, "networking": 95, "diversity": 80},
+    "cbs": {"case_method": 60, "collaboration": 70, "entrepreneurship": 80, "global": 80, "social_impact": 60, "innovation": 75, "networking": 90, "diversity": 75},
+    "sloan": {"case_method": 30, "collaboration": 85, "entrepreneurship": 85, "global": 80, "social_impact": 70, "innovation": 95, "networking": 80, "diversity": 80},
+    "tuck": {"case_method": 50, "collaboration": 95, "entrepreneurship": 65, "global": 70, "social_impact": 70, "innovation": 65, "networking": 95, "diversity": 70},
+    "haas": {"case_method": 40, "collaboration": 90, "entrepreneurship": 85, "global": 80, "social_impact": 80, "innovation": 90, "networking": 80, "diversity": 85},
+    "ross": {"case_method": 30, "collaboration": 90, "entrepreneurship": 70, "global": 75, "social_impact": 80, "innovation": 75, "networking": 80, "diversity": 75},
+    "fuqua": {"case_method": 45, "collaboration": 90, "entrepreneurship": 65, "global": 75, "social_impact": 70, "innovation": 70, "networking": 85, "diversity": 75},
+    "darden": {"case_method": 95, "collaboration": 85, "entrepreneurship": 60, "global": 70, "social_impact": 65, "innovation": 60, "networking": 85, "diversity": 70},
+    "stern": {"case_method": 30, "collaboration": 75, "entrepreneurship": 80, "global": 85, "social_impact": 60, "innovation": 80, "networking": 85, "diversity": 80},
+    "yale_som": {"case_method": 35, "collaboration": 85, "entrepreneurship": 70, "global": 80, "social_impact": 90, "innovation": 75, "networking": 80, "diversity": 80},
+    "anderson": {"case_method": 30, "collaboration": 80, "entrepreneurship": 80, "global": 75, "social_impact": 65, "innovation": 80, "networking": 80, "diversity": 80},
+}
+
+_CULTURE_DISPLAY = {
+    "hbs": "Harvard Business School",
+    "gsb": "Stanford GSB",
+    "wharton": "Wharton",
+    "booth": "Chicago Booth",
+    "kellogg": "Kellogg",
+    "cbs": "Columbia Business School",
+    "sloan": "MIT Sloan",
+    "tuck": "Tuck",
+    "haas": "Berkeley Haas",
+    "ross": "Michigan Ross",
+    "fuqua": "Duke Fuqua",
+    "darden": "UVA Darden",
+    "stern": "NYU Stern",
+    "yale_som": "Yale SOM",
+    "anderson": "UCLA Anderson",
+}
+
+
+@router.post("/schools/culture-match")
+def culture_match(req: CultureMatchRequest):
+    """Score schools against user culture priorities and return ranked matches."""
+    if not req.priorities:
+        raise HTTPException(400, "At least one priority is required")
+
+    # Determine which schools to evaluate
+    if req.school_ids:
+        candidates = {sid: traits for sid, traits in SCHOOL_CULTURE.items() if sid in req.school_ids}
+    else:
+        candidates = dict(list(SCHOOL_CULTURE.items())[:30])
+
+    matches = []
+    total_weight = sum(req.priorities.values()) or 1
+
+    for sid, traits in candidates.items():
+        weighted_sum = 0
+        trait_scores: list[tuple[str, float]] = []
+
+        for trait, importance in req.priorities.items():
+            school_val = traits.get(trait, 50)  # default 50 if trait not tracked
+            weighted_sum += (school_val / 100) * importance
+            trait_scores.append((trait, school_val * importance))
+
+        match_pct = round((weighted_sum / total_weight) * 100)
+        match_pct = max(0, min(100, match_pct))
+
+        # Sort traits by weighted score
+        trait_scores.sort(key=lambda x: -x[1])
+        top_traits = [t[0] for t in trait_scores[:2]]
+
+        trait_scores.sort(key=lambda x: x[1])
+        weak_traits = [t[0] for t in trait_scores[:1] if t[1] < trait_scores[-1][1] * 0.6]
+
+        school_name = _CULTURE_DISPLAY.get(sid) or SCHOOL_DB.get(sid, {}).get("name", sid)
+
+        matches.append({
+            "school_id": sid,
+            "school_name": school_name,
+            "match_pct": match_pct,
+            "top_traits": top_traits,
+            "weak_traits": weak_traits,
+        })
+
+    matches.sort(key=lambda x: -x["match_pct"])
+
+    return {"matches": matches}
+
+
 @router.get("/schools/{school_id}")
 def get_school(school_id: str):
     """Returns detail for a single school including essay prompts and data quality."""
