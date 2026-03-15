@@ -246,3 +246,28 @@ class ChancesRequest(BaseModel):
     work_exp_years: Optional[int] = Field(default=None, ge=0, le=30)
     industry: Optional[str] = None
     school_ids: Optional[List[str]] = Field(default=None, max_length=10)
+
+
+# ── Fit Score ──────────────────────────────────────────────────────────────
+
+class FitScoreRequest(BaseModel):
+    school_ids: List[str] = Field(min_length=1, max_length=10)
+    gmat: Optional[int] = Field(default=None, ge=200, le=800)
+    gpa: Optional[float] = Field(default=None, ge=0.0, le=4.0)
+    work_exp_years: Optional[int] = Field(default=None, ge=0, le=30)
+    target_industry: Optional[str] = None
+    budget_max: Optional[float] = None  # max tuition willing to pay
+
+
+# ── Application Fee Calculator (Feature 9) ──────────────────────────────────
+
+class ApplicationFeesRequest(BaseModel):
+    school_ids: List[str] = Field(min_length=1, max_length=20)
+
+
+# ── Essay Word Count ───────────────────────────────────────────────────────
+
+class EssayWordCountRequest(BaseModel):
+    text: str
+    word_limit: Optional[int] = None
+    char_limit: Optional[int] = None

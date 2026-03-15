@@ -323,3 +323,293 @@ def compute_chances(req: ChancesRequest):
         "total_similar_profiles": len(similar),
         "schools": results,
     }
+
+
+# ── Interview Question Bank ──────────────────────────────────────────────
+
+import json as _json
+import os as _os
+
+_QUESTIONS_PATH = _os.path.join(_os.path.dirname(__file__), "..", "data", "interview_questions.json")
+_questions_cache: dict | None = None
+
+
+def _load_questions() -> dict:
+    global _questions_cache
+    if _questions_cache is None:
+        with open(_QUESTIONS_PATH) as f:
+            _questions_cache = _json.load(f)
+    return _questions_cache
+
+
+@router.get("/interview/questions")
+def get_interview_questions(
+    school_id: str = None,
+    category: str = None,
+    difficulty: str = None,
+):
+    """Browseable interview question bank with optional filters."""
+    data = _load_questions()
+    categories = data["categories"]
+    result_categories = []
+
+    for cat in categories:
+        if category and cat["id"] != category:
+            continue
+
+        filtered_qs = cat["questions"]
+        if school_id:
+            filtered_qs = [q for q in filtered_qs if school_id in q.get("schools", [])]
+        if difficulty:
+            filtered_qs = [q for q in filtered_qs if q["difficulty"] == difficulty]
+
+        if filtered_qs:
+            result_categories.append({
+                "id": cat["id"],
+                "name": cat["name"],
+                "questions": filtered_qs,
+                "count": len(filtered_qs),
+            })
+
+    total = sum(c["count"] for c in result_categories)
+
+    # School-specific tips
+    school_info = None
+    if school_id:
+        school_info = data.get("school_specific", {}).get(school_id)
+
+    return {
+        "categories": result_categories,
+        "total_questions": total,
+        "school_info": school_info,
+    }
+
+
+@router.get("/interview/questions/random")
+def get_random_questions(
+    school_id: str = None,
+    count: int = Query(default=5, ge=1, le=20),
+):
+    """Get random interview questions for practice mode."""
+    data = _load_questions()
+    all_qs = []
+    for cat in data["categories"]:
+        for q in cat["questions"]:
+            if school_id and school_id not in q.get("schools", []):
+                continue
+            all_qs.append({**q, "category": cat["name"]})
+
+    if not all_qs:
+        return {"questions": [], "count": 0}
+
+    selected = random.sample(all_qs, min(count, len(all_qs)))
+    return {"questions": selected, "count": len(selected)}
+
+
+# ── Admit Analytics ──────────────────────────────────────────────────────
+
+@router.get("/decisions/analytics")
+def get_decision_analytics(school_id: str = None):
+    """Aggregated analytics: GMAT/GPA distributions, round trends, admit rates by school."""
+    data = load_gmatclub_data()
+    if school_id:
+        data = [d for d in data if d.get("school_id") == school_id]
+
+    if not data:
+        return {"error": "No data found", "total": 0}
+
+    # GMAT distribution (buckets of 20)
+    gmat_dist: dict[str, int] = {}
+    gpa_dist: dict[str, int] = {}
+    round_stats: dict[str, dict[str, int]] = {}
+    industry_stats: dict[str, dict[str, int]] = {}
+    yoe_dist: dict[str, int] = {}
+
+    for d in data:
+        status_group = "admitted" if _is_admitted(d.get("status", "")) else "denied" if _is_denied(d.get("status", "")) else "other"
+
+        # GMAT buckets
+        gmat = d.get("gmat_focus") or d.get("gmat")
+        if gmat:
+            bucket = f"{(gmat // 20) * 20}-{(gmat // 20) * 20 + 19}"
+            gmat_dist[bucket] = gmat_dist.get(bucket, 0) + 1
+
+        # GPA buckets (0.2 increments)
+        gpa = d.get("gpa")
+        if gpa:
+            bucket = f"{gpa // 0.2 * 0.2:.1f}-{gpa // 0.2 * 0.2 + 0.19:.2f}"
+            gpa_dist[bucket] = gpa_dist.get(bucket, 0) + 1
+
+        # Round breakdown
+        rnd = d.get("round", "Unknown")
+        if rnd not in round_stats:
+            round_stats[rnd] = {"admitted": 0, "denied": 0, "other": 0, "total": 0}
+        round_stats[rnd][status_group] = round_stats[rnd].get(status_group, 0) + 1
+        round_stats[rnd]["total"] += 1
+
+        # Industry breakdown (top industries)
+        ind = d.get("industry", "Unknown")
+        if ind and ind != "Unknown":
+            if ind not in industry_stats:
+                industry_stats[ind] = {"admitted": 0, "denied": 0, "total": 0}
+            industry_stats[ind][status_group] = industry_stats[ind].get(status_group, 0) + 1
+            industry_stats[ind]["total"] += 1
+
+        # YOE distribution
+        yoe = d.get("yoe")
+        if yoe is not None:
+            bucket = f"{yoe}y"
+            yoe_dist[bucket] = yoe_dist.get(bucket, 0) + 1
+
+    # Sort GMAT buckets
+    sorted_gmat = sorted(gmat_dist.items(), key=lambda x: x[0])
+
+    # Top 10 industries by total
+    top_industries = sorted(industry_stats.items(), key=lambda x: -x[1]["total"])[:10]
+    industry_result = []
+    for ind, stats in top_industries:
+        resolved = stats["admitted"] + stats["denied"]
+        rate = round(stats["admitted"] / resolved * 100, 1) if resolved > 0 else 0
+        industry_result.append({"industry": ind, "admit_rate": rate, **stats})
+
+    # Round admit rates
+    round_result = []
+    for rnd, stats in sorted(round_stats.items()):
+        resolved = stats["admitted"] + stats["denied"]
+        rate = round(stats["admitted"] / resolved * 100, 1) if resolved > 0 else 0
+        round_result.append({"round": rnd, "admit_rate": rate, **stats})
+
+    return {
+        "total": len(data),
+        "gmat_distribution": sorted_gmat,
+        "gpa_distribution": sorted(gpa_dist.items(), key=lambda x: x[0]),
+        "yoe_distribution": sorted(yoe_dist.items(), key=lambda x: x[0]),
+        "by_round": round_result,
+        "by_industry": industry_result,
+    }
+
+
+# ── Essay Word Counter ──────────────────────────────────────────────────
+
+import re as _re
+from models import EssayWordCountRequest
+
+
+@router.post("/essay/word-count")
+def essay_word_count(req: EssayWordCountRequest):
+    """Analyze essay text: word count, character count, sentence count, reading time."""
+    text = req.text.strip()
+    words = text.split() if text else []
+    word_count = len(words)
+    char_count = len(text)
+    char_no_spaces = len(text.replace(" ", ""))
+    sentences = len(_re.findall(r"[.!?]+", text)) or (1 if text else 0)
+    paragraphs = len([p for p in text.split("\n\n") if p.strip()]) if text else 0
+    reading_time_sec = round(word_count / 3.5)  # ~210 words/min speaking pace for interviews
+
+    result: dict = {
+        "word_count": word_count,
+        "char_count": char_count,
+        "char_no_spaces": char_no_spaces,
+        "sentence_count": sentences,
+        "paragraph_count": paragraphs,
+        "reading_time_seconds": reading_time_sec,
+    }
+
+    if req.word_limit:
+        remaining = req.word_limit - word_count
+        result["word_limit"] = req.word_limit
+        result["words_remaining"] = remaining
+        result["over_limit"] = remaining < 0
+        result["utilization_pct"] = round(word_count / req.word_limit * 100, 1)
+
+    if req.char_limit:
+        remaining = req.char_limit - char_count
+        result["char_limit"] = req.char_limit
+        result["chars_remaining"] = remaining
+        result["char_over_limit"] = remaining < 0
+
+    return result
+
+
+# ── Application Checklist Generator ─────────────────────────────────────
+
+@router.get("/schools/{school_id}/checklist")
+def get_application_checklist(school_id: str):
+    """Generate a per-school application checklist from admission requirements."""
+    school = SCHOOL_DB.get(school_id)
+    if not school:
+        raise HTTPException(status_code=404, detail="School not found")
+
+    reqs = school.get("admission_requirements", {})
+    essays = school.get("essay_prompts", [])
+    deadlines = school.get("admission_deadlines", [])
+    app_qs = school.get("application_questions", [])
+
+    checklist = []
+
+    # Standard required items
+    std_items = [
+        ("application_fee", "Pay application fee", reqs.get("application_fee")),
+        ("transcripts", "Submit official transcripts", reqs.get("transcripts")),
+        ("resume", "Upload resume/CV", reqs.get("resume")),
+        ("gmat_gre", "Submit GMAT/GRE score", reqs.get("gmat_gre")),
+        ("recommendations", "Secure letters of recommendation", reqs.get("recommendations")),
+        ("interview", "Complete interview (if invited)", reqs.get("interview")),
+        ("english_proficiency", "Submit English proficiency score (if applicable)", reqs.get("english_proficiency")),
+    ]
+
+    for item_id, label, detail in std_items:
+        if detail and detail.lower() not in ("n/a", "none", "not required"):
+            checklist.append({
+                "id": item_id,
+                "label": label,
+                "detail": detail if isinstance(detail, str) else str(detail),
+                "category": "requirements",
+                "required": True,
+            })
+
+    # Essays
+    for i, essay in enumerate(essays):
+        prompt = essay if isinstance(essay, str) else essay.get("prompt", essay.get("question", str(essay)))
+        checklist.append({
+            "id": f"essay_{i}",
+            "label": f"Essay {i + 1}",
+            "detail": prompt[:200] if len(prompt) > 200 else prompt,
+            "category": "essays",
+            "required": True,
+        })
+
+    # Application questions
+    for i, q in enumerate(app_qs):
+        q_text = q if isinstance(q, str) else q.get("question", str(q))
+        checklist.append({
+            "id": f"appq_{i}",
+            "label": f"Application question {i + 1}",
+            "detail": q_text[:200] if len(q_text) > 200 else q_text,
+            "category": "questions",
+            "required": True,
+        })
+
+    # Deadlines
+    deadline_info = []
+    for dl in deadlines:
+        if isinstance(dl, dict):
+            deadline_info.append({
+                "round": dl.get("round", ""),
+                "deadline": dl.get("deadline", ""),
+                "decision": dl.get("decision", ""),
+            })
+
+    return {
+        "school_id": school_id,
+        "school_name": school.get("name", school_id),
+        "checklist": checklist,
+        "total_items": len(checklist),
+        "deadlines": deadline_info,
+        "categories": {
+            "requirements": len([c for c in checklist if c["category"] == "requirements"]),
+            "essays": len([c for c in checklist if c["category"] == "essays"]),
+            "questions": len([c for c in checklist if c["category"] == "questions"]),
+        },
+    }
