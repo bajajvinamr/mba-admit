@@ -4529,3 +4529,468 @@ def get_concentrations(
         results = [c for c in results if c["field"] == f]
 
     return {"concentrations": results, "total": len(results)}
+
+
+# ── Alumni Interview Prep ──────────────────────────────────────────────────
+
+
+class _AlumniInterviewSchool(_BaseModel):
+    school_id: str
+    school_name: str
+    interview_format: str
+    typical_duration: str
+    common_questions: list[str]
+    tips: list[str]
+    interviewer_type: str
+    dress_code: str
+
+
+class _AlumniInterviewPrepResponse(_BaseModel):
+    schools: list[_AlumniInterviewSchool]
+    total: int
+
+
+_ALUMNI_INTERVIEW_DATA: list[dict] = [
+    {
+        "school_id": "hbs",
+        "school_name": "Harvard Business School",
+        "interview_format": "blind",
+        "typical_duration": "30 minutes",
+        "common_questions": [
+            "Walk me through your resume.",
+            "Why do you want an MBA now?",
+            "Tell me about a time you led a team through a challenge.",
+            "What will you contribute to the HBS community?",
+            "Describe a situation where you had to influence without authority.",
+            "What are your post-MBA goals?",
+        ],
+        "tips": [
+            "Interviewer has NOT read your application — introduce yourself clearly.",
+            "Prepare a concise 2-minute personal pitch.",
+            "HBS values leadership and community impact — weave those in.",
+            "Be ready for rapid follow-up questions; interviewers probe deeply.",
+            "Practice with a timer — 30 minutes goes fast.",
+        ],
+        "interviewer_type": "adcom",
+        "dress_code": "Business professional",
+    },
+    {
+        "school_id": "gsb",
+        "school_name": "Stanford GSB",
+        "interview_format": "blind",
+        "typical_duration": "45 minutes",
+        "common_questions": [
+            "Tell me about yourself.",
+            "What matters most to you and why?",
+            "Describe a time you created change in an organization.",
+            "Why Stanford GSB?",
+            "What would your colleagues say about working with you?",
+            "Tell me about a failure and what you learned.",
+            "How do you plan to use your MBA?",
+        ],
+        "tips": [
+            "The 'what matters most' question mirrors the essay — ensure consistency.",
+            "Interviewers are alumni; show genuine knowledge of GSB culture.",
+            "Be authentic — Stanford values self-reflection over polish.",
+            "Have specific examples of impact, not just responsibilities.",
+            "Ask thoughtful questions about their GSB experience.",
+        ],
+        "interviewer_type": "alumni",
+        "dress_code": "Business casual",
+    },
+    {
+        "school_id": "wharton",
+        "school_name": "Wharton",
+        "interview_format": "team",
+        "typical_duration": "35 minutes (team-based assessment)",
+        "common_questions": [
+            "Introduce yourself to the group.",
+            "Discuss this case scenario as a team and present a recommendation.",
+            "What role did you play in the team discussion?",
+            "How would you handle a disagreement with a teammate?",
+            "Why Wharton?",
+            "What unique perspective do you bring?",
+        ],
+        "tips": [
+            "Wharton uses a Team-Based Discussion (TBD) — practice group dynamics.",
+            "Balance contributing ideas with listening to others.",
+            "Don't dominate or stay silent — find the collaborative middle ground.",
+            "The 1-on-1 portion is short; be concise with personal stories.",
+            "Research Wharton's learning teams and reference them.",
+        ],
+        "interviewer_type": "adcom",
+        "dress_code": "Business professional",
+    },
+    {
+        "school_id": "booth",
+        "school_name": "Chicago Booth",
+        "interview_format": "informed",
+        "typical_duration": "30-45 minutes",
+        "common_questions": [
+            "Walk me through your resume.",
+            "Why Booth specifically?",
+            "Describe a time you used data to make a decision.",
+            "Tell me about a professional accomplishment you're proud of.",
+            "How do you handle ambiguity?",
+            "What clubs or activities interest you at Booth?",
+        ],
+        "tips": [
+            "Interviewer has read your application — avoid repeating essays verbatim.",
+            "Booth values analytical thinking — have quant-heavy examples ready.",
+            "Reference the flexible curriculum and LEAD program.",
+            "Be prepared to discuss why Chicago as a city appeals to you.",
+            "Alumni interviews tend to be conversational; be personable.",
+        ],
+        "interviewer_type": "alumni",
+        "dress_code": "Business casual",
+    },
+    {
+        "school_id": "kellogg",
+        "school_name": "Kellogg",
+        "interview_format": "blind",
+        "typical_duration": "30 minutes",
+        "common_questions": [
+            "Tell me about yourself.",
+            "Why Kellogg?",
+            "Give an example of a time you worked on a diverse team.",
+            "Describe a leadership moment you're proud of.",
+            "How do you build relationships in professional settings?",
+            "What will you contribute to the Kellogg community?",
+            "Tell me about a time you had to persuade a group.",
+        ],
+        "tips": [
+            "Kellogg prizes collaboration and empathy — emphasize teamwork.",
+            "Alumni interviewers are enthusiastic; match their energy.",
+            "Know Kellogg's clubs, GIM trips, and social impact initiatives.",
+            "Practice telling concise stories — the format is tight.",
+            "Send a thoughtful thank-you note within 24 hours.",
+        ],
+        "interviewer_type": "alumni",
+        "dress_code": "Business casual",
+    },
+    {
+        "school_id": "cbs",
+        "school_name": "Columbia Business School",
+        "interview_format": "informed",
+        "typical_duration": "30 minutes",
+        "common_questions": [
+            "Walk me through your resume.",
+            "Why Columbia?",
+            "Tell me about a time you overcame an obstacle.",
+            "What industry do you want to work in post-MBA?",
+            "How would you take advantage of being in New York City?",
+            "Describe your management style.",
+        ],
+        "tips": [
+            "Interviewer has reviewed your application — add new details.",
+            "Leverage the NYC location in your 'Why CBS' answer.",
+            "CBS values entrepreneurship — mention relevant experiences.",
+            "If interviewing with an alumnus, research their background.",
+            "Be specific about CBS resources: Chazen Institute, Lang Center, etc.",
+        ],
+        "interviewer_type": "alumni",
+        "dress_code": "Business professional",
+    },
+    {
+        "school_id": "sloan",
+        "school_name": "MIT Sloan",
+        "interview_format": "informed",
+        "typical_duration": "30 minutes",
+        "common_questions": [
+            "Tell me about a time you worked on a complex problem.",
+            "Why MIT Sloan?",
+            "How do you approach innovation?",
+            "Describe a project where you combined technical and business skills.",
+            "What would you do if your startup idea failed?",
+            "How do you plan to contribute to the Sloan community?",
+        ],
+        "tips": [
+            "Sloan values 'principled, innovative leaders' — frame stories accordingly.",
+            "Have examples that show technical depth and business acumen.",
+            "Reference MIT's cross-registration, the Martin Trust Center, or Action Learning.",
+            "Interviews can be conducted by adcom or alumni — tone varies.",
+            "Prepare for behavioral and situational questions equally.",
+        ],
+        "interviewer_type": "adcom",
+        "dress_code": "Business casual",
+    },
+    {
+        "school_id": "tuck",
+        "school_name": "Dartmouth Tuck",
+        "interview_format": "informed",
+        "typical_duration": "30-45 minutes",
+        "common_questions": [
+            "Why an MBA? Why now?",
+            "Why Tuck?",
+            "Tell me about a time you made an impact in your community.",
+            "Describe a challenge you faced in a team setting.",
+            "How do you handle feedback?",
+            "What will you do if you don't get into business school?",
+            "How does Tuck fit into your long-term plan?",
+        ],
+        "tips": [
+            "Tuck has the strongest alumni network per capita — mention that.",
+            "The tight-knit Hanover community is central; show you'd thrive there.",
+            "Interviewers are often alumni who are passionate about Tuck — be genuine.",
+            "Prepare specific examples of community building.",
+            "Tuck interviews tend to be warm and conversational.",
+        ],
+        "interviewer_type": "alumni",
+        "dress_code": "Business casual",
+    },
+    {
+        "school_id": "haas",
+        "school_name": "UC Berkeley Haas",
+        "interview_format": "blind",
+        "typical_duration": "30 minutes",
+        "common_questions": [
+            "Tell me about yourself.",
+            "Why Haas?",
+            "How do you embody 'Question the Status Quo'?",
+            "Tell me about a time you demonstrated 'Confidence Without Attitude'.",
+            "Describe a leadership experience.",
+            "What are your short-term and long-term goals?",
+            "How would you contribute to the Haas community?",
+        ],
+        "tips": [
+            "Know Haas's four Defining Leadership Principles by heart.",
+            "Frame at least one story around each principle.",
+            "Haas values social impact and innovation — highlight relevant work.",
+            "The interview is blind — give a strong self-introduction.",
+            "Berkeley's culture is collaborative; avoid overly competitive framing.",
+        ],
+        "interviewer_type": "student",
+        "dress_code": "Business casual",
+    },
+    {
+        "school_id": "som",
+        "school_name": "Yale SOM",
+        "interview_format": "informed",
+        "typical_duration": "30 minutes",
+        "common_questions": [
+            "Why Yale SOM?",
+            "Tell me about a time you made a positive impact on an organization.",
+            "How do you approach ethical dilemmas?",
+            "Describe your leadership philosophy.",
+            "What sector do you want to work in and why?",
+            "How would you contribute to the Yale SOM community?",
+        ],
+        "tips": [
+            "Yale SOM's mission is 'educating leaders for business and society' — align to it.",
+            "Mention integrated curriculum and cross-Yale opportunities.",
+            "Social impact and purpose-driven careers resonate strongly.",
+            "Be ready to discuss ethics — SOM takes this seriously.",
+            "Interviewers are often alumni; ask about their SOM experience.",
+        ],
+        "interviewer_type": "alumni",
+        "dress_code": "Business casual",
+    },
+]
+
+
+@router.get("/alumni-interview-prep")
+def get_alumni_interview_prep(
+    school_id: str | None = Query(default=None, description="Filter by school ID"),
+):
+    """Return alumni interview prep data for top MBA programs."""
+    if school_id:
+        sid = school_id.strip().lower()
+        results = [s for s in _ALUMNI_INTERVIEW_DATA if s["school_id"] == sid]
+        if not results:
+            raise HTTPException(404, f"No interview prep data for school '{school_id}'")
+    else:
+        results = list(_ALUMNI_INTERVIEW_DATA)
+
+    return {"schools": results, "total": len(results)}
+
+
+# ── Acceptance Rate History ────────────────────────────────────────────────
+
+
+class _YearRecord(_BaseModel):
+    year: int
+    acceptance_rate: float
+    applications: int
+    class_size: int
+
+
+class _AcceptanceSchool(_BaseModel):
+    school_id: str
+    school_name: str
+    years: list[_YearRecord]
+    trend: str
+
+
+class _AcceptanceRateHistoryResponse(_BaseModel):
+    schools: list[_AcceptanceSchool]
+    total: int
+
+
+def _calc_trend(years: list[dict]) -> str:
+    """Determine trend from first to last year acceptance rate."""
+    if len(years) < 2:
+        return "stable"
+    first = years[0]["acceptance_rate"]
+    last = years[-1]["acceptance_rate"]
+    diff = last - first
+    if diff > 1.0:
+        return "up"
+    elif diff < -1.0:
+        return "down"
+    return "stable"
+
+
+_ACCEPTANCE_RATE_DATA: list[dict] = [
+    {
+        "school_id": "hbs",
+        "school_name": "Harvard Business School",
+        "years": [
+            {"year": 2022, "acceptance_rate": 11.0, "applications": 9773, "class_size": 938},
+            {"year": 2023, "acceptance_rate": 11.5, "applications": 9520, "class_size": 930},
+            {"year": 2024, "acceptance_rate": 12.0, "applications": 9304, "class_size": 935},
+            {"year": 2025, "acceptance_rate": 11.8, "applications": 9610, "class_size": 940},
+            {"year": 2026, "acceptance_rate": 11.3, "applications": 9900, "class_size": 932},
+        ],
+    },
+    {
+        "school_id": "gsb",
+        "school_name": "Stanford GSB",
+        "years": [
+            {"year": 2022, "acceptance_rate": 6.2, "applications": 7368, "class_size": 424},
+            {"year": 2023, "acceptance_rate": 6.0, "applications": 7510, "class_size": 420},
+            {"year": 2024, "acceptance_rate": 5.7, "applications": 7880, "class_size": 418},
+            {"year": 2025, "acceptance_rate": 5.5, "applications": 8100, "class_size": 421},
+            {"year": 2026, "acceptance_rate": 5.3, "applications": 8350, "class_size": 417},
+        ],
+    },
+    {
+        "school_id": "wharton",
+        "school_name": "Wharton",
+        "years": [
+            {"year": 2022, "acceptance_rate": 19.2, "applications": 7158, "class_size": 916},
+            {"year": 2023, "acceptance_rate": 18.5, "applications": 7340, "class_size": 912},
+            {"year": 2024, "acceptance_rate": 17.8, "applications": 7600, "class_size": 920},
+            {"year": 2025, "acceptance_rate": 17.2, "applications": 7850, "class_size": 918},
+            {"year": 2026, "acceptance_rate": 16.5, "applications": 8100, "class_size": 910},
+        ],
+    },
+    {
+        "school_id": "booth",
+        "school_name": "Chicago Booth",
+        "years": [
+            {"year": 2022, "acceptance_rate": 21.3, "applications": 4650, "class_size": 618},
+            {"year": 2023, "acceptance_rate": 20.8, "applications": 4800, "class_size": 620},
+            {"year": 2024, "acceptance_rate": 20.2, "applications": 4950, "class_size": 615},
+            {"year": 2025, "acceptance_rate": 19.5, "applications": 5100, "class_size": 622},
+            {"year": 2026, "acceptance_rate": 19.0, "applications": 5300, "class_size": 618},
+        ],
+    },
+    {
+        "school_id": "kellogg",
+        "school_name": "Kellogg",
+        "years": [
+            {"year": 2022, "acceptance_rate": 20.1, "applications": 4780, "class_size": 504},
+            {"year": 2023, "acceptance_rate": 19.6, "applications": 4900, "class_size": 500},
+            {"year": 2024, "acceptance_rate": 19.0, "applications": 5050, "class_size": 498},
+            {"year": 2025, "acceptance_rate": 18.5, "applications": 5200, "class_size": 502},
+            {"year": 2026, "acceptance_rate": 18.0, "applications": 5400, "class_size": 500},
+        ],
+    },
+    {
+        "school_id": "cbs",
+        "school_name": "Columbia Business School",
+        "years": [
+            {"year": 2022, "acceptance_rate": 15.5, "applications": 6100, "class_size": 776},
+            {"year": 2023, "acceptance_rate": 15.0, "applications": 6300, "class_size": 770},
+            {"year": 2024, "acceptance_rate": 14.3, "applications": 6550, "class_size": 768},
+            {"year": 2025, "acceptance_rate": 13.8, "applications": 6800, "class_size": 772},
+            {"year": 2026, "acceptance_rate": 13.2, "applications": 7050, "class_size": 765},
+        ],
+    },
+    {
+        "school_id": "sloan",
+        "school_name": "MIT Sloan",
+        "years": [
+            {"year": 2022, "acceptance_rate": 14.6, "applications": 5430, "class_size": 480},
+            {"year": 2023, "acceptance_rate": 14.0, "applications": 5600, "class_size": 475},
+            {"year": 2024, "acceptance_rate": 13.5, "applications": 5800, "class_size": 478},
+            {"year": 2025, "acceptance_rate": 13.0, "applications": 6000, "class_size": 474},
+            {"year": 2026, "acceptance_rate": 12.5, "applications": 6250, "class_size": 472},
+        ],
+    },
+    {
+        "school_id": "tuck",
+        "school_name": "Dartmouth Tuck",
+        "years": [
+            {"year": 2022, "acceptance_rate": 23.2, "applications": 2780, "class_size": 286},
+            {"year": 2023, "acceptance_rate": 22.5, "applications": 2850, "class_size": 282},
+            {"year": 2024, "acceptance_rate": 22.0, "applications": 2920, "class_size": 284},
+            {"year": 2025, "acceptance_rate": 21.5, "applications": 3000, "class_size": 280},
+            {"year": 2026, "acceptance_rate": 21.0, "applications": 3100, "class_size": 283},
+        ],
+    },
+    {
+        "school_id": "haas",
+        "school_name": "UC Berkeley Haas",
+        "years": [
+            {"year": 2022, "acceptance_rate": 17.5, "applications": 3800, "class_size": 292},
+            {"year": 2023, "acceptance_rate": 16.8, "applications": 3950, "class_size": 288},
+            {"year": 2024, "acceptance_rate": 16.2, "applications": 4100, "class_size": 290},
+            {"year": 2025, "acceptance_rate": 15.5, "applications": 4250, "class_size": 286},
+            {"year": 2026, "acceptance_rate": 15.0, "applications": 4400, "class_size": 284},
+        ],
+    },
+    {
+        "school_id": "stern",
+        "school_name": "NYU Stern",
+        "years": [
+            {"year": 2022, "acceptance_rate": 23.8, "applications": 3950, "class_size": 360},
+            {"year": 2023, "acceptance_rate": 23.0, "applications": 4100, "class_size": 356},
+            {"year": 2024, "acceptance_rate": 22.3, "applications": 4250, "class_size": 358},
+            {"year": 2025, "acceptance_rate": 21.5, "applications": 4400, "class_size": 354},
+            {"year": 2026, "acceptance_rate": 21.0, "applications": 4550, "class_size": 352},
+        ],
+    },
+    {
+        "school_id": "ross",
+        "school_name": "Michigan Ross",
+        "years": [
+            {"year": 2022, "acceptance_rate": 25.1, "applications": 3400, "class_size": 426},
+            {"year": 2023, "acceptance_rate": 24.5, "applications": 3500, "class_size": 420},
+            {"year": 2024, "acceptance_rate": 23.8, "applications": 3620, "class_size": 418},
+            {"year": 2025, "acceptance_rate": 23.2, "applications": 3750, "class_size": 422},
+            {"year": 2026, "acceptance_rate": 22.5, "applications": 3900, "class_size": 416},
+        ],
+    },
+    {
+        "school_id": "fuqua",
+        "school_name": "Duke Fuqua",
+        "years": [
+            {"year": 2022, "acceptance_rate": 22.0, "applications": 3680, "class_size": 440},
+            {"year": 2023, "acceptance_rate": 21.5, "applications": 3800, "class_size": 435},
+            {"year": 2024, "acceptance_rate": 20.8, "applications": 3950, "class_size": 438},
+            {"year": 2025, "acceptance_rate": 20.2, "applications": 4100, "class_size": 432},
+            {"year": 2026, "acceptance_rate": 19.5, "applications": 4280, "class_size": 430},
+        ],
+    },
+]
+
+# Pre-compute trends
+for _school_entry in _ACCEPTANCE_RATE_DATA:
+    _school_entry["trend"] = _calc_trend(_school_entry["years"])
+
+
+@router.get("/acceptance-rate-history")
+def get_acceptance_rate_history(
+    school_id: str | None = Query(default=None, description="Comma-separated school IDs"),
+):
+    """Return 5-year acceptance rate history for top MBA programs."""
+    if school_id:
+        ids = [s.strip().lower() for s in school_id.split(",") if s.strip()]
+        results = [s for s in _ACCEPTANCE_RATE_DATA if s["school_id"] in ids]
+        if not results:
+            raise HTTPException(404, f"No acceptance rate data for: {school_id}")
+    else:
+        results = list(_ACCEPTANCE_RATE_DATA)
+
+    return {"schools": results, "total": len(results)}
