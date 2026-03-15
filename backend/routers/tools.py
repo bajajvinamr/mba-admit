@@ -195,3 +195,131 @@ def get_decision_stats():
         "avg_gmat": round(sum(gmat_scores) / len(gmat_scores)) if gmat_scores else None,
         "avg_gpa": round(sum(gpa_scores) / len(gpa_scores), 2) if gpa_scores else None,
     }
+
+
+# ── Admission Chances Calculator ──────────────────────────────────────────
+
+from models import ChancesRequest
+
+_ADMIT_STATUSES = {"Admitted", "Matriculating", "Admitted from WL"}
+_DENY_STATUSES = {"Denied without Interview", "Denied with Interview"}
+
+
+def _is_admitted(status: str) -> bool:
+    """Check if a decision status counts as admitted (including scholarship tiers)."""
+    for s in _ADMIT_STATUSES:
+        if status.startswith(s):
+            return True
+    return False
+
+
+def _is_denied(status: str) -> bool:
+    return any(status.startswith(s) for s in _DENY_STATUSES)
+
+
+@router.post("/decisions/chances")
+def compute_chances(req: ChancesRequest):
+    """Compute admission probability per school based on similar profiles in 12K real decisions.
+
+    Uses a similarity window approach: finds applicants with similar GMAT (±30),
+    GPA (±0.3), and work experience (±2 years), then computes admit rate.
+    """
+    data = load_gmatclub_data()
+
+    # Filter to requested schools if specified
+    if req.school_ids:
+        school_set = set(req.school_ids)
+        data = [d for d in data if d.get("school_id") in school_set]
+
+    # Find similar profiles
+    GMAT_WINDOW = 30
+    GPA_WINDOW = 0.3
+    YOE_WINDOW = 2
+
+    def is_similar(d: dict) -> bool:
+        if req.gmat is not None:
+            d_gmat = d.get("gmat_focus") or d.get("gmat")
+            if d_gmat is None:
+                return False
+            if abs(d_gmat - req.gmat) > GMAT_WINDOW:
+                return False
+        if req.gpa is not None:
+            d_gpa = d.get("gpa")
+            if d_gpa is None:
+                return False
+            if abs(d_gpa - req.gpa) > GPA_WINDOW:
+                return False
+        if req.work_exp_years is not None:
+            d_yoe = d.get("yoe")
+            if d_yoe is None:
+                return False
+            if abs(d_yoe - req.work_exp_years) > YOE_WINDOW:
+                return False
+        if req.industry is not None:
+            d_ind = (d.get("industry") or "").lower()
+            if req.industry.lower() not in d_ind:
+                return False
+        return True
+
+    similar = [d for d in data if is_similar(d)]
+
+    # Group by school
+    from collections import defaultdict
+    school_groups: dict[str, list] = defaultdict(list)
+    for d in similar:
+        school_groups[d.get("school_id", "")].append(d)
+
+    results = []
+    for sid, decisions in sorted(school_groups.items(), key=lambda x: -len(x[1])):
+        admitted = sum(1 for d in decisions if _is_admitted(d.get("status", "")))
+        denied = sum(1 for d in decisions if _is_denied(d.get("status", "")))
+        total_resolved = admitted + denied
+        if total_resolved == 0:
+            continue
+
+        admit_rate = round(admitted / total_resolved * 100, 1)
+
+        # GMAT distribution of admitted applicants
+        admitted_gmats = [
+            d.get("gmat_focus") or d.get("gmat")
+            for d in decisions
+            if _is_admitted(d.get("status", "")) and (d.get("gmat_focus") or d.get("gmat"))
+        ]
+        admitted_gpas = [
+            d["gpa"] for d in decisions
+            if _is_admitted(d.get("status", "")) and d.get("gpa")
+        ]
+
+        # Scholarship rate among admitted
+        scholarship_decisions = [
+            d for d in decisions
+            if d.get("status", "").startswith("Admitted") and "($" in d.get("status", "")
+        ]
+        scholarship_rate = round(len(scholarship_decisions) / admitted * 100, 1) if admitted > 0 else 0
+
+        school = SCHOOL_DB.get(sid, {})
+        results.append({
+            "school_id": sid,
+            "school_name": school.get("name", sid),
+            "sample_size": len(decisions),
+            "admitted": admitted,
+            "denied": denied,
+            "admit_rate": admit_rate,
+            "confidence": "high" if total_resolved >= 20 else "medium" if total_resolved >= 8 else "low",
+            "avg_gmat_admitted": round(sum(admitted_gmats) / len(admitted_gmats)) if admitted_gmats else None,
+            "avg_gpa_admitted": round(sum(admitted_gpas) / len(admitted_gpas), 2) if admitted_gpas else None,
+            "scholarship_rate": scholarship_rate,
+        })
+
+    results.sort(key=lambda x: -x["admit_rate"])
+
+    return {
+        "profile": {
+            "gmat": req.gmat,
+            "gpa": req.gpa,
+            "work_exp_years": req.work_exp_years,
+            "industry": req.industry,
+        },
+        "total_similar_profiles": len(similar),
+        "schools": results,
+    }

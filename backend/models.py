@@ -236,3 +236,13 @@ class FinancialCompareRequest(BaseModel):
     work_exp_years: Optional[int] = Field(default=None, ge=0, le=30)
     loan_rate: float = Field(default=7.0, ge=0, le=30)
     loan_term_years: int = Field(default=10, ge=1, le=30)
+
+
+# ── Admission Chances ──────────────────────────────────────────────────────
+
+class ChancesRequest(BaseModel):
+    gmat: Optional[int] = Field(default=None, ge=200, le=800)
+    gpa: Optional[float] = Field(default=None, ge=0.0, le=4.0)
+    work_exp_years: Optional[int] = Field(default=None, ge=0, le=30)
+    industry: Optional[str] = None
+    school_ids: Optional[List[str]] = Field(default=None, max_length=10)
