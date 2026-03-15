@@ -4102,3 +4102,430 @@ def get_school_news(
         return {"news": items, "total": len(items)}
 
     return {"news": _SCHOOL_NEWS, "total": len(_SCHOOL_NEWS)}
+
+
+# ── Dual Degree Explorer ─────────────────────────────────────────────
+
+_DUAL_DEGREE_PROGRAMS = [
+    {
+        "school_id": "hbs",
+        "school_name": "Harvard Business School",
+        "partner_school": "Harvard Law School",
+        "degree_combo": "MBA/JD",
+        "duration": "4 years",
+        "typical_applicants": "Students interested in corporate law, private equity, venture capital, or policy.",
+        "unique_benefits": "Access to both HBS and HLS networks; joint career services; strong placement in PE/VC.",
+    },
+    {
+        "school_id": "hbs",
+        "school_name": "Harvard Business School",
+        "partner_school": "Harvard Kennedy School",
+        "degree_combo": "MBA/MPP",
+        "duration": "3 years",
+        "typical_applicants": "Future public sector leaders, policy entrepreneurs, and social impact professionals.",
+        "unique_benefits": "Combines analytical rigor of HBS with policy depth; strong government and nonprofit placement.",
+    },
+    {
+        "school_id": "hbs",
+        "school_name": "Harvard Business School",
+        "partner_school": "Harvard Medical School",
+        "degree_combo": "MBA/MD",
+        "duration": "5 years",
+        "typical_applicants": "Physician-leaders pursuing healthcare administration, biotech, or med-tech startups.",
+        "unique_benefits": "Unique physician-executive training; access to Harvard's health system and innovation labs.",
+    },
+    {
+        "school_id": "gsb",
+        "school_name": "Stanford GSB",
+        "partner_school": "Stanford School of Engineering",
+        "degree_combo": "MBA/MS",
+        "duration": "3 years",
+        "typical_applicants": "Tech founders, product managers, and engineers seeking business acumen.",
+        "unique_benefits": "Silicon Valley network; access to Stanford's engineering labs and CS faculty.",
+    },
+    {
+        "school_id": "gsb",
+        "school_name": "Stanford GSB",
+        "partner_school": "Stanford Law School",
+        "degree_combo": "MBA/JD",
+        "duration": "4 years",
+        "typical_applicants": "Aspiring tech lawyers, venture capitalists, and startup founders with legal interests.",
+        "unique_benefits": "Premier West Coast legal-business network; strong VC and tech law placement.",
+    },
+    {
+        "school_id": "wharton",
+        "school_name": "Wharton",
+        "partner_school": "Penn Law",
+        "degree_combo": "MBA/JD",
+        "duration": "3.5 years",
+        "typical_applicants": "Future M&A lawyers, corporate counsels, and finance-law professionals.",
+        "unique_benefits": "One of the oldest JD/MBA programs; strong Wall Street and BigLaw placement.",
+    },
+    {
+        "school_id": "wharton",
+        "school_name": "Wharton",
+        "partner_school": "Penn Engineering",
+        "degree_combo": "MBA/MS",
+        "duration": "2.5 years",
+        "typical_applicants": "Tech professionals seeking quantitative and business leadership skills.",
+        "unique_benefits": "Integrated curriculum combining Wharton analytics with Penn Engineering depth.",
+    },
+    {
+        "school_id": "cbs",
+        "school_name": "Columbia Business School",
+        "partner_school": "Columbia Law School",
+        "degree_combo": "MBA/JD",
+        "duration": "4 years",
+        "typical_applicants": "NYC-focused professionals in corporate law, media, and financial regulation.",
+        "unique_benefits": "NYC location premium; strong placement in media, entertainment law, and Wall Street.",
+    },
+    {
+        "school_id": "cbs",
+        "school_name": "Columbia Business School",
+        "partner_school": "SIPA (Columbia)",
+        "degree_combo": "MBA/MPA",
+        "duration": "3 years",
+        "typical_applicants": "International development professionals and aspiring policy leaders.",
+        "unique_benefits": "UN proximity; global development network; strong international placement.",
+    },
+    {
+        "school_id": "kellogg",
+        "school_name": "Kellogg",
+        "partner_school": "Northwestern Pritzker School of Law",
+        "degree_combo": "MBA/JD",
+        "duration": "3.5 years",
+        "typical_applicants": "Corporate strategy professionals interested in law, governance, and compliance.",
+        "unique_benefits": "Collaborative culture across schools; strong Chicago corporate placement.",
+    },
+    {
+        "school_id": "kellogg",
+        "school_name": "Kellogg",
+        "partner_school": "Northwestern McCormick School of Engineering",
+        "degree_combo": "MBA/MS",
+        "duration": "2.5 years",
+        "typical_applicants": "Engineers transitioning to product management, tech strategy, or operations.",
+        "unique_benefits": "Design thinking integration; access to MMM (Manufacturing & Management) program resources.",
+    },
+    {
+        "school_id": "booth",
+        "school_name": "Chicago Booth",
+        "partner_school": "University of Chicago Law School",
+        "degree_combo": "MBA/JD",
+        "duration": "4 years",
+        "typical_applicants": "Analytically minded professionals pursuing law and economics, antitrust, or policy.",
+        "unique_benefits": "Economics-rooted approach to both law and business; top placement in consulting and law.",
+    },
+    {
+        "school_id": "booth",
+        "school_name": "Chicago Booth",
+        "partner_school": "Pritzker School of Medicine",
+        "degree_combo": "MBA/MD",
+        "duration": "5 years",
+        "typical_applicants": "Future healthcare executives, biotech entrepreneurs, and health policy leaders.",
+        "unique_benefits": "Strong quantitative training combined with clinical experience; Chicago's health sector access.",
+    },
+    {
+        "school_id": "sloan",
+        "school_name": "MIT Sloan",
+        "partner_school": "MIT School of Engineering",
+        "degree_combo": "MBA/MS",
+        "duration": "2.5 years",
+        "typical_applicants": "Deep-tech founders, AI/ML professionals, and hardware entrepreneurs.",
+        "unique_benefits": "Unmatched engineering integration; MIT Media Lab and CSAIL access; strong in robotics and AI.",
+    },
+    {
+        "school_id": "sloan",
+        "school_name": "MIT Sloan",
+        "partner_school": "Harvard Kennedy School",
+        "degree_combo": "MBA/MPP",
+        "duration": "3 years",
+        "typical_applicants": "Tech policy professionals, civic tech entrepreneurs, and government innovators.",
+        "unique_benefits": "Cross-registration between MIT and Harvard; unique tech-policy intersection.",
+    },
+    {
+        "school_id": "haas",
+        "school_name": "UC Berkeley Haas",
+        "partner_school": "UC Berkeley School of Public Health",
+        "degree_combo": "MBA/MPH",
+        "duration": "3 years",
+        "typical_applicants": "Health-tech founders, global health leaders, and biotech executives.",
+        "unique_benefits": "Bay Area biotech ecosystem; strong public health research; access to UCSF network.",
+    },
+    {
+        "school_id": "tuck",
+        "school_name": "Dartmouth Tuck",
+        "partner_school": "Thayer School of Engineering",
+        "degree_combo": "MBA/MS",
+        "duration": "2.5 years",
+        "typical_applicants": "Engineers seeking general management roles in manufacturing or tech.",
+        "unique_benefits": "Small, tight-knit cohort; strong alumni loyalty; integrated curriculum.",
+    },
+]
+
+_DEGREE_TYPE_MAP = {
+    "JD": "JD",
+    "MD": "MD",
+    "MPP": "MPP",
+    "MPA": "MPP",
+    "MS": "MS",
+    "PhD": "PhD",
+    "MPH": "MPH",
+}
+
+
+@router.get("/dual-degrees")
+def get_dual_degrees(
+    school_id: str | None = Query(default=None, description="Filter by school ID"),
+    degree_type: str | None = Query(default=None, description="Filter by degree type: JD, MD, MPP, MS, PhD"),
+):
+    """Return dual degree programs offered at top MBA schools."""
+    results = list(_DUAL_DEGREE_PROGRAMS)
+
+    if school_id:
+        sid = school_id.strip().lower()
+        results = [p for p in results if p["school_id"] == sid]
+
+    if degree_type:
+        dt = degree_type.strip().upper()
+        results = [p for p in results if dt in p["degree_combo"].upper()]
+
+    return {"programs": results, "total": len(results)}
+
+
+# ── Class Size Comparison ────────────────────────────────────────────
+
+_CLASS_SIZE_DATA = [
+    {"school_id": "hbs", "school_name": "Harvard Business School", "class_size": 930, "sections": 10, "avg_section_size": 93, "student_faculty_ratio": 5.2, "international_pct": 37},
+    {"school_id": "gsb", "school_name": "Stanford GSB", "class_size": 424, "sections": 8, "avg_section_size": 53, "student_faculty_ratio": 4.1, "international_pct": 41},
+    {"school_id": "wharton", "school_name": "Wharton", "class_size": 918, "sections": 12, "avg_section_size": 77, "student_faculty_ratio": 5.0, "international_pct": 33},
+    {"school_id": "booth", "school_name": "Chicago Booth", "class_size": 614, "sections": 0, "avg_section_size": 0, "student_faculty_ratio": 5.8, "international_pct": 36},
+    {"school_id": "kellogg", "school_name": "Kellogg", "class_size": 504, "sections": 6, "avg_section_size": 84, "student_faculty_ratio": 5.5, "international_pct": 37},
+    {"school_id": "cbs", "school_name": "Columbia Business School", "class_size": 850, "sections": 8, "avg_section_size": 106, "student_faculty_ratio": 6.0, "international_pct": 48},
+    {"school_id": "sloan", "school_name": "MIT Sloan", "class_size": 480, "sections": 6, "avg_section_size": 80, "student_faculty_ratio": 4.5, "international_pct": 42},
+    {"school_id": "tuck", "school_name": "Dartmouth Tuck", "class_size": 295, "sections": 4, "avg_section_size": 74, "student_faculty_ratio": 4.0, "international_pct": 36},
+    {"school_id": "haas", "school_name": "UC Berkeley Haas", "class_size": 291, "sections": 4, "avg_section_size": 73, "student_faculty_ratio": 4.8, "international_pct": 40},
+    {"school_id": "ross", "school_name": "Michigan Ross", "class_size": 425, "sections": 6, "avg_section_size": 71, "student_faculty_ratio": 5.3, "international_pct": 34},
+    {"school_id": "fuqua", "school_name": "Duke Fuqua", "class_size": 440, "sections": 6, "avg_section_size": 73, "student_faculty_ratio": 5.0, "international_pct": 39},
+    {"school_id": "darden", "school_name": "UVA Darden", "class_size": 345, "sections": 5, "avg_section_size": 69, "student_faculty_ratio": 4.2, "international_pct": 35},
+    {"school_id": "stern", "school_name": "NYU Stern", "class_size": 392, "sections": 6, "avg_section_size": 65, "student_faculty_ratio": 5.6, "international_pct": 42},
+    {"school_id": "anderson", "school_name": "UCLA Anderson", "class_size": 360, "sections": 5, "avg_section_size": 72, "student_faculty_ratio": 5.1, "international_pct": 33},
+    {"school_id": "johnson", "school_name": "Cornell Johnson", "class_size": 290, "sections": 4, "avg_section_size": 73, "student_faculty_ratio": 4.9, "international_pct": 31},
+    {"school_id": "tepper", "school_name": "CMU Tepper", "class_size": 220, "sections": 4, "avg_section_size": 55, "student_faculty_ratio": 4.3, "international_pct": 44},
+    {"school_id": "mcdonough", "school_name": "Georgetown McDonough", "class_size": 260, "sections": 4, "avg_section_size": 65, "student_faculty_ratio": 5.4, "international_pct": 38},
+    {"school_id": "marshall", "school_name": "USC Marshall", "class_size": 230, "sections": 4, "avg_section_size": 58, "student_faculty_ratio": 5.2, "international_pct": 35},
+]
+
+_VALID_SORT_FIELDS = {"class_size", "school_name", "avg_section_size", "student_faculty_ratio", "international_pct", "sections"}
+
+
+@router.get("/class-size")
+def get_class_size(
+    sort_by: str = Query(default="class_size", description="Sort field: class_size, school_name, avg_section_size, student_faculty_ratio, international_pct"),
+):
+    """Return class size data for tracked MBA schools."""
+    key = sort_by.strip().lower()
+    if key not in _VALID_SORT_FIELDS:
+        raise HTTPException(400, f"Invalid sort_by '{sort_by}'. Options: {', '.join(sorted(_VALID_SORT_FIELDS))}")
+
+    reverse = key != "school_name"
+    sorted_data = sorted(_CLASS_SIZE_DATA, key=lambda s: s.get(key, 0), reverse=reverse)
+
+    return {"schools": sorted_data, "total": len(sorted_data), "sorted_by": key}
+
+
+# ── Post-MBA Location Guide ─────────────────────────────────────────
+
+_POST_MBA_LOCATIONS = [
+    {
+        "city": "New York City",
+        "country": "United States",
+        "top_industries": ["Finance", "Consulting", "Media", "Tech"],
+        "avg_mba_salary": 185000,
+        "cost_of_living_index": 187,
+        "quality_of_life_score": 7.2,
+        "visa_friendliness": "Moderate — H-1B lottery required; OPT available for recent grads.",
+        "top_employers": ["Goldman Sachs", "McKinsey", "JPMorgan", "Google", "Amazon"],
+        "feeder_schools": ["Columbia", "Wharton", "NYU Stern", "Harvard", "Booth"],
+    },
+    {
+        "city": "San Francisco",
+        "country": "United States",
+        "top_industries": ["Tech", "Venture Capital", "Startups", "Biotech"],
+        "avg_mba_salary": 195000,
+        "cost_of_living_index": 179,
+        "quality_of_life_score": 7.8,
+        "visa_friendliness": "Moderate — H-1B lottery; tech companies sponsor frequently.",
+        "top_employers": ["Google", "Meta", "Apple", "Salesforce", "Sequoia Capital"],
+        "feeder_schools": ["Stanford", "Haas", "Wharton", "Booth", "Kellogg"],
+    },
+    {
+        "city": "London",
+        "country": "United Kingdom",
+        "top_industries": ["Finance", "Consulting", "Private Equity", "Fintech"],
+        "avg_mba_salary": 135000,
+        "cost_of_living_index": 152,
+        "quality_of_life_score": 7.5,
+        "visa_friendliness": "Good — Graduate visa (2 years) for UK MBA grads; Skilled Worker visa for jobs.",
+        "top_employers": ["McKinsey", "Goldman Sachs", "Bain", "Revolut", "Barclays"],
+        "feeder_schools": ["LBS", "INSEAD", "Oxford Said", "Cambridge Judge", "Harvard"],
+    },
+    {
+        "city": "Singapore",
+        "country": "Singapore",
+        "top_industries": ["Finance", "Consulting", "Tech", "Private Equity"],
+        "avg_mba_salary": 120000,
+        "cost_of_living_index": 134,
+        "quality_of_life_score": 8.3,
+        "visa_friendliness": "Very Good — Employment Pass is straightforward for MBA grads; low rejection rate.",
+        "top_employers": ["DBS", "GIC", "Temasek", "BCG", "Grab"],
+        "feeder_schools": ["INSEAD", "NUS", "Booth", "Wharton", "Kellogg"],
+    },
+    {
+        "city": "Dubai",
+        "country": "UAE",
+        "top_industries": ["Finance", "Consulting", "Real Estate", "Energy"],
+        "avg_mba_salary": 115000,
+        "cost_of_living_index": 112,
+        "quality_of_life_score": 7.6,
+        "visa_friendliness": "Excellent — Employer-sponsored work visa; no income tax; golden visa available.",
+        "top_employers": ["McKinsey", "Emirates NBD", "Mubadala", "BCG", "ADNOC"],
+        "feeder_schools": ["INSEAD", "LBS", "Booth", "Wharton", "Kellogg"],
+    },
+    {
+        "city": "Chicago",
+        "country": "United States",
+        "top_industries": ["Consulting", "Finance", "CPG", "Healthcare"],
+        "avg_mba_salary": 170000,
+        "cost_of_living_index": 107,
+        "quality_of_life_score": 7.0,
+        "visa_friendliness": "Moderate — H-1B lottery; strong employer sponsorship in consulting.",
+        "top_employers": ["McKinsey", "BCG", "Abbott", "Boeing", "Citadel"],
+        "feeder_schools": ["Booth", "Kellogg", "Ross", "Harvard", "Wharton"],
+    },
+    {
+        "city": "Los Angeles",
+        "country": "United States",
+        "top_industries": ["Entertainment", "Tech", "Healthcare", "Real Estate"],
+        "avg_mba_salary": 165000,
+        "cost_of_living_index": 146,
+        "quality_of_life_score": 7.4,
+        "visa_friendliness": "Moderate — H-1B lottery; entertainment and tech industries sponsor.",
+        "top_employers": ["Disney", "Netflix", "SpaceX", "BCG", "CBRE"],
+        "feeder_schools": ["Anderson", "Marshall", "Stanford", "Haas", "Wharton"],
+    },
+    {
+        "city": "Boston",
+        "country": "United States",
+        "top_industries": ["Consulting", "Biotech", "Finance", "Education/Tech"],
+        "avg_mba_salary": 175000,
+        "cost_of_living_index": 152,
+        "quality_of_life_score": 7.3,
+        "visa_friendliness": "Moderate — H-1B lottery; strong biotech and consulting sponsorship.",
+        "top_employers": ["Bain", "BCG", "Fidelity", "Moderna", "HubSpot"],
+        "feeder_schools": ["Harvard", "MIT Sloan", "Tuck", "Yale SOM", "Wharton"],
+    },
+    {
+        "city": "Hong Kong",
+        "country": "China (SAR)",
+        "top_industries": ["Finance", "Private Equity", "Consulting", "Real Estate"],
+        "avg_mba_salary": 125000,
+        "cost_of_living_index": 143,
+        "quality_of_life_score": 6.8,
+        "visa_friendliness": "Good — IANG visa for graduates; relatively easy employer sponsorship.",
+        "top_employers": ["Goldman Sachs", "HSBC", "McKinsey", "Bain", "KKR"],
+        "feeder_schools": ["HKUST", "INSEAD", "Booth", "Wharton", "LBS"],
+    },
+    {
+        "city": "Mumbai",
+        "country": "India",
+        "top_industries": ["Finance", "Consulting", "Tech", "Consumer Goods"],
+        "avg_mba_salary": 75000,
+        "cost_of_living_index": 46,
+        "quality_of_life_score": 5.8,
+        "visa_friendliness": "Challenging — Employment visa requires sponsorship; slow processing.",
+        "top_employers": ["McKinsey", "Reliance", "Tata", "BCG", "HDFC"],
+        "feeder_schools": ["ISB", "IIM Ahmedabad", "IIM Bangalore", "XLRI", "Harvard"],
+    },
+    {
+        "city": "Shanghai",
+        "country": "China",
+        "top_industries": ["Finance", "Tech", "Manufacturing", "Consumer"],
+        "avg_mba_salary": 95000,
+        "cost_of_living_index": 85,
+        "quality_of_life_score": 6.5,
+        "visa_friendliness": "Moderate — Z-visa required; employer must sponsor; improving for STEM talent.",
+        "top_employers": ["Alibaba", "Tencent", "McKinsey", "CICC", "ByteDance"],
+        "feeder_schools": ["CEIBS", "INSEAD", "Booth", "Wharton", "Kellogg"],
+    },
+]
+
+
+@router.get("/post-mba-locations")
+def get_post_mba_locations(
+    sort_by: str = Query(default="avg_mba_salary", description="Sort field: avg_mba_salary, cost_of_living_index, quality_of_life_score, city"),
+):
+    """Return data on popular post-MBA cities worldwide."""
+    valid = {"avg_mba_salary", "cost_of_living_index", "quality_of_life_score", "city"}
+    key = sort_by.strip().lower()
+    if key not in valid:
+        raise HTTPException(400, f"Invalid sort_by '{sort_by}'. Options: {', '.join(sorted(valid))}")
+
+    reverse = key != "city"
+    sorted_data = sorted(_POST_MBA_LOCATIONS, key=lambda c: c.get(key, 0) if key != "city" else c["city"], reverse=reverse)
+
+    return {"locations": sorted_data, "total": len(sorted_data), "sorted_by": key}
+
+
+# ── MBA Concentration Finder ────────────────────────────────────────
+
+_CONCENTRATIONS = [
+    {"school_id": "hbs", "school_name": "Harvard Business School", "concentration_name": "Finance", "field": "finance", "courses_required": 5, "notable_faculty": "Mihir Desai, Victoria Ivashina", "career_outcomes": "Investment banking, private equity, corporate finance at top-tier firms."},
+    {"school_id": "hbs", "school_name": "Harvard Business School", "concentration_name": "Entrepreneurship", "field": "entrepreneurship", "courses_required": 4, "notable_faculty": "Tom Eisenmann, Jeffrey Bussgang", "career_outcomes": "Startup founding, venture capital, corporate innovation."},
+    {"school_id": "hbs", "school_name": "Harvard Business School", "concentration_name": "Social Enterprise", "field": "social_impact", "courses_required": 4, "notable_faculty": "Dutch Leonard, Allen Grossman", "career_outcomes": "Nonprofit leadership, impact investing, social venture founding."},
+    {"school_id": "gsb", "school_name": "Stanford GSB", "concentration_name": "Strategic Management", "field": "consulting", "courses_required": 4, "notable_faculty": "Robert Burgelman, Jesper Sorensen", "career_outcomes": "Strategy consulting, corporate development, CEO/COO roles."},
+    {"school_id": "gsb", "school_name": "Stanford GSB", "concentration_name": "Finance", "field": "finance", "courses_required": 5, "notable_faculty": "Jonathan Berk, Peter DeMarzo", "career_outcomes": "Venture capital, hedge funds, fintech startups."},
+    {"school_id": "gsb", "school_name": "Stanford GSB", "concentration_name": "Entrepreneurship & Innovation", "field": "entrepreneurship", "courses_required": 4, "notable_faculty": "Chuck Eesley, Ilya Strebulaev", "career_outcomes": "Tech startup founding, product management, venture capital."},
+    {"school_id": "wharton", "school_name": "Wharton", "concentration_name": "Finance", "field": "finance", "courses_required": 4, "notable_faculty": "Jeremy Siegel, Itay Goldstein", "career_outcomes": "Investment banking, private equity, quantitative finance."},
+    {"school_id": "wharton", "school_name": "Wharton", "concentration_name": "Marketing", "field": "marketing", "courses_required": 4, "notable_faculty": "Jonah Berger, Peter Fader", "career_outcomes": "Brand management, digital marketing leadership, CMO track."},
+    {"school_id": "wharton", "school_name": "Wharton", "concentration_name": "Health Care Management", "field": "healthcare", "courses_required": 4, "notable_faculty": "Mark Pauly, Lawton Burns", "career_outcomes": "Hospital administration, pharma strategy, health-tech ventures."},
+    {"school_id": "wharton", "school_name": "Wharton", "concentration_name": "Operations, Information and Decisions", "field": "operations", "courses_required": 4, "notable_faculty": "Morris Cohen, Christian Terwiesch", "career_outcomes": "Supply chain leadership, operations consulting, tech operations."},
+    {"school_id": "booth", "school_name": "Chicago Booth", "concentration_name": "Analytic Finance", "field": "finance", "courses_required": 5, "notable_faculty": "John Cochrane, Raghuram Rajan", "career_outcomes": "Quantitative trading, hedge funds, asset management."},
+    {"school_id": "booth", "school_name": "Chicago Booth", "concentration_name": "Entrepreneurship", "field": "entrepreneurship", "courses_required": 4, "notable_faculty": "Steve Kaplan, Waverly Deutsch", "career_outcomes": "Startup founding, venture capital, private equity."},
+    {"school_id": "booth", "school_name": "Chicago Booth", "concentration_name": "Marketing Management", "field": "marketing", "courses_required": 4, "notable_faculty": "Jean-Pierre Dube, Pradeep Chintagunta", "career_outcomes": "Data-driven marketing, CPG brand strategy, ad-tech."},
+    {"school_id": "kellogg", "school_name": "Kellogg", "concentration_name": "Marketing", "field": "marketing", "courses_required": 4, "notable_faculty": "Philip Kotler, Lakshman Krishnamurthi", "career_outcomes": "Brand strategy, consumer insights, marketing analytics leadership."},
+    {"school_id": "kellogg", "school_name": "Kellogg", "concentration_name": "Management & Organizations", "field": "consulting", "courses_required": 4, "notable_faculty": "Brian Uzzi, Adam Galinsky", "career_outcomes": "Management consulting, organizational transformation, leadership."},
+    {"school_id": "kellogg", "school_name": "Kellogg", "concentration_name": "Social Impact", "field": "social_impact", "courses_required": 3, "notable_faculty": "Megan Kashner, William Ocasio", "career_outcomes": "Social enterprise leadership, ESG consulting, impact measurement."},
+    {"school_id": "cbs", "school_name": "Columbia Business School", "concentration_name": "Finance & Economics", "field": "finance", "courses_required": 5, "notable_faculty": "Tano Santos, Patrick Bolton", "career_outcomes": "Investment banking, hedge funds, Wall Street trading desks."},
+    {"school_id": "cbs", "school_name": "Columbia Business School", "concentration_name": "Media, Technology & Entrepreneurship", "field": "tech", "courses_required": 4, "notable_faculty": "Oded Netzer, Michael Woodford", "career_outcomes": "Media-tech leadership, digital product management, startup founding."},
+    {"school_id": "sloan", "school_name": "MIT Sloan", "concentration_name": "Finance", "field": "finance", "courses_required": 4, "notable_faculty": "Andrew Lo, Antoinette Schoar", "career_outcomes": "Fintech, quantitative finance, venture capital."},
+    {"school_id": "sloan", "school_name": "MIT Sloan", "concentration_name": "Technological Innovation, Entrepreneurship, and Strategic Management", "field": "tech", "courses_required": 5, "notable_faculty": "Fiona Murray, Scott Stern", "career_outcomes": "Deep-tech founding, AI/ML product leadership, tech consulting."},
+    {"school_id": "sloan", "school_name": "MIT Sloan", "concentration_name": "Operations Management", "field": "operations", "courses_required": 4, "notable_faculty": "Georgia Perakis, Retsef Levi", "career_outcomes": "Supply chain optimization, operations consulting, logistics tech."},
+    {"school_id": "haas", "school_name": "UC Berkeley Haas", "concentration_name": "Healthcare", "field": "healthcare", "courses_required": 3, "notable_faculty": "Brent Fulton, James Robinson", "career_outcomes": "Health-tech ventures, biotech commercialization, hospital strategy."},
+    {"school_id": "haas", "school_name": "UC Berkeley Haas", "concentration_name": "Social Impact", "field": "social_impact", "courses_required": 3, "notable_faculty": "Laura Tyson, Catherine Wolfram", "career_outcomes": "Impact investing, cleantech, social enterprise leadership."},
+    {"school_id": "tuck", "school_name": "Dartmouth Tuck", "concentration_name": "Healthcare", "field": "healthcare", "courses_required": 3, "notable_faculty": "Erin Sullivan, Phillip Phan", "career_outcomes": "Pharma management, health-tech, hospital administration."},
+    {"school_id": "ross", "school_name": "Michigan Ross", "concentration_name": "Technology & Operations", "field": "tech", "courses_required": 4, "notable_faculty": "M.S. Krishnan, Ravi Anupindi", "career_outcomes": "Tech strategy, digital transformation, product management."},
+    {"school_id": "fuqua", "school_name": "Duke Fuqua", "concentration_name": "Health Sector Management", "field": "healthcare", "courses_required": 4, "notable_faculty": "David Ridley, Kevin Schulman", "career_outcomes": "Healthcare consulting, pharma strategy, biotech commercialization."},
+]
+
+_VALID_FIELDS = {"finance", "tech", "consulting", "marketing", "healthcare", "social_impact", "entrepreneurship", "operations"}
+
+
+@router.get("/concentrations")
+def get_concentrations(
+    school_id: str | None = Query(default=None, description="Filter by school ID"),
+    field: str | None = Query(default=None, description="Filter by field: finance, tech, consulting, marketing, healthcare, social_impact, entrepreneurship, operations"),
+):
+    """Return MBA concentrations/majors at top schools."""
+    results = list(_CONCENTRATIONS)
+
+    if school_id:
+        sid = school_id.strip().lower()
+        results = [c for c in results if c["school_id"] == sid]
+
+    if field:
+        f = field.strip().lower()
+        if f not in _VALID_FIELDS:
+            raise HTTPException(400, f"Invalid field '{field}'. Options: {', '.join(sorted(_VALID_FIELDS))}")
+        results = [c for c in results if c["field"] == f]
+
+    return {"concentrations": results, "total": len(results)}
