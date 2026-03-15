@@ -114,6 +114,97 @@ def geo_meta():
     }
 
 
+# ── Class Profile Comparison ──────────────────────────────────────────────
+
+@router.get("/schools/class-profile")
+def get_class_profiles(school_ids: str = Query(description="Comma-separated school IDs")):
+    """Compare class profile data across schools."""
+    ids = [s.strip() for s in school_ids.split(",") if s.strip()]
+    if not ids:
+        raise HTTPException(400, "Provide at least one school_id")
+
+    profiles = []
+    for sid in ids:
+        sid_lower = sid.lower()
+        school = SCHOOL_DB.get(sid_lower) or SCHOOL_DB.get(SCHOOL_ALIASES.get(sid_lower, ""))
+        if not school:
+            continue
+
+        prog = school.get("program_details", {}) or {}
+        cp = school.get("class_profile", {}) or {}
+        placement = school.get("placement_stats", {}) or {}
+
+        profiles.append({
+            "school_id": sid_lower,
+            "school_name": school.get("name", sid),
+            "class_size": prog.get("class_size") or school.get("class_size", 0),
+            "avg_age": prog.get("avg_age") or cp.get("avg_age"),
+            "female_pct": prog.get("female_percentage") or cp.get("female_pct"),
+            "international_pct": prog.get("international_percentage") or cp.get("international_pct"),
+            "countries_represented": prog.get("countries_represented") or cp.get("countries"),
+            "avg_gmat": school.get("gmat_avg"),
+            "avg_gpa": cp.get("avg_gpa"),
+            "avg_work_exp": prog.get("avg_work_experience") or cp.get("avg_work_exp"),
+            "acceptance_rate": school.get("acceptance_rate"),
+            "median_salary": school.get("median_salary"),
+            "stem_designated": school.get("stem_designated", False),
+            "employment_rate": (placement.get("employment_rate_3mo_pct")
+                                or placement.get("employment_rate_3_months")),
+        })
+
+    return {
+        "profiles": profiles,
+        "school_count": len(profiles),
+    }
+
+
+# ── GMAT Score Targets ─────────────────────────────────────────────────
+
+@router.get("/schools/gmat-targets")
+def get_gmat_targets():
+    """Get GMAT score targets for top schools, grouped by tier."""
+    tiers: dict = {"M7": [], "T15": [], "T25": [], "Other": []}
+
+    M7_IDS = {"hbs", "gsb", "wharton", "booth", "kellogg", "cbs", "sloan"}
+    T15_IDS = {"tuck", "haas", "ross", "fuqua", "darden", "stern", "yale-som", "johnson"}
+    T25_IDS = {"anderson", "tepper", "kenan-flagler", "mccombs", "marshall",
+               "georgetown-mcdonough", "goizueta", "kelley", "olin", "foster"}
+
+    for sid, school in SCHOOL_DB.items():
+        gmat = school.get("gmat_avg")
+        if not gmat or not isinstance(gmat, (int, float)):
+            continue
+
+        entry = {
+            "school_id": sid,
+            "school_name": school.get("name", sid),
+            "gmat_avg": gmat,
+            "acceptance_rate": school.get("acceptance_rate"),
+        }
+
+        if sid in M7_IDS:
+            tiers["M7"].append(entry)
+        elif sid in T15_IDS:
+            tiers["T15"].append(entry)
+        elif sid in T25_IDS:
+            tiers["T25"].append(entry)
+        else:
+            tiers["Other"].append(entry)
+
+    # Sort each tier by GMAT
+    for tier in tiers.values():
+        tier.sort(key=lambda x: x["gmat_avg"], reverse=True)
+
+    return {
+        "tiers": tiers,
+        "summary": {
+            "M7_avg": round(sum(s["gmat_avg"] for s in tiers["M7"]) / max(len(tiers["M7"]), 1)),
+            "T15_avg": round(sum(s["gmat_avg"] for s in tiers["T15"]) / max(len(tiers["T15"]), 1)),
+            "T25_avg": round(sum(s["gmat_avg"] for s in tiers["T25"]) / max(len(tiers["T25"]), 1)),
+        },
+    }
+
+
 @router.get("/schools/{school_id}")
 def get_school(school_id: str):
     """Returns detail for a single school including essay prompts and data quality."""
