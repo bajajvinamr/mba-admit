@@ -1931,3 +1931,627 @@ def get_diversity_stats(school_ids: str | None = None):
         },
         "total_schools": len(stats),
     }
+
+
+# ── Networking Events ──────────────────────────────────────────────────
+
+_EVENT_TYPES = ["info_session", "campus_visit", "webinar", "coffee_chat", "conference", "alumni_mixer"]
+
+_SAMPLE_EVENTS = {
+    "hbs": [
+        {"title": "HBS Virtual Info Session", "type": "webinar", "frequency": "Monthly", "format": "online",
+         "description": "Overview of the HBS MBA program, admissions process, and student life.",
+         "registration_url": "https://www.hbs.edu/mba/admissions/events"},
+        {"title": "HBS Campus Visit Day", "type": "campus_visit", "frequency": "Bi-weekly (Sep-Mar)", "format": "in_person",
+         "description": "Full-day campus visit including class visit, campus tour, and student lunch.",
+         "registration_url": "https://www.hbs.edu/mba/admissions/visit"},
+    ],
+    "gsb": [
+        {"title": "Stanford GSB Admission Chat", "type": "coffee_chat", "frequency": "Weekly", "format": "online",
+         "description": "Informal Q&A with current students and admissions staff.",
+         "registration_url": "https://www.gsb.stanford.edu/programs/mba/admission/events"},
+        {"title": "GSB In-Person Information Session", "type": "info_session", "frequency": "Monthly", "format": "in_person",
+         "description": "On-campus info session with admissions presentation and Q&A.",
+         "registration_url": "https://www.gsb.stanford.edu/programs/mba/admission/events"},
+    ],
+    "wharton": [
+        {"title": "Wharton MBA Webinar Series", "type": "webinar", "frequency": "Bi-weekly", "format": "online",
+         "description": "Themed webinars covering curriculum, career outcomes, and student experience.",
+         "registration_url": "https://mba.wharton.upenn.edu/admissions-events/"},
+        {"title": "Wharton Campus Tour", "type": "campus_visit", "frequency": "Weekly (Sep-Apr)", "format": "in_person",
+         "description": "Student-led campus tour and class visit.",
+         "registration_url": "https://mba.wharton.upenn.edu/visit/"},
+    ],
+    "booth": [
+        {"title": "Chicago Booth Virtual Session", "type": "webinar", "frequency": "Monthly", "format": "online",
+         "description": "Live webinar with admissions team covering program highlights.",
+         "registration_url": "https://www.chicagobooth.edu/mba/admissions/events"},
+    ],
+    "kellogg": [
+        {"title": "Kellogg Inside Day", "type": "campus_visit", "frequency": "Monthly (Oct-Mar)", "format": "in_person",
+         "description": "Full-day immersive campus experience with classes, tours, and networking.",
+         "registration_url": "https://www.kellogg.northwestern.edu/programs/full-time-mba/admissions/visit.aspx"},
+    ],
+    "cbs": [
+        {"title": "CBS Admissions Coffee Chat", "type": "coffee_chat", "frequency": "Bi-weekly", "format": "online",
+         "description": "Small-group conversations with current CBS students.",
+         "registration_url": "https://www8.gsb.columbia.edu/programs/mba/admissions/events"},
+    ],
+    "sloan": [
+        {"title": "MIT Sloan Info Session", "type": "info_session", "frequency": "Monthly", "format": "hybrid",
+         "description": "Admissions overview and Q&A with option for virtual or in-person attendance.",
+         "registration_url": "https://mitsloan.mit.edu/mba/admissions/visit-us"},
+    ],
+}
+
+_GENERAL_EVENTS = [
+    {"title": "MBA Tour — Major Cities", "type": "conference", "frequency": "Annual (fall)", "format": "in_person",
+     "description": "Multi-school MBA fair with presentations, booths, and 1-on-1 meetings with admissions."},
+    {"title": "QS World MBA Tour", "type": "conference", "frequency": "Annual", "format": "in_person",
+     "description": "International MBA fair connecting prospective students with top programs worldwide."},
+    {"title": "Forté Foundation MBA Forum", "type": "conference", "frequency": "Annual", "format": "hybrid",
+     "description": "Focused on women in business — panels, networking, and school presentations."},
+    {"title": "ROMBA Conference", "type": "conference", "frequency": "Annual", "format": "in_person",
+     "description": "Reaching Out MBA conference for LGBTQ+ business school community."},
+    {"title": "National Black MBA Association Conference", "type": "conference", "frequency": "Annual", "format": "in_person",
+     "description": "Largest gathering of Black MBA professionals and students."},
+    {"title": "Consortium for Graduate Study Orientation", "type": "conference", "frequency": "Annual", "format": "in_person",
+     "description": "Pre-MBA orientation for Consortium fellows — networking and professional development."},
+]
+
+
+@router.get("/networking-events")
+def get_networking_events(
+    school_id: str | None = None,
+    event_type: str | None = None,
+    format: str | None = None,
+):
+    """Get MBA networking events, info sessions, and conferences."""
+    results = []
+
+    if school_id:
+        ids = [s.strip().lower() for s in school_id.split(",") if s.strip()]
+    else:
+        ids = list(_SAMPLE_EVENTS.keys())
+
+    for sid in ids:
+        school = SCHOOL_DB.get(sid)
+        school_name = school.get("name", sid) if school else sid.upper()
+        events = _SAMPLE_EVENTS.get(sid, [])
+        for ev in events:
+            results.append({**ev, "school_id": sid, "school_name": school_name, "scope": "school_specific"})
+
+    # Always include general events
+    for ev in _GENERAL_EVENTS:
+        results.append({**ev, "school_id": None, "school_name": None, "scope": "general"})
+
+    # Filter by event_type
+    if event_type:
+        results = [e for e in results if e["type"] == event_type]
+
+    # Filter by format
+    if format:
+        results = [e for e in results if e.get("format") == format]
+
+    return {
+        "events": results,
+        "total": len(results),
+        "event_types": _EVENT_TYPES,
+        "formats": ["online", "in_person", "hybrid"],
+    }
+
+
+# ── Interview Question Bank ─────────────────────────────────────────────────
+
+from pydantic import BaseModel as _BaseModel  # noqa: E402
+
+
+class InterviewQuestion(_BaseModel):
+    question: str
+    category: str
+    difficulty: int
+    tips: list[str]
+    school_specific: bool
+
+
+class InterviewQuestionBankResponse(_BaseModel):
+    questions: list[InterviewQuestion]
+    count: int
+    categories: list[str]
+
+
+_IQ_CATEGORIES = [
+    "behavioral",
+    "why_mba",
+    "why_school",
+    "leadership",
+    "career_goals",
+    "strengths_weaknesses",
+    "teamwork",
+    "ethical_dilemma",
+]
+
+_QUESTION_BANK: dict[str, list[dict]] = {
+    "behavioral": [
+        {"question": "Tell me about a time you failed and what you learned from it.", "difficulty": 1, "tips": ["Use the STAR method", "Focus on the lesson, not just the failure", "Show self-awareness"]},
+        {"question": "Describe a situation where you had to influence someone without direct authority.", "difficulty": 2, "tips": ["Highlight interpersonal skills", "Show strategic thinking", "Quantify the outcome"]},
+        {"question": "Walk me through a time you received critical feedback. How did you respond?", "difficulty": 1, "tips": ["Show humility and growth mindset", "Describe concrete changes you made", "Avoid being defensive in your retelling"]},
+        {"question": "Tell me about a time you had to make a decision with incomplete information.", "difficulty": 2, "tips": ["Explain your reasoning framework", "Show comfort with ambiguity", "Describe the outcome and what you'd do differently"]},
+        {"question": "Describe a conflict with a colleague and how you resolved it.", "difficulty": 2, "tips": ["Show emotional intelligence", "Focus on the resolution process", "Avoid placing blame"]},
+        {"question": "Give an example of when you went above and beyond what was expected.", "difficulty": 1, "tips": ["Quantify the impact", "Explain your motivation", "Connect to your values"]},
+        {"question": "Tell me about a time you had to adapt to a major change at work.", "difficulty": 2, "tips": ["Show flexibility and resilience", "Describe your mindset shift", "Highlight how you helped others adapt"]},
+        {"question": "Describe a situation where you had to manage competing priorities.", "difficulty": 2, "tips": ["Show your prioritization framework", "Demonstrate time management skills", "Explain trade-offs you made"]},
+        {"question": "Tell me about a time you took a calculated risk.", "difficulty": 3, "tips": ["Explain your risk assessment process", "Show that you weighed pros and cons", "Describe the outcome honestly"]},
+        {"question": "Describe a moment when you demonstrated resilience.", "difficulty": 1, "tips": ["Choose a genuinely challenging situation", "Show the emotional journey", "Connect to personal growth"]},
+    ],
+    "why_mba": [
+        {"question": "Why do you want to pursue an MBA at this point in your career?", "difficulty": 1, "tips": ["Be specific about timing", "Connect to career trajectory", "Show you've explored alternatives"]},
+        {"question": "What skills do you hope to develop during your MBA?", "difficulty": 1, "tips": ["Be specific — avoid generic answers", "Connect skills to career goals", "Show self-awareness about current gaps"]},
+        {"question": "How will an MBA help you achieve your long-term goals?", "difficulty": 2, "tips": ["Have a clear 5-10 year vision", "Explain why an MBA is necessary, not just nice-to-have", "Be realistic and specific"]},
+        {"question": "What would you do if you don't get into any MBA program this year?", "difficulty": 3, "tips": ["Show resilience and alternative planning", "Demonstrate genuine passion beyond the credential", "Be honest but optimistic"]},
+        {"question": "How do you plan to contribute to the MBA community?", "difficulty": 2, "tips": ["Reference specific clubs or initiatives", "Draw from past community involvement", "Be genuine, not transactional"]},
+        {"question": "What is the biggest misconception people have about MBAs?", "difficulty": 2, "tips": ["Show critical thinking", "Demonstrate your research", "Be thoughtful, not cynical"]},
+        {"question": "How have you prepared for the MBA experience?", "difficulty": 1, "tips": ["Mention conversations with alumni", "Reference relevant pre-MBA activities", "Show intentionality"]},
+        {"question": "What alternatives to an MBA have you considered?", "difficulty": 2, "tips": ["Be honest about other paths", "Explain why MBA won out", "Show thorough self-reflection"]},
+    ],
+    "why_school": [
+        {"question": "Why is this school your top choice?", "difficulty": 2, "tips": ["Name specific courses, professors, or programs", "Reference campus visits or alumni conversations", "Show genuine fit, not flattery"]},
+        {"question": "What specific programs or courses attract you to this school?", "difficulty": 2, "tips": ["Research the curriculum deeply", "Connect courses to your goals", "Mention unique offerings"]},
+        {"question": "How does this school's culture align with your values?", "difficulty": 2, "tips": ["Reference specific cultural elements", "Share examples of your values in action", "Show you've talked to current students"]},
+        {"question": "What will you bring to the incoming class?", "difficulty": 2, "tips": ["Highlight unique perspectives", "Be specific about contributions", "Connect to the school's community needs"]},
+        {"question": "Which clubs or organizations do you plan to join?", "difficulty": 1, "tips": ["Name specific clubs", "Explain why they matter to you", "Show leadership aspirations within them"]},
+        {"question": "How does this school's alumni network align with your career goals?", "difficulty": 2, "tips": ["Reference specific alumni outcomes", "Show you've done informational interviews", "Connect to your target industry"]},
+        {"question": "What do you know about our learning methodology?", "difficulty": 2, "tips": ["Research the school's pedagogy", "Explain how the method suits your learning style", "Give examples from past learning experiences"]},
+        {"question": "If admitted to multiple schools, how would you make your decision?", "difficulty": 3, "tips": ["Be diplomatic but honest", "Show your decision framework", "Emphasize unique school strengths"]},
+    ],
+    "leadership": [
+        {"question": "Describe your leadership style.", "difficulty": 1, "tips": ["Give concrete examples, not just adjectives", "Show situational adaptability", "Reference feedback from others"]},
+        {"question": "Tell me about a time you led a team through a difficult challenge.", "difficulty": 2, "tips": ["Focus on your specific actions", "Show how you motivated the team", "Quantify the outcome"]},
+        {"question": "How do you develop talent in others?", "difficulty": 2, "tips": ["Give specific mentoring examples", "Show investment in others' growth", "Describe your coaching approach"]},
+        {"question": "Describe a time you had to lead a team with diverse perspectives.", "difficulty": 2, "tips": ["Show inclusive leadership", "Highlight how you leveraged different viewpoints", "Demonstrate cultural awareness"]},
+        {"question": "Tell me about a leadership failure and what it taught you.", "difficulty": 3, "tips": ["Choose a genuine failure, not a humble brag", "Focus on the learning", "Show how you've changed"]},
+        {"question": "How do you build trust with a new team?", "difficulty": 1, "tips": ["Describe specific actions, not platitudes", "Show authenticity", "Reference real examples"]},
+        {"question": "Describe a time you had to lead without a formal title.", "difficulty": 2, "tips": ["Show influence skills", "Demonstrate initiative", "Highlight the outcome"]},
+        {"question": "How do you handle underperforming team members?", "difficulty": 3, "tips": ["Show empathy balanced with accountability", "Describe your process step by step", "Give a real example"]},
+        {"question": "Tell me about a decision you made that was unpopular.", "difficulty": 3, "tips": ["Show conviction and courage", "Explain your reasoning clearly", "Describe how you managed pushback"]},
+        {"question": "What leader do you admire and why?", "difficulty": 1, "tips": ["Choose someone relevant to your field", "Be specific about qualities you admire", "Connect to your own leadership development"]},
+    ],
+    "career_goals": [
+        {"question": "Where do you see yourself five years after your MBA?", "difficulty": 1, "tips": ["Be specific about role, industry, and impact", "Show a logical progression from your background", "Connect to the MBA program"]},
+        {"question": "What is your long-term career vision?", "difficulty": 2, "tips": ["Think 15-20 years out", "Be ambitious but credible", "Show purpose beyond personal success"]},
+        {"question": "Why are you switching industries/functions?", "difficulty": 2, "tips": ["Explain the pull, not just the push", "Show transferable skills", "Demonstrate industry knowledge"]},
+        {"question": "How does your pre-MBA experience prepare you for your post-MBA goals?", "difficulty": 2, "tips": ["Draw clear connections", "Identify skill gaps the MBA fills", "Show intentional career planning"]},
+        {"question": "What is your backup plan if your primary career goal doesn't work out?", "difficulty": 2, "tips": ["Show flexibility without seeming unfocused", "Demonstrate realistic thinking", "Connect backup to your core interests"]},
+        {"question": "What impact do you want to have in your career?", "difficulty": 2, "tips": ["Go beyond financial success", "Be genuine about your motivations", "Connect to personal experiences"]},
+        {"question": "How do you define professional success?", "difficulty": 1, "tips": ["Be authentic", "Show maturity in your definition", "Connect to values and purpose"]},
+        {"question": "What industry trends excite you most?", "difficulty": 2, "tips": ["Show you're well-read on your target industry", "Explain how you want to contribute", "Be specific and current"]},
+        {"question": "Who is your professional role model and why?", "difficulty": 1, "tips": ["Choose someone in your target field", "Be specific about what you admire", "Show how they inspire your goals"]},
+        {"question": "What would you do if you couldn't work in your target industry?", "difficulty": 3, "tips": ["Show breadth of interests", "Demonstrate core transferable passions", "Be creative but credible"]},
+    ],
+    "strengths_weaknesses": [
+        {"question": "What is your greatest strength?", "difficulty": 1, "tips": ["Back it up with a specific example", "Choose something relevant to MBA success", "Avoid cliches"]},
+        {"question": "What is your biggest weakness?", "difficulty": 2, "tips": ["Be genuine — avoid disguised strengths", "Show what you're doing to improve", "Pick something real but manageable"]},
+        {"question": "What would your colleagues say is your biggest area for growth?", "difficulty": 2, "tips": ["Reference actual feedback you've received", "Show self-awareness", "Describe your improvement plan"]},
+        {"question": "How do you handle stress and pressure?", "difficulty": 1, "tips": ["Give a specific high-pressure example", "Describe your coping strategies", "Show that you thrive, not just survive"]},
+        {"question": "What skill are you most eager to develop in business school?", "difficulty": 1, "tips": ["Be specific about the skill and why", "Connect to your career goals", "Show how the school can help"]},
+        {"question": "Describe a time your biggest strength became a liability.", "difficulty": 3, "tips": ["Show nuanced self-understanding", "Demonstrate adaptability", "Explain what you learned"]},
+        {"question": "How do you solicit and process feedback?", "difficulty": 2, "tips": ["Describe your feedback-seeking habits", "Give examples of acting on feedback", "Show growth mindset"]},
+        {"question": "What do people misunderstand about you?", "difficulty": 2, "tips": ["Be honest and reflective", "Show how you bridge the gap", "Use this to reveal a hidden strength"]},
+        {"question": "Rate yourself on a scale of 1-10 and explain why.", "difficulty": 3, "tips": ["Avoid extremes (not 10, not below 6)", "Be thoughtful about your reasoning", "Show ambition to improve"]},
+    ],
+    "teamwork": [
+        {"question": "Describe your role in a successful team project.", "difficulty": 1, "tips": ["Clarify your specific contribution", "Show how you enabled others", "Quantify the team's achievement"]},
+        {"question": "How do you handle disagreements within a team?", "difficulty": 2, "tips": ["Show your conflict resolution approach", "Give a specific example", "Emphasize productive outcomes"]},
+        {"question": "Tell me about a time a team project didn't go as planned.", "difficulty": 2, "tips": ["Take appropriate ownership", "Focus on the team's recovery process", "Share the lesson learned"]},
+        {"question": "How do you ensure all team members contribute?", "difficulty": 2, "tips": ["Show inclusive facilitation skills", "Describe specific techniques", "Give an example"]},
+        {"question": "Describe a time you had to work with someone you didn't get along with.", "difficulty": 2, "tips": ["Show professionalism and maturity", "Focus on the working relationship, not personality", "Describe the outcome"]},
+        {"question": "What role do you typically play on a team?", "difficulty": 1, "tips": ["Show self-awareness", "Demonstrate flexibility across roles", "Give examples of different roles you've played"]},
+        {"question": "How do you build consensus when opinions differ?", "difficulty": 2, "tips": ["Describe your process step by step", "Show respect for diverse viewpoints", "Give a concrete example"]},
+        {"question": "Tell me about a time you helped a struggling teammate.", "difficulty": 1, "tips": ["Show empathy and initiative", "Describe your specific actions", "Focus on the teammate's growth"]},
+        {"question": "How do you handle a team member who isn't pulling their weight?", "difficulty": 3, "tips": ["Show direct but empathetic communication", "Describe escalation if needed", "Focus on the team's success"]},
+        {"question": "Describe a cross-functional team experience.", "difficulty": 2, "tips": ["Show ability to bridge different perspectives", "Highlight communication skills", "Quantify the impact"]},
+    ],
+    "ethical_dilemma": [
+        {"question": "Describe a time you faced an ethical dilemma at work.", "difficulty": 3, "tips": ["Choose a genuine dilemma, not an obvious right/wrong", "Walk through your decision-making process", "Show your values in action"]},
+        {"question": "What would you do if you discovered a colleague was being dishonest?", "difficulty": 2, "tips": ["Show moral courage", "Describe a measured approach", "Balance loyalty with integrity"]},
+        {"question": "How do you handle situations where business goals conflict with ethics?", "difficulty": 3, "tips": ["Show that you don't see it as binary", "Demonstrate creative problem-solving", "Reference your personal framework"]},
+        {"question": "Tell me about a time you had to speak truth to power.", "difficulty": 3, "tips": ["Show courage balanced with tact", "Describe the preparation involved", "Share the outcome honestly"]},
+        {"question": "Describe a situation where you had to choose between two right answers.", "difficulty": 3, "tips": ["Show sophisticated moral reasoning", "Explain your decision framework", "Be honest about the trade-offs"]},
+        {"question": "How do you ensure ethical behavior in your team?", "difficulty": 2, "tips": ["Describe specific practices", "Show proactive culture-building", "Give a concrete example"]},
+        {"question": "What is your personal code of ethics?", "difficulty": 2, "tips": ["Be specific, not vague", "Root it in experiences", "Show how it guides decisions"]},
+        {"question": "Describe a time you sacrificed personal gain for the right thing.", "difficulty": 3, "tips": ["Choose a meaningful example", "Show that you'd do it again", "Connect to your core values"]},
+    ],
+}
+
+_SCHOOL_SPECIFIC_TEMPLATES = [
+    "Why {school_name} specifically? What makes it the right fit for you?",
+    "Which {school_name} professor's research resonates with your interests and why?",
+    "How will you contribute to the {school_name} community outside the classroom?",
+    "What {school_name} tradition or program are you most excited about?",
+    "How does {school_name}'s approach to {approach} align with your learning style?",
+]
+
+_SCHOOL_APPROACHES = {
+    "hbs": "the case method",
+    "gsb": "personal leadership development",
+    "wharton": "analytical rigor and teamwork",
+    "booth": "flexible curriculum and data-driven decision making",
+    "kellogg": "collaborative culture and team-based learning",
+    "sloan": "innovation and action learning",
+    "cbs": "value investing and New York immersion",
+    "tuck": "tight-knit community and general management",
+    "haas": "questioning the status quo and confidence without attitude",
+    "ross": "action-based learning and positive business impact",
+    "fuqua": "Team Fuqua and consequential leadership",
+    "darden": "the case method and ethical leadership",
+    "stern": "IQ + EQ and urban immersion",
+    "johnson": "experiential learning and tech entrepreneurship",
+    "anderson": "entrepreneurship and social impact",
+    "iima": "analytical rigor and case-based pedagogy",
+    "isb": "accelerated learning and global exposure",
+    "lbs": "global perspective and experiential learning",
+    "insead": "diversity and the one-year intensive format",
+}
+
+
+@router.get("/interview-questions")
+def get_interview_questions(
+    school_id: str = Query(default=None, description="Filter for school-specific questions"),
+    category: str = Query(default=None, description="Filter by question category"),
+):
+    """Interview question bank with tips — filterable by school and category."""
+    categories_to_include = [category] if category and category in _IQ_CATEGORIES else _IQ_CATEGORIES
+    questions: list[dict] = []
+
+    for cat in categories_to_include:
+        cat_questions = _QUESTION_BANK.get(cat, [])
+        for q in cat_questions:
+            questions.append({
+                "question": q["question"],
+                "category": cat,
+                "difficulty": q["difficulty"],
+                "tips": q["tips"],
+                "school_specific": False,
+            })
+
+    # Add school-specific questions if school_id provided
+    if school_id:
+        school = SCHOOL_DB.get(school_id)
+        school_name = school.get("name", school_id.upper()) if school else school_id.upper()
+        approach = _SCHOOL_APPROACHES.get(school_id, "experiential learning")
+
+        school_questions = []
+        for template in _SCHOOL_SPECIFIC_TEMPLATES:
+            q_text = template.format(school_name=school_name, approach=approach)
+            school_questions.append({
+                "question": q_text,
+                "category": "why_school",
+                "difficulty": 2,
+                "tips": [
+                    f"Research {school_name}'s unique programs and culture",
+                    "Reference specific conversations with alumni or students",
+                    "Connect your goals to what makes this school distinct",
+                ],
+                "school_specific": True,
+            })
+        questions.extend(school_questions)
+
+    return {
+        "questions": questions,
+        "count": len(questions),
+        "categories": categories_to_include,
+    }
+
+
+# ── Career Paths Explorer ─────────────────────────────────────────────────
+
+_CAREER_DATA = {
+    "consulting": {
+        "industry": "consulting",
+        "display_name": "Consulting",
+        "roles": [
+            {"title": "Associate Consultant", "avg_salary": 105000, "yoe_required": 0, "description": "Entry-level post-MBA role focused on client engagement and analysis.", "top_recruiters": ["McKinsey", "BCG", "Bain", "Deloitte", "Accenture"]},
+            {"title": "Engagement Manager", "avg_salary": 175000, "yoe_required": 3, "description": "Leads project workstreams and manages junior consultants.", "top_recruiters": ["McKinsey", "BCG", "Bain", "Oliver Wyman"]},
+            {"title": "Principal / Associate Partner", "avg_salary": 300000, "yoe_required": 7, "description": "Owns client relationships and drives firm revenue.", "top_recruiters": ["McKinsey", "BCG", "Bain", "Kearney"]},
+        ],
+        "mba_advantage": "MBA is the primary feeder for top consulting firms. Case-method training, structured problem-solving, and peer networks are directly transferable to consulting engagements.",
+        "top_schools": ["hbs", "gsb", "wharton", "booth", "kellogg", "cbs", "tuck"],
+        "growth_outlook": "stable",
+    },
+    "finance": {
+        "industry": "finance",
+        "display_name": "Finance",
+        "roles": [
+            {"title": "Investment Banking Associate", "avg_salary": 150000, "yoe_required": 0, "description": "Post-MBA IB role focused on deal execution, modeling, and client pitches.", "top_recruiters": ["Goldman Sachs", "Morgan Stanley", "JP Morgan", "Evercore", "Lazard"]},
+            {"title": "Private Equity Associate", "avg_salary": 180000, "yoe_required": 2, "description": "Evaluate and execute leveraged buyout transactions.", "top_recruiters": ["KKR", "Blackstone", "Apollo", "Carlyle", "Warburg Pincus"]},
+            {"title": "Hedge Fund Analyst", "avg_salary": 200000, "yoe_required": 2, "description": "Research-driven role managing portfolio positions.", "top_recruiters": ["Citadel", "Point72", "Bridgewater", "Two Sigma", "DE Shaw"]},
+            {"title": "VP / Director", "avg_salary": 350000, "yoe_required": 6, "description": "Senior deal leadership and client relationship management.", "top_recruiters": ["Goldman Sachs", "Morgan Stanley", "JP Morgan"]},
+        ],
+        "mba_advantage": "MBA unlocks associate-level entry at bulge-bracket banks and provides the network essential for PE/HF recruiting. Finance-focused curricula and alumni connections are unmatched.",
+        "top_schools": ["wharton", "cbs", "booth", "stern", "hbs", "gsb"],
+        "growth_outlook": "moderate",
+    },
+    "tech": {
+        "industry": "tech",
+        "display_name": "Technology",
+        "roles": [
+            {"title": "Product Manager", "avg_salary": 160000, "yoe_required": 0, "description": "Own product strategy, roadmap, and cross-functional execution.", "top_recruiters": ["Google", "Amazon", "Meta", "Apple", "Microsoft"]},
+            {"title": "Strategy & Operations Manager", "avg_salary": 155000, "yoe_required": 0, "description": "Drive internal strategy and operational improvements.", "top_recruiters": ["Google", "Uber", "Airbnb", "Stripe", "DoorDash"]},
+            {"title": "Senior PM / Group PM", "avg_salary": 250000, "yoe_required": 4, "description": "Lead product teams and define multi-year product vision.", "top_recruiters": ["Google", "Amazon", "Meta", "Netflix"]},
+            {"title": "VP of Product", "avg_salary": 400000, "yoe_required": 8, "description": "Executive leadership of product organization.", "top_recruiters": ["Google", "Amazon", "Microsoft", "Salesforce"]},
+        ],
+        "mba_advantage": "MBA provides structured frameworks for product thinking, go-to-market strategy, and leadership. Top tech firms actively recruit from M7/T15 programs for PM and strategy roles.",
+        "top_schools": ["gsb", "hbs", "haas", "sloan", "kellogg", "booth", "anderson"],
+        "growth_outlook": "high",
+    },
+    "healthcare": {
+        "industry": "healthcare",
+        "display_name": "Healthcare & Life Sciences",
+        "roles": [
+            {"title": "Healthcare Consultant", "avg_salary": 120000, "yoe_required": 0, "description": "Advise hospitals, payers, and pharma on strategy and operations.", "top_recruiters": ["McKinsey", "BCG", "Huron", "ZS Associates"]},
+            {"title": "Pharma Brand Manager", "avg_salary": 140000, "yoe_required": 1, "description": "Lead product marketing for pharmaceutical brands.", "top_recruiters": ["Johnson & Johnson", "Pfizer", "Abbott", "Merck"]},
+            {"title": "Director of Strategy", "avg_salary": 220000, "yoe_required": 5, "description": "Shape corporate strategy for healthcare organizations.", "top_recruiters": ["UnitedHealth", "CVS Health", "Mayo Clinic"]},
+        ],
+        "mba_advantage": "Healthcare is the largest sector in the US economy. MBA graduates bring business acumen to a field dominated by clinical expertise, creating unique value at the intersection of strategy and patient outcomes.",
+        "top_schools": ["wharton", "hbs", "kellogg", "fuqua", "ross", "darden"],
+        "growth_outlook": "high",
+    },
+    "energy": {
+        "industry": "energy",
+        "display_name": "Energy & Sustainability",
+        "roles": [
+            {"title": "Energy Consultant", "avg_salary": 115000, "yoe_required": 0, "description": "Advise utilities and energy companies on strategy and transition planning.", "top_recruiters": ["McKinsey", "BCG", "Bain", "Wood Mackenzie"]},
+            {"title": "Renewables Project Manager", "avg_salary": 130000, "yoe_required": 2, "description": "Manage solar, wind, or storage project development.", "top_recruiters": ["NextEra", "Enphase", "First Solar", "Tesla Energy"]},
+            {"title": "VP of Strategy", "avg_salary": 250000, "yoe_required": 7, "description": "Lead corporate strategy for energy transition.", "top_recruiters": ["BP", "Shell", "TotalEnergies", "Brookfield"]},
+        ],
+        "mba_advantage": "The energy transition is creating massive demand for business leaders who understand both technology and finance. MBA graduates bridge the gap between engineering teams and investors.",
+        "top_schools": ["gsb", "hbs", "yale_som", "erb_institute", "fuqua", "sloan"],
+        "growth_outlook": "high",
+    },
+    "nonprofit": {
+        "industry": "nonprofit",
+        "display_name": "Nonprofit & Social Impact",
+        "roles": [
+            {"title": "Program Manager", "avg_salary": 80000, "yoe_required": 0, "description": "Design and execute social impact programs.", "top_recruiters": ["Gates Foundation", "Teach For America", "USAID", "World Bank"]},
+            {"title": "Director of Operations", "avg_salary": 110000, "yoe_required": 3, "description": "Oversee organizational operations and efficiency.", "top_recruiters": ["Red Cross", "United Way", "Habitat for Humanity"]},
+            {"title": "Executive Director", "avg_salary": 160000, "yoe_required": 8, "description": "Lead nonprofit organizations and drive fundraising strategy.", "top_recruiters": ["Large foundations", "NGOs", "Social enterprises"]},
+        ],
+        "mba_advantage": "MBA provides operational and financial skills that nonprofits desperately need. Schools with strong social enterprise centers offer dedicated recruiting pipelines and loan forgiveness programs.",
+        "top_schools": ["yale_som", "hbs", "gsb", "haas", "fuqua", "ross"],
+        "growth_outlook": "moderate",
+    },
+    "entrepreneurship": {
+        "industry": "entrepreneurship",
+        "display_name": "Entrepreneurship",
+        "roles": [
+            {"title": "Founder / CEO", "avg_salary": 0, "yoe_required": 0, "description": "Launch and lead a startup. Salary varies widely by funding stage.", "top_recruiters": ["Self-funded", "Y Combinator", "Techstars", "a16z"]},
+            {"title": "Venture Capital Associate", "avg_salary": 150000, "yoe_required": 2, "description": "Source deals, perform due diligence, and support portfolio companies.", "top_recruiters": ["Sequoia", "a16z", "Accel", "Bessemer"]},
+            {"title": "Chief of Staff (Startup)", "avg_salary": 130000, "yoe_required": 1, "description": "Right hand to the CEO, driving cross-functional initiatives.", "top_recruiters": ["Series A-C startups"]},
+        ],
+        "mba_advantage": "MBA provides a co-founder network, structured frameworks for building businesses, access to startup competitions and funding, and a safety net of recruiting options if the venture fails.",
+        "top_schools": ["gsb", "hbs", "sloan", "haas", "booth", "kellogg"],
+        "growth_outlook": "high",
+    },
+    "real_estate": {
+        "industry": "real_estate",
+        "display_name": "Real Estate",
+        "roles": [
+            {"title": "Acquisitions Analyst", "avg_salary": 120000, "yoe_required": 0, "description": "Underwrite and evaluate commercial real estate deals.", "top_recruiters": ["Brookfield", "Blackstone Real Estate", "Starwood", "Hines"]},
+            {"title": "Development Manager", "avg_salary": 145000, "yoe_required": 3, "description": "Manage ground-up construction and renovation projects.", "top_recruiters": ["Related Companies", "Tishman Speyer", "Greystar"]},
+            {"title": "Portfolio Manager", "avg_salary": 220000, "yoe_required": 6, "description": "Oversee a portfolio of properties and optimize returns.", "top_recruiters": ["CBRE Investment", "Prologis", "Vornado"]},
+        ],
+        "mba_advantage": "Real estate combines finance, negotiation, and operations. MBA programs with dedicated real estate centers offer unmatched access to deal flow, alumni networks, and REIT recruiting.",
+        "top_schools": ["wharton", "cbs", "stern", "hbs", "ross", "wisconsin"],
+        "growth_outlook": "moderate",
+    },
+}
+
+
+@router.get("/career-paths")
+def get_career_paths(industry: str | None = None):
+    """Post-MBA career paths explorer with roles, salaries, and top schools by industry."""
+    if industry:
+        key = industry.strip().lower()
+        if key not in _CAREER_DATA:
+            raise HTTPException(status_code=404, detail=f"Unknown industry: {industry}. Valid: {', '.join(_CAREER_DATA.keys())}")
+        return _CAREER_DATA[key]
+
+    # Return summary for all industries
+    summaries = []
+    for key, data in _CAREER_DATA.items():
+        summaries.append({
+            "industry": data["industry"],
+            "display_name": data["display_name"],
+            "role_count": len(data["roles"]),
+            "top_schools": data["top_schools"][:3],
+            "growth_outlook": data["growth_outlook"],
+            "mba_advantage": data["mba_advantage"],
+        })
+    return {"industries": summaries, "total": len(summaries)}
+
+
+# ── Application Checklist Generator ───────────────────────────────────────
+
+class ChecklistGeneratorRequest(_BaseModel):
+    school_ids: list[str]
+    round: str = "R1"
+
+
+_ROUND_DEADLINES: dict[str, dict[str, str]] = {
+    "hbs": {"R1": "Sep 4, 2025", "R2": "Jan 6, 2026", "2+2": "Apr 15, 2025"},
+    "gsb": {"R1": "Sep 10, 2025", "R2": "Jan 8, 2026", "R3": "Apr 8, 2026"},
+    "wharton": {"R1": "Sep 3, 2025", "R2": "Jan 5, 2026", "R3": "Mar 25, 2026"},
+    "booth": {"R1": "Sep 12, 2025", "R2": "Jan 7, 2026", "R3": "Apr 2, 2026"},
+    "kellogg": {"R1": "Sep 10, 2025", "R2": "Jan 8, 2026", "R3": "Apr 1, 2026"},
+    "cbs": {"R1": "Sep 4, 2025", "ED": "Jan 6, 2026"},
+    "sloan": {"R1": "Sep 17, 2025", "R2": "Jan 14, 2026", "R3": "Apr 8, 2026"},
+    "tuck": {"R1": "Sep 8, 2025", "R2": "Jan 6, 2026", "R3": "Mar 31, 2026"},
+    "haas": {"R1": "Sep 11, 2025", "R2": "Jan 8, 2026", "R3": "Apr 1, 2026"},
+    "ross": {"R1": "Sep 15, 2025", "R2": "Jan 10, 2026", "R3": "Mar 20, 2026"},
+    "fuqua": {"R1": "Sep 10, 2025", "R2": "Jan 7, 2026", "R3": "Mar 19, 2026"},
+    "darden": {"R1": "Sep 8, 2025", "R2": "Jan 5, 2026", "R3": "Apr 1, 2026"},
+    "stern": {"R1": "Sep 15, 2025", "R2": "Jan 15, 2026", "R3": "Mar 15, 2026"},
+    "yale_som": {"R1": "Sep 10, 2025", "R2": "Jan 7, 2026", "R3": "Apr 8, 2026"},
+    "anderson": {"R1": "Sep 17, 2025", "R2": "Jan 8, 2026", "R3": "Apr 15, 2026"},
+}
+
+_SCHOOL_ESSAY_COUNTS: dict[str, int] = {
+    "hbs": 1, "gsb": 2, "wharton": 1, "booth": 2, "kellogg": 3,
+    "cbs": 3, "sloan": 1, "tuck": 2, "haas": 4, "ross": 2,
+    "fuqua": 2, "darden": 3, "stern": 2, "yale_som": 3, "anderson": 3,
+}
+
+
+def _build_checklist(school_id: str, school_name: str, round_name: str) -> list[dict]:
+    """Build a generic MBA application checklist for a school."""
+    items: list[dict] = []
+    essay_count = _SCHOOL_ESSAY_COUNTS.get(school_id, 2)
+
+    # Testing
+    items.append({
+        "task": "Complete GMAT/GRE and submit official score",
+        "category": "testing",
+        "priority": "critical",
+        "estimated_days": 60,
+        "notes": "Most schools accept both GMAT and GRE. Plan 2-3 months for preparation.",
+    })
+    items.append({
+        "task": "Request official TOEFL/IELTS score report (if applicable)",
+        "category": "testing",
+        "priority": "important",
+        "estimated_days": 14,
+        "notes": "Required for non-native English speakers. Some schools waive if undergrad was in English.",
+    })
+
+    # Essays
+    for i in range(1, essay_count + 1):
+        items.append({
+            "task": f"Write Essay {i} for {school_name}",
+            "category": "essays",
+            "priority": "critical",
+            "estimated_days": 14,
+            "notes": f"Essay {i} of {essay_count}. Start early — allow time for multiple drafts and feedback.",
+        })
+    items.append({
+        "task": "Have essays reviewed by 2-3 trusted readers",
+        "category": "essays",
+        "priority": "important",
+        "estimated_days": 7,
+        "notes": "Get feedback from people who know you well AND from someone in admissions consulting.",
+    })
+
+    # Recommendations
+    items.append({
+        "task": "Select 2 recommenders and brief them",
+        "category": "recommendations",
+        "priority": "critical",
+        "estimated_days": 7,
+        "notes": "Choose people who can speak to your leadership and impact. Ideally direct supervisors.",
+    })
+    items.append({
+        "task": "Follow up with recommenders 2 weeks before deadline",
+        "category": "recommendations",
+        "priority": "important",
+        "estimated_days": 1,
+        "notes": "Send a gentle reminder with the deadline and a summary of key points you'd like them to cover.",
+    })
+
+    # Application form
+    items.append({
+        "task": "Complete online application form",
+        "category": "application_form",
+        "priority": "critical",
+        "estimated_days": 3,
+        "notes": "Includes employment history, education, extracurriculars, and short-answer questions.",
+    })
+    items.append({
+        "task": "Upload polished MBA resume (1 page)",
+        "category": "application_form",
+        "priority": "critical",
+        "estimated_days": 5,
+        "notes": "MBA resume format differs from corporate. Focus on impact, leadership, and quantified results.",
+    })
+    items.append({
+        "task": "Request official transcripts from all universities attended",
+        "category": "application_form",
+        "priority": "critical",
+        "estimated_days": 14,
+        "notes": "Some schools accept unofficial transcripts initially, but official ones are needed for matriculation.",
+    })
+
+    # Financial
+    items.append({
+        "task": "Pay application fee or request fee waiver",
+        "category": "financial",
+        "priority": "important",
+        "estimated_days": 1,
+        "notes": "Fees range from $200-$275. Fee waivers available through campus visits, diversity programs, or financial need.",
+    })
+    items.append({
+        "task": "Research scholarship and financial aid options",
+        "category": "financial",
+        "priority": "nice_to_have",
+        "estimated_days": 3,
+        "notes": "Many merit scholarships are auto-considered with your application. Some require separate essays.",
+    })
+
+    # Interview
+    items.append({
+        "task": "Prepare for admissions interview",
+        "category": "interview",
+        "priority": "important",
+        "estimated_days": 10,
+        "notes": "Practice behavioral stories (leadership, teamwork, failure). Research the school's interview format.",
+    })
+
+    # Supplemental
+    items.append({
+        "task": "Write optional essay (if addressing a weakness)",
+        "category": "supplemental",
+        "priority": "nice_to_have",
+        "estimated_days": 5,
+        "notes": "Use the optional essay to address gaps — low GPA, employment gap, or lack of quant background.",
+    })
+    items.append({
+        "task": "Attend a virtual or in-person info session / campus visit",
+        "category": "supplemental",
+        "priority": "nice_to_have",
+        "estimated_days": 1,
+        "notes": "Demonstrates interest and helps you write stronger 'why this school' essays.",
+    })
+
+    return items
+
+
+@router.post("/application-checklist")
+def generate_application_checklist(req: ChecklistGeneratorRequest):
+    """Generate a per-school application checklist with deadlines and prioritized tasks."""
+    if not req.school_ids:
+        raise HTTPException(status_code=400, detail="At least one school_id is required.")
+    if len(req.school_ids) > 10:
+        raise HTTPException(status_code=400, detail="Maximum 10 schools per request.")
+
+    round_name = req.round.strip()
+    results = []
+
+    for sid in req.school_ids:
+        sid_lower = sid.strip().lower()
+        school = SCHOOL_DB.get(sid_lower)
+        school_name = school.get("name", sid_lower) if school else sid_lower.upper()
+
+        deadlines = _ROUND_DEADLINES.get(sid_lower, {})
+        deadline = deadlines.get(round_name, "Check school website")
+
+        checklist = _build_checklist(sid_lower, school_name, round_name)
+
+        results.append({
+            "school_id": sid_lower,
+            "school_name": school_name,
+            "round": round_name,
+            "deadline": deadline,
+            "checklist": checklist,
+            "total_items": len(checklist),
+            "critical_count": sum(1 for c in checklist if c["priority"] == "critical"),
+        })
+
+    return {"schools": results, "total_schools": len(results)}
