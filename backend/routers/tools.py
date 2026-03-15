@@ -613,3 +613,215 @@ def get_application_checklist(school_id: str):
             "questions": len([c for c in checklist if c["category"] == "questions"]),
         },
     }
+
+
+# ── Essay Prompt Library ────────────────────────────────────────────────
+
+@router.get("/essay-prompts")
+def get_essay_prompts(school_id: str = None):
+    """Get essay prompts for all schools or a specific school."""
+    results = []
+    schools = SCHOOL_DB
+
+    if school_id:
+        if school_id not in schools:
+            raise HTTPException(404, f"School '{school_id}' not found")
+        schools = {school_id: SCHOOL_DB[school_id]}
+
+    for sid, school in schools.items():
+        prompts = school.get("essay_prompts", [])
+        if not prompts:
+            continue
+        for i, prompt in enumerate(prompts):
+            word_limit = None
+            text = prompt if isinstance(prompt, str) else str(prompt)
+            # Try to extract word limit from prompt text
+            import re
+            wl_match = re.search(r"(\d+)\s*word", text.lower())
+            if wl_match:
+                word_limit = int(wl_match.group(1))
+            results.append({
+                "school_id": sid,
+                "school_name": school.get("name", sid),
+                "prompt_index": i,
+                "prompt_text": text,
+                "word_limit": word_limit,
+            })
+
+    # Sort by school name
+    results.sort(key=lambda x: x["school_name"])
+
+    return {
+        "prompts": results,
+        "total_prompts": len(results),
+        "school_count": len(set(r["school_id"] for r in results)),
+    }
+
+
+# ── GMAT ↔ GRE Score Conversion ────────────────────────────────────────
+
+@router.get("/score-convert")
+def convert_test_score(
+    score: int,
+    from_test: str = "gmat",  # gmat | gre
+):
+    """Convert between GMAT and GRE scores using official concordance table."""
+    # Official ETS/GMAC concordance (approximate)
+    GMAT_TO_GRE = {
+        800: 340, 790: 340, 780: 339, 770: 338, 760: 337,
+        750: 336, 740: 335, 730: 333, 720: 332, 710: 330,
+        700: 329, 690: 327, 680: 326, 670: 324, 660: 323,
+        650: 321, 640: 319, 630: 318, 620: 316, 610: 314,
+        600: 312, 590: 311, 580: 309, 570: 307, 560: 305,
+        550: 303, 540: 301, 530: 299, 520: 297, 510: 295,
+        500: 293, 490: 291, 480: 289, 470: 287, 460: 285,
+        450: 283, 440: 281, 430: 279, 420: 277, 410: 275,
+        400: 273,
+    }
+    GRE_TO_GMAT = {v: k for k, v in GMAT_TO_GRE.items()}
+
+    if from_test == "gmat":
+        if score < 200 or score > 800:
+            raise HTTPException(400, "GMAT score must be 200-800")
+        # Round to nearest 10
+        rounded = round(score / 10) * 10
+        gre_equiv = GMAT_TO_GRE.get(rounded)
+        if not gre_equiv:
+            # Interpolate
+            keys = sorted(GMAT_TO_GRE.keys())
+            for i in range(len(keys) - 1):
+                if keys[i] <= rounded <= keys[i + 1]:
+                    ratio = (rounded - keys[i]) / (keys[i + 1] - keys[i])
+                    gre_equiv = int(GMAT_TO_GRE[keys[i]] + ratio * (GMAT_TO_GRE[keys[i + 1]] - GMAT_TO_GRE[keys[i]]))
+                    break
+            if not gre_equiv:
+                gre_equiv = 260
+        return {
+            "input_test": "gmat",
+            "input_score": score,
+            "converted_test": "gre",
+            "converted_score": gre_equiv,
+            "percentile_estimate": _gmat_percentile(score),
+            "note": "Based on official ETS/GMAC concordance table",
+        }
+    elif from_test == "gre":
+        if score < 260 or score > 340:
+            raise HTTPException(400, "GRE score must be 260-340")
+        # Find closest match
+        closest_gre = min(GRE_TO_GMAT.keys(), key=lambda x: abs(x - score))
+        gmat_equiv = GRE_TO_GMAT[closest_gre]
+        return {
+            "input_test": "gre",
+            "input_score": score,
+            "converted_test": "gmat",
+            "converted_score": gmat_equiv,
+            "percentile_estimate": _gmat_percentile(gmat_equiv),
+            "note": "Based on official ETS/GMAC concordance table",
+        }
+    else:
+        raise HTTPException(400, "from_test must be 'gmat' or 'gre'")
+
+
+def _gmat_percentile(score: int) -> int:
+    """Rough GMAT percentile estimate."""
+    if score >= 760: return 99
+    if score >= 740: return 97
+    if score >= 720: return 94
+    if score >= 700: return 89
+    if score >= 680: return 82
+    if score >= 660: return 76
+    if score >= 640: return 68
+    if score >= 620: return 60
+    if score >= 600: return 51
+    if score >= 580: return 43
+    if score >= 560: return 36
+    if score >= 540: return 28
+    if score >= 520: return 22
+    if score >= 500: return 16
+    return max(1, (score - 200) * 15 // 300)
+
+
+# ── Employment Outcomes ─────────────────────────────────────────────────
+
+@router.get("/schools/{school_id}/employment")
+def get_employment_stats(school_id: str):
+    """Get detailed employment/placement data for a school."""
+    school = SCHOOL_DB.get(school_id)
+    if not school:
+        raise HTTPException(404, f"School '{school_id}' not found")
+
+    placement = school.get("placement_stats", {})
+    if not placement:
+        # Return empty structure
+        return {
+            "school_id": school_id,
+            "school_name": school.get("name", school_id),
+            "has_data": False,
+        }
+
+    # Parse industry breakdown
+    industries = placement.get("top_industries", [])
+    if isinstance(industries, dict):
+        industries = [{"industry": k, "percentage": v} for k, v in industries.items()]
+
+    return {
+        "school_id": school_id,
+        "school_name": school.get("name", school_id),
+        "has_data": True,
+        "median_base_salary": placement.get("median_base_salary_usd") or placement.get("median_base_salary"),
+        "median_signing_bonus": placement.get("median_signing_bonus_usd") or placement.get("median_signing_bonus"),
+        "employment_rate_3mo": placement.get("employment_rate_3mo_pct") or placement.get("employment_rate_3_months"),
+        "internship_rate": placement.get("internship_rate"),
+        "top_industries": industries[:10] if isinstance(industries, list) else [],
+        "top_employers": (placement.get("top_employers") or [])[:15],
+    }
+
+
+# ── MBA Salary ROI ─────────────────────────────────────────────────────
+
+@router.get("/schools/{school_id}/roi")
+def get_school_roi(school_id: str, current_salary: float = 60000, years: int = 10):
+    """Calculate MBA ROI for a specific school."""
+    school = SCHOOL_DB.get(school_id)
+    if not school:
+        raise HTTPException(404, f"School '{school_id}' not found")
+
+    tuition = school.get("tuition_usd", 0)
+    # Parse median salary
+    median_str = school.get("median_salary", "0")
+    import re
+    salary_match = re.search(r"[\d,]+", str(median_str).replace(",", ""))
+    post_mba_salary = float(salary_match.group().replace(",", "")) if salary_match else 0
+
+    # 2 years of tuition + opportunity cost
+    total_cost = (tuition * 2) + (current_salary * 2)
+    salary_increase = post_mba_salary - current_salary
+
+    # Calculate ROI over N years
+    cumulative_earnings_mba = sum(post_mba_salary * (1.03 ** y) for y in range(years))
+    cumulative_earnings_no_mba = sum(current_salary * (1.03 ** y) for y in range(years))
+    net_gain = cumulative_earnings_mba - cumulative_earnings_no_mba - total_cost
+
+    # Breakeven year
+    breakeven_year = None
+    running_diff = -total_cost
+    for y in range(1, years + 1):
+        running_diff += salary_increase * (1.03 ** y)
+        if running_diff >= 0 and breakeven_year is None:
+            breakeven_year = y + 2  # +2 for MBA years
+
+    roi_pct = round((net_gain / total_cost) * 100, 1) if total_cost > 0 else 0
+
+    return {
+        "school_id": school_id,
+        "school_name": school.get("name", school_id),
+        "tuition_total": tuition * 2,
+        "opportunity_cost": current_salary * 2,
+        "total_investment": total_cost,
+        "post_mba_salary": post_mba_salary,
+        "salary_increase": salary_increase,
+        "roi_pct": roi_pct,
+        "net_gain_10yr": round(net_gain),
+        "breakeven_year": breakeven_year,
+        "assumptions": f"3% annual raise, {years}-year horizon, current salary ${current_salary:,.0f}",
+    }
