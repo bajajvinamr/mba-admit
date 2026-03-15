@@ -3475,3 +3475,320 @@ def admission_trends(school_id: str | None = None):
         "total": len(results),
         "available_metrics": ["acceptance_rate", "class_size", "median_gmat", "avg_gpa", "applications_received"],
     }
+
+
+# ── GMAT Score Predictor ─────────────────────────────────────────────
+
+from pydantic import BaseModel as _BaseModel  # noqa: E811
+
+
+class GmatPredictorRequest(_BaseModel):
+    practice_scores: list[int]
+    study_hours_per_week: int = 10
+    weeks_remaining: int = 4
+
+
+# GMAT percentile lookup (approximate, based on recent distributions)
+_GMAT_PERCENTILES = [
+    (800, 99), (780, 99), (770, 98), (760, 97), (750, 96),
+    (740, 94), (730, 93), (720, 90), (710, 88), (700, 85),
+    (690, 82), (680, 79), (670, 76), (660, 72), (650, 68),
+    (640, 64), (630, 60), (620, 56), (610, 51), (600, 47),
+    (590, 43), (580, 39), (570, 35), (560, 31), (550, 27),
+    (540, 24), (530, 21), (520, 18), (510, 15), (500, 13),
+    (490, 11), (480, 9), (470, 7), (460, 6), (450, 5),
+    (400, 2), (350, 1), (200, 0),
+]
+
+
+def _gmat_percentile(score: int) -> int:
+    for threshold, pct in _GMAT_PERCENTILES:
+        if score >= threshold:
+            return pct
+    return 0
+
+
+@router.post("/gmat-predictor")
+def predict_gmat(req: GmatPredictorRequest):
+    """Predict GMAT score from practice scores, study hours, and weeks remaining."""
+    scores = req.practice_scores
+    if not scores:
+        raise HTTPException(status_code=400, detail="At least one practice score is required.")
+
+    n = len(scores)
+
+    # Weighted average with recency bias: weight = index + 1
+    total_weight = 0.0
+    weighted_sum = 0.0
+    for i, s in enumerate(scores):
+        w = i + 1
+        weighted_sum += s * w
+        total_weight += w
+    weighted_avg = weighted_sum / total_weight
+
+    # Study factor: predicted = weighted_avg * (1 + 0.01 * min(weeks * hours / 10, 0.05))
+    study_factor = 1 + 0.01 * min(req.weeks_remaining * req.study_hours_per_week / 10, 0.05)
+    predicted_raw = weighted_avg * study_factor
+    predicted = int(round(predicted_raw / 10) * 10)  # round to nearest 10
+
+    # Confidence range: +/- 30
+    conf_low = predicted - 30
+    conf_high = predicted + 30
+
+    # Score trend
+    if n >= 2:
+        first_half = scores[: n // 2]
+        second_half = scores[n // 2 :]
+        avg_first = sum(first_half) / len(first_half)
+        avg_second = sum(second_half) / len(second_half)
+        diff = avg_second - avg_first
+        if diff > 10:
+            trend = "improving"
+        elif diff < -10:
+            trend = "declining"
+        else:
+            trend = "plateauing"
+    else:
+        trend = "plateauing"
+
+    # Percentile
+    percentile = _gmat_percentile(predicted)
+
+    # Recommendations
+    recommendations: list[str] = []
+    if trend == "declining":
+        recommendations.append("Your scores are trending down — consider taking a break to avoid burnout.")
+        recommendations.append("Review fundamentals before attempting more practice tests.")
+    elif trend == "plateauing":
+        recommendations.append("Try changing your study approach — focus on your weakest areas.")
+        recommendations.append("Consider timed section practice to improve pacing.")
+    else:
+        recommendations.append("Great momentum! Maintain your current study routine.")
+        recommendations.append("Start taking full-length practice tests under exam conditions.")
+
+    if req.study_hours_per_week < 10:
+        recommendations.append("Consider increasing study hours to at least 10-15 per week for meaningful progress.")
+    if req.weeks_remaining <= 2:
+        recommendations.append("With limited time left, focus on your highest-impact weak areas only.")
+    if predicted < 700:
+        recommendations.append("Target Quant improvement — it typically offers the biggest score gains.")
+
+    # Target schools comparison
+    target_school_ids = ["hbs", "gsb", "wharton", "columbia", "booth", "kellogg",
+                         "sloan", "tuck", "haas", "stern", "ross", "darden",
+                         "fuqua", "anderson", "yale-som", "insead", "lbs"]
+    target_schools = []
+    for sid in target_school_ids:
+        school = SCHOOL_DB.get(sid)
+        if not school:
+            continue
+        median_gmat = school.get("gmat_avg", school.get("median_gmat", 720))
+        try:
+            median_gmat = int(median_gmat)
+        except (ValueError, TypeError):
+            median_gmat = 720
+        target_schools.append({
+            "school_id": sid,
+            "school_name": school.get("name", sid),
+            "median_gmat": median_gmat,
+            "your_delta": predicted - median_gmat,
+        })
+
+    target_schools.sort(key=lambda s: s["your_delta"], reverse=True)
+
+    return {
+        "predicted_score": predicted,
+        "confidence_range": {"low": conf_low, "high": conf_high},
+        "score_trend": trend,
+        "percentile": percentile,
+        "recommendations": recommendations,
+        "target_schools": target_schools,
+    }
+
+
+# ── MBA Program Length Comparison ────────────────────────────────────
+
+_PROGRAM_FORMATS = {
+    "2_year": {
+        "format": "2_year",
+        "display_name": "2-Year Full-Time MBA",
+        "typical_duration": "21-24 months",
+        "schools": [
+            {"school_id": "hbs", "program_name": "HBS MBA", "duration": "24 months", "total_cost_estimate": 230000},
+            {"school_id": "gsb", "program_name": "Stanford MBA", "duration": "21 months", "total_cost_estimate": 240000},
+            {"school_id": "wharton", "program_name": "Wharton MBA", "duration": "21 months", "total_cost_estimate": 225000},
+            {"school_id": "booth", "program_name": "Chicago Booth MBA", "duration": "21 months", "total_cost_estimate": 215000},
+            {"school_id": "kellogg", "program_name": "Kellogg 2Y MBA", "duration": "21 months", "total_cost_estimate": 220000},
+            {"school_id": "columbia", "program_name": "CBS MBA", "duration": "20 months", "total_cost_estimate": 230000},
+            {"school_id": "sloan", "program_name": "MIT Sloan MBA", "duration": "24 months", "total_cost_estimate": 225000},
+            {"school_id": "tuck", "program_name": "Tuck MBA", "duration": "21 months", "total_cost_estimate": 210000},
+            {"school_id": "haas", "program_name": "Haas MBA", "duration": "21 months", "total_cost_estimate": 215000},
+            {"school_id": "stern", "program_name": "Stern MBA", "duration": "21 months", "total_cost_estimate": 220000},
+        ],
+        "pros": [
+            "Deep immersion in coursework and campus life",
+            "Summer internship opportunity for career switching",
+            "Strongest alumni network and recruiting pipeline",
+            "Maximum elective flexibility and specialization",
+        ],
+        "cons": [
+            "Highest total cost (tuition + 2 years opportunity cost)",
+            "Longest time away from the workforce",
+            "May be overkill for career advancers (vs. switchers)",
+        ],
+        "best_for": "Career switchers, those seeking top-tier consulting/IB/tech recruiting, and anyone who wants the full MBA experience.",
+        "avg_cost": 225000,
+    },
+    "1_year": {
+        "format": "1_year",
+        "display_name": "1-Year Accelerated MBA",
+        "typical_duration": "10-16 months",
+        "schools": [
+            {"school_id": "insead", "program_name": "INSEAD MBA", "duration": "10 months", "total_cost_estimate": 120000},
+            {"school_id": "lbs", "program_name": "LBS MBA", "duration": "15-21 months", "total_cost_estimate": 140000},
+            {"school_id": "kellogg", "program_name": "Kellogg 1Y MBA", "duration": "12 months", "total_cost_estimate": 155000},
+            {"school_id": "cornell", "program_name": "Johnson Cornell Tech MBA", "duration": "12 months", "total_cost_estimate": 130000},
+            {"school_id": "iese", "program_name": "IESE MBA", "duration": "15 months", "total_cost_estimate": 110000},
+        ],
+        "pros": [
+            "Lower total cost and less time away from career",
+            "Fast-track back to workforce",
+            "Great for career advancers with clear goals",
+            "International exposure (especially INSEAD, LBS)",
+        ],
+        "cons": [
+            "No summer internship — harder for career switchers",
+            "Compressed curriculum with fewer electives",
+            "Less time for networking and extracurriculars",
+        ],
+        "best_for": "Career advancers with 5+ years of experience and clear post-MBA goals who want to minimize time and cost.",
+        "avg_cost": 131000,
+    },
+    "accelerated": {
+        "format": "accelerated",
+        "display_name": "Accelerated / J-Term MBA",
+        "typical_duration": "16-20 months",
+        "schools": [
+            {"school_id": "kellogg", "program_name": "Kellogg Accelerated MBA", "duration": "16 months", "total_cost_estimate": 170000},
+            {"school_id": "columbia", "program_name": "CBS J-Term MBA", "duration": "16 months", "total_cost_estimate": 195000},
+            {"school_id": "darden", "program_name": "Darden Accelerated MBA", "duration": "16 months", "total_cost_estimate": 165000},
+        ],
+        "pros": [
+            "Shorter than 2-year but still includes summer internship",
+            "Lower opportunity cost than traditional 2-year",
+            "January start avoids fall rush",
+        ],
+        "cons": [
+            "Very intense pace with fewer breaks",
+            "Smaller cohort — less diverse peer group",
+            "Limited program options at top schools",
+        ],
+        "best_for": "Experienced professionals who want internship access but prefer a compressed timeline.",
+        "avg_cost": 177000,
+    },
+    "part_time": {
+        "format": "part_time",
+        "display_name": "Part-Time / Evening / Weekend MBA",
+        "typical_duration": "24-36 months",
+        "schools": [
+            {"school_id": "booth", "program_name": "Booth Evening MBA", "duration": "33 months", "total_cost_estimate": 175000},
+            {"school_id": "booth", "program_name": "Booth Weekend MBA", "duration": "33 months", "total_cost_estimate": 175000},
+            {"school_id": "haas", "program_name": "Haas EWMBA", "duration": "30 months", "total_cost_estimate": 170000},
+            {"school_id": "stern", "program_name": "Stern Part-Time MBA", "duration": "24-30 months", "total_cost_estimate": 165000},
+            {"school_id": "anderson", "program_name": "Anderson FEMBA", "duration": "33 months", "total_cost_estimate": 160000},
+            {"school_id": "kellogg", "program_name": "Kellogg Part-Time MBA", "duration": "24-30 months", "total_cost_estimate": 170000},
+        ],
+        "pros": [
+            "Keep your job and income while earning the degree",
+            "Employer may sponsor tuition",
+            "Immediately apply lessons at work",
+            "Same degree as full-time at many schools",
+        ],
+        "cons": [
+            "Extremely demanding schedule (work + school)",
+            "Limited access to full-time recruiting and internships",
+            "Longer time to completion",
+            "Less immersive campus experience",
+        ],
+        "best_for": "Working professionals who want to advance at their current employer or industry without leaving their job.",
+        "avg_cost": 169000,
+    },
+    "executive": {
+        "format": "executive",
+        "display_name": "Executive MBA (EMBA)",
+        "typical_duration": "18-24 months",
+        "schools": [
+            {"school_id": "wharton", "program_name": "Wharton EMBA", "duration": "22 months", "total_cost_estimate": 215000},
+            {"school_id": "kellogg", "program_name": "Kellogg EMBA", "duration": "22 months", "total_cost_estimate": 210000},
+            {"school_id": "booth", "program_name": "Booth EMBA", "duration": "21 months", "total_cost_estimate": 200000},
+            {"school_id": "columbia", "program_name": "CBS EMBA", "duration": "20 months", "total_cost_estimate": 220000},
+            {"school_id": "sloan", "program_name": "MIT Sloan EMBA", "duration": "20 months", "total_cost_estimate": 205000},
+        ],
+        "pros": [
+            "Designed for senior leaders — no career break needed",
+            "Cohort of experienced executives (10-15+ years experience)",
+            "Often employer-sponsored",
+            "Weekend/module-based schedule",
+        ],
+        "cons": [
+            "Highest tuition among MBA formats",
+            "Less flexibility — fixed cohort schedule",
+            "Not designed for career switching",
+            "GMAT often waived but standards are high",
+        ],
+        "best_for": "Senior managers and directors with 10+ years of experience looking to move into C-suite or board roles.",
+        "avg_cost": 210000,
+    },
+    "online": {
+        "format": "online",
+        "display_name": "Online MBA",
+        "typical_duration": "18-36 months",
+        "schools": [
+            {"school_id": "booth", "program_name": "Booth Online MBA (proposed)", "duration": "24 months", "total_cost_estimate": 145000},
+            {"school_id": "tepper", "program_name": "Tepper Online MBA", "duration": "32 months", "total_cost_estimate": 120000},
+            {"school_id": "kelley", "program_name": "Kelley Direct Online MBA", "duration": "24-60 months", "total_cost_estimate": 78000},
+            {"school_id": "unc", "program_name": "UNC Kenan-Flagler Online MBA", "duration": "18-36 months", "total_cost_estimate": 125000},
+            {"school_id": "warwick", "program_name": "Warwick Distance Learning MBA", "duration": "24-48 months", "total_cost_estimate": 45000},
+        ],
+        "pros": [
+            "Maximum flexibility — study from anywhere",
+            "Lowest total cost among MBA formats",
+            "No relocation required",
+            "Can maintain full-time employment",
+        ],
+        "cons": [
+            "Limited networking and on-campus experience",
+            "May carry less prestige with some employers",
+            "Requires strong self-discipline",
+            "Fewer recruiting opportunities compared to on-campus",
+        ],
+        "best_for": "Professionals in remote locations or with family obligations who need maximum flexibility and lower cost.",
+        "avg_cost": 103000,
+    },
+}
+
+
+@router.get("/program-formats")
+def get_program_formats(format: str = None):
+    """Return MBA program format comparisons with schools, costs, pros/cons."""
+    if format:
+        fmt = _PROGRAM_FORMATS.get(format)
+        if not fmt:
+            raise HTTPException(status_code=404, detail=f"Unknown format: {format}. Options: {', '.join(_PROGRAM_FORMATS.keys())}")
+
+        # Enrich school entries with names from SCHOOL_DB
+        enriched = _enrich_format(fmt)
+        return {"formats": [enriched]}
+
+    # Return all formats
+    return {"formats": [_enrich_format(f) for f in _PROGRAM_FORMATS.values()]}
+
+
+def _enrich_format(fmt: dict) -> dict:
+    """Add school_name from SCHOOL_DB to each school entry."""
+    enriched_schools = []
+    for s in fmt["schools"]:
+        school = SCHOOL_DB.get(s["school_id"])
+        school_name = school.get("name", s["school_id"]) if school else s["school_id"]
+        enriched_schools.append({**s, "school_name": school_name})
+    return {**fmt, "schools": enriched_schools}
