@@ -1781,3 +1781,153 @@ def analyze_resume_keywords(req: ResumeKeywordsRequest):
         "weak_verbs_found": weak_verbs_found,
         "power_verb_suggestions": POWER_VERBS_LIST[:5], "tips": tips,
     }
+
+
+# ── Peer Comparison ──────────────────────────────────────────────────────────
+
+from pydantic import BaseModel as _BaseModel
+
+
+class PeerCompareRequest(_BaseModel):
+    gmat: int = 700
+    gpa: float = 3.5
+    work_years: int = 4
+    industry: str = "technology"
+
+
+@router.post("/peer-compare")
+def peer_compare(req: PeerCompareRequest):
+    """Compare your profile against the full school database — percentile rankings."""
+
+    gmat_avgs: list[int] = []
+    gpa_avgs: list[float] = []
+
+    for school in SCHOOL_DB.values():
+        g = school.get("gmat_avg")
+        if isinstance(g, (int, float)) and 400 <= g <= 800:
+            gmat_avgs.append(int(g))
+
+        cp = school.get("class_profile") or {}
+        gpa = cp.get("avg_gpa")
+        if isinstance(gpa, (int, float)) and 0 < gpa <= 4.0:
+            gpa_avgs.append(float(gpa))
+
+    total_schools = len(SCHOOL_DB)
+
+    # GMAT percentile — % of schools whose avg GMAT the user exceeds
+    if gmat_avgs:
+        schools_below_gmat = sum(1 for g in gmat_avgs if req.gmat >= g)
+        schools_above_gmat = len(gmat_avgs) - schools_below_gmat
+        gmat_percentile = round(schools_below_gmat / len(gmat_avgs) * 100)
+    else:
+        schools_below_gmat = 0
+        schools_above_gmat = 0
+        gmat_percentile = 50
+
+    # GPA percentile
+    if gpa_avgs:
+        below_gpa = sum(1 for g in gpa_avgs if req.gpa >= g)
+        gpa_percentile = round(below_gpa / len(gpa_avgs) * 100)
+    else:
+        gpa_percentile = 50
+
+    # Work experience percentile — typical MBA range 3-7 years
+    work_min, work_max = 3, 7
+    if req.work_years <= work_min:
+        work_exp_percentile = max(10, round((req.work_years / work_min) * 30))
+    elif req.work_years >= work_max:
+        work_exp_percentile = min(95, 70 + round((req.work_years - work_max) * 5))
+    else:
+        work_exp_percentile = 30 + round((req.work_years - work_min) / (work_max - work_min) * 40)
+
+    # Build strengths / areas to improve
+    strengths: list[str] = []
+    areas_to_improve: list[str] = []
+
+    if gmat_percentile >= 70:
+        strengths.append("Strong GMAT — above average at most T25 schools")
+    elif gmat_percentile < 40:
+        areas_to_improve.append("GMAT is below median — consider retaking or emphasizing GRE")
+
+    if gpa_percentile >= 70:
+        strengths.append("High GPA — competitive across most programs")
+    elif gpa_percentile < 40:
+        areas_to_improve.append("GPA is below average for M7 — highlight work experience instead")
+
+    if 3 <= req.work_years <= 7:
+        strengths.append(f"{req.work_years} years of experience is in the sweet spot for MBA programs")
+    elif req.work_years < 3:
+        areas_to_improve.append("Less than 3 years of experience — target deferred-enrollment or early-career programs")
+    else:
+        areas_to_improve.append("Senior profile — emphasize why MBA now and target EMBA-friendly programs")
+
+    if req.industry.lower() in {"technology", "consulting", "finance", "investment banking"}:
+        strengths.append(f"{req.industry} is a well-represented industry at top MBA programs")
+    elif req.industry.lower() in {"non-profit", "military", "government", "education"}:
+        strengths.append(f"{req.industry} background adds diversity — highlight unique perspective")
+
+    # Summary
+    peer_summary = f"Your GMAT places you above the average at {gmat_percentile}% of programs."
+    if gpa_percentile >= 60:
+        peer_summary += f" Your GPA is competitive at most schools."
+    else:
+        peer_summary += f" Your GPA may need offsetting strengths at more selective programs."
+
+    return {
+        "gmat_percentile": gmat_percentile,
+        "gpa_percentile": gpa_percentile,
+        "work_exp_percentile": work_exp_percentile,
+        "schools_above_gmat": schools_above_gmat,
+        "schools_below_gmat": schools_below_gmat,
+        "total_schools": total_schools,
+        "peer_summary": peer_summary,
+        "strengths": strengths,
+        "areas_to_improve": areas_to_improve,
+    }
+
+
+# ── Diversity Stats ─────────────────────────────────────────────────────
+
+@router.get("/diversity-stats")
+def get_diversity_stats(school_ids: str | None = None):
+    """Get diversity statistics across MBA programs."""
+    if school_ids:
+        ids = [s.strip().lower() for s in school_ids.split(",") if s.strip()]
+    else:
+        ids = ["hbs", "gsb", "wharton", "booth", "kellogg", "cbs", "sloan",
+               "tuck", "haas", "ross", "fuqua", "darden", "stern", "yale_som", "anderson"]
+
+    stats = []
+    for sid in ids:
+        school = SCHOOL_DB.get(sid)
+        if not school:
+            continue
+        prog = school.get("program_details", {}) or {}
+        cp = school.get("class_profile", {}) or {}
+        stats.append({
+            "school_id": sid,
+            "school_name": school.get("name", sid),
+            "female_pct": prog.get("female_percentage") or cp.get("female_pct"),
+            "international_pct": prog.get("international_percentage") or cp.get("international_pct"),
+            "countries_represented": prog.get("countries_represented") or cp.get("countries"),
+            "avg_age": prog.get("avg_age") or cp.get("avg_age"),
+            "stem_designated": school.get("stem_designated", False),
+        })
+
+    # Compute averages
+    def avg(key: str) -> float | None:
+        vals = [s[key] for s in stats if s[key] is not None]
+        if not vals:
+            return None
+        nums = [float(str(v).replace("%", "")) for v in vals if str(v).replace(".", "").replace("%", "").isdigit()]
+        return round(sum(nums) / len(nums), 1) if nums else None
+
+    return {
+        "schools": stats,
+        "averages": {
+            "female_pct": avg("female_pct"),
+            "international_pct": avg("international_pct"),
+            "avg_age": avg("avg_age"),
+        },
+        "total_schools": len(stats),
+    }
