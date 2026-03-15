@@ -492,7 +492,7 @@ def get_decision_analytics(school_id: str = None):
 # ── Essay Word Counter ──────────────────────────────────────────────────
 
 import re as _re
-from models import EssayWordCountRequest
+from models import EssayWordCountRequest, ThemeAnalysisRequest
 
 
 @router.post("/essay/word-count")
@@ -824,4 +824,385 @@ def get_school_roi(school_id: str, current_salary: float = 60000, years: int = 1
         "net_gain_10yr": round(net_gain),
         "breakeven_year": breakeven_year,
         "assumptions": f"3% annual raise, {years}-year horizon, current salary ${current_salary:,.0f}",
+    }
+
+
+# ── Application Strength Meter ────────────────────────────────────────
+
+from models import AppStrengthRequest
+
+
+def _score_academics(gmat: int | None, gpa: float | None) -> tuple[int, list[str]]:
+    """Score academic dimension 0-100 with tips."""
+    tips: list[str] = []
+    scores: list[int] = []
+
+    if gmat is not None:
+        if gmat >= 750:
+            scores.append(95)
+        elif gmat >= 700:
+            scores.append(90)
+        elif gmat >= 650:
+            scores.append(70)
+        elif gmat >= 600:
+            scores.append(55)
+        else:
+            scores.append(35)
+        if gmat < 700:
+            tips.append("A GMAT above 700 significantly strengthens your academic profile.")
+        if gmat < 650:
+            tips.append("Consider retaking the GMAT or switching to the GRE if it better suits your strengths.")
+    else:
+        tips.append("Add your GMAT score for a more accurate academic assessment.")
+
+    if gpa is not None:
+        if gpa >= 3.8:
+            scores.append(95)
+        elif gpa >= 3.7:
+            scores.append(90)
+        elif gpa >= 3.5:
+            scores.append(75)
+        elif gpa >= 3.2:
+            scores.append(60)
+        else:
+            scores.append(40)
+        if gpa < 3.5:
+            tips.append("Highlight quantitative coursework or certifications to offset a lower GPA.")
+    else:
+        tips.append("Add your GPA for a more accurate academic assessment.")
+
+    return (round(sum(scores) / len(scores)) if scores else 50, tips)
+
+
+def _score_professional(work_years: int | None) -> tuple[int, list[str]]:
+    tips: list[str] = []
+    if work_years is None:
+        return (50, ["Add your work experience for a better assessment."])
+    if 3 <= work_years <= 5:
+        score = 90
+    elif 2 <= work_years < 3:
+        score = 70
+        tips.append("One more year of experience would put you in the sweet spot for most programs.")
+    elif 5 < work_years <= 7:
+        score = 80
+        tips.append("Emphasize leadership progression and strategic impact in your application.")
+    elif work_years < 2:
+        score = 50
+        tips.append("Most top programs prefer 3-5 years of experience. Consider deferring or targeting early-career programs.")
+    else:
+        score = 50
+        tips.append("With 7+ years, highlight why an MBA now. Consider executive MBA programs as an alternative.")
+    return (score, tips)
+
+
+def _score_leadership(examples: int) -> tuple[int, list[str]]:
+    tips: list[str] = []
+    score = min(examples * 25, 100)
+    if examples == 0:
+        tips.append("Leadership is critical — document any team lead, project ownership, or mentoring experiences.")
+    elif examples < 3:
+        tips.append("Seek additional leadership opportunities (volunteer roles, side projects, ERGs).")
+    return (score, tips)
+
+
+def _score_extracurriculars(count: int) -> tuple[int, list[str]]:
+    tips: list[str] = []
+    score = min(count * 20, 100)
+    if count == 0:
+        tips.append("Extracurriculars show passion beyond work — start a community initiative or join a board.")
+    elif count < 3:
+        tips.append("Depth matters more than breadth — show sustained commitment to your activities.")
+    return (score, tips)
+
+
+def _score_diversity(international_exp: bool) -> tuple[int, list[str]]:
+    tips: list[str] = []
+    score = 40
+    if international_exp:
+        score += 30
+    else:
+        tips.append("International experience (work, study, or volunteering abroad) strengthens your diversity profile.")
+    if score < 70:
+        tips.append("Highlight any cross-cultural experiences, multilingual skills, or global projects.")
+    return (score, tips)
+
+
+@router.post("/application-strength")
+def application_strength(req: AppStrengthRequest):
+    """Score an MBA applicant's profile across 5 dimensions and return actionable tips."""
+    acad_score, acad_tips = _score_academics(req.gmat, req.gpa)
+    prof_score, prof_tips = _score_professional(req.work_years)
+    lead_score, lead_tips = _score_leadership(req.leadership_examples or 0)
+    extra_score, extra_tips = _score_extracurriculars(req.extracurriculars or 0)
+    div_score, div_tips = _score_diversity(req.international_exp)
+
+    dimensions = [
+        {"name": "Academics", "score": acad_score, "max": 100, "tips": acad_tips},
+        {"name": "Professional", "score": prof_score, "max": 100, "tips": prof_tips},
+        {"name": "Leadership", "score": lead_score, "max": 100, "tips": lead_tips},
+        {"name": "Extracurriculars", "score": extra_score, "max": 100, "tips": extra_tips},
+        {"name": "Diversity", "score": div_score, "max": 100, "tips": div_tips},
+    ]
+
+    overall = round(
+        acad_score * 0.30
+        + prof_score * 0.25
+        + lead_score * 0.20
+        + extra_score * 0.15
+        + div_score * 0.10
+    )
+
+    if overall >= 80:
+        label = "Very Strong"
+    elif overall >= 65:
+        label = "Strong"
+    elif overall >= 50:
+        label = "Moderate"
+    else:
+        label = "Needs Work"
+
+    result: dict = {
+        "dimensions": dimensions,
+        "overall_score": overall,
+        "overall_label": label,
+    }
+
+    # School comparison
+    if req.target_school_id:
+        school = SCHOOL_DB.get(req.target_school_id)
+        if school:
+            school_gmat = school.get("gmat_avg")
+            school_gpa = None
+            # Try to extract GPA from class profile
+            class_profile = school.get("class_profile", {})
+            if isinstance(class_profile, dict):
+                school_gpa = class_profile.get("avg_gpa") or class_profile.get("median_gpa")
+
+            comparison: dict = {
+                "school_id": req.target_school_id,
+                "school_name": school.get("name", req.target_school_id),
+            }
+
+            if school_gmat and req.gmat is not None:
+                diff = req.gmat - school_gmat
+                comparison["gmat_avg"] = school_gmat
+                comparison["gmat_diff"] = diff
+                comparison["gmat_assessment"] = (
+                    "Above average" if diff > 20
+                    else "At average" if diff >= -10
+                    else "Below average"
+                )
+
+            if school_gpa and req.gpa is not None:
+                try:
+                    sgpa = float(school_gpa)
+                    diff = round(req.gpa - sgpa, 2)
+                    comparison["gpa_avg"] = sgpa
+                    comparison["gpa_diff"] = diff
+                    comparison["gpa_assessment"] = (
+                        "Above average" if diff > 0.1
+                        else "At average" if diff >= -0.1
+                        else "Below average"
+                    )
+                except (ValueError, TypeError):
+                    pass
+
+            result["school_comparison"] = comparison
+
+    return result
+
+
+# ── Cost of Living Comparison ─────────────────────────────────────────
+
+from routers.schools import SCHOOL_ALIASES
+
+CITY_COSTS = {
+    "boston": {"rent": 2400, "food": 600, "transport": 100, "misc": 400},
+    "stanford": {"rent": 2800, "food": 650, "transport": 150, "misc": 450},
+    "palo alto": {"rent": 2800, "food": 650, "transport": 150, "misc": 450},
+    "new york": {"rent": 2600, "food": 700, "transport": 130, "misc": 500},
+    "chicago": {"rent": 1800, "food": 500, "transport": 100, "misc": 350},
+    "philadelphia": {"rent": 1600, "food": 500, "transport": 100, "misc": 350},
+    "new haven": {"rent": 1400, "food": 450, "transport": 80, "misc": 300},
+    "hanover": {"rent": 1500, "food": 450, "transport": 80, "misc": 300},
+    "ann arbor": {"rent": 1400, "food": 450, "transport": 80, "misc": 300},
+    "durham": {"rent": 1300, "food": 400, "transport": 90, "misc": 280},
+    "charlottesville": {"rent": 1300, "food": 400, "transport": 80, "misc": 280},
+    "ithaca": {"rent": 1200, "food": 400, "transport": 70, "misc": 270},
+    "los angeles": {"rent": 2200, "food": 600, "transport": 150, "misc": 400},
+    "san francisco": {"rent": 2800, "food": 650, "transport": 120, "misc": 450},
+    "london": {"rent": 2500, "food": 600, "transport": 200, "misc": 400},
+    "singapore": {"rent": 2000, "food": 500, "transport": 100, "misc": 350},
+    "mumbai": {"rent": 800, "food": 300, "transport": 50, "misc": 200},
+    "ahmedabad": {"rent": 500, "food": 250, "transport": 40, "misc": 150},
+    "paris": {"rent": 1800, "food": 500, "transport": 80, "misc": 350},
+    "barcelona": {"rent": 1200, "food": 400, "transport": 60, "misc": 280},
+    "fontainebleau": {"rent": 1200, "food": 400, "transport": 100, "misc": 300},
+    "toronto": {"rent": 1800, "food": 500, "transport": 100, "misc": 350},
+    "seattle": {"rent": 2000, "food": 550, "transport": 100, "misc": 380},
+    "washington": {"rent": 2200, "food": 550, "transport": 120, "misc": 400},
+    "austin": {"rent": 1600, "food": 450, "transport": 100, "misc": 320},
+    "atlanta": {"rent": 1500, "food": 450, "transport": 90, "misc": 300},
+}
+
+_DEFAULT_COSTS = {"rent": 1500, "food": 450, "transport": 100, "misc": 300}
+
+
+def _match_city_costs(location: str) -> dict:
+    """Fuzzy-match a school location string to CITY_COSTS."""
+    if not location:
+        return dict(_DEFAULT_COSTS)
+    loc_lower = location.lower()
+    # Try each city key as a substring of the location
+    for city_key, costs in CITY_COSTS.items():
+        if city_key in loc_lower:
+            return dict(costs)
+    # Also try the first part of location (before comma)
+    city_part = loc_lower.split(",")[0].strip()
+    for city_key, costs in CITY_COSTS.items():
+        if city_key in city_part or city_part in city_key:
+            return dict(costs)
+    return dict(_DEFAULT_COSTS)
+
+
+@router.get("/cost-of-living")
+def get_cost_of_living(school_ids: str = Query(description="Comma-separated school IDs")):
+    """Compare monthly cost of living across MBA program cities."""
+    ids = [s.strip().lower() for s in school_ids.split(",") if s.strip()]
+    if not ids:
+        raise HTTPException(400, "Provide at least one school_id")
+    if len(ids) > 10:
+        raise HTTPException(400, "Maximum 10 schools per comparison")
+
+    comparisons = []
+    for sid in ids:
+        school = SCHOOL_DB.get(sid)
+        if not school:
+            resolved = SCHOOL_ALIASES.get(sid, "")
+            school = SCHOOL_DB.get(resolved) if resolved else None
+        if not school:
+            continue
+
+        location = school.get("location", "")
+        costs = _match_city_costs(location)
+        monthly_total = sum(costs.values())
+
+        # Determine program length in years
+        duration_str = school.get("program_details", {}).get("duration", "")
+        program_years = 2  # default
+        if duration_str:
+            dur_match = _re.search(r"(\d+)", str(duration_str))
+            if dur_match:
+                val = int(dur_match.group(1))
+                if val >= 10:  # months
+                    program_years = max(1, round(val / 12))
+                else:
+                    program_years = val
+
+        comparisons.append({
+            "school_id": sid,
+            "school_name": school.get("name", sid),
+            "location": location or "Unknown",
+            "monthly": {**costs, "total": monthly_total},
+            "annual_total": monthly_total * 12,
+            "program_years": program_years,
+        })
+
+    if not comparisons:
+        raise HTTPException(404, "No matching schools found")
+
+    cheapest = min(comparisons, key=lambda c: c["monthly"]["total"])
+    most_expensive = max(comparisons, key=lambda c: c["monthly"]["total"])
+
+    return {
+        "comparisons": comparisons,
+        "cheapest": cheapest["school_id"],
+        "most_expensive": most_expensive["school_id"],
+    }
+
+
+# ── Essay Theme Analyzer ─────────────────────────────────────────────
+
+THEME_KEYWORDS = {
+    "Leadership": ["led", "managed", "team", "leader", "initiative", "directed", "spearheaded", "organized", "mentor"],
+    "Innovation": ["created", "built", "designed", "developed", "launched", "startup", "entrepreneur", "innovation", "new"],
+    "Impact": ["impact", "helped", "community", "volunteer", "social", "nonprofit", "improved", "transformed", "changed"],
+    "Global": ["international", "global", "abroad", "diverse", "culture", "countries", "cross-cultural", "overseas"],
+    "Analytical": ["analysis", "data", "strategy", "research", "quantitative", "financial", "problem-solving", "solve"],
+    "Growth": ["learned", "growth", "challenge", "overcome", "failure", "resilience", "adapted", "evolved", "reflection"],
+    "Collaboration": ["collaborated", "partnership", "cross-functional", "stakeholder", "consensus", "together", "teamwork"],
+    "Vision": ["vision", "goal", "future", "aspire", "dream", "mission", "purpose", "long-term", "ambition"],
+}
+
+
+@router.post("/essay/analyze-themes")
+def analyze_essay_themes(req: ThemeAnalysisRequest):
+    """Keyword-based theme analysis across multiple essays — no LLM needed."""
+    if not req.essays:
+        raise HTTPException(400, "At least one essay is required")
+
+    per_essay = []
+    overall_raw: dict[str, int] = {t: 0 for t in THEME_KEYWORDS}
+
+    for essay in req.essays:
+        text_lower = essay.content.lower()
+        words = essay.content.split() if essay.content.strip() else []
+        word_count = len(words)
+
+        # Count keyword matches per theme
+        theme_counts: dict[str, int] = {}
+        for theme, keywords in THEME_KEYWORDS.items():
+            count = sum(text_lower.count(kw) for kw in keywords)
+            theme_counts[theme] = count
+            overall_raw[theme] += count
+
+        # Normalize to percentages
+        total_hits = sum(theme_counts.values()) or 1
+        theme_pcts = {t: round(c / total_hits * 100) for t, c in theme_counts.items()}
+
+        # Find dominant theme for this essay
+        dominant = max(theme_pcts, key=lambda t: theme_pcts[t]) if any(theme_pcts.values()) else "None"
+
+        per_essay.append({
+            "title": essay.title,
+            "themes": theme_pcts,
+            "dominant": dominant,
+            "word_count": word_count,
+        })
+
+    # Overall percentages
+    overall_total = sum(overall_raw.values()) or 1
+    overall_pcts = {t: round(c / overall_total * 100) for t, c in overall_raw.items()}
+
+    # Top 3 dominant themes
+    sorted_themes = sorted(overall_pcts.items(), key=lambda x: -x[1])
+    dominant_themes = [t for t, _ in sorted_themes[:3]]
+
+    # Gaps: themes with < 5% representation
+    gaps = [t for t, pct in sorted_themes if pct < 5]
+
+    # Generate tips
+    tips: list[str] = []
+    if sorted_themes and sorted_themes[0][1] > 40:
+        tips.append(
+            f"Your essays focus heavily on {sorted_themes[0][0]} — consider diversifying to show breadth."
+        )
+    if gaps:
+        gap_str = ", ".join(gaps[:3])
+        tips.append(
+            f"Themes like {gap_str} are underrepresented — weaving in these elements can strengthen your narrative."
+        )
+    if len(req.essays) == 1:
+        tips.append(
+            "Add more essays to get a more comprehensive theme balance analysis."
+        )
+    if not tips:
+        tips.append("Your essays show a well-balanced theme distribution across key MBA dimensions.")
+
+    return {
+        "per_essay": per_essay,
+        "overall": overall_pcts,
+        "dominant_themes": dominant_themes,
+        "gaps": gaps,
+        "tips": tips,
     }
