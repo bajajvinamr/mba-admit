@@ -184,3 +184,36 @@ def test_subscribe_email_invalid(client):
     """Invalid email format returns 422."""
     resp = client.post("/api/subscribe", json={"email": "not-an-email", "source": "test"})
     assert resp.status_code == 422
+
+
+# ── Analytics ────────────────────────────────────────────────────────────────
+
+
+def test_analytics_event_batch(client, tmp_path, monkeypatch):
+    """Analytics endpoint accepts event batches and writes JSONL."""
+    import routers.features as feat_mod
+    analytics_file = tmp_path / "analytics.jsonl"
+    monkeypatch.setattr(feat_mod, "ANALYTICS_FILE", analytics_file)
+
+    resp = client.post("/api/analytics/event", json={
+        "events": [
+            {"event": "page_view", "properties": {"path": "/"}, "timestamp": "2026-03-15T00:00:00Z"},
+            {"event": "odds_calculated", "properties": {"gmat": 720}, "timestamp": "2026-03-15T00:01:00Z"},
+        ]
+    })
+    assert resp.status_code == 200
+    assert resp.json()["ok"] is True
+
+    # Verify JSONL file was written
+    lines = analytics_file.read_text().strip().split("\n")
+    assert len(lines) == 2
+    import json
+    assert json.loads(lines[0])["event"] == "page_view"
+    assert json.loads(lines[1])["event"] == "odds_calculated"
+
+
+def test_analytics_event_empty_batch(client):
+    """Empty batch is accepted without error."""
+    resp = client.post("/api/analytics/event", json={"events": []})
+    assert resp.status_code == 200
+    assert resp.json()["ok"] is True
