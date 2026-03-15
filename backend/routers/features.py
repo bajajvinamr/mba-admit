@@ -394,3 +394,26 @@ def subscribe_email(request: Request, req: EmailCaptureRequest):
         raise HTTPException(status_code=500, detail="Failed to save — please try again")
 
     return {"status": "subscribed", "message": "Welcome aboard! We'll be in touch."}
+
+
+# ── Analytics ────────────────────────────────────────────────────────────────
+
+ANALYTICS_FILE = Path(__file__).resolve().parent.parent / "data" / "analytics.jsonl"
+logger = logging.getLogger(__name__)
+
+
+class AnalyticsEventBatch(BaseModel):
+    events: list
+
+
+@router.post("/analytics/event")
+async def track_events(request: Request, batch: AnalyticsEventBatch):
+    """Receive frontend analytics events. Fire-and-forget, never fails."""
+    try:
+        ANALYTICS_FILE.parent.mkdir(parents=True, exist_ok=True)
+        with open(ANALYTICS_FILE, "a") as f:
+            for event in batch.events:
+                f.write(json.dumps(event) + "\n")
+    except Exception as e:
+        logger.warning("Analytics write failed: %s", e)
+    return {"ok": True}
