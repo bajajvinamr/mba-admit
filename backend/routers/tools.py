@@ -1592,3 +1592,192 @@ def get_fee_waivers(school_ids: str | None = None, is_military: bool = False, is
         "consortium_eligible": sum(1 for r in results if r["qualifies_consortium"]),
         "military_eligible": sum(1 for r in results if r["qualifies_military"]),
     }
+
+
+# ── Scholarship Estimator ─────────────────────────────────────────────────────
+
+from routers.schools import SCHOOL_DB as _SCHOL_SCHOOL_DB, SCHOOL_ALIASES as _SCHOL_ALIASES
+
+
+class ScholarshipRequest(_BaseModel):
+    gmat: int = 700
+    gpa: float = 3.5
+    work_years: int = 4
+    school_ids: list[str] = []
+    is_urm: bool = False
+    is_international: bool = False
+    financial_need: bool = False
+
+
+SCHOLARSHIP_DATA = {
+    "hbs": {"avg_award": 40000, "pct_receiving": 50, "merit_based": True, "need_based": True, "full_tuition_pct": 5, "total_tuition": 150000},
+    "gsb": {"avg_award": 45000, "pct_receiving": 52, "merit_based": True, "need_based": True, "full_tuition_pct": 7, "total_tuition": 155000},
+    "wharton": {"avg_award": 35000, "pct_receiving": 45, "merit_based": True, "need_based": True, "full_tuition_pct": 3, "total_tuition": 148000},
+    "booth": {"avg_award": 38000, "pct_receiving": 50, "merit_based": True, "need_based": True, "full_tuition_pct": 5, "total_tuition": 146000},
+    "kellogg": {"avg_award": 32000, "pct_receiving": 48, "merit_based": True, "need_based": True, "full_tuition_pct": 4, "total_tuition": 145000},
+    "cbs": {"avg_award": 30000, "pct_receiving": 40, "merit_based": True, "need_based": True, "full_tuition_pct": 3, "total_tuition": 152000},
+    "sloan": {"avg_award": 35000, "pct_receiving": 42, "merit_based": True, "need_based": True, "full_tuition_pct": 4, "total_tuition": 148000},
+    "tuck": {"avg_award": 40000, "pct_receiving": 55, "merit_based": True, "need_based": True, "full_tuition_pct": 6, "total_tuition": 142000},
+    "haas": {"avg_award": 28000, "pct_receiving": 45, "merit_based": True, "need_based": True, "full_tuition_pct": 3, "total_tuition": 132000},
+    "ross": {"avg_award": 30000, "pct_receiving": 50, "merit_based": True, "need_based": True, "full_tuition_pct": 4, "total_tuition": 138000},
+    "fuqua": {"avg_award": 32000, "pct_receiving": 48, "merit_based": True, "need_based": True, "full_tuition_pct": 4, "total_tuition": 140000},
+    "darden": {"avg_award": 35000, "pct_receiving": 50, "merit_based": True, "need_based": True, "full_tuition_pct": 5, "total_tuition": 140000},
+    "stern": {"avg_award": 28000, "pct_receiving": 38, "merit_based": True, "need_based": True, "full_tuition_pct": 2, "total_tuition": 150000},
+    "yale_som": {"avg_award": 30000, "pct_receiving": 50, "merit_based": True, "need_based": True, "full_tuition_pct": 5, "total_tuition": 142000},
+    "anderson": {"avg_award": 25000, "pct_receiving": 42, "merit_based": True, "need_based": True, "full_tuition_pct": 3, "total_tuition": 132000},
+}
+
+_SCHOL_M7 = ["hbs", "gsb", "wharton", "booth", "kellogg", "cbs", "sloan"]
+
+
+@router.post("/scholarship-estimate")
+def estimate_scholarship(req: ScholarshipRequest):
+    """Estimate MBA scholarship probability and award amount based on applicant profile."""
+    ids = req.school_ids if req.school_ids else list(_SCHOL_M7)
+    # Resolve aliases (SCHOOL_ALIASES values may be lists)
+    resolved = []
+    for sid in ids:
+        alias = _SCHOL_ALIASES.get(sid, sid)
+        r = alias[0] if isinstance(alias, list) else alias
+        if r not in resolved:
+            resolved.append(r)
+
+    results = []
+    for sid in resolved:
+        sdata = SCHOLARSHIP_DATA.get(sid)
+        if not sdata:
+            continue
+        school = _SCHOL_SCHOOL_DB.get(sid, {})
+        school_name = school.get("name", sid)
+        school_gmat_avg = school.get("gmat_avg") or 720
+
+        # 1. Base probability
+        prob = sdata["pct_receiving"]
+
+        # 2. GMAT boost
+        gmat_diff = req.gmat - school_gmat_avg
+        if gmat_diff >= 30:
+            prob += 10
+        elif gmat_diff >= 15:
+            prob += 5
+
+        # 3. URM boost
+        if req.is_urm:
+            prob += 8
+
+        # 4. Financial need boost (only for need-based schools)
+        if req.financial_need and sdata["need_based"]:
+            prob += 10
+
+        prob = min(prob, 95)
+
+        # 5. Estimated award — multiplier based on profile strength
+        strength = 1.0
+        if gmat_diff >= 30:
+            strength += 0.25
+        elif gmat_diff >= 15:
+            strength += 0.10
+        if req.gpa >= 3.8:
+            strength += 0.15
+        elif req.gpa >= 3.6:
+            strength += 0.05
+        if req.work_years >= 6:
+            strength += 0.10
+        if req.is_urm:
+            strength += 0.10
+        if req.financial_need and sdata["need_based"]:
+            strength += 0.15
+
+        estimated_award = int(sdata["avg_award"] * strength)
+        total_tuition = sdata["total_tuition"]
+        net_cost = total_tuition - estimated_award
+
+        results.append({
+            "school_id": sid,
+            "school_name": school_name,
+            "estimated_award": estimated_award,
+            "probability_pct": prob,
+            "total_tuition": total_tuition,
+            "net_cost": net_cost,
+            "school_data": {
+                "avg_award": sdata["avg_award"],
+                "pct_receiving": sdata["pct_receiving"],
+                "merit_based": sdata["merit_based"],
+                "need_based": sdata["need_based"],
+                "full_tuition_pct": sdata["full_tuition_pct"],
+            },
+        })
+
+    results.sort(key=lambda x: x["estimated_award"], reverse=True)
+    total_savings = sum(r["estimated_award"] for r in results)
+    best = max(results, key=lambda x: x["estimated_award"]) if results else None
+
+    return {
+        "estimates": results,
+        "total_schools": len(results),
+        "total_potential_savings": total_savings,
+        "best_opportunity": {
+            "school_id": best["school_id"],
+            "school_name": best["school_name"],
+            "estimated_award": best["estimated_award"],
+        } if best else None,
+    }
+
+
+# ── Resume Keywords Optimizer ───────────────────────────────────────────
+
+MBA_KEYWORDS: dict[str, list[str]] = {
+    "Leadership": ["led", "managed", "directed", "oversaw", "spearheaded", "headed", "supervised", "mentored", "coordinated", "orchestrated"],
+    "Impact": ["increased", "decreased", "improved", "generated", "achieved", "delivered", "grew", "reduced", "saved", "accelerated"],
+    "Quantitative": ["analyzed", "modeled", "forecasted", "calculated", "measured", "quantified", "optimized", "benchmarked"],
+    "Strategy": ["developed", "designed", "launched", "implemented", "created", "built", "established", "initiated", "pioneered"],
+    "Collaboration": ["collaborated", "partnered", "cross-functional", "stakeholder", "team", "aligned", "negotiated", "influenced"],
+    "Innovation": ["innovated", "transformed", "disrupted", "automated", "streamlined", "redesigned", "modernized", "digitized"],
+}
+
+WEAK_VERBS = ["helped", "assisted", "worked on", "was responsible for", "participated in", "was involved in", "handled", "dealt with"]
+POWER_VERBS_LIST = ["spearheaded", "orchestrated", "transformed", "generated", "accelerated", "pioneered", "architected", "catalyzed"]
+
+
+class ResumeKeywordsRequest(_BaseModel):
+    resume_text: str
+    target_role: str = "general"
+
+
+@router.post("/resume/keywords")
+def analyze_resume_keywords(req: ResumeKeywordsRequest):
+    """Analyze resume for MBA-relevant keywords and suggest improvements."""
+    import re
+    text_lower = req.resume_text.lower()
+    words = req.resume_text.split()
+    word_count = len(words)
+
+    category_scores: dict[str, dict] = {}
+    for category, keywords in MBA_KEYWORDS.items():
+        found = [kw for kw in keywords if kw in text_lower]
+        missing = [kw for kw in keywords if kw not in text_lower]
+        score = min(100, len(found) * 20)
+        category_scores[category] = {"score": score, "found": found, "suggested": missing[:3]}
+
+    weak_verbs_found = [v for v in WEAK_VERBS if v in text_lower]
+    metrics = re.findall(r'\d+[%$KMB]|\$[\d,.]+|\d+\+', req.resume_text)
+    metrics_count = len(metrics)
+    overall_score = round(sum(c["score"] for c in category_scores.values()) / len(category_scores))
+
+    tips: list[str] = []
+    if weak_verbs_found:
+        tips.append(f"Replace weak verbs ({', '.join(weak_verbs_found[:3])}) with power verbs.")
+    if metrics_count < 3:
+        tips.append("Add more quantifiable achievements — aim for one metric per bullet.")
+    low = [c for c, v in category_scores.items() if v["score"] < 40]
+    if low:
+        tips.append(f"Strengthen these themes: {', '.join(low)}.")
+    if overall_score >= 70:
+        tips.append("Strong keyword density! Focus on clear impact stories.")
+
+    return {
+        "overall_score": overall_score, "word_count": word_count,
+        "metrics_count": metrics_count, "categories": category_scores,
+        "weak_verbs_found": weak_verbs_found,
+        "power_verb_suggestions": POWER_VERBS_LIST[:5], "tips": tips,
+    }

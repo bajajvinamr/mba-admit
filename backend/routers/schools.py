@@ -301,6 +301,71 @@ def culture_match(req: CultureMatchRequest):
     return {"matches": matches}
 
 
+# ── Alumni Network Explorer ──────────────────────────────────────────────
+
+ALUMNI_DATA = {
+    "hbs": {"total_alumni": 85000, "industries": {"Consulting": 25, "Finance": 22, "Tech": 18, "Healthcare": 8, "Entrepreneurship": 12, "PE/VC": 8, "Other": 7}, "top_companies": ["McKinsey", "BCG", "Goldman Sachs", "Amazon", "Google", "Bain"], "notable_alumni": ["Michael Bloomberg", "Sheryl Sandberg", "Jamie Dimon"]},
+    "gsb": {"total_alumni": 32000, "industries": {"Tech": 30, "Entrepreneurship": 20, "PE/VC": 15, "Consulting": 12, "Finance": 10, "Nonprofit": 5, "Other": 8}, "top_companies": ["Google", "Apple", "Sequoia", "A16Z", "Nike", "McKinsey"], "notable_alumni": ["Phil Knight", "Sundar Pichai", "Mary Barra"]},
+    "wharton": {"total_alumni": 100000, "industries": {"Finance": 30, "Consulting": 20, "Tech": 15, "PE/VC": 12, "Real Estate": 8, "Healthcare": 7, "Other": 8}, "top_companies": ["Goldman Sachs", "JP Morgan", "McKinsey", "Google", "Blackstone", "BCG"], "notable_alumni": ["Elon Musk", "Warren Buffett", "Sundar Pichai"]},
+    "booth": {"total_alumni": 55000, "industries": {"Finance": 28, "Consulting": 22, "Tech": 15, "PE/VC": 12, "Entrepreneurship": 10, "Healthcare": 6, "Other": 7}, "top_companies": ["McKinsey", "BCG", "Goldman Sachs", "Citadel", "Amazon", "Google"], "notable_alumni": ["Satya Nadella", "Susan Wojcicki"]},
+    "kellogg": {"total_alumni": 65000, "industries": {"Consulting": 28, "Tech": 18, "Finance": 15, "CPG/Marketing": 12, "Healthcare": 10, "Entrepreneurship": 8, "Other": 9}, "top_companies": ["McKinsey", "BCG", "Amazon", "Google", "Deloitte", "P&G"], "notable_alumni": ["Jacqueline Mars", "Rick Waddell"]},
+    "cbs": {"total_alumni": 49000, "industries": {"Finance": 32, "Consulting": 18, "Media/Entertainment": 10, "Tech": 15, "PE/VC": 10, "Real Estate": 8, "Other": 7}, "top_companies": ["Goldman Sachs", "JP Morgan", "McKinsey", "Deloitte", "Amazon", "Blackstone"], "notable_alumni": ["Warren Buffett", "Henry Kravis"]},
+    "sloan": {"total_alumni": 28000, "industries": {"Tech": 32, "Consulting": 18, "Finance": 12, "Entrepreneurship": 15, "Healthcare": 10, "Manufacturing": 6, "Other": 7}, "top_companies": ["Amazon", "Google", "McKinsey", "Microsoft", "Apple", "BCG"], "notable_alumni": ["Kofi Annan", "Robin Chase"]},
+    "tuck": {"total_alumni": 11000, "industries": {"Consulting": 25, "Finance": 20, "Tech": 15, "CPG": 12, "Healthcare": 10, "Entrepreneurship": 8, "Other": 10}, "top_companies": ["McKinsey", "BCG", "Bain", "Amazon", "Goldman Sachs", "Google"], "notable_alumni": ["Timothy Geithner"]},
+    "haas": {"total_alumni": 22000, "industries": {"Tech": 35, "Entrepreneurship": 18, "Consulting": 12, "Finance": 10, "Social Impact": 10, "Healthcare": 8, "Other": 7}, "top_companies": ["Google", "Apple", "Amazon", "Meta", "McKinsey", "Bain"], "notable_alumni": ["Walter Haas Jr.", "Steve Blank"]},
+    "ross": {"total_alumni": 25000, "industries": {"Consulting": 22, "Tech": 20, "Finance": 15, "Healthcare": 12, "Social Impact": 10, "Manufacturing": 8, "Other": 13}, "top_companies": ["McKinsey", "Amazon", "Google", "Deloitte", "Ford", "BCG"], "notable_alumni": ["Stephen Ross"]},
+    "fuqua": {"total_alumni": 20000, "industries": {"Consulting": 24, "Tech": 18, "Finance": 16, "Healthcare": 14, "Entrepreneurship": 10, "Energy": 8, "Other": 10}, "top_companies": ["McKinsey", "Deloitte", "Amazon", "BCG", "Google", "Goldman Sachs"], "notable_alumni": ["Melinda French Gates", "Tim Cook"]},
+    "darden": {"total_alumni": 18000, "industries": {"Consulting": 26, "Finance": 22, "Tech": 16, "Healthcare": 10, "Entrepreneurship": 8, "CPG": 8, "Other": 10}, "top_companies": ["McKinsey", "BCG", "Bain", "Amazon", "Deloitte", "Goldman Sachs"], "notable_alumni": ["Steven Reinemund"]},
+    "stern": {"total_alumni": 40000, "industries": {"Finance": 30, "Consulting": 18, "Tech": 16, "Media/Entertainment": 10, "PE/VC": 8, "Real Estate": 8, "Other": 10}, "top_companies": ["Goldman Sachs", "JP Morgan", "McKinsey", "Deloitte", "Google", "Amazon"], "notable_alumni": ["Alan Greenspan", "Richard Fuld"]},
+    "yale_som": {"total_alumni": 12000, "industries": {"Consulting": 22, "Tech": 18, "Finance": 15, "Social Impact": 15, "Healthcare": 12, "Entrepreneurship": 8, "Other": 10}, "top_companies": ["McKinsey", "BCG", "Amazon", "Google", "Bridgewater", "Bain"], "notable_alumni": ["Indra Nooyi"]},
+    "anderson": {"total_alumni": 24000, "industries": {"Tech": 28, "Entrepreneurship": 16, "Consulting": 14, "Finance": 14, "Entertainment": 10, "Healthcare": 8, "Other": 10}, "top_companies": ["Amazon", "Google", "McKinsey", "Disney", "Goldman Sachs", "BCG"], "notable_alumni": ["Hank McKinnell"]},
+}
+
+_ALUMNI_DISPLAY_NAMES = {
+    "hbs": "Harvard Business School",
+    "gsb": "Stanford GSB",
+    "wharton": "Wharton",
+    "booth": "Chicago Booth",
+    "kellogg": "Kellogg",
+    "cbs": "Columbia Business School",
+    "sloan": "MIT Sloan",
+    "tuck": "Tuck",
+    "haas": "Berkeley Haas",
+    "ross": "Michigan Ross",
+    "fuqua": "Duke Fuqua",
+    "darden": "UVA Darden",
+    "stern": "NYU Stern",
+    "yale_som": "Yale SOM",
+    "anderson": "UCLA Anderson",
+}
+
+
+@router.get("/schools/alumni-network")
+def get_alumni_network(school_ids: str = Query(description="Comma-separated school IDs")):
+    """Get alumni network data for one or more schools."""
+    ids = [s.strip() for s in school_ids.split(",") if s.strip()]
+    if not ids:
+        raise HTTPException(400, "Provide at least one school_id")
+
+    results = []
+    for sid in ids:
+        sid_lower = sid.lower()
+        data = ALUMNI_DATA.get(sid_lower)
+        if not data:
+            continue
+        school_name = _ALUMNI_DISPLAY_NAMES.get(sid_lower) or SCHOOL_DB.get(sid_lower, {}).get("name", sid)
+        results.append({
+            "school_id": sid_lower,
+            "school_name": school_name,
+            "total_alumni": data["total_alumni"],
+            "industries": data["industries"],
+            "top_companies": data["top_companies"],
+            "notable_alumni": data["notable_alumni"],
+        })
+
+    return {"schools": results, "school_count": len(results)}
+
+
 @router.get("/schools/{school_id}")
 def get_school(school_id: str):
     """Returns detail for a single school including essay prompts and data quality."""
