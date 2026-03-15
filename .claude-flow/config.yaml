@@ -1,0 +1,77 @@
+# RuFlo V3 Runtime Configuration
+# Generated: 2026-03-15T15:18:35.319Z
+
+version: "3.0.0"
+
+swarm:
+  topology: hierarchical
+  maxAgents: 8
+  autoScale: true
+  coordinationStrategy: raft
+  checkpointInterval: 5m
+  antiDrift: true
+
+memory:
+  backend: hybrid
+  enableHNSW: true
+  persistPath: .claude-flow/data
+  cacheSize: 100
+  # ADR-049: Self-Learning Memory
+  learningBridge:
+    enabled: true
+    sonaMode: balanced
+    confidenceDecayRate: 0.005
+    accessBoostAmount: 0.03
+    consolidationThreshold: 10
+  memoryGraph:
+    enabled: true
+    pageRankDamping: 0.85
+    maxNodes: 5000
+    similarityThreshold: 0.8
+  agentScopes:
+    enabled: true
+    defaultScope: project
+
+neural:
+  enabled: true
+  modelPath: .claude-flow/neural
+
+hooks:
+  enabled: true
+  autoExecute: true
+
+providers:
+  anthropic:
+    enabled: true
+    apiKeyEnv: ANTHROPIC_API_KEY  # reads from environment, never hardcoded
+    models:
+      - claude-opus-4-6
+      - claude-sonnet-4-6
+      - claude-haiku-4-5-20251001
+    default: claude-sonnet-4-6
+    routing:
+      simple: claude-haiku-4-5-20251001    # cheap tasks (<1s)
+      medium: claude-sonnet-4-6            # most coding tasks
+      complex: claude-opus-4-6             # architecture, multi-file refactors
+    costOptimization:
+      enabled: true
+      preferCheapest: true                 # use cheapest model that meets quality threshold
+      qualityThreshold: 0.8               # minimum quality score before upgrading model
+
+mcp:
+  autoStart: false
+  port: 3100
+
+# Project-specific: MBA Admissions AI
+project:
+  name: admit-compass
+  stack:
+    backend: python-fastapi
+    frontend: nextjs-react
+    database: json-file
+    ai: claude-api
+  paths:
+    backend: ./backend
+    frontend: ./frontend
+    data: ./backend/data
+    docs: ./docs

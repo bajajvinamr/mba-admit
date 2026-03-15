@@ -45,3 +45,12 @@ yarn-debug.log*
 
 # Worktrees
 .worktrees/
+
+# Ruflo / Claude Flow runtime
+.claude-flow/data/
+.claude-flow/logs/
+.claude-flow/sessions/
+.claude-flow/daemon.log
+.claude-flow/metrics/
+.swarm/
+.claude/memory.db
