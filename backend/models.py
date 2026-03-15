@@ -219,3 +219,20 @@ class SignupRequest(BaseModel):
     email: str
     password: str = Field(min_length=8)
     name: str = Field(min_length=1, max_length=100)
+
+
+# ── Financial Comparison ────────────────────────────────────────────────────
+
+class SchoolFinancialInput(BaseModel):
+    school_id: str
+    scholarship_amount: float = 0
+
+class FinancialCompareRequest(BaseModel):
+    schools: List[SchoolFinancialInput] = Field(min_length=2, max_length=5)
+    current_salary: float = Field(ge=0)
+    living_cost_override: Optional[float] = None
+    gmat: Optional[int] = Field(default=None, ge=200, le=800)
+    gpa: Optional[float] = Field(default=None, ge=0, le=10.0)
+    work_exp_years: Optional[int] = Field(default=None, ge=0, le=30)
+    loan_rate: float = Field(default=7.0, ge=0, le=30)
+    loan_term_years: int = Field(default=10, ge=1, le=30)
