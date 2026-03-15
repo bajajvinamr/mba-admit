@@ -3792,3 +3792,313 @@ def _enrich_format(fmt: dict) -> dict:
         school_name = school.get("name", s["school_id"]) if school else s["school_id"]
         enriched_schools.append({**s, "school_name": school_name})
     return {**fmt, "schools": enriched_schools}
+
+
+# ── Campus Life Comparison ────────────────────────────────────────────
+
+
+class _HousingInfo(_BaseModel):
+    on_campus_available: bool
+    avg_monthly_rent: int
+
+
+class _CampusLifeEntry(_BaseModel):
+    school_id: str
+    school_name: str
+    city: str
+    state_or_country: str
+    climate: str
+    housing: _HousingInfo
+    walkability_score: int
+    nightlife_score: int
+    cost_of_living_index: int
+    nearby_attractions: list[str]
+    student_clubs_count: int
+    sports_facilities: list[str]
+
+
+_CAMPUS_LIFE_DATA: list[dict] = [
+    {
+        "school_id": "hbs",
+        "school_name": "Harvard Business School",
+        "city": "Boston",
+        "state_or_country": "Massachusetts",
+        "climate": "Cold winters with snowy conditions; warm, humid summers. Four distinct seasons.",
+        "housing": {"on_campus_available": True, "avg_monthly_rent": 2400},
+        "walkability_score": 8,
+        "nightlife_score": 7,
+        "cost_of_living_index": 148,
+        "nearby_attractions": ["Harvard Square", "Freedom Trail", "Charles River Esplanade", "Fenway Park", "MIT campus"],
+        "student_clubs_count": 120,
+        "sports_facilities": ["Shad Hall gym", "Indoor pool", "Basketball courts", "Squash courts", "Outdoor running trails"],
+    },
+    {
+        "school_id": "gsb",
+        "school_name": "Stanford GSB",
+        "city": "Stanford",
+        "state_or_country": "California",
+        "climate": "Mediterranean climate — mild year-round, dry summers, occasional rain in winter.",
+        "housing": {"on_campus_available": True, "avg_monthly_rent": 3200},
+        "walkability_score": 6,
+        "nightlife_score": 5,
+        "cost_of_living_index": 172,
+        "nearby_attractions": ["Palo Alto downtown", "Stanford Dish trail", "San Francisco (30 mi)", "Napa Valley", "Big Sur coast"],
+        "student_clubs_count": 100,
+        "sports_facilities": ["Arrillaga Recreation Center", "Golf course", "Tennis courts", "Olympic pool", "Climbing wall"],
+    },
+    {
+        "school_id": "wharton",
+        "school_name": "Wharton School",
+        "city": "Philadelphia",
+        "state_or_country": "Pennsylvania",
+        "climate": "Four seasons — hot, humid summers and cold winters with moderate snowfall.",
+        "housing": {"on_campus_available": True, "avg_monthly_rent": 1800},
+        "walkability_score": 9,
+        "nightlife_score": 8,
+        "cost_of_living_index": 118,
+        "nearby_attractions": ["Rittenhouse Square", "Philadelphia Museum of Art", "Reading Terminal Market", "South Street", "Schuylkill River Trail"],
+        "student_clubs_count": 150,
+        "sports_facilities": ["Pottruck Health & Fitness Center", "Squash courts", "Indoor pool", "Basketball courts", "Ice rink"],
+    },
+    {
+        "school_id": "booth",
+        "school_name": "Chicago Booth",
+        "city": "Chicago",
+        "state_or_country": "Illinois",
+        "climate": "Cold, windy winters with heavy snow; warm summers along Lake Michigan.",
+        "housing": {"on_campus_available": False, "avg_monthly_rent": 1900},
+        "walkability_score": 9,
+        "nightlife_score": 9,
+        "cost_of_living_index": 107,
+        "nearby_attractions": ["Millennium Park", "Art Institute of Chicago", "Wrigley Field", "Navy Pier", "Lake Michigan waterfront"],
+        "student_clubs_count": 130,
+        "sports_facilities": ["Ratner Athletics Center", "Stagg Field", "Indoor pool", "Squash courts", "Henry Crown Field House"],
+    },
+    {
+        "school_id": "kellogg",
+        "school_name": "Kellogg School of Management",
+        "city": "Evanston",
+        "state_or_country": "Illinois",
+        "climate": "Similar to Chicago — harsh winters, pleasant summers. Lake-effect weather patterns.",
+        "housing": {"on_campus_available": True, "avg_monthly_rent": 1700},
+        "walkability_score": 7,
+        "nightlife_score": 6,
+        "cost_of_living_index": 105,
+        "nearby_attractions": ["Northwestern campus lakefront", "downtown Evanston shops", "Chicago (12 mi)", "Grosse Point Lighthouse", "Baha'i Temple"],
+        "student_clubs_count": 140,
+        "sports_facilities": ["Henry Crown Sports Pavilion", "Norris Aquatics Center", "Tennis courts", "Running trails", "Ryan Fieldhouse"],
+    },
+    {
+        "school_id": "cbs",
+        "school_name": "Columbia Business School",
+        "city": "New York City",
+        "state_or_country": "New York",
+        "climate": "Four seasons — hot, humid summers; cold winters with occasional nor'easters.",
+        "housing": {"on_campus_available": True, "avg_monthly_rent": 3000},
+        "walkability_score": 10,
+        "nightlife_score": 10,
+        "cost_of_living_index": 187,
+        "nearby_attractions": ["Central Park", "Broadway theaters", "Hudson Yards", "Brooklyn Bridge", "Museum Mile"],
+        "student_clubs_count": 160,
+        "sports_facilities": ["Manhattanville campus gym", "Baker Athletics Complex", "Tennis courts", "Indoor pool", "Dodge Fitness Center"],
+    },
+    {
+        "school_id": "sloan",
+        "school_name": "MIT Sloan",
+        "city": "Cambridge",
+        "state_or_country": "Massachusetts",
+        "climate": "Cold winters with nor'easters; warm, humid summers. Classic New England weather.",
+        "housing": {"on_campus_available": True, "avg_monthly_rent": 2500},
+        "walkability_score": 9,
+        "nightlife_score": 7,
+        "cost_of_living_index": 152,
+        "nearby_attractions": ["Kendall Square tech hub", "Harvard Square", "Charles River", "Boston waterfront", "MIT Museum"],
+        "student_clubs_count": 100,
+        "sports_facilities": ["Zesiger Sports & Fitness Center", "Sailing pavilion", "Indoor pool", "Squash courts", "Outdoor track"],
+    },
+    {
+        "school_id": "tuck",
+        "school_name": "Tuck School of Business",
+        "city": "Hanover",
+        "state_or_country": "New Hampshire",
+        "climate": "Long, snowy winters; beautiful fall foliage; short but warm summers.",
+        "housing": {"on_campus_available": True, "avg_monthly_rent": 1400},
+        "walkability_score": 5,
+        "nightlife_score": 3,
+        "cost_of_living_index": 92,
+        "nearby_attractions": ["Appalachian Trail", "Dartmouth skiway", "Connecticut River", "Quechee Gorge", "Woodstock village"],
+        "student_clubs_count": 70,
+        "sports_facilities": ["Alumni Gymnasium", "Leverone Field House", "Dartmouth Skiway", "Golf course", "Outdoor pool"],
+    },
+    {
+        "school_id": "haas",
+        "school_name": "UC Berkeley Haas",
+        "city": "Berkeley",
+        "state_or_country": "California",
+        "climate": "Mild Mediterranean — cool fog mornings, sunny afternoons, minimal rain May–October.",
+        "housing": {"on_campus_available": False, "avg_monthly_rent": 2800},
+        "walkability_score": 8,
+        "nightlife_score": 7,
+        "cost_of_living_index": 164,
+        "nearby_attractions": ["San Francisco (15 mi)", "Tilden Regional Park", "Berkeley Marina", "Gourmet Ghetto", "UC Botanical Garden"],
+        "student_clubs_count": 90,
+        "sports_facilities": ["Recreational Sports Facility", "Strawberry Canyon pool", "Tennis courts", "Golden Bear Recreation Center", "Stadium running track"],
+    },
+    {
+        "school_id": "ross",
+        "school_name": "Michigan Ross",
+        "city": "Ann Arbor",
+        "state_or_country": "Michigan",
+        "climate": "Cold, snowy winters; warm summers. Classic Midwest seasons with lake-effect snow.",
+        "housing": {"on_campus_available": False, "avg_monthly_rent": 1400},
+        "walkability_score": 7,
+        "nightlife_score": 7,
+        "cost_of_living_index": 95,
+        "nearby_attractions": ["Michigan Stadium (The Big House)", "Ann Arbor Art Fair", "Huron River", "Nichols Arboretum", "Zingerman's Deli"],
+        "student_clubs_count": 110,
+        "sports_facilities": ["Central Campus Recreation Building", "Indoor pool", "Ross fitness center", "Golf course", "Ice arena"],
+    },
+]
+
+
+@router.get("/campus-life")
+def get_campus_life(
+    school_id: str | None = Query(default=None, description="Comma-separated school IDs to filter"),
+):
+    """Return campus life data for MBA schools — housing, climate, scores, attractions."""
+    if school_id:
+        ids = [s.strip().lower() for s in school_id.split(",") if s.strip()]
+        lookup = {e["school_id"]: e for e in _CAMPUS_LIFE_DATA}
+        results = [lookup[sid] for sid in ids if sid in lookup]
+        if not results:
+            raise HTTPException(404, f"No campus life data for: {school_id}")
+        return {"schools": results, "total": len(results)}
+
+    return {"schools": _CAMPUS_LIFE_DATA, "total": len(_CAMPUS_LIFE_DATA)}
+
+
+# ── School News Feed ──────────────────────────────────────────────────
+
+
+class _NewsItem(_BaseModel):
+    school_id: str
+    school_name: str
+    headline: str
+    summary: str
+    date: str
+    category: str
+
+
+_SCHOOL_NEWS: list[dict] = [
+    {
+        "school_id": "hbs",
+        "school_name": "Harvard Business School",
+        "headline": "HBS Launches New Climate-Focused MBA Elective",
+        "summary": "Harvard Business School announced a new elective on climate finance and sustainability, reflecting growing student demand for ESG-oriented coursework.",
+        "date": "2026-03-15",
+        "category": "curriculum",
+    },
+    {
+        "school_id": "gsb",
+        "school_name": "Stanford GSB",
+        "headline": "Stanford GSB Rises to #1 in Latest FT Global MBA Ranking",
+        "summary": "Stanford Graduate School of Business reclaimed the top spot in the Financial Times 2026 Global MBA ranking, edging past Wharton and INSEAD.",
+        "date": "2026-03-14",
+        "category": "ranking",
+    },
+    {
+        "school_id": "wharton",
+        "school_name": "Wharton School",
+        "headline": "Wharton Hires Former Fed Economist as Finance Chair",
+        "summary": "The Wharton School appointed Dr. Elena Vasquez, previously a senior economist at the Federal Reserve, to lead its Finance Department.",
+        "date": "2026-03-13",
+        "category": "faculty",
+    },
+    {
+        "school_id": "booth",
+        "school_name": "Chicago Booth",
+        "headline": "Booth Students Launch AI-Powered Consulting Club",
+        "summary": "A group of second-year Booth students created an AI consulting club that partners with Chicago startups on machine learning strategy projects.",
+        "date": "2026-03-12",
+        "category": "student_life",
+    },
+    {
+        "school_id": "kellogg",
+        "school_name": "Kellogg School of Management",
+        "headline": "Kellogg Reports Record Placement in Tech Sector",
+        "summary": "Kellogg's 2025 employment report shows 38% of graduates entered tech roles, up from 29% last year — a new school record.",
+        "date": "2026-03-11",
+        "category": "career",
+    },
+    {
+        "school_id": "cbs",
+        "school_name": "Columbia Business School",
+        "headline": "CBS Opens New Manhattanville Campus Building",
+        "summary": "Columbia Business School officially opened its third Manhattanville building, adding state-of-the-art classrooms and a fintech innovation lab.",
+        "date": "2026-03-10",
+        "category": "student_life",
+    },
+    {
+        "school_id": "sloan",
+        "school_name": "MIT Sloan",
+        "headline": "MIT Sloan Extends Application Deadline for Round 3",
+        "summary": "MIT Sloan announced a two-week extension for Round 3 applications, citing high demand and a desire to accommodate more international applicants.",
+        "date": "2026-03-09",
+        "category": "admissions",
+    },
+    {
+        "school_id": "tuck",
+        "school_name": "Tuck School of Business",
+        "headline": "Tuck Named Most Tight-Knit MBA Community for 5th Year",
+        "summary": "Poets & Quants once again ranked Tuck #1 for student satisfaction and community culture, citing its small class size and Hanover setting.",
+        "date": "2026-03-08",
+        "category": "ranking",
+    },
+    {
+        "school_id": "haas",
+        "school_name": "UC Berkeley Haas",
+        "headline": "Haas Introduces Blockchain & Web3 Concentration",
+        "summary": "UC Berkeley Haas launched a new MBA concentration in blockchain technology and decentralized finance, leveraging the university's strong CS department.",
+        "date": "2026-03-07",
+        "category": "curriculum",
+    },
+    {
+        "school_id": "ross",
+        "school_name": "Michigan Ross",
+        "headline": "Ross MAP Projects Generate $12M in Client Value",
+        "summary": "Michigan Ross reported that its signature Multidisciplinary Action Projects (MAP) delivered over $12 million in measurable client value this academic year.",
+        "date": "2026-03-06",
+        "category": "career",
+    },
+    {
+        "school_id": "hbs",
+        "school_name": "Harvard Business School",
+        "headline": "HBS Admits Most Diverse Class in School History",
+        "summary": "The incoming HBS Class of 2028 is 47% female and represents 78 countries — the most diverse cohort since the school's founding.",
+        "date": "2026-03-05",
+        "category": "admissions",
+    },
+    {
+        "school_id": "gsb",
+        "school_name": "Stanford GSB",
+        "headline": "Stanford GSB Faculty Win Nobel-Adjacent Econ Prize",
+        "summary": "Two GSB professors were awarded the John Bates Clark Medal and the Fischer Black Prize, raising the school's research profile.",
+        "date": "2026-03-04",
+        "category": "faculty",
+    },
+]
+
+
+@router.get("/school-news")
+def get_school_news(
+    school_id: str | None = Query(default=None, description="Filter by school ID"),
+):
+    """Return recent MBA school news items, optionally filtered by school."""
+    if school_id:
+        sid = school_id.strip().lower()
+        items = [n for n in _SCHOOL_NEWS if n["school_id"] == sid]
+        if not items:
+            raise HTTPException(404, f"No news found for school: {school_id}")
+        return {"news": items, "total": len(items)}
+
+    return {"news": _SCHOOL_NEWS, "total": len(_SCHOOL_NEWS)}
