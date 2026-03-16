@@ -3,6 +3,7 @@
 import logging
 import math
 import re
+from datetime import datetime
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException, Query
@@ -34,6 +35,7 @@ def _school_summary(sid: str, school: dict) -> dict:
         "admission_deadlines": school.get("admission_deadlines") or [],
         "primary_admission_test": school.get("primary_admission_test"),
         "program_count": len(school.get("programs") or []),
+        "degree_type": school.get("degree_type", "MBA"),
         "data_source": dq["source"],
         "data_confidence": dq["confidence"],
     }
@@ -44,6 +46,9 @@ def list_schools(
     q: str = Query(default=None, description="Search query — matches name, ID, or common abbreviations"),
     country: str = Query(default=None, description="Filter by country name (case-insensitive)"),
     city: str = Query(default=None, description="Filter by city name (substring match, case-insensitive)"),
+    degree_type: str = Query(default=None, description="Filter by degree type: MBA, MiM, Executive MBA, MBA (CAT)"),
+    limit: int = Query(default=0, ge=0, le=500, description="Max results to return (0 = unlimited)"),
+    offset: int = Query(default=0, ge=0, description="Number of results to skip (for pagination)"),
 ):
     """Returns the school directory, optionally filtered by search query, country, or city.
 
@@ -51,6 +56,8 @@ def list_schools(
     - School name (e.g. 'London Business School')
     - School ID (e.g. 'lbs')
     - Common abbreviations (e.g. 'LBS', 'HBS', 'GSB')
+
+    Use `limit` and `offset` for pagination.
     """
     if q:
         q_lower = q.strip().lower()
@@ -79,6 +86,15 @@ def list_schools(
     if city:
         city_lower = city.strip().lower()
         results = [s for s in results if city_lower in s.get("location", "").lower()]
+    if degree_type:
+        dt_lower = degree_type.strip().lower()
+        results = [s for s in results if s.get("degree_type", "MBA").lower() == dt_lower]
+
+    # Apply pagination if requested
+    if offset > 0:
+        results = results[offset:]
+    if limit > 0:
+        results = results[:limit]
 
     return results
 
@@ -89,6 +105,7 @@ def geo_meta():
     from collections import Counter
     countries: Counter[str] = Counter()
     cities: Counter[str] = Counter()
+    degree_types: Counter[str] = Counter()
     for school in SCHOOL_DB.values():
         c = school.get("country", "Unknown")
         if c and c not in ("?", "Unknown"):
@@ -98,6 +115,8 @@ def geo_meta():
             city_name = loc.split(",")[0].strip()
             if city_name:
                 cities[city_name] += 1
+        dt = school.get("degree_type", "MBA")
+        degree_types[dt] += 1
 
     def slugify(s: str) -> str:
         return s.lower().replace(" ", "-").replace(".", "")
@@ -111,6 +130,11 @@ def geo_meta():
             [{"name": c, "slug": slugify(c), "count": n} for c, n in cities.items() if n >= 2],
             key=lambda x: -x["count"],
         ),
+        "degree_types": sorted(
+            [{"name": dt, "count": n} for dt, n in degree_types.items()],
+            key=lambda x: -x["count"],
+        ),
+        "total_schools": len(SCHOOL_DB),
     }
 
 
@@ -371,8 +395,32 @@ def get_school(school_id: str):
     """Returns detail for a single school including essay prompts and data quality."""
     if school_id not in SCHOOL_DB:
         raise HTTPException(status_code=404, detail="School not found")
-    school = SCHOOL_DB[school_id]
+    school = dict(SCHOOL_DB[school_id])  # shallow copy to avoid mutating global
     dq = get_school_data_quality(school_id)
+
+    # Merge enriched `deadlines` into `admission_deadlines` if the former is richer
+    raw_deadlines = school.get("deadlines") or []
+    existing_ad = school.get("admission_deadlines") or []
+    if raw_deadlines and isinstance(raw_deadlines, list) and len(raw_deadlines) >= len(existing_ad):
+        merged = []
+        for dl in raw_deadlines:
+            try:
+                dt = datetime.strptime(dl.get("date", ""), "%Y-%m-%d")
+                readable = dt.strftime("%B %d, %Y")
+            except (ValueError, TypeError):
+                readable = dl.get("date", "TBD")
+            try:
+                dec_dt = datetime.strptime(dl.get("decision_date", "") or "", "%Y-%m-%d")
+                dec_readable = dec_dt.strftime("%B %d, %Y")
+            except (ValueError, TypeError):
+                dec_readable = dl.get("decision_date") or "TBD"
+            merged.append({
+                "round": dl.get("round", ""),
+                "deadline": readable,
+                "decision": dec_readable,
+            })
+        school["admission_deadlines"] = merged
+
     return {"id": school_id, **school, "data_quality_summary": dq}
 
 
@@ -495,6 +543,11 @@ def calculate_odds(req: OddsRequest):
             "school": school.get("name", sid),
             "tier": final_tier,
             "prob": final_prob,
+            "degree_type": school.get("degree_type", "MBA"),
+            "country": school.get("country", "Unknown"),
+            "program_count": len(school.get("programs") or []),
+            "gmat_avg": school.get("gmat_avg"),
+            "acceptance_rate": accept_rate,
         }
         if gmat_estimated:
             result["gmat_estimated"] = True
@@ -723,9 +776,13 @@ def similar_schools(school_id: str):
     source = SCHOOL_DB[school_id]
     scored: list[tuple[str, float, dict]] = []
 
+    source_degree = source.get("degree_type", "MBA")
+
     for sid, school in SCHOOL_DB.items():
-        # Skip self and synthetic schools
+        # Skip self, synthetic schools, and different degree types
         if sid == school_id or _HEX_ID.match(sid):
+            continue
+        if school.get("degree_type", "MBA") != source_degree:
             continue
         sim, dim_scores = _compute_similarity(source, school)
         scored.append((sid, sim, dim_scores))
@@ -983,8 +1040,6 @@ def compute_fit_score(req: FitScoreRequest):
 
 
 # ── Deadline Calendar ─────────────────────────────────────────────────────
-
-from datetime import datetime
 
 
 def _parse_deadline_date(date_str: str) -> Optional[str]:

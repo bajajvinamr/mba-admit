@@ -235,6 +235,7 @@ def get_recommendations(
             "tuition_inr": school.get("tuition_inr"),
             "specializations": (school.get("specializations") or [])[:3],
             "primary_admission_test": school.get("primary_admission_test"),
+            "degree_type": school.get("degree_type", "MBA"),
             "stem_designated": school.get("program_details", {}).get("stem_designated", False),
             "tier": result["tier"],
             "prob": result["prob"],

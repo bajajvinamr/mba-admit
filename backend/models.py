@@ -271,3 +271,25 @@ class EssayWordCountRequest(BaseModel):
     text: str
     word_limit: Optional[int] = None
     char_limit: Optional[int] = None
+
+
+# ── Essay Theme Analyzer ─────────────────────────────────────────────────
+
+class ThemeAnalysisEssay(BaseModel):
+    title: str
+    content: str
+
+class ThemeAnalysisRequest(BaseModel):
+    essays: List[ThemeAnalysisEssay]
+
+
+# ── Application Strength Meter ────────────────────────────────────────────
+
+class AppStrengthRequest(BaseModel):
+    gmat: Optional[int] = None
+    gpa: Optional[float] = None
+    work_years: Optional[int] = None
+    leadership_examples: Optional[int] = 0
+    extracurriculars: Optional[int] = 0
+    international_exp: bool = False
+    target_school_id: Optional[str] = None
