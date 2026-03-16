@@ -86,6 +86,38 @@ def platform_stats():
     }
 
 
+# ── Analytics Event Ingestion ─────────────────────────────────────────────────
+
+from pydantic import BaseModel
+from typing import Optional
+
+
+class AnalyticsEvent(BaseModel):
+    event: str
+    properties: dict = {}
+    timestamp: Optional[str] = None
+
+
+class AnalyticsBatch(BaseModel):
+    events: list[AnalyticsEvent]
+
+
+@app.post("/api/analytics/event")
+def ingest_analytics(batch: AnalyticsBatch):
+    """
+    Receive frontend analytics events.
+    In production, forward to a proper analytics store (Clickhouse, BigQuery, etc).
+    For now, log them for observability.
+    """
+    for event in batch.events[:50]:  # Cap at 50 events per batch
+        logger.info(
+            "analytics: %s %s",
+            event.event,
+            {k: v for k, v in event.properties.items() if k != "stack"},
+        )
+    return {"accepted": len(batch.events[:50])}
+
+
 @app.get("/health")
 def health_check():
     """Health check for load balancers and monitoring."""
@@ -94,7 +126,7 @@ def health_check():
     return {
         "status": "healthy",
         "schools_loaded": len(SCHOOL_DB),
-        "version": "2.2.0",
+        "version": "2.3.0",
         "timestamp": time.time(),
         "features": {
             "rate_limiting": bool(os.environ.get("RATE_LIMIT_ENABLED", "true").lower() == "true"),
