@@ -38,6 +38,7 @@ def _school_summary(sid: str, school: dict) -> dict:
         "degree_type": school.get("degree_type", "MBA"),
         "program_length_months": school.get("program_length_months"),
         "program_format": school.get("program_format"),
+        "application_fee_usd": school.get("application_fee_usd"),
         "data_source": dq["source"],
         "data_confidence": dq["confidence"],
     }
@@ -718,26 +719,39 @@ def calculate_application_fees(req: ApplicationFeesRequest):
 
         school = SCHOOL_DB[sid]
         school_name = school.get("name", sid)
-        country = school.get("country", "Unknown")
-        raw_fee = school.get("admission_requirements", {}).get("application_fee")
-        parsed = _parse_fee(raw_fee)
 
-        if parsed is not None:
+        # Prefer enriched fee field, fall back to parsing admission_requirements
+        enriched_fee = school.get("application_fee_usd")
+        if enriched_fee is not None:
             schools_out.append({
                 "school_id": sid,
                 "school_name": school_name,
-                "fee": parsed,
+                "fee": float(enriched_fee),
+                "currency": "USD",
                 "fee_source": "database",
             })
         else:
-            default_fee = 250.0 if country in _US_COUNTRIES else 200.0
-            schools_out.append({
-                "school_id": sid,
-                "school_name": school_name,
-                "fee": default_fee,
-                "fee_source": "estimated",
-            })
-            estimated_count += 1
+            raw_fee = school.get("admission_requirements", {}).get("application_fee")
+            parsed = _parse_fee(raw_fee)
+            if parsed is not None:
+                schools_out.append({
+                    "school_id": sid,
+                    "school_name": school_name,
+                    "fee": parsed,
+                    "currency": "USD",
+                    "fee_source": "parsed",
+                })
+            else:
+                country = school.get("country", "Unknown")
+                default_fee = 250.0 if country in _US_COUNTRIES else 200.0
+                schools_out.append({
+                    "school_id": sid,
+                    "school_name": school_name,
+                    "fee": default_fee,
+                    "currency": "USD",
+                    "fee_source": "estimated",
+                })
+                estimated_count += 1
 
     total = sum(s["fee"] for s in schools_out)
 

@@ -175,6 +175,48 @@ class TestOddsCalculatorDegreeFiltering:
         assert isb[0]["degree_type"] == "MBA"
 
 
+class TestApplicationFeeEnrichment:
+    """Tests for application_fee_usd enrichment."""
+
+    def test_all_schools_have_fee(self):
+        """Every school should have application_fee_usd populated."""
+        r = client.get("/api/schools?limit=50")
+        assert r.status_code == 200
+        schools = r.json()
+        for s in schools:
+            detail = client.get(f"/api/schools/{s['id']}")
+            assert detail.status_code == 200
+            fee = detail.json().get("application_fee_usd")
+            assert fee is not None and fee > 0, f"{s['id']} missing application_fee_usd"
+
+    def test_hbs_fee(self):
+        r = client.get("/api/schools/hbs")
+        assert r.json()["application_fee_usd"] == 250
+
+    def test_gsb_fee(self):
+        r = client.get("/api/schools/gsb")
+        assert r.json()["application_fee_usd"] == 275
+
+    def test_insead_fee(self):
+        r = client.get("/api/schools/insead")
+        assert r.json()["application_fee_usd"] == 265
+
+    def test_indian_schools_low_fees(self):
+        """Indian MBA programs have significantly lower fees."""
+        for sid in ["iima", "iimb", "iimc"]:
+            r = client.get(f"/api/schools/{sid}")
+            if r.status_code == 200:
+                fee = r.json().get("application_fee_usd", 0)
+                assert fee <= 50, f"{sid} fee too high: {fee}"
+
+    def test_fee_in_listing_api(self):
+        """application_fee_usd should appear in school listing summaries."""
+        r = client.get("/api/schools?limit=5")
+        assert r.status_code == 200
+        for s in r.json():
+            assert "application_fee_usd" in s
+
+
 class TestProgramLengthAndFormat:
     """Tests for program_length_months and program_format enrichment."""
 
