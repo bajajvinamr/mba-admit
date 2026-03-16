@@ -59,3 +59,16 @@ app.include_router(financial_router)
 @app.get("/")
 def root():
     return {"service": "Chief of Staff — MBA Admissions API v2", "status": "ok"}
+
+
+@app.get("/health")
+def health_check():
+    """Health check for load balancers and monitoring. Returns school count + uptime."""
+    from agents import SCHOOL_DB
+    import time
+    return {
+        "status": "healthy",
+        "schools_loaded": len(SCHOOL_DB),
+        "version": "2.1.0",
+        "timestamp": time.time(),
+    }

@@ -88,17 +88,20 @@ def _generate_fit_reason(
     if similar_admits >= 20:
         return f"{similar_admits} similar profiles got in — solid match"
 
-    # Priority 2: GMAT comparison when we have school data
+    # Priority 2: GMAT/CAT comparison when we have school data
+    degree = school.get("degree_type", "MBA")
     if school_gmat and gmat_value:
         diff = gmat_value - school_gmat
+        test_label = "CAT score" if degree == "MBA (CAT)" else "GMAT"
+        avg_label = f"their {school_gmat} average" if degree != "MBA (CAT)" else f"their class profile"
         if diff >= 20:
-            return f"Your GMAT is {diff} points above their {school_gmat} average"
+            return f"Your {test_label} is {diff} points above {avg_label}"
         if diff >= 0:
-            return f"Your GMAT matches their {school_gmat} average — competitive"
+            return f"Your {test_label} matches {avg_label} — competitive"
         if diff >= -15:
-            return f"Your GMAT is close to their {school_gmat} average — within range"
+            return f"Your {test_label} is close to {avg_label} — within range"
         if tier == "Reach":
-            return f"Their {school_gmat} avg GMAT is above yours — strong story needed"
+            return f"{avg_label.capitalize()} is above yours — strong story needed"
 
     # Priority 3: Percentile-based from profile fit
     if fit:
