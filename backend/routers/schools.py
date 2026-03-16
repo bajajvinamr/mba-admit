@@ -6,7 +6,7 @@ import re
 from datetime import datetime
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, Response
 from agents import SCHOOL_DB, SCHOOL_ALIASES, get_school_data_quality
 from models import OddsRequest, FitScoreRequest, ApplicationFeesRequest
 
@@ -43,6 +43,7 @@ def _school_summary(sid: str, school: dict) -> dict:
 
 @router.get("/schools")
 def list_schools(
+    response: Response,
     q: str = Query(default=None, description="Search query — matches name, ID, or common abbreviations"),
     country: str = Query(default=None, description="Filter by country name (case-insensitive)"),
     city: str = Query(default=None, description="Filter by city name (substring match, case-insensitive)"),
@@ -96,6 +97,8 @@ def list_schools(
     if limit > 0:
         results = results[:limit]
 
+    # Cache school list for 5 minutes (data changes infrequently)
+    response.headers["Cache-Control"] = "public, max-age=300, stale-while-revalidate=600"
     return results
 
 
