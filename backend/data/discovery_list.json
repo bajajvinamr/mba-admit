@@ -713,7 +713,7 @@
   },
   {
     "id": "said",
-    "name": "Oxford Saïd",
+    "name": "Oxford Sa\u00efd",
     "location": "Oxford",
     "country": "UK",
     "source": "existing_db",
@@ -865,7 +865,7 @@
   },
   {
     "id": "whu",
-    "name": "WHU – Otto Beisheim School of Management",
+    "name": "WHU \u2013 Otto Beisheim School of Management",
     "location": "Vallendar",
     "country": "Germany",
     "source": "existing_db",
@@ -1074,7 +1074,7 @@
   {
     "id": "insper",
     "name": "Insper",
-    "location": "São Paulo",
+    "location": "S\u00e3o Paulo",
     "country": "Brazil",
     "source": "existing_db",
     "website": "https://www.insper.edu.br/en/mba"
@@ -1089,7 +1089,7 @@
   },
   {
     "id": "uai",
-    "name": "Universidad Adolfo Ibáñez",
+    "name": "Universidad Adolfo Ib\u00e1\u00f1ez",
     "location": "Santiago",
     "country": "Chile",
     "source": "existing_db",
@@ -1401,7 +1401,7 @@
   },
   {
     "id": "fundacao_dom_cabral",
-    "name": "Fundação Dom Cabral",
+    "name": "Funda\u00e7\u00e3o Dom Cabral",
     "location": "Nova Lima",
     "country": "Brazil",
     "source": "existing_db",
@@ -1410,7 +1410,7 @@
   {
     "id": "uniandes",
     "name": "Universidad de los Andes",
-    "location": "Bogotá",
+    "location": "Bogot\u00e1",
     "country": "Colombia",
     "source": "existing_db",
     "website": "https://administracion.uniandes.edu.co/mba"
@@ -1561,7 +1561,7 @@
   },
   {
     "id": "koc",
-    "name": "Koç University GSB",
+    "name": "Ko\u00e7 University GSB",
     "location": "Istanbul",
     "country": "Turkey",
     "source": "existing_db",
@@ -1577,7 +1577,7 @@
   },
   {
     "id": "bosphorus",
-    "name": "Boğaziçi University MBA",
+    "name": "Bo\u011fazi\u00e7i University MBA",
     "location": "Istanbul",
     "country": "Turkey",
     "source": "existing_db",
@@ -1640,7 +1640,7 @@
     "website": "https://ueb.vnu.edu.vn/en"
   },
   {
-    "id": "isb_deferred_mba",
+    "id": "isb_pgp_yl",
     "name": "Indian School of Business (PGP YL (Young Leaders))",
     "location": "Hyderabad / Mohali",
     "country": "India",
