@@ -122,6 +122,19 @@ def list_schools(
     return results
 
 
+@router.get("/schools/names")
+def school_names():
+    """Lightweight endpoint for dropdowns and autocomplete — just id, name, country.
+
+    ~15KB gzipped vs ~36KB for the full school list.
+    Use this for select dropdowns, search autocomplete, and name lookups.
+    """
+    return [
+        {"id": sid, "name": s.get("name", sid), "country": s.get("country", "")}
+        for sid, s in SCHOOL_DB.items()
+    ]
+
+
 @router.get("/schools/featured")
 def featured_schools(response: Response):
     """Returns a curated set of top schools per program type for the directory landing."""
