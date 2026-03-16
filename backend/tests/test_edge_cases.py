@@ -118,6 +118,34 @@ class TestHealthEndpoint:
         assert "service" in resp.json()
 
 
+class TestPlatformStats:
+    """Tests for /api/stats endpoint."""
+
+    def test_stats_returns_200(self, client):
+        resp = client.get("/api/stats")
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["total_schools"] > 800
+        assert data["countries"] > 30
+        assert "degree_breakdown" in data
+        assert "data_coverage" in data
+
+    def test_stats_top_countries(self, client):
+        resp = client.get("/api/stats")
+        data = resp.json()
+        top = data["top_countries"]
+        assert len(top) <= 10
+        counts = [c["count"] for c in top]
+        assert counts == sorted(counts, reverse=True)
+
+    def test_stats_degree_breakdown(self, client):
+        resp = client.get("/api/stats")
+        data = resp.json()
+        degrees = data["degree_breakdown"]
+        assert "MBA" in degrees
+        assert degrees["MBA"] > 100
+
+
 class TestOddsCalculatorEdgeCases:
     """Edge cases for the odds calculator."""
 

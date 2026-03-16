@@ -61,6 +61,30 @@ def root():
     return {"service": "Chief of Staff — MBA Admissions API v2", "status": "ok"}
 
 
+@app.get("/api/stats")
+def platform_stats():
+    """Public platform stats — school counts, country coverage, degree breakdown."""
+    from agents import SCHOOL_DB
+    from collections import Counter
+
+    countries = Counter(s.get("country", "Unknown") for s in SCHOOL_DB.values())
+    degrees = Counter(s.get("degree_type", "MBA") for s in SCHOOL_DB.values())
+    with_fees = sum(1 for s in SCHOOL_DB.values() if s.get("application_fee_usd"))
+    with_deadlines = sum(1 for s in SCHOOL_DB.values() if s.get("deadlines"))
+
+    return {
+        "total_schools": len(SCHOOL_DB),
+        "countries": len(countries),
+        "top_countries": [{"country": c, "count": n} for c, n in countries.most_common(10)],
+        "degree_breakdown": dict(degrees),
+        "data_coverage": {
+            "application_fees": with_fees,
+            "deadlines": with_deadlines,
+            "essay_prompts": sum(1 for s in SCHOOL_DB.values() if s.get("essay_prompts")),
+        },
+    }
+
+
 @app.get("/health")
 def health_check():
     """Health check for load balancers and monitoring."""
