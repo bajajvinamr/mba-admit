@@ -1,7 +1,7 @@
 import os
 import json
 from enum import Enum
-from typing import TypedDict, List, Dict, Any, Optional
+from typing import TypedDict, List, Dict, Any
 from logging_config import setup_logging
 
 logger = setup_logging()
