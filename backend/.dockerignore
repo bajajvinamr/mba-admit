@@ -1,0 +1,11 @@
+__pycache__
+*.pyc
+.env
+.env.*
+*.egg-info
+.git
+.claude*
+.pytest_cache
+tests/
+scraper/raw_html/
+data/analytics.jsonl
