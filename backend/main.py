@@ -128,11 +128,50 @@ def health_check():
     return {
         "status": "healthy",
         "schools_loaded": len(SCHOOL_DB),
-        "version": "2.3.0",
+        "version": "2.4.0",
         "timestamp": time.time(),
         "features": {
             "rate_limiting": bool(os.environ.get("RATE_LIMIT_ENABLED", "true").lower() == "true"),
             "structured_logging": True,
             "cors_restricted": len(ALLOWED_ORIGINS) < 10,
         },
+    }
+
+
+@app.get("/health/ready")
+def readiness_check():
+    """Deep readiness check — verifies all dependencies are available."""
+    import time
+    checks: dict = {}
+    overall = True
+
+    # School database loaded
+    try:
+        from agents import SCHOOL_DB
+        checks["school_db"] = {"ok": len(SCHOOL_DB) > 0, "count": len(SCHOOL_DB)}
+        if not checks["school_db"]["ok"]:
+            overall = False
+    except Exception as e:
+        checks["school_db"] = {"ok": False, "error": str(e)}
+        overall = False
+
+    # LLM API key configured
+    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+    checks["llm_api_key"] = {"ok": bool(api_key), "provider": "anthropic"}
+    if not api_key:
+        overall = False
+
+    # Community data available
+    try:
+        from agents import load_community_decisions
+        decisions = load_community_decisions()
+        checks["community_data"] = {"ok": True, "count": len(decisions)}
+    except Exception as e:
+        checks["community_data"] = {"ok": False, "error": str(e)}
+
+    return {
+        "status": "ready" if overall else "degraded",
+        "timestamp": time.time(),
+        "version": "2.4.0",
+        "checks": checks,
     }
