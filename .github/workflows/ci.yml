@@ -78,5 +78,4 @@ jobs:
 
       - name: Test
         run: npm run test -- --run
-        # Vitest with --run flag exits after tests complete
-        continue-on-error: true  # Tests are new — don't block PRs initially
+        # Vitest with --run flag exits after tests complete (76 tests, 8 suites)
