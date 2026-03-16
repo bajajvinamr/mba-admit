@@ -173,3 +173,37 @@ class TestOddsCalculatorDegreeFiltering:
         isb = [x for x in results if x["school_id"] == "isb"]
         assert len(isb) == 1
         assert isb[0]["degree_type"] == "MBA"
+
+
+class TestProgramLengthAndFormat:
+    """Tests for program_length_months and program_format enrichment."""
+
+    def test_all_schools_have_program_length(self):
+        """Every school should have program_length_months populated."""
+        r = client.get("/api/schools?limit=0")
+        assert r.status_code == 200
+        schools = r.json()
+        for s in schools[:50]:  # spot check first 50
+            detail = client.get(f"/api/schools/{s['id']}")
+            assert detail.status_code == 200
+            assert detail.json().get("program_length_months"), f"{s['id']} missing program_length_months"
+
+    def test_insead_is_10_months(self):
+        r = client.get("/api/schools/insead")
+        assert r.status_code == 200
+        assert r.json()["program_length_months"] == 10
+
+    def test_hbs_is_24_months(self):
+        r = client.get("/api/schools/hbs")
+        assert r.status_code == 200
+        assert r.json()["program_length_months"] == 24
+
+    def test_emba_format_is_part_time(self):
+        """Executive MBA programs should have part-time/modular format."""
+        r = client.get("/api/schools?degree_type=Executive+MBA&limit=5")
+        assert r.status_code == 200
+        schools = r.json()
+        for s in schools:
+            detail = client.get(f"/api/schools/{s['id']}")
+            fmt = detail.json().get("program_format", "")
+            assert fmt, f"{s['id']} missing program_format"

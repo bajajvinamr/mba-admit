@@ -865,7 +865,7 @@
         "EY",
         "Godrej",
         "Coca Cola",
-        "Nestlé",
+        "Nestl\u00e9",
         "JP Morgan Chase & Co."
       ]
     },
@@ -3602,7 +3602,7 @@
     "interview_format": null,
     "application_url": null,
     "accreditations": null,
-    "program_length_months": 12,
+    "program_length_months": 10,
     "program_format": "Full-time",
     "acceptance_rate_pct": null,
     "yield_rate_pct": null,
@@ -3698,7 +3698,7 @@
     "confidence": 0.1,
     "_meta": {
       "school_id": "said",
-      "school_name": "Oxford Saïd",
+      "school_name": "Oxford Sa\u00efd",
       "extracted_at": "2026-03-13T23:11:11.439550+00:00",
       "model": "claude-sonnet-4-20250514",
       "source_files": [
@@ -3751,7 +3751,7 @@
     },
     "scholarships": [
       {
-        "name": "Forté Foundation Fellows Scholarship",
+        "name": "Fort\u00e9 Foundation Fellows Scholarship",
         "amount_usd": null,
         "criteria": "women"
       }
@@ -3876,7 +3876,7 @@
       }
     ],
     "tuition_usd": null,
-    "tuition_notes": "€47,000 course fee, with early bird discounts ranging from €1,000 to €4,000",
+    "tuition_notes": "\u20ac47,000 course fee, with early bird discounts ranging from \u20ac1,000 to \u20ac4,000",
     "class_size": 60,
     "class_profile": {
       "median_gmat": null,
@@ -3891,7 +3891,7 @@
       {
         "name": "Industry Diversity Scholarship",
         "amount_usd": null,
-        "criteria": "€2,000 for first three accepted applicants per industry group"
+        "criteria": "\u20ac2,000 for first three accepted applicants per industry group"
       },
       {
         "name": "Outstanding Candidate Scholarship",
@@ -3901,7 +3901,7 @@
       {
         "name": "German Language Proficiency Scholarship",
         "amount_usd": null,
-        "criteria": "€500 for A2 level, €2,000 for B1 level German proficiency"
+        "criteria": "\u20ac500 for A2 level, \u20ac2,000 for B1 level German proficiency"
       },
       {
         "name": "Women in Business Scholarship",
@@ -3941,7 +3941,7 @@
     "essay_prompts": null,
     "deadlines": null,
     "tuition_usd": null,
-    "tuition_notes": "Full-Time MBA: £78,000, Global Online MBA: £57,000, Weekend MBA: £68,500, Executive MBA: £84,500",
+    "tuition_notes": "Full-Time MBA: \u00a378,000, Global Online MBA: \u00a357,000, Weekend MBA: \u00a368,500, Executive MBA: \u00a384,500",
     "class_size": null,
     "class_profile": {
       "median_gmat": null,
@@ -4592,7 +4592,7 @@
         "EY",
         "Godrej",
         "Coca Cola",
-        "Nestlé",
+        "Nestl\u00e9",
         "JP Morgan Chase & Co."
       ]
     },
@@ -5431,7 +5431,7 @@
     },
     "scholarships": [
       {
-        "name": "Forté Fellowship",
+        "name": "Fort\u00e9 Fellowship",
         "amount_usd": null,
         "criteria": "women enrolling in MBA"
       },
@@ -5802,7 +5802,7 @@
     "essay_prompts": null,
     "deadlines": null,
     "tuition_usd": 26600,
-    "tuition_notes": "₹21.00 Lakhs for two years (inclusive of Tuition fee ₹14.00 Lakhs and Caution Money Deposit ₹50,000), Mess charges paid separately",
+    "tuition_notes": "\u20b921.00 Lakhs for two years (inclusive of Tuition fee \u20b914.00 Lakhs and Caution Money Deposit \u20b950,000), Mess charges paid separately",
     "class_size": null,
     "class_profile": {
       "median_gmat": null,
@@ -6530,7 +6530,7 @@
       }
     ],
     "tuition_usd": 32000,
-    "tuition_notes": "€28,000 converted to USD, tuition waivers from 30% to 70% available",
+    "tuition_notes": "\u20ac28,000 converted to USD, tuition waivers from 30% to 70% available",
     "class_size": null,
     "class_profile": {
       "median_gmat": null,
@@ -6657,7 +6657,7 @@
     "confidence": 0.1,
     "_meta": {
       "school_id": "fundacao_dom_cabral",
-      "school_name": "Fundação Dom Cabral",
+      "school_name": "Funda\u00e7\u00e3o Dom Cabral",
       "extracted_at": "2026-03-13T23:22:52.829563+00:00",
       "model": "claude-sonnet-4-20250514",
       "source_files": [
@@ -7161,7 +7161,7 @@
       }
     ],
     "tuition_usd": null,
-    "tuition_notes": "Tuition fees for the 2026–2027 Academic Year will be announced. Annual fees collected in first and second years.",
+    "tuition_notes": "Tuition fees for the 2026\u20132027 Academic Year will be announced. Annual fees collected in first and second years.",
     "class_size": null,
     "class_profile": {
       "median_gmat": null,
@@ -7190,7 +7190,7 @@
     "confidence": 0.3,
     "_meta": {
       "school_id": "koc",
-      "school_name": "Koç University GSB",
+      "school_name": "Ko\u00e7 University GSB",
       "extracted_at": "2026-03-13T23:25:09.022201+00:00",
       "model": "claude-sonnet-4-20250514",
       "source_files": [
@@ -7235,7 +7235,7 @@
     "confidence": 0.1,
     "_meta": {
       "school_id": "bosphorus",
-      "school_name": "Boğaziçi University MBA",
+      "school_name": "Bo\u011fazi\u00e7i University MBA",
       "extracted_at": "2026-03-13T23:25:20.296330+00:00",
       "model": "claude-sonnet-4-20250514",
       "source_files": [
