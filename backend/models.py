@@ -18,6 +18,7 @@ class OddsRequest(BaseModel):
     leadership_roles: str = ""
     intl_experience: bool = False
     community_service: bool = False
+    degree_type: Optional[str] = Field(default=None, description="Filter: MBA, MiM, Executive MBA, MBA (CAT)")
 
 
 # ── Application Sessions ──────────────────────────────────────────────────────

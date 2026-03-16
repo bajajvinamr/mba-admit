@@ -126,6 +126,7 @@ def get_recommendations(
     test_score: Optional[int] = Query(default=None),
     industry: Optional[str] = Query(default=None),
     undergrad_tier: Optional[str] = Query(default=None),
+    degree_type: Optional[str] = Query(default=None),
     limit: int = Query(default=12, ge=4, le=30),
 ):
     """Smart school recommendations combining odds scoring with real GMAT Club data.
@@ -183,6 +184,17 @@ def get_recommendations(
     elif work_exp > 7:
         modifier += 1
 
+    # Determine which degree types to include
+    # If explicit degree_type filter, use it. Otherwise infer from test_type.
+    allowed_types: set[str] | None = None
+    if degree_type:
+        allowed_types = {degree_type}
+    elif tt in ("cat", "xat"):
+        allowed_types = {"MBA (CAT)"}
+    elif tt in ("gmat", "gre"):
+        # GMAT/GRE users shouldn't see CAT-only programs by default
+        allowed_types = {"MBA", "MiM", "Executive MBA", "Master of Finance"}
+
     # Score every school
     all_decisions = load_gmatclub_data()
     profile_dict = {}
@@ -195,6 +207,9 @@ def get_recommendations(
 
     scored = []
     for sid, school in SCHOOL_DB.items():
+        # Apply degree type filter
+        if allowed_types and school.get("degree_type", "MBA") not in allowed_types:
+            continue
         result = _score_school(sid, school, gmat_value, gpa_normalized, modifier)
 
         # Enrich with GMAT Club data

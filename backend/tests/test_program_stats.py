@@ -111,3 +111,65 @@ class TestDegreeTypeInRecommendations:
         recs = r.json().get("recommendations", [])
         if recs:
             assert "degree_type" in recs[0]
+
+    def test_gmat_user_no_cat_schools(self):
+        """GMAT users should not see CAT-only programs."""
+        r = client.get("/api/recommendations?gmat=720&gpa=3.8&limit=12")
+        recs = r.json().get("recommendations", [])
+        cat_recs = [x for x in recs if x.get("degree_type") == "MBA (CAT)"]
+        assert len(cat_recs) == 0
+
+    def test_cat_user_sees_cat_schools(self):
+        """CAT test takers should see Indian MBA programs."""
+        r = client.get("/api/recommendations?test_type=cat&test_score=98&gpa=8.5&gpa_scale=10&limit=10")
+        assert r.status_code == 200
+        recs = r.json().get("recommendations", [])
+        assert len(recs) > 0
+        for rec in recs:
+            assert rec["degree_type"] == "MBA (CAT)"
+
+    def test_explicit_degree_filter(self):
+        """Explicit degree_type param overrides default logic."""
+        r = client.get("/api/recommendations?gmat=720&degree_type=MiM&limit=5")
+        assert r.status_code == 200
+        recs = r.json().get("recommendations", [])
+        for rec in recs:
+            assert rec["degree_type"] == "MiM"
+
+
+class TestOddsCalculatorDegreeFiltering:
+    """Tests that odds calculator filters by degree type correctly."""
+
+    def test_gmat_odds_excludes_cat(self):
+        r = client.post("/api/calculate_odds", json={"gmat": 720, "gpa": 3.8})
+        assert r.status_code == 200
+        results = r.json()
+        cat_results = [x for x in results if x.get("degree_type") == "MBA (CAT)"]
+        assert len(cat_results) == 0
+
+    def test_cat_odds_only_cat(self):
+        r = client.post("/api/calculate_odds", json={
+            "gpa": 8.5, "gpa_scale": "10", "test_type": "cat", "test_score": 98
+        })
+        assert r.status_code == 200
+        results = r.json()
+        assert len(results) > 0
+        for x in results:
+            assert x["degree_type"] == "MBA (CAT)"
+
+    def test_explicit_degree_type_odds(self):
+        r = client.post("/api/calculate_odds", json={
+            "gmat": 700, "gpa": 3.5, "degree_type": "MiM"
+        })
+        assert r.status_code == 200
+        results = r.json()
+        for x in results:
+            assert x["degree_type"] == "MiM"
+
+    def test_isb_appears_for_gmat_users(self):
+        """ISB accepts GMAT and should appear for GMAT users."""
+        r = client.post("/api/calculate_odds", json={"gmat": 720, "gpa": 3.8})
+        results = r.json()
+        isb = [x for x in results if x["school_id"] == "isb"]
+        assert len(isb) == 1
+        assert isb[0]["degree_type"] == "MBA"

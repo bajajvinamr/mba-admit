@@ -91,6 +91,8 @@ def list_schools(
         dt_lower = degree_type.strip().lower()
         results = [s for s in results if s.get("degree_type", "MBA").lower() == dt_lower]
 
+    total_count = len(results)
+
     # Apply pagination if requested
     if offset > 0:
         results = results[offset:]
@@ -99,7 +101,55 @@ def list_schools(
 
     # Cache school list for 5 minutes (data changes infrequently)
     response.headers["Cache-Control"] = "public, max-age=300, stale-while-revalidate=600"
+    response.headers["X-Total-Count"] = str(total_count)
+    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count"
     return results
+
+
+@router.get("/schools/featured")
+def featured_schools(response: Response):
+    """Returns a curated set of top schools per program type for the directory landing."""
+    response.headers["Cache-Control"] = "public, max-age=600"
+
+    # Top MBA schools by lowest acceptance rate (proxy for prestige)
+    mba = sorted(
+        [(sid, s) for sid, s in SCHOOL_DB.items() if s.get("degree_type") == "MBA"],
+        key=lambda x: x[1].get("acceptance_rate", 100),
+    )[:15]
+
+    # Top MiM by lowest acceptance rate
+    mim = sorted(
+        [(sid, s) for sid, s in SCHOOL_DB.items() if s.get("degree_type") == "MiM"],
+        key=lambda x: x[1].get("acceptance_rate", 100),
+    )[:10]
+
+    # Top EMBA by highest GMAT
+    emba = sorted(
+        [(sid, s) for sid, s in SCHOOL_DB.items() if s.get("degree_type") == "Executive MBA"],
+        key=lambda x: -(x[1].get("gmat_avg") or 0),
+    )[:10]
+
+    # Top CAT by lowest acceptance rate
+    cat = sorted(
+        [(sid, s) for sid, s in SCHOOL_DB.items() if s.get("degree_type") == "MBA (CAT)"],
+        key=lambda x: x[1].get("acceptance_rate", 100),
+    )[:10]
+
+    def mini(sid: str, s: dict) -> dict:
+        return {
+            "id": sid, "name": s.get("name", sid), "location": s.get("location", ""),
+            "country": s.get("country", ""), "gmat_avg": s.get("gmat_avg"),
+            "acceptance_rate": s.get("acceptance_rate"), "tuition_usd": s.get("tuition_usd"),
+            "degree_type": s.get("degree_type", "MBA"),
+        }
+
+    return {
+        "mba": [mini(sid, s) for sid, s in mba],
+        "mim": [mini(sid, s) for sid, s in mim],
+        "emba": [mini(sid, s) for sid, s in emba],
+        "cat": [mini(sid, s) for sid, s in cat],
+        "total_schools": len(SCHOOL_DB),
+    }
 
 
 @router.get("/schools/geo-meta")
@@ -531,7 +581,18 @@ def calculate_odds(req: OddsRequest):
     elif work_exp > 7:
         modifier += 1  # diminishing returns
 
+    # Degree type filtering — same logic as recommendations
+    allowed_types: set | None = None
+    if req.degree_type:
+        allowed_types = {req.degree_type}
+    elif test_type in ("cat", "xat"):
+        allowed_types = {"MBA (CAT)"}
+    elif test_type in ("gmat", "gre"):
+        allowed_types = {"MBA", "MiM", "Executive MBA", "Master of Finance"}
+
     for sid, school in SCHOOL_DB.items():
+        if allowed_types and school.get("degree_type", "MBA") not in allowed_types:
+            continue
         school_gmat = school.get("gmat_avg", 720)
         # Cap GMAT advantage to prevent it from dominating
         gmat_diff = max(-80, min(30, gmat_value - school_gmat))
