@@ -122,6 +122,7 @@ def compare_schools(req: CompareSchoolsRequest):
             "specializations": school.get("specializations", []),
             "essay_count": len(school.get("essay_prompts", [])),
             "deadlines": school.get("admission_deadlines", []),
+            "degree_type": school.get("degree_type", "MBA"),
         }
 
         schools.append({
