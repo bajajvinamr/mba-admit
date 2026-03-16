@@ -138,3 +138,44 @@ def test_search_schools_no_results(client):
     assert resp.status_code == 200
     data = resp.json()
     assert len(data) == 0
+
+
+# ── /api/schools/names endpoint tests ────────────────────────────────────
+
+def test_school_names_returns_list(client):
+    """Names endpoint returns a list of lightweight school objects."""
+    resp = client.get("/api/schools/names")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert isinstance(data, list)
+    assert len(data) >= 2
+
+
+def test_school_names_has_minimal_fields(client):
+    """Each name entry has id, name, and optional country — no heavy fields."""
+    resp = client.get("/api/schools/names")
+    data = resp.json()
+    first = data[0]
+    assert "id" in first
+    assert "name" in first
+    # Should NOT contain heavy fields that /api/schools returns
+    assert "essay_prompts" not in first
+    assert "placement_stats" not in first
+    assert "class_profile" not in first
+
+
+def test_school_names_smaller_than_full_schools(client):
+    """Names payload should be significantly smaller than full schools."""
+    full_resp = client.get("/api/schools")
+    names_resp = client.get("/api/schools/names")
+    full_size = len(full_resp.text)
+    names_size = len(names_resp.text)
+    # Names should be at least 40% smaller
+    assert names_size < full_size * 0.6, f"Names ({names_size}B) not much smaller than full ({full_size}B)"
+
+
+def test_school_names_same_count_as_full_schools(client):
+    """Names endpoint should return same number of schools as full endpoint."""
+    full = client.get("/api/schools").json()
+    names = client.get("/api/schools/names").json()
+    assert len(names) == len(full)
