@@ -60,6 +60,7 @@ CACHE_RULES: dict[str, tuple[int, int]] = {
     "/api/schools/geo-meta": (3600, 7200),  # geo meta — 1 hour fresh
     "/api/upcoming-deadlines": (300, 600),  # deadlines — 5 min fresh
     "/api/schools/application-fees": (300, 600),
+    "/api/schools/names": (300, 600),        # lightweight names endpoint — 5 min fresh
 }
 
 # Prefix match for dynamic school detail pages: /api/schools/{id}
