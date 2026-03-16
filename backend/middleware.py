@@ -1,10 +1,12 @@
-"""Middleware — rate limiting, caching headers, and global error handling.
+"""Middleware — rate limiting, caching headers, request timeouts, and global error handling.
 
 Rate limits protect LLM-heavy endpoints from abuse.
 Cache headers reduce latency for read-heavy school data.
+Request timeouts prevent LLM calls from holding connections open indefinitely.
 Global error handler prevents 500s from leaking stack traces.
 """
 
+import asyncio
 import traceback
 from starlette.middleware.base import BaseHTTPMiddleware
 from fastapi import Request
@@ -47,7 +49,57 @@ def setup_rate_limiter(app):
     logger.info("Rate limiting enabled")
 
 
-# ── Global Exception Handler ─────────────────────────────────────────────────
+# ── Request Timeout Middleware ────────────────────────────────────────────────
+
+# LLM-calling POST endpoints get a longer timeout than quick data fetches.
+# Pattern → timeout in seconds. Matched by prefix.
+LLM_ENDPOINTS: set[str] = {
+    "/api/start_session",
+    "/api/chat",
+    "/api/unlock",
+    "/api/roast_resume",
+    "/api/evaluate_essay",
+    "/api/recommender_strategy",
+    "/api/interview/start",
+    "/api/interview/respond",
+    "/api/goals/sculpt",
+    "/api/outreach_strategy",
+    "/api/waitlist_strategy",
+    "/api/financial/compare",
+    "/api/negotiate_scholarship",
+    "/api/essays/storyteller",
+}
+
+DEFAULT_TIMEOUT_S = 30    # Quick data endpoints
+LLM_TIMEOUT_S = 90       # LLM endpoints — generous to allow Claude to finish
+
+
+class RequestTimeoutMiddleware(BaseHTTPMiddleware):
+    """Abort requests that exceed a time budget.
+
+    LLM endpoints get 90s; everything else gets 30s.
+    Returns 504 Gateway Timeout on expiry.
+    """
+
+    async def dispatch(self, request: Request, call_next):
+        path = request.url.path
+        timeout = LLM_TIMEOUT_S if path in LLM_ENDPOINTS else DEFAULT_TIMEOUT_S
+
+        try:
+            return await asyncio.wait_for(call_next(request), timeout=timeout)
+        except asyncio.TimeoutError:
+            logger.warning("Request timeout (%ds) on %s %s", timeout, request.method, path)
+            return JSONResponse(
+                status_code=504,
+                content={"detail": f"Request timed out after {timeout}s. Please try again."},
+            )
+
+
+def setup_request_timeout(app):
+    """Attach request timeout middleware to the FastAPI app."""
+    app.add_middleware(RequestTimeoutMiddleware)
+    logger.info("Request timeout middleware enabled (default=%ds, LLM=%ds)", DEFAULT_TIMEOUT_S, LLM_TIMEOUT_S)
+
 
 # ── Cache Headers Middleware ─────────────────────────────────────────────────
 
