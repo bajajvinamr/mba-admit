@@ -129,10 +129,11 @@ def health_check():
     return {
         "status": "healthy",
         "schools_loaded": len(SCHOOL_DB),
-        "version": "2.4.0",
+        "version": "2.5.0",
         "timestamp": time.time(),
         "features": {
             "rate_limiting": bool(os.environ.get("RATE_LIMIT_ENABLED", "true").lower() == "true"),
+            "request_timeout": True,
             "structured_logging": True,
             "cors_restricted": len(ALLOWED_ORIGINS) < 10,
         },
@@ -173,6 +174,6 @@ def readiness_check():
     return {
         "status": "ready" if overall else "degraded",
         "timestamp": time.time(),
-        "version": "2.4.0",
+        "version": "2.5.0",
         "checks": checks,
     }
