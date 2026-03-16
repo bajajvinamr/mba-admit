@@ -138,6 +138,45 @@ def geo_meta():
     }
 
 
+# ── Program Stats by Degree Type ──────────────────────────────────────────
+
+@router.get("/schools/program-stats")
+def program_stats(degree_type: Optional[str] = Query(default=None)):
+    """Returns aggregate stats per degree type: count, avg GMAT, avg tuition, top countries."""
+    from collections import Counter
+    buckets: dict[str, list] = {}
+    for school in SCHOOL_DB.values():
+        dt = school.get("degree_type", "MBA")
+        buckets.setdefault(dt, []).append(school)
+
+    def stats_for(schools_list: list) -> dict:
+        gmats = [s["gmat_avg"] for s in schools_list if s.get("gmat_avg")]
+        tuitions = [s["tuition_usd"] for s in schools_list if s.get("tuition_usd")]
+        countries = Counter(s.get("country", "?") for s in schools_list)
+        top_countries = [{"name": c, "count": n} for c, n in countries.most_common(10) if c != "?"]
+        return {
+            "count": len(schools_list),
+            "avg_gmat": round(sum(gmats) / len(gmats)) if gmats else None,
+            "avg_tuition_usd": round(sum(tuitions) / len(tuitions)) if tuitions else None,
+            "countries": len(set(s.get("country") for s in schools_list if s.get("country"))),
+            "top_countries": top_countries,
+        }
+
+    if degree_type:
+        matching = buckets.get(degree_type, [])
+        if not matching:
+            raise HTTPException(404, f"No programs found for degree_type={degree_type}")
+        return {"degree_type": degree_type, **stats_for(matching)}
+
+    return {
+        "program_types": [
+            {"degree_type": dt, **stats_for(schools)}
+            for dt, schools in sorted(buckets.items(), key=lambda x: -len(x[1]))
+        ],
+        "total_schools": len(SCHOOL_DB),
+    }
+
+
 # ── Class Profile Comparison ──────────────────────────────────────────────
 
 @router.get("/schools/class-profile")
