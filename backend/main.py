@@ -8,6 +8,7 @@ import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.gzip import GZipMiddleware
 from logging_config import setup_logging
 
 from middleware import setup_rate_limiter, setup_cache_headers, global_exception_handler
@@ -20,6 +21,7 @@ app = FastAPI(title="Chief of Staff — MBA Admissions API v2")
 
 setup_rate_limiter(app)
 setup_cache_headers(app)
+app.add_middleware(GZipMiddleware, minimum_size=1000)  # Compress responses > 1KB
 app.add_exception_handler(Exception, global_exception_handler)
 
 # ── CORS ───────────────────────────────────────────────────────────────────────
