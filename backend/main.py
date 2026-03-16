@@ -42,22 +42,32 @@ app.add_middleware(
 from routers.auth_routes import router as auth_router
 from routers.schools import router as schools_router
 from routers.sessions import router as sessions_router
-from routers.tools import router as tools_router
 from routers.user import router as user_router
 from routers.features import router as features_router
 from routers.scraper import router as scraper_router
 from routers.recommendations import router as recommendations_router
+from routers.essays import router as essays_router
+from routers.interview import router as interview_router
+from routers.strategy import router as strategy_router
+from routers.community import router as community_router
 from routers.financial import router as financial_router
+from routers.school_data import router as school_data_router
+from routers.profile import router as profile_router
 
 app.include_router(auth_router)
 app.include_router(schools_router)
 app.include_router(sessions_router)
-app.include_router(tools_router)
 app.include_router(user_router)
 app.include_router(features_router)
 app.include_router(scraper_router)
 app.include_router(recommendations_router)
+app.include_router(essays_router)
+app.include_router(interview_router)
+app.include_router(strategy_router)
+app.include_router(community_router)
 app.include_router(financial_router)
+app.include_router(school_data_router)
+app.include_router(profile_router)
 
 
 @app.get("/")

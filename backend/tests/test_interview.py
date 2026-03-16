@@ -33,7 +33,7 @@ MOCK_FINAL_RESPONSE = {
 }
 
 
-@patch("routers.tools.simulate_interview_pass", return_value=MOCK_INTERVIEW_RESPONSE)
+@patch("routers.interview.simulate_interview_pass", return_value=MOCK_INTERVIEW_RESPONSE)
 def test_interview_start_returns_valid_shape(mock_sim, client):
     """Starting an interview returns proper JSON structure."""
     resp = client.post("/api/interview/start", json={"school_id": "hbs"})
@@ -47,7 +47,7 @@ def test_interview_start_returns_valid_shape(mock_sim, client):
     assert len(data["message"]) > 0
 
 
-@patch("routers.tools.simulate_interview_pass", return_value=MOCK_INTERVIEW_RESPONSE)
+@patch("routers.interview.simulate_interview_pass", return_value=MOCK_INTERVIEW_RESPONSE)
 def test_interview_start_with_difficulty(mock_sim, client):
     """Starting with a difficulty level is accepted."""
     resp = client.post("/api/interview/start", json={
@@ -65,14 +65,14 @@ def test_interview_start_with_difficulty(mock_sim, client):
     assert call_kwargs[0][0] == "hbs" or call_kwargs[1].get("school_id") == "hbs"
 
 
-@patch("routers.tools.simulate_interview_pass", return_value=MOCK_INTERVIEW_RESPONSE)
+@patch("routers.interview.simulate_interview_pass", return_value=MOCK_INTERVIEW_RESPONSE)
 def test_interview_start_default_difficulty(mock_sim, client):
     """Missing difficulty defaults gracefully (no 422)."""
     resp = client.post("/api/interview/start", json={"school_id": "gsb"})
     assert resp.status_code == 200
 
 
-@patch("routers.tools.simulate_interview_pass", return_value=MOCK_INTERVIEW_RESPONSE)
+@patch("routers.interview.simulate_interview_pass", return_value=MOCK_INTERVIEW_RESPONSE)
 def test_interview_respond_valid(mock_sim, client):
     """Sending a response with history returns next question."""
     resp = client.post("/api/interview/respond", json={
@@ -88,7 +88,7 @@ def test_interview_respond_valid(mock_sim, client):
     assert data["is_finished"] is False
 
 
-@patch("routers.tools.simulate_interview_pass", return_value=MOCK_FINAL_RESPONSE)
+@patch("routers.interview.simulate_interview_pass", return_value=MOCK_FINAL_RESPONSE)
 def test_interview_final_response_has_feedback(mock_sim, client):
     """On the final question, feedback is returned with all metrics."""
     history = []
@@ -114,14 +114,14 @@ def test_interview_final_response_has_feedback(mock_sim, client):
     assert 0 <= fb["overall_score"] <= 100
 
 
-@patch("routers.tools.simulate_interview_pass", return_value=MOCK_INTERVIEW_RESPONSE)
+@patch("routers.interview.simulate_interview_pass", return_value=MOCK_INTERVIEW_RESPONSE)
 def test_interview_start_missing_school_rejects(mock_sim, client):
     """Missing school_id returns 422."""
     resp = client.post("/api/interview/start", json={})
     assert resp.status_code == 422
 
 
-@patch("routers.tools.simulate_interview_pass", return_value=MOCK_INTERVIEW_RESPONSE)
+@patch("routers.interview.simulate_interview_pass", return_value=MOCK_INTERVIEW_RESPONSE)
 def test_interview_respond_empty_history_ok(mock_sim, client):
     """Empty history (fresh start via respond) still works."""
     resp = client.post("/api/interview/respond", json={
@@ -131,7 +131,7 @@ def test_interview_respond_empty_history_ok(mock_sim, client):
     assert resp.status_code == 200
 
 
-@patch("routers.tools.simulate_interview_pass", return_value=MOCK_INTERVIEW_RESPONSE)
+@patch("routers.interview.simulate_interview_pass", return_value=MOCK_INTERVIEW_RESPONSE)
 def test_interview_new_question_fields(mock_sim, client):
     """Response includes question_number, total_questions, question_category."""
     resp = client.post("/api/interview/start", json={"school_id": "booth"})
@@ -144,7 +144,7 @@ def test_interview_new_question_fields(mock_sim, client):
     assert isinstance(data["total_questions"], int)
 
 
-@patch("routers.tools.simulate_interview_pass", return_value=MOCK_FINAL_RESPONSE)
+@patch("routers.interview.simulate_interview_pass", return_value=MOCK_FINAL_RESPONSE)
 def test_interview_feedback_per_question_notes(mock_sim, client):
     """Final feedback includes per_question_notes array."""
     resp = client.post("/api/interview/respond", json={
@@ -161,7 +161,7 @@ def test_interview_feedback_per_question_notes(mock_sim, client):
     assert len(fb["per_question_notes"]) > 0
 
 
-@patch("routers.tools.simulate_interview_pass", return_value=MOCK_INTERVIEW_RESPONSE)
+@patch("routers.interview.simulate_interview_pass", return_value=MOCK_INTERVIEW_RESPONSE)
 def test_interview_various_schools(mock_sim, client):
     """Verify interview works for multiple school IDs without 500 errors."""
     school_ids = ["hbs", "gsb", "wharton", "kellogg", "booth", "insead", "cbs", "sloan", "tuck", "ross"]

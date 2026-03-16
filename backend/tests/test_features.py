@@ -328,7 +328,7 @@ def test_evaluate_essay_mocked(client):
         "feedback": "Good narrative arc.",
         "rewrite_suggestions": ["Add a concrete example."],
     }
-    with patch("routers.tools.evaluate_essay_draft", return_value=mock_result):
+    with patch("routers.essays.evaluate_essay_draft", return_value=mock_result):
         resp = client.post("/api/evaluate_essay", json={
             "school_id": "hbs",
             "prompt": "What is your post-MBA goal?",
