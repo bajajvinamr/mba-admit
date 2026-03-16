@@ -36,6 +36,8 @@ def _school_summary(sid: str, school: dict) -> dict:
         "primary_admission_test": school.get("primary_admission_test"),
         "program_count": len(school.get("programs") or []),
         "degree_type": school.get("degree_type", "MBA"),
+        "program_length_months": school.get("program_length_months"),
+        "program_format": school.get("program_format"),
         "data_source": dq["source"],
         "data_confidence": dq["confidence"],
     }
