@@ -47,6 +47,12 @@ def start_session(request: Request, req: StartSessionRequest, user: Dict = Depen
         "gmat": req.gmat,
         "gpa": req.gpa,
         "industry_background": req.industry_background,
+        "undergrad_tier": req.undergrad_tier,
+        "leadership_roles": req.leadership_roles,
+        "target_intake": req.target_intake,
+        "intl_experience": req.intl_experience,
+        "community_service": req.community_service,
+        "publications": req.publications,
     }
 
     user_id = user.get("sub") if user else None

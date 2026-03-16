@@ -31,6 +31,12 @@ class StartSessionRequest(BaseModel):
     gpa: float = Field(ge=0, le=10.0)
     gpa_scale: Optional[str] = Field(default="4.0", description="Grading scale: 4.0, 10.0, 5.0, percentage")
     industry_background: str
+    undergrad_tier: Optional[str] = None
+    leadership_roles: Optional[str] = None
+    target_intake: Optional[str] = None
+    intl_experience: Optional[bool] = False
+    community_service: Optional[bool] = False
+    publications: Optional[bool] = False
 
 
 class ChatMessageRequest(BaseModel):
