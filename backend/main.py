@@ -10,7 +10,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from logging_config import setup_logging
 
-from middleware import setup_rate_limiter, global_exception_handler
+from middleware import setup_rate_limiter, setup_cache_headers, global_exception_handler
 
 logger = setup_logging()
 
@@ -19,6 +19,7 @@ app = FastAPI(title="Chief of Staff — MBA Admissions API v2")
 # ── Middleware ─────────────────────────────────────────────────────────────────
 
 setup_rate_limiter(app)
+setup_cache_headers(app)
 app.add_exception_handler(Exception, global_exception_handler)
 
 # ── CORS ───────────────────────────────────────────────────────────────────────
