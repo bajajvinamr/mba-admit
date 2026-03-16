@@ -1248,3 +1248,50 @@ def get_deadline_calendar(school_ids: str = None):
         "months": months,
         "school_count": len(set(e["school_id"] for e in events)),
     }
+
+
+@router.get("/upcoming-deadlines")
+def upcoming_deadlines(
+    days: int = Query(default=90, ge=1, le=365, description="Show deadlines within N days"),
+    degree_type: str = Query(default=None, description="Filter by degree type"),
+    limit: int = Query(default=20, ge=1, le=100),
+):
+    """Returns upcoming application deadlines across all schools, sorted by date.
+
+    Great for applicants tracking multiple schools' timelines.
+    """
+    today = datetime.now()
+    cutoff = today + __import__("datetime").timedelta(days=days)
+    upcoming = []
+
+    for sid, school in SCHOOL_DB.items():
+        if degree_type and school.get("degree_type", "MBA") != degree_type:
+            continue
+
+        deadlines = school.get("deadlines") or []
+        for dl in deadlines:
+            date_str = dl.get("date", "")
+            try:
+                dt = datetime.strptime(date_str, "%Y-%m-%d")
+            except (ValueError, TypeError):
+                continue
+            if today <= dt <= cutoff:
+                days_away = (dt - today).days
+                upcoming.append({
+                    "school_id": sid,
+                    "school_name": school.get("name", sid),
+                    "round": dl.get("round", ""),
+                    "deadline": dt.strftime("%B %d, %Y"),
+                    "deadline_date": date_str,
+                    "days_away": days_away,
+                    "decision_date": dl.get("decision_date"),
+                    "degree_type": school.get("degree_type", "MBA"),
+                    "urgency": "critical" if days_away <= 7 else "soon" if days_away <= 30 else "upcoming",
+                })
+
+    upcoming.sort(key=lambda x: x["deadline_date"])
+    return {
+        "deadlines": upcoming[:limit],
+        "total": len(upcoming),
+        "window_days": days,
+    }
