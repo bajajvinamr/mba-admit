@@ -62,20 +62,33 @@ def list_schools(
     """
     if q:
         q_lower = q.strip().lower()
-        matched_ids: set[str] = set()
+        matched: dict[str, int] = {}  # sid → relevance score (lower = better)
 
-        # 1. Check alias map for abbreviation matches
+        # 1. Check alias map for abbreviation matches (highest relevance)
         for sid, aliases in SCHOOL_ALIASES.items():
-            if any(q_lower == alias or q_lower in alias for alias in aliases):
+            if any(q_lower == alias for alias in aliases):
                 if sid in SCHOOL_DB:
-                    matched_ids.add(sid)
+                    matched[sid] = 0  # exact alias match
+            elif any(q_lower in alias for alias in aliases):
+                if sid in SCHOOL_DB:
+                    matched.setdefault(sid, 5)
 
-        # 2. Check school names and IDs directly
+        # 2. Check school names and IDs — ranked by match quality
         for sid, school in SCHOOL_DB.items():
-            if q_lower in school.get("name", "").lower() or q_lower in sid.lower():
-                matched_ids.add(sid)
+            name_lower = school.get("name", "").lower()
+            if sid == q_lower:
+                matched[sid] = 0  # exact ID match
+            elif sid.startswith(q_lower):
+                matched.setdefault(sid, 1)  # ID prefix
+            elif name_lower.startswith(q_lower):
+                matched.setdefault(sid, 2)  # name prefix
+            elif q_lower in name_lower:
+                matched.setdefault(sid, 3)  # name substring
+            elif q_lower in sid:
+                matched.setdefault(sid, 4)  # ID substring
 
-        results = [_school_summary(sid, SCHOOL_DB[sid]) for sid in sorted(matched_ids)]
+        results = [_school_summary(sid, SCHOOL_DB[sid])
+                   for sid in sorted(matched, key=lambda s: (matched[s], s))]
     else:
         # No query — return all schools
         results = [_school_summary(sid, school) for sid, school in SCHOOL_DB.items()]

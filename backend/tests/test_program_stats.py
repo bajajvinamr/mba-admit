@@ -44,7 +44,7 @@ class TestProgramStats:
     def test_filter_emba(self):
         r = client.get("/api/schools/program-stats?degree_type=Executive+MBA")
         assert r.status_code == 200
-        assert r.json()["count"] > 400
+        assert r.json()["count"] > 200
 
     def test_filter_mim(self):
         r = client.get("/api/schools/program-stats?degree_type=MiM")

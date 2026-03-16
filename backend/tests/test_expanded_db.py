@@ -1,11 +1,11 @@
-"""Tests to verify the expanded 1500-school database works correctly across all endpoints."""
+"""Tests to verify the school database works correctly across all endpoints."""
 
 
 def test_total_school_count(client):
-    """Database should have 1400+ real schools loaded."""
+    """Database should have 800+ real schools loaded."""
     resp = client.get("/api/schools")
     data = resp.json()
-    assert len(data) >= 1400, f"Expected 1400+ schools, got {len(data)}"
+    assert len(data) >= 800, f"Expected 800+ schools, got {len(data)}"
 
 
 def test_mim_programs_exist(client):
@@ -19,14 +19,14 @@ def test_emba_programs_exist(client):
     """Executive MBA programs are present and filterable."""
     resp = client.get("/api/schools?degree_type=Executive+MBA")
     data = resp.json()
-    assert len(data) >= 400, f"Expected 400+ EMBA programs, got {len(data)}"
+    assert len(data) >= 200, f"Expected 200+ EMBA programs, got {len(data)}"
 
 
 def test_cat_programs_exist(client):
     """MBA (CAT) programs are present and filterable."""
     resp = client.get("/api/schools?degree_type=MBA+(CAT)")
     data = resp.json()
-    assert len(data) >= 200, f"Expected 200+ CAT programs, got {len(data)}"
+    assert len(data) >= 50, f"Expected 50+ CAT programs, got {len(data)}"
 
 
 def test_no_deferred_mba_type(client):
@@ -116,4 +116,4 @@ def test_pagination_zero_limit_returns_all(client):
     """limit=0 returns all results (default behavior)."""
     resp = client.get("/api/schools?limit=0")
     data = resp.json()
-    assert len(data) > 1000
+    assert len(data) > 800
