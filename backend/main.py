@@ -63,12 +63,17 @@ def root():
 
 @app.get("/health")
 def health_check():
-    """Health check for load balancers and monitoring. Returns school count + uptime."""
+    """Health check for load balancers and monitoring."""
     from agents import SCHOOL_DB
     import time
     return {
         "status": "healthy",
         "schools_loaded": len(SCHOOL_DB),
-        "version": "2.1.0",
+        "version": "2.2.0",
         "timestamp": time.time(),
+        "features": {
+            "rate_limiting": bool(os.environ.get("RATE_LIMIT_ENABLED", "true").lower() == "true"),
+            "structured_logging": True,
+            "cors_restricted": len(ALLOWED_ORIGINS) < 10,
+        },
     }

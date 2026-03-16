@@ -34,12 +34,23 @@ import db
 
 @pytest.fixture(autouse=True)
 def _clean_db():
-    """Reset in-memory stores between tests."""
+    """Reset in-memory stores and rate limiter between tests."""
     db._MEMORY_SESSIONS.clear()
     db._MEMORY_USERS.clear()
     db._MEMORY_SCHOOL_LIST.clear()
     db._MEMORY_DECISIONS.clear()
     db._supabase = None  # force in-memory mode
+
+    # Reset rate limiter state to prevent cross-test rate limit failures
+    try:
+        from middleware import limiter
+        if limiter and hasattr(limiter, "_storage"):
+            limiter._storage.reset()
+        elif limiter:
+            limiter.reset()
+    except Exception:
+        pass
+
     yield
     db._MEMORY_SESSIONS.clear()
     db._MEMORY_USERS.clear()
