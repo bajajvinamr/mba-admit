@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "computedAt": 1773651488476,
+  "computedAt": 1773683774280,
   "entries": [
     {
       "id": "mem-MEMORY-tooling",
       "content": "- [Ruflo v3.5 Integration](project_ruflo_integration.md) — agent orchestration, self-learning, cost optimization\n- [Competitive Analysis](../../docs/research/2026-03-15-competitive-analysis.md) — market research on MBA admissions platforms",
       "summary": "Tooling",
       "category": "core",
-      "confidence": 0.5,
+      "confidence": 0.495,
       "pageRank": 0.19693779476003911,
       "accessCount": 0,
       "words": [
@@ -39,7 +39,7 @@
       "content": "- School IDs: lowercase slugs (e.g., `hbs`, `gsb`, `wharton`, `iima`)\n- Synthetic schools: hex-hash IDs > 6 chars, filtered at load time\n- Data quality: `data_quality` dict with `verified_fields`, `confidence`, `last_scraped`\n- Frontend: editorial design system with `heading-serif`, `editorial-card`, gold/jet colors",
       "summary": "Patterns",
       "category": "core",
-      "confidence": 0.5,
+      "confidence": 0.495,
       "pageRank": 0.1805398196428332,
       "accessCount": 0,
       "words": [
@@ -86,7 +86,7 @@
       "content": "- 1,198 total entries in `school_db_full.json` (mostly synthetic)\n- 254 \"real\" schools after hex-ID filtering\n- 4 schools crawled (HBS, Stanford, Wharton, IIM Ahmedabad)\n- 0 successfully extracted (API key missing)",
       "summary": "School DB",
       "category": "core",
-      "confidence": 0.5,
+      "confidence": 0.495,
       "pageRank": 0.16124789535775155,
       "accessCount": 0,
       "words": [
@@ -123,7 +123,7 @@
       "content": "- `agents.py` now overlays scraped data at load time (`_overlay_scraped_data`)\n- School API responses include `data_source` and `data_confidence` fields\n- School detail API includes full `data_quality_summary` object\n- Frontend shows \"Verified Data\" / \"AI-Generated Data\" badges\n- Per-section verified indicators on essay prompts, deadlines, placement stats\n- New endpoints: `/api/scraper/status`, `/api/scraper/stats`",
       "summary": "Data Quality Integration (completed 2026-03-13)",
       "category": "core",
-      "confidence": 0.5,
+      "confidence": 0.495,
       "pageRank": 0.13855145248608602,
       "accessCount": 0,
       "words": [
@@ -190,7 +190,7 @@
       "content": "- **Stage 1**: Discovery — ranking site scraping, seed schools, dedup\n- **Stage 1.5**: URL Resolution — Google search for missing websites\n- **Stage 2**: Crawl — Playwright page capture with resume support\n- **Stage 3**: Extract — Claude API structured extraction\n- **Stage 4**: Merge — overlay scraped data on existing DB\n- **Tests**: 12 unit tests in `backend/scraper/test_*.py`\n- **Blocker**: No `.env` with ANTHROPIC_API_KEY — extraction fails",
       "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
       "category": "core",
-      "confidence": 0.5,
+      "confidence": 0.495,
       "pageRank": 0.11184980072651707,
       "accessCount": 0,
       "words": [
@@ -253,7 +253,7 @@
       "content": "- `backend/agents.py` — School DB loader, LangChain agents, RAG engine\n- `backend/routers/schools.py` — School directory + odds calculator API\n- `backend/routers/scraper.py` — Pipeline status/stats endpoints (NEW)\n- `backend/scraper/run.py` — CLI orchestrator: `python -m backend.scraper.run <cmd>`\n- `frontend/src/app/school/[schoolId]/page.tsx` — School detail page\n- `frontend/src/app/schools/page.tsx` — School directory listing\n- `docs/plans/2026-03-12-mba-scraper-pipeline.md` — Implementation ",
       "summary": "Key Files",
       "category": "core",
-      "confidence": 0.5,
+      "confidence": 0.495,
       "pageRank": 0.08043617573058126,
       "accessCount": 0,
       "words": [
@@ -319,11 +319,36 @@
       ]
     },
     {
+      "id": "insight-1773611581443-0kqd",
+      "content": "File unknown was edited 39 times this session — likely a hot path worth monitoring.",
+      "summary": "Frequently edited: unknown (39x)",
+      "category": "insights",
+      "confidence": 0.5,
+      "pageRank": 0.04347902043206393,
+      "accessCount": 0,
+      "words": [
+        "file",
+        "unknown",
+        "edited",
+        "times",
+        "session",
+        "likely",
+        "hot",
+        "path",
+        "worth",
+        "monitoring",
+        "frequently",
+        "edited",
+        "unknown",
+        "39x"
+      ]
+    },
+    {
       "id": "mem-MEMORY-architecture",
       "content": "- **Backend**: Python FastAPI (`backend/`) — routers pattern, loaded from `backend/main.py`\n- **Frontend**: Next.js 16 + React 19 + TypeScript + Tailwind v4 (`frontend/`)\n- **Scraper Pipeline**: Python CLI tool (`backend/scraper/`) — 4-stage pipeline\n- **Data**: `backend/data/` — JSON files, raw HTML cache",
       "summary": "Architecture",
       "category": "core",
-      "confidence": 0.5,
+      "confidence": 0.495,
       "pageRank": 0.04347902043206393,
       "accessCount": 0,
       "words": [
@@ -367,7 +392,7 @@
       "content": "name: ruflo-integration\ndescription: Ruflo v3.5 agent orchestration platform integrated into project for multi-agent swarms, self-learning, and cost optimization\ntype: project\n---\n\nRuflo v3.5.15 installed globally and initialized in the MBA admissions project (2026-03-15).\n\n**Why:** Increase development productivity via multi-agent coordination, persistent learning across sessions, and intelligent task routing (simple tasks to Haiku, complex to Opus).\n\n**How to apply:**\n- Daemon runs in backgrou",
       "summary": "---",
       "category": "project_ruflo_integration",
-      "confidence": 0.5,
+      "confidence": 0.495,
       "pageRank": 0.04347902043206393,
       "accessCount": 0,
       "words": [
@@ -421,31 +446,6 @@
         "runs",
         "backgrou",
         "---"
-      ]
-    },
-    {
-      "id": "insight-1773611581443-0kqd",
-      "content": "File unknown was edited 39 times this session — likely a hot path worth monitoring.",
-      "summary": "Frequently edited: unknown (39x)",
-      "category": "insights",
-      "confidence": 0.5,
-      "pageRank": 0.04347902043206393,
-      "accessCount": 0,
-      "words": [
-        "file",
-        "unknown",
-        "edited",
-        "times",
-        "session",
-        "likely",
-        "hot",
-        "path",
-        "worth",
-        "monitoring",
-        "frequently",
-        "edited",
-        "unknown",
-        "39x"
       ]
     }
   ]
