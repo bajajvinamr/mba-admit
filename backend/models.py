@@ -160,6 +160,7 @@ class StorytellerResponse(BaseModel):
 
 class AddSchoolRequest(BaseModel):
     school_id: str
+    status: Optional[str] = None
     round: Optional[str] = None
     notes: Optional[str] = None
     priority: int = 0

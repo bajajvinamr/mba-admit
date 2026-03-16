@@ -267,12 +267,12 @@ def get_user_schools(user_id: str) -> List[Dict[str, Any]]:
     return _MEMORY_SCHOOL_LIST.get(user_id, [])
 
 
-def add_user_school(user_id: str, school_id: str, round: Optional[str] = None, notes: Optional[str] = None, priority: int = 0) -> Dict[str, Any]:
+def add_user_school(user_id: str, school_id: str, status: Optional[str] = None, round: Optional[str] = None, notes: Optional[str] = None, priority: int = 0) -> Dict[str, Any]:
     entry = {
         "user_id": user_id,
         "school_id": school_id,
         "round": round,
-        "status": "researching",
+        "status": status or "researching",
         "notes": notes,
         "priority": priority,
     }

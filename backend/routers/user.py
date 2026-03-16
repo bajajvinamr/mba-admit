@@ -24,6 +24,7 @@ def add_school_to_list(req: AddSchoolRequest, user: Dict = Depends(get_current_u
     return db.add_user_school(
         user_id=user["sub"],
         school_id=req.school_id,
+        status=req.status,
         round=req.round,
         notes=req.notes,
         priority=req.priority,
