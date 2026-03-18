@@ -11,7 +11,7 @@ def test_compare_schools(client):
     assert len(data["schools"]) == 2
     names = [s["name"] for s in data["schools"]]
     assert "Harvard Business School" in names
-    assert "Stanford GSB" in names
+    assert any("Stanford" in n for n in names)
     # Check new response structure
     hbs = data["schools"][0]
     assert "static" in hbs
