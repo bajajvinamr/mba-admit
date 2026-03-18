@@ -263,53 +263,17 @@ _SCHOOL_APPROACHES = {
 }
 
 
-@router.get("/interview-questions")
-def get_interview_questions(
+@router.get("/interview-questions", deprecated=True)
+def get_interview_questions_legacy(
     school_id: str = Query(default=None, description="Filter for school-specific questions"),
     category: str = Query(default=None, description="Filter by question category"),
 ):
-    """Interview question bank with tips — filterable by school and category."""
-    categories_to_include = [category] if category and category in _IQ_CATEGORIES else _IQ_CATEGORIES
-    questions: list[dict] = []
+    """DEPRECATED — use /api/interview/questions instead.
 
-    for cat in categories_to_include:
-        cat_questions = _QUESTION_BANK.get(cat, [])
-        for q in cat_questions:
-            questions.append({
-                "question": q["question"],
-                "category": cat,
-                "difficulty": q["difficulty"],
-                "tips": q["tips"],
-                "school_specific": False,
-            })
-
-    # Add school-specific questions if school_id provided
-    if school_id:
-        school = SCHOOL_DB.get(school_id)
-        school_name = (school.get("name") or school_id.upper()) if school else school_id.upper()
-        approach = _SCHOOL_APPROACHES.get(school_id, "experiential learning")
-
-        school_questions = []
-        for template in _SCHOOL_SPECIFIC_TEMPLATES:
-            q_text = template.format(school_name=school_name, approach=approach)
-            school_questions.append({
-                "question": q_text,
-                "category": "why_school",
-                "difficulty": 2,
-                "tips": [
-                    f"Research {school_name}'s unique programs and culture",
-                    "Reference specific conversations with alumni or students",
-                    "Connect your goals to what makes this school distinct",
-                ],
-                "school_specific": True,
-            })
-        questions.extend(school_questions)
-
-    return {
-        "questions": questions,
-        "count": len(questions),
-        "categories": categories_to_include,
-    }
+    Redirects to the JSON-based question bank which has richer data.
+    Kept for backwards compatibility with existing frontend routes.
+    """
+    return get_interview_questions_json(school_id=school_id, category=category)
 
 
 # ── Alumni Interview Prep ──────────────────────────────────────────────────

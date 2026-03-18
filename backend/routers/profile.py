@@ -191,9 +191,13 @@ def _score_diversity(international_exp: bool) -> tuple[int, list[str]]:
     return (score, tips)
 
 
-@router.post("/application-strength")
+@router.post("/application-strength", deprecated=True)
 def application_strength(req: AppStrengthRequest):
-    """Score an MBA applicant's profile across 5 dimensions and return actionable tips."""
+    """Score an MBA applicant's profile across 5 dimensions and return actionable tips.
+
+    DEPRECATED: Prefer /api/profile/analyze which has 6 dimensions (adds pedigree)
+    and richer scoring. This endpoint is kept for backwards compatibility.
+    """
     acad_score, acad_tips = _score_academics(req.gmat, req.gpa)
     prof_score, prof_tips = _score_professional(req.work_years)
     lead_score, lead_tips = _score_leadership(req.leadership_examples or 0)

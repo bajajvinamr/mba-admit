@@ -39,9 +39,14 @@ def evaluate_essay(request: Request, req: EssayEvaluationRequest):
 
 # ── Essay Word Counter ──────────────────────────────────────────────────
 
-@router.post("/essay/word-count")
+@router.post("/essay/word-count", deprecated=True)
 def essay_word_count(req: EssayWordCountRequest):
-    """Analyze essay text: word count, character count, sentence count, reading time."""
+    """Analyze essay text: word count, character count, sentence count, reading time.
+
+    DEPRECATED: Word counting is built into every essay editor. This standalone
+    endpoint will be removed in a future release. The essay evaluator already
+    returns word count in its response.
+    """
     text = req.text.strip()
     words = text.split() if text else []
     word_count = len(words)
