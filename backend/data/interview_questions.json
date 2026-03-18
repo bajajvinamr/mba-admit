@@ -4,82 +4,1316 @@
       "id": "personal",
       "name": "Personal & Background",
       "questions": [
-        {"q": "Walk me through your resume.", "difficulty": "easy", "schools": ["hbs", "booth", "gsb", "wharton", "kellogg", "sloan", "cbs", "tuck"], "tips": "Keep it to 2-3 minutes. Focus on transitions and growth, not every job detail."},
-        {"q": "Tell me about yourself.", "difficulty": "easy", "schools": ["hbs", "gsb", "wharton", "kellogg", "cbs"], "tips": "Structure: current role → key past experiences → why MBA now. Under 2 minutes."},
-        {"q": "What are three words your colleagues would use to describe you?", "difficulty": "medium", "schools": ["booth", "kellogg", "tuck", "haas"], "tips": "Pick words that map to different leadership qualities. Have a specific story for each."},
-        {"q": "What is your greatest accomplishment?", "difficulty": "medium", "schools": ["hbs", "gsb", "wharton", "cbs", "sloan"], "tips": "Choose one with measurable impact. Use STAR format: Situation, Task, Action, Result."},
-        {"q": "Describe a time you failed and what you learned.", "difficulty": "medium", "schools": ["hbs", "booth", "gsb", "kellogg", "tuck", "haas"], "tips": "Show self-awareness. The learning matters more than the failure. Demonstrate growth."},
-        {"q": "What do you do outside of work?", "difficulty": "easy", "schools": ["booth", "kellogg", "tuck", "haas", "fuqua"], "tips": "Show you're a well-rounded person. Community involvement and hobbies that reveal character work best."},
-        {"q": "What would your direct reports say about your management style?", "difficulty": "hard", "schools": ["hbs", "wharton", "booth", "sloan"], "tips": "Be honest about both strengths and areas of growth. Reference specific feedback you've received."}
+        {
+          "q": "Walk me through your resume.",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "booth",
+            "gsb",
+            "wharton",
+            "kellogg",
+            "sloan",
+            "cbs",
+            "tuck"
+          ],
+          "tips": "Keep it to 2-3 minutes. Focus on transitions and growth, not every job detail."
+        },
+        {
+          "q": "Tell me about yourself.",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "kellogg",
+            "cbs"
+          ],
+          "tips": "Structure: current role \u2192 key past experiences \u2192 why MBA now. Under 2 minutes."
+        },
+        {
+          "q": "What are three words your colleagues would use to describe you?",
+          "difficulty": "medium",
+          "schools": [
+            "booth",
+            "kellogg",
+            "tuck",
+            "haas"
+          ],
+          "tips": "Pick words that map to different leadership qualities. Have a specific story for each."
+        },
+        {
+          "q": "What is your greatest accomplishment?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "cbs",
+            "sloan"
+          ],
+          "tips": "Choose one with measurable impact. Use STAR format: Situation, Task, Action, Result."
+        },
+        {
+          "q": "Describe a time you failed and what you learned.",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "booth",
+            "gsb",
+            "kellogg",
+            "tuck",
+            "haas"
+          ],
+          "tips": "Show self-awareness. The learning matters more than the failure. Demonstrate growth."
+        },
+        {
+          "q": "What do you do outside of work?",
+          "difficulty": "easy",
+          "schools": [
+            "booth",
+            "kellogg",
+            "tuck",
+            "haas",
+            "fuqua"
+          ],
+          "tips": "Show you're a well-rounded person. Community involvement and hobbies that reveal character work best."
+        },
+        {
+          "q": "What would your direct reports say about your management style?",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "wharton",
+            "booth",
+            "sloan"
+          ],
+          "tips": "Be honest about both strengths and areas of growth. Reference specific feedback you've received."
+        },
+        {
+          "q": "What is your greatest strength?",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Back it up with a specific example. Choose something relevant to MBA success. Avoid cliches."
+        },
+        {
+          "q": "What is your biggest weakness?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Be genuine \u2014 avoid disguised strengths. Show what you're doing to improve. Pick something real but manageable."
+        },
+        {
+          "q": "What would your colleagues say is your biggest area for growth?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Reference actual feedback you've received. Show self-awareness. Describe your improvement plan."
+        },
+        {
+          "q": "How do you handle stress and pressure?",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Give a specific high-pressure example. Describe your coping strategies. Show that you thrive, not just survive."
+        },
+        {
+          "q": "What skill are you most eager to develop in business school?",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Be specific about the skill and why. Connect to your career goals. Show how the school can help."
+        },
+        {
+          "q": "Describe a time your biggest strength became a liability.",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show nuanced self-understanding. Demonstrate adaptability. Explain what you learned."
+        },
+        {
+          "q": "How do you solicit and process feedback?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Describe your feedback-seeking habits. Give examples of acting on feedback. Show growth mindset."
+        },
+        {
+          "q": "What do people misunderstand about you?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Be honest and reflective. Show how you bridge the gap. Use this to reveal a hidden strength."
+        },
+        {
+          "q": "Rate yourself on a scale of 1-10 and explain why.",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Avoid extremes (not 10, not below 6). Be thoughtful about your reasoning. Show ambition to improve."
+        }
       ]
     },
     {
       "id": "why_mba",
-      "name": "Why MBA & Career Goals",
+      "name": "Why MBA",
       "questions": [
-        {"q": "Why do you want an MBA?", "difficulty": "easy", "schools": ["hbs", "booth", "gsb", "wharton", "kellogg", "sloan", "cbs", "tuck", "haas"], "tips": "Connect past experience → skill gap → MBA value → future goal. Be specific about what you can't get elsewhere."},
-        {"q": "Why this school specifically?", "difficulty": "medium", "schools": ["hbs", "booth", "gsb", "wharton", "kellogg", "sloan", "cbs", "tuck", "haas"], "tips": "Name specific professors, clubs, courses, and initiatives. Show you've done deep research."},
-        {"q": "What are your short-term and long-term career goals?", "difficulty": "medium", "schools": ["hbs", "gsb", "wharton", "booth", "kellogg", "cbs"], "tips": "Short-term: specific role/industry (2-3 years post-MBA). Long-term: broader vision (10+ years). Connect them logically."},
-        {"q": "What will you do if you don't get into any MBA program?", "difficulty": "hard", "schools": ["booth", "kellogg", "haas"], "tips": "Show the MBA is a strategic choice, not desperation. Have a credible alternative path."},
-        {"q": "How will you contribute to our class?", "difficulty": "medium", "schools": ["hbs", "gsb", "wharton", "kellogg", "tuck", "haas"], "tips": "Mention unique perspectives from your background, specific clubs you'd join/lead, and what you'd bring to study groups."},
-        {"q": "Where else are you applying?", "difficulty": "medium", "schools": ["booth", "kellogg", "tuck", "cbs"], "tips": "Be honest but brief. Show a coherent strategy in your school choices. Don't badmouth competitors."}
+        {
+          "q": "Why do you want an MBA?",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "booth",
+            "gsb",
+            "wharton",
+            "kellogg",
+            "sloan",
+            "cbs",
+            "tuck",
+            "haas"
+          ],
+          "tips": "Connect past experience \u2192 skill gap \u2192 MBA value \u2192 future goal. Be specific about what you can't get elsewhere."
+        },
+        {
+          "q": "What will you do if you don't get into any MBA program?",
+          "difficulty": "hard",
+          "schools": [
+            "booth",
+            "kellogg",
+            "haas"
+          ],
+          "tips": "Show the MBA is a strategic choice, not desperation. Have a credible alternative path."
+        },
+        {
+          "q": "What skills do you hope to develop during your MBA?",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Be specific \u2014 avoid generic answers. Connect skills to career goals. Show self-awareness about current gaps."
+        },
+        {
+          "q": "How do you plan to contribute to the MBA community?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Reference specific clubs or initiatives. Draw from past community involvement. Be genuine, not transactional."
+        },
+        {
+          "q": "What is the biggest misconception people have about MBAs?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show critical thinking. Demonstrate your research. Be thoughtful, not cynical."
+        },
+        {
+          "q": "How have you prepared for the MBA experience?",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Mention conversations with alumni. Reference relevant pre-MBA activities. Show intentionality."
+        },
+        {
+          "q": "What alternatives to an MBA have you considered?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Be honest about other paths. Explain why MBA won out. Show thorough self-reflection."
+        }
+      ]
+    },
+    {
+      "id": "school_fit",
+      "name": "School Fit & Contribution",
+      "questions": [
+        {
+          "q": "Why this school specifically?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "booth",
+            "gsb",
+            "wharton",
+            "kellogg",
+            "sloan",
+            "cbs",
+            "tuck",
+            "haas"
+          ],
+          "tips": "Name specific professors, clubs, courses, and initiatives. Show you've done deep research."
+        },
+        {
+          "q": "How will you contribute to our class?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "kellogg",
+            "tuck",
+            "haas"
+          ],
+          "tips": "Mention unique perspectives from your background, specific clubs you'd join/lead, and what you'd bring to study groups."
+        },
+        {
+          "q": "Where else are you applying?",
+          "difficulty": "medium",
+          "schools": [
+            "booth",
+            "kellogg",
+            "tuck",
+            "cbs"
+          ],
+          "tips": "Be honest but brief. Show a coherent strategy in your school choices. Don't badmouth competitors."
+        },
+        {
+          "q": "Why is this school your top choice?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Name specific courses, professors, or programs. Reference campus visits or alumni conversations. Show genuine fit, not flattery."
+        },
+        {
+          "q": "What specific programs or courses attract you to this school?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Research the curriculum deeply. Connect courses to your goals. Mention unique offerings."
+        },
+        {
+          "q": "How does this school's culture align with your values?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Reference specific cultural elements. Share examples of your values in action. Show you've talked to current students."
+        },
+        {
+          "q": "What will you bring to the incoming class?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Highlight unique perspectives. Be specific about contributions. Connect to the school's community needs."
+        },
+        {
+          "q": "Which clubs or organizations do you plan to join?",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Name specific clubs. Explain why they matter to you. Show leadership aspirations within them."
+        },
+        {
+          "q": "How does this school's alumni network align with your career goals?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Reference specific alumni outcomes. Show you've done informational interviews. Connect to your target industry."
+        },
+        {
+          "q": "What do you know about our learning methodology?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Research the school's pedagogy. Explain how the method suits your learning style. Give examples from past learning experiences."
+        },
+        {
+          "q": "If admitted to multiple schools, how would you make your decision?",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Be diplomatic but honest. Show your decision framework. Emphasize unique school strengths."
+        }
+      ]
+    },
+    {
+      "id": "career_goals",
+      "name": "Career Goals & Vision",
+      "questions": [
+        {
+          "q": "What are your short-term and long-term career goals?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg",
+            "cbs"
+          ],
+          "tips": "Short-term: specific role/industry (2-3 years post-MBA). Long-term: broader vision (10+ years). Connect them logically."
+        },
+        {
+          "q": "Why do you want to pursue an MBA at this point in your career?",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Be specific about timing. Connect to career trajectory. Show you've explored alternatives."
+        },
+        {
+          "q": "How will an MBA help you achieve your long-term goals?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Have a clear 5-10 year vision. Explain why an MBA is necessary, not just nice-to-have. Be realistic and specific."
+        },
+        {
+          "q": "Where do you see yourself five years after your MBA?",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Be specific about role, industry, and impact. Show a logical progression from your background. Connect to the MBA program."
+        },
+        {
+          "q": "What is your long-term career vision?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Think 15-20 years out. Be ambitious but credible. Show purpose beyond personal success."
+        },
+        {
+          "q": "Why are you switching industries/functions?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Explain the pull, not just the push. Show transferable skills. Demonstrate industry knowledge."
+        },
+        {
+          "q": "How does your pre-MBA experience prepare you for your post-MBA goals?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Draw clear connections. Identify skill gaps the MBA fills. Show intentional career planning."
+        },
+        {
+          "q": "What is your backup plan if your primary career goal doesn't work out?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show flexibility without seeming unfocused. Demonstrate realistic thinking. Connect backup to your core interests."
+        },
+        {
+          "q": "What impact do you want to have in your career?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Go beyond financial success. Be genuine about your motivations. Connect to personal experiences."
+        },
+        {
+          "q": "How do you define professional success?",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Be authentic. Show maturity in your definition. Connect to values and purpose."
+        },
+        {
+          "q": "What industry trends excite you most?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show you're well-read on your target industry. Explain how you want to contribute. Be specific and current."
+        },
+        {
+          "q": "Who is your professional role model and why?",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Choose someone in your target field. Be specific about what you admire. Show how they inspire your goals."
+        },
+        {
+          "q": "What would you do if you couldn't work in your target industry?",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show breadth of interests. Demonstrate core transferable passions. Be creative but credible."
+        }
       ]
     },
     {
       "id": "leadership",
       "name": "Leadership & Teamwork",
       "questions": [
-        {"q": "Tell me about a time you led a team through a difficult situation.", "difficulty": "medium", "schools": ["hbs", "gsb", "wharton", "kellogg", "sloan"], "tips": "Focus on how you motivated others, made tough calls, and achieved results despite obstacles."},
-        {"q": "Describe a conflict you had with a colleague and how you resolved it.", "difficulty": "medium", "schools": ["hbs", "booth", "kellogg", "tuck", "haas"], "tips": "Show emotional intelligence. Emphasize listening, finding common ground, and preserving the relationship."},
-        {"q": "Give an example of when you had to influence without authority.", "difficulty": "hard", "schools": ["hbs", "wharton", "sloan", "booth"], "tips": "This tests cross-functional leadership. Show how you built coalitions and used data/persuasion."},
-        {"q": "Tell me about a time you received critical feedback. How did you respond?", "difficulty": "medium", "schools": ["gsb", "kellogg", "tuck", "haas"], "tips": "Show humility and growth mindset. Describe the specific changes you made as a result."},
-        {"q": "Describe your leadership style.", "difficulty": "medium", "schools": ["hbs", "booth", "wharton", "kellogg"], "tips": "Be authentic. Use examples. The best answers show adaptability — different situations require different approaches."},
-        {"q": "Tell me about a time you had to make an unpopular decision.", "difficulty": "hard", "schools": ["hbs", "gsb", "wharton", "sloan"], "tips": "Show conviction with empathy. Explain your reasoning, how you communicated it, and what happened."}
+        {
+          "q": "Tell me about a time you led a team through a difficult situation.",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "kellogg",
+            "sloan"
+          ],
+          "tips": "Focus on how you motivated others, made tough calls, and achieved results despite obstacles."
+        },
+        {
+          "q": "Describe a conflict you had with a colleague and how you resolved it.",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "booth",
+            "kellogg",
+            "tuck",
+            "haas"
+          ],
+          "tips": "Show emotional intelligence. Emphasize listening, finding common ground, and preserving the relationship."
+        },
+        {
+          "q": "Give an example of when you had to influence without authority.",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "wharton",
+            "sloan",
+            "booth"
+          ],
+          "tips": "This tests cross-functional leadership. Show how you built coalitions and used data/persuasion."
+        },
+        {
+          "q": "Tell me about a time you received critical feedback. How did you respond?",
+          "difficulty": "medium",
+          "schools": [
+            "gsb",
+            "kellogg",
+            "tuck",
+            "haas"
+          ],
+          "tips": "Show humility and growth mindset. Describe the specific changes you made as a result."
+        },
+        {
+          "q": "Describe your leadership style.",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "booth",
+            "wharton",
+            "kellogg"
+          ],
+          "tips": "Be authentic. Use examples. The best answers show adaptability \u2014 different situations require different approaches."
+        },
+        {
+          "q": "Tell me about a time you had to make an unpopular decision.",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "sloan"
+          ],
+          "tips": "Show conviction with empathy. Explain your reasoning, how you communicated it, and what happened."
+        },
+        {
+          "q": "Tell me about a time you led a team through a difficult challenge.",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Focus on your specific actions. Show how you motivated the team. Quantify the outcome."
+        },
+        {
+          "q": "How do you develop talent in others?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Give specific mentoring examples. Show investment in others' growth. Describe your coaching approach."
+        },
+        {
+          "q": "Describe a time you had to lead a team with diverse perspectives.",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show inclusive leadership. Highlight how you leveraged different viewpoints. Demonstrate cultural awareness."
+        },
+        {
+          "q": "Tell me about a leadership failure and what it taught you.",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Choose a genuine failure, not a humble brag. Focus on the learning. Show how you've changed."
+        },
+        {
+          "q": "How do you build trust with a new team?",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Describe specific actions, not platitudes. Show authenticity. Reference real examples."
+        },
+        {
+          "q": "Describe a time you had to lead without a formal title.",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show influence skills. Demonstrate initiative. Highlight the outcome."
+        },
+        {
+          "q": "How do you handle underperforming team members?",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show empathy balanced with accountability. Describe your process step by step. Give a real example."
+        },
+        {
+          "q": "Tell me about a decision you made that was unpopular.",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show conviction and courage. Explain your reasoning clearly. Describe how you managed pushback."
+        },
+        {
+          "q": "What leader do you admire and why?",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Choose someone relevant to your field. Be specific about qualities you admire. Connect to your own leadership development."
+        },
+        {
+          "q": "Describe your role in a successful team project.",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Clarify your specific contribution. Show how you enabled others. Quantify the team's achievement."
+        },
+        {
+          "q": "How do you handle disagreements within a team?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show your conflict resolution approach. Give a specific example. Emphasize productive outcomes."
+        },
+        {
+          "q": "Tell me about a time a team project didn't go as planned.",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Take appropriate ownership. Focus on the team's recovery process. Share the lesson learned."
+        },
+        {
+          "q": "How do you ensure all team members contribute?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show inclusive facilitation skills. Describe specific techniques. Give an example."
+        },
+        {
+          "q": "Describe a time you had to work with someone you didn't get along with.",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show professionalism and maturity. Focus on the working relationship, not personality. Describe the outcome."
+        },
+        {
+          "q": "What role do you typically play on a team?",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show self-awareness. Demonstrate flexibility across roles. Give examples of different roles you've played."
+        },
+        {
+          "q": "How do you build consensus when opinions differ?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Describe your process step by step. Show respect for diverse viewpoints. Give a concrete example."
+        },
+        {
+          "q": "Tell me about a time you helped a struggling teammate.",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show empathy and initiative. Describe your specific actions. Focus on the teammate's growth."
+        },
+        {
+          "q": "How do you handle a team member who isn't pulling their weight?",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show direct but empathetic communication. Describe escalation if needed. Focus on the team's success."
+        },
+        {
+          "q": "Describe a cross-functional team experience.",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show ability to bridge different perspectives. Highlight communication skills. Quantify the impact."
+        }
       ]
     },
     {
       "id": "behavioral",
       "name": "Behavioral & Situational",
       "questions": [
-        {"q": "Tell me about a time you had to adapt to a major change at work.", "difficulty": "medium", "schools": ["booth", "kellogg", "haas", "fuqua"], "tips": "Show resilience and agility. Focus on how you helped others adapt too."},
-        {"q": "Describe a time when you had to work with someone very different from you.", "difficulty": "medium", "schools": ["kellogg", "tuck", "haas", "fuqua"], "tips": "Emphasize cultural curiosity and what you learned from the experience."},
-        {"q": "Give an example of when you took a calculated risk.", "difficulty": "hard", "schools": ["gsb", "booth", "wharton"], "tips": "Show your decision-making framework. Explain the upside, downside, and why the risk was worth taking."},
-        {"q": "Tell me about a project where you had to use data to drive a decision.", "difficulty": "medium", "schools": ["sloan", "booth", "wharton", "stern"], "tips": "Show analytical thinking. Describe the data you gathered, how you analyzed it, and the business impact."},
-        {"q": "Describe a time you had to balance multiple competing priorities.", "difficulty": "medium", "schools": ["hbs", "booth", "kellogg", "sloan"], "tips": "Show prioritization skills. Explain your framework for deciding what gets attention first."},
-        {"q": "What's the most creative solution you've implemented at work?", "difficulty": "hard", "schools": ["gsb", "haas", "kellogg"], "tips": "Show innovation thinking. The best stories involve constraints that forced creative problem-solving."}
+        {
+          "q": "Tell me about a time you had to adapt to a major change at work.",
+          "difficulty": "medium",
+          "schools": [
+            "booth",
+            "kellogg",
+            "haas",
+            "fuqua"
+          ],
+          "tips": "Show resilience and agility. Focus on how you helped others adapt too."
+        },
+        {
+          "q": "Describe a time when you had to work with someone very different from you.",
+          "difficulty": "medium",
+          "schools": [
+            "kellogg",
+            "tuck",
+            "haas",
+            "fuqua"
+          ],
+          "tips": "Emphasize cultural curiosity and what you learned from the experience."
+        },
+        {
+          "q": "Give an example of when you took a calculated risk.",
+          "difficulty": "hard",
+          "schools": [
+            "gsb",
+            "booth",
+            "wharton"
+          ],
+          "tips": "Show your decision-making framework. Explain the upside, downside, and why the risk was worth taking."
+        },
+        {
+          "q": "Tell me about a project where you had to use data to drive a decision.",
+          "difficulty": "medium",
+          "schools": [
+            "sloan",
+            "booth",
+            "wharton",
+            "stern"
+          ],
+          "tips": "Show analytical thinking. Describe the data you gathered, how you analyzed it, and the business impact."
+        },
+        {
+          "q": "Describe a time you had to balance multiple competing priorities.",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "booth",
+            "kellogg",
+            "sloan"
+          ],
+          "tips": "Show prioritization skills. Explain your framework for deciding what gets attention first."
+        },
+        {
+          "q": "What's the most creative solution you've implemented at work?",
+          "difficulty": "hard",
+          "schools": [
+            "gsb",
+            "haas",
+            "kellogg"
+          ],
+          "tips": "Show innovation thinking. The best stories involve constraints that forced creative problem-solving."
+        },
+        {
+          "q": "Tell me about a time you failed and what you learned from it.",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Use the STAR method. Focus on the lesson, not just the failure. Show self-awareness."
+        },
+        {
+          "q": "Describe a situation where you had to influence someone without direct authority.",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Highlight interpersonal skills. Show strategic thinking. Quantify the outcome."
+        },
+        {
+          "q": "Walk me through a time you received critical feedback. How did you respond?",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show humility and growth mindset. Describe concrete changes you made. Avoid being defensive in your retelling."
+        },
+        {
+          "q": "Tell me about a time you had to make a decision with incomplete information.",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Explain your reasoning framework. Show comfort with ambiguity. Describe the outcome and what you'd do differently."
+        },
+        {
+          "q": "Describe a conflict with a colleague and how you resolved it.",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show emotional intelligence. Focus on the resolution process. Avoid placing blame."
+        },
+        {
+          "q": "Give an example of when you went above and beyond what was expected.",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Quantify the impact. Explain your motivation. Connect to your values."
+        },
+        {
+          "q": "Describe a situation where you had to manage competing priorities.",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show your prioritization framework. Demonstrate time management skills. Explain trade-offs you made."
+        },
+        {
+          "q": "Tell me about a time you took a calculated risk.",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Explain your risk assessment process. Show that you weighed pros and cons. Describe the outcome honestly."
+        },
+        {
+          "q": "Describe a moment when you demonstrated resilience.",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Choose a genuinely challenging situation. Show the emotional journey. Connect to personal growth."
+        }
       ]
     },
     {
       "id": "ethics",
       "name": "Ethics & Values",
       "questions": [
-        {"q": "Tell me about an ethical dilemma you faced at work.", "difficulty": "hard", "schools": ["hbs", "gsb", "wharton", "tuck"], "tips": "Show clear moral reasoning. Explain the competing interests and how you decided what was right."},
-        {"q": "What matters most to you?", "difficulty": "hard", "schools": ["gsb"], "tips": "Stanford's signature question. Be deeply personal and authentic. This is about values, not achievements."},
-        {"q": "How would you handle discovering a superior was doing something unethical?", "difficulty": "hard", "schools": ["hbs", "wharton", "tuck"], "tips": "Show courage and judgment. Discuss escalation paths and protecting stakeholders."},
-        {"q": "What social or community issue are you most passionate about?", "difficulty": "medium", "schools": ["haas", "kellogg", "tuck", "fuqua"], "tips": "Show genuine passion with specific action. Talking about an issue is weaker than showing what you've done about it."}
+        {
+          "q": "Tell me about an ethical dilemma you faced at work.",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "tuck"
+          ],
+          "tips": "Show clear moral reasoning. Explain the competing interests and how you decided what was right."
+        },
+        {
+          "q": "What matters most to you?",
+          "difficulty": "hard",
+          "schools": [
+            "gsb"
+          ],
+          "tips": "Stanford's signature question. Be deeply personal and authentic. This is about values, not achievements."
+        },
+        {
+          "q": "How would you handle discovering a superior was doing something unethical?",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "wharton",
+            "tuck"
+          ],
+          "tips": "Show courage and judgment. Discuss escalation paths and protecting stakeholders."
+        },
+        {
+          "q": "What social or community issue are you most passionate about?",
+          "difficulty": "medium",
+          "schools": [
+            "haas",
+            "kellogg",
+            "tuck",
+            "fuqua"
+          ],
+          "tips": "Show genuine passion with specific action. Talking about an issue is weaker than showing what you've done about it."
+        },
+        {
+          "q": "Describe a time you faced an ethical dilemma at work.",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Choose a genuine dilemma, not an obvious right/wrong. Walk through your decision-making process. Show your values in action."
+        },
+        {
+          "q": "What would you do if you discovered a colleague was being dishonest?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show moral courage. Describe a measured approach. Balance loyalty with integrity."
+        },
+        {
+          "q": "How do you handle situations where business goals conflict with ethics?",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show that you don't see it as binary. Demonstrate creative problem-solving. Reference your personal framework."
+        },
+        {
+          "q": "Tell me about a time you had to speak truth to power.",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show courage balanced with tact. Describe the preparation involved. Share the outcome honestly."
+        },
+        {
+          "q": "Describe a situation where you had to choose between two right answers.",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Show sophisticated moral reasoning. Explain your decision framework. Be honest about the trade-offs."
+        },
+        {
+          "q": "How do you ensure ethical behavior in your team?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Describe specific practices. Show proactive culture-building. Give a concrete example."
+        },
+        {
+          "q": "What is your personal code of ethics?",
+          "difficulty": "medium",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Be specific, not vague. Root it in experiences. Show how it guides decisions."
+        },
+        {
+          "q": "Describe a time you sacrificed personal gain for the right thing.",
+          "difficulty": "hard",
+          "schools": [
+            "hbs",
+            "gsb",
+            "wharton",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Choose a meaningful example. Show that you'd do it again. Connect to your core values."
+        }
       ]
     },
     {
       "id": "industry",
       "name": "Industry & Current Events",
       "questions": [
-        {"q": "What trends do you see shaping your industry in the next 5 years?", "difficulty": "medium", "schools": ["booth", "wharton", "sloan", "stern"], "tips": "Show thought leadership. Name 2-3 specific trends with evidence, and explain implications."},
-        {"q": "If you could start a company, what would it be?", "difficulty": "hard", "schools": ["gsb", "booth", "sloan", "haas"], "tips": "Show entrepreneurial thinking. The idea matters less than your reasoning about market need and execution."},
-        {"q": "What business leader do you admire and why?", "difficulty": "easy", "schools": ["hbs", "booth", "kellogg"], "tips": "Choose someone whose values align with yours. Explain specific decisions or qualities you admire, not just outcomes."},
-        {"q": "Tell me about a recent business news story that caught your attention.", "difficulty": "medium", "schools": ["wharton", "booth", "stern"], "tips": "Pick something relevant to your target industry. Have a nuanced view, not just a summary."}
+        {
+          "q": "What trends do you see shaping your industry in the next 5 years?",
+          "difficulty": "medium",
+          "schools": [
+            "booth",
+            "wharton",
+            "sloan",
+            "stern"
+          ],
+          "tips": "Show thought leadership. Name 2-3 specific trends with evidence, and explain implications."
+        },
+        {
+          "q": "If you could start a company, what would it be?",
+          "difficulty": "hard",
+          "schools": [
+            "gsb",
+            "booth",
+            "sloan",
+            "haas"
+          ],
+          "tips": "Show entrepreneurial thinking. The idea matters less than your reasoning about market need and execution."
+        },
+        {
+          "q": "What business leader do you admire and why?",
+          "difficulty": "easy",
+          "schools": [
+            "hbs",
+            "booth",
+            "kellogg"
+          ],
+          "tips": "Choose someone whose values align with yours. Explain specific decisions or qualities you admire, not just outcomes."
+        },
+        {
+          "q": "Tell me about a recent business news story that caught your attention.",
+          "difficulty": "medium",
+          "schools": [
+            "wharton",
+            "booth",
+            "stern"
+          ],
+          "tips": "Pick something relevant to your target industry. Have a nuanced view, not just a summary."
+        }
       ]
     }
   ],
   "school_specific": {
-    "hbs": {"format": "30-minute interview, case-based + behavioral", "interviewer": "Admissions board member", "prep_tip": "HBS uses case-based discussions. Prepare to analyze business situations on the spot."},
-    "gsb": {"format": "Behavioral interview, 45 minutes", "interviewer": "Alumni or admissions officer", "prep_tip": "Stanford emphasizes self-awareness. 'What matters most' is key — prepare deeply personal stories."},
-    "wharton": {"format": "Team-Based Discussion (TBD) + individual interview", "interviewer": "Second-year students", "prep_tip": "Unique group exercise. Practice collaborative problem-solving and showing leadership without dominating."},
-    "booth": {"format": "Behavioral, 30 minutes, conversational", "interviewer": "Alumni or admissions", "prep_tip": "Booth values analytical rigor. Prepare to discuss how you approach problems with data and frameworks."},
-    "kellogg": {"format": "30-minute behavioral, very conversational", "interviewer": "Alumni", "prep_tip": "Kellogg prizes teamwork and emotional intelligence. Show genuine warmth and collaboration stories."},
-    "sloan": {"format": "Behavioral, 30 minutes", "interviewer": "Admissions ambassador (current student)", "prep_tip": "MIT values innovation and impact. Prepare stories about driving change through analytical thinking."},
-    "cbs": {"format": "Blind interview (interviewer hasn't read your application)", "interviewer": "Alumni", "prep_tip": "Since the interviewer hasn't read your app, you need to efficiently convey your story from scratch."},
-    "tuck": {"format": "Behavioral, 30-45 minutes", "interviewer": "Alumni or admissions officer", "prep_tip": "Tuck emphasizes community. Show how you've contributed to communities and why small class size appeals to you."},
-    "haas": {"format": "Behavioral, 30 minutes", "interviewer": "Alumni or admissions", "prep_tip": "Haas's four defining principles (Question the Status Quo, Confidence Without Attitude, Students Always, Beyond Yourself) — weave them in."}
+    "hbs": {
+      "format": "30-minute interview, case-based + behavioral",
+      "interviewer": "Admissions board member",
+      "prep_tip": "HBS uses case-based discussions. Prepare to analyze business situations on the spot."
+    },
+    "gsb": {
+      "format": "Behavioral interview, 45 minutes",
+      "interviewer": "Alumni or admissions officer",
+      "prep_tip": "Stanford emphasizes self-awareness. 'What matters most' is key \u2014 prepare deeply personal stories."
+    },
+    "wharton": {
+      "format": "Team-Based Discussion (TBD) + individual interview",
+      "interviewer": "Second-year students",
+      "prep_tip": "Unique group exercise. Practice collaborative problem-solving and showing leadership without dominating."
+    },
+    "booth": {
+      "format": "Behavioral, 30 minutes, conversational",
+      "interviewer": "Alumni or admissions",
+      "prep_tip": "Booth values analytical rigor. Prepare to discuss how you approach problems with data and frameworks."
+    },
+    "kellogg": {
+      "format": "30-minute behavioral, very conversational",
+      "interviewer": "Alumni",
+      "prep_tip": "Kellogg prizes teamwork and emotional intelligence. Show genuine warmth and collaboration stories."
+    },
+    "sloan": {
+      "format": "Behavioral, 30 minutes",
+      "interviewer": "Admissions ambassador (current student)",
+      "prep_tip": "MIT values innovation and impact. Prepare stories about driving change through analytical thinking."
+    },
+    "cbs": {
+      "format": "Blind interview (interviewer hasn't read your application)",
+      "interviewer": "Alumni",
+      "prep_tip": "Since the interviewer hasn't read your app, you need to efficiently convey your story from scratch."
+    },
+    "tuck": {
+      "format": "Behavioral, 30-45 minutes",
+      "interviewer": "Alumni or admissions officer",
+      "prep_tip": "Tuck emphasizes community. Show how you've contributed to communities and why small class size appeals to you."
+    },
+    "haas": {
+      "format": "Behavioral, 30 minutes",
+      "interviewer": "Alumni or admissions",
+      "prep_tip": "Haas's four defining principles (Question the Status Quo, Confidence Without Attitude, Students Always, Beyond Yourself) \u2014 weave them in."
+    }
   },
-  "total_questions": 33
+  "total_questions": 103
 }

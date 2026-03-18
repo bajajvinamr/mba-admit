@@ -713,7 +713,7 @@
   },
   {
     "id": "said",
-    "name": "Oxford Sa\u00efd",
+    "name": "Oxford Saïd",
     "location": "Oxford",
     "country": "UK",
     "source": "existing_db",
@@ -865,7 +865,7 @@
   },
   {
     "id": "whu",
-    "name": "WHU \u2013 Otto Beisheim School of Management",
+    "name": "WHU – Otto Beisheim School of Management",
     "location": "Vallendar",
     "country": "Germany",
     "source": "existing_db",
@@ -1074,7 +1074,7 @@
   {
     "id": "insper",
     "name": "Insper",
-    "location": "S\u00e3o Paulo",
+    "location": "São Paulo",
     "country": "Brazil",
     "source": "existing_db",
     "website": "https://www.insper.edu.br/en/mba"
@@ -1089,7 +1089,7 @@
   },
   {
     "id": "uai",
-    "name": "Universidad Adolfo Ib\u00e1\u00f1ez",
+    "name": "Universidad Adolfo Ibáñez",
     "location": "Santiago",
     "country": "Chile",
     "source": "existing_db",
@@ -1401,7 +1401,7 @@
   },
   {
     "id": "fundacao_dom_cabral",
-    "name": "Funda\u00e7\u00e3o Dom Cabral",
+    "name": "Fundação Dom Cabral",
     "location": "Nova Lima",
     "country": "Brazil",
     "source": "existing_db",
@@ -1410,7 +1410,7 @@
   {
     "id": "uniandes",
     "name": "Universidad de los Andes",
-    "location": "Bogot\u00e1",
+    "location": "Bogotá",
     "country": "Colombia",
     "source": "existing_db",
     "website": "https://administracion.uniandes.edu.co/mba"
@@ -1561,7 +1561,7 @@
   },
   {
     "id": "koc",
-    "name": "Ko\u00e7 University GSB",
+    "name": "Koç University GSB",
     "location": "Istanbul",
     "country": "Turkey",
     "source": "existing_db",
@@ -1577,7 +1577,7 @@
   },
   {
     "id": "bosphorus",
-    "name": "Bo\u011fazi\u00e7i University MBA",
+    "name": "Boğaziçi University MBA",
     "location": "Istanbul",
     "country": "Turkey",
     "source": "existing_db",
@@ -1646,5 +1646,2665 @@
     "country": "India",
     "source": "existing_db",
     "website": "https://www.isb.edu"
+  },
+  {
+    "id": "rotman",
+    "name": "Rotman",
+    "website": "https://www.rotman.utoronto.ca/mba",
+    "source": "known_urls"
+  },
+  {
+    "id": "esade",
+    "name": "Esade",
+    "website": "https://www.esade.edu/en/programmes/mbas/full-time-mba",
+    "source": "known_urls"
+  },
+  {
+    "id": "london_school_of_economics",
+    "name": "London School Of Economics",
+    "website": "https://www.lse.ac.uk/study-at-lse/graduate/mba",
+    "source": "known_urls"
+  },
+  {
+    "id": "ehl",
+    "name": "Ehl",
+    "website": "https://www.ehl.edu/en/programmes/mba",
+    "source": "known_urls"
+  },
+  {
+    "id": "fudan_university",
+    "name": "Fudan University",
+    "website": "https://www.fdsm.fudan.edu.cn/en/mba",
+    "source": "known_urls"
+  },
+  {
+    "id": "university_of_hong_kong",
+    "name": "University Of Hong Kong",
+    "website": "https://www.hkubs.hku.hk/mba",
+    "source": "known_urls"
+  },
+  {
+    "id": "brigham_young_marriott",
+    "name": "Brigham Young Marriott",
+    "website": "https://marriottschool.byu.edu/mba",
+    "source": "known_urls"
+  },
+  {
+    "id": "case_western_weatherhead",
+    "name": "Case Western Weatherhead",
+    "website": "https://weatherhead.case.edu/mba",
+    "source": "known_urls"
+  },
+  {
+    "id": "tulane_freeman",
+    "name": "Tulane Freeman",
+    "website": "https://freeman.tulane.edu/mba",
+    "source": "known_urls"
+  },
+  {
+    "id": "wake_forest_school_of_business",
+    "name": "Wake Forest School Of Business",
+    "website": "https://business.wfu.edu/mba",
+    "source": "known_urls"
+  },
+  {
+    "id": "boston_college_carroll",
+    "name": "Boston College Carroll",
+    "website": "https://www.bc.edu/content/bc-web/schools/carroll-school/graduate/mba.html",
+    "source": "known_urls"
+  },
+  {
+    "id": "asu_wpcarey",
+    "name": "Asu Wpcarey",
+    "website": "https://wpcarey.asu.edu/mba-programs",
+    "source": "known_urls"
+  },
+  {
+    "id": "uci_merage",
+    "name": "Uci Merage",
+    "website": "https://merage.uci.edu/programs/mba",
+    "source": "known_urls"
+  },
+  {
+    "id": "fordham_gabelli",
+    "name": "Fordham Gabelli",
+    "website": "https://www.fordham.edu/gabelli-school-of-business/academic-programs/graduate-programs/mba",
+    "source": "known_urls"
+  },
+  {
+    "id": "sloan_master_of_finance",
+    "name": "MIT Sloan (Master of Finance)",
+    "location": "Cambridge, MA",
+    "country": "USA",
+    "website": "https://mitsloan.mit.edu/mfin/introduce-yourself",
+    "source": "main_db"
+  },
+  {
+    "id": "hec_paris_mim",
+    "name": "HEC Paris Master in Management",
+    "location": "Paris, France",
+    "country": "France",
+    "website": "https://www.hec.edu/en/master-s-programs/master-management",
+    "source": "main_db"
+  },
+  {
+    "id": "st_gallen_mim",
+    "name": "University of St. Gallen Master in Management",
+    "location": "St. Gallen, Switzerland",
+    "country": "Switzerland",
+    "website": "https://www.mba.unisg.ch/",
+    "source": "main_db"
+  },
+  {
+    "id": "escp_mim",
+    "name": "ESCP Business School Master in Management",
+    "location": "Paris / London / Berlin / Madrid / Turin",
+    "country": "France",
+    "website": "https://escp.eu/programmes/mba",
+    "source": "main_db"
+  },
+  {
+    "id": "rsm_mim",
+    "name": "Rotterdam School of Management MSc Management",
+    "location": "Rotterdam, Netherlands",
+    "country": "Netherlands",
+    "website": "https://www.aacsb.edu/accredited/r/rotterdam-school-of-management-erasmus-university-rotterdam",
+    "source": "main_db"
+  },
+  {
+    "id": "sda_bocconi_mim",
+    "name": "SDA Bocconi Master in International Management",
+    "location": "Milan, Italy",
+    "country": "Italy",
+    "website": "https://www.aacsb.edu/accredited/s/sda-bocconi-school-of-management-universit-bocconi",
+    "source": "main_db"
+  },
+  {
+    "id": "sse_mim",
+    "name": "Stockholm School of Economics MSc Business & Management",
+    "location": "Stockholm, Sweden",
+    "country": "Sweden",
+    "website": "https://www.hhs.se/en/Education/MSc/",
+    "source": "main_db"
+  },
+  {
+    "id": "warwick_mim",
+    "name": "Warwick Business School MSc Management",
+    "location": "Coventry, UK",
+    "country": "UK",
+    "website": "https://www.wbs.ac.uk/courses/masters/management/",
+    "source": "main_db"
+  },
+  {
+    "id": "tbs_mim",
+    "name": "TBS Education Master in Management",
+    "location": "Toulouse, France",
+    "country": "France",
+    "website": "https://www.tbs-education.com/program/master-in-management/",
+    "source": "main_db"
+  },
+  {
+    "id": "hhl_mim",
+    "name": "HHL Leipzig Graduate School of Management MSc Management",
+    "location": "Leipzig, Germany",
+    "country": "Germany",
+    "website": "https://www.hhl.de/programs/full-time-master-in-management/",
+    "source": "main_db"
+  },
+  {
+    "id": "esmt_mim",
+    "name": "ESMT Berlin Master in Management",
+    "location": "Berlin, Germany",
+    "country": "Germany",
+    "website": "https://esmt.berlin/",
+    "source": "main_db"
+  },
+  {
+    "id": "oxford_mim",
+    "name": "Saïd Business School MSc Financial Economics",
+    "location": "Oxford, UK",
+    "country": "UK",
+    "website": "https://www.sbs.ox.ac.uk/programmes/degrees/msc-financial-economics",
+    "source": "main_db"
+  },
+  {
+    "id": "cambridge_mim",
+    "name": "Cambridge Judge Business School MPhil Management",
+    "location": "Cambridge, UK",
+    "country": "UK",
+    "website": "https://www.jbs.cam.ac.uk/masters-degrees/mphil-management/",
+    "source": "main_db"
+  },
+  {
+    "id": "lse_mim",
+    "name": "LSE Master in Management",
+    "location": "London, UK",
+    "country": "UK",
+    "website": "https://www.lse.ac.uk/study-at-lse/graduate/masters-in-management",
+    "source": "main_db"
+  },
+  {
+    "id": "kcl_mim",
+    "name": "King's College London MSc International Management",
+    "location": "London, UK",
+    "country": "UK",
+    "website": "https://www.kcl.ac.uk/study/postgraduate-taught/courses/international-management-msc",
+    "source": "main_db"
+  },
+  {
+    "id": "wu_vienna_mim",
+    "name": "WU Vienna Master in Strategy, Innovation, and Management Control",
+    "location": "Vienna, Austria",
+    "country": "Austria",
+    "website": "https://www.wu.ac.at/en/programs/masters-programs/strategy-innovation-and-management-control/overview",
+    "source": "main_db"
+  },
+  {
+    "id": "kozminski_mim",
+    "name": "Kozminski University Master in Management",
+    "location": "Warsaw, Poland",
+    "country": "Poland",
+    "website": "https://www.kozminski.edu.pl/en/programs/graduate-programs-master/master-management",
+    "source": "main_db"
+  },
+  {
+    "id": "nova_sbe_mim",
+    "name": "Nova SBE Master in Management",
+    "location": "Lisbon, Portugal",
+    "country": "Portugal",
+    "website": "https://www.novasbe.unl.pt/en/programs/masters/management/overview",
+    "source": "main_db"
+  },
+  {
+    "id": "catolica_mim",
+    "name": "Católica-Lisbon Master in Management",
+    "location": "Lisbon, Portugal",
+    "country": "Portugal",
+    "website": "https://clsbe.lisboa.ucp.pt/",
+    "source": "main_db"
+  },
+  {
+    "id": "solvay_mim",
+    "name": "Solvay Brussels School MSc Business Engineering",
+    "location": "Brussels, Belgium",
+    "country": "Belgium",
+    "website": "https://www.solvay.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "tum_mim",
+    "name": "TUM School of Management MSc Management & Technology",
+    "location": "Munich, Germany",
+    "country": "Germany",
+    "website": "https://www.tum.de/en/studies/degree-programs/detail/management-and-technology-tum-bwl-master-of-science-msc/",
+    "source": "main_db"
+  },
+  {
+    "id": "frankfurt_mim",
+    "name": "Frankfurt School of Finance & Management MSc Management",
+    "location": "Frankfurt, Germany",
+    "country": "Germany",
+    "website": "https://www.frankfurt-school.de/en",
+    "source": "main_db"
+  },
+  {
+    "id": "ebs_mim",
+    "name": "EBS Universität MSc Management",
+    "location": "Wiesbaden, Germany",
+    "country": "Germany",
+    "website": "https://www.ebs.edu/en/ebs-business-school/study-programmes/master-in-management",
+    "source": "main_db"
+  },
+  {
+    "id": "copenhagen_mim",
+    "name": "Copenhagen Business School MSc Economics & Business Administration",
+    "location": "Copenhagen, Denmark",
+    "country": "Denmark",
+    "website": "https://efteruddannelse.cbs.dk/en/mba",
+    "source": "main_db"
+  },
+  {
+    "id": "aalto_mim",
+    "name": "Aalto University School of Business MSc Economics & Business Administration",
+    "location": "Helsinki, Finland",
+    "country": "Finland",
+    "website": "https://www.aalto.fi/en/study-options/economics-master-of-science-economics-and-business-administration",
+    "source": "main_db"
+  },
+  {
+    "id": "nhh_mim",
+    "name": "NHH Norwegian School of Economics MSc Economics & Business Administration",
+    "location": "Bergen, Norway",
+    "country": "Norway",
+    "website": "https://www.nhh.no/en/study-programmes/msc-in-economics-and-business-administration/",
+    "source": "main_db"
+  },
+  {
+    "id": "smu_mim",
+    "name": "Singapore Management University Master in Management",
+    "location": "Singapore",
+    "country": "Singapore",
+    "website": "https://masters.smu.edu.sg/programme/master-of-business-administration",
+    "source": "main_db"
+  },
+  {
+    "id": "hkust_mim",
+    "name": "HKUST Business School MSc International Management",
+    "location": "Hong Kong",
+    "country": "Hong Kong",
+    "website": "https://mimt.hkust.edu.hk/",
+    "source": "main_db"
+  },
+  {
+    "id": "grenoble_mim",
+    "name": "Grenoble Ecole de Management MSc Management",
+    "location": "Grenoble, France",
+    "country": "France",
+    "website": "https://www.grenoble-em.com/en/programs/mba",
+    "source": "main_db"
+  },
+  {
+    "id": "ieseg_mim",
+    "name": "IESEG School of Management Master in Management",
+    "location": "Lille / Paris, France",
+    "country": "France",
+    "website": "https://www.ieseg.fr/en/",
+    "source": "main_db"
+  },
+  {
+    "id": "polimi_mim",
+    "name": "Politecnico di Milano School of Management MSc Management Engineering",
+    "location": "Milan, Italy",
+    "country": "Italy",
+    "website": "https://www.aacsb.edu/accredited/p/politecnico-di-milano-school-of-management-politecnico-milano",
+    "source": "main_db"
+  },
+  {
+    "id": "olin_wustl",
+    "name": "Washington University Olin Business School",
+    "location": "St. Louis, MO",
+    "country": "USA",
+    "website": "https://olin.washu.edu/programs/mbas/full-time-mba/index.php",
+    "source": "main_db"
+  },
+  {
+    "id": "rice_jones",
+    "name": "Rice University Jones Graduate School of Business",
+    "location": "Houston, TX",
+    "country": "USA",
+    "website": "https://business.rice.edu/rice-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "pitt_katz",
+    "name": "Pittsburgh Katz Graduate School of Business",
+    "location": "Pittsburgh, PA",
+    "country": "USA",
+    "website": "https://www.business.pitt.edu/mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "cass_mba",
+    "name": "Bayes (formerly Cass) Business School MBA",
+    "location": "London, UK",
+    "country": "UK",
+    "website": "https://www.bayes.citystgeorges.ac.uk/study/mba",
+    "source": "main_db"
+  },
+  {
+    "id": "manchester",
+    "name": "Alliance Manchester Business School",
+    "location": "Manchester, UK",
+    "country": "UK",
+    "website": "https://www.alliancembs.manchester.ac.uk/study/mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "smu_singapore",
+    "name": "Singapore Management University MBA",
+    "location": "Singapore",
+    "country": "Singapore",
+    "website": "https://masters.smu.edu.sg/programme/master-of-business-administration",
+    "source": "main_db"
+  },
+  {
+    "id": "ceibs_mba",
+    "name": "CEIBS MBA",
+    "location": "Shanghai, China",
+    "country": "China",
+    "website": "https://www.ceibs.edu/mba",
+    "source": "main_db"
+  },
+  {
+    "id": "yonsei_mba",
+    "name": "Yonsei University School of Business MBA",
+    "location": "Seoul, South Korea",
+    "country": "South Korea",
+    "website": "https://mba.yonsei.ac.kr/default.asp?lang=e",
+    "source": "main_db"
+  },
+  {
+    "id": "waseda_mba",
+    "name": "Waseda Business School MBA",
+    "location": "Tokyo, Japan",
+    "country": "Japan",
+    "website": "https://www.waseda.jp/fcom/wbs/en/applicants/why/imba",
+    "source": "main_db"
+  },
+  {
+    "id": "hitotsubashi_mba",
+    "name": "Hitotsubashi University ICS MBA",
+    "location": "Tokyo, Japan",
+    "country": "Japan",
+    "website": "https://www.ics.hub.hit-u.ac.jp/mba",
+    "source": "main_db"
+  },
+  {
+    "id": "insper_mba",
+    "name": "Insper MBA",
+    "location": "São Paulo, Brazil",
+    "country": "Brazil",
+    "website": "https://www.insper.edu.br/pt/home",
+    "source": "main_db"
+  },
+  {
+    "id": "gibs_mba",
+    "name": "GIBS Business School MBA",
+    "location": "Johannesburg, South Africa",
+    "country": "South Africa",
+    "website": "https://www.up.ac.za/programmes/postgraduate/master-of-business-administration-full-time-mba/2026",
+    "source": "main_db"
+  },
+  {
+    "id": "bsg_lisbon_mba",
+    "name": "Nova SBE (PGP YL (Young Leaders))",
+    "location": "Lisbon",
+    "country": "Portugal",
+    "website": "https://www.novasbe.unl.pt/en/programs/the-lisbon-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "iima_executive_mba",
+    "name": "IIM Ahmedabad (EPGP (Executive))",
+    "location": "Ahmedabad",
+    "country": "India",
+    "website": "https://www.iima.ac.in/academics/epgp/about",
+    "source": "main_db"
+  },
+  {
+    "id": "iimb_executive_mba",
+    "name": "IIM Bangalore (EPGP (Executive))",
+    "location": "Bangalore",
+    "country": "India",
+    "website": "https://www.iimb.ac.in/programmes/epgp",
+    "source": "main_db"
+  },
+  {
+    "id": "iimc_executive_mba",
+    "name": "IIM Calcutta (EPGP (Executive))",
+    "location": "Kolkata",
+    "country": "India",
+    "website": "https://www.iimcal.ac.in/programs/pgpex/mba-for-executives-programme",
+    "source": "main_db"
+  },
+  {
+    "id": "iiml_executive_mba",
+    "name": "IIM Lucknow (EPGP (Executive))",
+    "location": "Lucknow",
+    "country": "India",
+    "website": "https://www.iiml.ac.in/",
+    "source": "main_db"
+  },
+  {
+    "id": "iimk_executive_mba",
+    "name": "IIM Kozhikode (EPGP (Executive))",
+    "location": "Kozhikode",
+    "country": "India",
+    "website": "https://iimk.ac.in/academic-programmes/Executive/about-epgp",
+    "source": "main_db"
+  },
+  {
+    "id": "iimr_executive_mba",
+    "name": "IIM Ranchi (EPGP (Executive))",
+    "location": "Ranchi",
+    "country": "India",
+    "website": "https://iimranchi.ac.in/emba/",
+    "source": "main_db"
+  },
+  {
+    "id": "iimt_executive_mba",
+    "name": "IIM Tiruchirappalli (EPGP (Executive))",
+    "location": "Tiruchirappalli",
+    "country": "India",
+    "website": "https://www.iimtrichy.ac.in/",
+    "source": "main_db"
+  },
+  {
+    "id": "iim_bodh_executive_mba",
+    "name": "IIM Bodh Gaya (EPGP (Executive))",
+    "location": "Bodh Gaya",
+    "country": "India",
+    "website": "https://iimbg.ac.in/emba/",
+    "source": "main_db"
+  },
+  {
+    "id": "iim_sambalpur_executive_mba",
+    "name": "IIM Sambalpur (EPGP (Executive))",
+    "location": "Sambalpur",
+    "country": "India",
+    "website": "https://iimsambalpur.ac.in/emba-new/",
+    "source": "main_db"
+  },
+  {
+    "id": "iim_vizag_executive_mba",
+    "name": "IIM Visakhapatnam (EPGP (Executive))",
+    "location": "Visakhapatnam",
+    "country": "India",
+    "website": "https://iimv.ac.in/",
+    "source": "main_db"
+  },
+  {
+    "id": "iim_bangalore_epgp_mba_(cat)",
+    "name": "IIM Bangalore EPGP (CAT-led PGP (MBA))",
+    "location": "Bangalore",
+    "country": "India",
+    "website": "https://www.iimb.ac.in/programmes/epgp",
+    "source": "main_db"
+  },
+  {
+    "id": "hec_paris_executive_mba",
+    "name": "HEC Paris (Executive MBA)",
+    "location": "Paris",
+    "country": "France",
+    "website": "https://www.hec.edu/en/mba-executive-mba/executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "iese_executive_mba",
+    "name": "IESE Business School (Executive MBA)",
+    "location": "Barcelona",
+    "country": "Spain",
+    "website": "https://www.iese.edu/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "sloan_executive_mba",
+    "name": "MIT Sloan (Sloan Fellows / EMBA)",
+    "location": "Cambridge, MA",
+    "country": "USA",
+    "website": "https://mitsloan.mit.edu/mit-sloan-fellows-mba-program/explore-program",
+    "source": "main_db"
+  },
+  {
+    "id": "yale_som_executive_mba",
+    "name": "Yale SOM (Executive MBA)",
+    "location": "New Haven, CT",
+    "country": "USA",
+    "website": "https://som.yale.edu/programs/emba",
+    "source": "main_db"
+  },
+  {
+    "id": "wharton_executive_mba",
+    "name": "The Wharton School (Executive MBA)",
+    "location": "Philadelphia, PA",
+    "country": "USA",
+    "website": "https://executivemba.wharton.upenn.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "kellogg_executive_mba",
+    "name": "Northwestern Kellogg (Executive MBA)",
+    "location": "Evanston, IL",
+    "country": "USA",
+    "website": "https://www.kellogg.northwestern.edu/programs/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "insead_executive_mba",
+    "name": "INSEAD (Global Executive MBA (GEMBA))",
+    "location": "Fontainebleau, France / Singapore",
+    "country": "France",
+    "website": "https://www.insead.edu/master-programmes/global-executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "booth_executive_mba",
+    "name": "Chicago Booth (Executive MBA)",
+    "location": "Chicago, IL",
+    "country": "USA",
+    "website": "https://www.chicagobooth.edu/mba/executive",
+    "source": "main_db"
+  },
+  {
+    "id": "stern_executive_mba",
+    "name": "NYU Stern (Executive MBA)",
+    "location": "New York, NY",
+    "country": "USA",
+    "website": "https://www.stern.nyu.edu/programs-admissions/executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "fuqua_executive_mba",
+    "name": "Duke Fuqua (Global Executive MBA)",
+    "location": "Durham, NC",
+    "country": "USA",
+    "website": "https://www.fuqua.duke.edu/programs/global-executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "darden_executive_mba",
+    "name": "UVA Darden (Executive MBA)",
+    "location": "Charlottesville, VA",
+    "country": "USA",
+    "website": "https://www.darden.virginia.edu/executive-mba-formats",
+    "source": "main_db"
+  },
+  {
+    "id": "ross_executive_mba",
+    "name": "Michigan Ross (Executive MBA)",
+    "location": "Ann Arbor, MI",
+    "country": "USA",
+    "website": "https://michiganross.umich.edu/graduate/executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "gsb_executive_mba",
+    "name": "Stanford GSB (MSx Program)",
+    "location": "Stanford, CA",
+    "country": "USA",
+    "website": "https://www.gsb.stanford.edu/programs/msx",
+    "source": "main_db"
+  },
+  {
+    "id": "haas_executive_mba",
+    "name": "UC Berkeley Haas (Executive MBA)",
+    "location": "Berkeley, CA",
+    "country": "USA",
+    "website": "https://mbaforexecs.haas.berkeley.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "anderson_executive_mba",
+    "name": "UCLA Anderson (Executive MBA (FEMBA))",
+    "location": "Los Angeles, CA",
+    "country": "USA",
+    "website": "https://www.anderson.ucla.edu/degrees/fully-employed-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "judge_executive_mba",
+    "name": "Cambridge Judge (Executive MBA)",
+    "location": "Cambridge",
+    "country": "UK",
+    "website": "https://www.jbs.cam.ac.uk/masters-degrees/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "sda_bocconi_executive_mba",
+    "name": "SDA Bocconi (Executive MBA)",
+    "location": "Milan",
+    "country": "Italy",
+    "website": "https://www.sdabocconi.it/en/mba-executive-mba/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "esmt_executive_mba",
+    "name": "ESMT Berlin (Executive MBA)",
+    "location": "Berlin",
+    "country": "Germany",
+    "website": "https://esmt.berlin/mba-programs/executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "ceibs_executive_mba",
+    "name": "CEIBS (Global Executive MBA)",
+    "location": "Shanghai",
+    "country": "China",
+    "website": "https://www.ceibs.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "foster_executive_mba",
+    "name": "UW Foster (Executive MBA)",
+    "location": "Seattle, WA",
+    "country": "USA",
+    "website": "https://foster.uw.edu/academics/degree-programs/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "strathclyde_executive_mba",
+    "name": "Strathclyde Business School (Executive MBA)",
+    "location": "Glasgow",
+    "country": "UK",
+    "website": "https://www.strath.ac.uk/business/mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "edinburgh_executive_mba",
+    "name": "Edinburgh Business School (Executive MBA)",
+    "location": "Edinburgh",
+    "country": "UK",
+    "website": "https://www.business-school.ed.ac.uk/mba",
+    "source": "main_db"
+  },
+  {
+    "id": "nottingham_executive_mba",
+    "name": "Nottingham University Business School (Executive MBA)",
+    "location": "Nottingham",
+    "country": "UK",
+    "website": "https://www.nottingham.ac.uk/business/study-with-us/mba/index.aspx?cid=6e54556b-b487-452b-ae6d-088052986329",
+    "source": "main_db"
+  },
+  {
+    "id": "rotman_executive_mba",
+    "name": "Rotman School of Management (Executive MBA)",
+    "location": "Toronto",
+    "country": "Canada",
+    "website": "https://www.rotman.utoronto.ca/programs/mba-programs/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "sauder_executive_mba",
+    "name": "UBC Sauder (Executive MBA)",
+    "location": "Vancouver",
+    "country": "Canada",
+    "website": "https://www.sauder.ubc.ca/programs/masters-degrees/ubc-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "schulich_executive_mba",
+    "name": "York Schulich (Executive MBA)",
+    "location": "Toronto",
+    "country": "Canada",
+    "website": "https://www.kellogg.northwestern.edu/programs/executive-mba/global-network/toronto-schulich/",
+    "source": "main_db"
+  },
+  {
+    "id": "haskayne_executive_mba",
+    "name": "Calgary Haskayne (Executive MBA)",
+    "location": "Calgary",
+    "country": "Canada",
+    "website": "https://haskayne.ucalgary.ca/future-students/mba-programs/executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "desautels_executive_mba",
+    "name": "McGill Desautels (Executive MBA)",
+    "location": "Montreal",
+    "country": "Canada",
+    "website": "https://www.mcgill.ca/desautels/programs/mba-programs",
+    "source": "main_db"
+  },
+  {
+    "id": "polimi_executive_mba",
+    "name": "Politecnico di Milano GSoM (Executive MBA)",
+    "location": "Milan",
+    "country": "Italy",
+    "website": "https://www.gsom.polimi.it/en/programmes/mba-executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "st_gallen_executive_mba",
+    "name": "University of St. Gallen (Executive MBA)",
+    "location": "St. Gallen",
+    "country": "Switzerland",
+    "website": "https://www.mba.unisg.ch/",
+    "source": "main_db"
+  },
+  {
+    "id": "imds_executive_mba",
+    "name": "IMD (Executive MBA)",
+    "location": "Lausanne",
+    "country": "Switzerland",
+    "website": "https://www.imd.org/emba/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "fudan_executive_mba",
+    "name": "Fudan University School of Management (Executive MBA)",
+    "location": "Shanghai",
+    "country": "China",
+    "website": "https://olin.washu.edu/programs/mbas/executive-mba/emba-shanghai.php",
+    "source": "main_db"
+  },
+  {
+    "id": "sjtu_antai_executive_mba",
+    "name": "Shanghai Jiao Tong Antai (Executive MBA)",
+    "location": "Shanghai",
+    "country": "China",
+    "website": "https://mba.sjtu.edu.cn/en/",
+    "source": "main_db"
+  },
+  {
+    "id": "tsinghua_sem_executive_mba",
+    "name": "Tsinghua SEM (Executive MBA)",
+    "location": "Beijing",
+    "country": "China",
+    "website": "https://www.insead.edu/master-programmes/tsinghua-insead-executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "skema_executive_mba",
+    "name": "SKEMA Business School (Global Executive MBA)",
+    "location": "Sophia Antipolis",
+    "country": "France",
+    "website": "https://www.skema.edu/en/programmes/global-executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "mccombs_executive_mba",
+    "name": "UT Austin McCombs (Executive MBA)",
+    "location": "Austin, TX",
+    "country": "USA",
+    "website": "https://www.mccombs.utexas.edu/graduate/mba/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "kaist_executive_mba",
+    "name": "KAIST College of Business (Executive MBA)",
+    "location": "Seoul",
+    "country": "South Korea",
+    "website": "https://www.business.kaist.edu/programs/02030301",
+    "source": "main_db"
+  },
+  {
+    "id": "mcdonough_executive_mba",
+    "name": "Georgetown McDonough (Executive MBA)",
+    "location": "Washington, DC",
+    "country": "USA",
+    "website": "https://msb.georgetown.edu/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "goizueta_executive_mba",
+    "name": "Emory Goizueta (Executive MBA)",
+    "location": "Atlanta, GA",
+    "country": "USA",
+    "website": "https://goizueta.emory.edu/emba",
+    "source": "main_db"
+  },
+  {
+    "id": "tepper_executive_mba",
+    "name": "Carnegie Mellon Tepper (Executive MBA)",
+    "location": "Pittsburgh, PA",
+    "country": "USA",
+    "website": "https://www.cmu.edu/tepper/programs/mba",
+    "source": "main_db"
+  },
+  {
+    "id": "kenan_flagler_executive_mba",
+    "name": "UNC Kenan-Flagler (Executive MBA)",
+    "location": "Chapel Hill, NC",
+    "country": "USA",
+    "website": "https://www.kenan-flagler.unc.edu/programs/mba/unc-kenan-flagler-executive-mba-programs/",
+    "source": "main_db"
+  },
+  {
+    "id": "marshall_executive_mba",
+    "name": "USC Marshall (Executive MBA)",
+    "location": "Los Angeles, CA",
+    "country": "USA",
+    "website": "https://www.marshall.usc.edu/programs/graduate-programs/mba-programs/executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "kelley_executive_mba",
+    "name": "Indiana Kelley (Executive MBA)",
+    "location": "Bloomington, IN",
+    "country": "USA",
+    "website": "https://kelley.iu.edu/programs/full-time-mba/index.html",
+    "source": "main_db"
+  },
+  {
+    "id": "olin_executive_mba",
+    "name": "WashU Olin (Executive MBA)",
+    "location": "St. Louis, MO",
+    "country": "USA",
+    "website": "https://olin.washu.edu/programs/mbas/executive-mba/index.php",
+    "source": "main_db"
+  },
+  {
+    "id": "questrom_executive_mba",
+    "name": "Boston University Questrom (Executive MBA)",
+    "location": "Boston, MA",
+    "country": "USA",
+    "website": "https://www.bu.edu/questrom/",
+    "source": "main_db"
+  },
+  {
+    "id": "fisher_executive_mba",
+    "name": "Ohio State Fisher (Executive MBA)",
+    "location": "Columbus, OH",
+    "country": "USA",
+    "website": "https://fisher.osu.edu/graduate/executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "broad_executive_mba",
+    "name": "Michigan State Broad (Executive MBA)",
+    "location": "East Lansing, MI",
+    "country": "USA",
+    "website": "https://broad.msu.edu/masters/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "mendoza_executive_mba",
+    "name": "Notre Dame Mendoza (Executive MBA)",
+    "location": "Notre Dame, IN",
+    "country": "USA",
+    "website": "https://mendoza.nd.edu/graduate-programs/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "johnson_executive_mba",
+    "name": "Cornell Johnson (Executive MBA)",
+    "location": "Ithaca, NY",
+    "country": "USA",
+    "website": "https://www.johnson.cornell.edu/programs/emba/",
+    "source": "main_db"
+  },
+  {
+    "id": "tuck_executive_mba",
+    "name": "Dartmouth Tuck (Executive Education / EMBA Partners)",
+    "location": "Hanover, NH",
+    "country": "USA",
+    "website": "https://tuck.dartmouth.edu/mba",
+    "source": "main_db"
+  },
+  {
+    "id": "owen_executive_mba",
+    "name": "Vanderbilt Owen (Executive MBA)",
+    "location": "Nashville, TN",
+    "country": "USA",
+    "website": "https://business.vanderbilt.edu/emba/",
+    "source": "main_db"
+  },
+  {
+    "id": "scheller_executive_mba",
+    "name": "Georgia Tech Scheller (Executive MBA)",
+    "location": "Atlanta, GA",
+    "country": "USA",
+    "website": "https://www.scheller.gatech.edu/explore-programs/mba-programs/executive-mba/index.html",
+    "source": "main_db"
+  },
+  {
+    "id": "carlson_executive_mba",
+    "name": "Minnesota Carlson (Executive MBA)",
+    "location": "Minneapolis, MN",
+    "country": "USA",
+    "website": "https://carlsonschool.umn.edu/graduate/mba/executive",
+    "source": "main_db"
+  },
+  {
+    "id": "simon_executive_mba",
+    "name": "Rochester Simon (Executive MBA)",
+    "location": "Rochester, NY",
+    "country": "USA",
+    "website": "https://simon.rochester.edu/programs/emba",
+    "source": "main_db"
+  },
+  {
+    "id": "babson_olin_executive_mba",
+    "name": "Babson Olin (Executive MBA)",
+    "location": "Babson Park, MA",
+    "country": "USA",
+    "website": "https://www.babson.edu/graduate/",
+    "source": "main_db"
+  },
+  {
+    "id": "hult_executive_mba",
+    "name": "Hult International Business School MBA (Executive MBA)",
+    "location": "Boston / London / Dubai / Shanghai / San Francisco",
+    "country": "USA",
+    "website": "https://www.hult.edu/mba/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "fgv_executive_mba",
+    "name": "FGV EAESP (Executive MBA)",
+    "location": "São Paulo",
+    "country": "Brazil",
+    "website": "https://eaesp.fgv.br/en/courses/executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "coppead_executive_mba",
+    "name": "COPPEAD UFRJ (Executive MBA)",
+    "location": "Rio de Janeiro",
+    "country": "Brazil",
+    "website": "https://www.coppead.ufrj.br/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "bsg_lisbon_executive_mba",
+    "name": "Nova SBE (ISB PGPMAX (Executive))",
+    "location": "Lisbon",
+    "country": "Portugal",
+    "website": "https://www.isb.edu/programmes/post-graduate-programmes/pgp-max/fees-and-scholarships",
+    "source": "main_db"
+  },
+  {
+    "id": "smurfit_executive_mba",
+    "name": "UCD Michael Smurfit (Executive MBA)",
+    "location": "Dublin",
+    "country": "Ireland",
+    "website": "https://www.smurfitschool.ie/programmes/thesmurfitmba/modularexecutivemba/",
+    "source": "main_db"
+  },
+  {
+    "id": "kozminski_executive_mba",
+    "name": "Kozminski University (Executive MBA)",
+    "location": "Warsaw",
+    "country": "Poland",
+    "website": "https://www.kozminski.edu.pl/en/programs/postgraduate-programs/executive-mba-english",
+    "source": "main_db"
+  },
+  {
+    "id": "booth_mim",
+    "name": "Chicago Booth (Master in Management)",
+    "location": "Chicago, IL",
+    "country": "USA",
+    "website": "https://www.chicagobooth.edu/master-in-management",
+    "source": "main_db"
+  },
+  {
+    "id": "ross_mim",
+    "name": "Michigan Ross (Master of Management)",
+    "location": "Ann Arbor, MI",
+    "country": "USA",
+    "website": "https://michiganross.umich.edu/graduate/master-of-management",
+    "source": "main_db"
+  },
+  {
+    "id": "fuqua_mim",
+    "name": "Duke Fuqua (MMS: Foundations of Business)",
+    "location": "Durham, NC",
+    "country": "USA",
+    "website": "https://www.fuqua.duke.edu/programs/mms-foundations-of-business",
+    "source": "main_db"
+  },
+  {
+    "id": "darden_mim",
+    "name": "UVA Darden (MS in Commerce)",
+    "location": "Charlottesville, VA",
+    "country": "USA",
+    "website": "https://www.darden.virginia.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "stern_mim",
+    "name": "NYU Stern (MS in Management)",
+    "location": "New York, NY",
+    "country": "USA",
+    "website": "https://www.stern.nyu.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "anderson_mim",
+    "name": "UCLA Anderson (Master of Science in Business)",
+    "location": "Los Angeles, CA",
+    "country": "USA",
+    "website": "https://www.anderson.ucla.edu/degrees/full-time-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "yale_som_mim",
+    "name": "Yale SOM (Master of Advanced Management)",
+    "location": "New Haven, CT",
+    "country": "USA",
+    "website": "https://som.yale.edu/programs/mba",
+    "source": "main_db"
+  },
+  {
+    "id": "johnson_mim",
+    "name": "Cornell Johnson (Master of Management)",
+    "location": "Ithaca, NY",
+    "country": "USA",
+    "website": "https://www.johnson.cornell.edu/programs/",
+    "source": "main_db"
+  },
+  {
+    "id": "kelley_mim",
+    "name": "Indiana Kelley (MS in Management)",
+    "location": "Bloomington, IN",
+    "country": "USA",
+    "website": "https://kelley.iu.edu/programs/ms-management/index.html",
+    "source": "main_db"
+  },
+  {
+    "id": "mccombs_mim",
+    "name": "UT Austin McCombs (MS in Management)",
+    "location": "Austin, TX",
+    "country": "USA",
+    "website": "https://www.mccombs.utexas.edu/graduate/mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "kenan_flagler_mim",
+    "name": "UNC Kenan-Flagler (Master of Management)",
+    "location": "Chapel Hill, NC",
+    "country": "USA",
+    "website": "https://www.kenan-flagler.unc.edu/Programs/MBA/",
+    "source": "main_db"
+  },
+  {
+    "id": "marshall_mim",
+    "name": "USC Marshall (MS in Management)",
+    "location": "Los Angeles, CA",
+    "country": "USA",
+    "website": "https://www.marshall.usc.edu/programs/mba-programs",
+    "source": "main_db"
+  },
+  {
+    "id": "goizueta_mim",
+    "name": "Emory Goizueta (Master of Analytical Finance)",
+    "location": "Atlanta, GA",
+    "country": "USA",
+    "website": "https://business.emory.edu/masters-in-finance/learn",
+    "source": "main_db"
+  },
+  {
+    "id": "mcdonough_mim",
+    "name": "Georgetown McDonough (Master of International Business)",
+    "location": "Washington, DC",
+    "country": "USA",
+    "website": "https://msb.georgetown.edu/mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "fisher_mim",
+    "name": "Ohio State Fisher (Master of Business Operational Excellence)",
+    "location": "Columbus, OH",
+    "country": "USA",
+    "website": "https://fisher.osu.edu/graduate/mboe",
+    "source": "main_db"
+  },
+  {
+    "id": "broad_mim",
+    "name": "Michigan State Broad (MS in Management)",
+    "location": "East Lansing, MI",
+    "country": "USA",
+    "website": "https://broad.msu.edu/masters/mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "tepper_mim",
+    "name": "Carnegie Mellon Tepper (MS in Management)",
+    "location": "Pittsburgh, PA",
+    "country": "USA",
+    "website": "https://www.cmu.edu/tepper/programs/mba",
+    "source": "main_db"
+  },
+  {
+    "id": "mendoza_mim",
+    "name": "Notre Dame Mendoza (Master of Science in Management)",
+    "location": "Notre Dame, IN",
+    "country": "USA",
+    "website": "https://mendoza.nd.edu/graduate-programs/management-msm/",
+    "source": "main_db"
+  },
+  {
+    "id": "simon_mim",
+    "name": "Rochester Simon (MS in Management)",
+    "location": "Rochester, NY",
+    "country": "USA",
+    "website": "https://simon.rochester.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "henry_mim",
+    "name": "George Washington (MS in Business Analytics)",
+    "location": "Washington, DC",
+    "country": "USA",
+    "website": "https://business.gwu.edu/academics/programs/masters/ms-in-business-analytics",
+    "source": "main_db"
+  },
+  {
+    "id": "isenberg_mim",
+    "name": "UMass Isenberg (MS in Management)",
+    "location": "Amherst, MA",
+    "country": "USA",
+    "website": "https://www.isenberg.umass.edu/programs/masters/mba",
+    "source": "main_db"
+  },
+  {
+    "id": "rotman_mim",
+    "name": "Rotman School of Management (Master of Management Analytics)",
+    "location": "Toronto",
+    "country": "Canada",
+    "website": "https://www.rotman.utoronto.ca/programs/specialized-programs/master-of-management-analytics/",
+    "source": "main_db"
+  },
+  {
+    "id": "sauder_mim",
+    "name": "UBC Sauder (Master of Management)",
+    "location": "Vancouver",
+    "country": "Canada",
+    "website": "https://www.sauder.ubc.ca/programs/masters-degrees/ubc-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "smith_queens_mim",
+    "name": "Smith School of Business (Queen's) (Master of Management)",
+    "location": "Kingston, ON",
+    "country": "Canada",
+    "website": "https://smith.queensu.ca/mba_programs/mba/index.php",
+    "source": "main_db"
+  },
+  {
+    "id": "schulich_mim",
+    "name": "York Schulich (Master of Management)",
+    "location": "Toronto",
+    "country": "Canada",
+    "website": "https://schulich.yorku.ca/programs/mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "desautels_mim",
+    "name": "McGill Desautels (Master of Management)",
+    "location": "Montreal",
+    "country": "Canada",
+    "website": "https://www.mcgill.ca/desautels/programs/mba-programs/mba",
+    "source": "main_db"
+  },
+  {
+    "id": "lancaster_mim",
+    "name": "Lancaster University Management School (MSc Management)",
+    "location": "Lancaster",
+    "country": "UK",
+    "website": "https://www.lancaster.ac.uk/study/postgraduate/postgraduate-courses/business-administration-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "aston_mim",
+    "name": "Aston Business School (MSc Business Management)",
+    "location": "Birmingham",
+    "country": "UK",
+    "website": "https://www.aston.ac.uk/bss/aston-business-school/aston-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "kaist_mim",
+    "name": "KAIST College of Business (MSc Management Engineering)",
+    "location": "Seoul",
+    "country": "South Korea",
+    "website": "http://www.business.kaist.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "sjtu_antai_mim",
+    "name": "Shanghai Jiao Tong Antai (Master in Management)",
+    "location": "Shanghai",
+    "country": "China",
+    "website": "https://mba.sjtu.edu.cn/en/",
+    "source": "main_db"
+  },
+  {
+    "id": "tsinghua_sem_mim",
+    "name": "Tsinghua SEM (Master in Management)",
+    "location": "Beijing",
+    "country": "China",
+    "website": "https://gmba.sem.tsinghua.edu.cn/Admissions/International.htm",
+    "source": "main_db"
+  },
+  {
+    "id": "smurfit_mim",
+    "name": "UCD Michael Smurfit (MSc in Management)",
+    "location": "Dublin",
+    "country": "Ireland",
+    "website": "https://www.smurfitschool.ie/programmes/masters/",
+    "source": "main_db"
+  },
+  {
+    "id": "egade_mim",
+    "name": "EGADE Business School (Tec de Monterrey) (Master in Management)",
+    "location": "Monterrey",
+    "country": "Mexico",
+    "website": "https://egade.tec.mx/en/programs/egade-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "fgv_mim",
+    "name": "FGV EAESP (Master in Management)",
+    "location": "São Paulo",
+    "country": "Brazil",
+    "website": "https://www.aacsb.edu/accredited/f/fundao-getulio-vargas---so-paulo",
+    "source": "main_db"
+  },
+  {
+    "id": "coppead_mim",
+    "name": "COPPEAD UFRJ (Master in Management)",
+    "location": "Rio de Janeiro",
+    "country": "Brazil",
+    "website": "https://www.coppead.ufrj.br/full-time-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "imds_mim",
+    "name": "IMD (Master in Management and Sustainability)",
+    "location": "Lausanne",
+    "country": "Switzerland",
+    "website": "https://www.imd.org/programs-solutions/degree-programs/",
+    "source": "main_db"
+  },
+  {
+    "id": "gibs_mim",
+    "name": "Gordon Institute of Business Science (Master in Management)",
+    "location": "Johannesburg",
+    "country": "South Africa",
+    "website": "https://www.up.ac.za/programmes/postgraduate/master-of-business-administration-full-time-mba/2026",
+    "source": "main_db"
+  },
+  {
+    "id": "em_strasbourg_mim",
+    "name": "EM Strasbourg Master in Management",
+    "location": "Strasbourg",
+    "country": "France",
+    "website": "https://www.em-strasbourg.com/en",
+    "source": "main_db"
+  },
+  {
+    "id": "bsg_mim",
+    "name": "BSB Burgundy School of Business MiM",
+    "location": "Dijon",
+    "country": "France",
+    "website": "https://international.sonoma.edu/opportunity/burgundy-school-business-bsb",
+    "source": "main_db"
+  },
+  {
+    "id": "wbs_mim",
+    "name": "Warsaw School of Economics SGH MiM",
+    "location": "Warsaw",
+    "country": "Poland",
+    "website": "https://www.sgh.waw.pl/en",
+    "source": "main_db"
+  },
+  {
+    "id": "gothenburg_mim",
+    "name": "University of Gothenburg School of Business MiM",
+    "location": "Gothenburg",
+    "country": "Sweden",
+    "website": "https://www.gu.se/en/school-business-economics-law",
+    "source": "main_db"
+  },
+  {
+    "id": "lund_mim",
+    "name": "Lund University School of Economics MiM",
+    "location": "Lund",
+    "country": "Sweden",
+    "website": "https://www.lusem.lu.se/",
+    "source": "main_db"
+  },
+  {
+    "id": "hanken_mim",
+    "name": "Hanken School of Economics MSc",
+    "location": "Helsinki",
+    "country": "Finland",
+    "website": "https://www.hanken.fi/en",
+    "source": "main_db"
+  },
+  {
+    "id": "aarhus_mim",
+    "name": "Aarhus University BSS MSc in Management",
+    "location": "Aarhus",
+    "country": "Denmark",
+    "website": "https://bss.au.dk/en/programmes/master/",
+    "source": "main_db"
+  },
+  {
+    "id": "cbs_mim",
+    "name": "Copenhagen Business School MSc Management of Innovation and Business Development",
+    "location": "Copenhagen",
+    "country": "Denmark",
+    "website": "https://www.cbs.dk/en/study-programmes/master-programmes",
+    "source": "main_db"
+  },
+  {
+    "id": "bi_norwegian_mim",
+    "name": "BI Norwegian Business School MSc in Management",
+    "location": "Oslo",
+    "country": "Norway",
+    "website": "https://www.bi.no/en/programmes-and-individual-courses/master-programmes/",
+    "source": "main_db"
+  },
+  {
+    "id": "hsg_mim",
+    "name": "University of St. Gallen MiM (additional track)",
+    "location": "St. Gallen",
+    "country": "Switzerland",
+    "website": "https://www.unisg.ch/en/studying/programmes/master/general-management-mgm-1/",
+    "source": "main_db"
+  },
+  {
+    "id": "zhaw_mim",
+    "name": "ZHAW School of Management MSc",
+    "location": "Winterthur",
+    "country": "Switzerland",
+    "website": "https://www.zhaw.ch/en/sml/study/master",
+    "source": "main_db"
+  },
+  {
+    "id": "fribourg_mim",
+    "name": "University of Fribourg MSc Management",
+    "location": "Fribourg",
+    "country": "Switzerland",
+    "website": "https://www.international.uni-freiburg.de/en/go/ma",
+    "source": "main_db"
+  },
+  {
+    "id": "vienna_wu_mim",
+    "name": "Vienna University of Economics WU MSc",
+    "location": "Vienna",
+    "country": "Austria",
+    "website": "https://www.wu.ac.at/en/programs/masters-programs",
+    "source": "main_db"
+  },
+  {
+    "id": "tcd_mim",
+    "name": "Trinity College Dublin MSc Management",
+    "location": "Dublin",
+    "country": "Ireland",
+    "website": "https://www.tcd.ie/courses/postgraduate/",
+    "source": "main_db"
+  },
+  {
+    "id": "ups_mim",
+    "name": "Universidade Católica Portuguesa MiM",
+    "location": "Lisbon",
+    "country": "Portugal",
+    "website": "https://clsbe.lisboa.ucp.pt/international-msc-management/overview",
+    "source": "main_db"
+  },
+  {
+    "id": "carlos_iii_mim",
+    "name": "Carlos III University Madrid MSc Management",
+    "location": "Madrid",
+    "country": "Spain",
+    "website": "https://www.uc3m.es/postgraduate/home",
+    "source": "main_db"
+  },
+  {
+    "id": "pompeu_mim",
+    "name": "Universitat Pompeu Fabra BSM MSc Management",
+    "location": "Barcelona",
+    "country": "Spain",
+    "website": "https://www.bsm.upf.edu/en",
+    "source": "main_db"
+  },
+  {
+    "id": "mip_mim",
+    "name": "MIP Politecnico di Milano School of Management MiM",
+    "location": "Milan",
+    "country": "Italy",
+    "website": "https://www.aacsb.edu/accredited/p/politecnico-di-milano-school-of-management-politecnico-milano",
+    "source": "main_db"
+  },
+  {
+    "id": "luiss_mim_rome",
+    "name": "LUISS Guido Carli University MiM",
+    "location": "Rome",
+    "country": "Italy",
+    "website": "https://www.luiss.edu/ammissione/offerta-formativa/laurea-magistrale/management",
+    "source": "main_db"
+  },
+  {
+    "id": "leuven_mim",
+    "name": "KU Leuven Faculty of Economics MSc Management",
+    "location": "Leuven",
+    "country": "Belgium",
+    "website": "https://www.kuleuven.be/programmes/master-economics",
+    "source": "main_db"
+  },
+  {
+    "id": "tilburg_mim",
+    "name": "Tilburg University School of Economics MSc Management",
+    "location": "Tilburg",
+    "country": "Netherlands",
+    "website": "https://www.tilburguniversity.edu/education/masters-programs/fields/economics",
+    "source": "main_db"
+  },
+  {
+    "id": "groningen_mim",
+    "name": "University of Groningen Faculty of Economics MSc",
+    "location": "Groningen",
+    "country": "Netherlands",
+    "website": "https://www.rug.nl/masters/economics/?lang=en",
+    "source": "main_db"
+  },
+  {
+    "id": "maastricht_mim",
+    "name": "Maastricht University SBE MSc International Business",
+    "location": "Maastricht",
+    "country": "Netherlands",
+    "website": "https://www.monash.edu/study-abroad/overseas/program-search/maastricht-university-school-of-business-and-economics-sbe_",
+    "source": "main_db"
+  },
+  {
+    "id": "cologne_mim",
+    "name": "University of Cologne Faculty of Management MSc",
+    "location": "Cologne",
+    "country": "Germany",
+    "website": "https://wiso.uni-koeln.de/en/studies/master",
+    "source": "main_db"
+  },
+  {
+    "id": "munich_lmu_mim",
+    "name": "LMU Munich School of Management MSc",
+    "location": "Munich",
+    "country": "Germany",
+    "website": "https://www.som.lmu.de/en/",
+    "source": "main_db"
+  },
+  {
+    "id": "free_berlin_mim",
+    "name": "Freie Universität Berlin School of Business MSc",
+    "location": "Berlin",
+    "country": "Germany",
+    "website": "https://www.wiwiss.fu-berlin.de/en/studium-lehre/master/index.html",
+    "source": "main_db"
+  },
+  {
+    "id": "goethe_mim",
+    "name": "Goethe University Frankfurt MSc in Management",
+    "location": "Frankfurt",
+    "country": "Germany",
+    "website": "https://www.uni-frankfurt.de/de/studium/bewerbung-einschreibung/master-studiengaenge",
+    "source": "main_db"
+  },
+  {
+    "id": "humboldt_mim",
+    "name": "Humboldt University Berlin MSc Business Administration",
+    "location": "Berlin",
+    "country": "Germany",
+    "website": "https://www.hu-berlin.de/en/study/study-programme",
+    "source": "main_db"
+  },
+  {
+    "id": "kit_mim",
+    "name": "Karlsruhe Institute of Technology MSc Industrial Engineering",
+    "location": "Karlsruhe",
+    "country": "Germany",
+    "website": "https://www.kit.edu/study/master-doctorate.php",
+    "source": "main_db"
+  },
+  {
+    "id": "rwth_mim",
+    "name": "RWTH Aachen University MSc Business Administration",
+    "location": "Aachen",
+    "country": "Germany",
+    "website": "https://www.business-school.rwth-aachen.de/en/mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "tu_munich_mim",
+    "name": "TU Munich SoM MSc in Management & Technology",
+    "location": "Munich",
+    "country": "Germany",
+    "website": "https://www.tum.de/en/studies/degree-programs/detail/management-and-technology-tum-bwl-master-of-science-msc/",
+    "source": "main_db"
+  },
+  {
+    "id": "cem_stpetersburg_mim",
+    "name": "Graduate School of Management SPbU MiM",
+    "location": "St. Petersburg",
+    "country": "Russia",
+    "website": "https://www.manipal.edu/som.html",
+    "source": "main_db"
+  },
+  {
+    "id": "skolkovo_mim",
+    "name": "SKOLKOVO Moscow School of Management MiM",
+    "location": "Moscow",
+    "country": "Russia",
+    "website": "https://www.skolkovo.ru/",
+    "source": "main_db"
+  },
+  {
+    "id": "sabanci_mim",
+    "name": "Sabancı University MSc in Management",
+    "location": "Istanbul",
+    "country": "Turkey",
+    "website": "https://sbs.sabanciuniv.edu/en",
+    "source": "main_db"
+  },
+  {
+    "id": "iim_a_mim",
+    "name": "IIM Ahmedabad PGPX MiM Track",
+    "location": "Ahmedabad",
+    "country": "India",
+    "website": "https://www.iima.ac.in/academics/MBA-PGPX",
+    "source": "main_db"
+  },
+  {
+    "id": "iim_b_mim",
+    "name": "IIM Bangalore PGPEM MiM Track",
+    "location": "Bangalore",
+    "country": "India",
+    "website": "https://www.iimb.ac.in/programmes/pgpEM",
+    "source": "main_db"
+  },
+  {
+    "id": "spjimr_mim",
+    "name": "SPJIMR PGDM MiM Track",
+    "location": "Mumbai",
+    "country": "India",
+    "website": "https://www.spjimr.org/course/post-graduate-diploma-in-management-pgdm/",
+    "source": "main_db"
+  },
+  {
+    "id": "imt_gh_mim",
+    "name": "IMT Ghaziabad PGDM MiM Track",
+    "location": "Ghaziabad",
+    "country": "India",
+    "website": "https://www.imt.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "mdi_mim",
+    "name": "MDI Gurgaon MiM Track",
+    "location": "Gurgaon",
+    "country": "India",
+    "website": "https://www.mdi.ac.in/programmes",
+    "source": "main_db"
+  },
+  {
+    "id": "smu_mim_sg",
+    "name": "SMU Lee Kong Chian MSc in Management",
+    "location": "Singapore",
+    "country": "Singapore",
+    "website": "https://business.smu.edu.sg/",
+    "source": "main_db"
+  },
+  {
+    "id": "hkust_mim_2",
+    "name": "HKUST Business School MSc (additional track)",
+    "location": "Hong Kong",
+    "country": "Hong Kong",
+    "website": "https://bm.hkust.edu.hk/",
+    "source": "main_db"
+  },
+  {
+    "id": "snu_mim",
+    "name": "Seoul National University GSBA MiM",
+    "location": "Seoul",
+    "country": "South Korea",
+    "website": "https://gsb.snu.ac.kr/en/adminssions/overview",
+    "source": "main_db"
+  },
+  {
+    "id": "hitotsubashi_mim",
+    "name": "Hitotsubashi ICS Master in Management",
+    "location": "Tokyo",
+    "country": "Japan",
+    "website": "https://www.ics.hub.hit-u.ac.jp/mba",
+    "source": "main_db"
+  },
+  {
+    "id": "lingnan_mim",
+    "name": "Sun Yat-sen University Lingnan College MiM",
+    "location": "Guangzhou",
+    "country": "China",
+    "website": "https://lingnan.sysu.edu.cn/mba/en",
+    "source": "main_db"
+  },
+  {
+    "id": "unimelb_mim",
+    "name": "University of Melbourne FBE Master of Management",
+    "location": "Melbourne",
+    "country": "Australia",
+    "website": "https://mbs.edu/degree-programs/master-of-management",
+    "source": "main_db"
+  },
+  {
+    "id": "usyd_mim",
+    "name": "University of Sydney Business School Master of Management",
+    "location": "Sydney",
+    "country": "Australia",
+    "website": "https://www.sydney.edu.au/business/study/mba.html",
+    "source": "main_db"
+  },
+  {
+    "id": "puc_chile_mim",
+    "name": "PUC Chile School of Management MiM",
+    "location": "Santiago",
+    "country": "Chile",
+    "website": "https://www.aacsb.edu/accredited/p/pontificia-universidad-catlica-de-chile",
+    "source": "main_db"
+  },
+  {
+    "id": "telecom_paris_mim",
+    "name": "Telecom Paris MSc in Management",
+    "location": "Paris",
+    "country": "France",
+    "website": "https://www.telecom-paris.fr/en/international/students/programmes",
+    "source": "main_db"
+  },
+  {
+    "id": "dauphine_mim",
+    "name": "Paris Dauphine-PSL MSc Management",
+    "location": "Paris",
+    "country": "France",
+    "website": "https://dauphine.psl.eu/en/training/masters-degrees",
+    "source": "main_db"
+  },
+  {
+    "id": "em_lyon_mim2",
+    "name": "EMLV Business School MiM",
+    "location": "Paris",
+    "country": "France",
+    "website": "https://www.aacsb.edu/accredited/e/ecole-de-management-leonard-de-vinci--ple-universitaire-lonard-de-vinci-in-la-defense",
+    "source": "main_db"
+  },
+  {
+    "id": "esc_troyes_mim",
+    "name": "ESC Troyes MiM",
+    "location": "Troyes",
+    "country": "France",
+    "website": "https://yschools.fr/",
+    "source": "main_db"
+  },
+  {
+    "id": "nova_mim_add",
+    "name": "NOVA SBE MSc in Management (additional)",
+    "location": "Lisbon",
+    "country": "Portugal",
+    "website": "https://www.novasbe.unl.pt/en/programs/masters/management/overview",
+    "source": "main_db"
+  },
+  {
+    "id": "ie_univ_mim",
+    "name": "IE University MSc International Management",
+    "location": "Segovia",
+    "country": "Spain",
+    "website": "https://www.ie.edu/masters/",
+    "source": "main_db"
+  },
+  {
+    "id": "esic_mim",
+    "name": "ESIC Business & Marketing School MiM",
+    "location": "Madrid",
+    "country": "Spain",
+    "website": "https://en.esic.edu/master-and-postgraduate/master",
+    "source": "main_db"
+  },
+  {
+    "id": "surrey_mim",
+    "name": "University of Surrey SBE MSc Management",
+    "location": "Guildford",
+    "country": "UK",
+    "website": "https://www.surrey.ac.uk/postgraduate",
+    "source": "main_db"
+  },
+  {
+    "id": "glasgow_mim",
+    "name": "University of Glasgow Adam Smith Business School MSc",
+    "location": "Glasgow",
+    "country": "UK",
+    "website": "https://www.gla.ac.uk/schools/business/postgraduate/",
+    "source": "main_db"
+  },
+  {
+    "id": "southampton_mim",
+    "name": "University of Southampton MSc Management",
+    "location": "Southampton",
+    "country": "UK",
+    "website": "https://www.southampton.ac.uk/study/postgraduate-taught",
+    "source": "main_db"
+  },
+  {
+    "id": "liverpoolms_mim",
+    "name": "University of Liverpool Management School MSc",
+    "location": "Liverpool",
+    "country": "UK",
+    "website": "https://www.liverpool.ac.uk/management/study/postgraduate-taught/",
+    "source": "main_db"
+  },
+  {
+    "id": "brunel_mim",
+    "name": "Brunel University London MSc Management",
+    "location": "London",
+    "country": "UK",
+    "website": "https://www.brunel.ac.uk/study/postgraduate-study",
+    "source": "main_db"
+  },
+  {
+    "id": "mannheim_mim_2",
+    "name": "University of Mannheim MSc in Management (Diplom)",
+    "location": "Mannheim",
+    "country": "Germany",
+    "website": "https://www.uni-mannheim.de/en/academics/before-your-studies/applying/masters-program/",
+    "source": "main_db"
+  },
+  {
+    "id": "wiso_cologne_mim",
+    "name": "University of Cologne WiSo Faculty MSc Business Admin",
+    "location": "Cologne",
+    "country": "Germany",
+    "website": "https://wiso.uni-koeln.de/en/studies/master",
+    "source": "main_db"
+  },
+  {
+    "id": "jku_linz_mim",
+    "name": "JKU Linz MSc Management",
+    "location": "Linz",
+    "country": "Austria",
+    "website": "https://www.jku.at/en/degree-programs/types-of-degree-programs/masters-degree-programs/ma-management/",
+    "source": "main_db"
+  },
+  {
+    "id": "usi_lugano_mim",
+    "name": "Università della Svizzera italiana MSc Management",
+    "location": "Lugano",
+    "country": "Switzerland",
+    "website": "https://www.usi.ch/en/education/master",
+    "source": "main_db"
+  },
+  {
+    "id": "epfl_mim",
+    "name": "EPFL College of Management MiM Track",
+    "location": "Lausanne",
+    "country": "Switzerland",
+    "website": "https://www.epfl.ch/education/master/programs/",
+    "source": "main_db"
+  },
+  {
+    "id": "eth_mim",
+    "name": "ETH Zurich D-MTEC MSc Management, Technology, Economics",
+    "location": "Zurich",
+    "country": "Switzerland",
+    "website": "https://mtec.ethz.ch/",
+    "source": "main_db"
+  },
+  {
+    "id": "prague_vse_mim",
+    "name": "Prague University of Economics VSE MiM",
+    "location": "Prague",
+    "country": "Czech Republic",
+    "website": "https://mimg.vse.cz/",
+    "source": "main_db"
+  },
+  {
+    "id": "masaryk_brno_mim",
+    "name": "Masaryk University Faculty of Economics MiM",
+    "location": "Brno",
+    "country": "Czech Republic",
+    "website": "https://www.muni.cz/en/bachelors-and-masters-study-programmes/study-at-faculty-of-economics-and-administration",
+    "source": "main_db"
+  },
+  {
+    "id": "corvinus_mim",
+    "name": "Corvinus University of Budapest MSc Management",
+    "location": "Budapest",
+    "country": "Hungary",
+    "website": "https://www.uni-corvinus.hu/ind/programs-curriculum-degree/master-programs/?lang=en",
+    "source": "main_db"
+  },
+  {
+    "id": "sse_riga_mim",
+    "name": "SSE Riga MSc Economics",
+    "location": "Riga",
+    "country": "Latvia",
+    "website": "https://www.sseriga.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "sgh_warsaw_mim",
+    "name": "SGH Warsaw MSc International Business",
+    "location": "Warsaw",
+    "country": "Poland",
+    "website": "https://www.sgh.waw.pl/en",
+    "source": "main_db"
+  },
+  {
+    "id": "liu_mim",
+    "name": "Linköping University MSc Business Administration",
+    "location": "Linköping",
+    "country": "Sweden",
+    "website": "https://liu.se/en/education/our-programmes",
+    "source": "main_db"
+  },
+  {
+    "id": "jyu_mim",
+    "name": "University of Jyväskylä School of Business MSc",
+    "location": "Jyväskylä",
+    "country": "Finland",
+    "website": "https://www.aacsb.edu/accredited/j/jyvskyl-university-school-of-business-and-economics-university-of-jyvskyl",
+    "source": "main_db"
+  },
+  {
+    "id": "ucd_smurfit_mim",
+    "name": "UCD Smurfit MSc Management (additional)",
+    "location": "Dublin",
+    "country": "Ireland",
+    "website": "https://www.smurfitschool.ie/programmes/masters/",
+    "source": "main_db"
+  },
+  {
+    "id": "wp_carey_emba",
+    "name": "Arizona State University WP Carey Executive MBA",
+    "location": "Phoenix, AZ",
+    "country": "USA",
+    "website": "https://digital.lib.ecu.edu/91417",
+    "source": "main_db"
+  },
+  {
+    "id": "olin_wustl_emba",
+    "name": "Washington University Olin Executive MBA",
+    "location": "St. Louis, MO",
+    "country": "USA",
+    "website": "https://olin.washu.edu/programs/mbas/executive-mba/index.php",
+    "source": "main_db"
+  },
+  {
+    "id": "fudan_washu_emba",
+    "name": "WashU-Fudan Executive MBA",
+    "location": "Shanghai",
+    "country": "China",
+    "website": "https://olin.washu.edu/programs/mbas/executive-mba/emba-shanghai.php",
+    "source": "main_db"
+  },
+  {
+    "id": "kellogg_hkust_emba",
+    "name": "Kellogg-HKUST Executive MBA",
+    "location": "Hong Kong",
+    "country": "Hong Kong",
+    "website": "https://www.kellogg.northwestern.edu/programs/executive-mba/global-network/hong-kong-hkust/",
+    "source": "main_db"
+  },
+  {
+    "id": "trium_emba",
+    "name": "TRIUM Global Executive MBA (HEC/LSE/NYU)",
+    "location": "Paris / London / New York",
+    "country": "France",
+    "website": "https://www.lse.ac.uk/study-at-lse/graduate/trium-global-executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "guanghua_kellogg_emba",
+    "name": "Peking Guanghua-Kellogg Executive MBA",
+    "location": "Beijing",
+    "country": "China",
+    "website": "https://www.kellogg.northwestern.edu/programs/executive-mba/global-network/beijing-guanghua/",
+    "source": "main_db"
+  },
+  {
+    "id": "tiemba_emba",
+    "name": "INSEAD-Tsinghua TIEMBA",
+    "location": "Singapore / Beijing",
+    "country": "Singapore",
+    "website": "https://www.insead.edu/master-programmes/tsinghua-insead-executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "imd_emba_standalone",
+    "name": "IMD Executive MBA (standalone)",
+    "location": "Lausanne",
+    "country": "Switzerland",
+    "website": "https://www.imd.org/emba/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "puc_chile_emba",
+    "name": "Pontificia Universidad Católica de Chile EMBA",
+    "location": "Santiago",
+    "country": "Chile",
+    "website": "https://escueladeadministracion.uc.cl/mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "chile_emba",
+    "name": "Universidad de Chile EMBA",
+    "location": "Santiago",
+    "country": "Chile",
+    "website": "https://www.mbauchile.cl/mba-executive-santiago-centro/",
+    "source": "main_db"
+  },
+  {
+    "id": "dom_cabral_emba",
+    "name": "Fundação Dom Cabral Executive MBA",
+    "location": "Belo Horizonte",
+    "country": "Brazil",
+    "website": "https://www.fdc.org.br/",
+    "source": "main_db"
+  },
+  {
+    "id": "iim_a_emba",
+    "name": "IIM Ahmedabad Executive MBA (PGPX)",
+    "location": "Ahmedabad",
+    "country": "India",
+    "website": "https://www.iima.ac.in/",
+    "source": "main_db"
+  },
+  {
+    "id": "iim_c_emba",
+    "name": "IIM Calcutta Executive MBA (PGPEX)",
+    "location": "Kolkata",
+    "country": "India",
+    "website": "https://www.iimcal.ac.in/programs/pgpex/mba-for-executives-programme",
+    "source": "main_db"
+  },
+  {
+    "id": "xlri_emba",
+    "name": "XLRI Executive MBA (PGDM-GMP)",
+    "location": "Jamshedpur",
+    "country": "India",
+    "website": "https://xlri.ac.in/academic-programmes/school-of-business/pgdgm",
+    "source": "main_db"
+  },
+  {
+    "id": "spjimr_emba",
+    "name": "SPJIMR Executive MBA (PGMPW)",
+    "location": "Mumbai",
+    "country": "India",
+    "website": "https://www.spjimr.org/",
+    "source": "main_db"
+  },
+  {
+    "id": "mdi_emba",
+    "name": "MDI Gurgaon Executive PGDM",
+    "location": "Gurgaon",
+    "country": "India",
+    "website": "https://www.mdi.ac.in/",
+    "source": "main_db"
+  },
+  {
+    "id": "great_lakes_emba",
+    "name": "Great Lakes Institute Executive PGPM",
+    "location": "Chennai",
+    "country": "India",
+    "website": "https://www.greatlakes.edu.in/chennai/pgxpm",
+    "source": "main_db"
+  },
+  {
+    "id": "imt_gh_emba",
+    "name": "IMT Ghaziabad Executive PGDM",
+    "location": "Ghaziabad",
+    "country": "India",
+    "website": "https://www.imt.edu/expgdm/",
+    "source": "main_db"
+  },
+  {
+    "id": "ntu_emba",
+    "name": "Nanyang Business School Executive MBA (standalone)",
+    "location": "Singapore",
+    "country": "Singapore",
+    "website": "https://www.ntu.edu.sg/business/admissions/graduate-studies/nanyang-executive-mba/home",
+    "source": "main_db"
+  },
+  {
+    "id": "hitotsubashi_emba",
+    "name": "Hitotsubashi ICS Executive MBA",
+    "location": "Tokyo",
+    "country": "Japan",
+    "website": "https://www.ics.hub.hit-u.ac.jp/",
+    "source": "main_db"
+  },
+  {
+    "id": "rmit_emba",
+    "name": "RMIT University Executive MBA",
+    "location": "Melbourne",
+    "country": "Australia",
+    "website": "https://www.rmit.edu.au/study-with-us/levels-of-study/postgraduate-study/masters-by-coursework/executive-master-of-business-administration-mc162",
+    "source": "main_db"
+  },
+  {
+    "id": "mahidol_emba",
+    "name": "Mahidol University CMMU Executive MBA",
+    "location": "Bangkok",
+    "country": "Thailand",
+    "website": "https://www.cm.mahidol.ac.th/",
+    "source": "main_db"
+  },
+  {
+    "id": "sasin_emba_th",
+    "name": "Sasin Chulalongkorn Executive MBA (standalone)",
+    "location": "Bangkok",
+    "country": "Thailand",
+    "website": "https://www.sasin.edu/programs/executive-mba/overview",
+    "source": "main_db"
+  },
+  {
+    "id": "ateneo_emba",
+    "name": "Ateneo GSBA Executive MBA",
+    "location": "Manila",
+    "country": "Philippines",
+    "website": "https://www.ateneo.edu/gsb",
+    "source": "main_db"
+  },
+  {
+    "id": "technion_emba",
+    "name": "Technion MBA Executive Program",
+    "location": "Haifa",
+    "country": "Israel",
+    "website": "https://mba.technion.ac.il/",
+    "source": "main_db"
+  },
+  {
+    "id": "ucgsb_emba",
+    "name": "UCT Graduate School of Business Executive MBA",
+    "location": "Cape Town",
+    "country": "South Africa",
+    "website": "https://www.gsb.uct.ac.za/academic-programmes/emba",
+    "source": "main_db"
+  },
+  {
+    "id": "solvay_emba",
+    "name": "Solvay Brussels School Executive MBA",
+    "location": "Brussels",
+    "country": "Belgium",
+    "website": "https://exed.solvay.edu/en/executive-education/general-management/executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "mib_emba",
+    "name": "MIB Trieste Executive MBA",
+    "location": "Trieste",
+    "country": "Italy",
+    "website": "https://mib.edu/en/programs/mba-master-programs/executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "bi_emba",
+    "name": "BI Norwegian Business School Executive MBA",
+    "location": "Oslo",
+    "country": "Norway",
+    "website": "https://www.bi.no/en/programmes-and-individual-courses/master-programmes/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "corvinus_emba",
+    "name": "Corvinus University Executive MBA",
+    "location": "Budapest",
+    "country": "Hungary",
+    "website": "https://www.uni-corvinus.hu/post/landing-page/executive-mba/?lang=en",
+    "source": "main_db"
+  },
+  {
+    "id": "uea_mim",
+    "name": "University of East Anglia MSc Management",
+    "location": "Norwich",
+    "country": "UK",
+    "website": "https://www.uea.ac.uk/study/postgraduate",
+    "source": "main_db"
+  },
+  {
+    "id": "queen_mary_mim",
+    "name": "Queen Mary University London MSc Management",
+    "location": "London",
+    "country": "UK",
+    "website": "https://www.qmul.ac.uk/postgraduate/",
+    "source": "main_db"
+  },
+  {
+    "id": "nantes_mim",
+    "name": "Audencia Nantes Master in Management (additional)",
+    "location": "Nantes",
+    "country": "France",
+    "website": "https://www.audencia.com/en",
+    "source": "main_db"
+  },
+  {
+    "id": "bordeaux_mim",
+    "name": "KEDGE Bordeaux MiM Track",
+    "location": "Bordeaux",
+    "country": "France",
+    "website": "https://student.kedge.edu/programmes/master-in-management-grande-ecole",
+    "source": "main_db"
+  },
+  {
+    "id": "lille_mim",
+    "name": "IESEG Lille MiM (additional track)",
+    "location": "Lille",
+    "country": "France",
+    "website": "https://www.ieseg.fr/programmes/programme-grande-ecole/",
+    "source": "main_db"
+  },
+  {
+    "id": "erlangen_mim",
+    "name": "FAU Erlangen-Nürnberg MSc Management",
+    "location": "Nuremberg",
+    "country": "Germany",
+    "website": "https://www.fau.eu/studying/degree-programs/masters-degree-programmes/",
+    "source": "main_db"
+  },
+  {
+    "id": "augsburg_mim",
+    "name": "University of Augsburg MSc Business Administration",
+    "location": "Augsburg",
+    "country": "Germany",
+    "website": "https://www.augsburg.edu/grad/programs/",
+    "source": "main_db"
+  },
+  {
+    "id": "turin_mim",
+    "name": "University of Turin MSc Business Management",
+    "location": "Turin",
+    "country": "Italy",
+    "website": "https://en.unito.it/studying-unito/programs/degree-programs",
+    "source": "main_db"
+  },
+  {
+    "id": "uam_madrid_mim",
+    "name": "Universidad Autónoma de Madrid MSc Management",
+    "location": "Madrid",
+    "country": "Spain",
+    "website": "https://www.monash.edu/study-abroad/overseas/program-search/autonomous-university-of-madrid-uam_",
+    "source": "main_db"
+  },
+  {
+    "id": "lisbon_iseg_mim",
+    "name": "ISEG Lisbon School of Economics & Management MSc",
+    "location": "Lisbon",
+    "country": "Portugal",
+    "website": "https://www.iseg.ulisboa.pt/en/",
+    "source": "main_db"
+  },
+  {
+    "id": "zurich_mim",
+    "name": "University of Zurich MSc Management & Economics",
+    "location": "Zurich",
+    "country": "Switzerland",
+    "website": "https://www.degrees.uzh.ch/en/master/",
+    "source": "main_db"
+  },
+  {
+    "id": "bucharest_mim",
+    "name": "Bucharest University of Economic Studies MSc",
+    "location": "Bucharest",
+    "country": "Romania",
+    "website": "https://international.ase.ro/21/master-program/",
+    "source": "main_db"
+  },
+  {
+    "id": "athens_econ_mim",
+    "name": "Athens University of Economics MSc Management Science",
+    "location": "Athens",
+    "country": "Greece",
+    "website": "https://www.aueb.gr/en/content/master-programs",
+    "source": "main_db"
+  },
+  {
+    "id": "turku_mim",
+    "name": "University of Turku School of Economics MSc",
+    "location": "Turku",
+    "country": "Finland",
+    "website": "https://www.utu.fi/en/university/turku-school-of-economics",
+    "source": "main_db"
+  },
+  {
+    "id": "delhi_iift_mim",
+    "name": "IIFT Delhi MiM Track",
+    "location": "Delhi",
+    "country": "India",
+    "website": "https://www.iift.ac.in/iift/index.php",
+    "source": "main_db"
+  },
+  {
+    "id": "nmims_mim",
+    "name": "NMIMS Mumbai MiM Track",
+    "location": "Mumbai",
+    "country": "India",
+    "website": "https://nmims.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "liba_mim",
+    "name": "LIBA Chennai MiM Track",
+    "location": "Chennai",
+    "country": "India",
+    "website": "https://admissions.liba.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "gim_mim",
+    "name": "Goa Institute of Management MiM Track",
+    "location": "Goa",
+    "country": "India",
+    "website": "https://gim.ac.in/",
+    "source": "main_db"
+  },
+  {
+    "id": "bits_mim",
+    "name": "BITS Pilani MBA MiM Track",
+    "location": "Pilani",
+    "country": "India",
+    "website": "https://www.bits-pilani.ac.in/pilani/management/",
+    "source": "main_db"
+  },
+  {
+    "id": "ritsumeikan_mim",
+    "name": "Ritsumeikan Asia Pacific University MiM",
+    "location": "Beppu",
+    "country": "Japan",
+    "website": "https://admissions.apu.ac.jp/graduate/academics/",
+    "source": "main_db"
+  },
+  {
+    "id": "chulalongkorn_mim",
+    "name": "Chulalongkorn University MiM",
+    "location": "Bangkok",
+    "country": "Thailand",
+    "website": "https://mmchula.cbs.chula.ac.th/",
+    "source": "main_db"
+  },
+  {
+    "id": "thammasat_mim",
+    "name": "Thammasat University MiM",
+    "location": "Bangkok",
+    "country": "Thailand",
+    "website": "https://tu.ac.th/en/",
+    "source": "main_db"
+  },
+  {
+    "id": "utm_mim",
+    "name": "Universiti Teknologi Malaysia MiM",
+    "location": "Johor",
+    "country": "Malaysia",
+    "website": "https://admission.utm.my/malaysian-postgraduate-study/",
+    "source": "main_db"
+  },
+  {
+    "id": "up_diliman_mim",
+    "name": "UP Diliman MSc Management",
+    "location": "Quezon City",
+    "country": "Philippines",
+    "website": "https://upd.edu.ph/academics/graduate-and-postgraduate/",
+    "source": "main_db"
+  },
+  {
+    "id": "cairo_mim",
+    "name": "AUC School of Business MiM",
+    "location": "Cairo",
+    "country": "Egypt",
+    "website": "https://business.aucegypt.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "pitt_katz_emba",
+    "name": "Pittsburgh Katz Executive MBA",
+    "location": "Pittsburgh, PA",
+    "country": "USA",
+    "website": "https://www.business.pitt.edu/executive-programs/executivemba/",
+    "source": "main_db"
+  },
+  {
+    "id": "smeal_psu_emba",
+    "name": "Penn State Smeal Executive MBA",
+    "location": "University Park, PA",
+    "country": "USA",
+    "website": "https://www.smeal.psu.edu/academic-programs/mbas",
+    "source": "main_db"
+  },
+  {
+    "id": "iowa_tippie_emba",
+    "name": "Iowa Tippie Executive MBA",
+    "location": "Iowa City, IA",
+    "country": "USA",
+    "website": "https://tippie.uiowa.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "pamplin_vt_emba",
+    "name": "Virginia Tech Pamplin Executive MBA",
+    "location": "Blacksburg, VA",
+    "country": "USA",
+    "website": "https://mba.vt.edu/index-NEW.html",
+    "source": "main_db"
+  },
+  {
+    "id": "whitman_emba",
+    "name": "Syracuse Whitman Executive MBA",
+    "location": "Syracuse, NY",
+    "country": "USA",
+    "website": "https://whitman.syracuse.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "willam_mary_emba",
+    "name": "William & Mary Mason Executive MBA",
+    "location": "Williamsburg, VA",
+    "country": "USA",
+    "website": "https://mason.wm.edu/graduate/mba/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "wisconsin_emba",
+    "name": "Wisconsin School of Business Executive MBA",
+    "location": "Madison, WI",
+    "country": "USA",
+    "website": "https://business.wisc.edu/graduate/mba/executive/",
+    "source": "main_db"
+  },
+  {
+    "id": "lerner_de_emba",
+    "name": "Delaware Lerner Executive MBA",
+    "location": "Newark, DE",
+    "country": "USA",
+    "website": "https://www1.udel.edu/alex/emba/embasche.html",
+    "source": "main_db"
+  },
+  {
+    "id": "warrington_emba",
+    "name": "Florida Warrington Executive MBA",
+    "location": "Gainesville, FL",
+    "country": "USA",
+    "website": "https://warrington.ufl.edu/graduate/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "mays_emba",
+    "name": "Texas A&M Mays Executive MBA",
+    "location": "College Station, TX",
+    "country": "USA",
+    "website": "https://mays.tamu.edu/graduate/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "northeastern_emba",
+    "name": "Northeastern D'Amore-McKim Executive MBA",
+    "location": "Boston, MA",
+    "country": "USA",
+    "website": "https://damore-mckim.northeastern.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "cox_smu_emba",
+    "name": "SMU Cox Executive MBA",
+    "location": "Dallas, TX",
+    "country": "USA",
+    "website": "https://www.smu.edu/cox/business-degrees/mba-programs/executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "eller_emba",
+    "name": "Arizona Eller Executive MBA",
+    "location": "Tucson, AZ",
+    "country": "USA",
+    "website": "https://eller.arizona.edu/programs/mba/executive",
+    "source": "main_db"
+  },
+  {
+    "id": "fordham_emba",
+    "name": "Fordham University Gabelli Executive MBA",
+    "location": "New York, NY",
+    "country": "USA",
+    "website": "https://www.fordham.edu/gabelli-school-of-business/academic-programs-and-admissions/graduate-programs/academic-programs/executive-mba/",
+    "source": "main_db"
+  },
+  {
+    "id": "alberta_emba",
+    "name": "University of Alberta Executive MBA",
+    "location": "Edmonton",
+    "country": "Canada",
+    "website": "https://www.ualberta.ca/en/business/programs/executive-mba/index.html",
+    "source": "main_db"
+  },
+  {
+    "id": "hec_montreal_emba",
+    "name": "HEC Montreal Executive MBA",
+    "location": "Montreal",
+    "country": "Canada",
+    "website": "https://www.hec.ca/en/programs/mba",
+    "source": "main_db"
+  },
+  {
+    "id": "unsw_agsm_emba",
+    "name": "UNSW AGSM Executive MBA",
+    "location": "Sydney",
+    "country": "Australia",
+    "website": "https://www.unsw.edu.au/study/postgraduate/agsm-mba-master-of-business-administration-executive",
+    "source": "main_db"
+  },
+  {
+    "id": "wbs_sydney_emba",
+    "name": "Western Sydney University Executive MBA",
+    "location": "Sydney",
+    "country": "Australia",
+    "website": "https://www.westernsydney.edu.au/future/study/courses/postgraduate/master-of-business-administration",
+    "source": "main_db"
+  },
+  {
+    "id": "uwa_emba",
+    "name": "University of Western Australia Executive MBA",
+    "location": "Perth",
+    "country": "Australia",
+    "website": "https://www.uwa.edu.au/study/Courses/Master-of-Business-Administration",
+    "source": "main_db"
+  },
+  {
+    "id": "sjtu_kedge_emba",
+    "name": "SJTU–KEDGE Joint Executive MBA",
+    "location": "Shanghai",
+    "country": "China",
+    "website": "https://student.kedge.edu/about-kedge/international/kedge-in-china/kedge-and-shanghai-jiao-tong-university-sjtu-partnership",
+    "source": "main_db"
+  },
+  {
+    "id": "wuhan_emba",
+    "name": "Wuhan University EMS EMBA",
+    "location": "Wuhan",
+    "country": "China",
+    "website": "https://www.uni-goettingen.de/de/document/download/fc0d6faaaa1ad63780d0ac281cdaa037.pdf/English-taught%20courses%20at%20Wuhan%20University%20%20.pdf",
+    "source": "main_db"
+  },
+  {
+    "id": "skku_emba",
+    "name": "Sungkyunkwan GSB Executive MBA",
+    "location": "Seoul",
+    "country": "South Korea",
+    "website": "https://gsb.skku.edu/en/index.do",
+    "source": "main_db"
+  },
+  {
+    "id": "nagoya_emba",
+    "name": "Nagoya University of Commerce Executive MBA",
+    "location": "Nagoya",
+    "country": "Japan",
+    "website": "https://mba.nucba.ac.jp/en/program/emba/",
+    "source": "main_db"
+  },
+  {
+    "id": "iag_puc_emba",
+    "name": "IAG PUC-Rio Executive MBA",
+    "location": "Rio de Janeiro",
+    "country": "Brazil",
+    "website": "https://iag.puc-rio.br/",
+    "source": "main_db"
+  },
+  {
+    "id": "cesa_emba",
+    "name": "CESA Executive MBA",
+    "location": "Bogotá",
+    "country": "Colombia",
+    "website": "https://www.cesa.edu.co/escuela-de-negocios/posgrados/maestria-administracion-empresas/",
+    "source": "main_db"
+  },
+  {
+    "id": "uai_emba",
+    "name": "Universidad Adolfo Ibáñez Executive MBA",
+    "location": "Santiago",
+    "country": "Chile",
+    "website": "https://www.uai.cl/postgrados/mbas/executive-mba-cada-3-semanas",
+    "source": "main_db"
+  },
+  {
+    "id": "obbs_emba",
+    "name": "Oxford Brookes Business School Executive MBA",
+    "location": "Oxford",
+    "country": "UK",
+    "website": "https://www.sbs.ox.ac.uk/programmes/mbas/oxford-executive-mba",
+    "source": "main_db"
+  },
+  {
+    "id": "hertfordshire_emba",
+    "name": "University of Hertfordshire Executive MBA",
+    "location": "Hatfield",
+    "country": "UK",
+    "website": "https://www.herts.ac.uk/courses/postgraduate-masters/master-of-business-administration",
+    "source": "main_db"
+  },
+  {
+    "id": "pretoria_emba",
+    "name": "University of Pretoria GIBS Executive MBA (standalone)",
+    "location": "Pretoria",
+    "country": "South Africa",
+    "website": "https://www.up.ac.za/gibs-business-school",
+    "source": "main_db"
+  },
+  {
+    "id": "uct_gsb_emba2",
+    "name": "UCT GSB Modular Executive MBA",
+    "location": "Cape Town",
+    "country": "South Africa",
+    "website": "https://www.gsb.uct.ac.za/academic-programmes/emba",
+    "source": "main_db"
+  },
+  {
+    "id": "beirut_emba",
+    "name": "American University of Beirut Olayan Executive MBA",
+    "location": "Beirut",
+    "country": "Lebanon",
+    "website": "https://www.aub.edu/osb/Pages/default-old.aspx",
+    "source": "main_db"
+  },
+  {
+    "id": "hamad_emba",
+    "name": "Hamad Bin Khalifa University Executive MBA",
+    "location": "Doha",
+    "country": "Qatar",
+    "website": "https://www.hbku.edu.qa/en",
+    "source": "main_db"
+  },
+  {
+    "id": "georgetown",
+    "name": "Georgetown McDonough School of Business",
+    "location": "Washington, DC",
+    "country": "USA",
+    "website": "https://msb.georgetown.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "emory",
+    "name": "Emory Goizueta Business School",
+    "location": "Atlanta, GA",
+    "country": "USA",
+    "website": "https://goizueta.emory.edu/",
+    "source": "main_db"
+  },
+  {
+    "id": "isb_deferred_mba",
+    "name": "isb_deferred_mba",
+    "location": "",
+    "country": "",
+    "website": "https://www.isb.edu/programmes/programme-finder",
+    "source": "main_db"
+  },
+  {
+    "id": "nus_business_school",
+    "name": "nus_business_school",
+    "location": "",
+    "country": "",
+    "website": "https://bschool.nus.edu.sg/",
+    "source": "main_db"
+  },
+  {
+    "id": "ieseg_school_of_management",
+    "name": "ieseg_school_of_management",
+    "location": "",
+    "country": "",
+    "website": "https://www.ieseg.fr/en/prospective-student/admission/",
+    "source": "main_db"
+  },
+  {
+    "id": "vlerick_business_school",
+    "name": "vlerick_business_school",
+    "location": "",
+    "country": "",
+    "website": "https://www.vlerick.com/en/",
+    "source": "main_db"
+  },
+  {
+    "id": "rotterdam_school_of_management",
+    "name": "rotterdam_school_of_management",
+    "location": "",
+    "country": "",
+    "website": "https://www.rsm.nl/education/admission/",
+    "source": "main_db"
+  },
+  {
+    "id": "macquarie_business_school",
+    "name": "macquarie_business_school",
+    "location": "",
+    "country": "",
+    "website": "https://www.aacsb.edu/accredited/m/macquarie-university",
+    "source": "main_db"
+  },
+  {
+    "id": "uconn_school_of_business",
+    "name": "uconn_school_of_business",
+    "location": "",
+    "country": "",
+    "website": "https://www.business.uconn.edu/",
+    "source": "main_db"
   }
 ]
