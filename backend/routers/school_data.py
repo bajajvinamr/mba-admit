@@ -15,12 +15,12 @@ def get_application_checklist(school_id: str):
     """Generate a per-school application checklist from admission requirements."""
     school = SCHOOL_DB.get(school_id)
     if not school:
-        raise HTTPException(status_code=404, detail="School not found")
+        raise HTTPException(status_code=404, detail=f"School not found: {school_id}")
 
-    reqs = school.get("admission_requirements", {})
-    essays = school.get("essay_prompts", [])
-    deadlines = school.get("admission_deadlines", [])
-    app_qs = school.get("application_questions", [])
+    reqs = school.get("admission_requirements") or {}
+    essays = school.get("essay_prompts") or []
+    deadlines = school.get("admission_deadlines") or []
+    app_qs = school.get("application_questions") or []
 
     checklist = []
 
@@ -97,9 +97,9 @@ def get_employment_stats(school_id: str):
     """Get detailed employment/placement data for a school."""
     school = SCHOOL_DB.get(school_id)
     if not school:
-        raise HTTPException(404, f"School '{school_id}' not found")
+        raise HTTPException(404, detail=f"School not found: {school_id}")
 
-    placement = school.get("placement_stats", {})
+    placement = school.get("placement_stats") or {}
     if not placement:
         # Return empty structure
         return {
@@ -134,14 +134,37 @@ def get_school_roi(school_id: str, current_salary: float = 60000, years: int = 1
     """Calculate MBA ROI for a specific school."""
     school = SCHOOL_DB.get(school_id)
     if not school:
-        raise HTTPException(404, f"School '{school_id}' not found")
+        raise HTTPException(404, detail=f"School not found: {school_id}")
 
-    tuition = school.get("tuition_usd", 0)
-    # Parse median salary
-    median_str = school.get("median_salary", "0")
-    import re
-    salary_match = re.search(r"[\d,]+", str(median_str).replace(",", ""))
-    post_mba_salary = float(salary_match.group().replace(",", "")) if salary_match else 0
+    tuition = school.get("tuition_usd") or 0
+    # Parse median salary safely
+    post_mba_salary = 0.0
+    median_raw = school.get("median_salary")
+    if median_raw is not None:
+        try:
+            import re
+            salary_match = re.search(r"[\d,]+", str(median_raw).replace(",", ""))
+            if salary_match:
+                post_mba_salary = float(salary_match.group().replace(",", ""))
+        except (ValueError, TypeError):
+            post_mba_salary = 0.0
+
+    # If salary data is missing, return null ROI fields
+    if post_mba_salary == 0:
+        return {
+            "school_id": school_id,
+            "school_name": school.get("name", school_id),
+            "tuition_total": tuition * 2,
+            "opportunity_cost": current_salary * 2,
+            "total_investment": (tuition * 2) + (current_salary * 2),
+            "post_mba_salary": None,
+            "salary_increase": None,
+            "roi_pct": None,
+            "net_gain_10yr": None,
+            "breakeven_year": None,
+            "assumptions": f"3% annual raise, {years}-year horizon, current salary ${current_salary:,.0f}",
+            "note": "Salary data not available for this school — ROI cannot be calculated.",
+        }
 
     # 2 years of tuition + opportunity cost
     total_cost = (tuition * 2) + (current_salary * 2)
@@ -1089,7 +1112,7 @@ def get_campus_life(
         lookup = {e["school_id"]: e for e in _CAMPUS_LIFE_DATA}
         results = [lookup[sid] for sid in ids if sid in lookup]
         if not results:
-            raise HTTPException(404, f"No campus life data for: {school_id}")
+            raise HTTPException(404, detail=f"School not found: {school_id}")
         return {"schools": results, "total": len(results)}
 
     return {"schools": _CAMPUS_LIFE_DATA, "total": len(_CAMPUS_LIFE_DATA)}
@@ -1217,7 +1240,7 @@ def get_school_news(
         sid = school_id.strip().lower()
         items = [n for n in _SCHOOL_NEWS if n["school_id"] == sid]
         if not items:
-            raise HTTPException(404, f"No news found for school: {school_id}")
+            raise HTTPException(404, detail=f"School not found: {school_id}")
         return {"news": items, "total": len(items)}
 
     return {"news": _SCHOOL_NEWS, "total": len(_SCHOOL_NEWS)}
@@ -1840,7 +1863,7 @@ def get_acceptance_rate_history(
         ids = [s.strip().lower() for s in school_id.split(",") if s.strip()]
         results = [s for s in _ACCEPTANCE_RATE_DATA if s["school_id"] in ids]
         if not results:
-            raise HTTPException(404, f"No acceptance rate data for: {school_id}")
+            raise HTTPException(404, detail=f"School not found: {school_id}")
     else:
         results = list(_ACCEPTANCE_RATE_DATA)
 
@@ -2177,7 +2200,7 @@ def get_employment_reports(
         ids = [s.strip().lower() for s in school_id.split(",") if s.strip()]
         results = [s for s in results if s["school_id"] in ids]
         if not results:
-            raise HTTPException(404, f"No employment data for: {school_id}")
+            raise HTTPException(404, detail=f"School not found: {school_id}")
 
     if industry:
         ind_lower = industry.strip().lower()

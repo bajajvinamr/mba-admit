@@ -15,32 +15,56 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api", tags=["schools"])
 
 
+def _safe_int(val, default=None):
+    """Coerce to int or return default. Prevents 'N/A' strings in numeric fields."""
+    if val is None:
+        return default
+    try:
+        return int(val)
+    except (ValueError, TypeError):
+        return default
+
+
+def _safe_float(val, default=None):
+    """Coerce to float or return default."""
+    if val is None:
+        return default
+    try:
+        return float(val)
+    except (ValueError, TypeError):
+        return default
+
+
 def _school_summary(sid: str, school: dict) -> dict:
-    """Standard school summary dict used by list and search endpoints."""
-    dq = get_school_data_quality(sid)
+    """Standard school summary dict used by list and search endpoints.
+
+    All numeric fields return int/float or None — never strings like 'N/A'.
+    Frontend can safely do arithmetic on these without type errors.
+    """
+    dq = school.get("data_quality") or get_school_data_quality(sid)
     return {
         "id": sid,
-        "name": school.get("name", sid),
-        "location": school.get("location", "Unknown Location"),
-        "country": school.get("country", "Unknown"),
-        "gmat_avg": school.get("gmat_avg"),
-        "median_salary": school.get("median_salary", "N/A"),
-        "acceptance_rate": school.get("acceptance_rate", "N/A"),
-        "class_size": school.get("class_size", "N/A"),
-        "specializations": school.get("specializations", []),
-        "tuition_usd": school.get("tuition_usd", "N/A"),
-        "program_duration": school.get("program_details", {}).get("duration", "N/A"),
-        "stem_designated": school.get("program_details", {}).get("stem_designated", False),
+        "name": school.get("name") or sid.replace("_", " ").title(),
+        "location": school.get("location") or "Unknown Location",
+        "country": school.get("country") or "Unknown",
+        "gmat_avg": _safe_int(school.get("gmat_avg")),
+        "median_salary": school.get("median_salary"),
+        "acceptance_rate": _safe_float(school.get("acceptance_rate")),
+        "class_size": _safe_int(school.get("class_size")),
+        "specializations": school.get("specializations") or [],
+        "tuition_usd": _safe_int(school.get("tuition_usd")),
+        "program_duration": (school.get("program_details") or {}).get("duration"),
+        "stem_designated": (school.get("program_details") or {}).get("stem_designated", False),
         "essay_count": len(school.get("essay_prompts") or []),
         "admission_deadlines": school.get("admission_deadlines") or [],
         "primary_admission_test": school.get("primary_admission_test"),
         "program_count": len(school.get("programs") or []),
         "degree_type": school.get("degree_type", "MBA"),
-        "program_length_months": school.get("program_length_months"),
+        "program_length_months": _safe_int(school.get("program_length_months")),
         "program_format": school.get("program_format"),
-        "application_fee_usd": school.get("application_fee_usd"),
-        "data_source": dq["source"],
-        "data_confidence": dq["confidence"],
+        "application_fee_usd": _safe_int(school.get("application_fee_usd")),
+        "data_source": dq.get("source", "synthetic") if isinstance(dq, dict) else "synthetic",
+        "data_confidence": dq.get("confidence", 0.0) if isinstance(dq, dict) else 0.0,
     }
 
 

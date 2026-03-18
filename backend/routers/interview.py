@@ -286,7 +286,7 @@ def get_interview_questions(
     # Add school-specific questions if school_id provided
     if school_id:
         school = SCHOOL_DB.get(school_id)
-        school_name = school.get("name", school_id.upper()) if school else school_id.upper()
+        school_name = (school.get("name") or school_id.upper()) if school else school_id.upper()
         approach = _SCHOOL_APPROACHES.get(school_id, "experiential learning")
 
         school_questions = []
@@ -561,7 +561,7 @@ def get_alumni_interview_prep(
         sid = school_id.strip().lower()
         results = [s for s in _ALUMNI_INTERVIEW_DATA if s["school_id"] == sid]
         if not results:
-            raise HTTPException(404, f"No interview prep data for school '{school_id}'")
+            raise HTTPException(404, detail=f"School not found: {school_id}")
     else:
         results = list(_ALUMNI_INTERVIEW_DATA)
 

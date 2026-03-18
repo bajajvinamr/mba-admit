@@ -86,11 +86,11 @@ def get_essay_prompts(school_id: str = None):
 
     if school_id:
         if school_id not in schools:
-            raise HTTPException(404, f"School '{school_id}' not found")
+            raise HTTPException(404, detail=f"School not found: {school_id}")
         schools = {school_id: SCHOOL_DB[school_id]}
 
     for sid, school in schools.items():
-        prompts = school.get("essay_prompts", [])
+        prompts = school.get("essay_prompts") or []
         if not prompts:
             continue
         for i, prompt in enumerate(prompts):

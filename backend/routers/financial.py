@@ -119,7 +119,9 @@ def compare_financials(req: FinancialCompareRequest):
             errors.append({"school_id": sid, "error": "School not found"})
             continue
 
-        tuition = school.get("tuition_usd") or 0
+        tuition = school.get("tuition_usd")
+        if tuition is None:
+            tuition = 0
         post_mba_salary = _parse_salary(school.get("median_salary")) or 0
         program_length_months = school.get("program_length_months")
         country = school.get("country")
@@ -1003,7 +1005,7 @@ def salary_database(school_id: str | None = None, industry: str | None = None):
         sid = school_id.strip().lower()
         data = [s for s in data if s["school_id"] == sid]
         if not data:
-            raise HTTPException(status_code=404, detail=f"School '{school_id}' not found in salary database")
+            raise HTTPException(status_code=404, detail=f"School not found: {school_id}")
 
     if industry:
         ind = industry.strip().lower()
