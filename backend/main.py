@@ -53,6 +53,7 @@ from routers.community import router as community_router
 from routers.financial import router as financial_router
 from routers.school_data import router as school_data_router
 from routers.profile import router as profile_router
+from routers.applicant_data import router as applicant_data_router
 
 app.include_router(auth_router)
 app.include_router(schools_router)
@@ -68,6 +69,7 @@ app.include_router(community_router)
 app.include_router(financial_router)
 app.include_router(school_data_router)
 app.include_router(profile_router)
+app.include_router(applicant_data_router)
 
 
 @app.get("/")
