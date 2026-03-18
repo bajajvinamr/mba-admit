@@ -12,7 +12,7 @@ EXISTING_DB_FILE = DATA_DIR / "school_db_full.json"
 
 # Crawl settings
 CRAWL_DELAY_SEC = 2.0          # Delay between requests to same domain
-CRAWL_CONCURRENCY = 3          # Max parallel browser contexts
+CRAWL_CONCURRENCY = 15         # Max parallel httpx connections
 CRAWL_TIMEOUT_MS = 30_000      # Page load timeout
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "

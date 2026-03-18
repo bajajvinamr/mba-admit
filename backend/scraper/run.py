@@ -87,9 +87,17 @@ def cmd_discover(args: argparse.Namespace) -> list[dict]:
     return schools
 
 
+def cmd_expand(args: argparse.Namespace) -> list[dict]:
+    """Expand discovery list with all real schools from the main DB."""
+    from scraper.expand_discovery import expand_discovery_list
+
+    _header("Expand Discovery List")
+    return expand_discovery_list()
+
+
 def cmd_resolve(args: argparse.Namespace) -> None:
     """Resolve missing website URLs for discovered schools."""
-    from scraper.resolve_urls import resolve_missing_urls
+    from scraper.resolve_urls_v2 import resolve_missing_urls
 
     _header("URL Resolution")
 
@@ -225,6 +233,34 @@ def cmd_all(args: argparse.Namespace) -> None:
     print("All stages finished successfully.")
 
 
+def cmd_info_sites(args: argparse.Namespace) -> None:
+    """Scrape top MBA information sites (Poets & Quants, Clear Admit, etc.)."""
+    from scraper.info_sites import crawl_all_sites, extract_site_data, MBA_INFO_SITES, INFO_SITES_DIR
+
+    _header("MBA Info Sites Scraper")
+
+    if getattr(args, "list", False):
+        print("\nAvailable MBA info sites:")
+        print("-" * 60)
+        for site_id, config in MBA_INFO_SITES.items():
+            pages_count = len(config["pages"])
+            site_dir = INFO_SITES_DIR / site_id
+            crawled = len(list(site_dir.glob("*.txt"))) if site_dir.exists() else 0
+            print(f"  {site_id:20s} {config['name']:30s} {crawled}/{pages_count} pages")
+        return
+
+    sites = getattr(args, "sites", None)
+    sites_list = sites.split(",") if sites else None
+    fresh = getattr(args, "fresh", False)
+
+    asyncio.run(crawl_all_sites(sites=sites_list, resume=not fresh))
+
+    if getattr(args, "extract", False):
+        target = sites_list or list(MBA_INFO_SITES.keys())
+        for site_id in target:
+            asyncio.run(extract_site_data(site_id))
+
+
 def cmd_stats(args: argparse.Namespace) -> None:
     """Show pipeline statistics."""
     _header("Pipeline Statistics")
@@ -343,8 +379,18 @@ def build_parser() -> argparse.ArgumentParser:
     p_all.add_argument("--schools", type=str, help="Comma-separated school IDs")
     p_all.add_argument("--limit", type=int, default=50, help="Max URLs to resolve (default: 50)")
 
+    # expand
+    sub.add_parser("expand", help="Expand discovery list with main DB schools")
+
     # stats
     sub.add_parser("stats", help="Show pipeline statistics")
+
+    # info_sites
+    p_info = sub.add_parser("info_sites", help="Scrape top MBA information sites")
+    p_info.add_argument("--sites", type=str, help="Comma-separated site IDs (poets_quants,clear_admit,...)")
+    p_info.add_argument("--extract", action="store_true", help="Run Claude API extraction after crawl")
+    p_info.add_argument("--fresh", action="store_true", help="Re-crawl all pages (ignore cache)")
+    p_info.add_argument("--list", action="store_true", help="List available sites")
 
     return parser
 
@@ -362,12 +408,14 @@ def main():
 
     commands = {
         "discover": cmd_discover,
+        "expand": cmd_expand,
         "resolve": cmd_resolve,
         "crawl": cmd_crawl,
         "extract": cmd_extract,
         "merge": cmd_merge,
         "all": cmd_all,
         "stats": cmd_stats,
+        "info_sites": cmd_info_sites,
     }
 
     if not args.command:

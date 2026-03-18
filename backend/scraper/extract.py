@@ -24,6 +24,12 @@ from scraper.utils import load_json, save_json
 # Schema example shown to Claude so it knows the target structure
 # ---------------------------------------------------------------------------
 EXTRACTION_SCHEMA = """{
+  "name": "Full official school name (e.g. 'Harvard Business School')",
+  "country": "Country name (e.g. 'USA', 'India', 'UK')",
+  "gmat_avg": 730,
+  "gre_avg": 330,
+  "acceptance_rate": 12.0,
+  "median_salary": "$175,000",
   "essay_prompts": [
     {"prompt": "exact essay question text", "word_limit": 500, "required": true}
   ],
