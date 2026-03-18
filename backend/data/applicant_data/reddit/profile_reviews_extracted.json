@@ -1,0 +1,53 @@
+{
+  "source": "reddit",
+  "decisions": [
+    {
+      "school": "Harvard Business School",
+      "school_id": "hbs",
+      "result": "Rejected",
+      "round": "R1",
+      "gmat_score": 735,
+      "gpa": 3.2,
+      "work_experience_years": 5,
+      "industry": "Technology",
+      "date": null,
+      "international": false
+    },
+    {
+      "school": "University of Chicago Booth School of Business",
+      "school_id": "booth",
+      "result": "Rejected",
+      "round": "R1",
+      "gmat_score": 735,
+      "gpa": 3.2,
+      "work_experience_years": 5,
+      "industry": "Technology",
+      "date": null,
+      "international": false
+    },
+    {
+      "school": "Wharton School",
+      "school_id": "wharton",
+      "result": "Accepted",
+      "round": "R1",
+      "gmat_score": 735,
+      "gpa": 3.2,
+      "work_experience_years": 5,
+      "industry": "Technology",
+      "date": null,
+      "international": false
+    },
+    {
+      "school": "Columbia Business School",
+      "school_id": "columbia",
+      "result": "Accepted",
+      "round": "R1",
+      "gmat_score": 735,
+      "gpa": 3.2,
+      "work_experience_years": 5,
+      "industry": "Technology",
+      "date": null,
+      "international": false
+    }
+  ]
+}

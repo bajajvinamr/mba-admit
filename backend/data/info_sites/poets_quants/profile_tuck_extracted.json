@@ -1,0 +1,24 @@
+{
+  "type": "school_profile",
+  "data": {
+    "school_name": "Tuck School of Business (Dartmouth College)",
+    "class_size": 280,
+    "median_starting_salary": 115000,
+    "median_signing_bonus": 25000,
+    "acceptance_rate": "Data shows 20% of class accepted offers from McKinsey, Bain, and Boston Consulting Group",
+    "top_employers": [
+      "McKinsey & Company",
+      "Bain & Company",
+      "Boston Consulting Group",
+      "Amazon",
+      "Deloitte Digital"
+    ],
+    "top_industries": [
+      "Management Consulting",
+      "Technology",
+      "Retail"
+    ],
+    "key_differentiators": "Tuck has experienced five straight years of improving job placement results with international students achieving higher employment offers than domestic students for the first time. The school has strong placement in top-tier consulting firms with McKinsey taking 27 graduates and Bain taking over 20 graduates from a single class."
+  },
+  "extracted_at": "2026-03-17T21:56:48.512914"
+}

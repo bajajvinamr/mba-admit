@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html amp lang="en">
+<head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>(()=>{class RocketLazyLoadScripts{constructor(){this.v="2.0.5",this.userEvents=["keydown","keyup","mousedown","mouseup","mousemove","mouseover","mouseout","touchmove","touchstart","touchend","touchcancel","wheel","click","dblclick","input"],this.attributeEvents=["onblur","onclick","oncontextmenu","ondblclick","onfocus","onmousedown","onmouseenter","onmouseleave","onmousemove","onmouseout","onmouseover","onmouseup","onmousewheel","onscroll","onsubmit"]}async t(){this.i(),this.o(),/iP(ad|hone)/.test(navigator.userAgent)&&this.h(),this.u(),this.l(this),this.m(),this.k(this),this.p(this),this._(),await Promise.all([this.R(),this.L()]),this.lastBreath=Date.now(),this.S(this),this.P(),this.D(),this.O(),this.M(),await this.C(this.delayedScripts.normal),await this.C(this.delayedScripts.defer),await this.C(this.delayedScripts.async),await this.T(),await this.F(),await this.j(),await this.A(),window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this.everythingLoaded=!0,this.lastTouchEnd&&await new Promise(t=>setTimeout(t,500-Date.now()+this.lastTouchEnd)),this.I(),this.H(),this.U(),this.W()}i(){this.CSPIssue=sessionStorage.getItem("rocketCSPIssue"),document.addEventListener("securitypolicyviolation",t=>{this.CSPIssue||"script-src-elem"!==t.violatedDirective||"data"!==t.blockedURI||(this.CSPIssue=!0,sessionStorage.setItem("rocketCSPIssue",!0))},{isRocket:!0})}o(){window.addEventListener("pageshow",t=>{this.persisted=t.persisted,this.realWindowLoadedFired=!0},{isRocket:!0}),window.addEventListener("pagehide",()=>{this.onFirstUserAction=null},{isRocket:!0})}h(){let t;function e(e){t=e}window.addEventListener("touchstart",e,{isRocket:!0}),window.addEventListener("touchend",function i(o){o.changedTouches[0]&&t.changedTouches[0]&&Math.abs(o.changedTouches[0].pageX-t.changedTouches[0].pageX)<10&&Math.abs(o.changedTouches[0].pageY-t.changedTouches[0].pageY)<10&&o.timeStamp-t.timeStamp<200&&(window.removeEventListener("touchstart",e,{isRocket:!0}),window.removeEventListener("touchend",i,{isRocket:!0}),"INPUT"===o.target.tagName&&"text"===o.target.type||(o.target.dispatchEvent(new TouchEvent("touchend",{target:o.target,bubbles:!0})),o.target.dispatchEvent(new MouseEvent("mouseover",{target:o.target,bubbles:!0})),o.target.dispatchEvent(new PointerEvent("click",{target:o.target,bubbles:!0,cancelable:!0,detail:1,clientX:o.changedTouches[0].clientX,clientY:o.changedTouches[0].clientY})),event.preventDefault()))},{isRocket:!0})}q(t){this.userActionTriggered||("mousemove"!==t.type||this.firstMousemoveIgnored?"keyup"===t.type||"mouseover"===t.type||"mouseout"===t.type||(this.userActionTriggered=!0,this.onFirstUserAction&&this.onFirstUserAction()):this.firstMousemoveIgnored=!0),"click"===t.type&&t.preventDefault(),t.stopPropagation(),t.stopImmediatePropagation(),"touchstart"===this.lastEvent&&"touchend"===t.type&&(this.lastTouchEnd=Date.now()),"click"===t.type&&(this.lastTouchEnd=0),this.lastEvent=t.type,t.composedPath&&t.composedPath()[0].getRootNode()instanceof ShadowRoot&&(t.rocketTarget=t.composedPath()[0]),this.savedUserEvents.push(t)}u(){this.savedUserEvents=[],this.userEventHandler=this.q.bind(this),this.userEvents.forEach(t=>window.addEventListener(t,this.userEventHandler,{passive:!1,isRocket:!0})),document.addEventListener("visibilitychange",this.userEventHandler,{isRocket:!0})}U(){this.userEvents.forEach(t=>window.removeEventListener(t,this.userEventHandler,{passive:!1,isRocket:!0})),document.removeEventListener("visibilitychange",this.userEventHandler,{isRocket:!0}),this.savedUserEvents.forEach(t=>{(t.rocketTarget||t.target).dispatchEvent(new window[t.constructor.name](t.type,t))})}m(){const t="return false",e=Array.from(this.attributeEvents,t=>"data-rocket-"+t),i="["+this.attributeEvents.join("],[")+"]",o="[data-rocket-"+this.attributeEvents.join("],[data-rocket-")+"]",s=(e,i,o)=>{o&&o!==t&&(e.setAttribute("data-rocket-"+i,o),e["rocket"+i]=new Function("event",o),e.setAttribute(i,t))};new MutationObserver(t=>{for(const n of t)"attributes"===n.type&&(n.attributeName.startsWith("data-rocket-")||this.everythingLoaded?n.attributeName.startsWith("data-rocket-")&&this.everythingLoaded&&this.N(n.target,n.attributeName.substring(12)):s(n.target,n.attributeName,n.target.getAttribute(n.attributeName))),"childList"===n.type&&n.addedNodes.forEach(t=>{if(t.nodeType===Node.ELEMENT_NODE)if(this.everythingLoaded)for(const i of[t,...t.querySelectorAll(o)])for(const t of i.getAttributeNames())e.includes(t)&&this.N(i,t.substring(12));else for(const e of[t,...t.querySelectorAll(i)])for(const t of e.getAttributeNames())this.attributeEvents.includes(t)&&s(e,t,e.getAttribute(t))})}).observe(document,{subtree:!0,childList:!0,attributeFilter:[...this.attributeEvents,...e]})}I(){this.attributeEvents.forEach(t=>{document.querySelectorAll("[data-rocket-"+t+"]").forEach(e=>{this.N(e,t)})})}N(t,e){const i=t.getAttribute("data-rocket-"+e);i&&(t.setAttribute(e,i),t.removeAttribute("data-rocket-"+e))}k(t){Object.defineProperty(HTMLElement.prototype,"onclick",{get(){return this.rocketonclick||null},set(e){this.rocketonclick=e,this.setAttribute(t.everythingLoaded?"onclick":"data-rocket-onclick","this.rocketonclick(event)")}})}S(t){function e(e,i){let o=e[i];e[i]=null,Object.defineProperty(e,i,{get:()=>o,set(s){t.everythingLoaded?o=s:e["rocket"+i]=o=s}})}e(document,"onreadystatechange"),e(window,"onload"),e(window,"onpageshow");try{Object.defineProperty(document,"readyState",{get:()=>t.rocketReadyState,set(e){t.rocketReadyState=e},configurable:!0}),document.readyState="loading"}catch(t){console.log("WPRocket DJE readyState conflict, bypassing")}}l(t){this.originalAddEventListener=EventTarget.prototype.addEventListener,this.originalRemoveEventListener=EventTarget.prototype.removeEventListener,this.savedEventListeners=[],EventTarget.prototype.addEventListener=function(e,i,o){o&&o.isRocket||!t.B(e,this)&&!t.userEvents.includes(e)||t.B(e,this)&&!t.userActionTriggered||e.startsWith("rocket-")||t.everythingLoaded?t.originalAddEventListener.call(this,e,i,o):(t.savedEventListeners.push({target:this,remove:!1,type:e,func:i,options:o}),"mouseenter"!==e&&"mouseleave"!==e||t.originalAddEventListener.call(this,e,t.savedUserEvents.push,o))},EventTarget.prototype.removeEventListener=function(e,i,o){o&&o.isRocket||!t.B(e,this)&&!t.userEvents.includes(e)||t.B(e,this)&&!t.userActionTriggered||e.startsWith("rocket-")||t.everythingLoaded?t.originalRemoveEventListener.call(this,e,i,o):t.savedEventListeners.push({target:this,remove:!0,type:e,func:i,options:o})}}J(t,e){this.savedEventListeners=this.savedEventListeners.filter(i=>{let o=i.type,s=i.target||window;return e!==o||t!==s||(this.B(o,s)&&(i.type="rocket-"+o),this.$(i),!1)})}H(){EventTarget.prototype.addEventListener=this.originalAddEventListener,EventTarget.prototype.removeEventListener=this.originalRemoveEventListener,this.savedEventListeners.forEach(t=>this.$(t))}$(t){t.remove?this.originalRemoveEventListener.call(t.target,t.type,t.func,t.options):this.originalAddEventListener.call(t.target,t.type,t.func,t.options)}p(t){let e;function i(e){return t.everythingLoaded?e:e.split(" ").map(t=>"load"===t||t.startsWith("load.")?"rocket-jquery-load":t).join(" ")}function o(o){function s(e){const s=o.fn[e];o.fn[e]=o.fn.init.prototype[e]=function(){return this[0]===window&&t.userActionTriggered&&("string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=i(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach(t=>{const e=arguments[0][t];delete arguments[0][t],arguments[0][i(t)]=e})),s.apply(this,arguments),this}}if(o&&o.fn&&!t.allJQueries.includes(o)){const e={DOMContentLoaded:[],"rocket-DOMContentLoaded":[]};for(const t in e)document.addEventListener(t,()=>{e[t].forEach(t=>t())},{isRocket:!0});o.fn.ready=o.fn.init.prototype.ready=function(i){function s(){parseInt(o.fn.jquery)>2?setTimeout(()=>i.bind(document)(o)):i.bind(document)(o)}return"function"==typeof i&&(t.realDomReadyFired?!t.userActionTriggered||t.fauxDomReadyFired?s():e["rocket-DOMContentLoaded"].push(s):e.DOMContentLoaded.push(s)),this},s("on"),s("one"),s("off"),t.allJQueries.push(o)}e=o}t.allJQueries=[],o(window.jQuery),Object.defineProperty(window,"jQuery",{get:()=>e,set(t){o(t)}})}P(){const t=new Map;document.write=document.writeln=function(e){const i=document.currentScript,o=document.createRange(),s=i.parentElement;let n=t.get(i);void 0===n&&(n=i.nextSibling,t.set(i,n));const c=document.createDocumentFragment();o.setStart(c,0),c.appendChild(o.createContextualFragment(e)),s.insertBefore(c,n)}}async R(){return new Promise(t=>{this.userActionTriggered?t():this.onFirstUserAction=t})}async L(){return new Promise(t=>{document.addEventListener("DOMContentLoaded",()=>{this.realDomReadyFired=!0,t()},{isRocket:!0})})}async j(){return this.realWindowLoadedFired?Promise.resolve():new Promise(t=>{window.addEventListener("load",t,{isRocket:!0})})}M(){this.pendingScripts=[];this.scriptsMutationObserver=new MutationObserver(t=>{for(const e of t)e.addedNodes.forEach(t=>{"SCRIPT"!==t.tagName||!t.src||t.noModule||t.isWPRocket||this.pendingScripts.push({script:t,promise:new Promise(e=>{const i=()=>{const i=this.pendingScripts.findIndex(e=>e.script===t);i>=0&&this.pendingScripts.splice(i,1),e()};t.addEventListener("load",i,{isRocket:!0}),t.addEventListener("error",i,{isRocket:!0}),setTimeout(i,1e3)})})})}),this.scriptsMutationObserver.observe(document,{childList:!0,subtree:!0})}async F(){await this.X(),this.pendingScripts.length?(await this.pendingScripts[0].promise,await this.F()):this.scriptsMutationObserver.disconnect()}D(){this.delayedScripts={normal:[],async:[],defer:[]},document.querySelectorAll("script[type$=rocketlazyloadscript]").forEach(t=>{t.hasAttribute("data-rocket-src")?t.hasAttribute("async")&&!1!==t.async?this.delayedScripts.async.push(t):t.hasAttribute("defer")&&!1!==t.defer||"module"===t.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(t):this.delayedScripts.normal.push(t):this.delayedScripts.normal.push(t)})}async _(){await this.L();let t=[];document.querySelectorAll("script[type$=rocketlazyloadscript][data-rocket-src]").forEach(e=>{let i=e.getAttribute("data-rocket-src");if(i&&!i.startsWith("data:")){i.startsWith("//")&&(i=location.protocol+i);try{const o=new URL(i).origin;o!==location.origin&&t.push({src:o,crossOrigin:e.crossOrigin||"module"===e.getAttribute("data-rocket-type")})}catch(t){}}}),t=[...new Map(t.map(t=>[JSON.stringify(t),t])).values()],this.Y(t,"preconnect")}async G(t){if(await this.K(),!0!==t.noModule||!("noModule"in HTMLScriptElement.prototype))return new Promise(e=>{let i;function o(){(i||t).setAttribute("data-rocket-status","executed"),e()}try{if(navigator.userAgent.includes("Firefox/")||""===navigator.vendor||this.CSPIssue)i=document.createElement("script"),[...t.attributes].forEach(t=>{let e=t.nodeName;"type"!==e&&("data-rocket-type"===e&&(e="type"),"data-rocket-src"===e&&(e="src"),i.setAttribute(e,t.nodeValue))}),t.text&&(i.text=t.text),t.nonce&&(i.nonce=t.nonce),i.hasAttribute("src")?(i.addEventListener("load",o,{isRocket:!0}),i.addEventListener("error",()=>{i.setAttribute("data-rocket-status","failed-network"),e()},{isRocket:!0}),setTimeout(()=>{i.isConnected||e()},1)):(i.text=t.text,o()),i.isWPRocket=!0,t.parentNode.replaceChild(i,t);else{const i=t.getAttribute("data-rocket-type"),s=t.getAttribute("data-rocket-src");i?(t.type=i,t.removeAttribute("data-rocket-type")):t.removeAttribute("type"),t.addEventListener("load",o,{isRocket:!0}),t.addEventListener("error",i=>{this.CSPIssue&&i.target.src.startsWith("data:")?(console.log("WPRocket: CSP fallback activated"),t.removeAttribute("src"),this.G(t).then(e)):(t.setAttribute("data-rocket-status","failed-network"),e())},{isRocket:!0}),s?(t.fetchPriority="high",t.removeAttribute("data-rocket-src"),t.src=s):t.src="data:text/javascript;base64,"+window.btoa(unescape(encodeURIComponent(t.text)))}}catch(i){t.setAttribute("data-rocket-status","failed-transform"),e()}});t.setAttribute("data-rocket-status","skipped")}async C(t){const e=t.shift();return e?(e.isConnected&&await this.G(e),this.C(t)):Promise.resolve()}O(){this.Y([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}Y(t,e){this.trash=this.trash||[];let i=!0;var o=document.createDocumentFragment();t.forEach(t=>{const s=t.getAttribute&&t.getAttribute("data-rocket-src")||t.src;if(s&&!s.startsWith("data:")){const n=document.createElement("link");n.href=s,n.rel=e,"preconnect"!==e&&(n.as="script",n.fetchPriority=i?"high":"low"),t.getAttribute&&"module"===t.getAttribute("data-rocket-type")&&(n.crossOrigin=!0),t.crossOrigin&&(n.crossOrigin=t.crossOrigin),t.integrity&&(n.integrity=t.integrity),t.nonce&&(n.nonce=t.nonce),o.appendChild(n),this.trash.push(n),i=!1}}),document.head.appendChild(o)}W(){this.trash.forEach(t=>t.remove())}async T(){try{document.readyState="interactive"}catch(t){}this.fauxDomReadyFired=!0;try{await this.K(),this.J(document,"readystatechange"),document.dispatchEvent(new Event("rocket-readystatechange")),await this.K(),document.rocketonreadystatechange&&document.rocketonreadystatechange(),await this.K(),this.J(document,"DOMContentLoaded"),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this.K(),this.J(window,"DOMContentLoaded"),window.dispatchEvent(new Event("rocket-DOMContentLoaded"))}catch(t){console.error(t)}}async A(){try{document.readyState="complete"}catch(t){}try{await this.K(),this.J(document,"readystatechange"),document.dispatchEvent(new Event("rocket-readystatechange")),await this.K(),document.rocketonreadystatechange&&document.rocketonreadystatechange(),await this.K(),this.J(window,"load"),window.dispatchEvent(new Event("rocket-load")),await this.K(),window.rocketonload&&window.rocketonload(),await this.K(),this.allJQueries.forEach(t=>t(window).trigger("rocket-jquery-load")),await this.K(),this.J(window,"pageshow");const t=new Event("rocket-pageshow");t.persisted=this.persisted,window.dispatchEvent(t),await this.K(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}catch(t){console.error(t)}}async K(){Date.now()-this.lastBreath>45&&(await this.X(),this.lastBreath=Date.now())}async X(){return document.hidden?new Promise(t=>setTimeout(t)):new Promise(t=>requestAnimationFrame(t))}B(t,e=window){return e===document&&"readystatechange"===t||(e===document&&"DOMContentLoaded"===t||(e===window&&"DOMContentLoaded"===t||(e===window&&"load"===t||e===window&&"pageshow"===t)))}static run(){(new RocketLazyLoadScripts).t()}}RocketLazyLoadScripts.run()})();
+</script><script type="rocketlazyloadscript" data-minify="1" data-cfasync='false' async data-rocket-src='https://www.stacyblackman.com/wp-content/cache/min/1/7s99.js?ver=1773735244'></script>
+	
+    <script type="rocketlazyloadscript" data-minify="1" async data-rocket-src="https://www.stacyblackman.com/wp-content/cache/min/1/v0.js?ver=1773254126"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/favicons/apple-touch-icon.png?v2">
+		<link rel="icon" type="image/png" sizes="32x32" href="https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/favicons/favicon-32x32.png?v2">
+		<link rel="icon" type="image/png" sizes="16x16" href="https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/favicons/favicon-16x16.png?v2">
+    <link rel="preload" as="image" href="https://www.stacyblackman.com/wp-content/uploads/home-mb.webp" fetchpriority="high">
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+   	<noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+   
+    <link rel="stylesheet" href="https://www.stacyblackman.com/wp-content/cache/background-css/1/www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/css/google-amp.min.css?wpr_t=1773738144" type="text/css" media="all"/>
+    <link data-minify="1" rel="stylesheet" href="https://www.stacyblackman.com/wp-content/cache/background-css/1/www.stacyblackman.com/wp-content/cache/min/1/wp-content/themes/stacyblackman-2026/assets/css/style.css?ver=1773751772&wpr_t=1773738144" type="text/css" media="all"/>
+   	
+	<script type="rocketlazyloadscript" data-minify="1" async data-rocket-src="https://www.stacyblackman.com/wp-content/cache/min/1/v0.js?ver=1773254126">
+	<script data-minify="1" async custom-element="amp-sidebar" src="https://www.stacyblackman.com/wp-content/cache/min/1/v0/amp-sidebar-0.1.js?ver=1773254126"></script>
+	<script type="rocketlazyloadscript" data-minify="1" async custom-element="amp-position-observer" data-rocket-src="https://www.stacyblackman.com/wp-content/cache/min/1/v0/amp-position-observer-0.1.js?ver=1773254126"></script>
+	<script type="rocketlazyloadscript" data-minify="1" async custom-element="amp-animation" data-rocket-src="https://www.stacyblackman.com/wp-content/cache/min/1/v0/amp-animation-0.1.js?ver=1773254126"></script>
+	<script type="rocketlazyloadscript" data-minify="1" async custom-element="amp-lightbox" data-rocket-src="https://www.stacyblackman.com/wp-content/cache/min/1/v0/amp-lightbox-0.1.js?ver=1773254126"></script>
+	
+	<link rel="preload" as="image" href="https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/business-brand.gif"/>
+	<link rel="preload" as="image" href="https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/top-posts.jpg"/>
+			<script type="rocketlazyloadscript" data-minify="1" async custom-element="amp-youtube" data-rocket-src="https://www.stacyblackman.com/wp-content/cache/min/1/v0/amp-youtube-0.1.js?ver=1773254126"></script>
+				
+	<!-- Google Tag Manager -->
+	<script type="rocketlazyloadscript">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M7PGJQS');</script>
+<!-- End Google Tag Manager -->
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "u1fju5o3f0");
+</script>
+	
+    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO Premium plugin v27.1 (Yoast SEO v27.1.1) - https://yoast.com/product/yoast-seo-premium-wordpress/ -->
+	<title>Columbia MBA Application | MBA Application Advice | Stacy Blackman</title>
+	<meta name="description" content="Get MBA application advice for the Columbia Business School. Columbia (CBS) essay tips, application deadlines and more." />
+	<link rel="canonical" href="https://www.stacyblackman.com/mba-application-advice/columbia-business-school/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Columbia MBA Application" />
+	<meta property="og:description" content="Get MBA application advice for the Columbia Business School. Columbia (CBS) essay tips, application deadlines and more." />
+	<meta property="og:url" content="https://www.stacyblackman.com/mba-application-advice/columbia-business-school/" />
+	<meta property="og:site_name" content="Stacy Blackman Consulting - MBA Admissions Consulting" />
+	<meta property="article:modified_time" content="2025-05-23T20:42:18+00:00" />
+	<meta property="og:image" content="https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM.png" />
+	<meta property="og:image:width" content="2828" />
+	<meta property="og:image:height" content="1006" />
+	<meta property="og:image:type" content="image/png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="Est. reading time" />
+	<meta name="twitter:data1" content="4 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://www.stacyblackman.com/mba-application-advice/columbia-business-school/","url":"https://www.stacyblackman.com/mba-application-advice/columbia-business-school/","name":"Columbia MBA Application | MBA Application Advice | Stacy Blackman","isPartOf":{"@id":"https://www.stacyblackman.com/#website"},"primaryImageOfPage":{"@id":"https://www.stacyblackman.com/mba-application-advice/columbia-business-school/#primaryimage"},"image":{"@id":"https://www.stacyblackman.com/mba-application-advice/columbia-business-school/#primaryimage"},"thumbnailUrl":"https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM.png","datePublished":"2011-10-29T23:26:48+00:00","dateModified":"2025-05-23T20:42:18+00:00","description":"Get MBA application advice for the Columbia Business School. Columbia (CBS) essay tips, application deadlines and more.","breadcrumb":{"@id":"https://www.stacyblackman.com/mba-application-advice/columbia-business-school/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.stacyblackman.com/mba-application-advice/columbia-business-school/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.stacyblackman.com/mba-application-advice/columbia-business-school/#primaryimage","url":"https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM.png","contentUrl":"https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM.png","width":2828,"height":1006},{"@type":"BreadcrumbList","@id":"https://www.stacyblackman.com/mba-application-advice/columbia-business-school/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.stacyblackman.com/"},{"@type":"ListItem","position":2,"name":"MBA Application | Cheat Sheet","item":"https://www.stacyblackman.com/mba-application-advice/"},{"@type":"ListItem","position":3,"name":"Columbia MBA Application"}]},{"@type":"WebSite","@id":"https://www.stacyblackman.com/#website","url":"https://www.stacyblackman.com/","name":"Stacy Blackman Consulting - MBA Admissions Consulting","description":"Winning Marketing Strategy for Business School Admissions","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.stacyblackman.com/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"}]}</script>
+	<!-- / Yoast SEO Premium plugin. -->
+
+
+<link rel='dns-prefetch' href='//www.google.com' />
+<link rel='dns-prefetch' href='//a.omappapi.com' />
+<link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
+
+<link rel="alternate" type="application/rss+xml" title="Stacy Blackman Consulting - MBA Admissions Consulting &raquo; Feed" href="https://www.stacyblackman.com/feed/" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.stacyblackman.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.stacyblackman.com%2Fmba-application-advice%2Fcolumbia-business-school%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://www.stacyblackman.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.stacyblackman.com%2Fmba-application-advice%2Fcolumbia-business-school%2F&#038;format=xml" />
+<style id='wp-img-auto-sizes-contain-inline-css'>
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link data-minify="1" rel='stylesheet' id='stacyblackman-main-css' href='https://www.stacyblackman.com/wp-content/cache/background-css/1/www.stacyblackman.com/wp-content/cache/min/1/wp-content/themes/stacyblackman-2026/assets/css/main.css?ver=1773751772&wpr_t=1773738144' media='all' />
+<link data-minify="1" rel='stylesheet' id='fa-fonts-css' href='https://www.stacyblackman.com/wp-content/cache/min/1/ajax/libs/font-awesome/7.0.1/css/all.min.css?ver=1773751772' media='all' />
+<link data-minify="1" rel='stylesheet' id='tablepress-default-css' href='https://www.stacyblackman.com/wp-content/cache/min/1/wp-content/plugins/tablepress/css/build/default.css?ver=1773751772' media='all' />
+<style id='rocket-lazyload-inline-css'>
+.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;}.rll-youtube-player:focus-within{outline: 2px solid currentColor;outline-offset: 5px;}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:100%;width:100%;left:0;top:0;position:absolute;background:var(--wpr-bg-12edbc9d-89d6-494f-a7db-63da60d199c2) no-repeat center;background-color: transparent !important;cursor:pointer;border:none;}
+/*# sourceURL=rocket-lazyload-inline-css */
+</style>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.stacyblackman.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js" data-rocket-defer defer></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.stacyblackman.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js" data-rocket-defer defer></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.google.com/recaptcha/api.js?render=6LefrOIhAAAAADn8NnYlmBCJBpbtxH3iavO_Di3l&amp;ver=6.9.1" id="recaptcha-js"></script>
+<link rel="https://api.w.org/" href="https://www.stacyblackman.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://www.stacyblackman.com/wp-json/wp/v2/pages/14308" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.stacyblackman.com/xmlrpc.php?rsd" />
+<link rel='shortlink' href='https://www.stacyblackman.com/?p=14308' />
+<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>     
+<style id='global-styles-inline-css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<style id="rocket-lazyrender-inline-css">[data-wpr-lazyrender] {content-visibility: auto;}</style><style id="wpr-lazyload-bg-container"></style><style id="wpr-lazyload-bg-exclusion"></style>
+<noscript>
+<style id="wpr-lazyload-bg-nostyle">select.form-control{--wpr-bg-0d56712f-ec1b-4bda-93ed-8da86b9a0182: url('https://ampcssframework.com/assets/icons/chevron-down.svg');}select.form-control{--wpr-bg-fe0fc5e9-bb1c-483f-9ab5-19dea074588e: url('https://ampcssframework.com/assets/icons/chevron-down.svg');}amp-social-share.custom-style{--wpr-bg-7171b765-b720-465f-88fd-3046e14e720e: url('https://raw.githubusercontent.com/google/material-design-icons/master/social/1x_web/ic_share_white_48dp.webp');}.menu-list-column h4,.header .navbar .menu-list-column li{--wpr-bg-0dea0fc8-3fe0-4eb7-8e9a-f52df0a9b959: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/chevron-right.png?v2');}.header .navbar .menu-list-column li:hover{--wpr-bg-709fdcd8-cab7-4ab7-88d3-0cca9fe543fd: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/chevron-right.png?v2');}#business-school-brand{--wpr-bg-e0481984-c6fd-428c-86fd-12ce84ed41e3: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/business-brand.gif');}#top-posts{--wpr-bg-d3c0ad21-bc2f-4517-a1a4-d7a32c60211c: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/top-posts.jpg?v4');}i.chevron-down{--wpr-bg-e6cf2478-6769-4ddf-8f88-82eeadc4e7c1: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/chevron-down.png');}.about-content h2{--wpr-bg-c4b5b544-9b72-4528-a85e-9c5c573e12f4: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/bg-h2-about.png');}.entry-content .ej_view_cart,#sidebar .ej_view_cart{--wpr-bg-3970c32e-396c-4452-a887-6f5c3d6b2475: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/bg-view-cart.png');}.entry-content .ej_view_cart:hover,#sidebar .ej_view_cart:hover{--wpr-bg-d1f95c97-fecc-44c8-88c8-79a478d280ca: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/bg-view-cart.png');}.bs-title{--wpr-bg-767d72cb-01bc-4093-8d0b-4247f85c5cd8: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/bg-h2-about.png');}.page-template-template-the-all-in main #split-section p.lets-go{--wpr-bg-0e5ef577-a63f-41d9-904b-982ac420c139: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/arrow-lets-go.gif?v2');}#module-1-map:hover{--wpr-bg-48e64d55-c50b-4c90-904e-e9602524e5dc: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/module-1-hover.png');}#module-1-map:hover{--wpr-bg-b00ee8a2-3d1e-4f50-b85e-a10591cbbd78: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/module-1-hover.png');}#module-2-map:hover{--wpr-bg-f93435c4-15cb-48d4-9959-a821ef609b9d: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/module-2-hover.png');}#module-2-map:hover{--wpr-bg-c86f41d5-83e8-485d-a01a-582a4d6fac82: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/module-2-hover.png');}#module-3-map:hover{--wpr-bg-7a47e4c2-a1a9-442e-a129-0a819d1c3b88: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/module-3-hover.png');}#module-3-map:hover{--wpr-bg-ba20fb41-ce5e-40d6-b1f0-bf961efed394: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/module-3-hover.png');}#module-4-map:hover{--wpr-bg-720f69bb-a10d-48e7-805b-4edaa086937a: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/module-4-hover.png');}#module-4-map:hover{--wpr-bg-1a60f83b-b59e-4c1d-95f6-099dfa7f4d4e: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/module-4-hover.png');}#module-5-map:hover{--wpr-bg-e110de5f-25b4-4655-8e39-4772c06887d0: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/module-5-hover.png');}#module-5-map:hover{--wpr-bg-8b9881ae-7ecf-4746-a781-0a75152178bd: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/module-5-hover.png');}#module-6-map:hover{--wpr-bg-0e873592-d948-4e54-aaa5-729930c90d9f: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/module-6-hover.png');}#module-6-map:hover{--wpr-bg-e011990b-ceec-4b3d-9cfc-514fa7c49e81: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/module-6-hover.png');}#module-7-map:hover{--wpr-bg-7a201440-4b43-4043-9390-7bc44f32faac: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/module-7-hover.png');}#module-7-map:hover{--wpr-bg-3daa94ae-6991-470b-9884-1f55a7589c73: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/module-7-hover.png');}#module-8-map:hover{--wpr-bg-9eeb562f-5f6b-43f7-af26-ddf93fd8ccfe: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/module-8-hover.png');}#module-8-map:hover{--wpr-bg-0a270b60-33de-4af1-9381-2279a9cb346e: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/module-8-hover.png');}#module-illustration{--wpr-bg-f0fda317-c935-4bae-bd5a-ff2335079e32: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/all-in-package/sbc-modules.png?v3');}#going-all-in .container{--wpr-bg-19d794ff-684d-4326-a9dc-9bd455dfa816: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/bg-going-all-in.png');}#sbc-praise .featured-praise{--wpr-bg-f7b0684f-3f82-467f-9da1-bbd9bd91e85e: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/bg-featured-praise.png');}#sbc-client-stories .story-number{--wpr-bg-06874146-c91f-4f29-91ff-f42641a0d90e: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/bg-toggle-view-cs-tag.png');}a.back-consultants:before{--wpr-bg-6c247594-afc2-457b-bea3-c1f75eea17fe: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/arrow-left.png');}.footer-button h3{--wpr-bg-c4fa0bbe-df87-48ba-8c18-12afaa88efa0: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/footer-btn-arrow.png');}.tablesorter-header{--wpr-bg-4166e4c7-0b5c-4b44-97cf-10234fff1644: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/css/images/icon-unsorted.png?v2');}.tablesorter-headerAsc{--wpr-bg-ff3d1c45-3b94-4f60-856c-56536e6bfa3b: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/css/images/icon-white-asc.png?v2');}.tablesorter-headerDesc{--wpr-bg-f9b8cae7-d01b-4782-81de-2f2aeaef1565: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/css/images/icon-white-desc.png?v2');}.hourly-price-box__list li{--wpr-bg-7c14353d-188c-4fc0-b991-e3e98306aa31: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/list-bullet.png');}.hourly-price-box__list li::before{--wpr-bg-595aa635-8219-40ea-8655-b30dd43fda04: url('https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/assets/images/list-bullet.png');}.rll-youtube-player .play{--wpr-bg-12edbc9d-89d6-494f-a7db-63da60d199c2: url('https://www.stacyblackman.com/wp-content/plugins/wp-rocket/assets/img/youtube.png');}</style>
+</noscript>
+<script type="application/javascript">const rocket_pairs = [{"selector":"select.form-control","style":"select.form-control{--wpr-bg-0d56712f-ec1b-4bda-93ed-8da86b9a0182: url('https:\/\/ampcssframework.com\/assets\/icons\/chevron-down.svg');}","hash":"0d56712f-ec1b-4bda-93ed-8da86b9a0182","url":"https:\/\/ampcssframework.com\/assets\/icons\/chevron-down.svg"},{"selector":"select.form-control","style":"select.form-control{--wpr-bg-fe0fc5e9-bb1c-483f-9ab5-19dea074588e: url('https:\/\/ampcssframework.com\/assets\/icons\/chevron-down.svg');}","hash":"fe0fc5e9-bb1c-483f-9ab5-19dea074588e","url":"https:\/\/ampcssframework.com\/assets\/icons\/chevron-down.svg"},{"selector":"amp-social-share.custom-style","style":"amp-social-share.custom-style{--wpr-bg-7171b765-b720-465f-88fd-3046e14e720e: url('https:\/\/raw.githubusercontent.com\/google\/material-design-icons\/master\/social\/1x_web\/ic_share_white_48dp.webp');}","hash":"7171b765-b720-465f-88fd-3046e14e720e","url":"https:\/\/raw.githubusercontent.com\/google\/material-design-icons\/master\/social\/1x_web\/ic_share_white_48dp.webp"},{"selector":".menu-list-column h4,.header .navbar .menu-list-column li","style":".menu-list-column h4,.header .navbar .menu-list-column li{--wpr-bg-0dea0fc8-3fe0-4eb7-8e9a-f52df0a9b959: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/chevron-right.png?v2');}","hash":"0dea0fc8-3fe0-4eb7-8e9a-f52df0a9b959","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/chevron-right.png?v2"},{"selector":".header .navbar .menu-list-column li","style":".header .navbar .menu-list-column li:hover{--wpr-bg-709fdcd8-cab7-4ab7-88d3-0cca9fe543fd: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/chevron-right.png?v2');}","hash":"709fdcd8-cab7-4ab7-88d3-0cca9fe543fd","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/chevron-right.png?v2"},{"selector":"#business-school-brand","style":"#business-school-brand{--wpr-bg-e0481984-c6fd-428c-86fd-12ce84ed41e3: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/business-brand.gif');}","hash":"e0481984-c6fd-428c-86fd-12ce84ed41e3","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/business-brand.gif"},{"selector":"#top-posts","style":"#top-posts{--wpr-bg-d3c0ad21-bc2f-4517-a1a4-d7a32c60211c: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/top-posts.jpg?v4');}","hash":"d3c0ad21-bc2f-4517-a1a4-d7a32c60211c","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/top-posts.jpg?v4"},{"selector":"i.chevron-down","style":"i.chevron-down{--wpr-bg-e6cf2478-6769-4ddf-8f88-82eeadc4e7c1: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/chevron-down.png');}","hash":"e6cf2478-6769-4ddf-8f88-82eeadc4e7c1","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/chevron-down.png"},{"selector":".about-content h2","style":".about-content h2{--wpr-bg-c4b5b544-9b72-4528-a85e-9c5c573e12f4: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/bg-h2-about.png');}","hash":"c4b5b544-9b72-4528-a85e-9c5c573e12f4","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/bg-h2-about.png"},{"selector":".entry-content .ej_view_cart,#sidebar .ej_view_cart","style":".entry-content .ej_view_cart,#sidebar .ej_view_cart{--wpr-bg-3970c32e-396c-4452-a887-6f5c3d6b2475: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/bg-view-cart.png');}","hash":"3970c32e-396c-4452-a887-6f5c3d6b2475","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/bg-view-cart.png"},{"selector":".entry-content .ej_view_cart,#sidebar .ej_view_cart","style":".entry-content .ej_view_cart:hover,#sidebar .ej_view_cart:hover{--wpr-bg-d1f95c97-fecc-44c8-88c8-79a478d280ca: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/bg-view-cart.png');}","hash":"d1f95c97-fecc-44c8-88c8-79a478d280ca","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/bg-view-cart.png"},{"selector":".bs-title","style":".bs-title{--wpr-bg-767d72cb-01bc-4093-8d0b-4247f85c5cd8: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/bg-h2-about.png');}","hash":"767d72cb-01bc-4093-8d0b-4247f85c5cd8","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/bg-h2-about.png"},{"selector":".page-template-template-the-all-in main #split-section p.lets-go","style":".page-template-template-the-all-in main #split-section p.lets-go{--wpr-bg-0e5ef577-a63f-41d9-904b-982ac420c139: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/arrow-lets-go.gif?v2');}","hash":"0e5ef577-a63f-41d9-904b-982ac420c139","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/arrow-lets-go.gif?v2"},{"selector":"#module-1-map","style":"#module-1-map:hover{--wpr-bg-48e64d55-c50b-4c90-904e-e9602524e5dc: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-1-hover.png');}","hash":"48e64d55-c50b-4c90-904e-e9602524e5dc","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-1-hover.png"},{"selector":"#module-1-map","style":"#module-1-map:hover{--wpr-bg-b00ee8a2-3d1e-4f50-b85e-a10591cbbd78: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-1-hover.png');}","hash":"b00ee8a2-3d1e-4f50-b85e-a10591cbbd78","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-1-hover.png"},{"selector":"#module-2-map","style":"#module-2-map:hover{--wpr-bg-f93435c4-15cb-48d4-9959-a821ef609b9d: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-2-hover.png');}","hash":"f93435c4-15cb-48d4-9959-a821ef609b9d","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-2-hover.png"},{"selector":"#module-2-map","style":"#module-2-map:hover{--wpr-bg-c86f41d5-83e8-485d-a01a-582a4d6fac82: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-2-hover.png');}","hash":"c86f41d5-83e8-485d-a01a-582a4d6fac82","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-2-hover.png"},{"selector":"#module-3-map","style":"#module-3-map:hover{--wpr-bg-7a47e4c2-a1a9-442e-a129-0a819d1c3b88: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-3-hover.png');}","hash":"7a47e4c2-a1a9-442e-a129-0a819d1c3b88","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-3-hover.png"},{"selector":"#module-3-map","style":"#module-3-map:hover{--wpr-bg-ba20fb41-ce5e-40d6-b1f0-bf961efed394: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-3-hover.png');}","hash":"ba20fb41-ce5e-40d6-b1f0-bf961efed394","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-3-hover.png"},{"selector":"#module-4-map","style":"#module-4-map:hover{--wpr-bg-720f69bb-a10d-48e7-805b-4edaa086937a: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-4-hover.png');}","hash":"720f69bb-a10d-48e7-805b-4edaa086937a","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-4-hover.png"},{"selector":"#module-4-map","style":"#module-4-map:hover{--wpr-bg-1a60f83b-b59e-4c1d-95f6-099dfa7f4d4e: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-4-hover.png');}","hash":"1a60f83b-b59e-4c1d-95f6-099dfa7f4d4e","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-4-hover.png"},{"selector":"#module-5-map","style":"#module-5-map:hover{--wpr-bg-e110de5f-25b4-4655-8e39-4772c06887d0: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-5-hover.png');}","hash":"e110de5f-25b4-4655-8e39-4772c06887d0","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-5-hover.png"},{"selector":"#module-5-map","style":"#module-5-map:hover{--wpr-bg-8b9881ae-7ecf-4746-a781-0a75152178bd: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-5-hover.png');}","hash":"8b9881ae-7ecf-4746-a781-0a75152178bd","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-5-hover.png"},{"selector":"#module-6-map","style":"#module-6-map:hover{--wpr-bg-0e873592-d948-4e54-aaa5-729930c90d9f: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-6-hover.png');}","hash":"0e873592-d948-4e54-aaa5-729930c90d9f","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-6-hover.png"},{"selector":"#module-6-map","style":"#module-6-map:hover{--wpr-bg-e011990b-ceec-4b3d-9cfc-514fa7c49e81: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-6-hover.png');}","hash":"e011990b-ceec-4b3d-9cfc-514fa7c49e81","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-6-hover.png"},{"selector":"#module-7-map","style":"#module-7-map:hover{--wpr-bg-7a201440-4b43-4043-9390-7bc44f32faac: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-7-hover.png');}","hash":"7a201440-4b43-4043-9390-7bc44f32faac","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-7-hover.png"},{"selector":"#module-7-map","style":"#module-7-map:hover{--wpr-bg-3daa94ae-6991-470b-9884-1f55a7589c73: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-7-hover.png');}","hash":"3daa94ae-6991-470b-9884-1f55a7589c73","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-7-hover.png"},{"selector":"#module-8-map","style":"#module-8-map:hover{--wpr-bg-9eeb562f-5f6b-43f7-af26-ddf93fd8ccfe: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-8-hover.png');}","hash":"9eeb562f-5f6b-43f7-af26-ddf93fd8ccfe","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-8-hover.png"},{"selector":"#module-8-map","style":"#module-8-map:hover{--wpr-bg-0a270b60-33de-4af1-9381-2279a9cb346e: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-8-hover.png');}","hash":"0a270b60-33de-4af1-9381-2279a9cb346e","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/module-8-hover.png"},{"selector":"#module-illustration","style":"#module-illustration{--wpr-bg-f0fda317-c935-4bae-bd5a-ff2335079e32: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/all-in-package\/sbc-modules.png?v3');}","hash":"f0fda317-c935-4bae-bd5a-ff2335079e32","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/all-in-package\/sbc-modules.png?v3"},{"selector":"#going-all-in .container","style":"#going-all-in .container{--wpr-bg-19d794ff-684d-4326-a9dc-9bd455dfa816: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/bg-going-all-in.png');}","hash":"19d794ff-684d-4326-a9dc-9bd455dfa816","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/bg-going-all-in.png"},{"selector":"#sbc-praise .featured-praise","style":"#sbc-praise .featured-praise{--wpr-bg-f7b0684f-3f82-467f-9da1-bbd9bd91e85e: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/bg-featured-praise.png');}","hash":"f7b0684f-3f82-467f-9da1-bbd9bd91e85e","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/bg-featured-praise.png"},{"selector":"#sbc-client-stories .story-number","style":"#sbc-client-stories .story-number{--wpr-bg-06874146-c91f-4f29-91ff-f42641a0d90e: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/bg-toggle-view-cs-tag.png');}","hash":"06874146-c91f-4f29-91ff-f42641a0d90e","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/bg-toggle-view-cs-tag.png"},{"selector":"a.back-consultants","style":"a.back-consultants:before{--wpr-bg-6c247594-afc2-457b-bea3-c1f75eea17fe: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/arrow-left.png');}","hash":"6c247594-afc2-457b-bea3-c1f75eea17fe","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/arrow-left.png"},{"selector":".footer-button h3","style":".footer-button h3{--wpr-bg-c4fa0bbe-df87-48ba-8c18-12afaa88efa0: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/footer-btn-arrow.png');}","hash":"c4fa0bbe-df87-48ba-8c18-12afaa88efa0","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/footer-btn-arrow.png"},{"selector":".tablesorter-header","style":".tablesorter-header{--wpr-bg-4166e4c7-0b5c-4b44-97cf-10234fff1644: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/css\/images\/icon-unsorted.png?v2');}","hash":"4166e4c7-0b5c-4b44-97cf-10234fff1644","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/css\/images\/icon-unsorted.png?v2"},{"selector":".tablesorter-headerAsc","style":".tablesorter-headerAsc{--wpr-bg-ff3d1c45-3b94-4f60-856c-56536e6bfa3b: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/css\/images\/icon-white-asc.png?v2');}","hash":"ff3d1c45-3b94-4f60-856c-56536e6bfa3b","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/css\/images\/icon-white-asc.png?v2"},{"selector":".tablesorter-headerDesc","style":".tablesorter-headerDesc{--wpr-bg-f9b8cae7-d01b-4782-81de-2f2aeaef1565: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/css\/images\/icon-white-desc.png?v2');}","hash":"f9b8cae7-d01b-4782-81de-2f2aeaef1565","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/css\/images\/icon-white-desc.png?v2"},{"selector":".hourly-price-box__list li","style":".hourly-price-box__list li{--wpr-bg-7c14353d-188c-4fc0-b991-e3e98306aa31: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/list-bullet.png');}","hash":"7c14353d-188c-4fc0-b991-e3e98306aa31","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/images\/list-bullet.png"},{"selector":".hourly-price-box__list li","style":".hourly-price-box__list li::before{--wpr-bg-595aa635-8219-40ea-8655-b30dd43fda04: url('https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/assets\/images\/list-bullet.png');}","hash":"595aa635-8219-40ea-8655-b30dd43fda04","url":"https:\/\/www.stacyblackman.com\/wp-content\/themes\/stacyblackman-2026\/assets\/assets\/images\/list-bullet.png"},{"selector":".rll-youtube-player .play","style":".rll-youtube-player .play{--wpr-bg-12edbc9d-89d6-494f-a7db-63da60d199c2: url('https:\/\/www.stacyblackman.com\/wp-content\/plugins\/wp-rocket\/assets\/img\/youtube.png');}","hash":"12edbc9d-89d6-494f-a7db-63da60d199c2","url":"https:\/\/www.stacyblackman.com\/wp-content\/plugins\/wp-rocket\/assets\/img\/youtube.png"}]; const rocket_excluded_pairs = [];</script><meta name="generator" content="WP Rocket 3.20.5" data-wpr-features="wpr_lazyload_css_bg_img wpr_delay_js wpr_defer_js wpr_minify_js wpr_lazyload_images wpr_lazyload_iframes wpr_automatic_lazy_rendering wpr_minify_css wpr_preload_links wpr_host_fonts_locally wpr_desktop" /></head>
+<body class="wp-singular page-template page-template-template-business-school page-template-template-business-school-php page page-id-14308 page-child parent-pageid-13962 wp-theme-stacyblackman-2026">
+
+		<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M7PGJQS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-src='https://www.stacyblackman.com/wp-content/cache/min/1/tracking.js?ver=1773254127' data-rocket-type='text/javascript' async='true' onload='_mri="4371",_mr_domain="stacyblackman.ontraport.net",mrtracking();'></script>
+
+	
+	<div  class="target">
+  		<a class="target-anchor" id="top"></a>
+ 		<amp-position-observer on="enter:hideAnim.start; exit:showAnim.start" layout="nodisplay">
+  		</amp-position-observer>
+	</div>
+
+	<amp-animation id="showAnim" layout="nodisplay">
+  		<script type="application/json">
+    		{
+      		"duration": "200ms",
+       		"fill": "both",
+       		"iterations": "1",
+      		"direction": "alternate",
+      		"animations": [
+         		{
+           		"selector": "#scroll-to-top-button",
+           		"keyframes": [
+             		{ "opacity": "1", "visibility": "visible" }
+           		]
+         		}
+       		]
+    		}
+  		</script>
+	</amp-animation>
+
+	<amp-animation id="hideAnim" layout="nodisplay">
+  		<script type="application/json">
+    		{
+     		"duration": "200ms",
+       		"fill": "both",
+       		"iterations": "1",
+       		"direction": "alternate",
+       		"animations": [
+         		{
+           		"selector": "#scroll-to-top-button",
+           		"keyframes": [
+             		{ "opacity": "0", "visibility": "hidden" }
+           		]
+         		}
+       		]
+   		}
+  		</script>
+	</amp-animation>
+    
+	
+	<section  class="sbc-section" id="stacyblackman-header">
+     	<header  class="fixed mega-menu full-width">
+       		<div  class="header">
+       			<nav class="navbar main-menu" id="main-menu">
+             		<div class="container-fluid">		
+             			<a href="/">
+							<amp-img
+  								alt="Stacy Blackman Logo"
+  								src="https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/logo.png"
+  								width="225"
+  								height="34"
+  								layout="intrinsic"
+  								class="sbc-logo"
+							>
+							</amp-img>
+						</a>
+						<a href="/contact/" class="btn btn-mobile">Free Advising Session</a></li>
+             			<label for="mobile" id="mobile-menu">
+              				<span class="main-menu-dropdown-icon">
+                				<i class="hamburger"></i>
+              				</span>
+            			</label>
+        				<input type="checkbox" id="mobile">
+                   		<ul itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement" class="main-menu mr-auto">
+							<li class="has-dropdown" id="work-with-us-menu">
+                       			<a href="/comprehensive-services/" class="main-nav-item"><span>Work With Us</span> <i class="chevron-down"></i></a>
+                       			<label class="main-menu-dropdown-icon" for="is-dropdown-2"><i class="arrow-down arrow-down-mobile"></i></label>
+  								<input type="checkbox" id="is-dropdown-2" checked>
+                       			<div class="is-dropdown">
+                       				<div class="container-fluid" >
+   										<div class="row menu-row">
+     	 									<div class="col-lg-4 menu-info-column d-none d-sm-block">
+        										<h4>The All-In Package</h4>
+        										<p class="semi-bold">We’re turning No's into Yes's by teaching you how to build the type of application that competitive MBA programs want to receive.</p>
+        										<p>Learn how to remodel short-comings into strong points, write compelling essays, strategize for admission tests, ace interviews, and be the strongest applicant you can be.</p>
+        										<a class="btn-menu-cta" href="/comprehensive-services/">Learn More About All-In Package</a>
+      										</div>
+      										<div class="col-lg-8 menu-list-column">
+        										<div  class="row">
+        											<div class="col-lg-3 col-md-12 col-sm-12">
+        												<div class="featured-menu-item">
+        													<h4><a href="/comprehensive-services/">The All-in Package</a></h4>
+        													<p><a href="/comprehensive-services/">Build the most competitive application possible.</a></p>
+        												</div>
+        											</div>
+        											<div class="col-lg-3 col-md-12 col-sm-12">
+        										 		<h4><a href="/hourly/">Hourly Services</a></h4>
+        												 <p><a href="/hourly/">Target a specific piece of your MBA application.</a></p>
+        											</div>
+													<div class="col-lg-3 col-md-12 col-sm-12">
+        												<h4 class="no-chevron">A La Carte Services</h4>
+        												<ul>
+        										 			<li><a href="/testprep/">Test Prep</a></li>
+        										 			<li><a href="/flight-test/">SBC Flight Test<sup> &trade;</sup></a></li>
+        										 			<li><a href="/college-seniors-mba-application-services/">For College Students</a></li>
+        										 			<li><a href="/mba-social-impact-accelerator-package/">For Social Impact</a></li>
+        										 			<li><a href="/mba-precheck-background-verification/">MBA PreCheck</a></li>
+        										 			<li><a href="/plan-ahead/">MBA Plan Ahead</a></li>
+        										 			<li><a href="/editing/">Editing Services</a></li>
+        										 			<li><a href="/mba-financial-aid-costs-tuition/">Financial Aid Advisory</a></li>
+        										 		</ul>
+        										 	</div>
+        										 	<div class="col-lg-3 col-md-12 col-sm-12">
+        										 		<h4 class="no-chevron">Interview Prep</h4>
+        												<ul>
+        										 			<li><a href="/mba-interview-prep-coaching/">MBA Interview Prep</a></li>
+        										 			<li><a href="/hbs-interview-prep/">HBS Interview Prep</a></li>
+        										 			<li><a href="/wharton-group-interview-prep/">Wharton Group Interview Prep</a></li>
+        										 		</ul>
+        											</div>
+        										</div><!-- .row -->
+        									</div><!-- .col-lg-9 menu-list-column -->
+        								</div><!-- .menu-row  -->
+      								</div><!-- .container-fluid  -->
+    							</div><!-- .is-dropdown -->
+							</li>
+							<li class="has-dropdown"><a href="/about/mba-admissions-consulting-team/" class="main-nav-item"><span>Meet the Team</span></a></li>
+                    		<li class="has-dropdown" id="about-sbc-menu">
+                       			<a href="/about/" class="main-nav-item"><span>About SBC</span> <i class="chevron-down"></i></a>
+                       			<label class="main-menu-dropdown-icon" for="is-dropdown-3"><i class="arrow-down arrow-down-mobile"></i></label>
+  								<input type="checkbox" id="is-dropdown-3"  checked>
+                       			<div class="is-dropdown">
+                       				<div class="container-fluid">
+   										<div class="row menu-row">
+     	 									<div class="col-lg-4 col-md-12 col-sm-12 menu-info-column d-none d-sm-block">
+        										 <h4>Our Current Rankings</h4>
+        										 <div class="row">
+        										 	<div class="col-lg-6">
+        										 		<p><strong>Poets&amp;Quants</strong></p>
+        										 	</div>
+        										 	<div class="col-lg-6">
+        										 		<p>#<span class="num-one">1</span> out of eleven firms</p>
+        										 	</div>
+        										 </div>
+        										 <div class="row">
+        										 	<div class="col-lg-6">
+        										 		<p><strong>Beat the GMAT</strong></p>
+        										 	</div>
+        										 	<div class="col-lg-6">
+        										 		 <i class="fas fa-star"></i>
+        										 		 <i class="fas fa-star"></i>
+        										 		 <i class="fas fa-star"></i>
+        										 		 <i class="fas fa-star"></i>
+        										 		 <i class="fas fa-star"></i>
+        										 	</div>
+        										 </div>
+        										 <div class="row">
+        										 	<div class="col-lg-6">
+        										 		<p><strong>Clear Admit</strong></p>
+        										 	</div>
+        										 	<div class="col-lg-6">
+        										 		 <i class="fas fa-star"></i>
+        										 		 <i class="fas fa-star"></i>
+        										 		 <i class="fas fa-star"></i>
+        										 		 <i class="fas fa-star"></i>
+        										 		 <i class="fas fa-star"></i>
+        										 	</div>
+        										 </div>
+        										 <div class="row">
+        										 	<div class="col-lg-6">
+        										 		<p><strong>MBA Insight</strong></p>
+        										 	</div>
+        										 	<div class="col-lg-6">
+        										 		 <i class="fas fa-star"></i>
+        										 		 <i class="fas fa-star"></i>
+        										 		 <i class="fas fa-star"></i>
+        										 		 <i class="fas fa-star"></i>
+        										 		 <i class="fas fa-star"></i>
+        										 	</div>
+        										 </div>
+        										 <div class="row">
+        										 	<div class="col-lg-6">
+        										 		<p><strong> GMATClub</strong></p>
+        										 	</div>
+        										 	<div class="col-lg-6">
+        										 		 <i class="fas fa-star"></i>
+        										 		 <i class="fas fa-star"></i>
+        										 		 <i class="fas fa-star"></i>
+        										 		 <i class="fas fa-star"></i>
+        										 		 <i class="fas fa-star"></i>
+        										 	</div>
+        										 </div>
+        										 <a class="btn-menu-cta" href="/about/mba-consulting-reviews-ranking-by-firm/">View Our Rankings</a>
+      										</div><!-- /.col-lg-4 menu-info-column -->
+      										<div class="col-lg-8 menu-list-column">
+        										<div class="row">
+        											<div class="col-lg-4">
+        												<h5>Introduction</h5>
+        												<ul>
+															<li><a href="/about/">About SBC</a></li>
+        										 			<li><a href="/about-stacy/">About Stacy Blackman</a></li>
+        										 			<li><a href="/reflections-from-admits/">MBA Case Studies</a></li>
+        												</ul>
+        												<h5 id="contact-info"><a href="/contact-sbc/">Contact Information</a></h5>
+        											</div>
+        											<div class="col-lg-4">
+        												<h5>Reputation</h5>
+        												<ul>
+        													<li><a href="/about/mba-consulting-reviews-ranking-by-firm/">See How We Rank</a></li>
+        										 			<li><a href="/testimonials/">Thousands of Reviews</a></li>
+        										 			<li><a href="/press/">Press</a></li>
+        												</ul>
+        											</div><!-- /.col-lg-4 menu-info-column -->
+        											<div class="col-lg-4">
+        												<h5>Frequently Asked Questions</a></h5>
+        												<ul>
+        													<li><a href="/faq/">Find out if we can get you into your dream school and why you should hire us.</a></li>
+        												</ul>
+        											</div><!-- /.col-lg-4 menu-info-column -->
+        										</div><!-- /.row -->
+        									</div><!-- /.col-lg-8 menu-info-column -->
+        								</div><!-- /.menu-row -->
+      								</div><!-- /.container-fluid -->
+    							</div><!-- /.is-dropdown -->
+  							</li>
+                    		<li class="has-dropdown" id="mba-resources-menu">
+                       			<a href="/Free-MBA-Resources" class="main-nav-item"><span>MBA Resources</span> <i class="chevron-down"></i></a>
+                       			<label class="main-menu-dropdown-icon" for="is-dropdown-4"><i class="arrow-down arrow-down-mobile"></i></label>
+  								<input type="checkbox" id="is-dropdown-4" checked>
+                       			<div class="is-dropdown">
+                       				<div class="container-fluid">
+   										<div class="row menu-row">
+     	 									<div class="col-lg-5 menu-info-column d-none d-sm-block">
+        										<div class="row">
+        										 	<div class="col-lg-5 col-md-12 col-sm-12">
+        										 		<div id="business-school-brand"></div>
+        										 	</div>
+        										 	<div class="col-lg-7 col-md-12 col-sm-12">
+        										 		<h4>Download FREE Guide</h4>
+        										 		<p>Developing a personal brand is critical to your b-school application strategy. Request this free branding guide, valued at $29.99, and let SBC help you figure out the steps that follow.</p>
+														<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://forms.ontraport.com/v2.4/include/formEditor/genjs-v3.php?html=false&uid=p2c4371f25" data-rocket-defer defer></script>
+														<form id="sbc-free-guides" class="moonray-form-clearfix" action="https://forms.ontraport.com/v2.4/form_processor.php?" method="post" accept-charset="UTF-8" autocomplete="off">
+																														<input name="afft_" type="hidden" value=""/>
+															<input name="aff_" type="hidden" value=""/>
+															<input name="sess_" type="hidden" value=""/>
+															<input name="ref_" type="hidden" value=""/>
+															<input name="own_" type="hidden" value=""/>
+															<input name="oprid" type="hidden" value=""/>
+															<input name="contact_id" type="hidden" value=""/>
+															<input name="utm_source" type="hidden" value=""/>
+															<input name="utm_medium" type="hidden" value=""/>
+															<input name="utm_term" type="hidden" value=""/>
+															<input name="utm_content" type="hidden" value=""/>
+															<input name="utm_campaign" type="hidden" value=""/>
+															<input name="referral_page" type="hidden" value=""/>
+															<input name="_op_gclid" type="hidden" value=""/>
+															<input name="_op_gcid" type="hidden" value=""/>
+															<input name="_fbc" type="hidden" value=""/>
+															<input name="_fbp" type="hidden" value=""/>
+															<input name="uid" type="hidden" value="p2c4371f22"/>
+															<input name="uniquep2c4371f22" type="hidden" value="0"/>
+															<input name="mopsbbk" type="hidden" value="3323149A85905CCA240E4AB5:E9CFDC1FFA396600B10920DF"/>
+															<input name="mopbelg" type="hidden" value="0151181:12ED55A5DBE087FD6EC3D7E3:746C2C9EB2C91460D2D3813A"/>
+															<input id="recaptcha-score-guides" name="f2012" type="hidden" value=""/>
+															<div class="row">
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<input name="firstname" type="text" placeholder="First Name" class="form-control" id="mr-field-element-735666808677"/>
+																		<input name="mopsbbk" type="hidden" value="A5384DCD8BDB39F5792732CA:592AD2B483C254B7E5E400BB"/>
+																		<input name="mopbelg" type="hidden" value="0150849:9F6DAC32926017147CFC36D5:5B88891CEB41F943C0F93459"/>
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<input name="email" type="email" placeholder="Email" class="form-control" id="mr-field-element-708839938752"/>
+																	</div>
+																</div>
+															</div>
+															<noscript>
+   																<p><strong>You must have javascript enabled to submit the form.</strong></p>
+   																<style type="text/css">
+																	#mr-field-element-564179367963 { display:none; }
+																</style>
+															</noscript>
+															<div class="form-group">
+																<button id="mr-field-element-564179367963" class="btn btn-menu-cta" onclick="checkGuidesRecaptcha(event);">Download Your Free Guide.</button>
+															</div>
+														</form>
+														
+														<script type="rocketlazyloadscript">
+ 															function checkGuidesRecaptcha(e) {
+ 																e.preventDefault();
+ 																//Address spam
+																grecaptcha.ready(function() {
+ 																	grecaptcha.execute("6LefrOIhAAAAADn8NnYlmBCJBpbtxH3iavO_Di3l", {action: "submit"}).then(function(token) {
+																		$.ajax({
+ 																			type: "GET",
+ 																			url: "https://www.stacyblackman.com/wp-admin/admin-ajax.php?action=sbc_guides_form_g_recaptcha&nonce=a68c4c689e",
+ 																			data: {
+ 																				"token" : token
+ 																			},
+ 																			contentType: "application/x-www-form-urlencoded",
+ 																			success: function(result) {
+																				console.log( `score: ${result.score}` );
+																				if (result.success) {
+ 																					document.getElementById("recaptcha-score-guides").value = `${result.score}`;
+ 																					document.getElementById("sbc-free-guides").submit();
+ 																					//alert("NO SPAM");
+ 																				} else {
+ 																					alert("Your email is marked as spam");
+					 															}
+																			}
+ 																		});
+																	});
+ 																});
+ 															}
+ 														</script>
+														
+        										 	</div>
+        										 </div><!-- .row -->
+      										</div><!-- .col-lg-4 menu-info-column -->
+      										<div class="col-lg-7 menu-list-column">
+        										 <div class="row">
+        										 	<div class="col-lg-4">
+        										 		<h5>Hot Topics</h5>
+        										 		<ul>
+        										 			<li><a href="/mba-sample-essays/">MBA Sample Essays</a></li>
+        										 			<li><a href="/mba-application-deadlines/">MBA Application Deadlines</a></li>
+															<li><a href="/which-mba-program-is-right-for-me/">Smackdowns: MBA Program Intel</a></li>
+        										 			<li><a href="/mba-application-advice/">MBA Application Cheat Sheet</a></li>
+        										 			<li><a href="/hbs-core-hbx-or-mba-math/">Pre-MBA Math Classes</a></li>
+															<li><a href="/mba-in-europe/">MBA in Europe</a></li> 
+															<li><a href="/is-an-mba-worth-it-heres-your-checklist/">Value of MBA</a></li>  
+															<li><a href="/mba-rankings-top-programs/">MBA Rankings</a></li>        										 			
+														</ul>
+        										 	</div>
+        										 	<div class="col-lg-4">
+        										 		<h5>Watch &amp; Listen</h5>
+        										 		<ul>
+        										 			<li><a href="/mba-podcasts-sbc-bschooled/">B-Schooled Podcast</a></li>
+        										 			<li><a href="https://m.youtube.com/c/stacyblackmanconsulting" target="_blank">SBC YouTube Channel</a></li>
+        										 		</ul>
+        										 		<div class="clearfix"></div>
+        										 		<h5>Subscribe</h5>
+        										 		<ul>
+        										 			<li><a href="/newsletter/">SBC Newsletter</a></li>
+        										 		</ul>
+        										 	</div>
+        										 	<div class="col-lg-4">
+        										 		<h5>Strategy Guides</h5>
+        										 		<ul>
+        										 			<li><a href="/store/#STRATEGYGUIDES">"What the AdComm Wants" Guides</a></li>
+        										 			<li><a href="/store/gmat-cheat-sheet/">GMAT Math Cheat Sheet</a></li>
+        										 			<li><a href="/store/#INTERVIEWGUIDES">Interview Guides</a></li>
+        										 			<li><a href="/store/#APPLICATIONBASICSGUIDES">Application Basics</a></li>
+        										 			<li><a href="/store/#21DAYPROJECTS">21-day Project Guides</a></li>
+        										 		</ul>
+        										 	</div>
+        										 </div><!-- .row -->
+      										</div><!-- .col-lg-7 menu-info-column -->
+    									</div><!-- /.menu-row -->
+  									</div><!-- /.container-fluid -->
+    							</div><!-- /.is-dropdown -->
+                       		</li>
+                    		
+                    		
+                    		<li class="has-dropdown" id="blog-sbc-menu">
+                       			<a href="/blog/" class="main-nav-item"><span>Blog</span> <i class="chevron-down"></i></a>
+                       			<label class="main-menu-dropdown-icon" for="is-dropdown-5"><i class="arrow-down arrow-down-mobile"></i></label>
+  								<input type="checkbox" id="is-dropdown-5"  checked>
+                       			<div class="is-dropdown">
+                       				<div class="container-fluid">
+   										<div class="row menu-row">
+     	 									<div class="col-lg-4 col-md-12 col-sm-12 menu-info-column d-none d-sm-block">
+        										 <a href="/top-ten-blog-posts/">
+        										 	<div id="top-posts"></div>
+												</a>
+        										 <h4><a href="/top-ten-blog-posts/">View Our Top 10 Blog Posts</a></h4>
+        										 <p>We hope this roundup of 10 most visited blog posts serves as a helpful jumping-off point as you begin to prepare for your MBA application journey.</p>
+      										</div><!-- /.col-lg-4 menu-info-column -->
+      										<div class="col-lg-8 menu-list-column">
+        										<div class="row">
+        											<div class="col-lg-6">
+        												<h5>Blog</h5>
+        												<ul>
+															<li><a href="blog/">Recent Posts</a></li>
+															<li><a href="/which-mba-program-is-right-for-me/">Smackdowns: MBA Program Intel</a></li>
+ 															<li><a href="/mba-careers-by-program-facts-figures/">Post-MBA Careers</a></li>
+ 															<li><a href="/blog/tag/mba-essay-questions/">MBA Essay Questions</a></li>
+															<li><a href="/blog/tag/mba-essay-tips/">MBA Essay Tips</a></li>
+ 															<li><a href="/blog/tag/gmat-or-gre/">GMAT and GRE</a></li>
+ 															<li><a href="/emba-vs-mba-executive-program-options/">For EMBA Applicants</a></li>
+ 															<li><a href="/deferred-mba-admissions/">For College Students</a></li>
+ 															<li><a href="/?s=minority">Diversity</a></li>
+ 															<li><a href="/scholarships/">Scholarship Opportunities</a></li>
+															<li><a href="/top-ten-blog-posts/">Top 10 Blog Posts</a></li>
+        												</ul>
+        											</div>
+        											<div class="col-lg-6">
+        												<h5>The Eternal Question</h5>
+        												<ul>
+        													<li><a href="/how-to-get-into-harvard-business-school/">How to Get Into Harvard Business School</a></li>
+        												</ul>
+        												<p>That's the first question that the majority of our perspective clients ask. We have several former HBS Admission Officers on our SBC consulting team, so we decided to gather HBS admit data across our client pool to define themes and strategies that can help future MBA applicants.</p>
+        											</div><!-- /.col-lg-4 menu-info-column -->
+        										</div><!-- /.row -->
+        									</div><!-- /.col-lg-8 menu-info-column -->
+        								</div><!-- /.menu-row -->
+      								</div><!-- /.container-fluid -->
+    							</div><!-- /.is-dropdown -->
+  							</li>
+                    		
+                    		<li class="btn btn-menu"><a href="/contact/" class="main-nav-item">Free Advising Session</a></li>
+                    	</ul>
+					</div>
+                </nav>
+			</div>
+       	</header> 
+	</section>
+	
+	<main >
+	<script type="rocketlazyloadscript">
+		function checkRecaptcha_102(e) {
+ 				e.preventDefault();
+ 				//Address spam
+ 				var first_name_102 = document.getElementById("mr-field-element-538956032514-102").value;
+ 				var email_102 = document.getElementById("mr-field-element-524181418303-102").value;
+ 				grecaptcha.ready(function() {
+ 					grecaptcha.execute("6LefrOIhAAAAADn8NnYlmBCJBpbtxH3iavO_Di3l", {action: "submit"}).then(function(token) {
+						$.ajax({
+ 							type: "GET",
+ 							url: "https://www.stacyblackman.com/wp-admin/admin-ajax.php?action=sbc_contact_form_g_recaptcha&nonce=aa5989b029",
+ 							data: {
+ 								"token" : token,
+ 								"first_name" : first_name_102,
+ 								"email" : email_102 							},
+ 							contentType: "application/x-www-form-urlencoded",
+ 							success: function(result) {
+								console.log( `score: ${result.score}` );
+								console.log( `first_name: ${result.first_name}` );
+ 								if (result.success) {
+ 									document.getElementById("recaptcha-score-102").value = `${result.score}`;
+ 									document.getElementById("sbc-contact-102").submit();
+ 									//alert("NO SPAM");
+ 								} else {
+ 									alert("Your email is marked as spam");
+					 			}
+							}
+ 						});
+					});
+						
+ 				});
+ 			}
+ 		</script>
+
+<div  class="signup signup-b">
+	<div  class="container">
+		<div class="row">
+			<div class="col-lg-7 col-md-12 signup-form-text" data-aos="fade-right" data-aos-duration="750">
+				<strong class="signup__headline">We can improve your MBA profile and boost your candidacy.</strong>
+				<p>Gain insight into the review process and eliminate weaknesses from your MBA application.</p>
+			</div>
+			<div class="col-lg-5 col-md-12 signup-form__container">
+				<div>
+					<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://forms.ontraport.com/v2.4/include/formEditor/genjs-v3.php?html=false&uid=p2c4371f23" data-rocket-defer defer></script>
+					<form id="sbc-contact-102" class="moonray-form-clearfix" action="https://forms.ontraport.com/v2.4/form_processor.php?" method="post" accept-charset="UTF-8">
+						<input name="afft_" type="hidden" value=""/>
+						<input name="aff_" type="hidden" value=""/>
+						<input name="sess_" type="hidden" value=""/>
+						<input name="ref_" type="hidden" value=""/>
+						<input name="own_" type="hidden" value=""/>
+						<input name="oprid" type="hidden" value=""/>
+						<input name="contact_id" type="hidden" value=""/>
+						<input name="utm_source" type="hidden" value=""/>
+						<input name="utm_medium" type="hidden" value=""/>
+						<input name="utm_term" type="hidden" value=""/>
+						<input name="utm_content" type="hidden" value=""/>
+						<input name="utm_campaign" type="hidden" value=""/>
+						<input name="referral_page" type="hidden" value=""/>
+						<input name="_op_gclid" type="hidden" value=""/>
+						<input name="_op_gcid" type="hidden" value=""/>
+						<input name="_fbc" type="hidden" value=""/>
+						<input name="_fbp" type="hidden" value=""/>
+						<input name="uid" type="hidden" value="p2c4371f29"/>
+						<input name="uniquep2c4371f29" type="hidden" value="0"/>
+						<input name="mopsbbk" type="hidden" value="CF5FC60016C172DFF19019CC:65D30BE2FE2D69BAF4E37873"/>
+						<input name="mopbelg" type="hidden" value="0172811:1FC15A94FDEE9D983912568C:4B3392B88DD39D22368AC690"/>
+						<input id="recaptcha-score-102" name="f2012" type="hidden" value=""/>
+						<div class="signup-flex">
+							<div class="form-group advising-first-name">
+								<input type="text" class="form-control" name="firstname" id="mr-field-element-538956032514-102" placeholder="First Name">
+							</div>
+							<div class="form-group">
+								<input type="email" class="form-control" name="email" id="mr-field-element-524181418303-102" placeholder="Email">
+							</div>
+						</div>
+						<div class="row">
+							<!-- <div class="col-lg-6">
+								<div class="form-group advising-first-name">
+									<input type="text" class="form-control" name="firstname" id="mr-field-element-538956032514-102" placeholder="First Name">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<input type="email" class="form-control" name="email" id="mr-field-element-524181418303-102" placeholder="Email">
+								</div>
+							</div> -->
+							
+							<noscript>
+									<p class="js-enabled"><strong>Note: You must have javascript enabled to submit the form.</strong></p>
+									<style type="text/css">
+									.advising-btn { display:none; }
+									.js-enabled { color:#fff; }
+								</style>
+							</noscript>
+							
+							<div class="col-lg-12">
+								<button class="btn advising-btn" name="submit-button" onclick="checkRecaptcha_102(event);">Schedule Your Free Advising Session</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<section  class="sbc-section" id="page-content">
+		<div  class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<article id="post-14308" class="post-14308 page type-page status-publish hentry">
+						<h1 class="bs-title">Columbia MBA Application</h1>
+                    	                    		
+                    	                   		 	<script type="rocketlazyloadscript" data-minify="1" async custom-element="amp-lightbox" data-rocket-src="https://www.stacyblackman.com/wp-content/cache/min/1/v0/amp-lightbox-0.1.js?ver=1773254126"></script>
+
+                    			<div class="row" id="school-videos">
+                       				
+                       				<div class="col-md-4">
+										<a class="btn-play-callout business-callout-link" href="#" on="tap:video-player-1">
+											<div data-bg="https://www.stacyblackman.com/wp-content/uploads/school-columbia-business.jpg" class="business-callout-img rocket-lazyload" style="">
+												<div class="table-container business-callout-overlay">
+													<div class="table-overlay">
+														<span>&#9658;</span>
+													</div>
+												</div>
+											</div>
+											<h3>INTRO SENTENCES</h3>										</a>
+										<amp-lightbox id="video-player-1" layout="nodisplay">
+											<div class="rll-youtube-player" data-src="https://www.youtube.com/embed/twaF1cDz0EQ" data-id="twaF1cDz0EQ" data-query="version=3&amp;enablejsapi=1" data-alt=""></div><noscript><iframe id="video-frame" src="https://www.youtube.com/embed/twaF1cDz0EQ?version=3&enablejsapi=1" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></noscript>
+											<button class="btn btn-secondary" on="tap:video-player-1.close">Close</button>
+										</amp-lightbox>
+									</div>
+									
+									<div class="col-md-4">
+										<a class="btn-play-callout business-callout-link" href="#" on="tap:video-player-2">
+											<div data-bg="https://www.stacyblackman.com/wp-content/uploads/CBS-grad.jpg" class="business-callout-img rocket-lazyload" style="">
+												<div class="table-container business-callout-overlay">
+													<div class="table-overlay">
+														<span>&#9658;</span>
+													</div>
+												</div>
+											</div>
+											<h3>CAREER GOALS</h3>										</a>
+										<amp-lightbox id="video-player-2" layout="nodisplay">
+											<div class="rll-youtube-player" data-src="https://www.youtube.com/embed/ZPLvWtfalCw" data-id="ZPLvWtfalCw" data-query="version=3&amp;enablejsapi=2" data-alt=""></div><noscript><iframe id="video-frame" src="https://www.youtube.com/embed/ZPLvWtfalCw?version=3&enablejsapi=2" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></noscript>
+											<button class="btn btn-secondary" on="tap:video-player-2.close">Close</button>
+										</amp-lightbox>
+									</div>
+									
+									<div class="col-md-4">
+										<a class="btn-play-callout business-callout-link" href="#" on="tap:video-player-3">
+											<div data-bg="https://www.stacyblackman.com/wp-content/uploads/strengths-weaknesses.jpg" class="business-callout-img rocket-lazyload" style="">
+												<div class="table-container business-callout-overlay">
+													<div class="table-overlay">
+														<span>&#9658;</span>
+													</div>
+												</div>
+											</div>
+											<h3>STRENGTHS + WEAKNESSES</h3>										</a>
+										<amp-lightbox id="video-player-3" layout="nodisplay">
+											<div class="rll-youtube-player" data-src="https://www.youtube.com/embed/8FUArd8calw" data-id="8FUArd8calw" data-query="version=3&amp;enablejsapi=3" data-alt=""></div><noscript><iframe id="video-frame" src="https://www.youtube.com/embed/8FUArd8calw?version=3&enablejsapi=3" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></noscript>
+											<button class="btn btn-secondary" on="tap:video-player-3.close">Close</button>
+										</amp-lightbox>
+									</div>
+									
+								</div>
+                       				
+                    	                    
+                 		<div class="entry-content">
+                    		<h2>Columbia Program Overview</h2>
+<p>For Columbia Business School students, the advantage is location, location, location. While Columbia’s academics are certainly on par with other top-tier schools, its status as the only Ivy League business school based in Manhattan draws the most accolades from graduates. As the school claims, New York’s flourishing financial community, which includes Wall Street and thousands of multi-national corporations, is a “living laboratory” for students interested in discovering the business world up close through internships and frequent visits from top CEOs.</p>
+<p>While Columbia’s academic strength is its Finance department, graduates from the program tend to have well-rounded interests, international connections, and a solid network of alumni willing to help them explore all their options. Columbia Business School is incredibly diverse both domestically and internationally, much like New York City itself. Columbia’s student body is 44% female for the MBA Class of 2026. International students make up 46% of the school, and 20% of alumni go on to live and work abroad.</p>
+<p>Columbia&#8217;s MBA Class of 2026 acceptance rate was 20.9%. In the 2025-2026 <a href="https://www.usnews.com/best-graduate-schools/top-business-schools/columbia-university-01148" target="_blank" rel="noopener"><em>US News Best Business Schools</em></a> ranking, Columbia comes in at #9.</p>
+<blockquote><p><i>&#8220;With Columbia, it really is a holistic approach, but the fit is very important. Top Columbia focus points for application include: involvement outside of work/classroom and leadership or potential for leadership. They want to be certain that you’re going to fit into its tight-knit community and super involved student life. Logical and attainable career goals are important as well,&#8221; shared a former CBS Admissions Officer on the Stacy Blackman Consulting team.</i></p></blockquote>
+<h4><em><a href="https://www.stacyblackman.com/contact/">Contact us</a> for an assessment of your CBS MBA candidacy today. Here&#8217;s a snapshot of our CBS expertise on the <a href="https://www.stacyblackman.com/about/mba-admissions-consulting-team/">SBC admissions consulting team</a>:</em></h4>
+<p><img fetchpriority="high" decoding="async" class="alignnone size-full wp-image-40190" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%202828%201006'%3E%3C/svg%3E" alt="" width="2828" height="1006" data-lazy-srcset="https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM.png 2828w, https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM-300x107.png 300w, https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM-734x261.png 734w, https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM-768x273.png 768w, https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM-1536x546.png 1536w, https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM-2048x729.png 2048w" data-lazy-sizes="(max-width: 2828px) 100vw, 2828px" data-lazy-src="https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM.png" /><noscript><img fetchpriority="high" decoding="async" class="alignnone size-full wp-image-40190" src="https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM.png" alt="" width="2828" height="1006" srcset="https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM.png 2828w, https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM-300x107.png 300w, https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM-734x261.png 734w, https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM-768x273.png 768w, https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM-1536x546.png 1536w, https://www.stacyblackman.com/wp-content/uploads/Screen-Shot-2021-06-07-at-11.35.20-AM-2048x729.png 2048w" sizes="(max-width: 2828px) 100vw, 2828px" /></noscript></p>
+<p>With such a jumble of cultures and opportunities—especially in NYC’s already noisy setting—Columbia’s biggest worry is that students will have a hard time finding their footing and making connections with each other. The cohort system is a considerable help; better still is what alumni describe as Columbia’s unusually positive atmosphere, perhaps forged as a response to the school’s difficulties and distractions.</p>
+<p>Says one graduate: “Columbia Business School uniquely combines competition with cooperation—many times my fellow students sent me copies of their class notes before exams, and we studied together with ease. However, we all fought to make our best possible effort and to land the best job interviews possible.”</p>
+<p><img decoding="async" class="img-fluid aligncenter wp-image-42329 size-full" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20750%20500'%3E%3C/svg%3E" alt="" width="750" height="500" data-lazy-srcset="https://www.stacyblackman.com/wp-content/uploads/03-columbia-business-school-iwan-baan-1597-neighbors.jpeg 750w, https://www.stacyblackman.com/wp-content/uploads/03-columbia-business-school-iwan-baan-1597-neighbors-600x400.jpeg 600w, https://www.stacyblackman.com/wp-content/uploads/03-columbia-business-school-iwan-baan-1597-neighbors-272x182.jpeg 272w" data-lazy-sizes="(max-width: 750px) 100vw, 750px" data-lazy-src="https://www.stacyblackman.com/wp-content/uploads/03-columbia-business-school-iwan-baan-1597-neighbors.jpeg" /><noscript><img decoding="async" class="img-fluid aligncenter wp-image-42329 size-full" src="https://www.stacyblackman.com/wp-content/uploads/03-columbia-business-school-iwan-baan-1597-neighbors.jpeg" alt="" width="750" height="500" srcset="https://www.stacyblackman.com/wp-content/uploads/03-columbia-business-school-iwan-baan-1597-neighbors.jpeg 750w, https://www.stacyblackman.com/wp-content/uploads/03-columbia-business-school-iwan-baan-1597-neighbors-600x400.jpeg 600w, https://www.stacyblackman.com/wp-content/uploads/03-columbia-business-school-iwan-baan-1597-neighbors-272x182.jpeg 272w" sizes="(max-width: 750px) 100vw, 750px" /></noscript></p>
+<h3>Admissions Stats</h3>
+<p>Here&#8217;s a snapshot of CBS&#8217;s MBA Class of 2026, relative to Wharton:</p>
+<table>
+<tbody>
+<tr>
+<td><b>Class of 2026 Admission Stats</b></td>
+<td><a href="https://mba.wharton.upenn.edu/class-profile/" target="_blank" rel="noopener"><b>Wharton</b></a></td>
+<td><a href="https://academics.business.columbia.edu/mba/admissions/class-profile" target="_blank" rel="noopener"><b>Columbia</b></a></td>
+</tr>
+<tr>
+<td>Average GMAT</td>
+<td>732</td>
+<td>732</td>
+</tr>
+<tr>
+<td>GMAT Range</td>
+<td>600-790*</td>
+<td>600–780</td>
+</tr>
+<tr>
+<td>Average GPA</td>
+<td>3.7</td>
+<td>3.6</td>
+</tr>
+<tr>
+<td>Acceptance Rate</td>
+<td>20.5%</td>
+<td>20.9%</td>
+</tr>
+<tr>
+<td>Yield</td>
+<td>58%</td>
+<td>51%</td>
+</tr>
+</tbody>
+</table>
+<p>* <em>Estimated</em></p>
+<table>
+<tbody>
+<tr>
+<td><b>Enrollment Stats</b></td>
+<td><a href="https://mba.wharton.upenn.edu/class-profile/" target="_blank" rel="noopener"><b>Wharton</b></a></td>
+<td><a href="https://academics.gsb.columbia.edu/mba/admissions/class-profile" target="_blank" rel="noopener"><b>Columbia</b></a></td>
+</tr>
+<tr>
+<td>Entering 2024 MBA Enrollment</td>
+<td>866</td>
+<td>972</td>
+</tr>
+<tr>
+<td>Women</td>
+<td>47%</td>
+<td>44%</td>
+</tr>
+<tr>
+<td>International</td>
+<td>31%</td>
+<td>47%</td>
+</tr>
+<tr>
+<td>Minority of US Origin</td>
+<td>34%*</td>
+<td>44%*</td>
+</tr>
+</tbody>
+</table>
+<p><i>* Estimated</i></p>
+<h3>Rounds &amp; Deadlines</h3>
+<p>Search our <a href="https://www.stacyblackman.com/mba-application-deadlines/">MBA deadlines chart</a> for updates on rounds and dates.</p>
+<h3>CBS&#8217;s Class of 2028 MBA Admissions Essays</h3>
+<p>Here are CBS&#8217;s main essay prompts. Essay tips can be found <a href="https://www.stacyblackman.com/columbia-business-school-mba-essay-tips/">here</a>.</p>
+<h4><em>Essay 1: Through your resume and recommendations, we have a clear sense of your professional path to date. What are your career goals over the next three to five years and what is your long-term dream job? (500 words)</em></h4>
+<h4><em>Essay 2: Please share a specific example of how you made a team more collaborative, more inclusive or fostered a greater sense of community within an organization. (<span class="markkg6b8uaby">2</span>50 words)</em></h4>
+<h4><em>Essay 3: </em><em>We believe Columbia Business School is a special place with a collaborative learning environment in which students feel a sense of belonging, agency, and partnership—academically, culturally, and professionally.</em></h4>
+<h4><em>How would you co-create your optimal MBA experience at CBS? Please be specific. (250 words)</em></h4>
+<h3>CBS Application Timing</h3>
+<p>In recent years, Columbia has moved beyond its traditional strength in finance and seeks to recruit a diverse and well-rounded student body. Many applicants cite “finance” as their primary motivation for attending Columbia, and their career aspirations reflect this. Understanding and appreciating other strengths in the school’s curriculum may earn you big points. Also, having a career goal that is not in the finance realm may help to set you apart.</p>
+<p>Columbia offers an accelerated MBA program that begins in January. The curriculum is identical to that of the fall entry program; the only difference is that &#8220;J-term&#8221; students take their second-term core courses during the summer instead of doing an internship. Admission to the January program is somewhat less competitive, so if you are willing to forgo a summer internship, applying to the accelerated program might improve your chances of getting in.</p>
+<h3>From the Blog</h3>
+<p>Check out <a href="https://www.stacyblackman.com/blog/cbs-mba-applicants-advice/" target="_blank" rel="noopener">CBS MBA Applicants, Heed This Sage Advice</a>, with all the deets on Columbia’s curriculum, culture, and admissions practices shared by SBC consultant Hannah, a former CBS admissions officer.</p>
+<h4><strong>Sample CBS MBA Essays</strong></h4>
+<p>Winning essays from our successful admits are new on the SBC site and can be found here:</p>
+<h4><a href="https://www.stacyblackman.com/columbia-cbs-essay-example-mba-2/">CBS Essay Examples</a></h4>
+<p><em>More CBS Application Tips</em></p>
+<p>View our extensive overview of how the application for CBS varies from that of Wharton <a href="https://www.stacyblackman.com/wharton-vs-columbia-business-school-mba/#Admitted-to-Both" target="_blank" rel="noopener">here</a>.</p>
+                		</div>
+                		
+                	</article>
+                	
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+            
+        <div data-wpr-lazyrender="1" id="business-school-info" class="entry-content">
+			<div  class="container">
+               	<div class="row">
+               		<div class="col-md-6">
+                        <p><strong>Columbia Class of 2026 Key Statistics</strong><br />
+Applicants: 7,487<br />
+Enrolled Full-Time MBA Students: 972<br />
+Average GMAT Score: 732<br />
+Average GPA: 3.6<br />
+Average Age: 28<br />
+Average Work Experience: 5 years<br />
+Rolling Admissions: Yes for J-term. No for August entry.<br />
+Women: 44%<br />
+International Students: 46%<br />
+Minority of US Origin: 44%</p>
+<p><strong>Columbia Important Dates</strong></p>
+<p>Round 1 Deadline: September 3, 2025<br />
+Round 2 Deadline: January 6, 2026<br />
+Round 3 Deadline: March 26, 2026</p>
+<p><strong>January 2025 Entry</strong></p>
+<p>First Deadline: June 17, 2025<br />
+Second Deadline: August 13, 2025</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Columbia Articles</strong><br />
+<a href="https://www.stacyblackman.com/blog/columbia-business-school-mba-essay-tips/">Columbia Business School MBA Essay Tips</a><br />
+<a href="https://www.stacyblackman.com/2010/05/25/tuesday-tips-%E2%80%93-columbia-gsb-essay-tips/">Columbia Business School Advice</a><br />
+<a href="https://www.stacyblackman.com/2009/09/22/tuesday-tips-columbia-business-school-essay-tips/">Columbia Essay Tips</a><br />
+<a href="https://www.stacyblackman.com/2009/05/26/tuesday-tips-columbia-gsb-january-program-essay-tips/">Columbia January Program Tips</a><br />
+<a title="Columbia essays" href="https://www.stacyblackman.com/2013/05/16/columbia-business-school-posts-2013-2014-mba-essay-questions/">Columbia Business School Essays</a></p>
+<p>More <a href="https://www.stacyblackman.com/category/columbia-advice/">Articles</a>.</p>
+<p><strong>Other Columbia Websites</strong><br />
+<a href="http://www4.gsb.columbia.edu/mba/admissions/classprofile" target="_blank" rel="noopener">Official Columbia Business School Class Profile</a><br />
+<a href="https://www.bloomberg.com/business-schools/2018/columbia" target="_blank" rel="noopener">Bloomberg Businessweek Columbia Business School Profile</a><br />
+<a href="http://en.wikipedia.org/wiki/Columbia_Business_School" target="_blank" rel="noopener">Wikipedia Columbia Business School Profile</a></p>
+<p><strong>SBC Columbia Guides</strong><br />
+<a href="https://www.stacyblackman.com/essay-guides/columbia/">Columbia Business School Essay Guide</a><br />
+<a href="https://www.stacyblackman.com/guides/interview/columbia/">Columbia Business School Interview Guide</a></p>
+					</div>
+                </div>
+            </div>
+        </div>
+                
+        <div data-wpr-lazyrender="1" class="container">
+            <div class="entry-content">
+            	<p class="bs-back"><a href="http://www.stacyblackman.com/business-school-hub/">&larr; Return to Business School Hub Overview page.</a></p>
+            </div>
+        </div>
+			
+	</section>
+		
+		
+			
+	<script type="rocketlazyloadscript">
+		function checkRecaptcha_73(e) {
+ 				e.preventDefault();
+ 				//Address spam
+ 				var first_name_73 = document.getElementById("mr-field-element-538956032514-73").value;
+ 				var email_73 = document.getElementById("mr-field-element-524181418303-73").value;
+ 				grecaptcha.ready(function() {
+ 					grecaptcha.execute("6LefrOIhAAAAADn8NnYlmBCJBpbtxH3iavO_Di3l", {action: "submit"}).then(function(token) {
+						$.ajax({
+ 							type: "GET",
+ 							url: "https://www.stacyblackman.com/wp-admin/admin-ajax.php?action=sbc_contact_form_g_recaptcha&nonce=aa5989b029",
+ 							data: {
+ 								"token" : token,
+ 								"first_name" : first_name_73,
+ 								"email" : email_73 							},
+ 							contentType: "application/x-www-form-urlencoded",
+ 							success: function(result) {
+								console.log( `score: ${result.score}` );
+								console.log( `first_name: ${result.first_name}` );
+ 								if (result.success) {
+ 									document.getElementById("recaptcha-score-73").value = `${result.score}`;
+ 									document.getElementById("sbc-contact-73").submit();
+ 									//alert("NO SPAM");
+ 								} else {
+ 									alert("Your email is marked as spam");
+					 			}
+							}
+ 						});
+					});
+						
+ 				});
+ 			}
+ 		</script>
+
+<div data-wpr-lazyrender="1" class="signup signup-b">
+	<div  class="container">
+		<div class="row">
+			<div class="col-lg-7 col-md-12 signup-form-text" data-aos="fade-right" data-aos-duration="750">
+				<strong class="signup__headline">We can improve your MBA profile and boost your candidacy.</strong>
+				<p>Gain insight into the review process and eliminate weaknesses from your MBA application.</p>
+			</div>
+			<div class="col-lg-5 col-md-12 signup-form__container">
+				<div>
+					<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://forms.ontraport.com/v2.4/include/formEditor/genjs-v3.php?html=false&uid=p2c4371f23" data-rocket-defer defer></script>
+					<form id="sbc-contact-73" class="moonray-form-clearfix" action="https://forms.ontraport.com/v2.4/form_processor.php?" method="post" accept-charset="UTF-8">
+						<input name="afft_" type="hidden" value=""/>
+						<input name="aff_" type="hidden" value=""/>
+						<input name="sess_" type="hidden" value=""/>
+						<input name="ref_" type="hidden" value=""/>
+						<input name="own_" type="hidden" value=""/>
+						<input name="oprid" type="hidden" value=""/>
+						<input name="contact_id" type="hidden" value=""/>
+						<input name="utm_source" type="hidden" value=""/>
+						<input name="utm_medium" type="hidden" value=""/>
+						<input name="utm_term" type="hidden" value=""/>
+						<input name="utm_content" type="hidden" value=""/>
+						<input name="utm_campaign" type="hidden" value=""/>
+						<input name="referral_page" type="hidden" value=""/>
+						<input name="_op_gclid" type="hidden" value=""/>
+						<input name="_op_gcid" type="hidden" value=""/>
+						<input name="_fbc" type="hidden" value=""/>
+						<input name="_fbp" type="hidden" value=""/>
+						<input name="uid" type="hidden" value="p2c4371f29"/>
+						<input name="uniquep2c4371f29" type="hidden" value="0"/>
+						<input name="mopsbbk" type="hidden" value="CF5FC60016C172DFF19019CC:65D30BE2FE2D69BAF4E37873"/>
+						<input name="mopbelg" type="hidden" value="0172811:1FC15A94FDEE9D983912568C:4B3392B88DD39D22368AC690"/>
+						<input id="recaptcha-score-73" name="f2012" type="hidden" value=""/>
+						<div class="signup-flex">
+							<div class="form-group advising-first-name">
+								<input type="text" class="form-control" name="firstname" id="mr-field-element-538956032514-73" placeholder="First Name">
+							</div>
+							<div class="form-group">
+								<input type="email" class="form-control" name="email" id="mr-field-element-524181418303-73" placeholder="Email">
+							</div>
+						</div>
+						<div class="row">
+							<!-- <div class="col-lg-6">
+								<div class="form-group advising-first-name">
+									<input type="text" class="form-control" name="firstname" id="mr-field-element-538956032514-73" placeholder="First Name">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<input type="email" class="form-control" name="email" id="mr-field-element-524181418303-73" placeholder="Email">
+								</div>
+							</div> -->
+							
+							<noscript>
+									<p class="js-enabled"><strong>Note: You must have javascript enabled to submit the form.</strong></p>
+									<style type="text/css">
+									.advising-btn { display:none; }
+									.js-enabled { color:#fff; }
+								</style>
+							</noscript>
+							
+							<div class="col-lg-12">
+								<button class="btn advising-btn" name="submit-button" onclick="checkRecaptcha_73(event);">Schedule Your Free Advising Session</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+		
+	
+	</main>
+	
+	<footer data-wpr-lazyrender="1" role="contentinfo" id="stacyblackman-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5ths">
+					<a href="/" class="sbc-footer-logo">
+						<amp-img
+  							alt="Stacy Blackman Logo"
+  							src="https://www.stacyblackman.com/wp-content/themes/stacyblackman-2026/assets/images/sbc-logo-mark.gif?v4"
+  							width="80"
+  							height="80"
+  							layout="intrinsic"
+  							class="sbc-logo"
+						>
+						</amp-img>
+					</a>
+					<p class="sbc-footer-phone">(323) 934-3936</p>
+					<p class="sbc-footer-mail"><a href="mailto:in&#102;&#111;&#64;&#83;t&#97;c&#121;&#66;&#108;ac&#107;m&#97;&#110;&#46;&#99;o&#109;">i&#110;&#102;o&#64;&#83;&#116;a&#99;&#121;&#66;l&#97;c&#107;&#109;&#97;&#110;.&#99;o&#109;</a></p>
+					
+					<ul class="list-inline sbc-footer-socials">
+ 						<li class="list-inline-item"><a href="https://www.facebook.com/StacyBlackmanConsulting" title="Stacy Blackman Consulting on Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+						<li class="list-inline-item"><a href="https://twitter.com/StacyBlackman" title="Stacy Blackman Consulting on X" target="_blank"><i class="fab fa-x-twitter"></i></a></li>
+						<li class="list-inline-item"><a href="https://www.linkedin.com/company/stacy-blackman-consulting/" title="Stacy Blackman Consulting on LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+						<li class="list-inline-item"><a href="https://www.youtube.com/user/StacyBlackmanMBA" title="Stacy Blackman Consulting on YouTube" target="_blank"><i class="fab fa-youtube"></i></a></li>
+						<li class="list-inline-item"><a href="https://www.instagram.com/stacyblackmanconsulting/" title="Stacy Blackman Consulting on Instagram" target="_blank"><i class="fab fa-instagram"></i></a></li>
+					</ul>
+				</div>
+				<div class="col-lg-80p">
+					<div class="row">
+						<div class="col-md-5ths col-sm-6">
+							<h5>About</h5>
+							<ul class="list-unstyled">
+								<li><a href="/about/">About SBC</a></li>
+								<li><a href="/about/mba-admissions-consulting-team/">Meet the Team</a></li>
+        						<li><a href="/about/mba-consulting-reviews-ranking-by-firm/">See How We Rank</a></li>
+        						<li><a href="/reflections-from-admits/">Case Studies</a></li>
+        					</ul>
+        				</div>
+						<div class="col-md-5ths col-sm-6">
+							<h5>MVP Services</h5>
+        					<ul class="list-unstyled">
+        						<li><a href="/comprehensive-services/">The All-In Package</a></li> 
+								<li><a href="/comprehensive-services/">How All-In Works</a></li>  
+								<li><a href="/hourly/">Hourly Coaching</a></li>        										 			
+							</ul>
+        				</div>
+        				<div class="col-md-5ths col-sm-6">
+							<h5>A La Carte</h5>
+        					<ul class="list-unstyled">
+        						<li><a href="/testprep/">Test Prep</a></li>
+        						<li><a href="/flight-test/">SBC Flight Test<sup> &trade;</sup></a></li>
+        						<li><a href="/college-seniors-mba-application-services/">For College Seniors</a></li>
+        						<li><a href="/mba-social-impact-accelerator-package/">For Social Impact</a></li>
+        						<li><a href="/mba-precheck-background-verification/">MBA PreCheck</a></li>
+        						<li><a href="/plan-ahead/">MBA Plan Ahead</a></li>
+        						<li><a href="/editing/">Editing Services</a></li>
+        						<li><a href="/mba-financial-aid-costs-tuition/">Financial Aid Advisory</a></li>      										 			
+							</ul>
+        				</div>
+        				<div class="col-md-5ths col-sm-6">
+							<h5>Interview Prep</h5>
+        					<ul class="list-unstyled">
+        						<li><a href="/mba-interview-prep-coaching/">MBA Interview Prep</a></li>
+        						<li><a href="/hbs-interview-prep/">HBS Interview Prep</a></li>
+        						<li><a href="/wharton-group-interview-prep/">Wharton Group Interview Prep</a></li>
+        					</ul>
+        				</div>
+        				<div class="col-md-5ths col-sm-6">
+							<h5>Resources</h5>
+        					<ul class="list-unstyled">
+        						<li><a href="/mba-podcasts-sbc-bschooled/">B-Schooled Podcast</a></li>
+        						<li><a href="/store/#STRATEGYGUIDES">"What the AdComm Wants" Guides</a></li>
+        						<li><a href="/mba-sample-essays/">MBA Sample Essays</a></li>
+        						<li><a href="/mba-application-deadlines/">MBA Application Deadlines</a></li>
+        						<li><a href="/mba-application-advice/">MBA Program Cheat Sheets</a></li>
+								<li><a href="/which-mba-program-is-right-for-me/">Smackdowns: MBA Program Intel</a></li>
+        					</ul>
+        				</div>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div  class="footer-bottom">
+				<div>
+					<a class="btn sbc-btn float-right" href="/newsletter/">Subscribe to Newsletter</a>
+				</div>
+				<p class="text-copyrights">&copy;2001-2026 <span>STACY BLACKMAN CONSULTING, INC. ALL RIGHTS RESERVED.</span></p>
+			</div>
+			
+		</div>	
+	</footer>
+	
+	<button id="scroll-to-top-button" on="tap:top.scrollTo(duration=200)" class="scroll-to-top"><i class="fas fa-chevron-up"></i></button>
+
+	<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/stacyblackman-2026/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+	<script type="application/ld+json">
+	{
+	 "@context": "http://schema.org",
+	 "@type": "BreadcrumbList",
+	 "itemListElement":
+	 [	  {
+	   "@type": "ListItem",
+	   "position": 1,
+	   "item":
+	   {
+	    "@id": "https://www.stacyblackman.com/mba-application-advice/",
+	    "name": "Mba-application-advice"
+	    }
+	  },	  {
+	   "@type": "ListItem",
+	  "position": 2,
+	  "item":
+	   {
+	     "@id": "https://www.stacyblackman.com/mba-application-advice/columbia-business-school/",
+	     "name": "Columbia MBA Application"
+	   }
+	  }
+	 ]
+	}
+	</script>
+	<script type="rocketlazyloadscript">
+document.addEventListener('DOMContentLoaded', function(e) {
+
+    e.preventDefault();
+
+    var formData = new FormData();
+    formData.append('action', 'ss88_increase_post_views');
+	formData.append('post_id', 14308);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/wp-admin/admin-ajax.php', true);
+    xhr.onreadystatechange = function (res) {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = JSON.parse(xhr.responseText);
+            console.log(res);
+
+			if(document.querySelector('.entry-meta-view')) {
+
+				document.querySelector('.entry-meta-view').innerHTML = '<i class="fa fa-eye"></i> ' + res.data.views.toLocaleString();
+
+			}
+
+			if(document.querySelector('.ss88viewstxt')) {
+
+				document.querySelector('.ss88viewstxt').innerHTML = res.data.views.toLocaleString();
+
+			}
+
+        }
+        if (this.readyState == 4 && this.status == 404){
+            console.log('An error occurred')
+        }
+    }
+    xhr.send(formData);
+
+}, false);
+</script>
+<style> .pviews { border-left:1px solid grey; padding-left: 15px; margin-left: 13px; font-size: 12px; font-weight: 300; } .ss88views { margin-right: 3px; } </style>
+<script type="rocketlazyloadscript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+//# sourceURL=rocket-browser-checker-js-after
+</script>
+<script id="rocket-preload-links-js-extra">
+var RocketPreloadLinksConfig = {"excludeUris":"/pay/|/comprehensive-services/|/testprep/|/about/mba-consulting-reviews-ranking-by-firm/|/hourly/|/edit-prices/|/2nd-edit-pricing/|/mba-application-roadmap/|/test-store/|/store/|/test-hourly/|/columbia/|/harvard/|/kellogg/|/stanford/|/wharton/|/chicago/|/branding/|/editing-order-test/|/edit-prices-2/|/mit/|/tuck/|/harvard-video/|/stanford-video/|/resume/|/chicago-booth/|/recommendationletters/|/quantjock/|/mba-interview-prep-coaching/|/ccpay/|/booth/|/insead/|/plan-ahead/|/flight-test/|/social/|/developyourbrand/|/getmoredone/|/letters-of-recommendation/|/create-your-resume/|/up-your-networking-game/|/all-guides-bundle/|/fuqua/|/hbs-interview-prep/|/wharton-group-interview-prep/|/mba-precheck-background-verification/|/mba-financial-aid-costs-tuition/|/hourly-2/|/gmat-cheat-sheet/|/mba-career-goals-essay-example/|/blog/career-pathing-guide-your-mba-plans/|/(?:.+/)?feed(?:/(?:.+/?)?)?$|/(?:.+/)?embed/|/(index.php/)?(.*)wp-json(/.*|$)|/refer/|/go/|/recommend/|/recommends/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https://www.stacyblackman.com","onHoverDelay":"100","rateThrottle":"3"};
+//# sourceURL=rocket-preload-links-js-extra
+</script>
+<script type="rocketlazyloadscript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+
+//# sourceURL=rocket-preload-links-js-after
+</script>
+<script id="rocket_lazyload_css-js-extra">
+var rocket_lazyload_css_data = {"threshold":"300"};
+//# sourceURL=rocket_lazyload_css-js-extra
+</script>
+<script id="rocket_lazyload_css-js-after">
+!function o(n,c,a){function u(t,e){if(!c[t]){if(!n[t]){var r="function"==typeof require&&require;if(!e&&r)return r(t,!0);if(s)return s(t,!0);throw(e=new Error("Cannot find module '"+t+"'")).code="MODULE_NOT_FOUND",e}r=c[t]={exports:{}},n[t][0].call(r.exports,function(e){return u(n[t][1][e]||e)},r,r.exports,o,n,c,a)}return c[t].exports}for(var s="function"==typeof require&&require,e=0;e<a.length;e++)u(a[e]);return u}({1:[function(e,t,r){"use strict";{const c="undefined"==typeof rocket_pairs?[]:rocket_pairs,a=(("undefined"==typeof rocket_excluded_pairs?[]:rocket_excluded_pairs).map(t=>{var e=t.selector;document.querySelectorAll(e).forEach(e=>{e.setAttribute("data-rocket-lazy-bg-"+t.hash,"excluded")})}),document.querySelector("#wpr-lazyload-bg-container"));var o=rocket_lazyload_css_data.threshold||300;const u=new IntersectionObserver(e=>{e.forEach(t=>{t.isIntersecting&&c.filter(e=>t.target.matches(e.selector)).map(t=>{var e;t&&((e=document.createElement("style")).textContent=t.style,a.insertAdjacentElement("afterend",e),t.elements.forEach(e=>{u.unobserve(e),e.setAttribute("data-rocket-lazy-bg-"+t.hash,"loaded")}))})})},{rootMargin:o+"px"});function n(){0<(0<arguments.length&&void 0!==arguments[0]?arguments[0]:[]).length&&c.forEach(t=>{try{document.querySelectorAll(t.selector).forEach(e=>{"loaded"!==e.getAttribute("data-rocket-lazy-bg-"+t.hash)&&"excluded"!==e.getAttribute("data-rocket-lazy-bg-"+t.hash)&&(u.observe(e),(t.elements||=[]).push(e))})}catch(e){console.error(e)}})}n(),function(){const r=window.MutationObserver;return function(e,t){if(e&&1===e.nodeType)return(t=new r(t)).observe(e,{attributes:!0,childList:!0,subtree:!0}),t}}()(document.querySelector("body"),n)}},{}]},{},[1]);
+//# sourceURL=rocket_lazyload_css-js-after
+</script>
+<script type="rocketlazyloadscript">(function(d){var s=d.createElement("script");s.type="text/javascript";s.src="https://a.omappapi.com/app/js/api.min.js";s.async=true;s.id="omapi-script";d.getElementsByTagName("head")[0].appendChild(s);})(document);</script>
+		<script type="rocketlazyloadscript" data-rocket-type="text/javascript">function EJEJC_lc(th) { return false; }; </script>
+		<script type="rocketlazyloadscript" data-minify="1" data-rocket-src="https://www.stacyblackman.com/wp-content/cache/min/1/ecom/box.js?ver=1773254129" data-rocket-type="text/javascript" data-rocket-defer defer></script>
+			<script type="rocketlazyloadscript" data-rocket-type="text/javascript">var omapi_data = {"object_id":14308,"object_key":"page","object_type":"post","term_ids":[],"wp_json":"https:\/\/www.stacyblackman.com\/wp-json","wc_active":false,"edd_active":false,"nonce":"898cfc30f9"};</script>
+		<script>window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://www.stacyblackman.com/wp-content/plugins/wp-rocket/assets/js/lazyload/17.8.3/lazyload.min.js"></script><script>function lazyLoadThumb(e,alt,l){var t='<img data-lazy-src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"><noscript><img src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"></noscript>',a='<button class="play" aria-label="Play Youtube video"></button>';if(l){t=t.replace('data-lazy-','');t=t.replace('loading="lazy"','');t=t.replace(/<noscript>.*?<\/noscript>/g,'');}t=t.replace('alt=""','alt="'+alt+'"');return t.replace("ID",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement("iframe"),t="ID?autoplay=1";t+=0===this.parentNode.dataset.query.length?"":"&"+this.parentNode.dataset.query;e.setAttribute("src",t.replace("ID",this.parentNode.dataset.src)),e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen","1"),e.setAttribute("allow","accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),this.parentNode.parentNode.replaceChild(e,this.parentNode)}document.addEventListener("DOMContentLoaded",function(){var exclusions=[];var e,t,p,u,l,a=document.getElementsByClassName("rll-youtube-player");for(t=0;t<a.length;t++)(e=document.createElement("div")),(u='https://i.ytimg.com/vi/ID/hqdefault.jpg'),(u=u.replace('ID',a[t].dataset.id)),(l=exclusions.some(exclusion=>u.includes(exclusion))),e.setAttribute("data-id",a[t].dataset.id),e.setAttribute("data-query",a[t].dataset.query),e.setAttribute("data-src",a[t].dataset.src),(e.innerHTML=lazyLoadThumb(a[t].dataset.id,a[t].dataset.alt,l)),a[t].appendChild(e),(p=e.querySelector(".play")),(p.onclick=lazyLoadYoutubeIframe)});</script>	<script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
+			// Original JavaScript code by Chirp Internet: chirpinternet.eu
+  			// Please acknowledge use of this code by including this header.
+	
+  			var today = new Date();
+  			var expiry = new Date(today.getTime() + 1 * 24 * 3600 * 1000); // plus 1 days
+
+  			function setCookie(name, value) {
+    			document.cookie=name + "=" + escape(value) + "; path=/; expires=" + expiry.toGMTString();
+  			}
+  			jQuery(document).ready(function($) { 
+  				setCookie("firstname", "");
+  				setCookie("email", "");
+  				
+  				 $( ".signup .btn" ).each(function(event) {
+    				$(this).on("click", function(event){
+  						var first_name = $(this).closest("div.signup").find("input[name='firstname']").val();
+  						var email = $(this).closest("div.signup").find("input[name='email']").val();
+  						setCookie("firstname", first_name);
+    					setCookie("email", email);
+    				
+    					var $form = $(this);
+    				
+    					if ( first_name == '' || email == '') {
+    						event.preventDefault();
+    						return false;
+    					} else {
+  							grecaptcha.ready(function() {
+ 								grecaptcha.execute("6LefrOIhAAAAADn8NnYlmBCJBpbtxH3iavO_Di3l", {action: "submit"}).then(function(token) {
+									$.ajax({
+ 										type: "GET",
+ 										url: "https://www.stacyblackman.com/wp-admin/admin-ajax.php?action=sbc_advising_form_g_recaptcha&nonce=3aff1d88fe",
+ 										data: {
+ 											"token" : token,
+ 											"first_name" : first_name
+ 										},
+ 										contentType: "application/x-www-form-urlencoded",
+ 										success: function(result) {
+											console.log( `score: ${result.score}` );
+											//console.log( `first_name: ${result.first_name}` );
+ 											if (result.success) {
+ 												$form.closest("form").submit();
+ 												//alert("NO SPAM");
+ 											} else {
+ 												alert("Your email is marked as spam");
+					 						}
+										}
+ 									});
+								});
+ 							});
+	 					}
+ 					});
+ 				});
+ 			});
+ 	});</script>
+	
+	</body>
+</html>
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me -->

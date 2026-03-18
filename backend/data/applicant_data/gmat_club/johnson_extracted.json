@@ -1,0 +1,37 @@
+{
+  "school_id": "johnson",
+  "real_applicant_profiles": [],
+  "interview_questions_reported": [],
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": null
+  },
+  "student_reviews": [
+    {
+      "rating": 5.0,
+      "pros": "Excellent alumni network, strong curriculum with focus on finance/consulting/PE/VC, close-knit atmosphere despite large size, beautiful Sage Hall facility, strong ties to MBB pipeline and IB, supportive professors",
+      "cons": "Location",
+      "year_of_review": 2024
+    },
+    {
+      "rating": 3.0,
+      "pros": "Ivy League brand, supportive career center, good for investment banking",
+      "cons": "Bureaucracy, lack of diversity, passive aggressive racism, limited social scene, high costs",
+      "year_of_review": 2023
+    },
+    {
+      "rating": 4.0,
+      "pros": "Great for IB and consulting recruiting, strong alumni network, close proximity to NYC, good immersion programs",
+      "cons": "Academics need improvement, not great for VC/PE/Tech/GM, poor student body diversity",
+      "year_of_review": 2023
+    },
+    {
+      "rating": null,
+      "pros": "Good for banking and T20 for consulting",
+      "cons": "Under resourced, poorly run administration, weak student quality, uninspiring academics, limited alumni support post-graduation, feels like vocational training",
+      "year_of_review": 2022
+    }
+  ]
+}

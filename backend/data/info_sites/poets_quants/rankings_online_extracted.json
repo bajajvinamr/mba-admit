@@ -1,0 +1,356 @@
+{
+  "type": "rankings",
+  "data": [
+    {
+      "rank": 1,
+      "school_name": "University of Southern California (Marshall)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$99,692",
+      "program_duration": null
+    },
+    {
+      "rank": 2,
+      "school_name": "Auburn University (Harbert)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$34,125",
+      "program_duration": null
+    },
+    {
+      "rank": 3,
+      "school_name": "Indiana University (Kelley)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$67,830",
+      "program_duration": "2 years"
+    },
+    {
+      "rank": 4,
+      "school_name": "Carnegie Mellon University (Tepper)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$132,000",
+      "program_duration": "3 years"
+    },
+    {
+      "rank": 5,
+      "school_name": "Lehigh University",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$42,300",
+      "program_duration": null
+    },
+    {
+      "rank": 6,
+      "school_name": "University of North Carolina (Kenan-Flagler)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$124,345",
+      "program_duration": null
+    },
+    {
+      "rank": 7,
+      "school_name": "University of Florida (Hough)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$58,000",
+      "program_duration": null
+    },
+    {
+      "rank": 8,
+      "school_name": "University of Nebraska-Lincoln",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$30,240",
+      "program_duration": "1.5 to 10 years"
+    },
+    {
+      "rank": 9,
+      "school_name": "Hofstra University (Zarb)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$63,435",
+      "program_duration": null
+    },
+    {
+      "rank": 10,
+      "school_name": "University of Texas at Dallas (Jindal)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$94,261",
+      "program_duration": null
+    },
+    {
+      "rank": 11,
+      "school_name": "Jack Welch Management Institute",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$42,800",
+      "program_duration": null
+    },
+    {
+      "rank": 12,
+      "school_name": "Arizona State University (W. P. Carey)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$59,535",
+      "program_duration": null
+    },
+    {
+      "rank": 13,
+      "school_name": "University of Massachusetts-Amherst (Isenberg)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$35,983",
+      "program_duration": null
+    },
+    {
+      "rank": 14,
+      "school_name": "University of Maryland (Smith)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$87,318",
+      "program_duration": null
+    },
+    {
+      "rank": 15,
+      "school_name": "University of Arizona (Eller)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$45,000",
+      "program_duration": null
+    },
+    {
+      "rank": 16,
+      "school_name": "Northeastern University (D'Amore-McKim)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$80,000",
+      "program_duration": null
+    },
+    {
+      "rank": 17,
+      "school_name": "Syracuse University (Whitman)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$42,093",
+      "program_duration": null
+    },
+    {
+      "rank": 18,
+      "school_name": "Baylor University (Hankamer)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$60,624",
+      "program_duration": null
+    },
+    {
+      "rank": 19,
+      "school_name": "University of Delaware (Lerner)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$39,600",
+      "program_duration": null
+    },
+    {
+      "rank": 20,
+      "school_name": "University of Cincinnati (Lindner)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$33,820",
+      "program_duration": null
+    },
+    {
+      "rank": 21,
+      "school_name": "University of Michigan-Dearborn",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$45,540",
+      "program_duration": null
+    },
+    {
+      "rank": 22,
+      "school_name": "Rochester Institute of Technology (Saunders)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$78,000",
+      "program_duration": null
+    },
+    {
+      "rank": 23,
+      "school_name": "University of Tennessee-Chattanooga",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$23,088",
+      "program_duration": null
+    },
+    {
+      "rank": 24,
+      "school_name": "North Carolina State University (Jenkins)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$44,555",
+      "program_duration": null
+    },
+    {
+      "rank": 25,
+      "school_name": "George Washington University",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$101,887",
+      "program_duration": null
+    },
+    {
+      "rank": 26,
+      "school_name": "Kennesaw State University",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$24,370",
+      "program_duration": null
+    },
+    {
+      "rank": 27,
+      "school_name": "University of North Dakota",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$38,789",
+      "program_duration": null
+    },
+    {
+      "rank": 28,
+      "school_name": "SUNY Oswego",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$23,956",
+      "program_duration": null
+    },
+    {
+      "rank": 29,
+      "school_name": "University of Massachusetts-Lowell (Manning)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$19,650",
+      "program_duration": null
+    },
+    {
+      "rank": 30,
+      "school_name": "University of Wisconsin (MBA Consortium)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$23,250",
+      "program_duration": null
+    },
+    {
+      "rank": 31,
+      "school_name": "Ohio University",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$35,980",
+      "program_duration": null
+    },
+    {
+      "rank": 32,
+      "school_name": "Florida International University (Chapman)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$42,000",
+      "program_duration": null
+    },
+    {
+      "rank": 33,
+      "school_name": "Southern Illinois University-Carbondale",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$17,934",
+      "program_duration": null
+    },
+    {
+      "rank": 34,
+      "school_name": "Creighton University",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$37,224",
+      "program_duration": null
+    },
+    {
+      "rank": 35,
+      "school_name": "Louisiana State University (Ourso)",
+      "country": "United States",
+      "gmat_avg": null,
+      "salary_after_3_years": null,
+      "acceptance_rate": null,
+      "tuition": "$19,980",
+      "program_duration": null
+    }
+  ],
+  "extracted_at": "2026-03-17T21:57:31.186359"
+}

@@ -1,0 +1,31 @@
+{
+  "type": "school_profile",
+  "data": {
+    "school_name": "Harvard Business School",
+    "class_size": 930,
+    "avg_gmat": 740,
+    "gmat_range": "540-790",
+    "avg_gpa": 3.69,
+    "avg_work_experience_years": 4.9,
+    "acceptance_rate": "11.2%",
+    "women_percentage": "45%",
+    "international_percentage": "35%",
+    "essay_prompts": [
+      "Business-Minded Essay: Please reflect on how your choices have influenced your career path and aspirations. (300 words)",
+      "Leadership-Focused Essay: What experiences have shaped how you invest in others and how you lead? (250 words)",
+      "Growth-Oriented Essay: Curiosity can be seen in many ways. Please share an example of how you have demonstrated curiosity and how that has influenced your growth. (up to 250 words)"
+    ],
+    "application_deadlines": [
+      {
+        "round": "Round 1",
+        "deadline_date": "September 4, 2024"
+      },
+      {
+        "round": "Round 2",
+        "deadline_date": "January 6, 2025"
+      }
+    ],
+    "key_differentiators": "Harvard Business School is the home of the case method of business education and has one of the largest and most influential alumni networks in the world, with 20% of the top three executive positions at Fortune 500 companies filled by HBS alumni. Students become part of smaller community 'sections' of about ninety students with dedicated faculty teams for a more intimate learning experience within the larger program."
+  },
+  "extracted_at": "2026-03-17T21:58:07.935421"
+}

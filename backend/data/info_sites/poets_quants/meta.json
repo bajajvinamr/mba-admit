@@ -1,0 +1,16 @@
+{
+  "urls": {
+    "rankings_online": "https://poetsandquants.com/ranking/best-online-mba-programs/",
+    "profile_hbs": "https://poetsandquants.com/school-profiles/harvard-business-school/",
+    "profile_gsb": "https://poetsandquants.com/school-profiles/stanford-gsb/",
+    "profile_wharton": "https://poetsandquants.com/school-profiles/wharton-school/",
+    "profile_booth": "https://poetsandquants.com/school-profiles/booth-school-of-business/",
+    "profile_kellogg": "https://poetsandquants.com/school-profiles/kellogg-school-of-management/",
+    "profile_sloan": "https://poetsandquants.com/school-profiles/mit-sloan-school-of-management/",
+    "profile_columbia": "https://poetsandquants.com/school-profiles/columbia-business-school/",
+    "profile_tuck": "https://poetsandquants.com/school-profiles/tuck-school-of-business/",
+    "profile_yale": "https://poetsandquants.com/school-profiles/yale-school-of-management/",
+    "profile_mccombs": "https://poetsandquants.com/school-profiles/mccombs-school-of-business/"
+  },
+  "crawled_at": "2026-03-17T21:38:41.874272"
+}

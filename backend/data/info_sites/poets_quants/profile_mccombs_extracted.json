@@ -1,0 +1,36 @@
+{
+  "type": "school_profile",
+  "data": {
+    "school_name": "University of Texas at Austin's McCombs School of Business",
+    "class_size": 220,
+    "median_gmat": 700,
+    "median_gre": 322.5,
+    "avg_gpa": 3.48,
+    "acceptance_rate": "42%",
+    "women_percentage": "35%",
+    "international_percentage": "26%",
+    "tuition_total": 49534,
+    "median_starting_salary": 150000,
+    "median_signing_bonus": 30000,
+    "application_deadlines": [
+      {
+        "round": "Round 1",
+        "deadline_date": "October 10, 2023"
+      },
+      {
+        "round": "Round 2",
+        "deadline_date": "January 5, 2024"
+      },
+      {
+        "round": "Round 3",
+        "deadline_date": "March 26, 2024"
+      },
+      {
+        "round": "Round 4",
+        "deadline_date": "May 9, 2024"
+      }
+    ],
+    "key_differentiators": "McCombs offers a flexible curriculum where more than 70% of coursework is self-selected, with over 100 electives and 20+ concentrations (14 STEM-designated). Located in vibrant Austin with strong tech company presence including Dell, IBM, Amazon, and Apple, the program emphasizes diversity and innovation with students from 28 countries."
+  },
+  "extracted_at": "2026-03-17T21:56:37.789054"
+}

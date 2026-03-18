@@ -1,0 +1,26 @@
+{
+  "type": "school_profile",
+  "data": {
+    "school_name": "Kellogg School of Management at Northwestern University",
+    "class_size": 503,
+    "avg_gmat": 729,
+    "avg_gre": 325,
+    "avg_gpa": 3.7,
+    "acceptance_rate": 31.4,
+    "women_percentage": 48,
+    "international_percentage": 38,
+    "tuition_total": 81015,
+    "mean_starting_salary": 170000,
+    "median_signing_bonus": 30000,
+    "top_industries": [
+      "Consulting"
+    ],
+    "top_employers": [
+      "Boston Consulting Group",
+      "McKinsey & Company",
+      "Bain & Company"
+    ],
+    "key_differentiators": "Kellogg is renowned for its collaborative, team-driven culture that emphasizes 'high impact, low ego' leadership development. The school offers extensive experiential learning opportunities including the signature KWEST program, over 200 team meetings during the MBA, and strong connections to top consulting firms and tech companies."
+  },
+  "extracted_at": "2026-03-17T21:56:32.541653"
+}

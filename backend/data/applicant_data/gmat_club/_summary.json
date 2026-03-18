@@ -1,0 +1,42 @@
+[
+  {
+    "school_id": "hbs",
+    "source": "gmat_club",
+    "decisions": [],
+    "interview_questions": [],
+    "reviews": [],
+    "pages_crawled": 0
+  },
+  {
+    "school_id": "gsb",
+    "source": "gmat_club",
+    "decisions": [],
+    "interview_questions": [],
+    "reviews": [],
+    "pages_crawled": 0
+  },
+  {
+    "school_id": "wharton",
+    "source": "gmat_club",
+    "decisions": [],
+    "interview_questions": [],
+    "reviews": [],
+    "pages_crawled": 0
+  },
+  {
+    "school_id": "booth",
+    "source": "gmat_club",
+    "decisions": [],
+    "interview_questions": [],
+    "reviews": [],
+    "pages_crawled": 0
+  },
+  {
+    "school_id": "kellogg",
+    "source": "gmat_club",
+    "decisions": [],
+    "interview_questions": [],
+    "reviews": [],
+    "pages_crawled": 0
+  }
+]

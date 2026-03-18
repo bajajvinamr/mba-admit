@@ -1,0 +1,31 @@
+{
+  "type": "school_profile",
+  "data": {
+    "school_name": "MIT Sloan School of Management",
+    "class_size": 433,
+    "avg_gmat": 730,
+    "gmat_range": "690-760",
+    "avg_gpa": 3.7,
+    "avg_work_experience_years": 5,
+    "acceptance_rate": "14%",
+    "yield_rate": "50%",
+    "women_percentage": "49%",
+    "international_percentage": "50%",
+    "application_deadlines": [
+      {
+        "round": "Round 1",
+        "deadline_date": "September 29, 2025"
+      },
+      {
+        "round": "Round 2",
+        "deadline_date": "January 13, 2026"
+      },
+      {
+        "round": "Round 3",
+        "deadline_date": "April 6, 2026"
+      }
+    ],
+    "key_differentiators": "MIT Sloan is a highly academic school that prides itself on parlaying theory into practical application, drawing from MIT's world-renowned science and engineering programs to bolster its intellectual culture. The school emphasizes a hands-on approach perfect for creating revolutionary inventions through its Entrepreneurship Center, which hosts a $100,000 competition annually for the best new business plan."
+  },
+  "extracted_at": "2026-03-17T21:58:16.503256"
+}

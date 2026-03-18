@@ -1,0 +1,13 @@
+{
+  "urls": {
+    "profile_hbs": "https://menlocoaching.com/mba-application/harvard-business-school/",
+    "profile_gsb": "https://menlocoaching.com/mba-application/stanford-gsb/",
+    "profile_wharton": "https://menlocoaching.com/mba-application/wharton/",
+    "profile_kellogg": "https://menlocoaching.com/mba-application/kellogg/",
+    "profile_columbia": "https://menlocoaching.com/mba-application/columbia/",
+    "profile_tuck": "https://menlocoaching.com/mba-application/tuck/",
+    "profile_stern": "https://menlocoaching.com/mba-application/nyu-stern/",
+    "profile_yale": "https://menlocoaching.com/mba-application/yale-som/"
+  },
+  "crawled_at": "2026-03-17T21:50:59.789961"
+}

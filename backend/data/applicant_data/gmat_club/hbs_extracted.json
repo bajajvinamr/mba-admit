@@ -1,0 +1,43 @@
+{
+  "school_id": "hbs",
+  "real_applicant_profiles": [],
+  "interview_questions_reported": [],
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": 900
+  },
+  "student_reviews": [
+    {
+      "rating": 5.0,
+      "pros": "Case method, faculty expertise, global perspective, alumni network, career opportunities",
+      "cons": null,
+      "year_of_review": 2025
+    },
+    {
+      "rating": 5.0,
+      "pros": "Case method, business judgment improvement, communication skills, diverse perspectives",
+      "cons": "Culture & Student Support, Specialization",
+      "year_of_review": 2018
+    },
+    {
+      "rating": 5.0,
+      "pros": "Bright classmates, case method engagement, close-knit sections",
+      "cons": "Cost of housing & parking",
+      "year_of_review": 2018
+    },
+    {
+      "rating": 4.0,
+      "pros": "Renowned professors, case method, alumni network, financial aid",
+      "cons": "Emphasis on wealth, outdated curriculum, lack of tech classes",
+      "year_of_review": 2018
+    },
+    {
+      "rating": 5.0,
+      "pros": "Incredible faculty, section experience, lifelong friendships, case method",
+      "cons": "No weekly day off",
+      "year_of_review": 2018
+    }
+  ]
+}

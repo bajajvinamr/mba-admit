@@ -1,0 +1,35 @@
+{
+  "type": "school_profile",
+  "data": {
+    "school_name": "Yale School of Management",
+    "class_size": 738,
+    "avg_gmat": 725,
+    "avg_gpa": 3.65,
+    "avg_work_experience_years": null,
+    "acceptance_rate": "28%",
+    "yield_rate": null,
+    "women_percentage": "43%",
+    "international_percentage": "44%",
+    "tuition_total": "$74,500",
+    "mean_starting_salary": "$160,000",
+    "median_signing_bonus": "$30,000",
+    "top_industries": [
+      "Consulting (32%)",
+      "Finance (26%)",
+      "Technology (10%)",
+      "Healthcare/Pharma (6%)",
+      "Consumer Packaged Goods (5%)",
+      "Energy (5%)",
+      "Retail (4%)"
+    ],
+    "top_employers": null,
+    "essay_prompts": [
+      "Describe the biggest commitment you have ever made. Why is this commitment meaningful to you and what actions have you taken to support it?",
+      "Describe the community that has been most meaningful to you. What is the most valuable thing you have gained from being a part of this community and what is the most important thing you have contributed to this community?",
+      "Describe the most significant challenge you have faced. How have you confronted this challenge and how has it shaped you as a person?"
+    ],
+    "application_deadlines": null,
+    "key_differentiators": "Yale SOM's unique integrated curriculum is built around stakeholder perspectives rather than traditional business functions, with 'raw cases' using multiple media channels. Students can take unlimited electives from other Yale schools and participate in the Global Network for Advanced Management with 31 partner schools worldwide."
+  },
+  "extracted_at": "2026-03-17T21:57:01.853536"
+}

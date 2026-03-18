@@ -1,0 +1,11 @@
+{
+  "type": "school_profile",
+  "data": {
+    "school_name": "Yale School of Management (Yale SOM)",
+    "class_size": 367,
+    "avg_gmat": 740,
+    "avg_gpa": 3.69,
+    "women_percentage": 44
+  },
+  "extracted_at": "2026-03-17T21:55:50.312791"
+}

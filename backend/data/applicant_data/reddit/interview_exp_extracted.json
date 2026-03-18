@@ -1,0 +1,113 @@
+{
+  "source": "reddit",
+  "decisions": [
+    {
+      "school": "Harvard Business School",
+      "school_id": "hbs",
+      "result": "Rejected",
+      "round": "R1",
+      "gmat_score": 735,
+      "gpa": 3.2,
+      "work_experience_years": 5,
+      "industry": "Technology",
+      "date": null,
+      "international": null
+    },
+    {
+      "school": "University of Chicago Booth School of Business",
+      "school_id": "booth",
+      "result": "Rejected",
+      "round": "R1",
+      "gmat_score": 735,
+      "gpa": 3.2,
+      "work_experience_years": 5,
+      "industry": "Technology",
+      "date": null,
+      "international": null
+    },
+    {
+      "school": "Wharton School",
+      "school_id": "wharton",
+      "result": "Accepted",
+      "round": "R1",
+      "gmat_score": 735,
+      "gpa": 3.2,
+      "work_experience_years": 5,
+      "industry": "Technology",
+      "date": null,
+      "international": null
+    },
+    {
+      "school": "Columbia Business School",
+      "school_id": "columbia",
+      "result": "Accepted",
+      "round": "R1",
+      "gmat_score": 735,
+      "gpa": 3.2,
+      "work_experience_years": 5,
+      "industry": "Technology",
+      "date": null,
+      "international": null
+    },
+    {
+      "school": "University of Georgia",
+      "school_id": "uga",
+      "result": "Accepted",
+      "round": null,
+      "gmat_score": null,
+      "gpa": null,
+      "work_experience_years": 2,
+      "industry": "Insurance",
+      "date": null,
+      "international": null
+    },
+    {
+      "school": "HEC Paris",
+      "school_id": "hec",
+      "result": "Rejected",
+      "round": null,
+      "gmat_score": 635,
+      "gpa": null,
+      "work_experience_years": 4,
+      "industry": "Technology",
+      "date": null,
+      "international": true
+    },
+    {
+      "school": "Indian School of Business",
+      "school_id": "isb",
+      "result": "Rejected",
+      "round": null,
+      "gmat_score": 665,
+      "gpa": null,
+      "work_experience_years": 4,
+      "industry": "Healthcare",
+      "date": null,
+      "international": true
+    },
+    {
+      "school": "Indian Institute of Management Ahmedabad",
+      "school_id": "iima",
+      "result": "Rejected",
+      "round": null,
+      "gmat_score": 665,
+      "gpa": null,
+      "work_experience_years": 4,
+      "industry": "Healthcare",
+      "date": null,
+      "international": true
+    },
+    {
+      "school": "Oxford Said Business School",
+      "school_id": "oxford",
+      "result": "Rejected",
+      "round": null,
+      "gmat_score": 665,
+      "gpa": null,
+      "work_experience_years": 4,
+      "industry": "Healthcare",
+      "date": null,
+      "international": true
+    }
+  ]
+}

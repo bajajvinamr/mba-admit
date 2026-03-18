@@ -1,0 +1,87 @@
+{
+  "school_id": "darden",
+  "real_applicant_profiles": [
+    {
+      "gmat_score": 690,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2024,
+      "scholarship_info": null,
+      "nationality": null,
+      "undergraduate_school": null
+    },
+    {
+      "gmat_score": 680,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2024,
+      "scholarship_info": null,
+      "nationality": null,
+      "undergraduate_school": null
+    },
+    {
+      "gmat_score": 740,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": "Engineering",
+      "result": "Accepted",
+      "round": null,
+      "year": 2024,
+      "scholarship_info": null,
+      "nationality": "Indian",
+      "undergraduate_school": null
+    },
+    {
+      "gmat_score": 760,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2017,
+      "scholarship_info": null,
+      "nationality": null,
+      "undergraduate_school": null
+    }
+  ],
+  "interview_questions_reported": [],
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": null,
+    "avg_work_experience_years": null
+  },
+  "student_reviews": [
+    {
+      "rating": 5.0,
+      "pros": "Great access to top Investment Banks and Consulting firms, non disclosure grade policy, strong culture, student-led recruiting resources",
+      "cons": "Limited opportunities in PE or VC without prior experience, student body diversity could be improved",
+      "year_of_review": 2023
+    },
+    {
+      "rating": 4.0,
+      "pros": "Amazing community support, great professors, excellent facilities, strong career opportunities in consulting/IB, case method learning",
+      "cons": "High workload during core curriculum, location 2 hours from good airport, small city limitations",
+      "year_of_review": 2023
+    },
+    {
+      "rating": 4.0,
+      "pros": "Talented diverse student body, strong alumni network, great career support for consulting and IB, beautiful Charlottesville location",
+      "cons": "Tech career support lacks behind peer schools, difficult to balance high academic pressure with other commitments",
+      "year_of_review": 2023
+    },
+    {
+      "rating": 5.0,
+      "pros": "Top-notch professors and classroom experience, focus on teamwork/integrity/leadership, dream city location, comparable recruiting to top schools",
+      "cons": "Non-ideal location for some companies, career services department in flux",
+      "year_of_review": 2018
+    }
+  ]
+}

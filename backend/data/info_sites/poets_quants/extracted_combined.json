@@ -1,0 +1,584 @@
+{
+  "profile_booth": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "University of Chicago Booth School of Business - Master in Finance",
+      "tuition_total": "Not yet released",
+      "key_differentiators": "The curriculum strategically prepares students to master transformative innovations disrupting the finance industry, including A.I., machine learning, blockchain technologies and applications, and big data. Students can choose from four areas of specialization: Asset Management, Investment Banking, Fintech or Research in Finance, and have the flexibility to complete the program in either 15 months (standard track) or 10 months (accelerated track)."
+    },
+    "extracted_at": "2026-03-17T21:56:11.373769"
+  },
+  "profile_columbia": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "Columbia Business School",
+      "class_size": 753,
+      "avg_gmat": 724,
+      "avg_gpa": 3.5,
+      "avg_work_experience_years": 5,
+      "acceptance_rate": 16.5,
+      "women_percentage": 41,
+      "international_percentage": 43,
+      "application_deadlines": [
+        {
+          "round": "Early Decision & January Term",
+          "deadline_date": "October 3, 2018"
+        },
+        {
+          "round": "Merit Scholarship",
+          "deadline_date": "January 4, 2019"
+        },
+        {
+          "round": "Final Decision",
+          "deadline_date": "April 10, 2019"
+        }
+      ],
+      "key_differentiators": "Columbia is unique for offering both August and January start options that merge in the second year, and it features an early decision option with rolling admissions rather than structured rounds. The school's Manhattan location provides exceptional access to business opportunities and networks in one of the world's financial capitals."
+    },
+    "extracted_at": "2026-03-17T21:56:16.219111"
+  },
+  "profile_gsb": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "Stanford Graduate School of Business (Stanford GSB)",
+      "key_differentiators": "Stanford GSB's mission is to 'change lives, change organizations, change the world' with emphasis on global management issues, management of technology, and entrepreneurship. The school has strong ties to Silicon Valley and focuses on applying both academic rigor and real-world relevance to research and teaching."
+    },
+    "extracted_at": "2026-03-17T21:56:18.990204"
+  },
+  "profile_hbs": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "Harvard Business School",
+      "class_size": 928,
+      "avg_gmat": 730,
+      "gmat_range": "580-790",
+      "avg_gpa": 3.71,
+      "avg_work_experience_years": 4.5,
+      "acceptance_rate": 0.099,
+      "yield_rate": 0.91,
+      "essay_prompts": [
+        "As we review your application, what more would you like us to know as we consider your candidacy for the Harvard Business School MBA Program?"
+      ],
+      "application_deadlines": [
+        {
+          "round": "Round One",
+          "deadline_date": "September 5, 2018"
+        },
+        {
+          "round": "Round Two",
+          "deadline_date": "January 3, 2019"
+        }
+      ],
+      "key_differentiators": "Harvard Business School eliminated its third application round to give admitted students better access to on-campus housing and more time for visa processing. The school maintains the highest yield rate among business schools globally at 91%, demonstrating its exceptional drawing power and selectivity."
+    },
+    "extracted_at": "2026-03-17T21:56:24.439498"
+  },
+  "profile_kellogg": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "Kellogg School of Management at Northwestern University",
+      "class_size": 503,
+      "avg_gmat": 729,
+      "avg_gre": 325,
+      "avg_gpa": 3.7,
+      "acceptance_rate": 31.4,
+      "women_percentage": 48,
+      "international_percentage": 38,
+      "tuition_total": 81015,
+      "mean_starting_salary": 170000,
+      "median_signing_bonus": 30000,
+      "top_industries": [
+        "Consulting"
+      ],
+      "top_employers": [
+        "Boston Consulting Group",
+        "McKinsey & Company",
+        "Bain & Company"
+      ],
+      "key_differentiators": "Kellogg is renowned for its collaborative, team-driven culture that emphasizes 'high impact, low ego' leadership development. The school offers extensive experiential learning opportunities including the signature KWEST program, over 200 team meetings during the MBA, and strong connections to top consulting firms and tech companies."
+    },
+    "extracted_at": "2026-03-17T21:56:32.541653"
+  },
+  "profile_mccombs": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "University of Texas at Austin's McCombs School of Business",
+      "class_size": 220,
+      "median_gmat": 700,
+      "median_gre": 322.5,
+      "avg_gpa": 3.48,
+      "acceptance_rate": "42%",
+      "women_percentage": "35%",
+      "international_percentage": "26%",
+      "tuition_total": 49534,
+      "median_starting_salary": 150000,
+      "median_signing_bonus": 30000,
+      "application_deadlines": [
+        {
+          "round": "Round 1",
+          "deadline_date": "October 10, 2023"
+        },
+        {
+          "round": "Round 2",
+          "deadline_date": "January 5, 2024"
+        },
+        {
+          "round": "Round 3",
+          "deadline_date": "March 26, 2024"
+        },
+        {
+          "round": "Round 4",
+          "deadline_date": "May 9, 2024"
+        }
+      ],
+      "key_differentiators": "McCombs offers a flexible curriculum where more than 70% of coursework is self-selected, with over 100 electives and 20+ concentrations (14 STEM-designated). Located in vibrant Austin with strong tech company presence including Dell, IBM, Amazon, and Apple, the program emphasizes diversity and innovation with students from 28 countries."
+    },
+    "extracted_at": "2026-03-17T21:56:37.789054"
+  },
+  "profile_sloan": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "MIT Sloan School of Management",
+      "class_size": 408,
+      "avg_gmat": 730,
+      "avg_gpa": 3.59,
+      "international_percentage": 40,
+      "women_percentage": 46,
+      "tuition_total": 86300,
+      "mean_starting_salary": 169550,
+      "top_industries": [
+        "Consulting",
+        "Finance",
+        "Investment Banking/Brokerage",
+        "Automotive/Aerospace",
+        "Consumer Products"
+      ],
+      "key_differentiators": "MIT Sloan combines intellectual rigor with experiential learning through unique programs like Action Learning Labs and the Sloan Intensive Period. The school offers unparalleled integration with MIT's broader technology ecosystem, allowing students to work at the intersection of business, technology, and innovation with access to courses across MIT's engineering programs."
+    },
+    "extracted_at": "2026-03-17T21:56:42.222517"
+  },
+  "profile_tuck": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "Tuck School of Business (Dartmouth College)",
+      "class_size": 280,
+      "median_starting_salary": 115000,
+      "median_signing_bonus": 25000,
+      "acceptance_rate": "Data shows 20% of class accepted offers from McKinsey, Bain, and Boston Consulting Group",
+      "top_employers": [
+        "McKinsey & Company",
+        "Bain & Company",
+        "Boston Consulting Group",
+        "Amazon",
+        "Deloitte Digital"
+      ],
+      "top_industries": [
+        "Management Consulting",
+        "Technology",
+        "Retail"
+      ],
+      "key_differentiators": "Tuck has experienced five straight years of improving job placement results with international students achieving higher employment offers than domestic students for the first time. The school has strong placement in top-tier consulting firms with McKinsey taking 27 graduates and Bain taking over 20 graduates from a single class."
+    },
+    "extracted_at": "2026-03-17T21:56:48.512914"
+  },
+  "profile_wharton": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "Wharton School (University of Pennsylvania)",
+      "women_percentage": "Information about 4 Forté Fellowship recipients in Class of 2024, but no overall percentage provided",
+      "key_differentiators": "Offers competitive Forté Fellowships recognizing students who exhibit exemplary leadership, represent diverse backgrounds, and demonstrate commitment to advancing women in business."
+    },
+    "extracted_at": "2026-03-17T21:56:54.981226"
+  },
+  "profile_yale": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "Yale School of Management",
+      "class_size": 738,
+      "avg_gmat": 725,
+      "avg_gpa": 3.65,
+      "avg_work_experience_years": null,
+      "acceptance_rate": "28%",
+      "yield_rate": null,
+      "women_percentage": "43%",
+      "international_percentage": "44%",
+      "tuition_total": "$74,500",
+      "mean_starting_salary": "$160,000",
+      "median_signing_bonus": "$30,000",
+      "top_industries": [
+        "Consulting (32%)",
+        "Finance (26%)",
+        "Technology (10%)",
+        "Healthcare/Pharma (6%)",
+        "Consumer Packaged Goods (5%)",
+        "Energy (5%)",
+        "Retail (4%)"
+      ],
+      "top_employers": null,
+      "essay_prompts": [
+        "Describe the biggest commitment you have ever made. Why is this commitment meaningful to you and what actions have you taken to support it?",
+        "Describe the community that has been most meaningful to you. What is the most valuable thing you have gained from being a part of this community and what is the most important thing you have contributed to this community?",
+        "Describe the most significant challenge you have faced. How have you confronted this challenge and how has it shaped you as a person?"
+      ],
+      "application_deadlines": null,
+      "key_differentiators": "Yale SOM's unique integrated curriculum is built around stakeholder perspectives rather than traditional business functions, with 'raw cases' using multiple media channels. Students can take unlimited electives from other Yale schools and participate in the Global Network for Advanced Management with 31 partner schools worldwide."
+    },
+    "extracted_at": "2026-03-17T21:57:01.853536"
+  },
+  "rankings_online": {
+    "type": "rankings",
+    "data": [
+      {
+        "rank": 1,
+        "school_name": "University of Southern California (Marshall)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$99,692",
+        "program_duration": null
+      },
+      {
+        "rank": 2,
+        "school_name": "Auburn University (Harbert)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$34,125",
+        "program_duration": null
+      },
+      {
+        "rank": 3,
+        "school_name": "Indiana University (Kelley)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$67,830",
+        "program_duration": "2 years"
+      },
+      {
+        "rank": 4,
+        "school_name": "Carnegie Mellon University (Tepper)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$132,000",
+        "program_duration": "3 years"
+      },
+      {
+        "rank": 5,
+        "school_name": "Lehigh University",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$42,300",
+        "program_duration": null
+      },
+      {
+        "rank": 6,
+        "school_name": "University of North Carolina (Kenan-Flagler)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$124,345",
+        "program_duration": null
+      },
+      {
+        "rank": 7,
+        "school_name": "University of Florida (Hough)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$58,000",
+        "program_duration": null
+      },
+      {
+        "rank": 8,
+        "school_name": "University of Nebraska-Lincoln",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$30,240",
+        "program_duration": "1.5 to 10 years"
+      },
+      {
+        "rank": 9,
+        "school_name": "Hofstra University (Zarb)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$63,435",
+        "program_duration": null
+      },
+      {
+        "rank": 10,
+        "school_name": "University of Texas at Dallas (Jindal)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$94,261",
+        "program_duration": null
+      },
+      {
+        "rank": 11,
+        "school_name": "Jack Welch Management Institute",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$42,800",
+        "program_duration": null
+      },
+      {
+        "rank": 12,
+        "school_name": "Arizona State University (W. P. Carey)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$59,535",
+        "program_duration": null
+      },
+      {
+        "rank": 13,
+        "school_name": "University of Massachusetts-Amherst (Isenberg)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$35,983",
+        "program_duration": null
+      },
+      {
+        "rank": 14,
+        "school_name": "University of Maryland (Smith)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$87,318",
+        "program_duration": null
+      },
+      {
+        "rank": 15,
+        "school_name": "University of Arizona (Eller)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$45,000",
+        "program_duration": null
+      },
+      {
+        "rank": 16,
+        "school_name": "Northeastern University (D'Amore-McKim)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$80,000",
+        "program_duration": null
+      },
+      {
+        "rank": 17,
+        "school_name": "Syracuse University (Whitman)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$42,093",
+        "program_duration": null
+      },
+      {
+        "rank": 18,
+        "school_name": "Baylor University (Hankamer)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$60,624",
+        "program_duration": null
+      },
+      {
+        "rank": 19,
+        "school_name": "University of Delaware (Lerner)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$39,600",
+        "program_duration": null
+      },
+      {
+        "rank": 20,
+        "school_name": "University of Cincinnati (Lindner)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$33,820",
+        "program_duration": null
+      },
+      {
+        "rank": 21,
+        "school_name": "University of Michigan-Dearborn",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$45,540",
+        "program_duration": null
+      },
+      {
+        "rank": 22,
+        "school_name": "Rochester Institute of Technology (Saunders)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$78,000",
+        "program_duration": null
+      },
+      {
+        "rank": 23,
+        "school_name": "University of Tennessee-Chattanooga",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$23,088",
+        "program_duration": null
+      },
+      {
+        "rank": 24,
+        "school_name": "North Carolina State University (Jenkins)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$44,555",
+        "program_duration": null
+      },
+      {
+        "rank": 25,
+        "school_name": "George Washington University",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$101,887",
+        "program_duration": null
+      },
+      {
+        "rank": 26,
+        "school_name": "Kennesaw State University",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$24,370",
+        "program_duration": null
+      },
+      {
+        "rank": 27,
+        "school_name": "University of North Dakota",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$38,789",
+        "program_duration": null
+      },
+      {
+        "rank": 28,
+        "school_name": "SUNY Oswego",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$23,956",
+        "program_duration": null
+      },
+      {
+        "rank": 29,
+        "school_name": "University of Massachusetts-Lowell (Manning)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$19,650",
+        "program_duration": null
+      },
+      {
+        "rank": 30,
+        "school_name": "University of Wisconsin (MBA Consortium)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$23,250",
+        "program_duration": null
+      },
+      {
+        "rank": 31,
+        "school_name": "Ohio University",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$35,980",
+        "program_duration": null
+      },
+      {
+        "rank": 32,
+        "school_name": "Florida International University (Chapman)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$42,000",
+        "program_duration": null
+      },
+      {
+        "rank": 33,
+        "school_name": "Southern Illinois University-Carbondale",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$17,934",
+        "program_duration": null
+      },
+      {
+        "rank": 34,
+        "school_name": "Creighton University",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$37,224",
+        "program_duration": null
+      },
+      {
+        "rank": 35,
+        "school_name": "Louisiana State University (Ourso)",
+        "country": "United States",
+        "gmat_avg": null,
+        "salary_after_3_years": null,
+        "acceptance_rate": null,
+        "tuition": "$19,980",
+        "program_duration": null
+      }
+    ],
+    "extracted_at": "2026-03-17T21:57:31.186359"
+  }
+}

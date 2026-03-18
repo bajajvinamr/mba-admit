@@ -1,0 +1,37 @@
+{
+  "school_id": "ross",
+  "real_applicant_profiles": [],
+  "interview_questions_reported": [],
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": null
+  },
+  "student_reviews": [
+    {
+      "rating": 5.0,
+      "pros": "World class education, amazing alumni network, action-based learning, close-knit culture, top career opportunities across consulting, finance, tech, entrepreneurship",
+      "cons": "Ann Arbor is not metropolitan, location adjustment required",
+      "year_of_review": 2023
+    },
+    {
+      "rating": 4.3,
+      "pros": "Great MBA value, excellent student body, strong alumni network, sound leadership foundation",
+      "cons": "Career opportunities provided by school",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 5.0,
+      "pros": "Action-based learning curriculum, supportive community, practical experience for career switching",
+      "cons": "Location, brand/ranking",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 4.3,
+      "pros": "Amazing alumni network, career opportunities in healthcare marketing, social aspect adds value",
+      "cons": null,
+      "year_of_review": 2017
+    }
+  ]
+}

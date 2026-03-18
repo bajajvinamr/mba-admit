@@ -1,0 +1,4304 @@
+[
+  {
+    "id": "agsm",
+    "name": "AGSM at UNSW",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "abs_egypt",
+    "name": "AUC School of Business",
+    "country": "Egypt",
+    "website": ""
+  },
+  {
+    "id": "abs_egypt_emba",
+    "name": "AUC School of Business Executive MBA",
+    "country": "Egypt",
+    "website": ""
+  },
+  {
+    "id": "cairo_mim",
+    "name": "AUC School of Business MiM",
+    "country": "Egypt",
+    "website": ""
+  },
+  {
+    "id": "aalborg_mim",
+    "name": "Aalborg University Business School MSc",
+    "country": "Denmark",
+    "website": ""
+  },
+  {
+    "id": "aalto_emba",
+    "name": "Aalto University Executive MBA",
+    "country": "Finland",
+    "website": ""
+  },
+  {
+    "id": "aalto",
+    "name": "Aalto University School of Business",
+    "country": "Finland",
+    "website": ""
+  },
+  {
+    "id": "aalto_mim",
+    "name": "Aalto University School of Business MSc Economics & Business Administration",
+    "country": "Finland",
+    "website": ""
+  },
+  {
+    "id": "aarhus_mim",
+    "name": "Aarhus University BSS MSc in Management",
+    "country": "Denmark",
+    "website": ""
+  },
+  {
+    "id": "alu_mim",
+    "name": "African Leadership University School of Business MiM",
+    "country": "Rwanda",
+    "website": ""
+  },
+  {
+    "id": "alberta",
+    "name": "Alberta School of Business",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "manchester",
+    "name": "Alliance Manchester Business School",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "manchester_executive_mba",
+    "name": "Alliance Manchester Business School (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "kogod",
+    "name": "American University Kogod",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "aud_emba",
+    "name": "American University in Dubai Executive MBA",
+    "country": "UAE",
+    "website": ""
+  },
+  {
+    "id": "aud_mba",
+    "name": "American University in Dubai MBA",
+    "country": "UAE",
+    "website": ""
+  },
+  {
+    "id": "aud_mim",
+    "name": "American University in Dubai MiM",
+    "country": "UAE",
+    "website": ""
+  },
+  {
+    "id": "beirut_emba",
+    "name": "American University of Beirut Olayan Executive MBA",
+    "country": "Lebanon",
+    "website": ""
+  },
+  {
+    "id": "sharjah_emba",
+    "name": "American University of Sharjah Executive MBA",
+    "country": "UAE",
+    "website": ""
+  },
+  {
+    "id": "amity",
+    "name": "Amity Business School",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "eller_emba",
+    "name": "Arizona Eller Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "wp_carey_emba",
+    "name": "Arizona State University WP Carey Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "apm_emba",
+    "name": "Asian Institute of Management Executive MBA",
+    "country": "Philippines",
+    "website": ""
+  },
+  {
+    "id": "aston",
+    "name": "Aston Business School",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "aston_executive_mba",
+    "name": "Aston Business School (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "aston_mim",
+    "name": "Aston Business School (MSc Business Management)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "ateneo_emba",
+    "name": "Ateneo GSBA Executive MBA",
+    "country": "Philippines",
+    "website": ""
+  },
+  {
+    "id": "ateneo",
+    "name": "Ateneo Graduate School of Business",
+    "country": "Philippines",
+    "website": ""
+  },
+  {
+    "id": "athens_econ_mim",
+    "name": "Athens University of Economics MSc Management Science",
+    "country": "Greece",
+    "website": ""
+  },
+  {
+    "id": "aut",
+    "name": "Auckland University of Technology",
+    "country": "New Zealand",
+    "website": ""
+  },
+  {
+    "id": "audencia_mim",
+    "name": "Audencia Business School Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "nantes_mim",
+    "name": "Audencia Nantes Master in Management (additional)",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "bi_emba",
+    "name": "BI Norwegian Business School Executive MBA",
+    "country": "Norway",
+    "website": ""
+  },
+  {
+    "id": "bi_norwegian_mim",
+    "name": "BI Norwegian Business School MSc in Management",
+    "country": "Norway",
+    "website": ""
+  },
+  {
+    "id": "bits_mim",
+    "name": "BITS Pilani MBA MiM Track",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "bsg_mim",
+    "name": "BSB Burgundy School of Business MiM",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "babson_olin_executive_mba",
+    "name": "Babson Olin (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "bath_spa_mim",
+    "name": "Bath Spa University MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "cass_mba",
+    "name": "Bayes (formerly Cass) Business School MBA",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "cass_bayes_executive_mba",
+    "name": "Bayes Business School (City London) (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "city_mim",
+    "name": "Bayes Business School MSc Management (City)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "bilkent_emba",
+    "name": "Bilkent University Executive MBA",
+    "country": "Turkey",
+    "website": ""
+  },
+  {
+    "id": "bilkent",
+    "name": "Bilkent University MBA",
+    "country": "Turkey",
+    "website": ""
+  },
+  {
+    "id": "bilkent_mim",
+    "name": "Bilkent University MSc in Management",
+    "country": "Turkey",
+    "website": ""
+  },
+  {
+    "id": "binus",
+    "name": "Binus Business School",
+    "country": "Indonesia",
+    "website": ""
+  },
+  {
+    "id": "binus_emba",
+    "name": "Binus Business School Executive MBA",
+    "country": "Indonesia",
+    "website": ""
+  },
+  {
+    "id": "bocconi_msc_mim",
+    "name": "Bocconi University MSc in International Management",
+    "country": "Italy",
+    "website": ""
+  },
+  {
+    "id": "questrom",
+    "name": "Boston University Questrom",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "questrom_executive_mba",
+    "name": "Boston University Questrom (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "bradford",
+    "name": "Bradford School of Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "bradford_executive_mba",
+    "name": "Bradford School of Management (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "bradford_mim",
+    "name": "Bradford School of Management (MSc Management)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "brunel_mim",
+    "name": "Brunel University London MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "bucharest_mim",
+    "name": "Bucharest University of Economic Studies MSc",
+    "country": "Romania",
+    "website": ""
+  },
+  {
+    "id": "burgundy_mim",
+    "name": "Burgundy School of Business Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "ceibs_executive_mba",
+    "name": "CEIBS (Global Executive MBA)",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "ceibs_mba",
+    "name": "CEIBS MBA",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "cems_mim",
+    "name": "CEMS Master in International Management",
+    "country": "Global",
+    "website": ""
+  },
+  {
+    "id": "cesa_emba",
+    "name": "CESA Executive MBA",
+    "country": "Colombia",
+    "website": ""
+  },
+  {
+    "id": "ceu_mim",
+    "name": "CEU Business School MSc in Management",
+    "country": "Austria",
+    "website": ""
+  },
+  {
+    "id": "coppead_executive_mba",
+    "name": "COPPEAD UFRJ (Executive MBA)",
+    "country": "Brazil",
+    "website": ""
+  },
+  {
+    "id": "coppead_mim",
+    "name": "COPPEAD UFRJ (Master in Management)",
+    "country": "Brazil",
+    "website": ""
+  },
+  {
+    "id": "cuhk",
+    "name": "CUHK Business School",
+    "country": "Hong Kong",
+    "website": ""
+  },
+  {
+    "id": "cuhk_executive_mba",
+    "name": "CUHK Business School (Executive MBA)",
+    "country": "Hong Kong",
+    "website": ""
+  },
+  {
+    "id": "cuhk_mim",
+    "name": "CUHK Business School (MSc in Management)",
+    "country": "Hong Kong",
+    "website": ""
+  },
+  {
+    "id": "cuhk_mba",
+    "name": "CUHK Business School MBA",
+    "country": "Hong Kong",
+    "website": ""
+  },
+  {
+    "id": "haskayne",
+    "name": "Calgary Haskayne",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "haskayne_executive_mba",
+    "name": "Calgary Haskayne (Executive MBA)",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "judge_executive_mba",
+    "name": "Cambridge Judge (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "cambridge_mim",
+    "name": "Cambridge Judge Business School MPhil Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "cardiff_mim",
+    "name": "Cardiff Business School MSc in Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "carlos_iii_emba",
+    "name": "Carlos III University Executive MBA",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "carlos_iii_mim",
+    "name": "Carlos III University Madrid MSc Management",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "tepper",
+    "name": "Carnegie Mellon Tepper",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "tepper_executive_mba",
+    "name": "Carnegie Mellon Tepper (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "tepper_mim",
+    "name": "Carnegie Mellon Tepper (MS in Management)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "catolica_mim",
+    "name": "Cat\u00f3lica-Lisbon Master in Management",
+    "country": "Portugal",
+    "website": ""
+  },
+  {
+    "id": "cem",
+    "name": "Central European Management Institute (CEMI)",
+    "country": "Czech Republic",
+    "website": ""
+  },
+  {
+    "id": "booth_executive_mba",
+    "name": "Chicago Booth (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "booth_mim",
+    "name": "Chicago Booth (Master in Management)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "chulalongkorn_mim",
+    "name": "Chulalongkorn University MiM",
+    "country": "Thailand",
+    "website": ""
+  },
+  {
+    "id": "cbs",
+    "name": "Columbia Business School",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "cbs_executive_mba",
+    "name": "Columbia Business School (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "copenhagen",
+    "name": "Copenhagen Business School",
+    "country": "Denmark",
+    "website": ""
+  },
+  {
+    "id": "copenhagen_executive_mba",
+    "name": "Copenhagen Business School (Executive MBA)",
+    "country": "Denmark",
+    "website": ""
+  },
+  {
+    "id": "copenhagen_mim",
+    "name": "Copenhagen Business School MSc Economics & Business Administration",
+    "country": "Denmark",
+    "website": ""
+  },
+  {
+    "id": "cbs_mim",
+    "name": "Copenhagen Business School MSc Management of Innovation and Business Development",
+    "country": "Denmark",
+    "website": ""
+  },
+  {
+    "id": "johnson_executive_mba",
+    "name": "Cornell Johnson (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "johnson_mim",
+    "name": "Cornell Johnson (Master of Management)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "corvinus_emba",
+    "name": "Corvinus University Executive MBA",
+    "country": "Hungary",
+    "website": ""
+  },
+  {
+    "id": "corvinus_mim",
+    "name": "Corvinus University of Budapest MSc Management",
+    "country": "Hungary",
+    "website": ""
+  },
+  {
+    "id": "cracow_mim",
+    "name": "Cracow University of Economics MSc Management",
+    "country": "Poland",
+    "website": ""
+  },
+  {
+    "id": "cranfield_executive_mba",
+    "name": "Cranfield School of Management (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "cranfield_mim",
+    "name": "Cranfield School of Management (MSc Management)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "curtin",
+    "name": "Curtin Business School",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "curtin_emba",
+    "name": "Curtin Business School Executive MBA",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "tuck_executive_mba",
+    "name": "Dartmouth Tuck (Executive Education / EMBA Partners)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "dlsu_mim",
+    "name": "De La Salle University MiM",
+    "country": "Philippines",
+    "website": ""
+  },
+  {
+    "id": "deakin",
+    "name": "Deakin Business School",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "deakin_emba",
+    "name": "Deakin Business School Executive MBA",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "lerner_de_emba",
+    "name": "Delaware Lerner Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "fuqua_executive_mba",
+    "name": "Duke Fuqua (Global Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "fuqua_mim",
+    "name": "Duke Fuqua (MMS: Foundations of Business)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "durham_executive_mba",
+    "name": "Durham University Business School (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "durham_mim",
+    "name": "Durham University Business School (MSc Management)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "eada_mim",
+    "name": "EADA Business School Master in Management",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "eae_mim",
+    "name": "EAE Business School MiM",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "eafit",
+    "name": "EAFIT University",
+    "country": "Colombia",
+    "website": ""
+  },
+  {
+    "id": "eafit_emba",
+    "name": "EAFIT University Executive MBA",
+    "country": "Colombia",
+    "website": ""
+  },
+  {
+    "id": "ebs_mim",
+    "name": "EBS Universit\u00e4t MSc Management",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "edhec",
+    "name": "EDHEC Business School",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "edhec_executive_mba",
+    "name": "EDHEC Business School (Executive MBA)",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "edhec_mim",
+    "name": "EDHEC Business School Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "egade",
+    "name": "EGADE Business School (Tec de Monterrey)",
+    "country": "Mexico",
+    "website": ""
+  },
+  {
+    "id": "egade_executive_mba",
+    "name": "EGADE Business School (Tec de Monterrey) (Executive MBA)",
+    "country": "Mexico",
+    "website": ""
+  },
+  {
+    "id": "egade_mim",
+    "name": "EGADE Business School (Tec de Monterrey) (Master in Management)",
+    "country": "Mexico",
+    "website": ""
+  },
+  {
+    "id": "emlyon",
+    "name": "EM Lyon Business School",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "emlyon_executive_mba",
+    "name": "EM Lyon Business School (Executive MBA)",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "emlyon_mim",
+    "name": "EM Lyon Business School MSc in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "em_normandie_mim",
+    "name": "EM Normandie Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "em_strasbourg_mim",
+    "name": "EM Strasbourg Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "em_lyon_mim2",
+    "name": "EMLV Business School MiM",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "epfl_mim",
+    "name": "EPFL College of Management MiM Track",
+    "country": "Switzerland",
+    "website": ""
+  },
+  {
+    "id": "esade_executive_mba",
+    "name": "ESADE Business School (Executive MBA)",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "esade_mim",
+    "name": "ESADE Master in Management",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "esan_emba",
+    "name": "ESAN Graduate School Executive MBA",
+    "country": "Peru",
+    "website": ""
+  },
+  {
+    "id": "esc_clermont_mim",
+    "name": "ESC Clermont Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "esc_pau_mim",
+    "name": "ESC Pau Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "esc_troyes_mim",
+    "name": "ESC Troyes MiM",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "escp_mim",
+    "name": "ESCP Business School Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "esic_mim",
+    "name": "ESIC Business & Marketing School MiM",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "esmt",
+    "name": "ESMT Berlin",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "esmt_executive_mba",
+    "name": "ESMT Berlin (Executive MBA)",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "esmt_mim",
+    "name": "ESMT Berlin Master in Management",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "espae_emba",
+    "name": "ESPAE-ESPOL Executive MBA",
+    "country": "Ecuador",
+    "website": ""
+  },
+  {
+    "id": "essec",
+    "name": "ESSEC Business School",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "essec_executive_mba",
+    "name": "ESSEC Business School (Executive MBA)",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "essec_mim",
+    "name": "ESSEC Business School Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "eth_mim",
+    "name": "ETH Zurich D-MTEC MSc Management, Technology, Economics",
+    "country": "Switzerland",
+    "website": ""
+  },
+  {
+    "id": "edinburgh",
+    "name": "Edinburgh Business School",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "edinburgh_executive_mba",
+    "name": "Edinburgh Business School (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "edinburgh_mim",
+    "name": "Edinburgh Business School (MSc Management)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "edinburgh_napier_mim",
+    "name": "Edinburgh Napier University MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "goizueta_executive_mba",
+    "name": "Emory Goizueta (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "goizueta_mim",
+    "name": "Emory Goizueta (Master of Analytical Finance)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "emory",
+    "name": "Emory Goizueta Business School",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "la_rochelle_mim",
+    "name": "Excelia Business School Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "exeter",
+    "name": "Exeter Business School",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "exeter_executive_mba",
+    "name": "Exeter Business School (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "exeter_mim",
+    "name": "Exeter Business School (MSc International Management)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "erlangen_mim",
+    "name": "FAU Erlangen-N\u00fcrnberg MSc Management",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "fgv",
+    "name": "FGV EAESP",
+    "country": "Brazil",
+    "website": ""
+  },
+  {
+    "id": "fgv_executive_mba",
+    "name": "FGV EAESP (Executive MBA)",
+    "country": "Brazil",
+    "website": ""
+  },
+  {
+    "id": "fgv_mim",
+    "name": "FGV EAESP (Master in Management)",
+    "country": "Brazil",
+    "website": ""
+  },
+  {
+    "id": "fgv_mba",
+    "name": "FGV EAESP MBA",
+    "country": "Brazil",
+    "website": ""
+  },
+  {
+    "id": "fia_emba",
+    "name": "FIA Business School Executive MBA",
+    "country": "Brazil",
+    "website": ""
+  },
+  {
+    "id": "fore_mim",
+    "name": "FORE Delhi MiM Track",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "fore",
+    "name": "FORE School of Management",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "warrington_emba",
+    "name": "Florida Warrington Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "fordham_emba",
+    "name": "Fordham University Gabelli Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "frankfurt_mim",
+    "name": "Frankfurt School of Finance & Management MSc Management",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "free_berlin_mim",
+    "name": "Freie Universit\u00e4t Berlin School of Business MSc",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "fudan",
+    "name": "Fudan University School of Management",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "fudan_executive_mba",
+    "name": "Fudan University School of Management (Executive MBA)",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "fudan_mim",
+    "name": "Fudan University School of Management (Master in Management)",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "fudan_mba",
+    "name": "Fudan University School of Management MBA",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "dom_cabral_emba",
+    "name": "Funda\u00e7\u00e3o Dom Cabral Executive MBA",
+    "country": "Brazil",
+    "website": ""
+  },
+  {
+    "id": "gibs_mba",
+    "name": "GIBS Business School MBA",
+    "country": "South Africa",
+    "website": ""
+  },
+  {
+    "id": "henry_mim",
+    "name": "George Washington (MS in Business Analytics)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "mcdonough_executive_mba",
+    "name": "Georgetown McDonough (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "mcdonough_mim",
+    "name": "Georgetown McDonough (Master of International Business)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "georgetown_emba",
+    "name": "Georgetown McDonough Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "georgetown",
+    "name": "Georgetown McDonough School of Business",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "scheller_executive_mba",
+    "name": "Georgia Tech Scheller (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "gim",
+    "name": "Goa Institute of Management",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "gim_mim",
+    "name": "Goa Institute of Management MiM Track",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "goethe_mim",
+    "name": "Goethe University Frankfurt MSc in Management",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "gibs_executive_mba",
+    "name": "Gordon Institute of Business Science (Executive MBA)",
+    "country": "South Africa",
+    "website": ""
+  },
+  {
+    "id": "gibs_mim",
+    "name": "Gordon Institute of Business Science (Master in Management)",
+    "country": "South Africa",
+    "website": ""
+  },
+  {
+    "id": "cem_stpetersburg_mim",
+    "name": "Graduate School of Management SPbU MiM",
+    "country": "Russia",
+    "website": ""
+  },
+  {
+    "id": "great_lakes_emba",
+    "name": "Great Lakes Institute Executive PGPM",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "grenoble",
+    "name": "Grenoble Ecole de Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "grenoble_executive_mba",
+    "name": "Grenoble Ecole de Management (Executive MBA)",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "grenoble_mim",
+    "name": "Grenoble Ecole de Management MSc Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "hbku",
+    "name": "HBKU College of Business",
+    "country": "Qatar",
+    "website": ""
+  },
+  {
+    "id": "hbku_emba",
+    "name": "HBKU College of Business Executive MBA",
+    "country": "Qatar",
+    "website": ""
+  },
+  {
+    "id": "hbku_mim",
+    "name": "HBKU College of Business MiM",
+    "country": "Qatar",
+    "website": ""
+  },
+  {
+    "id": "hec_liege_mim",
+    "name": "HEC Li\u00e8ge Master in Management",
+    "country": "Belgium",
+    "website": ""
+  },
+  {
+    "id": "hec_montreal_emba",
+    "name": "HEC Montreal Executive MBA",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "hec_paris_executive_mba",
+    "name": "HEC Paris (Executive MBA)",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "hec_paris_mim",
+    "name": "HEC Paris Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "hhl_mim",
+    "name": "HHL Leipzig Graduate School of Management MSc Management",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "hku",
+    "name": "HKU Business School",
+    "country": "Hong Kong",
+    "website": ""
+  },
+  {
+    "id": "hkust",
+    "name": "HKUST Business School",
+    "country": "Hong Kong",
+    "website": ""
+  },
+  {
+    "id": "hkust_executive_mba",
+    "name": "HKUST Business School (Executive MBA)",
+    "country": "Hong Kong",
+    "website": ""
+  },
+  {
+    "id": "hkust_mim_2",
+    "name": "HKUST Business School MSc (additional track)",
+    "country": "Hong Kong",
+    "website": ""
+  },
+  {
+    "id": "hkust_mim",
+    "name": "HKUST Business School MSc International Management",
+    "country": "Hong Kong",
+    "website": ""
+  },
+  {
+    "id": "hamad_emba",
+    "name": "Hamad Bin Khalifa University Executive MBA",
+    "country": "Qatar",
+    "website": ""
+  },
+  {
+    "id": "hanken_mim",
+    "name": "Hanken School of Economics MSc",
+    "country": "Finland",
+    "website": ""
+  },
+  {
+    "id": "hbs_mim",
+    "name": "Harvard Business School (MS/MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "hebrew_emba",
+    "name": "Hebrew University Executive MBA",
+    "country": "Israel",
+    "website": ""
+  },
+  {
+    "id": "hebrew",
+    "name": "Hebrew University MBA",
+    "country": "Israel",
+    "website": ""
+  },
+  {
+    "id": "henley",
+    "name": "Henley Business School",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "henley_executive_mba",
+    "name": "Henley Business School (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "henley_mim",
+    "name": "Henley Business School (MSc Management)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "reading_mim",
+    "name": "Henley Business School Reading MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "heriot_watt_mim",
+    "name": "Heriot-Watt University MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "hitotsubashi_emba",
+    "name": "Hitotsubashi ICS Executive MBA",
+    "country": "Japan",
+    "website": ""
+  },
+  {
+    "id": "hitotsubashi_mim",
+    "name": "Hitotsubashi ICS Master in Management",
+    "country": "Japan",
+    "website": ""
+  },
+  {
+    "id": "hitotsubashi_mba",
+    "name": "Hitotsubashi University ICS MBA",
+    "country": "Japan",
+    "website": ""
+  },
+  {
+    "id": "hult",
+    "name": "Hult International Business School MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "hult_executive_mba",
+    "name": "Hult International Business School MBA (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "humboldt_mim",
+    "name": "Humboldt University Berlin MSc Business Administration",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "iae",
+    "name": "IAE Business School",
+    "country": "Argentina",
+    "website": ""
+  },
+  {
+    "id": "iae_executive_mba",
+    "name": "IAE Business School (Executive MBA)",
+    "country": "Argentina",
+    "website": ""
+  },
+  {
+    "id": "iae_mim",
+    "name": "IAE Business School MiM",
+    "country": "Argentina",
+    "website": ""
+  },
+  {
+    "id": "iag_puc_emba",
+    "name": "IAG PUC-Rio Executive MBA",
+    "country": "Brazil",
+    "website": ""
+  },
+  {
+    "id": "icn_mim",
+    "name": "ICN Business School Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "ie_business",
+    "name": "IE Business School",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "ie_business_executive_mba",
+    "name": "IE Business School (Global Executive MBA)",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "ie_mim",
+    "name": "IE Business School Master in Management",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "ie_univ_mim",
+    "name": "IE University MSc International Management",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "iese",
+    "name": "IESE Business School",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "iese_executive_mba",
+    "name": "IESE Business School (Executive MBA)",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "iese_mim",
+    "name": "IESE Business School Master in Management",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "lille_mim",
+    "name": "IESEG Lille MiM (additional track)",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "ieseg_mim",
+    "name": "IESEG School of Management Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "delhi_iift_mim",
+    "name": "IIFT Delhi MiM Track",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iima_executive_mba",
+    "name": "IIM Ahmedabad (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_a_emba",
+    "name": "IIM Ahmedabad Executive MBA (PGPX)",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_a_emba_mba_(cat)",
+    "name": "IIM Ahmedabad Executive MBA (PGPX) (CAT-led PGP (MBA))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_a_mim",
+    "name": "IIM Ahmedabad PGPX MiM Track",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_amritsar_executive_mba",
+    "name": "IIM Amritsar (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iimb",
+    "name": "IIM Bangalore",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iimb_executive_mba",
+    "name": "IIM Bangalore (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_bangalore_epgp",
+    "name": "IIM Bangalore EPGP",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_bangalore_epgp_mba_(cat)",
+    "name": "IIM Bangalore EPGP (CAT-led PGP (MBA))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_b_mim",
+    "name": "IIM Bangalore PGPEM MiM Track",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_bodh_executive_mba",
+    "name": "IIM Bodh Gaya (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iimc",
+    "name": "IIM Calcutta",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iimc_executive_mba",
+    "name": "IIM Calcutta (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_c_emba",
+    "name": "IIM Calcutta Executive MBA (PGPEX)",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_c_emba_mba_(cat)",
+    "name": "IIM Calcutta Executive MBA (PGPEX) (CAT-led PGP (MBA))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iimi",
+    "name": "IIM Indore",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iimi_executive_mba",
+    "name": "IIM Indore (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_jammu_executive_mba",
+    "name": "IIM Jammu (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_kashipur_executive_mba",
+    "name": "IIM Kashipur (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iimk",
+    "name": "IIM Kozhikode",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iimk_executive_mba",
+    "name": "IIM Kozhikode (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iiml",
+    "name": "IIM Lucknow",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iiml_executive_mba",
+    "name": "IIM Lucknow (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_mumbai_executive_mba",
+    "name": "IIM Mumbai (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_nagpur_executive_mba",
+    "name": "IIM Nagpur (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_raipur_executive_mba",
+    "name": "IIM Raipur (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iimr",
+    "name": "IIM Ranchi",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iimr_executive_mba",
+    "name": "IIM Ranchi (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_rohtak_executive_mba",
+    "name": "IIM Rohtak (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_sambalpur_executive_mba",
+    "name": "IIM Sambalpur (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iims",
+    "name": "IIM Shillong",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iims_executive_mba",
+    "name": "IIM Shillong (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_sirmaur_executive_mba",
+    "name": "IIM Sirmaur (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iimt_executive_mba",
+    "name": "IIM Tiruchirappalli (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_udaipur_executive_mba",
+    "name": "IIM Udaipur (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iim_vizag_executive_mba",
+    "name": "IIM Visakhapatnam (EPGP (Executive))",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iit_kharagpur_vgsom",
+    "name": "IIT Kharagpur VGSoM",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "iit_roorkee",
+    "name": "IIT Roorkee (MBA)",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "imds_executive_mba",
+    "name": "IMD (Executive MBA)",
+    "country": "Switzerland",
+    "website": ""
+  },
+  {
+    "id": "imds_mim",
+    "name": "IMD (Master in Management and Sustainability)",
+    "country": "Switzerland",
+    "website": ""
+  },
+  {
+    "id": "imd",
+    "name": "IMD Business School",
+    "country": "Switzerland",
+    "website": ""
+  },
+  {
+    "id": "imd_emba_standalone",
+    "name": "IMD Executive MBA (standalone)",
+    "country": "Switzerland",
+    "website": ""
+  },
+  {
+    "id": "imt_mim",
+    "name": "IMT Business School Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "imt_gh_emba",
+    "name": "IMT Ghaziabad Executive PGDM",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "imt_gh_mim",
+    "name": "IMT Ghaziabad PGDM MiM Track",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "incae",
+    "name": "INCAE Business School",
+    "country": "Costa Rica",
+    "website": ""
+  },
+  {
+    "id": "incae_executive_mba",
+    "name": "INCAE Business School (Executive MBA)",
+    "country": "Costa Rica",
+    "website": ""
+  },
+  {
+    "id": "incae_mba",
+    "name": "INCAE Business School MBA",
+    "country": "Costa Rica",
+    "website": ""
+  },
+  {
+    "id": "incae_mim",
+    "name": "INCAE Business School MiM",
+    "country": "Costa Rica",
+    "website": ""
+  },
+  {
+    "id": "insead_executive_mba",
+    "name": "INSEAD (Global Executive MBA (GEMBA))",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "insead_ad",
+    "name": "INSEAD Abu Dhabi",
+    "country": "UAE",
+    "website": ""
+  },
+  {
+    "id": "tiemba_emba",
+    "name": "INSEAD-Tsinghua TIEMBA",
+    "country": "Singapore",
+    "website": ""
+  },
+  {
+    "id": "ipade",
+    "name": "IPADE Business School",
+    "country": "Mexico",
+    "website": ""
+  },
+  {
+    "id": "ipade_executive_mba",
+    "name": "IPADE Business School (Executive MBA)",
+    "country": "Mexico",
+    "website": ""
+  },
+  {
+    "id": "ipag_mim",
+    "name": "IPAG Business School MiM",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "iscte_mim",
+    "name": "ISCTE Business School MiM",
+    "country": "Portugal",
+    "website": ""
+  },
+  {
+    "id": "lisbon_iseg_mim",
+    "name": "ISEG Lisbon School of Economics & Management MSc",
+    "country": "Portugal",
+    "website": ""
+  },
+  {
+    "id": "itam",
+    "name": "ITAM",
+    "country": "Mexico",
+    "website": ""
+  },
+  {
+    "id": "itam_mim",
+    "name": "ITAM Master in Management",
+    "country": "Mexico",
+    "website": ""
+  },
+  {
+    "id": "imperial_executive_mba",
+    "name": "Imperial College Business School (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "imperial_mim",
+    "name": "Imperial College Business School MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "iift",
+    "name": "Indian Institute of Foreign Trade",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "isb",
+    "name": "Indian School of Business",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "kelley",
+    "name": "Indiana Kelley",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "kelley_executive_mba",
+    "name": "Indiana Kelley (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "kelley_mim",
+    "name": "Indiana Kelley (MS in Management)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "insper",
+    "name": "Insper",
+    "country": "Brazil",
+    "website": ""
+  },
+  {
+    "id": "insper_emba",
+    "name": "Insper Executive MBA",
+    "country": "Brazil",
+    "website": ""
+  },
+  {
+    "id": "insper_mba",
+    "name": "Insper MBA",
+    "country": "Brazil",
+    "website": ""
+  },
+  {
+    "id": "iowa_tippie_emba",
+    "name": "Iowa Tippie Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "ivey",
+    "name": "Ivey Business School",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "ivey_executive_mba",
+    "name": "Ivey Business School (Executive MBA)",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "ivey_mim",
+    "name": "Ivey Business School (MSc in Management)",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "jbims",
+    "name": "JBIMS Mumbai",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "jku_linz_mim",
+    "name": "JKU Linz MSc Management",
+    "country": "Austria",
+    "website": ""
+  },
+  {
+    "id": "kaist",
+    "name": "KAIST College of Business",
+    "country": "South Korea",
+    "website": ""
+  },
+  {
+    "id": "kaist_executive_mba",
+    "name": "KAIST College of Business (Executive MBA)",
+    "country": "South Korea",
+    "website": ""
+  },
+  {
+    "id": "kaist_mim",
+    "name": "KAIST College of Business (MSc Management Engineering)",
+    "country": "South Korea",
+    "website": ""
+  },
+  {
+    "id": "kaist_mba",
+    "name": "KAIST College of Business MBA",
+    "country": "South Korea",
+    "website": ""
+  },
+  {
+    "id": "kaist_emba_kr",
+    "name": "KAIST Executive MBA",
+    "country": "South Korea",
+    "website": ""
+  },
+  {
+    "id": "bordeaux_mim",
+    "name": "KEDGE Bordeaux MiM Track",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "kedge_mim",
+    "name": "KEDGE Business School Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "kfupm",
+    "name": "KFUPM College of Business",
+    "country": "Saudi Arabia",
+    "website": ""
+  },
+  {
+    "id": "kfupm_emba",
+    "name": "KFUPM College of Business Executive MBA",
+    "country": "Saudi Arabia",
+    "website": ""
+  },
+  {
+    "id": "leuven_mim",
+    "name": "KU Leuven Faculty of Economics MSc Management",
+    "country": "Belgium",
+    "website": ""
+  },
+  {
+    "id": "kit_mim",
+    "name": "Karlsruhe Institute of Technology MSc Industrial Engineering",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "keio",
+    "name": "Keio Business School",
+    "country": "Japan",
+    "website": ""
+  },
+  {
+    "id": "keio_executive_mba",
+    "name": "Keio Business School (Executive MBA)",
+    "country": "Japan",
+    "website": ""
+  },
+  {
+    "id": "keio_mim",
+    "name": "Keio Business School (Master of Management)",
+    "country": "Japan",
+    "website": ""
+  },
+  {
+    "id": "keio_mba",
+    "name": "Keio Business School MBA",
+    "country": "Japan",
+    "website": ""
+  },
+  {
+    "id": "kellogg_hkust_emba",
+    "name": "Kellogg-HKUST Executive MBA",
+    "country": "Hong Kong",
+    "website": ""
+  },
+  {
+    "id": "king_saud_emba",
+    "name": "King Saud University Executive MBA",
+    "country": "Saudi Arabia",
+    "website": ""
+  },
+  {
+    "id": "kcl_mim",
+    "name": "King's College London MSc International Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "kings_mim_2",
+    "name": "King's College London MSc International Management (extra)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "korea_univ_emba",
+    "name": "Korea University Business School Executive MBA",
+    "country": "South Korea",
+    "website": ""
+  },
+  {
+    "id": "korea_mim",
+    "name": "Korea University Business School MiM",
+    "country": "South Korea",
+    "website": ""
+  },
+  {
+    "id": "kozminski",
+    "name": "Kozminski University",
+    "country": "Poland",
+    "website": ""
+  },
+  {
+    "id": "kozminski_executive_mba",
+    "name": "Kozminski University (Executive MBA)",
+    "country": "Poland",
+    "website": ""
+  },
+  {
+    "id": "cbs_warsaw_mim",
+    "name": "Kozminski University MSc in Management",
+    "country": "Poland",
+    "website": ""
+  },
+  {
+    "id": "kozminski_mim",
+    "name": "Kozminski University Master in Management",
+    "country": "Poland",
+    "website": ""
+  },
+  {
+    "id": "koc_emba",
+    "name": "Ko\u00e7 University Executive MBA",
+    "country": "Turkey",
+    "website": ""
+  },
+  {
+    "id": "koc_mim",
+    "name": "Ko\u00e7 University MSc in Management & Strategy",
+    "country": "Turkey",
+    "website": ""
+  },
+  {
+    "id": "liba_mim",
+    "name": "LIBA Chennai MiM Track",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "munich_lmu_mim",
+    "name": "LMU Munich School of Management MSc",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "lse_mim",
+    "name": "LSE Master in Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "luiss",
+    "name": "LUISS Business School",
+    "country": "Italy",
+    "website": ""
+  },
+  {
+    "id": "luiss_emba",
+    "name": "LUISS Business School Executive MBA",
+    "country": "Italy",
+    "website": ""
+  },
+  {
+    "id": "luiss_mim",
+    "name": "LUISS Business School Master in Management",
+    "country": "Italy",
+    "website": ""
+  },
+  {
+    "id": "luiss_mim_rome",
+    "name": "LUISS Guido Carli University MiM",
+    "country": "Italy",
+    "website": ""
+  },
+  {
+    "id": "lagos",
+    "name": "Lagos Business School",
+    "country": "Nigeria",
+    "website": ""
+  },
+  {
+    "id": "lagos_executive_mba",
+    "name": "Lagos Business School (Executive MBA)",
+    "country": "Nigeria",
+    "website": ""
+  },
+  {
+    "id": "lagos_mim",
+    "name": "Lagos Business School (Master in Management)",
+    "country": "Nigeria",
+    "website": ""
+  },
+  {
+    "id": "lancaster",
+    "name": "Lancaster University Management School",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "lancaster_executive_mba",
+    "name": "Lancaster University Management School (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "lancaster_mim",
+    "name": "Lancaster University Management School (MSc Management)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "lehigh_emba",
+    "name": "Lehigh College of Business Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "liu_mim",
+    "name": "Link\u00f6ping University MSc Business Administration",
+    "country": "Sweden",
+    "website": ""
+  },
+  {
+    "id": "lbs",
+    "name": "London Business School",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "lbs_executive_mba",
+    "name": "London Business School (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "lbs_mim",
+    "name": "London Business School Masters in Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "lund_mim",
+    "name": "Lund University School of Economics MiM",
+    "country": "Sweden",
+    "website": ""
+  },
+  {
+    "id": "lyon_univ_mim",
+    "name": "Lyon University MSc Management Sciences",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "mdi_emba",
+    "name": "MDI Gurgaon Executive PGDM",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "mdi_mim",
+    "name": "MDI Gurgaon MiM Track",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "mib_emba",
+    "name": "MIB Trieste Executive MBA",
+    "country": "Italy",
+    "website": ""
+  },
+  {
+    "id": "mica",
+    "name": "MICA Ahmedabad",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "mip_mim",
+    "name": "MIP Politecnico di Milano School of Management MiM",
+    "country": "Italy",
+    "website": ""
+  },
+  {
+    "id": "sloan_master_of_finance",
+    "name": "MIT Sloan (Master of Finance)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "sloan_mim",
+    "name": "MIT Sloan (MiM)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "sloan_executive_mba",
+    "name": "MIT Sloan (Sloan Fellows / EMBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "maastricht_mim",
+    "name": "Maastricht University SBE MSc International Business",
+    "country": "Netherlands",
+    "website": ""
+  },
+  {
+    "id": "macquarie",
+    "name": "Macquarie Business School",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "macquarie_executive_mba",
+    "name": "Macquarie Business School (Executive MBA)",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "macquarie_mim",
+    "name": "Macquarie Business School (Master of Management)",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "mahidol",
+    "name": "Mahidol University CMMU",
+    "country": "Thailand",
+    "website": ""
+  },
+  {
+    "id": "mahidol_emba",
+    "name": "Mahidol University CMMU Executive MBA",
+    "country": "Thailand",
+    "website": ""
+  },
+  {
+    "id": "makerere_mim",
+    "name": "Makerere University Business School MiM",
+    "country": "Uganda",
+    "website": ""
+  },
+  {
+    "id": "mannheim_executive_mba",
+    "name": "Mannheim Business School (Executive MBA)",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "mannheim_mim",
+    "name": "Mannheim Business School Master in Management",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "masaryk_brno_mim",
+    "name": "Masaryk University Faculty of Economics MiM",
+    "country": "Czech Republic",
+    "website": ""
+  },
+  {
+    "id": "desautels_executive_mba",
+    "name": "McGill Desautels (Executive MBA)",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "desautels_mim",
+    "name": "McGill Desautels (Master of Management)",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "mbs",
+    "name": "Melbourne Business School",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "melbourne",
+    "name": "Melbourne Business School MBA",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "ross_executive_mba",
+    "name": "Michigan Ross (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "ross_mim",
+    "name": "Michigan Ross (Master of Management)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "broad_executive_mba",
+    "name": "Michigan State Broad (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "broad_mim",
+    "name": "Michigan State Broad (MS in Management)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "carlson_executive_mba",
+    "name": "Minnesota Carlson (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "monash",
+    "name": "Monash Business School",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "monash_executive_mba",
+    "name": "Monash Business School (Executive MBA)",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "monash_mim",
+    "name": "Monash Business School (Master of Management)",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "monash_mim_2",
+    "name": "Monash Business School Master of Management",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "montpellier_mim",
+    "name": "Montpellier Business School Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "neoma_mim",
+    "name": "NEOMA Business School Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "nhh",
+    "name": "NHH Norwegian School of Economics",
+    "country": "Norway",
+    "website": ""
+  },
+  {
+    "id": "nhh_executive_mba",
+    "name": "NHH Norwegian School of Economics (Executive MBA)",
+    "country": "Norway",
+    "website": ""
+  },
+  {
+    "id": "nhh_mim",
+    "name": "NHH Norwegian School of Economics MSc Economics & Business Administration",
+    "country": "Norway",
+    "website": ""
+  },
+  {
+    "id": "nmims_mim",
+    "name": "NMIMS Mumbai MiM Track",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "nova_mim_add",
+    "name": "NOVA SBE MSc in Management (additional)",
+    "country": "Portugal",
+    "website": ""
+  },
+  {
+    "id": "nus",
+    "name": "NUS Business School",
+    "country": "Singapore",
+    "website": ""
+  },
+  {
+    "id": "nus_executive_mba",
+    "name": "NUS Business School (Executive MBA)",
+    "country": "Singapore",
+    "website": ""
+  },
+  {
+    "id": "nus_emba_standalone",
+    "name": "NUS Business School Executive MBA (standalone)",
+    "country": "Singapore",
+    "website": ""
+  },
+  {
+    "id": "nus_mba",
+    "name": "NUS Business School MBA",
+    "country": "Singapore",
+    "website": ""
+  },
+  {
+    "id": "nus_mim",
+    "name": "NUS Business School MSc Management",
+    "country": "Singapore",
+    "website": ""
+  },
+  {
+    "id": "nus_mim_2",
+    "name": "NUS Business School MSc in Management (additional)",
+    "country": "Singapore",
+    "website": ""
+  },
+  {
+    "id": "stern",
+    "name": "NYU Stern",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "stern_executive_mba",
+    "name": "NYU Stern (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "stern_mim",
+    "name": "NYU Stern (MS in Management)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "nagoya_emba",
+    "name": "Nagoya University of Commerce Executive MBA",
+    "country": "Japan",
+    "website": ""
+  },
+  {
+    "id": "nagoya_mim",
+    "name": "Nagoya University of Commerce MiM",
+    "country": "Japan",
+    "website": ""
+  },
+  {
+    "id": "nanjing_emba",
+    "name": "Nanjing University Business School EMBA",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "nanyang",
+    "name": "Nanyang Business School",
+    "country": "Singapore",
+    "website": ""
+  },
+  {
+    "id": "nanyang_executive_mba",
+    "name": "Nanyang Business School (Executive MBA)",
+    "country": "Singapore",
+    "website": ""
+  },
+  {
+    "id": "ntu_emba",
+    "name": "Nanyang Business School Executive MBA (standalone)",
+    "country": "Singapore",
+    "website": ""
+  },
+  {
+    "id": "ntu_sg_mim",
+    "name": "Nanyang Business School MSc in Management",
+    "country": "Singapore",
+    "website": ""
+  },
+  {
+    "id": "nirma",
+    "name": "Nirma Institute of Management",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "imd_nord",
+    "name": "Nord University Business School",
+    "country": "Norway",
+    "website": ""
+  },
+  {
+    "id": "northeastern_dmore",
+    "name": "Northeastern D'Amore-McKim",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "northeastern_emba",
+    "name": "Northeastern D'Amore-McKim Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "kellogg_executive_mba",
+    "name": "Northwestern Kellogg (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "mendoza_executive_mba",
+    "name": "Notre Dame Mendoza (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "mendoza_mim",
+    "name": "Notre Dame Mendoza (Master of Science in Management)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "nottingham",
+    "name": "Nottingham University Business School",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "nottingham_executive_mba",
+    "name": "Nottingham University Business School (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "nottingham_mim",
+    "name": "Nottingham University Business School (MSc Management)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "bsg_lisbon",
+    "name": "Nova SBE",
+    "country": "Portugal",
+    "website": ""
+  },
+  {
+    "id": "bsg_lisbon_executive_mba",
+    "name": "Nova SBE (ISB PGPMAX (Executive))",
+    "country": "Portugal",
+    "website": ""
+  },
+  {
+    "id": "bsg_lisbon_mba",
+    "name": "Nova SBE (PGP YL (Young Leaders))",
+    "country": "Portugal",
+    "website": ""
+  },
+  {
+    "id": "nova_sbe_mim",
+    "name": "Nova SBE Master in Management",
+    "country": "Portugal",
+    "website": ""
+  },
+  {
+    "id": "nyenrode_emba",
+    "name": "Nyenrode Business University Executive MBA",
+    "country": "Netherlands",
+    "website": ""
+  },
+  {
+    "id": "fisher_executive_mba",
+    "name": "Ohio State Fisher (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "fisher_mim",
+    "name": "Ohio State Fisher (Master of Business Operational Excellence)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "otago",
+    "name": "Otago Business School",
+    "country": "New Zealand",
+    "website": ""
+  },
+  {
+    "id": "otago_emba",
+    "name": "Otago Business School Executive MBA",
+    "country": "New Zealand",
+    "website": ""
+  },
+  {
+    "id": "oulu_mim",
+    "name": "Oulu Business School MSc Management",
+    "country": "Finland",
+    "website": ""
+  },
+  {
+    "id": "obbs_emba",
+    "name": "Oxford Brookes Business School Executive MBA",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "oxford_brookes_mim",
+    "name": "Oxford Brookes University MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "puc_chile_mim",
+    "name": "PUC Chile School of Management MiM",
+    "country": "Chile",
+    "website": ""
+  },
+  {
+    "id": "dauphine_mim",
+    "name": "Paris Dauphine-PSL MSc Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "peking_mim",
+    "name": "Peking Guanghua MSc Management",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "peking_gsm_executive_mba",
+    "name": "Peking Guanghua School of Management (Executive MBA)",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "peking_gsm_mim",
+    "name": "Peking Guanghua School of Management (Master in Management)",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "guanghua_kellogg_emba",
+    "name": "Peking Guanghua-Kellogg Executive MBA",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "peking_gsm_mba",
+    "name": "Peking University Guanghua School of Management MBA",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "smeal_psu_emba",
+    "name": "Penn State Smeal Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "pitt_katz_emba",
+    "name": "Pittsburgh Katz Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "pitt_katz",
+    "name": "Pittsburgh Katz Graduate School of Business",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "polimi",
+    "name": "Politecnico di Milano GSoM",
+    "country": "Italy",
+    "website": ""
+  },
+  {
+    "id": "polimi_executive_mba",
+    "name": "Politecnico di Milano GSoM (Executive MBA)",
+    "country": "Italy",
+    "website": ""
+  },
+  {
+    "id": "polimi_mim",
+    "name": "Politecnico di Milano School of Management MSc Management Engineering",
+    "country": "Italy",
+    "website": ""
+  },
+  {
+    "id": "puc_chile_emba",
+    "name": "Pontificia Universidad Cat\u00f3lica de Chile EMBA",
+    "country": "Chile",
+    "website": ""
+  },
+  {
+    "id": "poznan_mim",
+    "name": "Poznan University of Economics MSc Management",
+    "country": "Poland",
+    "website": ""
+  },
+  {
+    "id": "prague_vse_emba",
+    "name": "Prague University of Economics Executive MBA",
+    "country": "Czech Republic",
+    "website": ""
+  },
+  {
+    "id": "prague_vse_mim",
+    "name": "Prague University of Economics VSE MiM",
+    "country": "Czech Republic",
+    "website": ""
+  },
+  {
+    "id": "krannert",
+    "name": "Purdue Krannert",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "queen_mary_mim",
+    "name": "Queen Mary University London MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "rmit_emba",
+    "name": "RMIT University Executive MBA",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "rmit",
+    "name": "RMIT University MBA",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "rwth_mim",
+    "name": "RWTH Aachen University MSc Business Administration",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "renmin_emba",
+    "name": "Renmin University Business School EMBA",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "renmin_mim",
+    "name": "Renmin University Business School MiM",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "rennes_mim",
+    "name": "Rennes School of Business Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "rice_jones",
+    "name": "Rice University Jones Graduate School of Business",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "rice_jones_executive_mba",
+    "name": "Rice University Jones Graduate School of Business (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "ritsumeikan_mim",
+    "name": "Ritsumeikan Asia Pacific University MiM",
+    "country": "Japan",
+    "website": ""
+  },
+  {
+    "id": "simon_executive_mba",
+    "name": "Rochester Simon (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "simon_mim",
+    "name": "Rochester Simon (MS in Management)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "rotman_executive_mba",
+    "name": "Rotman School of Management (Executive MBA)",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "rotman_mim",
+    "name": "Rotman School of Management (Master of Management Analytics)",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "rsm",
+    "name": "Rotterdam School of Management",
+    "country": "Netherlands",
+    "website": ""
+  },
+  {
+    "id": "rsm_executive_mba",
+    "name": "Rotterdam School of Management (Executive MBA)",
+    "country": "Netherlands",
+    "website": ""
+  },
+  {
+    "id": "rsm_mim",
+    "name": "Rotterdam School of Management MSc Management",
+    "country": "Netherlands",
+    "website": ""
+  },
+  {
+    "id": "rutgers",
+    "name": "Rutgers Business School",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "rutgers_emba",
+    "name": "Rutgers Business School Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "sda_bocconi",
+    "name": "SDA Bocconi",
+    "country": "Italy",
+    "website": ""
+  },
+  {
+    "id": "sda_bocconi_executive_mba",
+    "name": "SDA Bocconi (Executive MBA)",
+    "country": "Italy",
+    "website": ""
+  },
+  {
+    "id": "sda_bocconi_mim",
+    "name": "SDA Bocconi Master in International Management",
+    "country": "Italy",
+    "website": ""
+  },
+  {
+    "id": "sgh_warsaw_mim",
+    "name": "SGH Warsaw MSc International Business",
+    "country": "Poland",
+    "website": ""
+  },
+  {
+    "id": "sjtu_kedge_emba",
+    "name": "SJTU\u2013KEDGE Joint Executive MBA",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "skema",
+    "name": "SKEMA Business School",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "skema_executive_mba",
+    "name": "SKEMA Business School (Global Executive MBA)",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "skema_mim",
+    "name": "SKEMA Business School MSc in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "skolkovo_emba",
+    "name": "SKOLKOVO Moscow School of Management EMBA",
+    "country": "Russia",
+    "website": ""
+  },
+  {
+    "id": "skolkovo_mim",
+    "name": "SKOLKOVO Moscow School of Management MiM",
+    "country": "Russia",
+    "website": ""
+  },
+  {
+    "id": "cox",
+    "name": "SMU Cox",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "cox_smu_emba",
+    "name": "SMU Cox Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "smu_mim_sg",
+    "name": "SMU Lee Kong Chian MSc in Management",
+    "country": "Singapore",
+    "website": ""
+  },
+  {
+    "id": "sp_jain_emba",
+    "name": "SP Jain School of Global Management EMBA",
+    "country": "UAE",
+    "website": ""
+  },
+  {
+    "id": "spjimr_emba",
+    "name": "SPJIMR Executive MBA (PGMPW)",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "spjimr_mim",
+    "name": "SPJIMR PGDM MiM Track",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "sse_riga_mim",
+    "name": "SSE Riga MSc Economics",
+    "country": "Latvia",
+    "website": ""
+  },
+  {
+    "id": "sabanci_emba",
+    "name": "Sabanc\u0131 University Executive MBA",
+    "country": "Turkey",
+    "website": ""
+  },
+  {
+    "id": "sabanci_mim",
+    "name": "Sabanc\u0131 University MSc in Management",
+    "country": "Turkey",
+    "website": ""
+  },
+  {
+    "id": "sabanci",
+    "name": "Sabanc\u0131 University School of Management",
+    "country": "Turkey",
+    "website": ""
+  },
+  {
+    "id": "sbs_oxford_mena_executive_mba",
+    "name": "Said Business School - MENA Programs (Executive MBA)",
+    "country": "UK/UAE",
+    "website": ""
+  },
+  {
+    "id": "sasin_emba_th",
+    "name": "Sasin Chulalongkorn Executive MBA (standalone)",
+    "country": "Thailand",
+    "website": ""
+  },
+  {
+    "id": "sasin_executive_mba",
+    "name": "Sasin School of Management (Chula) (Executive MBA)",
+    "country": "Thailand",
+    "website": ""
+  },
+  {
+    "id": "oxford_mim",
+    "name": "Sa\u00efd Business School MSc Financial Economics",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "sciences_po_mim",
+    "name": "Sciences Po Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "snu_emba",
+    "name": "Seoul National University GSBA Executive MBA",
+    "country": "South Korea",
+    "website": ""
+  },
+  {
+    "id": "snu_mim",
+    "name": "Seoul National University GSBA MiM",
+    "country": "South Korea",
+    "website": ""
+  },
+  {
+    "id": "sjtu_antai_executive_mba",
+    "name": "Shanghai Jiao Tong Antai (Executive MBA)",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "sjtu_antai_mim",
+    "name": "Shanghai Jiao Tong Antai (Master in Management)",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "sjtu_mim",
+    "name": "Shanghai Jiao Tong Antai MSc Management",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "smu_singapore",
+    "name": "Singapore Management University MBA",
+    "country": "Singapore",
+    "website": ""
+  },
+  {
+    "id": "smu_singapore_executive_mba",
+    "name": "Singapore Management University MBA (Executive MBA)",
+    "country": "Singapore",
+    "website": ""
+  },
+  {
+    "id": "smu_mim",
+    "name": "Singapore Management University Master in Management",
+    "country": "Singapore",
+    "website": ""
+  },
+  {
+    "id": "smith_queens",
+    "name": "Smith School of Business (Queen's)",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "smith_queens_executive_mba",
+    "name": "Smith School of Business (Queen's) (Executive MBA)",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "smith_queens_mim",
+    "name": "Smith School of Business (Queen's) (Master of Management)",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "solvay",
+    "name": "Solvay Brussels School",
+    "country": "Belgium",
+    "website": ""
+  },
+  {
+    "id": "solvay_emba",
+    "name": "Solvay Brussels School Executive MBA",
+    "country": "Belgium",
+    "website": ""
+  },
+  {
+    "id": "solvay_mim",
+    "name": "Solvay Brussels School MSc Business Engineering",
+    "country": "Belgium",
+    "website": ""
+  },
+  {
+    "id": "gsb_executive_mba",
+    "name": "Stanford GSB (MSx Program)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "stellenbosch",
+    "name": "Stellenbosch Business School",
+    "country": "South Africa",
+    "website": ""
+  },
+  {
+    "id": "stellenbosch_executive_mba",
+    "name": "Stellenbosch Business School (Executive MBA)",
+    "country": "South Africa",
+    "website": ""
+  },
+  {
+    "id": "stellenbosch_mim",
+    "name": "Stellenbosch Business School (Master in Management)",
+    "country": "South Africa",
+    "website": ""
+  },
+  {
+    "id": "ssc_emba",
+    "name": "Stockholm School of Economics Executive MBA",
+    "country": "Sweden",
+    "website": ""
+  },
+  {
+    "id": "stockholm_mim",
+    "name": "Stockholm School of Economics MSc",
+    "country": "Sweden",
+    "website": ""
+  },
+  {
+    "id": "sse_mim",
+    "name": "Stockholm School of Economics MSc Business & Management",
+    "country": "Sweden",
+    "website": ""
+  },
+  {
+    "id": "strathclyde_executive_mba",
+    "name": "Strathclyde Business School (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "strathclyde_mim",
+    "name": "Strathclyde Business School (MSc Management)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "strathmore",
+    "name": "Strathmore Business School",
+    "country": "Kenya",
+    "website": ""
+  },
+  {
+    "id": "strathmore_executive_mba",
+    "name": "Strathmore Business School (Executive MBA)",
+    "country": "Kenya",
+    "website": ""
+  },
+  {
+    "id": "strathmore_mim",
+    "name": "Strathmore Business School MiM",
+    "country": "Kenya",
+    "website": ""
+  },
+  {
+    "id": "lingnan_mim",
+    "name": "Sun Yat-sen University Lingnan College MiM",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "sun_yat_sen_emba",
+    "name": "Sun Yat-sen University Lingnan EMBA",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "skku",
+    "name": "Sungkyunkwan GSB",
+    "country": "South Korea",
+    "website": ""
+  },
+  {
+    "id": "skku_emba",
+    "name": "Sungkyunkwan GSB Executive MBA",
+    "country": "South Korea",
+    "website": ""
+  },
+  {
+    "id": "sunway",
+    "name": "Sunway University Business School",
+    "country": "Malaysia",
+    "website": ""
+  },
+  {
+    "id": "sunway_emba",
+    "name": "Sunway University Business School Executive MBA",
+    "country": "Malaysia",
+    "website": ""
+  },
+  {
+    "id": "whitman",
+    "name": "Syracuse Whitman",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "whitman_emba",
+    "name": "Syracuse Whitman Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "tbs_mim",
+    "name": "TBS Education Master in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "tias_emba",
+    "name": "TIAS Business School Executive MBA",
+    "country": "Netherlands",
+    "website": ""
+  },
+  {
+    "id": "tiss",
+    "name": "TISS Mumbai (HRM)",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "trium_emba",
+    "name": "TRIUM Global Executive MBA (HEC/LSE/NYU)",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "tu_munich_mim",
+    "name": "TU Munich SoM MSc in Management & Technology",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "tum_mim",
+    "name": "TUM School of Management MSc Management & Technology",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "tampere_mim",
+    "name": "Tampere University MSc Management",
+    "country": "Finland",
+    "website": ""
+  },
+  {
+    "id": "technion",
+    "name": "Technion MBA",
+    "country": "Israel",
+    "website": ""
+  },
+  {
+    "id": "technion_emba",
+    "name": "Technion MBA Executive Program",
+    "country": "Israel",
+    "website": ""
+  },
+  {
+    "id": "tau_emba",
+    "name": "Tel Aviv University Executive MBA",
+    "country": "Israel",
+    "website": ""
+  },
+  {
+    "id": "tau",
+    "name": "Tel Aviv University MBA",
+    "country": "Israel",
+    "website": ""
+  },
+  {
+    "id": "telecom_paris_mim",
+    "name": "Telecom Paris MSc in Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "temple_fox_emba",
+    "name": "Temple University Fox Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "mays_emba",
+    "name": "Texas A&M Mays Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "thammasat_mim",
+    "name": "Thammasat University MiM",
+    "country": "Thailand",
+    "website": ""
+  },
+  {
+    "id": "wharton_executive_mba",
+    "name": "The Wharton School (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "thunderbird",
+    "name": "Thunderbird School of Global Management",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "thunderbird_executive_mba",
+    "name": "Thunderbird School of Global Management (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "tias",
+    "name": "Tilburg TIAS",
+    "country": "Netherlands",
+    "website": ""
+  },
+  {
+    "id": "tilburg_mim",
+    "name": "Tilburg University School of Economics MSc Management",
+    "country": "Netherlands",
+    "website": ""
+  },
+  {
+    "id": "tbs_executive_mba",
+    "name": "Toulouse Business School (Executive MBA)",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "toulouse_bse_mim",
+    "name": "Toulouse School of Economics MSc Management",
+    "country": "France",
+    "website": ""
+  },
+  {
+    "id": "tcd_mim",
+    "name": "Trinity College Dublin MSc Management",
+    "country": "Ireland",
+    "website": ""
+  },
+  {
+    "id": "tsinghua_sem_executive_mba",
+    "name": "Tsinghua SEM (Executive MBA)",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "tsinghua_sem_mim",
+    "name": "Tsinghua SEM (Master in Management)",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "tsinghua_mim",
+    "name": "Tsinghua SEM Master in Management",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "sauder_executive_mba",
+    "name": "UBC Sauder (Executive MBA)",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "sauder_mim",
+    "name": "UBC Sauder (Master of Management)",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "haas_executive_mba",
+    "name": "UC Berkeley Haas (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "smurfit_executive_mba",
+    "name": "UCD Michael Smurfit (Executive MBA)",
+    "country": "Ireland",
+    "website": ""
+  },
+  {
+    "id": "smurfit_mim",
+    "name": "UCD Michael Smurfit (MSc in Management)",
+    "country": "Ireland",
+    "website": ""
+  },
+  {
+    "id": "ucd_smurfit_mim",
+    "name": "UCD Smurfit MSc Management (additional)",
+    "country": "Ireland",
+    "website": ""
+  },
+  {
+    "id": "ucl_mim",
+    "name": "UCL School of Management MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "anderson_executive_mba",
+    "name": "UCLA Anderson (Executive MBA (FEMBA))",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "anderson_mim",
+    "name": "UCLA Anderson (Master of Science in Business)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "uct_gsb_emba2",
+    "name": "UCT GSB Modular Executive MBA",
+    "country": "South Africa",
+    "website": ""
+  },
+  {
+    "id": "ucgsb_emba",
+    "name": "UCT Graduate School of Business Executive MBA",
+    "country": "South Africa",
+    "website": ""
+  },
+  {
+    "id": "uconn",
+    "name": "UConn School of Business",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "isenberg_mim",
+    "name": "UMass Isenberg (MS in Management)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "kenan_flagler_executive_mba",
+    "name": "UNC Kenan-Flagler (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "kenan_flagler_mim",
+    "name": "UNC Kenan-Flagler (Master of Management)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "unsw_agsm_emba",
+    "name": "UNSW AGSM Executive MBA",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "unsw_mim",
+    "name": "UNSW Business School Master of Management",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "up_diliman_mim",
+    "name": "UP Diliman MSc Management",
+    "country": "Philippines",
+    "website": ""
+  },
+  {
+    "id": "marshall_executive_mba",
+    "name": "USC Marshall (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "marshall_mim",
+    "name": "USC Marshall (MS in Management)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "mccombs_executive_mba",
+    "name": "UT Austin McCombs (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "mccombs_mim",
+    "name": "UT Austin McCombs (MS in Management)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "uts",
+    "name": "UTS Business School",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "darden_executive_mba",
+    "name": "UVA Darden (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "darden_mim",
+    "name": "UVA Darden (MS in Commerce)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "foster",
+    "name": "UW Foster",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "foster_executive_mba",
+    "name": "UW Foster (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "ulster_emba",
+    "name": "Ulster University Executive MBA",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "uai",
+    "name": "Universidad Adolfo Ib\u00e1\u00f1ez",
+    "country": "Chile",
+    "website": ""
+  },
+  {
+    "id": "uai_emba",
+    "name": "Universidad Adolfo Ib\u00e1\u00f1ez Executive MBA",
+    "country": "Chile",
+    "website": ""
+  },
+  {
+    "id": "uam_madrid_mim",
+    "name": "Universidad Aut\u00f3noma de Madrid MSc Management",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "dit_tella_emba",
+    "name": "Universidad Torcuato Di Tella Executive MBA",
+    "country": "Argentina",
+    "website": ""
+  },
+  {
+    "id": "chile_emba",
+    "name": "Universidad de Chile EMBA",
+    "country": "Chile",
+    "website": ""
+  },
+  {
+    "id": "uniandes",
+    "name": "Universidad de los Andes",
+    "country": "Colombia",
+    "website": ""
+  },
+  {
+    "id": "uniandes_mim",
+    "name": "Universidad de los Andes MiM",
+    "country": "Colombia",
+    "website": ""
+  },
+  {
+    "id": "ups_mim",
+    "name": "Universidade Cat\u00f3lica Portuguesa MiM",
+    "country": "Portugal",
+    "website": ""
+  },
+  {
+    "id": "ui_indonesia_mim",
+    "name": "Universitas Indonesia MSc Management",
+    "country": "Indonesia",
+    "website": ""
+  },
+  {
+    "id": "pompeu_mim",
+    "name": "Universitat Pompeu Fabra BSM MSc Management",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "utm_emba",
+    "name": "Universiti Teknologi Malaysia Executive MBA",
+    "country": "Malaysia",
+    "website": ""
+  },
+  {
+    "id": "utm_mim",
+    "name": "Universiti Teknologi Malaysia MiM",
+    "country": "Malaysia",
+    "website": ""
+  },
+  {
+    "id": "aberdeen_mim",
+    "name": "University of Aberdeen MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "adelaide_emba",
+    "name": "University of Adelaide Executive MBA",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "adelaide",
+    "name": "University of Adelaide MBA",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "alberta_emba",
+    "name": "University of Alberta Executive MBA",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "amsterdam_mim",
+    "name": "University of Amsterdam Business School MSc",
+    "country": "Netherlands",
+    "website": ""
+  },
+  {
+    "id": "antwerp_mim",
+    "name": "University of Antwerp MSc Management",
+    "country": "Belgium",
+    "website": ""
+  },
+  {
+    "id": "auckland_emba",
+    "name": "University of Auckland Business School Executive MBA",
+    "country": "New Zealand",
+    "website": ""
+  },
+  {
+    "id": "auckland_mim",
+    "name": "University of Auckland Business School MiM",
+    "country": "New Zealand",
+    "website": ""
+  },
+  {
+    "id": "augsburg_mim",
+    "name": "University of Augsburg MSc Business Administration",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "ub_barcelona_mim",
+    "name": "University of Barcelona MSc Management",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "basel_mim",
+    "name": "University of Basel MSc Business & Economics",
+    "country": "Switzerland",
+    "website": ""
+  },
+  {
+    "id": "bath",
+    "name": "University of Bath School of Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "bath_executive_mba",
+    "name": "University of Bath School of Management (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "bath_mim",
+    "name": "University of Bath School of Management (MSc in Management)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "bayreuth_mim",
+    "name": "University of Bayreuth MSc Management",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "belgrade_mim",
+    "name": "University of Belgrade Faculty of Economics MSc",
+    "country": "Serbia",
+    "website": ""
+  },
+  {
+    "id": "bergen_mim",
+    "name": "University of Bergen NHH MSc (additional track)",
+    "country": "Norway",
+    "website": ""
+  },
+  {
+    "id": "bern_mim",
+    "name": "University of Bern MSc Management",
+    "country": "Switzerland",
+    "website": ""
+  },
+  {
+    "id": "birmingham_mim",
+    "name": "University of Birmingham Business School MSc",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "bologna_mim",
+    "name": "University of Bologna MSc Management",
+    "country": "Italy",
+    "website": ""
+  },
+  {
+    "id": "canterbury_nz_emba",
+    "name": "University of Canterbury Executive MBA",
+    "country": "New Zealand",
+    "website": ""
+  },
+  {
+    "id": "cologne_mim",
+    "name": "University of Cologne Faculty of Management MSc",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "wiso_cologne_mim",
+    "name": "University of Cologne WiSo Faculty MSc Business Admin",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "uconn_emba",
+    "name": "University of Connecticut Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "crete_mim",
+    "name": "University of Crete MSc Business Administration",
+    "country": "Greece",
+    "website": ""
+  },
+  {
+    "id": "cyprus_mim",
+    "name": "University of Cyprus MSc Management",
+    "country": "Cyprus",
+    "website": ""
+  },
+  {
+    "id": "deusto_mim",
+    "name": "University of Deusto MSc Management",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "dundee_mim",
+    "name": "University of Dundee MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "uea_mim",
+    "name": "University of East Anglia MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "essex_mim",
+    "name": "University of Essex MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "fribourg_mim",
+    "name": "University of Fribourg MSc Management",
+    "country": "Switzerland",
+    "website": ""
+  },
+  {
+    "id": "galway_mim",
+    "name": "University of Galway MSc Management",
+    "country": "Ireland",
+    "website": ""
+  },
+  {
+    "id": "ghana_emba",
+    "name": "University of Ghana Business School Executive MBA",
+    "country": "Ghana",
+    "website": ""
+  },
+  {
+    "id": "glasgow_mim",
+    "name": "University of Glasgow Adam Smith Business School MSc",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "gothenburg_mim",
+    "name": "University of Gothenburg School of Business MiM",
+    "country": "Sweden",
+    "website": ""
+  },
+  {
+    "id": "groningen_mim",
+    "name": "University of Groningen Faculty of Economics MSc",
+    "country": "Netherlands",
+    "website": ""
+  },
+  {
+    "id": "hamburg_mim",
+    "name": "University of Hamburg MSc Business Administration",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "hertfordshire_emba",
+    "name": "University of Hertfordshire Executive MBA",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "amman_emba",
+    "name": "University of Jordan Executive MBA",
+    "country": "Jordan",
+    "website": ""
+  },
+  {
+    "id": "jyu_mim",
+    "name": "University of Jyv\u00e4skyl\u00e4 School of Business MSc",
+    "country": "Finland",
+    "website": ""
+  },
+  {
+    "id": "kent_mim",
+    "name": "University of Kent MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "leeds_mim",
+    "name": "University of Leeds Business School MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "liverpoolms_mim",
+    "name": "University of Liverpool Management School MSc",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "ljubljana_mim",
+    "name": "University of Ljubljana School of Economics MSc",
+    "country": "Slovenia",
+    "website": ""
+  },
+  {
+    "id": "um_emba",
+    "name": "University of Malaya Executive MBA",
+    "country": "Malaysia",
+    "website": ""
+  },
+  {
+    "id": "um_mim",
+    "name": "University of Malaya MSc Management",
+    "country": "Malaysia",
+    "website": ""
+  },
+  {
+    "id": "mannheim_mim_2",
+    "name": "University of Mannheim MSc in Management (Diplom)",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "unimelb_mim",
+    "name": "University of Melbourne FBE Master of Management",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "wwu_munster_mim",
+    "name": "University of M\u00fcnster School of Business MSc",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "nairobi_emba",
+    "name": "University of Nairobi Business School Executive MBA",
+    "country": "Kenya",
+    "website": ""
+  },
+  {
+    "id": "navarra_mim",
+    "name": "University of Navarra School of Economics MiM",
+    "country": "Spain",
+    "website": ""
+  },
+  {
+    "id": "oslo_mim",
+    "name": "University of Oslo MSc Economics & Management",
+    "country": "Norway",
+    "website": ""
+  },
+  {
+    "id": "padova_mim",
+    "name": "University of Padova MSc Management",
+    "country": "Italy",
+    "website": ""
+  },
+  {
+    "id": "passau_mim",
+    "name": "University of Passau MSc Business Administration",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "porto_emba",
+    "name": "University of Porto FEP Executive MBA",
+    "country": "Portugal",
+    "website": ""
+  },
+  {
+    "id": "porto_mim",
+    "name": "University of Porto FEP MSc Management",
+    "country": "Portugal",
+    "website": ""
+  },
+  {
+    "id": "pretoria_emba",
+    "name": "University of Pretoria GIBS Executive MBA (standalone)",
+    "country": "South Africa",
+    "website": ""
+  },
+  {
+    "id": "uq",
+    "name": "University of Queensland Business School",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "uq_emba",
+    "name": "University of Queensland Business School Executive MBA",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "uq_mim",
+    "name": "University of Queensland Business School Master of Management",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "sheffield_mim",
+    "name": "University of Sheffield MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "southampton_mim",
+    "name": "University of Southampton MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "st_gallen",
+    "name": "University of St. Gallen",
+    "country": "Switzerland",
+    "website": ""
+  },
+  {
+    "id": "st_gallen_executive_mba",
+    "name": "University of St. Gallen (Executive MBA)",
+    "country": "Switzerland",
+    "website": ""
+  },
+  {
+    "id": "st_gallen_mim",
+    "name": "University of St. Gallen Master in Management",
+    "country": "Switzerland",
+    "website": ""
+  },
+  {
+    "id": "hsg_mim",
+    "name": "University of St. Gallen MiM (additional track)",
+    "country": "Switzerland",
+    "website": ""
+  },
+  {
+    "id": "stirling_mim",
+    "name": "University of Stirling MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "stuttgart_mim",
+    "name": "University of Stuttgart MSc Business Administration",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "surrey_mim",
+    "name": "University of Surrey SBE MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "usyd_mim",
+    "name": "University of Sydney Business School Master of Management",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "tartu_mim",
+    "name": "University of Tartu MSc Business Administration",
+    "country": "Estonia",
+    "website": ""
+  },
+  {
+    "id": "turin_mim",
+    "name": "University of Turin MSc Business Management",
+    "country": "Italy",
+    "website": ""
+  },
+  {
+    "id": "turku_mim",
+    "name": "University of Turku School of Economics MSc",
+    "country": "Finland",
+    "website": ""
+  },
+  {
+    "id": "tubingen_mim",
+    "name": "University of T\u00fcbingen MSc Management and Economics",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "uwa_emba",
+    "name": "University of Western Australia Executive MBA",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "zagreb_mim",
+    "name": "University of Zagreb Faculty of Economics MSc",
+    "country": "Croatia",
+    "website": ""
+  },
+  {
+    "id": "zurich_mim",
+    "name": "University of Zurich MSc Management & Economics",
+    "country": "Switzerland",
+    "website": ""
+  },
+  {
+    "id": "usi_lugano_mim",
+    "name": "Universit\u00e0 della Svizzera italiana MSc Management",
+    "country": "Switzerland",
+    "website": ""
+  },
+  {
+    "id": "vnu",
+    "name": "VNU University of Economics and Business",
+    "country": "Vietnam",
+    "website": ""
+  },
+  {
+    "id": "owen_executive_mba",
+    "name": "Vanderbilt Owen (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "vienna_wu_mim",
+    "name": "Vienna University of Economics WU MSc",
+    "country": "Austria",
+    "website": ""
+  },
+  {
+    "id": "pamplin",
+    "name": "Virginia Tech Pamplin",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "pamplin_vt_emba",
+    "name": "Virginia Tech Pamplin Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "vlerick",
+    "name": "Vlerick Business School",
+    "country": "Belgium",
+    "website": ""
+  },
+  {
+    "id": "vlerick_executive_mba",
+    "name": "Vlerick Business School (Executive MBA)",
+    "country": "Belgium",
+    "website": ""
+  },
+  {
+    "id": "vlerick_mba",
+    "name": "Vlerick Business School MBA",
+    "country": "Belgium",
+    "website": ""
+  },
+  {
+    "id": "vlerick_mim",
+    "name": "Vlerick Business School Master in General Management",
+    "country": "Belgium",
+    "website": ""
+  },
+  {
+    "id": "whu",
+    "name": "WHU \u2013 Otto Beisheim School of Management",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "whu_executive_mba",
+    "name": "WHU \u2013 Otto Beisheim School of Management (Executive MBA)",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "whu_mim",
+    "name": "WHU \u2014 Otto Beisheim School of Management MiM",
+    "country": "Germany",
+    "website": ""
+  },
+  {
+    "id": "wsg_bydgoszcz_mim",
+    "name": "WSB University MSc Management",
+    "country": "Poland",
+    "website": ""
+  },
+  {
+    "id": "wu_vienna_mim",
+    "name": "WU Vienna Master in Strategy, Innovation, and Management Control",
+    "country": "Austria",
+    "website": ""
+  },
+  {
+    "id": "wbs_mim",
+    "name": "Warsaw School of Economics SGH MiM",
+    "country": "Poland",
+    "website": ""
+  },
+  {
+    "id": "warwick_executive_mba",
+    "name": "Warwick Business School (Executive MBA)",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "warwick_mim",
+    "name": "Warwick Business School MSc Management",
+    "country": "UK",
+    "website": ""
+  },
+  {
+    "id": "waseda",
+    "name": "Waseda Business School",
+    "country": "Japan",
+    "website": ""
+  },
+  {
+    "id": "waseda_emba",
+    "name": "Waseda Business School Executive MBA",
+    "country": "Japan",
+    "website": ""
+  },
+  {
+    "id": "waseda_mba",
+    "name": "Waseda Business School MBA",
+    "country": "Japan",
+    "website": ""
+  },
+  {
+    "id": "waseda_mim",
+    "name": "Waseda Business School MSc Management",
+    "country": "Japan",
+    "website": ""
+  },
+  {
+    "id": "olin_executive_mba",
+    "name": "WashU Olin (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "fudan_washu_emba",
+    "name": "WashU-Fudan Executive MBA",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "wash_foster",
+    "name": "Washington Foster",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "olin_wustl",
+    "name": "Washington University Olin Business School",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "olin_wustl_emba",
+    "name": "Washington University Olin Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "wbs_sydney_emba",
+    "name": "Western Sydney University Executive MBA",
+    "country": "Australia",
+    "website": ""
+  },
+  {
+    "id": "willam_mary",
+    "name": "William & Mary Mason",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "willam_mary_emba",
+    "name": "William & Mary Mason Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "wisconsin",
+    "name": "Wisconsin School of Business",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "wisconsin_emba",
+    "name": "Wisconsin School of Business Executive MBA",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "wits",
+    "name": "Wits Business School",
+    "country": "South Africa",
+    "website": ""
+  },
+  {
+    "id": "wits_executive_mba",
+    "name": "Wits Business School (Executive MBA)",
+    "country": "South Africa",
+    "website": ""
+  },
+  {
+    "id": "wits_mim",
+    "name": "Wits Business School (Master in Management)",
+    "country": "South Africa",
+    "website": ""
+  },
+  {
+    "id": "wroclaw_mim",
+    "name": "Wroclaw University of Economics MSc Management",
+    "country": "Poland",
+    "website": ""
+  },
+  {
+    "id": "wuhan_emba",
+    "name": "Wuhan University EMS EMBA",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "xlri_emba",
+    "name": "XLRI Executive MBA (PGDM-GMP)",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "xlri",
+    "name": "XLRI Jamshedpur",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "xlri_mim",
+    "name": "XLRI Jamshedpur GMP-MiM",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "xim",
+    "name": "Xavier Institute of Management Bhubaneswar",
+    "country": "India",
+    "website": ""
+  },
+  {
+    "id": "xiamen_emba",
+    "name": "Xiamen University School of Management EMBA",
+    "country": "China",
+    "website": ""
+  },
+  {
+    "id": "yale_som_executive_mba",
+    "name": "Yale SOM (Executive MBA)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "yale_som_mim",
+    "name": "Yale SOM (Master of Advanced Management)",
+    "country": "USA",
+    "website": ""
+  },
+  {
+    "id": "yonsei",
+    "name": "Yonsei School of Business",
+    "country": "South Korea",
+    "website": ""
+  },
+  {
+    "id": "yonsei_emba",
+    "name": "Yonsei School of Business Executive MBA",
+    "country": "South Korea",
+    "website": ""
+  },
+  {
+    "id": "yonsei_mba",
+    "name": "Yonsei University School of Business MBA",
+    "country": "South Korea",
+    "website": ""
+  },
+  {
+    "id": "yonsei_mim",
+    "name": "Yonsei University School of Business MiM",
+    "country": "South Korea",
+    "website": ""
+  },
+  {
+    "id": "schulich_executive_mba",
+    "name": "York Schulich (Executive MBA)",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "schulich_mim",
+    "name": "York Schulich (Master of Management)",
+    "country": "Canada",
+    "website": ""
+  },
+  {
+    "id": "zhaw_mim",
+    "name": "ZHAW School of Management MSc",
+    "country": "Switzerland",
+    "website": ""
+  },
+  {
+    "id": "zhejiang_emba",
+    "name": "Zhejiang University School of Management EMBA",
+    "country": "China",
+    "website": ""
+  }
+]

@@ -1,0 +1,71 @@
+{
+  "school_id": "kelley",
+  "real_applicant_profiles": [
+    {
+      "gmat_score": 700,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": null,
+      "round": null,
+      "year": 2021
+    },
+    {
+      "gmat_score": 710,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": null,
+      "round": null,
+      "year": 2021
+    },
+    {
+      "gmat_score": 600,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": null,
+      "round": null,
+      "year": 2021
+    }
+  ],
+  "interview_questions_reported": null,
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": 150
+  },
+  "student_reviews": [
+    {
+      "rating": 5.0,
+      "pros": "Collaborative experience, professors care about students, small class size allows knowing everyone",
+      "cons": "Facilities",
+      "year_of_review": 2020
+    },
+    {
+      "rating": 5.0,
+      "pros": "Academy system, excellent career services, strong alumni network, friendly classmates",
+      "cons": "Facilities",
+      "year_of_review": 2020
+    },
+    {
+      "rating": 5.0,
+      "pros": "Diverse student body, strong brand recognition, warm culture",
+      "cons": "Location",
+      "year_of_review": 2020
+    },
+    {
+      "rating": 5.0,
+      "pros": "Strong alumni network, international opportunities (GLOBASE), good for personal growth",
+      "cons": "Student body diversity, brand/ranking",
+      "year_of_review": 2020
+    },
+    {
+      "rating": null,
+      "pros": "Collaborative culture, experiential learning, strong alumni network, good company recruitment",
+      "cons": null,
+      "year_of_review": 2020
+    }
+  ]
+}

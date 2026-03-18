@@ -1,0 +1,32 @@
+{
+  "type": "essay_prompts",
+  "data": [
+    {
+      "school_name": "Cornell Johnson School",
+      "year": "2014-2015",
+      "prompts": [
+        {
+          "prompt_text": "Your Life Story - Write your life story in 1,000 characters or less, as though it were the table of contents for the book of Your Life.",
+          "word_limit": "1,000 characters",
+          "required": true
+        },
+        {
+          "prompt_text": "What job would you like to have immediately upon graduating with an MBA? (Two-year program)",
+          "word_limit": "1,000 characters",
+          "required": true
+        },
+        {
+          "prompt_text": "How did your pre-MBA experience prepare you for the job you envision post-MBA? (One-year program)",
+          "word_limit": "1,000 characters",
+          "required": true
+        },
+        {
+          "prompt_text": "Optional essay to address any aspects of your application you feel need further explanation or to highlight your strengths",
+          "word_limit": "Not specified",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "extracted_at": "2026-03-17T21:57:43.268997"
+}

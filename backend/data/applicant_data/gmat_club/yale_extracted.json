@@ -1,0 +1,31 @@
+{
+  "school_id": "anderson",
+  "real_applicant_profiles": [],
+  "interview_questions_reported": [],
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": null
+  },
+  "student_reviews": [
+    {
+      "rating": 3.0,
+      "pros": "Curriculum, Classes, Professors, Alumni Network, Location",
+      "cons": "Student body, diversity",
+      "year_of_review": 2026
+    },
+    {
+      "rating": 1.0,
+      "pros": "Location, Brand/Ranking",
+      "cons": "Curriculum, Classes, Professors, Student body, diversity, Career opportunities provided by school, Culture & Student Support, Admissions Team, Specialization in a particular area",
+      "year_of_review": 2021
+    },
+    {
+      "rating": 5.0,
+      "pros": "Location, Facilities",
+      "cons": "Curriculum, Classes, Professors, Brand/Ranking",
+      "year_of_review": 2018
+    }
+  ]
+}

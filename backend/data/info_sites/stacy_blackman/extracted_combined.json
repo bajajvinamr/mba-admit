@@ -1,0 +1,162 @@
+{
+  "essay_tips": {
+    "type": "essay_prompts",
+    "data": [
+      {
+        "school_name": "Cornell Johnson School",
+        "year": "2014-2015",
+        "prompts": [
+          {
+            "prompt_text": "Your Life Story - Write your life story in 1,000 characters or less, as though it were the table of contents for the book of Your Life.",
+            "word_limit": "1,000 characters",
+            "required": true
+          },
+          {
+            "prompt_text": "What job would you like to have immediately upon graduating with an MBA? (Two-year program)",
+            "word_limit": "1,000 characters",
+            "required": true
+          },
+          {
+            "prompt_text": "How did your pre-MBA experience prepare you for the job you envision post-MBA? (One-year program)",
+            "word_limit": "1,000 characters",
+            "required": true
+          },
+          {
+            "prompt_text": "Optional essay to address any aspects of your application you feel need further explanation or to highlight your strengths",
+            "word_limit": "Not specified",
+            "required": false
+          }
+        ]
+      }
+    ],
+    "extracted_at": "2026-03-17T21:57:43.268997"
+  },
+  "school_booth": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "Chicago Booth"
+    },
+    "extracted_at": "2026-03-17T21:57:48.074163"
+  },
+  "school_columbia": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "Columbia Business School",
+      "class_size": 972,
+      "avg_gmat": 732,
+      "gmat_range": "600-780",
+      "avg_gpa": 3.6,
+      "avg_work_experience_years": 5,
+      "acceptance_rate": "20.9%",
+      "yield_rate": "51%",
+      "women_percentage": "44%",
+      "international_percentage": "46%",
+      "essay_prompts": [
+        "Through your resume and recommendations, we have a clear sense of your professional path to date. What are your career goals over the next three to five years and what is your long-term dream job? (500 words)",
+        "Please share a specific example of how you made a team more collaborative, more inclusive or fostered a greater sense of community within an organization. (250 words)",
+        "We believe Columbia Business School is a special place with a collaborative learning environment in which students feel a sense of belonging, agency, and partnership—academically, culturally, and professionally. How would you co-create your optimal MBA experience at CBS? Please be specific. (250 words)"
+      ],
+      "application_deadlines": [
+        {
+          "round": "Round 1",
+          "deadline_date": "September 3, 2025"
+        },
+        {
+          "round": "Round 2",
+          "deadline_date": "January 6, 2026"
+        },
+        {
+          "round": "Round 3",
+          "deadline_date": "March 26, 2026"
+        },
+        {
+          "round": "January 2025 Entry First Deadline",
+          "deadline_date": "June 17, 2025"
+        },
+        {
+          "round": "January 2025 Entry Second Deadline",
+          "deadline_date": "August 13, 2025"
+        }
+      ],
+      "key_differentiators": "Columbia's primary advantage is its Manhattan location, providing access to Wall Street and thousands of multinational corporations as a 'living laboratory' for business students. The school offers both traditional MBA and accelerated January-entry programs, with the J-term option being somewhat less competitive for admission."
+    },
+    "extracted_at": "2026-03-17T21:57:54.660136"
+  },
+  "school_hbs": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "Harvard Business School",
+      "class_size": 930,
+      "avg_gmat": 740,
+      "gmat_range": "540-790",
+      "avg_gpa": 3.69,
+      "avg_work_experience_years": 4.9,
+      "acceptance_rate": "11.2%",
+      "women_percentage": "45%",
+      "international_percentage": "35%",
+      "essay_prompts": [
+        "Business-Minded Essay: Please reflect on how your choices have influenced your career path and aspirations. (300 words)",
+        "Leadership-Focused Essay: What experiences have shaped how you invest in others and how you lead? (250 words)",
+        "Growth-Oriented Essay: Curiosity can be seen in many ways. Please share an example of how you have demonstrated curiosity and how that has influenced your growth. (up to 250 words)"
+      ],
+      "application_deadlines": [
+        {
+          "round": "Round 1",
+          "deadline_date": "September 4, 2024"
+        },
+        {
+          "round": "Round 2",
+          "deadline_date": "January 6, 2025"
+        }
+      ],
+      "key_differentiators": "Harvard Business School is the home of the case method of business education and has one of the largest and most influential alumni networks in the world, with 20% of the top three executive positions at Fortune 500 companies filled by HBS alumni. Students become part of smaller community 'sections' of about ninety students with dedicated faculty teams for a more intimate learning experience within the larger program."
+    },
+    "extracted_at": "2026-03-17T21:58:07.935421"
+  },
+  "school_kellogg": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "Kellogg School of Management"
+    },
+    "extracted_at": "2026-03-17T21:58:11.947904"
+  },
+  "school_sloan": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "MIT Sloan School of Management",
+      "class_size": 433,
+      "avg_gmat": 730,
+      "gmat_range": "690-760",
+      "avg_gpa": 3.7,
+      "avg_work_experience_years": 5,
+      "acceptance_rate": "14%",
+      "yield_rate": "50%",
+      "women_percentage": "49%",
+      "international_percentage": "50%",
+      "application_deadlines": [
+        {
+          "round": "Round 1",
+          "deadline_date": "September 29, 2025"
+        },
+        {
+          "round": "Round 2",
+          "deadline_date": "January 13, 2026"
+        },
+        {
+          "round": "Round 3",
+          "deadline_date": "April 6, 2026"
+        }
+      ],
+      "key_differentiators": "MIT Sloan is a highly academic school that prides itself on parlaying theory into practical application, drawing from MIT's world-renowned science and engineering programs to bolster its intellectual culture. The school emphasizes a hands-on approach perfect for creating revolutionary inventions through its Entrepreneurship Center, which hosts a $100,000 competition annually for the best new business plan."
+    },
+    "extracted_at": "2026-03-17T21:58:16.503256"
+  },
+  "school_wharton": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "The Wharton School",
+      "key_differentiators": "The page mentions Wharton has group interviews as part of their admissions process, suggesting a collaborative evaluation approach that may reflect the school's emphasis on teamwork and interpersonal skills."
+    },
+    "extracted_at": "2026-03-17T21:58:22.446870"
+  }
+}

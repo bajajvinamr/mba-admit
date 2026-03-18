@@ -1,0 +1,105 @@
+{
+  "school_id": "booth",
+  "real_applicant_profiles": [
+    {
+      "gmat_score": 740,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2023,
+      "scholarship_info": null,
+      "nationality": null,
+      "undergraduate_school": null
+    },
+    {
+      "gmat_score": 760,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": "Finance",
+      "result": "Accepted",
+      "round": null,
+      "year": 2021,
+      "scholarship_info": null,
+      "nationality": null,
+      "undergraduate_school": null
+    },
+    {
+      "gmat_score": 760,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2020,
+      "scholarship_info": null,
+      "nationality": null,
+      "undergraduate_school": null
+    },
+    {
+      "gmat_score": 710,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": "Government/Non-Profit",
+      "result": "Accepted",
+      "round": null,
+      "year": 2018,
+      "scholarship_info": null,
+      "nationality": null,
+      "undergraduate_school": null
+    },
+    {
+      "gmat_score": 760,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2015,
+      "scholarship_info": null,
+      "nationality": null,
+      "undergraduate_school": null
+    }
+  ],
+  "interview_questions_reported": [],
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": null,
+    "avg_work_experience_years": null
+  },
+  "student_reviews": [
+    {
+      "rating": 5.0,
+      "pros": "Great friends, world travel opportunities, great job placement, supportive student body, vast alumni network, curriculum flexibility",
+      "cons": "Can get overwhelmed, recruiting starts immediately",
+      "year_of_review": 2023
+    },
+    {
+      "rating": 4.0,
+      "pros": "Fantastic school, flexible curriculum, great for independent people, strong brand, helped secure PE internship without banking experience",
+      "cons": "Not strong cohort system, need to go extra mile to know classmates",
+      "year_of_review": 2020
+    },
+    {
+      "rating": 4.0,
+      "pros": "Create your own adventure approach, good career services, strong in banking/consulting/investment management",
+      "cons": "Culture not as intellectual as advertised, many employers don't recruit on campus",
+      "year_of_review": 2020
+    },
+    {
+      "rating": 5.0,
+      "pros": "Exceeded expectations, amazing learning pace, kind and smart colleagues, world-class entrepreneurship program",
+      "cons": "Not for those who need hand-holding, can be hard to find important information",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 5.0,
+      "pros": "Equal to top schools, unmatched faculty and curriculum, stepped up financial aid",
+      "cons": "Limited specialization in particular areas",
+      "year_of_review": 2017
+    }
+  ]
+}

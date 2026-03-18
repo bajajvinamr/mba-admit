@@ -1,0 +1,86 @@
+{
+  "school_id": "fuqua",
+  "real_applicant_profiles": [
+    {
+      "gmat_score": 720,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2017
+    },
+    {
+      "gmat_score": 700,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2015
+    },
+    {
+      "gmat_score": 760,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2015
+    },
+    {
+      "gmat_score": 610,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2016
+    }
+  ],
+  "interview_questions_reported": [],
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": null
+  },
+  "student_reviews": [
+    {
+      "rating": 5.0,
+      "pros": "Curriculum, Classes, Professors; Brand/Ranking; Specialization",
+      "cons": "Location; Facilities",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 4.7,
+      "pros": "Curriculum, Classes, Professors; Student body, diversity; Culture & Student Support",
+      "cons": "Alumni Network; Location",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 4.7,
+      "pros": "Curriculum, Classes, Professors; Alumni Network; Culture & Student Support",
+      "cons": "Brand/Ranking; Facilities",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 5.0,
+      "pros": "Curriculum, Classes, Professors; Student body, diversity; Culture & Student Support",
+      "cons": "Brand/Ranking; Facilities",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 5.0,
+      "pros": "Student body, diversity; Career opportunities; Culture & Student Support",
+      "cons": "Location",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 5.0,
+      "pros": "Curriculum, Classes, Professors; Student body, diversity; Alumni Network",
+      "cons": "Career opportunities; Admissions Team; Specialization",
+      "year_of_review": 2017
+    }
+  ]
+}

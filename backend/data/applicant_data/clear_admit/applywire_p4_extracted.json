@@ -1,0 +1,70 @@
+{
+  "source": "clear_admit",
+  "decisions": [
+    {
+      "school": "UVA / Darden",
+      "school_id": "darden",
+      "result": "Accepted",
+      "round": "Round 2",
+      "gmat_score": null,
+      "gre_score": 329,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "date": "2026-03-17",
+      "international": null
+    },
+    {
+      "school": "UVA / Darden",
+      "school_id": "darden",
+      "result": "Accepted",
+      "round": "Round 2",
+      "gmat_score": null,
+      "gre_score": 331,
+      "gpa": 3.86,
+      "work_experience_years": null,
+      "industry": "Consulting",
+      "date": "2026-03-17",
+      "international": null
+    },
+    {
+      "school": "UVA / Darden",
+      "school_id": "darden",
+      "result": "Accepted",
+      "round": "Round 2",
+      "gmat_score": null,
+      "gre_score": 307,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "date": "2026-03-17",
+      "international": null
+    },
+    {
+      "school": "UVA / Darden",
+      "school_id": "darden",
+      "result": "Accepted",
+      "round": "Round 2",
+      "gmat_score": 645,
+      "gre_score": null,
+      "gpa": 3.58,
+      "work_experience_years": null,
+      "industry": "Healthcare",
+      "date": "2026-03-17",
+      "international": null
+    },
+    {
+      "school": "UVA / Darden",
+      "school_id": "darden",
+      "result": "Accepted",
+      "round": "Round 2",
+      "gmat_score": 635,
+      "gre_score": null,
+      "gpa": 3.1,
+      "work_experience_years": null,
+      "industry": "Consumer Goods",
+      "date": "2026-03-17",
+      "international": true
+    }
+  ]
+}

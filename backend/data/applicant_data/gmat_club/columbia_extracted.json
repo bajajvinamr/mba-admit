@@ -1,0 +1,93 @@
+{
+  "school_id": "columbia",
+  "real_applicant_profiles": [
+    {
+      "gmat_score": 740,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": null,
+      "round": null,
+      "year": null,
+      "scholarship_info": null,
+      "nationality": null,
+      "undergraduate_school": null
+    },
+    {
+      "gmat_score": 760,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": null,
+      "round": null,
+      "year": null,
+      "scholarship_info": null,
+      "nationality": null,
+      "undergraduate_school": null
+    },
+    {
+      "gmat_score": 760,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": null,
+      "round": null,
+      "year": null,
+      "scholarship_info": null,
+      "nationality": null,
+      "undergraduate_school": null
+    },
+    {
+      "gmat_score": 770,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": null,
+      "round": null,
+      "year": null,
+      "scholarship_info": null,
+      "nationality": null,
+      "undergraduate_school": null
+    }
+  ],
+  "interview_questions_reported": [],
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": null,
+    "avg_work_experience_years": null
+  },
+  "student_reviews": [
+    {
+      "rating": 5.0,
+      "pros": "Great professors with real-world experience, diverse student body, strong community, practical curriculum",
+      "cons": "None mentioned",
+      "year_of_review": 2024
+    },
+    {
+      "rating": 4.0,
+      "pros": "Manhattan location, solid professors, great research opportunities, strong alumni network",
+      "cons": "Curriculum, classes, professors, career opportunities, admissions team could be improved",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 5.0,
+      "pros": "Strong community, excellent consulting placement, choice and flexibility, diverse opportunities",
+      "cons": "Facilities, curriculum and professors could be improved",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 5.0,
+      "pros": "Close-knit collaborative culture, unparalleled location, top-notch alumni network, brand recognition",
+      "cons": "Curriculum, classes, professors, facilities could be improved",
+      "year_of_review": 2017
+    },
+    {
+      "rating": null,
+      "pros": "Excellent for finance jobs, huge alumni network, good placement at investment banks",
+      "cons": null,
+      "year_of_review": 2017
+    }
+  ]
+}

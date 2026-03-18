@@ -1,0 +1,50 @@
+{
+  "school_id": "mccombs",
+  "real_applicant_profiles": [
+    {
+      "gmat_score": 720,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2023
+    },
+    {
+      "gmat_score": 770,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2015
+    }
+  ],
+  "interview_questions_reported": [],
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": null
+  },
+  "student_reviews": [
+    {
+      "rating": 5.0,
+      "pros": "Great community, warmth of people, opportunities offered, student body diversity, location, culture & student support",
+      "cons": "Curriculum, Classes, Professors",
+      "year_of_review": 2023
+    },
+    {
+      "rating": 4.7,
+      "pros": "Customization ability, fun and diverse student population, Austin location, academic reputation",
+      "cons": "Career opportunities provided by school, Brand/Ranking, limited assistance for non-typical geographic areas",
+      "year_of_review": 2018
+    },
+    {
+      "rating": null,
+      "pros": "Austin location, career opportunities, collaborative student body, strong alumni network, transformational experience",
+      "cons": "Career services needs improvement, facility issues",
+      "year_of_review": 2018
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "type": "school_profile",
+  "data": {
+    "school_name": "Columbia Business School",
+    "class_size": 753,
+    "avg_gmat": 724,
+    "avg_gpa": 3.5,
+    "avg_work_experience_years": 5,
+    "acceptance_rate": 16.5,
+    "women_percentage": 41,
+    "international_percentage": 43,
+    "application_deadlines": [
+      {
+        "round": "Early Decision & January Term",
+        "deadline_date": "October 3, 2018"
+      },
+      {
+        "round": "Merit Scholarship",
+        "deadline_date": "January 4, 2019"
+      },
+      {
+        "round": "Final Decision",
+        "deadline_date": "April 10, 2019"
+      }
+    ],
+    "key_differentiators": "Columbia is unique for offering both August and January start options that merge in the second year, and it features an early decision option with rolling admissions rather than structured rounds. The school's Manhattan location provides exceptional access to business opportunities and networks in one of the world's financial capitals."
+  },
+  "extracted_at": "2026-03-17T21:56:16.219111"
+}

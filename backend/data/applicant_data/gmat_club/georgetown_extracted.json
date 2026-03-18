@@ -1,0 +1,59 @@
+{
+  "school_id": null,
+  "real_applicant_profiles": [
+    {
+      "gmat_score": 660,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2024
+    },
+    {
+      "gmat_score": 750,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": null,
+      "round": null,
+      "year": 2022
+    },
+    {
+      "gmat_score": 700,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": null,
+      "round": null,
+      "year": 2022
+    }
+  ],
+  "interview_questions_reported": [],
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": null
+  },
+  "student_reviews": [
+    {
+      "rating": 5.0,
+      "pros": "Student body diversity, Alumni Network, Brand/Ranking, Consulting opportunities",
+      "cons": "Career opportunities could be improved",
+      "year_of_review": 2025
+    },
+    {
+      "rating": 1.0,
+      "pros": "Alumni Network",
+      "cons": "Poor career office, administration lacks support, poor teaching quality",
+      "year_of_review": 2023
+    },
+    {
+      "rating": 4.0,
+      "pros": "Fantastic diversity, supportive student body, strong alumni network",
+      "cons": "Career services consulting-focused, curriculum rushed",
+      "year_of_review": 2023
+    }
+  ]
+}

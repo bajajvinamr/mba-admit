@@ -1,0 +1,27 @@
+{
+  "urls": {
+    "guide_hbs": "https://www.clearadmit.com/school-guides/harvard-business-school/",
+    "guide_gsb": "https://www.clearadmit.com/school-guides/stanford-gsb/",
+    "guide_wharton": "https://www.clearadmit.com/school-guides/wharton/",
+    "guide_booth": "https://www.clearadmit.com/school-guides/chicago-booth/",
+    "guide_kellogg": "https://www.clearadmit.com/school-guides/kellogg/",
+    "guide_sloan": "https://www.clearadmit.com/school-guides/mit-sloan/",
+    "guide_columbia": "https://www.clearadmit.com/school-guides/columbia-business-school/",
+    "guide_haas": "https://www.clearadmit.com/school-guides/berkeley-haas/",
+    "guide_tuck": "https://www.clearadmit.com/school-guides/tuck/",
+    "guide_ross": "https://www.clearadmit.com/school-guides/michigan-ross/",
+    "guide_fuqua": "https://www.clearadmit.com/school-guides/duke-fuqua/",
+    "guide_darden": "https://www.clearadmit.com/school-guides/uva-darden/",
+    "guide_stern": "https://www.clearadmit.com/school-guides/nyu-stern/",
+    "guide_yale": "https://www.clearadmit.com/school-guides/yale-som/",
+    "guide_anderson": "https://www.clearadmit.com/school-guides/ucla-anderson/",
+    "guide_lbs": "https://www.clearadmit.com/school-guides/london-business-school/",
+    "guide_insead": "https://www.clearadmit.com/school-guides/insead/",
+    "guide_hec": "https://www.clearadmit.com/school-guides/hec-paris/",
+    "guide_iese": "https://www.clearadmit.com/school-guides/iese/",
+    "guide_said": "https://www.clearadmit.com/school-guides/oxford-said/",
+    "livewire": "https://www.clearadmit.com/livewire/",
+    "rankings": "https://www.clearadmit.com/mba-rankings/"
+  },
+  "crawled_at": "2026-03-17T21:39:41.053848"
+}

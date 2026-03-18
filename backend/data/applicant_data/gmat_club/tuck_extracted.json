@@ -1,0 +1,95 @@
+{
+  "school_id": "tuck",
+  "real_applicant_profiles": [
+    {
+      "gmat_score": 660,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2022
+    },
+    {
+      "gmat_score": 720,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2022
+    },
+    {
+      "gmat_score": 740,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": "operations",
+      "result": "Accepted",
+      "round": null,
+      "year": 2017
+    },
+    {
+      "gmat_score": 700,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2018
+    },
+    {
+      "gmat_score": 690,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2016
+    }
+  ],
+  "interview_questions_reported": [],
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": 280
+  },
+  "student_reviews": [
+    {
+      "rating": 5.0,
+      "pros": "Amazing people, alumni network, Tuck Nice culture, community support",
+      "cons": "Curriculum could be improved",
+      "year_of_review": 2020
+    },
+    {
+      "rating": 5.0,
+      "pros": "Best alumni network, excellent consulting placement, cooperative culture",
+      "cons": "Career services sometimes too busy, location",
+      "year_of_review": 2020
+    },
+    {
+      "rating": 5.0,
+      "pros": "Small class size, personal experience, Global Insights Expedition",
+      "cons": "Career opportunities, location",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 4.0,
+      "pros": "Supportive student body, world class professors, good for consulting/banking",
+      "cons": "Limited entrepreneurship opportunities",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 5.0,
+      "pros": "Strong consulting recruitment, bidding system, alumni engagement",
+      "cons": "Facilities",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 5.0,
+      "pros": "Impressive classmates, strong alumni network, career services support",
+      "cons": "Student diversity, career opportunities, location",
+      "year_of_review": 2017
+    }
+  ]
+}

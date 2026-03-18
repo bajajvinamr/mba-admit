@@ -1,0 +1,810 @@
+{
+  "guide_anderson": {
+    "type": "school_profile",
+    "data": {
+      "schools": [
+        {
+          "school_name": "Emory Goizueta",
+          "class_size": 128,
+          "avg_gmat": 723,
+          "avg_gpa": 3.5,
+          "women_percentage": 38
+        },
+        {
+          "school_name": "Manchester AMBS",
+          "class_size": 113,
+          "avg_gmat": 650,
+          "women_percentage": 40,
+          "international_percentage": 97
+        },
+        {
+          "school_name": "Ohio State Fisher",
+          "class_size": 45,
+          "avg_gmat": 673,
+          "avg_gpa": 3.49,
+          "women_percentage": 31
+        },
+        {
+          "school_name": "Georgia Terry",
+          "class_size": 78,
+          "avg_gmat": 641,
+          "avg_gpa": 3.5,
+          "women_percentage": 32
+        },
+        {
+          "school_name": "UC Irvine Merage",
+          "class_size": 40,
+          "avg_gmat": 675,
+          "avg_gpa": 3.44,
+          "women_percentage": 35
+        },
+        {
+          "school_name": "Yale SOM",
+          "class_size": 367,
+          "avg_gmat": 740,
+          "avg_gpa": 3.69,
+          "women_percentage": 44
+        },
+        {
+          "school_name": "Vanderbilt Owen",
+          "class_size": 160,
+          "avg_gmat": 660,
+          "avg_gpa": 3.4,
+          "women_percentage": 24
+        },
+        {
+          "school_name": "Indiana Kelley",
+          "class_size": 103,
+          "avg_gmat": 683,
+          "avg_gpa": 3.4,
+          "women_percentage": 28
+        }
+      ]
+    },
+    "extracted_at": "2026-03-17T21:54:10.130028"
+  },
+  "guide_booth": {
+    "type": "school_profile",
+    "data": {
+      "schools": [
+        {
+          "school_name": "Emory Goizueta",
+          "class_size": 128,
+          "avg_gmat": 723,
+          "avg_gpa": 3.5,
+          "women_percentage": 38
+        },
+        {
+          "school_name": "Manchester AMBS",
+          "class_size": 113,
+          "avg_gmat": 650,
+          "women_percentage": 40,
+          "international_percentage": 97
+        },
+        {
+          "school_name": "Ohio State Fisher",
+          "class_size": 45,
+          "avg_gmat": 673,
+          "avg_gpa": 3.49,
+          "women_percentage": 31
+        },
+        {
+          "school_name": "Georgia Terry",
+          "class_size": 78,
+          "avg_gmat": 641,
+          "avg_gpa": 3.5,
+          "women_percentage": 32
+        },
+        {
+          "school_name": "UC Irvine Merage",
+          "class_size": 40,
+          "avg_gmat": 675,
+          "avg_gpa": 3.44,
+          "women_percentage": 35
+        },
+        {
+          "school_name": "Yale SOM",
+          "class_size": 367,
+          "avg_gmat": 740,
+          "avg_gpa": 3.69,
+          "women_percentage": 44
+        },
+        {
+          "school_name": "Vanderbilt Owen",
+          "class_size": 160,
+          "avg_gmat": 660,
+          "avg_gpa": 3.4,
+          "women_percentage": 24
+        },
+        {
+          "school_name": "Indiana Kelley",
+          "class_size": 103,
+          "avg_gmat": 683,
+          "avg_gpa": 3.4,
+          "women_percentage": 28
+        }
+      ]
+    },
+    "extracted_at": "2026-03-17T21:54:16.086320"
+  },
+  "guide_columbia": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "Columbia Business School"
+    },
+    "extracted_at": "2026-03-17T21:54:21.481747"
+  },
+  "guide_darden": {
+    "type": "school_profile",
+    "data": {
+      "schools": [
+        {
+          "school_name": "Emory Goizueta",
+          "class_size": 128,
+          "avg_gmat": 723,
+          "avg_gpa": 3.5,
+          "women_percentage": 38
+        },
+        {
+          "school_name": "Manchester AMBS",
+          "class_size": 113,
+          "avg_gmat": 650,
+          "women_percentage": 40,
+          "international_percentage": 97
+        },
+        {
+          "school_name": "Ohio State Fisher",
+          "class_size": 45,
+          "avg_gmat": 673,
+          "avg_gpa": 3.49,
+          "women_percentage": 31
+        },
+        {
+          "school_name": "Georgia Terry",
+          "class_size": 78,
+          "avg_gmat": 641,
+          "avg_gpa": 3.5,
+          "women_percentage": 32
+        },
+        {
+          "school_name": "UC Irvine Merage",
+          "class_size": 40,
+          "avg_gmat": 675,
+          "avg_gpa": 3.44,
+          "women_percentage": 35
+        },
+        {
+          "school_name": "Yale SOM",
+          "class_size": 367,
+          "avg_gmat": 740,
+          "avg_gpa": 3.69,
+          "women_percentage": 44
+        },
+        {
+          "school_name": "Vanderbilt Owen",
+          "class_size": 160,
+          "avg_gmat": 660,
+          "avg_gpa": 3.4,
+          "women_percentage": 24
+        },
+        {
+          "school_name": "Indiana Kelley",
+          "class_size": 103,
+          "avg_gmat": 683,
+          "avg_gpa": 3.4,
+          "women_percentage": 28
+        }
+      ]
+    },
+    "extracted_at": "2026-03-17T21:54:27.259599"
+  },
+  "guide_fuqua": {
+    "type": "school_profile",
+    "data": {
+      "schools": [
+        {
+          "school_name": "Emory Goizueta",
+          "class_size": 128,
+          "avg_gmat": 723,
+          "avg_gpa": 3.5,
+          "women_percentage": 38
+        },
+        {
+          "school_name": "Manchester AMBS",
+          "class_size": 113,
+          "avg_gmat": 650,
+          "women_percentage": 40,
+          "international_percentage": 97
+        },
+        {
+          "school_name": "Ohio State Fisher",
+          "class_size": 45,
+          "avg_gmat": 673,
+          "avg_gpa": 3.49,
+          "women_percentage": 31
+        },
+        {
+          "school_name": "Georgia Terry",
+          "class_size": 78,
+          "avg_gmat": 641,
+          "avg_gpa": 3.5,
+          "women_percentage": 32
+        },
+        {
+          "school_name": "UC Irvine Merage",
+          "class_size": 40,
+          "avg_gmat": 675,
+          "avg_gpa": 3.44,
+          "women_percentage": 35
+        },
+        {
+          "school_name": "Yale SOM",
+          "class_size": 367,
+          "avg_gmat": 740,
+          "avg_gpa": 3.69,
+          "women_percentage": 44
+        },
+        {
+          "school_name": "Vanderbilt Owen",
+          "class_size": 160,
+          "avg_gmat": 660,
+          "avg_gpa": 3.4,
+          "women_percentage": 24
+        },
+        {
+          "school_name": "Indiana Kelley",
+          "class_size": 103,
+          "avg_gmat": 683,
+          "avg_gpa": 3.4,
+          "women_percentage": 28
+        }
+      ]
+    },
+    "extracted_at": "2026-03-17T21:54:32.611877"
+  },
+  "guide_gsb": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "Stanford Graduate School of Business (GSB)"
+    },
+    "extracted_at": "2026-03-17T21:54:37.122495"
+  },
+  "guide_haas": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "Berkeley Haas School of Business",
+      "median_starting_salary": 149000,
+      "mean_starting_salary": 143696,
+      "median_signing_bonus": 33775,
+      "top_industries": [
+        "Technology",
+        "Consulting",
+        "Financial Services",
+        "Healthcare",
+        "Consumer Packaged Goods"
+      ],
+      "key_differentiators": "Berkeley Haas holds strong connections to the tech industry with 34% of graduates entering technology roles. The school demonstrates strong regional placement in the West Coast with nearly three-quarters of graduates staying in the West U.S., particularly in high-paying markets like San Francisco."
+    },
+    "extracted_at": "2026-03-17T21:54:40.817512"
+  },
+  "guide_hbs": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "Harvard Business School"
+    },
+    "extracted_at": "2026-03-17T21:54:44.274009"
+  },
+  "guide_hec": {
+    "type": "school_profile",
+    "data": {
+      "schools": [
+        {
+          "school_name": "Emory Goizueta",
+          "class_size": 128,
+          "avg_gmat": 723,
+          "avg_gpa": 3.5,
+          "women_percentage": 38
+        },
+        {
+          "school_name": "Manchester AMBS",
+          "class_size": 113,
+          "avg_gmat": 650,
+          "women_percentage": 40,
+          "international_percentage": 97
+        },
+        {
+          "school_name": "Ohio State Fisher",
+          "class_size": 45,
+          "avg_gmat": 673,
+          "avg_gpa": 3.49,
+          "women_percentage": 31
+        },
+        {
+          "school_name": "Georgia Terry",
+          "class_size": 78,
+          "avg_gmat": 641,
+          "avg_gpa": 3.5,
+          "women_percentage": 32
+        },
+        {
+          "school_name": "UC Irvine Merage",
+          "class_size": 40,
+          "avg_gmat": 675,
+          "avg_gpa": 3.44,
+          "women_percentage": 35
+        },
+        {
+          "school_name": "Yale SOM",
+          "class_size": 367,
+          "avg_gmat": 740,
+          "avg_gpa": 3.69,
+          "women_percentage": 44
+        },
+        {
+          "school_name": "Vanderbilt Owen",
+          "class_size": 160,
+          "avg_gmat": 660,
+          "avg_gpa": 3.4,
+          "women_percentage": 24
+        },
+        {
+          "school_name": "Indiana Kelley",
+          "class_size": 103,
+          "avg_gmat": 683,
+          "avg_gpa": 3.4,
+          "women_percentage": 28
+        }
+      ]
+    },
+    "extracted_at": "2026-03-17T21:54:49.837364"
+  },
+  "guide_iese": {
+    "type": "school_profile",
+    "data": {
+      "schools": [
+        {
+          "school_name": "Emory Goizueta",
+          "class_size": 128,
+          "avg_gmat": 723,
+          "avg_gpa": 3.5,
+          "women_percentage": 38
+        },
+        {
+          "school_name": "Manchester AMBS",
+          "class_size": 113,
+          "avg_gmat": 650,
+          "women_percentage": 40,
+          "international_percentage": 97
+        },
+        {
+          "school_name": "Ohio State Fisher",
+          "class_size": 45,
+          "avg_gmat": 673,
+          "avg_gpa": 3.49,
+          "women_percentage": 31
+        },
+        {
+          "school_name": "Georgia Terry",
+          "class_size": 78,
+          "avg_gmat": 641,
+          "avg_gpa": 3.5,
+          "women_percentage": 32
+        },
+        {
+          "school_name": "UC Irvine Merage",
+          "class_size": 40,
+          "avg_gmat": 675,
+          "avg_gpa": 3.44,
+          "women_percentage": 35
+        },
+        {
+          "school_name": "Yale SOM",
+          "class_size": 367,
+          "avg_gmat": 740,
+          "avg_gpa": 3.69,
+          "women_percentage": 44
+        },
+        {
+          "school_name": "Vanderbilt Owen",
+          "class_size": 160,
+          "avg_gmat": 660,
+          "avg_gpa": 3.4,
+          "women_percentage": 24
+        },
+        {
+          "school_name": "Indiana Kelley",
+          "class_size": 103,
+          "avg_gmat": 683,
+          "avg_gpa": 3.4,
+          "women_percentage": 28
+        }
+      ]
+    },
+    "extracted_at": "2026-03-17T21:54:56.512134"
+  },
+  "guide_insead": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "INSEAD"
+    },
+    "extracted_at": "2026-03-17T21:55:01.281542"
+  },
+  "guide_kellogg": {
+    "type": "school_profile",
+    "data": {
+      "schools": [
+        {
+          "school_name": "Emory Goizueta",
+          "class_size": 128,
+          "avg_gmat": 723,
+          "avg_gpa": 3.5,
+          "women_percentage": 38
+        },
+        {
+          "school_name": "Manchester AMBS",
+          "class_size": 113,
+          "avg_gmat": 650,
+          "women_percentage": 40,
+          "international_percentage": 97
+        },
+        {
+          "school_name": "Ohio State Fisher",
+          "class_size": 45,
+          "avg_gmat": 673,
+          "avg_gpa": 3.49,
+          "women_percentage": 31
+        },
+        {
+          "school_name": "Georgia Terry",
+          "class_size": 78,
+          "avg_gmat": 641,
+          "avg_gpa": 3.5,
+          "women_percentage": 32
+        },
+        {
+          "school_name": "UC Irvine Merage",
+          "class_size": 40,
+          "avg_gmat": 675,
+          "avg_gpa": 3.44,
+          "women_percentage": 35
+        },
+        {
+          "school_name": "Yale SOM",
+          "class_size": 367,
+          "avg_gmat": 740,
+          "avg_gpa": 3.69,
+          "women_percentage": 44
+        },
+        {
+          "school_name": "Vanderbilt Owen",
+          "class_size": 160,
+          "avg_gmat": 660,
+          "avg_gpa": 3.4,
+          "women_percentage": 24
+        },
+        {
+          "school_name": "Indiana Kelley",
+          "class_size": 103,
+          "avg_gmat": 683,
+          "avg_gpa": 3.4,
+          "women_percentage": 28
+        }
+      ]
+    },
+    "extracted_at": "2026-03-17T21:55:06.819800"
+  },
+  "guide_lbs": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "London Business School"
+    },
+    "extracted_at": "2026-03-17T21:55:10.493350"
+  },
+  "guide_ross": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "University of Michigan Ross School of Business",
+      "key_differentiators": "Michigan Ross is known for its strong alumni network and emphasis on action-based learning. The school has produced successful entrepreneurs and business leaders who have built iconic brands and transformative consumer products companies."
+    },
+    "extracted_at": "2026-03-17T21:55:16.416450"
+  },
+  "guide_said": {
+    "type": "school_profile",
+    "data": {
+      "schools": [
+        {
+          "school_name": "Emory University - Goizueta Business School",
+          "class_size": 128,
+          "avg_gmat": 723,
+          "avg_gpa": 3.5,
+          "women_percentage": 38
+        },
+        {
+          "school_name": "University of Manchester - Alliance Manchester Business School",
+          "class_size": 113,
+          "avg_gmat": 650,
+          "women_percentage": 40,
+          "international_percentage": 97
+        },
+        {
+          "school_name": "Ohio State University - Fisher College of Business",
+          "class_size": 45,
+          "avg_gmat": 673,
+          "avg_gpa": 3.49,
+          "women_percentage": 31
+        },
+        {
+          "school_name": "University of Georgia - Terry College of Business",
+          "class_size": 78,
+          "avg_gmat": 641,
+          "avg_gpa": 3.5,
+          "women_percentage": 32
+        },
+        {
+          "school_name": "UC Irvine - Paul Merage School of Business",
+          "class_size": 40,
+          "avg_gmat": 675,
+          "avg_gpa": 3.44,
+          "women_percentage": 35
+        },
+        {
+          "school_name": "Yale University - School of Management",
+          "class_size": 367,
+          "avg_gmat": 740,
+          "avg_gpa": 3.69,
+          "women_percentage": 44
+        },
+        {
+          "school_name": "Vanderbilt University - Owen Graduate School of Management",
+          "class_size": 160,
+          "avg_gmat": 660,
+          "avg_gpa": 3.4,
+          "women_percentage": 24
+        },
+        {
+          "school_name": "Indiana University - Kelley School of Business",
+          "class_size": 103,
+          "avg_gmat": 683,
+          "avg_gpa": 3.4,
+          "women_percentage": 28
+        }
+      ]
+    },
+    "extracted_at": "2026-03-17T21:55:22.459009"
+  },
+  "guide_sloan": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "MIT Sloan School of Management",
+      "median_starting_salary": 125000,
+      "mean_starting_salary_service": 126841,
+      "mean_starting_salary_manufacturing": 120696,
+      "median_signing_bonus": 25000,
+      "top_industries": [
+        "Consulting",
+        "Technology",
+        "Pharmaceutical/Healthcare",
+        "Investment Banking"
+      ],
+      "top_employers": [
+        "McKinsey & Company",
+        "Amazon",
+        "Bain & Company",
+        "Boston Consulting Group",
+        "Microsoft",
+        "Google",
+        "Bank of America Merrill Lynch"
+      ],
+      "key_differentiators": "MIT Sloan has a notably high percentage of graduates starting their own businesses (6.1% of the class), rivaling top entrepreneurship programs. The school attracts significant interest from both top consulting firms and major technology companies, with these two industries drawing nearly 60% of graduates combined."
+    },
+    "extracted_at": "2026-03-17T21:55:27.915972"
+  },
+  "guide_stern": {
+    "type": "school_profile",
+    "data": [
+      {
+        "school_name": "Emory Goizueta",
+        "class_size": 128,
+        "avg_gmat": 723,
+        "avg_gpa": 3.5,
+        "women_percentage": 38
+      },
+      {
+        "school_name": "Manchester AMBS",
+        "class_size": 113,
+        "avg_gmat": 650,
+        "women_percentage": 40,
+        "international_percentage": 97
+      },
+      {
+        "school_name": "Ohio State Fisher",
+        "class_size": 45,
+        "avg_gmat": 673,
+        "avg_gpa": 3.49,
+        "women_percentage": 31
+      },
+      {
+        "school_name": "Georgia Terry",
+        "class_size": 78,
+        "avg_gmat": 641,
+        "avg_gpa": 3.5,
+        "women_percentage": 32
+      },
+      {
+        "school_name": "UC Irvine Merage",
+        "class_size": 40,
+        "avg_gmat": 675,
+        "avg_gpa": 3.44,
+        "women_percentage": 35
+      },
+      {
+        "school_name": "Yale SOM",
+        "class_size": 367,
+        "avg_gmat": 740,
+        "avg_gpa": 3.69,
+        "women_percentage": 44
+      },
+      {
+        "school_name": "Vanderbilt Owen",
+        "class_size": 160,
+        "avg_gmat": 660,
+        "avg_gpa": 3.4,
+        "women_percentage": 24
+      },
+      {
+        "school_name": "Indiana Kelley",
+        "class_size": 103,
+        "avg_gmat": 683,
+        "avg_gpa": 3.4,
+        "women_percentage": 28
+      }
+    ],
+    "extracted_at": "2026-03-17T21:55:36.024134"
+  },
+  "guide_tuck": {
+    "type": "school_profile",
+    "data": {
+      "schools": [
+        {
+          "school_name": "Emory / Goizueta",
+          "class_size": 128,
+          "avg_gmat": 723,
+          "avg_gpa": 3.5,
+          "women_percentage": 38
+        },
+        {
+          "school_name": "Manchester / AMBS",
+          "class_size": 113,
+          "avg_gmat": 650,
+          "women_percentage": 40,
+          "international_percentage": 97
+        },
+        {
+          "school_name": "Ohio State / Fisher",
+          "class_size": 45,
+          "avg_gmat": 673,
+          "avg_gpa": 3.49,
+          "women_percentage": 31
+        },
+        {
+          "school_name": "Georgia / Terry",
+          "class_size": 78,
+          "avg_gmat": 641,
+          "avg_gpa": 3.5,
+          "women_percentage": 32
+        },
+        {
+          "school_name": "UC Irvine Merage",
+          "class_size": 40,
+          "avg_gmat": 675,
+          "avg_gpa": 3.44,
+          "women_percentage": 35
+        },
+        {
+          "school_name": "Yale SOM",
+          "class_size": 367,
+          "avg_gmat": 740,
+          "avg_gpa": 3.69,
+          "women_percentage": 44
+        },
+        {
+          "school_name": "Vanderbilt / Owen",
+          "class_size": 160,
+          "avg_gmat": 660,
+          "avg_gpa": 3.4,
+          "women_percentage": 24
+        },
+        {
+          "school_name": "Indiana / Kelley",
+          "class_size": 103,
+          "avg_gmat": 683,
+          "avg_gpa": 3.4,
+          "women_percentage": 28
+        }
+      ]
+    },
+    "extracted_at": "2026-03-17T21:55:41.690174"
+  },
+  "guide_wharton": {
+    "type": "school_profile",
+    "data": {
+      "schools": [
+        {
+          "school_name": "Emory Goizueta",
+          "class_size": 128,
+          "avg_gmat": 723,
+          "avg_gpa": 3.5,
+          "women_percentage": 38
+        },
+        {
+          "school_name": "Manchester AMBS",
+          "class_size": 113,
+          "avg_gmat": 650,
+          "women_percentage": 40,
+          "international_percentage": 97
+        },
+        {
+          "school_name": "Ohio State Fisher",
+          "class_size": 45,
+          "avg_gmat": 673,
+          "avg_gpa": 3.49,
+          "women_percentage": 31
+        },
+        {
+          "school_name": "Georgia Terry",
+          "class_size": 78,
+          "avg_gmat": 641,
+          "avg_gpa": 3.5,
+          "women_percentage": 32
+        },
+        {
+          "school_name": "UC Irvine Merage",
+          "class_size": 40,
+          "avg_gmat": 675,
+          "avg_gpa": 3.44,
+          "women_percentage": 35
+        },
+        {
+          "school_name": "Yale SOM",
+          "class_size": 367,
+          "avg_gmat": 740,
+          "avg_gpa": 3.69,
+          "women_percentage": 44
+        },
+        {
+          "school_name": "Vanderbilt Owen",
+          "class_size": 160,
+          "avg_gmat": 660,
+          "avg_gpa": 3.4,
+          "women_percentage": 24
+        },
+        {
+          "school_name": "Indiana Kelley",
+          "class_size": 103,
+          "avg_gmat": 683,
+          "avg_gpa": 3.4,
+          "women_percentage": 28
+        }
+      ]
+    },
+    "extracted_at": "2026-03-17T21:55:47.737196"
+  },
+  "guide_yale": {
+    "type": "school_profile",
+    "data": {
+      "school_name": "Yale School of Management (Yale SOM)",
+      "class_size": 367,
+      "avg_gmat": 740,
+      "avg_gpa": 3.69,
+      "women_percentage": 44
+    },
+    "extracted_at": "2026-03-17T21:55:50.312791"
+  },
+  "livewire": {
+    "type": "school_profile",
+    "data": {
+      "error": "This page does not contain MBA school profile data. This appears to be a general admissions tracking platform rather than a specific school's profile page."
+    },
+    "extracted_at": "2026-03-17T21:55:56.047431"
+  }
+}

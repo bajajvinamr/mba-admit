@@ -1,0 +1,22 @@
+{
+  "type": "school_profile",
+  "data": {
+    "school_name": "MIT Sloan School of Management",
+    "class_size": 408,
+    "avg_gmat": 730,
+    "avg_gpa": 3.59,
+    "international_percentage": 40,
+    "women_percentage": 46,
+    "tuition_total": 86300,
+    "mean_starting_salary": 169550,
+    "top_industries": [
+      "Consulting",
+      "Finance",
+      "Investment Banking/Brokerage",
+      "Automotive/Aerospace",
+      "Consumer Products"
+    ],
+    "key_differentiators": "MIT Sloan combines intellectual rigor with experiential learning through unique programs like Action Learning Labs and the Sloan Intensive Period. The school offers unparalleled integration with MIT's broader technology ecosystem, allowing students to work at the intersection of business, technology, and innovation with access to courses across MIT's engineering programs."
+  },
+  "extracted_at": "2026-03-17T21:56:42.222517"
+}

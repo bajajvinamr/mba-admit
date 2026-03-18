@@ -1,0 +1,12 @@
+{
+  "school_id": "iese",
+  "real_applicant_profiles": [],
+  "interview_questions_reported": [],
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": null
+  },
+  "student_reviews": []
+}

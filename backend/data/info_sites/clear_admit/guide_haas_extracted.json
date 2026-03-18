@@ -1,0 +1,18 @@
+{
+  "type": "school_profile",
+  "data": {
+    "school_name": "Berkeley Haas School of Business",
+    "median_starting_salary": 149000,
+    "mean_starting_salary": 143696,
+    "median_signing_bonus": 33775,
+    "top_industries": [
+      "Technology",
+      "Consulting",
+      "Financial Services",
+      "Healthcare",
+      "Consumer Packaged Goods"
+    ],
+    "key_differentiators": "Berkeley Haas holds strong connections to the tech industry with 34% of graduates entering technology roles. The school demonstrates strong regional placement in the West Coast with nearly three-quarters of graduates staying in the West U.S., particularly in high-paying markets like San Francisco."
+  },
+  "extracted_at": "2026-03-17T21:54:40.817512"
+}

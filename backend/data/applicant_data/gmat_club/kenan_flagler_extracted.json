@@ -1,0 +1,95 @@
+{
+  "school_id": "tepper",
+  "real_applicant_profiles": [
+    {
+      "gmat_score": 720,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": "Engineering",
+      "result": "Accepted",
+      "round": null,
+      "year": 2018
+    },
+    {
+      "gmat_score": 740,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": "Engineering",
+      "result": "Accepted",
+      "round": null,
+      "year": 2017
+    },
+    {
+      "gmat_score": 700,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2015
+    },
+    {
+      "gmat_score": 680,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2014
+    },
+    {
+      "gmat_score": 750,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": null
+    }
+  ],
+  "interview_questions_reported": [],
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": null
+  },
+  "student_reviews": [
+    {
+      "rating": 5.0,
+      "pros": "Small class size, academic rigor, school support",
+      "cons": "Alumni Network",
+      "year_of_review": 2022
+    },
+    {
+      "rating": 5.0,
+      "pros": "Cross-campus collaboration, strong tech focus",
+      "cons": "Location, Brand/Ranking",
+      "year_of_review": 2018
+    },
+    {
+      "rating": 5.0,
+      "pros": "Inclusive environment, diverse students, career services",
+      "cons": "Alumni Network, Location",
+      "year_of_review": 2018
+    },
+    {
+      "rating": 4.0,
+      "pros": "Career opportunities, preparation for success",
+      "cons": "Brand/Ranking, Facilities",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 5.0,
+      "pros": "Professional development, analytical skills",
+      "cons": "Curriculum, Brand/Ranking",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 5.0,
+      "pros": "Great curriculum, Capstone program, small class network",
+      "cons": "Student diversity, Alumni Network, Location",
+      "year_of_review": 2017
+    }
+  ]
+}

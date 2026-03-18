@@ -1,0 +1,161 @@
+{
+  "source": "reddit",
+  "decisions": [
+    {
+      "school": "Harvard Business School",
+      "school_id": "hbs",
+      "result": "Rejected",
+      "round": "R1",
+      "gmat_score": 735,
+      "gpa": 3.2,
+      "work_experience_years": 5,
+      "industry": "Technology",
+      "date": null,
+      "international": false
+    },
+    {
+      "school": "University of Chicago Booth School of Business",
+      "school_id": "booth",
+      "result": "Rejected",
+      "round": "R1",
+      "gmat_score": 735,
+      "gpa": 3.2,
+      "work_experience_years": 5,
+      "industry": "Technology",
+      "date": null,
+      "international": false
+    },
+    {
+      "school": "Wharton School",
+      "school_id": "wharton",
+      "result": "Accepted",
+      "round": "R1",
+      "gmat_score": 735,
+      "gpa": 3.2,
+      "work_experience_years": 5,
+      "industry": "Technology",
+      "date": null,
+      "international": false
+    },
+    {
+      "school": "Columbia Business School",
+      "school_id": "cbs",
+      "result": "Accepted",
+      "round": "R1",
+      "gmat_score": 735,
+      "gpa": 3.2,
+      "work_experience_years": 5,
+      "industry": "Technology",
+      "date": null,
+      "international": false
+    },
+    {
+      "school": "Babson College (Olin)",
+      "school_id": "babson",
+      "result": "Accepted",
+      "round": null,
+      "gmat_score": null,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "date": null,
+      "international": null
+    },
+    {
+      "school": "Rice Business School",
+      "school_id": "rice",
+      "result": "Rejected",
+      "round": "R1",
+      "gmat_score": null,
+      "gpa": null,
+      "work_experience_years": 7,
+      "industry": "Healthcare",
+      "date": null,
+      "international": null
+    },
+    {
+      "school": "UT Austin McCombs",
+      "school_id": "mccombs",
+      "result": "Waitlisted",
+      "round": "R1",
+      "gmat_score": null,
+      "gpa": null,
+      "work_experience_years": 7,
+      "industry": "Healthcare",
+      "date": null,
+      "international": null
+    },
+    {
+      "school": "Cornell Johnson",
+      "school_id": "johnson",
+      "result": "Waitlisted",
+      "round": "R1",
+      "gmat_score": null,
+      "gpa": null,
+      "work_experience_years": 7,
+      "industry": "Healthcare",
+      "date": null,
+      "international": null
+    },
+    {
+      "school": "Duke Fuqua",
+      "school_id": "fuqua",
+      "result": "Rejected",
+      "round": "R2",
+      "gmat_score": 615,
+      "gpa": null,
+      "work_experience_years": 7,
+      "industry": "Healthcare",
+      "date": null,
+      "international": null
+    },
+    {
+      "school": "Duke Fuqua",
+      "school_id": "fuqua",
+      "result": "Waitlisted",
+      "round": "R2",
+      "gmat_score": null,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "date": null,
+      "international": null
+    },
+    {
+      "school": "Ross School of Business",
+      "school_id": "ross",
+      "result": "Waitlisted",
+      "round": "R2",
+      "gmat_score": null,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "date": null,
+      "international": null
+    },
+    {
+      "school": "Harvard Business School",
+      "school_id": "hbs",
+      "result": "Accepted",
+      "round": null,
+      "gmat_score": null,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "date": null,
+      "international": null
+    },
+    {
+      "school": "University of Chicago Booth School of Business",
+      "school_id": "booth",
+      "result": "Accepted",
+      "round": null,
+      "gmat_score": null,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "date": null,
+      "international": null
+    }
+  ]
+}

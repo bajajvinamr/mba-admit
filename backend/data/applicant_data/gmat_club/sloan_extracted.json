@@ -1,0 +1,50 @@
+{
+  "school_id": "sloan",
+  "real_applicant_profiles": [
+    {
+      "gmat_score": 750,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2024
+    },
+    {
+      "gmat_score": 670,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": "Finance",
+      "result": "Accepted",
+      "round": null,
+      "year": 2019
+    }
+  ],
+  "interview_questions_reported": [],
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": 400
+  },
+  "student_reviews": [
+    {
+      "rating": 5.0,
+      "pros": "Incredible entrepreneurial ecosystem, passionate and humble classmates, great school resources, access to entire MIT ecosystem",
+      "cons": "Emphasis on in-person classes/lack of flexibility for recruiting, limited leadership curriculum",
+      "year_of_review": 2023
+    },
+    {
+      "rating": 5.0,
+      "pros": "Exceptional support for career change, top 2-3 cultures among MBA programs, outstanding placement in consulting and tech, access to entire MIT ecosystem",
+      "cons": "Limited leadership curriculum, less focus on general management, some top finance firms don't recruit due to smaller student body",
+      "year_of_review": 2018
+    },
+    {
+      "rating": null,
+      "pros": "Amazing social life, incredible networking opportunities, top finance professors, strong entrepreneurial culture, amazing classmates",
+      "cons": null,
+      "year_of_review": 2017
+    }
+  ]
+}

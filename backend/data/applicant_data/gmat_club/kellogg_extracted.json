@@ -1,0 +1,95 @@
+{
+  "school_id": "kellogg",
+  "real_applicant_profiles": [
+    {
+      "gmat_score": 710,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2024
+    },
+    {
+      "gmat_score": 750,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2018
+    },
+    {
+      "gmat_score": 560,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2018
+    },
+    {
+      "gmat_score": 740,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2017
+    },
+    {
+      "gmat_score": 710,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2015
+    }
+  ],
+  "interview_questions_reported": [],
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": null
+  },
+  "student_reviews": [
+    {
+      "rating": 3.0,
+      "pros": "Collaborative atmosphere, Strong academic programs, Real-world experience, Networking opportunities, Supportive community",
+      "cons": "Career opportunities provided by school",
+      "year_of_review": 2023
+    },
+    {
+      "rating": 4.7,
+      "pros": "Broad based general management education, Vibrant student body, State of the art new building",
+      "cons": "Career opportunities provided by school",
+      "year_of_review": 2018
+    },
+    {
+      "rating": 4.7,
+      "pros": "Career enhancement scope, Homely environment, World-renowned Career Management center, Amazing new building",
+      "cons": "Location",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 5.0,
+      "pros": "Strong collaborative culture, Career support, Technical skills and leadership development, New building with improved facilities",
+      "cons": "Curriculum, Classes, Professors",
+      "year_of_review": 2017
+    },
+    {
+      "rating": 4.3,
+      "pros": "Collaborative culture, Strong alumni network, Great for consulting and tech careers",
+      "cons": "Curriculum, Classes, Professors, Location",
+      "year_of_review": 2017
+    },
+    {
+      "rating": null,
+      "pros": "Strong quantitative skills development, Great professors, Hard skills for data science",
+      "cons": "Recruiting process is stressful",
+      "year_of_review": 2017
+    }
+  ]
+}

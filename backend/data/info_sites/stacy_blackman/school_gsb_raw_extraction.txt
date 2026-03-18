@@ -1,0 +1,22 @@
+I apologize, but the content provided appears to be encoded/corrupted image data (JFIF format) rather than readable text about an MBA school profile. The content shows binary image data and some fragmented text that doesn't contain the structured MBA program information needed to extract the requested details.
+
+To properly extract MBA school profile data including:
+- school_name
+- class_size  
+- avg_gmat/gmat_range
+- avg_gpa/gpa_range
+- avg_work_experience_years
+- acceptance_rate
+- yield_rate
+- women_percentage
+- international_percentage
+- tuition_total
+- mean_starting_salary
+- median_signing_bonus
+- top_industries
+- top_employers
+- essay_prompts
+- application_deadlines
+- key_differentiators
+
+I would need clear, readable text content from an MBA school's website, admissions page, or program brochure. Could you please provide the actual text content from the MBA program page you'd like me to analyze?

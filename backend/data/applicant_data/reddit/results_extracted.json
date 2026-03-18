@@ -1,0 +1,89 @@
+{
+  "source": "reddit",
+  "decisions": [
+    {
+      "school": "Harvard Business School",
+      "school_id": "hbs",
+      "result": "Accepted",
+      "round": "R1",
+      "gmat_score": 705,
+      "gpa": null,
+      "work_experience_years": 5.5,
+      "industry": "Private Equity",
+      "date": null,
+      "international": true
+    },
+    {
+      "school": "INSEAD",
+      "school_id": "insead",
+      "result": "Accepted",
+      "round": null,
+      "gmat_score": null,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "date": null,
+      "international": true
+    },
+    {
+      "school": "University of Michigan Ross",
+      "school_id": "ross",
+      "result": "Accepted",
+      "round": null,
+      "gmat_score": null,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "date": null,
+      "international": false
+    },
+    {
+      "school": "Rice University",
+      "school_id": "rice",
+      "result": "Rejected",
+      "round": "R1",
+      "gmat_score": null,
+      "gpa": null,
+      "work_experience_years": 7,
+      "industry": "Healthcare",
+      "date": null,
+      "international": null
+    },
+    {
+      "school": "UT Austin",
+      "school_id": "mccombs",
+      "result": "Waitlisted",
+      "round": "R1",
+      "gmat_score": null,
+      "gpa": null,
+      "work_experience_years": 7,
+      "industry": "Healthcare",
+      "date": null,
+      "international": null
+    },
+    {
+      "school": "Cornell",
+      "school_id": "johnson",
+      "result": "Waitlisted",
+      "round": "R1",
+      "gmat_score": null,
+      "gpa": null,
+      "work_experience_years": 7,
+      "industry": "Healthcare",
+      "date": null,
+      "international": null
+    },
+    {
+      "school": "Duke",
+      "school_id": "fuqua",
+      "result": "Rejected",
+      "round": "R2",
+      "gmat_score": 615,
+      "gpa": null,
+      "work_experience_years": 7,
+      "industry": "Healthcare",
+      "date": null,
+      "international": null
+    }
+  ]
+}

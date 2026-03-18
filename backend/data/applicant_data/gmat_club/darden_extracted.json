@@ -1,0 +1,75 @@
+{
+  "school_id": "yale",
+  "real_applicant_profiles": [
+    {
+      "gmat_score": 710,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2023,
+      "scholarship_info": null,
+      "nationality": null,
+      "undergraduate_school": null
+    },
+    {
+      "gmat_score": 700,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2019,
+      "scholarship_info": null,
+      "nationality": null,
+      "undergraduate_school": null
+    },
+    {
+      "gmat_score": 740,
+      "gpa": null,
+      "work_experience_years": null,
+      "industry": null,
+      "result": "Accepted",
+      "round": null,
+      "year": 2019,
+      "scholarship_info": null,
+      "nationality": null,
+      "undergraduate_school": null
+    }
+  ],
+  "interview_questions_reported": [],
+  "admission_stats_reported": {
+    "avg_gmat_accepted": null,
+    "avg_gpa_accepted": null,
+    "acceptance_rate": null,
+    "class_size": null,
+    "avg_work_experience_years": null
+  },
+  "student_reviews": [
+    {
+      "rating": 4.7,
+      "pros": "Excellent student body, supportive culture, strong academics, doubled pre-MBA salary, lifelong friendships",
+      "cons": "High cost",
+      "year_of_review": 2023
+    },
+    {
+      "rating": 4.7,
+      "pros": "Mission-driven institution, passionate peers, excellent student culture, robust support system",
+      "cons": "Limited career opportunities, lack of specialization",
+      "year_of_review": 2018
+    },
+    {
+      "rating": 5.0,
+      "pros": "Life-changing Silver Scholar program, global community, tight-knit alumni network, dedicated professors",
+      "cons": "Limited career opportunities, lack of specialization",
+      "year_of_review": 2018
+    },
+    {
+      "rating": null,
+      "pros": "Excellent integrated core curriculum, high-tech facilities, helpful career office, strong IB and consulting placement",
+      "cons": "Student body low on quant skills, core curriculum low on quant topics",
+      "year_of_review": 2018
+    }
+  ]
+}

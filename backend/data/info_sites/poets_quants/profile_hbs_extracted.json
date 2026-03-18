@@ -1,0 +1,28 @@
+{
+  "type": "school_profile",
+  "data": {
+    "school_name": "Harvard Business School",
+    "class_size": 928,
+    "avg_gmat": 730,
+    "gmat_range": "580-790",
+    "avg_gpa": 3.71,
+    "avg_work_experience_years": 4.5,
+    "acceptance_rate": 0.099,
+    "yield_rate": 0.91,
+    "essay_prompts": [
+      "As we review your application, what more would you like us to know as we consider your candidacy for the Harvard Business School MBA Program?"
+    ],
+    "application_deadlines": [
+      {
+        "round": "Round One",
+        "deadline_date": "September 5, 2018"
+      },
+      {
+        "round": "Round Two",
+        "deadline_date": "January 3, 2019"
+      }
+    ],
+    "key_differentiators": "Harvard Business School eliminated its third application round to give admitted students better access to on-campus housing and more time for visa processing. The school maintains the highest yield rate among business schools globally at 91%, demonstrating its exceptional drawing power and selectivity."
+  },
+  "extracted_at": "2026-03-17T21:56:24.439498"
+}

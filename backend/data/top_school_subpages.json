@@ -1,0 +1,337 @@
+{
+  "hbs": {
+    "base": "https://www.hbs.edu",
+    "pages": [
+      [
+        "admissions",
+        "/mba/admissions/"
+      ],
+      [
+        "application",
+        "/mba/admissions/application-process/"
+      ],
+      [
+        "class_profile",
+        "/mba/admissions/class-profile/"
+      ],
+      [
+        "deadlines",
+        "/mba/admissions/application-process/deadlines/"
+      ],
+      [
+        "financial_aid",
+        "/mba/admissions/financial-aid/"
+      ]
+    ]
+  },
+  "gsb": {
+    "base": "https://www.gsb.stanford.edu",
+    "pages": [
+      [
+        "admissions",
+        "/programs/mba/admission/"
+      ],
+      [
+        "application",
+        "/programs/mba/admission/application-materials/"
+      ],
+      [
+        "class_profile",
+        "/programs/mba/admission/evaluation-criteria/"
+      ],
+      [
+        "financial_aid",
+        "/programs/mba/financial-aid/"
+      ]
+    ]
+  },
+  "wharton": {
+    "base": "https://mba.wharton.upenn.edu",
+    "pages": [
+      [
+        "admissions",
+        "/admissions/"
+      ],
+      [
+        "application",
+        "/admissions/application-requirements/"
+      ],
+      [
+        "class_profile",
+        "/class-profile/"
+      ],
+      [
+        "deadlines",
+        "/admissions/application-requirements/application-deadlines/"
+      ]
+    ]
+  },
+  "booth": {
+    "base": "https://www.chicagobooth.edu",
+    "pages": [
+      [
+        "admissions",
+        "/mba/full-time/admissions/"
+      ],
+      [
+        "application",
+        "/mba/full-time/admissions/how-to-apply/"
+      ],
+      [
+        "class_profile",
+        "/mba/full-time/admissions/class-profile/"
+      ],
+      [
+        "financial_aid",
+        "/mba/full-time/admissions/tuition-and-financial-aid/"
+      ]
+    ]
+  },
+  "kellogg": {
+    "base": "https://www.kellogg.northwestern.edu",
+    "pages": [
+      [
+        "admissions",
+        "/programs/full-time-mba/admissions/"
+      ],
+      [
+        "application",
+        "/programs/full-time-mba/admissions/how-to-apply/"
+      ],
+      [
+        "class_profile",
+        "/programs/full-time-mba/class-profile/"
+      ]
+    ]
+  },
+  "sloan": {
+    "base": "https://mitsloan.mit.edu",
+    "pages": [
+      [
+        "admissions",
+        "/mba/admissions/"
+      ],
+      [
+        "application",
+        "/mba/admissions/apply/"
+      ],
+      [
+        "class_profile",
+        "/mba/admissions/class-profile/"
+      ]
+    ]
+  },
+  "columbia": {
+    "base": "https://www8.gsb.columbia.edu",
+    "pages": [
+      [
+        "admissions",
+        "/programs/mba/admissions/"
+      ],
+      [
+        "application",
+        "/programs/mba/admissions/application-requirements/"
+      ],
+      [
+        "class_profile",
+        "/programs/mba/admissions/class-profile/"
+      ]
+    ]
+  },
+  "haas": {
+    "base": "https://haas.berkeley.edu",
+    "pages": [
+      [
+        "admissions",
+        "/mba/admissions/"
+      ],
+      [
+        "application",
+        "/mba/admissions/apply/"
+      ],
+      [
+        "class_profile",
+        "/mba/admissions/class-profile/"
+      ]
+    ]
+  },
+  "tuck": {
+    "base": "https://www.tuck.dartmouth.edu",
+    "pages": [
+      [
+        "admissions",
+        "/mba/admissions/"
+      ],
+      [
+        "application",
+        "/mba/admissions/applying/"
+      ],
+      [
+        "class_profile",
+        "/mba/admissions/class-profile/"
+      ]
+    ]
+  },
+  "ross": {
+    "base": "https://michiganross.umich.edu",
+    "pages": [
+      [
+        "admissions",
+        "/programs/full-time-mba/admissions/"
+      ],
+      [
+        "application",
+        "/programs/full-time-mba/admissions/how-to-apply/"
+      ],
+      [
+        "class_profile",
+        "/programs/full-time-mba/admissions/class-profile/"
+      ]
+    ]
+  },
+  "fuqua": {
+    "base": "https://www.fuqua.duke.edu",
+    "pages": [
+      [
+        "admissions",
+        "/programs/daytime-mba/admissions/"
+      ],
+      [
+        "application",
+        "/programs/daytime-mba/admissions/how-to-apply/"
+      ]
+    ]
+  },
+  "darden": {
+    "base": "https://www.darden.virginia.edu",
+    "pages": [
+      [
+        "admissions",
+        "/mba/admissions/"
+      ],
+      [
+        "application",
+        "/mba/admissions/application-process/"
+      ]
+    ]
+  },
+  "stern": {
+    "base": "https://www.stern.nyu.edu",
+    "pages": [
+      [
+        "admissions",
+        "/programs/full-time-mba/admissions/"
+      ],
+      [
+        "application",
+        "/programs/full-time-mba/admissions/application-requirements/"
+      ]
+    ]
+  },
+  "yale": {
+    "base": "https://som.yale.edu",
+    "pages": [
+      [
+        "admissions",
+        "/programs/mba/admissions/"
+      ],
+      [
+        "application",
+        "/programs/mba/admissions/application/"
+      ]
+    ]
+  },
+  "anderson": {
+    "base": "https://www.anderson.ucla.edu",
+    "pages": [
+      [
+        "admissions",
+        "/degrees/full-time-mba/admissions/"
+      ],
+      [
+        "application",
+        "/degrees/full-time-mba/admissions/how-to-apply/"
+      ]
+    ]
+  },
+  "lbs": {
+    "base": "https://www.london.edu",
+    "pages": [
+      [
+        "admissions",
+        "/mba/admissions/"
+      ],
+      [
+        "application",
+        "/mba/admissions/how-to-apply/"
+      ]
+    ]
+  },
+  "insead": {
+    "base": "https://www.insead.edu",
+    "pages": [
+      [
+        "admissions",
+        "/mba/admissions/"
+      ],
+      [
+        "application",
+        "/mba/admissions/application-process/"
+      ]
+    ]
+  },
+  "johnson": {
+    "base": "https://www.johnson.cornell.edu",
+    "pages": [
+      [
+        "admissions",
+        "/programs/mba/two-year-mba/admissions/"
+      ]
+    ]
+  },
+  "tepper": {
+    "base": "https://www.cmu.edu/tepper",
+    "pages": [
+      [
+        "admissions",
+        "/mba/admissions/"
+      ]
+    ]
+  },
+  "mccombs": {
+    "base": "https://www.mccombs.utexas.edu",
+    "pages": [
+      [
+        "admissions",
+        "/mba/full-time/admissions/"
+      ]
+    ]
+  },
+  "kenan_flagler": {
+    "base": "https://www.kenan-flagler.unc.edu",
+    "pages": [
+      [
+        "admissions",
+        "/programs/mba/admissions/"
+      ]
+    ]
+  },
+  "olin": {
+    "base": "https://olin.wustl.edu",
+    "pages": [
+      [
+        "admissions",
+        "/mba-programs/full-time-mba/admissions/"
+      ]
+    ]
+  },
+  "georgetown": {
+    "base": "https://msb.georgetown.edu",
+    "pages": [
+      [
+        "admissions",
+        "/mba/admissions/"
+      ]
+    ]
+  }
+}
