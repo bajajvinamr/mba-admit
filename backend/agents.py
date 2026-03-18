@@ -36,6 +36,8 @@ class AgentType(str, Enum):
 _DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 _SCHOOL_DB_PATH = os.path.join(_DATA_DIR, "school_db_full.json")
 _SCRAPED_DB_PATH = os.path.join(_DATA_DIR, "school_db_scraped.json")
+_DISCOVERY_LIST_PATH = os.path.join(_DATA_DIR, "discovery_list.json")
+_INFO_SITES_DIR = os.path.join(_DATA_DIR, "info_sites")
 
 import re
 _HEX_PATTERN = re.compile(r'^[0-9a-f]{6,}$')
@@ -65,6 +67,19 @@ def _load_school_db():
     scraped_count = _overlay_scraped_data(db)
     if scraped_count:
         logger.info("Overlaid scraped data for %d schools", scraped_count)
+
+    # Backfill missing core fields from discovery_list.json
+    backfilled = _backfill_from_discovery(db)
+    if backfilled:
+        logger.info("Backfilled core fields for %d schools from discovery_list", backfilled)
+
+    # Overlay info site data (rankings, essay tips, class profiles)
+    info_count = _overlay_info_site_data(db)
+    if info_count:
+        logger.info("Overlaid info site data for %d schools", info_count)
+
+    # Ensure every school has data_quality metadata
+    _ensure_data_quality(db)
 
     return db
 
@@ -100,11 +115,22 @@ def _overlay_scraped_data(db: dict) -> int:
             continue
 
         if school_id not in db:
-            db[school_id] = {k: v for k, v in scraped_fields.items() if k != "_meta"}
+            new_entry = {k: v for k, v in scraped_fields.items() if k != "_meta"}
+            new_fields = [k for k in new_entry if k not in {"data_quality", "confidence", "data_source", "_meta"}]
+            if "data_quality" not in new_entry and new_fields:
+                new_entry["data_quality"] = {
+                    "verified_fields": new_fields,
+                    "confidence": 0.9 if len(new_fields) >= 5 else 0.6,
+                    "last_scraped": meta.get("scraped_at") or "2026-03-17",
+                    "source": "scraped",
+                }
+            db[school_id] = new_entry
             count += 1
             continue
 
         # Selective overwrite: scraped non-null values win
+        _INTERNAL_FIELDS = {"confidence", "data_quality", "_meta", "data_source"}
+        verified_fields = []
         for key, value in scraped_fields.items():
             if key == "_meta":
                 continue
@@ -112,9 +138,217 @@ def _overlay_scraped_data(db: dict) -> int:
                 db[school_id][key] = value
             elif value is not None:
                 db[school_id][key] = value
+                if key not in _INTERNAL_FIELDS:
+                    verified_fields.append(key)
+
+        # Auto-generate data_quality if the extract didn't include one
+        if "data_quality" not in db[school_id] and verified_fields:
+            db[school_id]["data_quality"] = {
+                "verified_fields": verified_fields,
+                "confidence": 0.9 if len(verified_fields) >= 5 else 0.6,
+                "last_scraped": meta.get("scraped_at") or "2026-03-17",
+                "source": "scraped",
+            }
         count += 1
 
     return count
+
+
+def _backfill_from_discovery(db: dict) -> int:
+    """Fill missing name/country/location from discovery_list.json.
+
+    Schools added by the scraper merge often lack these core fields because
+    the extraction prompt focuses on admissions data, not basic metadata.
+    The discovery_list always has name, country, and location.
+    """
+    if not os.path.exists(_DISCOVERY_LIST_PATH):
+        return 0
+    try:
+        with open(_DISCOVERY_LIST_PATH, "r") as f:
+            disc = json.load(f)
+    except (json.JSONDecodeError, IOError):
+        return 0
+
+    disc_map = {s["id"]: s for s in disc if isinstance(s, dict) and "id" in s}
+    _BACKFILL_FIELDS = ["name", "country", "location"]
+    count = 0
+    for school_id, school in db.items():
+        if school_id not in disc_map:
+            # Fallback: derive name from ID if completely missing
+            if not school.get("name"):
+                school["name"] = school_id.replace("_", " ").title()
+                count += 1
+            continue
+        src = disc_map[school_id]
+        filled_any = False
+        for field in _BACKFILL_FIELDS:
+            if not school.get(field) and src.get(field):
+                school[field] = src[field]
+                filled_any = True
+        # Also backfill website URL if missing
+        if not school.get("website") and src.get("website"):
+            school["website"] = src["website"]
+        if filled_any:
+            count += 1
+    return count
+
+
+def _overlay_info_site_data(db: dict) -> int:
+    """Merge extracted info site data (rankings, essay tips, class profiles).
+
+    Info sites like Clear Admit, Poets & Quants, and Stacy Blackman provide
+    supplementary data (GMAT averages, class sizes, essay tips) that can fill
+    gaps in the primary school DB.
+    """
+    if not os.path.exists(_INFO_SITES_DIR):
+        return 0
+
+    # School name → ID mapping for fuzzy matching
+    name_to_id: Dict[str, str] = {}
+    for sid, school in db.items():
+        name = (school.get("name") or "").lower().strip()
+        if name:
+            name_to_id[name] = sid
+            # Add common short forms
+            for suffix in [" school of business", " business school", " school of management"]:
+                if name.endswith(suffix):
+                    name_to_id[name.replace(suffix, "")] = sid
+
+    count = 0
+    for site_dir in os.listdir(_INFO_SITES_DIR):
+        site_path = os.path.join(_INFO_SITES_DIR, site_dir)
+        if not os.path.isdir(site_path):
+            continue
+
+        for fname in os.listdir(site_path):
+            if not fname.endswith("_extracted.json"):
+                continue
+            fpath = os.path.join(site_path, fname)
+            try:
+                with open(fpath, "r") as f:
+                    extracted = json.load(f)
+            except (json.JSONDecodeError, IOError):
+                continue
+
+            data_type = extracted.get("type")
+            data = extracted.get("data")
+            if not data:
+                continue
+
+            # Handle different extraction types
+            if data_type == "school_profile" and isinstance(data, dict):
+                count += _merge_school_profile(db, name_to_id, data, site_dir)
+            elif data_type == "school_profile" and isinstance(data, list):
+                # Some extractions return a list of school profiles
+                for profile in data:
+                    if isinstance(profile, dict):
+                        count += _merge_school_profile(db, name_to_id, profile, site_dir)
+            elif data_type == "rankings" and isinstance(data, list):
+                for entry in data:
+                    if isinstance(entry, dict):
+                        count += _merge_ranking_entry(db, name_to_id, entry, site_dir)
+
+    return count
+
+
+def _merge_school_profile(db: dict, name_to_id: Dict[str, str], profile: dict, source: str) -> int:
+    """Merge a single school profile from info site data."""
+    school_name = (profile.get("school_name") or "").lower().strip()
+    if not school_name:
+        return 0
+
+    # Try to find matching school
+    sid = name_to_id.get(school_name)
+    if not sid:
+        # Try partial match
+        for db_name, db_sid in name_to_id.items():
+            if school_name in db_name or db_name in school_name:
+                sid = db_sid
+                break
+    if not sid or sid not in db:
+        return 0
+
+    school = db[sid]
+    updated = False
+
+    # Merge numeric fields only if missing or clearly better
+    _NUMERIC_MERGE = {
+        "avg_gmat": "gmat_avg",
+        "gmat_avg": "gmat_avg",
+        "class_size": "class_size",
+        "women_percentage": "women_pct",
+        "international_percentage": "international_pct",
+        "acceptance_rate": "acceptance_rate",
+    }
+    for src_key, dst_key in _NUMERIC_MERGE.items():
+        val = profile.get(src_key)
+        if val is not None and isinstance(val, (int, float)):
+            if not school.get(dst_key):
+                school[dst_key] = val
+                updated = True
+
+    # Track info site source
+    school.setdefault("_info_sources", [])
+    if source not in school["_info_sources"]:
+        school["_info_sources"].append(source)
+
+    return 1 if updated else 0
+
+
+def _merge_ranking_entry(db: dict, name_to_id: Dict[str, str], entry: dict, source: str) -> int:
+    """Merge a ranking entry (rank, tuition) from info site data."""
+    school_name = (entry.get("school_name") or "").lower().strip()
+    if not school_name:
+        return 0
+
+    sid = name_to_id.get(school_name)
+    if not sid:
+        for db_name, db_sid in name_to_id.items():
+            if school_name in db_name or db_name in school_name:
+                sid = db_sid
+                break
+    if not sid or sid not in db:
+        return 0
+
+    school = db[sid]
+    updated = False
+
+    # Merge rank
+    rank = entry.get("rank")
+    if rank and isinstance(rank, int):
+        school.setdefault("rankings", {})[source] = rank
+        updated = True
+
+    # Merge tuition if we have it and school doesn't
+    tuition_str = entry.get("tuition")
+    if tuition_str and not school.get("tuition_usd"):
+        # Parse "$99,692" → 99692
+        cleaned = re.sub(r'[^\d.]', '', str(tuition_str))
+        if cleaned:
+            try:
+                school["tuition_usd"] = int(float(cleaned))
+                updated = True
+            except ValueError:
+                pass
+
+    return 1 if updated else 0
+
+
+def _ensure_data_quality(db: dict) -> None:
+    """Ensure every school has a data_quality dict for consistent API responses."""
+    for school_id, school in db.items():
+        if "data_quality" in school:
+            continue
+        # Check what fields have real (non-null, non-placeholder) values
+        _CORE_FIELDS = ["name", "country", "gmat_avg", "tuition_usd", "acceptance_rate",
+                        "class_size", "essay_prompts", "deadlines", "placement_stats"]
+        verified = [f for f in _CORE_FIELDS if school.get(f)]
+        school["data_quality"] = {
+            "verified_fields": verified,
+            "confidence": min(0.9, len(verified) / len(_CORE_FIELDS)),
+            "last_scraped": None,
+            "source": "scraped" if len(verified) >= 3 else "synthetic",
+        }
 
 
 def get_school_data_quality(school_id: str) -> dict:
