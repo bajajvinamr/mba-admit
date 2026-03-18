@@ -87,6 +87,47 @@ if DATA_DIR.exists():
 
 
 # ---------------------------------------------------------------------------
+# Public accessor for cross-router integration
+# ---------------------------------------------------------------------------
+
+def get_applicant_data_summary(school_id: str) -> dict | None:
+    """Return a compact summary of real applicant data for a school.
+
+    Used by the school detail endpoint to inline community data.
+    Returns None if no data exists for this school.
+    """
+    decisions = _SCHOOL_DECISIONS.get(school_id, [])
+    profiles = _SCHOOL_PROFILES.get(school_id, [])
+    interviews = _SCHOOL_INTERVIEWS.get(school_id, [])
+    reviews = _SCHOOL_REVIEWS.get(school_id, [])
+    stats = _SCHOOL_STATS.get(school_id)
+
+    if not any([decisions, profiles, interviews, reviews, stats]):
+        return None
+
+    # Compute decision breakdown
+    decision_breakdown = {}
+    for d in decisions:
+        result = (d.get("result") or "Unknown").strip()
+        decision_breakdown[result] = decision_breakdown.get(result, 0) + 1
+
+    # Average GMAT from profiles
+    gmat_scores = [p.get("gmat_score") for p in profiles if isinstance(p.get("gmat_score"), (int, float))]
+    avg_gmat = round(sum(gmat_scores) / len(gmat_scores)) if gmat_scores else None
+
+    return {
+        "decision_count": len(decisions),
+        "decision_breakdown": decision_breakdown,
+        "profile_count": len(profiles),
+        "avg_reported_gmat": avg_gmat,
+        "interview_question_count": len(interviews),
+        "review_count": len(reviews),
+        "admission_stats": stats,
+        "sample_interview_questions": [q.get("question", q) if isinstance(q, dict) else q for q in interviews[:3]],
+    }
+
+
+# ---------------------------------------------------------------------------
 # Endpoints
 # ---------------------------------------------------------------------------
 

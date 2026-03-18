@@ -9,6 +9,7 @@ from typing import Optional
 from fastapi import APIRouter, HTTPException, Query, Response
 from agents import SCHOOL_DB, SCHOOL_ALIASES, get_school_data_quality
 from models import OddsRequest, FitScoreRequest, ApplicationFeesRequest
+from routers.applicant_data import get_applicant_data_summary
 
 logger = logging.getLogger(__name__)
 
@@ -566,7 +567,10 @@ def get_school(school_id: str):
             })
         school["admission_deadlines"] = merged
 
-    return {"id": school_id, **school, "data_quality_summary": dq}
+    # Inline community data if available
+    community = get_applicant_data_summary(school_id)
+
+    return {"id": school_id, **school, "data_quality_summary": dq, "community_data": community}
 
 
 @router.post("/calculate_odds")
