@@ -15,6 +15,7 @@ from models import (
     EssayWordCountRequest,
     ThemeAnalysisRequest,
 )
+from guardrails import sanitize_for_llm, MAX_BULLET_CHARS, MAX_ESSAY_CHARS, MAX_FIELD_CHARS
 
 router = APIRouter(prefix="/api", tags=["essays"])
 
@@ -25,7 +26,11 @@ router = APIRouter(prefix="/api", tags=["essays"])
 @rate_limit("10/minute")
 def roast_resume(request: Request, req: ResumeRoastRequest):
     """Brutal AI roast of a resume bullet + MBA-level rewrite — powered by Claude."""
-    return roast_resume_bullet(req.bullet)
+    try:
+        bullet = sanitize_for_llm(req.bullet, MAX_BULLET_CHARS, "resume bullet")
+    except ValueError as e:
+        raise HTTPException(400, detail=str(e))
+    return roast_resume_bullet(bullet)
 
 
 # ── Essay Evaluator ────────────────────────────────────────────────────────────
@@ -34,7 +39,12 @@ def roast_resume(request: Request, req: ResumeRoastRequest):
 @rate_limit("10/minute")
 def evaluate_essay(request: Request, req: EssayEvaluationRequest):
     """Rigorous AI Essay B.S. Detector."""
-    return evaluate_essay_draft(req.school_id, req.prompt, req.essay_text)
+    try:
+        essay_text = sanitize_for_llm(req.essay_text, MAX_ESSAY_CHARS, "essay")
+        prompt = sanitize_for_llm(req.prompt, MAX_FIELD_CHARS, "prompt")
+    except ValueError as e:
+        raise HTTPException(400, detail=str(e))
+    return evaluate_essay_draft(req.school_id, prompt, essay_text)
 
 
 # ── Essay Word Counter ──────────────────────────────────────────────────

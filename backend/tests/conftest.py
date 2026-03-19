@@ -34,7 +34,7 @@ import db
 
 @pytest.fixture(autouse=True)
 def _clean_db():
-    """Reset in-memory stores and rate limiter between tests."""
+    """Reset in-memory stores, rate limiter, and usage tracking between tests."""
     db._MEMORY_SESSIONS.clear()
     db._MEMORY_USERS.clear()
     db._MEMORY_SCHOOL_LIST.clear()
@@ -48,6 +48,15 @@ def _clean_db():
             limiter._storage.reset()
         elif limiter:
             limiter.reset()
+    except Exception:
+        pass
+
+    # Reset usage tracking state and set test user to premium (no limits)
+    try:
+        import usage
+        usage._MEMORY_USAGE.clear()
+        usage._MEMORY_TIERS.clear()
+        usage.set_user_tier("dev-user", "premium")
     except Exception:
         pass
 

@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException, Query
+from guardrails import anonymize_applicant_record
 
 logger = logging.getLogger(__name__)
 
@@ -161,10 +162,10 @@ async def school_applicant_data(school_id: str):
 
     return {
         "school_id": school_id,
-        "decisions": decisions,
-        "applicant_profiles": profiles,
+        "decisions": [anonymize_applicant_record(d) for d in decisions],
+        "applicant_profiles": [anonymize_applicant_record(p) for p in profiles],
         "interview_questions": interviews,
-        "student_reviews": reviews,
+        "student_reviews": [anonymize_applicant_record(r) for r in reviews],
         "admission_stats": stats,
         "data_counts": {
             "decisions": len(decisions),
@@ -207,7 +208,7 @@ async def all_decisions(
         "total": total,
         "offset": offset,
         "limit": limit,
-        "decisions": page,
+        "decisions": [anonymize_applicant_record(d) for d in page],
     }
 
 
@@ -235,7 +236,7 @@ async def school_reviews(school_id: str):
     return {
         "school_id": school_id,
         "total_reviews": len(reviews),
-        "reviews": reviews,
+        "reviews": [anonymize_applicant_record(r) for r in reviews],
     }
 
 
@@ -249,5 +250,5 @@ async def school_profiles(school_id: str):
     return {
         "school_id": school_id,
         "total_profiles": len(profiles),
-        "profiles": profiles,
+        "profiles": [anonymize_applicant_record(p) for p in profiles],
     }

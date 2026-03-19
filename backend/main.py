@@ -6,12 +6,12 @@ All endpoints live in routers/*.py.
 
 import os
 
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.gzip import GZipMiddleware
 from logging_config import setup_logging
 
-from middleware import setup_rate_limiter, setup_cache_headers, setup_request_timeout, global_exception_handler
+from middleware import setup_rate_limiter, setup_cache_headers, setup_request_timeout, setup_usage_tracking, global_exception_handler
 
 logger = setup_logging()
 
@@ -22,6 +22,7 @@ app = FastAPI(title="Chief of Staff — MBA Admissions API v2")
 setup_rate_limiter(app)
 setup_cache_headers(app)
 setup_request_timeout(app)
+setup_usage_tracking(app)
 app.add_middleware(GZipMiddleware, minimum_size=1000)  # Compress responses > 1KB
 app.add_exception_handler(Exception, global_exception_handler)
 
@@ -131,6 +132,35 @@ def ingest_analytics(batch: AnalyticsBatch):
             {k: v for k, v in event.properties.items() if k != "stack"},
         )
     return {"accepted": len(batch.events[:50])}
+
+
+# ── Usage Tracking ───────────────────────────────────────────────────────────
+
+from auth import get_optional_user
+from usage import get_usage_summary, get_user_tier, set_user_tier
+
+
+@app.get("/api/usage")
+def get_my_usage(request: Request, user: dict = Depends(get_optional_user)):
+    """Get current user's AI feature usage for this billing period."""
+    from middleware import _get_user_id
+    user_id = user.get("sub") if user else _get_user_id(request)
+    return get_usage_summary(user_id)
+
+
+@app.get("/api/usage/tiers")
+def get_tiers():
+    """Public endpoint: list all tiers and their limits."""
+    from usage import TIERS
+    return {
+        "tiers": {
+            name: {
+                "limits": limits if limits else "unlimited",
+                "price_usd": {"free": 0, "pro": 29, "premium": 79}.get(name, 0),
+            }
+            for name, limits in TIERS.items()
+        }
+    }
 
 
 @app.get("/health")

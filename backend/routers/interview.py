@@ -15,6 +15,7 @@ from models import (
     InterviewStartRequest,
     InterviewResponseRequest,
 )
+from guardrails import sanitize_for_llm, MAX_CHAT_CHARS
 
 router = APIRouter(prefix="/api", tags=["interview"])
 
@@ -32,7 +33,20 @@ def start_mock_interview(request: Request, req: InterviewStartRequest):
 @rate_limit("20/minute")
 def respond_mock_interview(request: Request, req: InterviewResponseRequest):
     """Next prompt or final feedback based on session history."""
-    return simulate_interview_pass(req.school_id, req.history, difficulty=req.difficulty, question_count=req.question_count)
+    # Sanitize the latest user message in history
+    sanitized_history = []
+    for msg in req.history:
+        entry = dict(msg) if isinstance(msg, dict) else msg
+        if isinstance(entry, dict) and entry.get("role") == "user":
+            try:
+                entry["content"] = sanitize_for_llm(
+                    entry.get("content", ""), MAX_CHAT_CHARS, "interview response"
+                )
+            except ValueError as e:
+                from fastapi import HTTPException
+                raise HTTPException(400, detail=str(e))
+        sanitized_history.append(entry)
+    return simulate_interview_pass(req.school_id, sanitized_history, difficulty=req.difficulty, question_count=req.question_count)
 
 
 # ── Interview Question Bank (JSON file) ──────────────────────────────────

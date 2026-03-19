@@ -6,6 +6,7 @@ from agents import run_agent_graph, ApplicationState, AgentType
 from models import StartSessionRequest, ChatMessageRequest, PaymentRequest
 from auth import get_optional_user
 from middleware import rate_limit
+from guardrails import sanitize_for_llm, MAX_CHAT_CHARS, MAX_FIELD_CHARS
 import db
 
 router = APIRouter(prefix="/api", tags=["sessions"])
@@ -42,13 +43,20 @@ def _state_to_updates(state: ApplicationState) -> Dict[str, Any]:
 @rate_limit("10/minute")
 def start_session(request: Request, req: StartSessionRequest, user: Dict = Depends(get_optional_user)):
     """Initialize a new application session for a specific school."""
+    try:
+        name = sanitize_for_llm(req.name, MAX_FIELD_CHARS, "name")
+        industry = sanitize_for_llm(req.industry_background, MAX_FIELD_CHARS, "industry background")
+        leadership = sanitize_for_llm(req.leadership_roles, MAX_FIELD_CHARS, "leadership roles")
+    except ValueError as e:
+        raise HTTPException(400, detail=str(e))
+
     profile = {
-        "name": req.name,
+        "name": name,
         "gmat": req.gmat,
         "gpa": req.gpa,
-        "industry_background": req.industry_background,
+        "industry_background": industry,
         "undergrad_tier": req.undergrad_tier,
-        "leadership_roles": req.leadership_roles,
+        "leadership_roles": leadership,
         "target_intake": req.target_intake,
         "intl_experience": req.intl_experience,
         "community_service": req.community_service,
@@ -81,8 +89,13 @@ def chat(request: Request, req: ChatMessageRequest):
     if not session:
         raise HTTPException(status_code=404, detail="Session not found")
 
+    try:
+        message = sanitize_for_llm(req.message, MAX_CHAT_CHARS, "chat message")
+    except ValueError as e:
+        raise HTTPException(400, detail=str(e))
+
     state = _session_to_state(session)
-    state["interview_history"].append({"role": "user", "content": req.message})
+    state["interview_history"].append({"role": "user", "content": message})
     new_state = run_agent_graph(state)
 
     db.update_session(req.session_id, _state_to_updates(new_state))
