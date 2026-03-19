@@ -3,9 +3,8 @@
   "configurations": [
     {
       "name": "frontend",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "cwd": "/Users/vinamr/Documents/mba-admissions-ai/frontend",
+      "runtimeExecutable": "/bin/bash",
+      "runtimeArgs": ["-c", "export PATH=/Users/vinamr/.nvm/versions/node/v22.14.0/bin:$PATH && cd /Users/vinamr/Documents/mba-admissions-ai/frontend && npm run dev"],
       "port": 3000
     },
     {
