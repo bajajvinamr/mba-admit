@@ -6,32 +6,35 @@ from main import app
 client = TestClient(app)
 
 
-# ── Admit Simulator ─────────────────────────────────────────────────
+# ── Admit Simulator (Monte Carlo v2) ─────────────────────────────────
 
 def test_simulator_basic():
-    r = client.post("/api/admit-simulator", json={"gmat": 730, "gpa": 3.8, "work_years": 4})
+    r = client.post("/api/admit-simulator", json={"gmat": 730, "gpa": 3.8, "work_exp_years": 4})
     assert r.status_code == 200
     data = r.json()
     assert "results" in data
+    assert "summary" in data
     assert len(data["results"]) > 0
     first = data["results"][0]
-    assert "probability_pct" in first
-    assert "verdict" in first
-    assert first["verdict"] in ("Reach", "Target", "Safety")
+    assert "admit_probability" in first
+    assert "outcome" in first
+    assert first["outcome"] in ("likely", "competitive", "possible", "unlikely")
 
 
 def test_simulator_with_schools():
     r = client.post("/api/admit-simulator", json={
-        "gmat": 700, "gpa": 3.5, "work_years": 3, "school_ids": ["hbs", "booth"]
+        "gmat": 700, "gpa": 3.5, "work_exp_years": 3, "school_ids": ["hbs", "booth"]
     })
     assert r.status_code == 200
     assert len(r.json()["results"]) >= 1
 
 
-def test_simulator_urm_bonus():
-    r1 = client.post("/api/admit-simulator", json={"gmat": 700, "gpa": 3.5, "work_years": 4, "is_urm": False, "school_ids": ["hbs"]})
-    r2 = client.post("/api/admit-simulator", json={"gmat": 700, "gpa": 3.5, "work_years": 4, "is_urm": True, "school_ids": ["hbs"]})
-    # URM should generally have higher probability (though randomness may affect)
+def test_simulator_profile_boost():
+    r1 = client.post("/api/admit-simulator", json={"gmat": 700, "gpa": 3.5, "school_ids": ["hbs"]})
+    r2 = client.post("/api/admit-simulator", json={
+        "gmat": 700, "gpa": 3.5, "school_ids": ["hbs"],
+        "undergrad_tier": "top_10", "industry": "military", "leadership_roles": "cxo",
+    })
     assert r1.status_code == 200
     assert r2.status_code == 200
 

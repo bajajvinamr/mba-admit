@@ -33,6 +33,8 @@ TIERS = {
         "chat": 20,
         "start_session": 5,
         "goals_sculpt": 3,
+        "admit_simulator": 3,
+        "profile_analyze": 3,
     },
     "pro": {
         "essay_eval": 50,
@@ -46,6 +48,8 @@ TIERS = {
         "chat": 200,
         "start_session": 50,
         "goals_sculpt": 30,
+        "admit_simulator": 50,
+        "profile_analyze": 50,
     },
     "premium": {},  # empty = unlimited
 }
@@ -65,6 +69,8 @@ ENDPOINT_FEATURE_MAP: dict[str, str] = {
     "/api/chat": "chat",
     "/api/start_session": "start_session",
     "/api/goals/sculpt": "goals_sculpt",
+    "/api/admit-simulator": "admit_simulator",
+    "/api/profile/analyze": "profile_analyze",
 }
 
 # ── In-Memory Store ──────────────────────────────────────────────────────────

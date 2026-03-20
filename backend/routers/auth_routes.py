@@ -28,14 +28,19 @@ def verify_credentials(req: VerifyCredentialsRequest):
     if not user or not user.get("password_hash"):
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
-    try:
-        import bcrypt
+    stored_hash = user["password_hash"]
 
-        if not bcrypt.checkpw(req.password.encode(), user["password_hash"].encode()):
-            raise HTTPException(status_code=401, detail="Invalid credentials")
-    except ImportError:
-        logger.warning("bcrypt not installed — password check skipped in dev")
-        if user.get("password_hash") and user["password_hash"] != "dev":
+    # Dev mode placeholder — accept any password
+    if stored_hash == "dev":
+        logger.warning("Dev-mode password hash — skipping bcrypt check")
+    else:
+        try:
+            import bcrypt
+
+            if not bcrypt.checkpw(req.password.encode(), stored_hash.encode()):
+                raise HTTPException(status_code=401, detail="Invalid credentials")
+        except ImportError:
+            logger.warning("bcrypt not installed — password check skipped in dev")
             raise HTTPException(status_code=401, detail="Invalid credentials")
 
     return {"id": user["id"], "email": user["email"], "name": user.get("name", "")}
