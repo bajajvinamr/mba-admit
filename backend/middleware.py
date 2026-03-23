@@ -1,8 +1,9 @@
-"""Middleware — rate limiting, caching headers, request timeouts, and global error handling.
+"""Middleware — rate limiting, caching headers, request timeouts, usage tracking, and global error handling.
 
 Rate limits protect LLM-heavy endpoints from abuse.
 Cache headers reduce latency for read-heavy school data.
 Request timeouts prevent LLM calls from holding connections open indefinitely.
+Usage tracking enforces per-tier monthly limits on AI features.
 Global error handler prevents 500s from leaking stack traces.
 """
 
@@ -12,6 +13,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from fastapi import Request
 from fastapi.responses import JSONResponse
 from logging_config import setup_logging
+from usage import feature_for_path, check_limit, increment_usage
 
 logger = setup_logging()
 
@@ -158,6 +160,87 @@ def setup_cache_headers(app):
     """Attach cache header middleware to the FastAPI app."""
     app.add_middleware(CacheHeaderMiddleware)
     logger.info("Cache-Control headers middleware enabled")
+
+
+# ── Usage Tracking Middleware ────────────────────────────────────────────────
+
+
+def _get_user_id(request: Request) -> str:
+    """Extract user ID from JWT or fall back to IP address.
+
+    Mirrors the logic in auth.get_optional_user so that the same user ID
+    is used for both tracking and reporting.
+    """
+    auth_header = request.headers.get("Authorization", "")
+    if auth_header.startswith("Bearer "):
+        try:
+            from auth import _decode_token
+            claims = _decode_token(auth_header[7:])
+            if claims and claims.get("sub"):
+                return claims["sub"]
+        except Exception:
+            pass
+    # Dev mode: no JWT secret = always "dev-user" (matches auth.get_optional_user)
+    import os
+    if not os.environ.get("NEXTAUTH_SECRET"):
+        return "dev-user"
+    # Production fallback: IP-based tracking for anonymous users
+    return f"anon:{request.client.host}" if request.client else "anon:unknown"
+
+
+class UsageTrackingMiddleware(BaseHTTPMiddleware):
+    """Enforce per-tier usage limits on AI-powered endpoints.
+
+    Only applies to POST requests to endpoints listed in ENDPOINT_FEATURE_MAP.
+    Returns 429 with upgrade info when a limit is exceeded.
+    Increments the counter after a successful response.
+    """
+
+    async def dispatch(self, request: Request, call_next):
+        # Only check POST requests to tracked endpoints
+        if request.method != "POST":
+            return await call_next(request)
+
+        feature = feature_for_path(request.url.path)
+        if not feature:
+            return await call_next(request)
+
+        user_id = _get_user_id(request)
+        allowed, current, limit = check_limit(user_id, feature)
+
+        if not allowed:
+            from usage import get_user_tier
+            tier = get_user_tier(user_id)
+            logger.info(
+                "Usage limit hit: user=%s tier=%s feature=%s (%d/%d)",
+                user_id, tier, feature, current, limit,
+            )
+            return JSONResponse(
+                status_code=429,
+                content={
+                    "detail": f"Monthly limit reached for this feature ({current}/{limit}).",
+                    "feature": feature,
+                    "tier": tier,
+                    "used": current,
+                    "limit": limit,
+                    "upgrade_url": "/pricing",
+                },
+            )
+
+        response = await call_next(request)
+
+        # Only count successful requests (not validation errors, etc.)
+        if response.status_code < 400:
+            new_count = increment_usage(user_id, feature)
+            logger.debug("Usage: user=%s feature=%s count=%d", user_id, feature, new_count)
+
+        return response
+
+
+def setup_usage_tracking(app):
+    """Attach usage tracking middleware to the FastAPI app."""
+    app.add_middleware(UsageTrackingMiddleware)
+    logger.info("Usage tracking middleware enabled")
 
 
 # ── Global Exception Handler ─────────────────────────────────────────────────

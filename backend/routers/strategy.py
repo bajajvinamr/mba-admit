@@ -16,6 +16,7 @@ from models import (
     OutreachStrategyRequest,
     WaitlistStrategyRequest,
 )
+from guardrails import sanitize_for_llm, MAX_STRATEGY_CHARS, MAX_FIELD_CHARS
 
 router = APIRouter(prefix="/api", tags=["strategy"])
 
@@ -26,8 +27,12 @@ router = APIRouter(prefix="/api", tags=["strategy"])
 @rate_limit("10/minute")
 def get_recommender_strategy(request: Request, req: RecommenderStrategyRequest):
     """Generates a structured prep packet for recommenders."""
+    try:
+        strengths = sanitize_for_llm(req.applicant_strengths, MAX_STRATEGY_CHARS, "applicant strengths")
+    except ValueError as e:
+        raise HTTPException(400, detail=str(e))
     recs_list = [r.model_dump() for r in req.recommenders]
-    return generate_recommender_strategy(req.school_id, req.applicant_strengths, recs_list)
+    return generate_recommender_strategy(req.school_id, strengths, recs_list)
 
 
 # ── Control Center ────────────────────────────────────────────────────────────
@@ -81,7 +86,12 @@ def get_application_logistics(req: ControlCenterInitRequest):
 @rate_limit("10/minute")
 def get_outreach_strategy(request: Request, req: OutreachStrategyRequest):
     """Generates personalized cold-email templates for networking."""
-    return generate_outreach_strategy(req.school_id, req.background, req.goal)
+    try:
+        background = sanitize_for_llm(req.background, MAX_STRATEGY_CHARS, "background")
+        goal = sanitize_for_llm(req.goal, MAX_FIELD_CHARS, "goal")
+    except ValueError as e:
+        raise HTTPException(400, detail=str(e))
+    return generate_outreach_strategy(req.school_id, background, goal)
 
 
 # ── Waitlist ──────────────────────────────────────────────────────────────────
@@ -90,4 +100,9 @@ def get_outreach_strategy(request: Request, req: OutreachStrategyRequest):
 @rate_limit("10/minute")
 def get_waitlist_strategy(request: Request, req: WaitlistStrategyRequest):
     """Generates a waitlist reality check and update letter draft."""
-    return generate_waitlist_strategy(req.school_id, req.profile_updates, req.previous_essay_themes)
+    try:
+        updates = sanitize_for_llm(req.profile_updates, MAX_STRATEGY_CHARS, "profile updates")
+        themes = sanitize_for_llm(req.previous_essay_themes, MAX_STRATEGY_CHARS, "essay themes")
+    except ValueError as e:
+        raise HTTPException(400, detail=str(e))
+    return generate_waitlist_strategy(req.school_id, updates, themes)

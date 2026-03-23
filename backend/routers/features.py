@@ -28,6 +28,7 @@ from models import (
     StorytellerRequest,
 )
 from compare_engine import load_gmatclub_data, compute_school_outcomes, compute_profile_fit, get_decisions_for_school, find_similar_applicants
+from guardrails import sanitize_for_llm, MAX_CHAT_CHARS, MAX_FIELD_CHARS, MAX_STRATEGY_CHARS
 from run_evals import run_eval_pipeline
 import db
 
@@ -299,11 +300,16 @@ def list_community_decisions(
 @rate_limit("10/minute")
 def negotiate_scholarship(request: Request, req: NegotiateScholarshipRequest):
     """Draft a professional scholarship negotiation letter built on competing offers."""
+    try:
+        primary_offer = sanitize_for_llm(req.primary_offer, MAX_STRATEGY_CHARS, "primary offer")
+        competing_offer = sanitize_for_llm(req.competing_offer, MAX_STRATEGY_CHARS, "competing offer")
+    except ValueError as e:
+        raise HTTPException(400, detail=str(e))
     return generate_scholarship_negotiation(
         primary_school_id=req.primary_school_id,
-        primary_offer=req.primary_offer,
+        primary_offer=primary_offer,
         competing_school_id=req.competing_school_id,
-        competing_offer=req.competing_offer,
+        competing_offer=competing_offer,
     )
 
 # ── CTO Eval Dashboard (Phase 22) ─────────────────────────────────────────────
@@ -326,10 +332,15 @@ def run_evals(request: Request):
 @rate_limit("10/minute")
 def sculpt_career_goal(request: Request, req: SculptGoalRequest):
     """Transform a vague career goal into a highly specific, AdCom-ready narrative."""
+    try:
+        current_role = sanitize_for_llm(req.current_role, MAX_FIELD_CHARS, "current role")
+        vague_goal = sanitize_for_llm(req.vague_goal, MAX_STRATEGY_CHARS, "career goal")
+    except ValueError as e:
+        raise HTTPException(400, detail=str(e))
     return generate_sculpted_goal(
-        current_role=req.current_role,
+        current_role=current_role,
         industry=req.industry,
-        vague_goal=req.vague_goal,
+        vague_goal=vague_goal,
         target_school_id=req.target_school_id
     )
 
@@ -340,11 +351,16 @@ def sculpt_career_goal(request: Request, req: SculptGoalRequest):
 @rate_limit("10/minute")
 def storyteller_chat(request: Request, req: StorytellerRequest):
     """Interactive multi-turn chat to ideate essay narratives."""
+    try:
+        essay_prompt = sanitize_for_llm(req.essay_prompt, MAX_FIELD_CHARS, "essay prompt")
+        new_message = sanitize_for_llm(req.new_message, MAX_CHAT_CHARS, "message")
+    except ValueError as e:
+        raise HTTPException(400, detail=str(e))
     return generate_storyteller_reply(
         school_name=req.school_name,
-        essay_prompt=req.essay_prompt,
+        essay_prompt=essay_prompt,
         chat_history=req.chat_history,
-        new_message=req.new_message
+        new_message=new_message
     )
 
 
