@@ -2,14 +2,17 @@
 
 
 from collections import Counter, defaultdict
+from typing import Dict, Optional
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel as _BaseModel
 from compare_engine import load_gmatclub_data
 from agents import SCHOOL_DB
+from auth import get_optional_user
 from routers.schools import SCHOOL_ALIASES
 from routers._helpers import is_admitted, is_denied
-from models import ChancesRequest
+from models import ChancesRequest, SubmitDecisionRequest
+import db
 
 router = APIRouter(prefix="/api", tags=["community"])
 
@@ -425,6 +428,29 @@ def admission_trends(school_id: str | None = None):
         "total": len(results),
         "available_metrics": ["acceptance_rate", "class_size", "median_gmat", "avg_gpa", "applications_received"],
     }
+
+
+# ── Submit Decision (frontend-facing alias) ──────────────────────────────────
+
+@router.post("/decisions/submit")
+def submit_decision(req: SubmitDecisionRequest, user: Dict = Depends(get_optional_user)):
+    """Submit an admission decision data point.
+
+    Frontend calls this path (/api/decisions/submit); delegates to the shared
+    submit_decision helper in db.py.
+    """
+    decision = {
+        "user_id": user["sub"] if user else "anonymous",
+        "school_id": req.school_id,
+        "round": req.round,
+        "status": req.status,
+        "gmat": req.gmat,
+        "gpa": req.gpa,
+        "work_years": req.work_years,
+        "industry": req.industry,
+        "is_anonymous": req.is_anonymous,
+    }
+    return db.submit_decision(decision)
 
 
 # ── Admit Probability Simulator ──────────────────────────────────────
