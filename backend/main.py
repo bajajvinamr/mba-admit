@@ -57,6 +57,7 @@ from routers.profile import router as profile_router
 from routers.applicant_data import router as applicant_data_router
 from routers.simulator import router as simulator_router
 from routers.search import router as search_router
+from routers.outcomes import router as outcomes_router
 
 app.include_router(auth_router)
 app.include_router(schools_router)
@@ -75,6 +76,7 @@ app.include_router(profile_router)
 app.include_router(applicant_data_router)
 app.include_router(simulator_router)
 app.include_router(search_router)
+app.include_router(outcomes_router)
 
 
 @app.get("/")

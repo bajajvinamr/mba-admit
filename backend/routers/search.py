@@ -131,6 +131,7 @@ class SearchFilters(BaseModel):
     gmat_max: int | None = None
     acceptance_min: float | None = None
     acceptance_max: float | None = None
+    tuition_min: int | None = None
     tuition_max: int | None = None
     countries: list[str] | None = None
     formats: list[str] | None = None
@@ -198,6 +199,9 @@ def _apply_filters(entries: list[_SchoolIndex], req: SearchRequest) -> list[_Sch
     if f.acceptance_max is not None:
         result = [e for e in result if e.acceptance_rate is not None and e.acceptance_rate <= f.acceptance_max]
 
+    if f.tuition_min is not None:
+        result = [e for e in result if e.tuition_usd is not None and e.tuition_usd >= f.tuition_min]
+
     if f.tuition_max is not None:
         result = [e for e in result if e.tuition_usd is not None and e.tuition_usd <= f.tuition_max]
 
@@ -243,6 +247,15 @@ def _sort_key(entry: _SchoolIndex, sort_field: str):
         return (-(entry.gmat_avg or 0),)
     if sort_field == "name":
         return (entry.name_lower,)
+    if sort_field == "deadline":
+        # Placeholder: sort by tier + name (deadlines not yet in data model)
+        tier_val = _TIER_RANK.get(entry.tier, 99)
+        return (tier_val, entry.name_lower)
+    if sort_field == "fit_score":
+        # Fit score: lower acceptance rate + known tier = better "fit" ranking
+        tier_val = _TIER_RANK.get(entry.tier, 99)
+        rate = entry.acceptance_rate if entry.acceptance_rate is not None else 999
+        return (tier_val, rate)
     # Default: ranking
     tier_val = _TIER_RANK.get(entry.tier, 99)
     return (tier_val, entry.name_lower)

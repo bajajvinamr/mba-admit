@@ -39,12 +39,21 @@ def roast_resume(request: Request, req: ResumeRoastRequest):
 @rate_limit("10/minute")
 def evaluate_essay(request: Request, req: EssayEvaluationRequest):
     """Rigorous AI Essay B.S. Detector."""
+    from observability import track_ai_interaction
+
     try:
         essay_text = sanitize_for_llm(req.essay_text, MAX_ESSAY_CHARS, "essay")
         prompt = sanitize_for_llm(req.prompt, MAX_FIELD_CHARS, "prompt")
     except ValueError as e:
         raise HTTPException(400, detail=str(e))
-    return evaluate_essay_draft(req.school_id, prompt, essay_text)
+
+    with track_ai_interaction(
+        user_input=f"essay:{req.school_id}:{prompt[:100]}",
+        endpoint="evaluate_essay",
+    ) as tracker:
+        result = evaluate_essay_draft(req.school_id, prompt, essay_text)
+        tracker["output"] = str(result.get("overall_score", ""))
+        return result
 
 
 # ── Essay Word Counter ──────────────────────────────────────────────────

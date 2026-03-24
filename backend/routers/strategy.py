@@ -27,12 +27,21 @@ router = APIRouter(prefix="/api", tags=["strategy"])
 @rate_limit("10/minute")
 def get_recommender_strategy(request: Request, req: RecommenderStrategyRequest):
     """Generates a structured prep packet for recommenders."""
+    from observability import track_ai_interaction
+
     try:
         strengths = sanitize_for_llm(req.applicant_strengths, MAX_STRATEGY_CHARS, "applicant strengths")
     except ValueError as e:
         raise HTTPException(400, detail=str(e))
     recs_list = [r.model_dump() for r in req.recommenders]
-    return generate_recommender_strategy(req.school_id, strengths, recs_list)
+
+    with track_ai_interaction(
+        user_input=f"recommender_strategy:{req.school_id}",
+        endpoint="recommender_strategy",
+    ) as tracker:
+        result = generate_recommender_strategy(req.school_id, strengths, recs_list)
+        tracker["output"] = "strategy_generated"
+        return result
 
 
 # ── Control Center ────────────────────────────────────────────────────────────

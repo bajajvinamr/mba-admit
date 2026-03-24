@@ -33,8 +33,11 @@ def start_mock_interview(request: Request, req: InterviewStartRequest):
 @rate_limit("20/minute")
 def respond_mock_interview(request: Request, req: InterviewResponseRequest):
     """Next prompt or final feedback based on session history."""
+    from observability import track_ai_interaction
+
     # Sanitize the latest user message in history
     sanitized_history = []
+    latest_user_msg = ""
     for msg in req.history:
         entry = dict(msg) if isinstance(msg, dict) else msg
         if isinstance(entry, dict) and entry.get("role") == "user":
@@ -42,11 +45,19 @@ def respond_mock_interview(request: Request, req: InterviewResponseRequest):
                 entry["content"] = sanitize_for_llm(
                     entry.get("content", ""), MAX_CHAT_CHARS, "interview response"
                 )
+                latest_user_msg = entry["content"]
             except ValueError as e:
                 from fastapi import HTTPException
                 raise HTTPException(400, detail=str(e))
         sanitized_history.append(entry)
-    return simulate_interview_pass(req.school_id, sanitized_history, difficulty=req.difficulty, question_count=req.question_count)
+
+    with track_ai_interaction(
+        user_input=latest_user_msg or f"interview:{req.school_id}",
+        endpoint="interview/respond",
+    ) as tracker:
+        result = simulate_interview_pass(req.school_id, sanitized_history, difficulty=req.difficulty, question_count=req.question_count)
+        tracker["output"] = result.get("question", result.get("feedback", ""))
+        return result
 
 
 # ── Interview Question Bank (JSON file) ──────────────────────────────────
