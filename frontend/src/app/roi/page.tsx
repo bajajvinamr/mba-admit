@@ -41,8 +41,11 @@ export default function RoiPage() {
  const [error, setError] = useState<string | null>(null);
 
  useEffect(() => {
- apiFetch<{ schools: School[] }>("/api/schools")
- .then((r) => setSchools(r.schools.filter((s) => s.name && s.id.length <= 20).sort((a, b) => a.name.localeCompare(b.name)).slice(0, 80)))
+ apiFetch<School[]>("/api/schools")
+ .then((r) => {
+   const list = Array.isArray(r) ? r : (r as unknown as { schools: School[] }).schools || [];
+   setSchools(list.filter((s) => s.name && s.id.length <= 20).sort((a, b) => a.name.localeCompare(b.name)).slice(0, 80));
+ })
  .catch(() => setError("Failed to load school list. Please refresh."));
  }, []);
 

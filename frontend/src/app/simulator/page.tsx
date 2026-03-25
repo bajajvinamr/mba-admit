@@ -67,7 +67,8 @@ export default function SimulatorPage() {
  const [showPicker, setShowPicker] = useState(false);
 
  /* Profile inputs */
- const [gmat, setGmat] = useState(700);
+ const [gmatVersion, setGmatVersion] = useState<"focus" | "classic">("focus");
+ const [gmat, setGmat] = useState(655); // GMAT Focus default
  const [gpa, setGpa] = useState(3.5);
  const [workYears, setWorkYears] = useState(4);
  const [isUrm, setIsUrm] = useState(false);
@@ -101,7 +102,11 @@ export default function SimulatorPage() {
  /* Validate inputs before submission */
  const validateInputs = (): boolean => {
  const errors: Record<string, string> = {};
- if (gmat < 200 || gmat > 800) errors.gmat ="GMAT must be 200-800";
+ if (gmatVersion === "focus") {
+   if (gmat < 205 || gmat > 805) errors.gmat = "GMAT Focus must be 205-805";
+ } else {
+   if (gmat < 200 || gmat > 800) errors.gmat = "GMAT Classic must be 200-800";
+ }
  if (gpa < 0 || gpa > 4.0) errors.gpa ="GPA must be 0-4.0";
  if (workYears < 0 || workYears > 30) errors.workYears ="Work years must be 0-30";
  setValidationErrors(errors);
@@ -129,8 +134,11 @@ export default function SimulatorPage() {
  setLoading(true);
  setError("");
  try {
+ // Normalize GMAT Focus to Classic scale for backend (Focus 205-805 maps to Classic 200-800)
+ const normalizedGmat = gmatVersion === "focus" ? Math.round((gmat - 205) / 600 * 600 + 200) : gmat;
  const body = {
- gmat,
+ gmat: normalizedGmat,
+ gmat_version: gmatVersion,
  gpa,
  work_years: workYears,
  school_ids: selected,
@@ -186,18 +194,22 @@ export default function SimulatorPage() {
  <h2 className="font-semibold text-foreground mb-4">Your Profile</h2>
  <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
  <div>
- <label htmlFor="sim-gmat" className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 block mb-1">GMAT</label>
+ <label htmlFor="sim-gmat" className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 block mb-1">GMAT Score</label>
+ <div className="flex gap-1 mb-1">
+   <button type="button" onClick={() => { setGmatVersion("focus"); setGmat(655); }} className={`text-[9px] px-2 py-0.5 rounded-full border transition-colors ${gmatVersion === "focus" ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:border-primary/40"}`}>Focus (205-805)</button>
+   <button type="button" onClick={() => { setGmatVersion("classic"); setGmat(700); }} className={`text-[9px] px-2 py-0.5 rounded-full border transition-colors ${gmatVersion === "classic" ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:border-primary/40"}`}>Classic (200-800)</button>
+ </div>
  <input
  id="sim-gmat"
- type="number" min={200} max={800} value={gmat}
- onChange={(e) => { setGmat(+e.target.value || 700); setValidationErrors((v) => { const { gmat: _, ...rest } = v; return rest; }); }}
+ type="number" min={gmatVersion === "focus" ? 205 : 200} max={gmatVersion === "focus" ? 805 : 800} value={gmat}
+ onChange={(e) => { setGmat(+e.target.value || (gmatVersion === "focus" ? 655 : 700)); setValidationErrors((v) => { const { gmat: _, ...rest } = v; return rest; }); }}
  aria-describedby="sim-gmat-range"
- className={`w-full px-3 py-2 border rounded text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 ${validationErrors.gmat ?"border-red-400":"border-border/10"}`}
+ className={`w-full px-3 py-2 border rounded text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 ${validationErrors.gmat ? "border-red-400" : "border-border/10"}`}
  />
  {validationErrors.gmat ? (
  <span className="text-[10px] text-red-500 mt-0.5 block">{validationErrors.gmat}</span>
  ) : (
- <span id="sim-gmat-range" className="text-[10px] text-foreground/30 mt-0.5 block">200 - 800</span>
+ <span id="sim-gmat-range" className="text-[10px] text-foreground/30 mt-0.5 block">{gmatVersion === "focus" ? "205 - 805" : "200 - 800"}</span>
  )}
  </div>
  <div>
