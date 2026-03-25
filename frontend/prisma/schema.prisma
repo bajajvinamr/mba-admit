@@ -18,6 +18,7 @@ model User {
   outcomes       OutcomeContribution[]
   subscription   Subscription?
   recommenders   Recommender[]
+  mentor         Mentor?
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 }
@@ -137,4 +138,32 @@ model Subscription {
   status               String    @default("active")
   currentPeriodEnd     DateTime?
   createdAt            DateTime  @default(now())
+}
+
+model Mentor {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  displayName       String
+  school            String   // school slug (e.g., "hbs")
+  schoolName        String   // "Harvard Business School"
+  graduationYear    Int?
+  status            String   @default("student") // student | alumni
+  currentRole       String?
+  currentCompany    String?
+  industry          String
+  expertise         String[] // ["essays", "interview_prep", "career_strategy", "school_selection"]
+  bio               String
+  hourlyRate        Int      // USD
+  currency          String   @default("USD")
+  availability      String   @default("available") // available | limited | unavailable
+  languages         String[]
+  rating            Float    @default(0)
+  reviewCount       Int      @default(0)
+  sessionsCompleted Int      @default(0)
+  verified          Boolean  @default(false)
+  profileImage      String?
+  linkedinUrl       String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id])
 }

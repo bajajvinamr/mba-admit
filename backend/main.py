@@ -64,6 +64,8 @@ from routers.financial_aid import router as financial_aid_router
 from routers.career import router as career_router
 from routers.countries import router as countries_router
 from routers.interview_guides import router as interview_guides_router
+from routers.peer_comparison import router as peer_comparison_router
+from routers.mentors import router as mentors_router
 
 app.include_router(auth_router)
 app.include_router(schools_router)
@@ -89,6 +91,8 @@ app.include_router(financial_aid_router)
 app.include_router(career_router)
 app.include_router(countries_router)
 app.include_router(interview_guides_router)
+app.include_router(peer_comparison_router)
+app.include_router(mentors_router)
 
 
 @app.get("/")

@@ -36,6 +36,7 @@ TIERS = {
         "goals_sculpt": 3,
         "admit_simulator": 3,
         "profile_analyze": 3,
+        "peer_comparison": 5,
     },
     "pro": {
         "essay_eval": 50,
@@ -52,6 +53,7 @@ TIERS = {
         "goals_sculpt": 30,
         "admit_simulator": 50,
         "profile_analyze": 50,
+        "peer_comparison": 50,
     },
     "premium": {},  # empty = unlimited
 }
@@ -74,6 +76,7 @@ ENDPOINT_FEATURE_MAP: dict[str, str] = {
     "/api/admit-simulator": "admit_simulator",
     "/api/profile/analyze": "profile_analyze",
     "/api/essay/coach": "essay_coach",
+    "/api/peer-comparison": "peer_comparison",
 }
 
 # ── In-Memory Store ──────────────────────────────────────────────────────────

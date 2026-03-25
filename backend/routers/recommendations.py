@@ -1,7 +1,8 @@
 """Smart school recommendations — combines odds scoring with real outcome data."""
 
 from fastapi import APIRouter, Query
-from typing import Optional
+from pydantic import BaseModel, Field
+from typing import Optional, List, Literal
 
 from agents import SCHOOL_DB
 from compare_engine import (
@@ -315,4 +316,389 @@ def get_recommendations(
             "target": len(target),
             "safety": len(safety),
         },
+    }
+
+
+# ── Personalized Recommendation Engine ──────────────────────────────────────
+
+
+class PersonalizedRecommendationRequest(BaseModel):
+    gmat: int = Field(ge=200, le=805)
+    gmat_version: Literal["focus", "classic"] = "focus"
+    gpa: float = Field(ge=0.0, le=4.0)
+    work_years: int = Field(ge=0, le=30)
+    industry: str = ""
+    target_industry: str = ""
+    is_urm: bool = False
+    is_international: bool = False
+    citizenship: str = ""
+    budget_max_usd: Optional[float] = None
+    priorities: List[str] = Field(default_factory=list)
+    preferred_countries: List[str] = Field(default_factory=list)
+
+
+# Priority keywords → school fields that signal strength in that area
+_PRIORITY_SIGNALS = {
+    "career_outcomes": ["placement_stats"],
+    "prestige": ["acceptance_rate"],
+    "location": ["location"],
+    "roi": ["tuition_usd", "median_salary"],
+    "entrepreneurship": ["specializations"],
+    "diversity": ["class_profile"],
+    "international": ["class_profile"],
+    "network": ["class_size"],
+}
+
+
+def _normalize_country(raw: str) -> str:
+    """Map common country codes/abbreviations to SCHOOL_DB country strings."""
+    mapping = {
+        "US": "United States", "USA": "United States",
+        "UK": "United Kingdom", "GB": "United Kingdom",
+        "CA": "Canada", "AU": "Australia",
+        "FR": "France", "DE": "Germany",
+        "SG": "Singapore", "HK": "Hong Kong",
+        "CN": "China", "IN": "India",
+        "ES": "Spain", "IT": "Italy",
+        "CH": "Switzerland", "NL": "Netherlands",
+        "JP": "Japan", "KR": "South Korea",
+        "AE": "UAE", "IE": "Ireland",
+    }
+    return mapping.get(raw.upper(), raw)
+
+
+def _compute_fit_score(
+    school: dict,
+    gmat_classic: int,
+    gpa: float,
+    work_years: int,
+    industry: str,
+    target_industry: str,
+    is_international: bool,
+    priorities: list[str],
+) -> int:
+    """Compute a 0-100 fit score for a single school against the applicant profile.
+
+    Scoring bands: ±30pts from GMAT median = 50, +60 = 90, -60 = 10.
+    """
+    components: list[float] = []
+    weights: list[float] = []
+
+    # ── GMAT fit (weight=0.35): ±30pts from median = 50, +60 = 90, -60 = 10 ──
+    school_gmat = school.get("gmat_avg")
+    if school_gmat:
+        gmat_diff = gmat_classic - school_gmat
+        # Steeper curve: each 30pts diff = 40 score points
+        gmat_score = 50 + (gmat_diff / 30) * 40
+        gmat_score = max(5, min(95, gmat_score))
+        components.append(gmat_score)
+        weights.append(0.35)
+
+    # ── GPA fit (weight=0.20): similar curve around school's avg ──
+    school_gpa = school.get("gpa_avg")
+    if not school_gpa:
+        accept = _safe_float(school.get("acceptance_rate"), 30)
+        school_gpa = 3.7 if accept < 15 else (3.5 if accept < 25 else 3.3)
+    gpa_diff = gpa - school_gpa
+    gpa_score = 50 + (gpa_diff / 0.5) * 30  # each 0.5 GPA = ±30 points
+    gpa_score = max(5, min(95, gpa_score))
+    components.append(gpa_score)
+    weights.append(0.20)
+
+    # ── Selectivity adjustment (weight=0.20): harder schools drag score down ──
+    accept_rate = _safe_float(school.get("acceptance_rate"), 30)
+    if accept_rate < 8:
+        selectivity_score = 10
+    elif accept_rate < 12:
+        selectivity_score = 20
+    elif accept_rate < 18:
+        selectivity_score = 35
+    elif accept_rate < 25:
+        selectivity_score = 50
+    elif accept_rate < 40:
+        selectivity_score = 65
+    else:
+        selectivity_score = 80
+    components.append(selectivity_score)
+    weights.append(0.20)
+
+    # ── Work years fit (weight=0.10): penalize if <2 or >10 vs school avg ──
+    cp = school.get("class_profile") or {}
+    school_avg_yoe = cp.get("avg_work_experience_years")
+    if school_avg_yoe is None:
+        school_avg_yoe = 5
+    yoe_diff = abs(work_years - school_avg_yoe)
+    if yoe_diff <= 1:
+        yoe_score = 70
+    elif yoe_diff <= 3:
+        yoe_score = 55
+    elif yoe_diff <= 5:
+        yoe_score = 35
+    else:
+        yoe_score = 15
+    components.append(yoe_score)
+    weights.append(0.10)
+
+    # ── Industry alignment (weight=0.10) ──
+    industry_score = 50
+    if industry:
+        high_value = {"consulting", "finance", "tech", "military", "nonprofit"}
+        if industry.lower() in high_value:
+            industry_score = 65
+        if accept_rate < 15 and industry.lower() in ("consulting", "finance", "tech"):
+            industry_score = 60  # these are common at top schools, less differentiating
+    components.append(industry_score)
+    weights.append(0.10)
+
+    # Compute weighted average
+    total_weight = sum(weights)
+    score = sum(c * w for c, w in zip(components, weights)) / total_weight if total_weight > 0 else 50
+
+    # ── International penalty: slight penalty at schools with <20% international ──
+    if is_international:
+        intl_pct = cp.get("international_pct")
+        if intl_pct is not None and intl_pct < 20:
+            score -= 5
+
+    # ── Priority boost: +8 for schools strong in user's priority areas (max 2) ──
+    priority_boosts = 0
+    for priority in priorities:
+        if priority_boosts >= 2:
+            break
+        if _school_matches_priority(school, priority, target_industry):
+            score += 8
+            priority_boosts += 1
+
+    return max(0, min(100, int(round(score))))
+
+
+def _safe_float(val, default: float) -> float:
+    """Safely convert to float."""
+    if val is None:
+        return default
+    try:
+        return float(val)
+    except (ValueError, TypeError):
+        return default
+
+
+def _school_matches_priority(school: dict, priority: str, target_industry: str) -> bool:
+    """Check if a school is strong in the given priority area."""
+    p = priority.lower()
+
+    if p == "career_outcomes":
+        ps = school.get("placement_stats", {})
+        rate = ps.get("employment_rate_3mo_pct")
+        if rate and rate >= 90:
+            return True
+        return False
+
+    if p == "prestige":
+        accept = _safe_float(school.get("acceptance_rate"), 50)
+        return accept < 20
+
+    if p == "roi":
+        tuition = _safe_float(school.get("tuition_usd"), 999999)
+        return tuition < 60000
+
+    if p == "entrepreneurship":
+        specs = school.get("specializations", [])
+        return any("entrepreneur" in s.lower() for s in specs)
+
+    if p == "diversity" or p == "international":
+        cp = school.get("class_profile", {})
+        intl = cp.get("international_pct")
+        if intl and intl >= 30:
+            return True
+        women = cp.get("women_pct")
+        if women and women >= 40:
+            return True
+        return False
+
+    if p == "location":
+        # A school in a major metro is considered strong for location priority
+        loc = (school.get("location") or "").lower()
+        major_cities = ["new york", "london", "san francisco", "boston", "chicago",
+                        "singapore", "paris", "hong kong", "los angeles", "toronto"]
+        return any(city in loc for city in major_cities)
+
+    if p == "network":
+        cs = school.get("class_size")
+        if cs and cs >= 500:
+            return True
+        return False
+
+    return False
+
+
+def _generate_personalized_why(
+    school: dict,
+    fit_score: int,
+    gmat_classic: int,
+    gpa: float,
+    work_years: int,
+    industry: str,
+    target_industry: str,
+) -> str:
+    """Generate a concise 'why' explanation for a school recommendation."""
+    school_gmat = school.get("gmat_avg")
+    name = school.get("name", "This school")
+    parts = []
+
+    # GMAT context
+    if school_gmat:
+        diff = gmat_classic - school_gmat
+        if diff >= 20:
+            parts.append(f"Your GMAT exceeds median by {diff}pts. Merit scholarship likely.")
+        elif diff >= 0:
+            parts.append(f"Your GMAT matches the {school_gmat} median. Competitive applicant.")
+        elif diff >= -20:
+            parts.append(f"Your GMAT is {abs(diff)}pts below median ({school_gmat}). Within range with strong profile.")
+        else:
+            parts.append(f"Your GMAT is below median ({school_gmat}). Strong work experience compensates.")
+
+    # GPA context
+    school_gpa = school.get("gpa_avg")
+    if school_gpa:
+        gpa_diff = gpa - school_gpa
+        if gpa_diff >= 0.15:
+            parts.append(f"GPA above class average ({school_gpa}).")
+        elif gpa_diff < -0.2:
+            parts.append(f"GPA below class average ({school_gpa}) — offset with strong narrative.")
+
+    # Industry pipeline
+    if target_industry and industry:
+        specs = [s.lower() for s in (school.get("specializations") or [])]
+        ps = school.get("placement_stats", {})
+        top_industries = [i.lower() if isinstance(i, str) else (i.get("name", "") if isinstance(i, dict) else "").lower()
+                          for i in (ps.get("top_industries") or [])]
+        if any(target_industry.lower() in s for s in specs + top_industries):
+            parts.append(f"Strong {industry}-to-{target_industry} pipeline.")
+        elif industry:
+            parts.append(f"Your {industry} background aligns well with median stats.")
+
+    # Work experience
+    cp = school.get("class_profile", {})
+    avg_yoe = cp.get("avg_work_experience_years")
+    if avg_yoe and abs(work_years - avg_yoe) <= 1:
+        parts.append("Work experience matches class average.")
+
+    if not parts:
+        if fit_score >= 70:
+            parts.append("Your profile aligns well with this program's class profile.")
+        elif fit_score >= 40:
+            parts.append("Competitive profile — emphasize differentiation in essays.")
+        else:
+            parts.append("Aspirational target — a strong narrative will be key.")
+
+    return " ".join(parts[:3])
+
+
+@router.post("/recommendations/personalized")
+def get_personalized_recommendations(req: PersonalizedRecommendationRequest):
+    """Personalized school recommendations based on detailed applicant profile.
+
+    Evaluates all schools in SCHOOL_DB, computes a fit score (0-100),
+    classifies into reach/target/safety, and returns top picks with explanations.
+    """
+    # Normalize GMAT Focus to classic scale
+    if req.gmat_version == "focus":
+        gmat_classic = req.gmat - 5
+    else:
+        gmat_classic = req.gmat
+    gmat_classic = max(200, min(800, gmat_classic))
+
+    # Normalize preferred countries
+    country_filter: set[str] = set()
+    for c in req.preferred_countries:
+        country_filter.add(_normalize_country(c))
+
+    total_evaluated = 0
+    scored: list[dict] = []
+
+    for sid, school in SCHOOL_DB.items():
+        # Skip schools without GMAT avg (can't meaningfully score)
+        if not school.get("gmat_avg"):
+            continue
+
+        total_evaluated += 1
+
+        # Country filter
+        school_country = school.get("country", "")
+        if country_filter and school_country not in country_filter:
+            continue
+
+        # Budget filter
+        tuition = _safe_float(school.get("tuition_usd"), 0)
+        if req.budget_max_usd and tuition > 0 and tuition > req.budget_max_usd:
+            continue
+
+        # Compute fit score
+        fit_score = _compute_fit_score(
+            school=school,
+            gmat_classic=gmat_classic,
+            gpa=req.gpa,
+            work_years=req.work_years,
+            industry=req.industry,
+            target_industry=req.target_industry,
+            is_international=req.is_international,
+            priorities=req.priorities,
+        )
+
+        # Generate why explanation
+        why = _generate_personalized_why(
+            school=school,
+            fit_score=fit_score,
+            gmat_classic=gmat_classic,
+            gpa=req.gpa,
+            work_years=req.work_years,
+            industry=req.industry,
+            target_industry=req.target_industry,
+        )
+
+        accept_rate = _safe_float(school.get("acceptance_rate"), None)
+
+        scored.append({
+            "school_id": sid,
+            "name": school.get("name", sid),
+            "fit_score": fit_score,
+            "why": why,
+            "gmat_avg": school.get("gmat_avg"),
+            "acceptance_rate": accept_rate,
+            "location": school.get("location", "Unknown"),
+            "country": school_country,
+            "tuition_usd": tuition if tuition > 0 else None,
+            "median_salary": school.get("median_salary", "N/A"),
+            "specializations": (school.get("specializations") or [])[:3],
+            "class_size": school.get("class_size"),
+            "degree_type": school.get("degree_type", "MBA"),
+        })
+
+    # Classify: fit_score < 45 = reach, 45-72 = target, 72+ = safety
+    reach = sorted([s for s in scored if s["fit_score"] < 45], key=lambda x: -x["fit_score"])
+    target = sorted([s for s in scored if 45 <= s["fit_score"] < 72], key=lambda x: -x["fit_score"])
+    safety = sorted([s for s in scored if s["fit_score"] >= 72], key=lambda x: -x["fit_score"])
+
+    # Generate profile summary
+    profile_parts = []
+    if req.is_international:
+        profile_parts.append("international applicant")
+    if req.is_urm:
+        profile_parts.append("URM")
+    if req.industry:
+        profile_parts.append(f"with {req.industry} background")
+    if req.target_industry:
+        profile_parts.append(f"targeting {req.target_industry} pivot")
+
+    gmat_tier = "M7" if gmat_classic >= 740 else ("T15" if gmat_classic >= 710 else ("T25" if gmat_classic >= 680 else "competitive"))
+    profile_summary = f"{'Strong ' if req.gpa >= 3.5 else ''}{''.join(p + ' ' for p in profile_parts).strip()}. GMAT competitive for {gmat_tier}."
+    if not profile_parts:
+        profile_summary = f"GMAT competitive for {gmat_tier} programs."
+
+    return {
+        "reach": reach[:5],
+        "target": target[:8],
+        "safety": safety[:5],
+        "profile_summary": profile_summary,
+        "total_evaluated": total_evaluated,
     }
