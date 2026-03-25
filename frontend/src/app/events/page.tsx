@@ -98,7 +98,7 @@ export default function EventsPage() {
  {/* Filters */}
  <div className="flex flex-wrap gap-3 mb-8">
  <div className="flex items-center gap-2">
- <Filter size={14} className="text-foreground/30"/>
+ <Filter size={14} className="text-muted-foreground"/>
  <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}
  className="px-3 py-1.5 border border-border/10 rounded text-sm bg-card">
  <option value="all">All Types</option>
@@ -114,13 +114,13 @@ export default function EventsPage() {
  <option value="in_person">In Person</option>
  <option value="hybrid">Hybrid</option>
  </select>
- <span className="text-xs text-foreground/30 self-center">{filtered.length} events</span>
+ <span className="text-xs text-muted-foreground self-center">{filtered.length} events</span>
  </div>
 
  {/* School-specific events */}
  {schoolEvents.length > 0 && (
  <>
- <h2 className="text-xs font-bold uppercase tracking-widest text-foreground/30 mb-4">School Events</h2>
+ <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">School Events</h2>
  <div className="grid md:grid-cols-2 gap-4 mb-10">
  {schoolEvents.map((ev, i) => {
  const FormatIcon = FORMAT_ICONS[ev.format] || Globe;
@@ -131,18 +131,18 @@ export default function EventsPage() {
  <p className="font-medium text-foreground text-sm">{ev.title}</p>
  <p className="text-[10px] text-primary font-bold">{ev.school_name}</p>
  </div>
- <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${FORMAT_COLORS[ev.format] ||"bg-foreground/5 text-foreground/40"}`}>
+ <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${FORMAT_COLORS[ev.format] ||"bg-foreground/5 text-muted-foreground"}`}>
  <FormatIcon size={10} className="inline mr-0.5"/>
  {ev.format ==="in_person" ?"In Person": ev.format ==="online" ?"Online":"Hybrid"}
  </span>
  </div>
- <p className="text-xs text-foreground/50 mb-3">{ev.description}</p>
+ <p className="text-xs text-muted-foreground mb-3">{ev.description}</p>
  <div className="flex items-center justify-between">
  <div className="flex gap-2">
- <span className="text-[10px] px-2 py-0.5 bg-foreground/5 rounded-full text-foreground/40 font-bold">
+ <span className="text-[10px] px-2 py-0.5 bg-foreground/5 rounded-full text-muted-foreground font-bold">
  {TYPE_LABELS[ev.type] || ev.type}
  </span>
- <span className="text-[10px] text-foreground/30 flex items-center gap-1">
+ <span className="text-[10px] text-muted-foreground flex items-center gap-1">
  <Calendar size={10} />{ev.frequency}
  </span>
  </div>
@@ -163,20 +163,20 @@ export default function EventsPage() {
  {/* General events */}
  {generalEvents.length > 0 && (
  <>
- <h2 className="text-xs font-bold uppercase tracking-widest text-foreground/30 mb-4">Conferences & Fairs</h2>
+ <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Conferences & Fairs</h2>
  <div className="grid md:grid-cols-2 gap-4">
  {generalEvents.map((ev, i) => (
  <div key={i} className="editorial-card p-5 border-l-2 border-primary">
  <p className="font-medium text-foreground text-sm mb-1">{ev.title}</p>
- <p className="text-xs text-foreground/50 mb-3">{ev.description}</p>
+ <p className="text-xs text-muted-foreground mb-3">{ev.description}</p>
  <div className="flex gap-2">
  <span className="text-[10px] px-2 py-0.5 bg-primary/10 rounded-full text-primary font-bold">
  {TYPE_LABELS[ev.type] || ev.type}
  </span>
- <span className="text-[10px] text-foreground/30 flex items-center gap-1">
+ <span className="text-[10px] text-muted-foreground flex items-center gap-1">
  <Calendar size={10} />{ev.frequency}
  </span>
- <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${FORMAT_COLORS[ev.format] ||"bg-foreground/5 text-foreground/40"}`}>
+ <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${FORMAT_COLORS[ev.format] ||"bg-foreground/5 text-muted-foreground"}`}>
  {ev.format ==="in_person" ?"In Person": ev.format ==="online" ?"Online":"Hybrid"}
  </span>
  </div>

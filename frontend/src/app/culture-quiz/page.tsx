@@ -128,7 +128,7 @@ export default function CultureQuizPage() {
  <div className="flex-1 bg-foreground/5 rounded-full h-2">
  <div className="h-full bg-primary rounded-full transition-all" style={{ width: `${(step / QUESTIONS.length) * 100}%` }} />
  </div>
- <span className="text-xs text-foreground/30 font-bold">{step + 1}/{QUESTIONS.length}</span>
+ <span className="text-xs text-muted-foreground font-bold">{step + 1}/{QUESTIONS.length}</span>
  </div>
 
  {/* Question */}
@@ -139,10 +139,10 @@ export default function CultureQuizPage() {
  <button
  key={i}
  onClick={() => answer(opt.scores)}
- className="w-full text-left px-5 py-4 border border-border/10 rounded-lg hover:border-primary hover:bg-primary/5 transition-all text-sm text-foreground/70 hover:text-foreground flex items-center justify-between group"
+ className="w-full text-left px-5 py-4 border border-border/10 rounded-lg hover:border-primary hover:bg-primary/5 transition-all text-sm text-muted-foreground hover:text-foreground flex items-center justify-between group"
  >
  {opt.label}
- <ArrowRight size={14} className="text-foreground/10 group-hover:text-primary transition-colors"/>
+ <ArrowRight size={14} className="text-muted-foreground group-hover:text-primary transition-colors"/>
  </button>
  ))}
  </div>
@@ -153,9 +153,9 @@ export default function CultureQuizPage() {
  {/* Results */}
  <div className="editorial-card p-8 text-center mb-8">
  <GraduationCap size={32} className="mx-auto text-primary mb-3"/>
- <p className="text-xs font-bold uppercase tracking-widest text-foreground/30 mb-2">Your Best-Fit Culture</p>
+ <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">Your Best-Fit Culture</p>
  <p className={`text-2xl font-bold ${ranked[0].color}`}>{ranked[0].name}</p>
- <p className="text-sm text-foreground/50 mt-2">{ranked[0].tagline}</p>
+ <p className="text-sm text-muted-foreground mt-2">{ranked[0].tagline}</p>
  </div>
 
  {/* All results */}
@@ -166,9 +166,9 @@ export default function CultureQuizPage() {
  <p className={`font-medium text-sm ${i === 0 ? profile.color :"text-foreground"}`}>
  {i === 0 &&"🏆"}{profile.name}
  </p>
- <p className="text-[10px] text-foreground/40">{profile.tagline}</p>
+ <p className="text-[10px] text-muted-foreground">{profile.tagline}</p>
  </div>
- <span className="text-xs font-bold text-foreground/30">{Math.round((profile.score / maxScore) * 100)}%</span>
+ <span className="text-xs font-bold text-muted-foreground">{Math.round((profile.score / maxScore) * 100)}%</span>
  </div>
  <div className="w-full bg-foreground/5 rounded-full h-2 mb-2">
  <div className={`h-full rounded-full transition-all ${i === 0 ?"bg-primary":"bg-foreground/15"}`}
@@ -176,13 +176,13 @@ export default function CultureQuizPage() {
  </div>
  <div className="flex flex-wrap gap-1">
  {profile.traits.map((t) => (
- <span key={t} className="text-[9px] px-1.5 py-0.5 bg-foreground/5 rounded-full text-foreground/40 font-bold">{t}</span>
+ <span key={t} className="text-[9px] px-1.5 py-0.5 bg-foreground/5 rounded-full text-muted-foreground font-bold">{t}</span>
  ))}
  </div>
  </div>
  ))}
 
- <button onClick={reset} className="mt-6 px-4 py-2 border border-border/10 text-sm text-foreground/50 rounded-lg hover:border-border/30 flex items-center gap-1 mx-auto">
+ <button onClick={reset} className="mt-6 px-4 py-2 border border-border/10 text-sm text-muted-foreground rounded-lg hover:border-border/30 flex items-center gap-1 mx-auto">
  <RotateCcw size={14} /> Retake Quiz
  </button>
  </>

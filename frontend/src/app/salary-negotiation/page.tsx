@@ -95,7 +95,7 @@ export default function SalaryNegotiationPage() {
  <div className="flex flex-wrap gap-2 mb-8">
  {STAGES.map((s) => (
  <button key={s} onClick={() => setStage(s)}
- className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${stage === s ?"bg-foreground text-white":"bg-foreground/5 text-foreground/40 hover:bg-foreground/10"}`}>
+ className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${stage === s ?"bg-foreground text-white":"bg-foreground/5 text-muted-foreground hover:bg-foreground/10"}`}>
  {s}
  </button>
  ))}
@@ -112,10 +112,10 @@ export default function SalaryNegotiationPage() {
  <div className="flex-1">
  <div className="flex items-center justify-between">
  <p className="font-medium text-foreground text-sm">{tip.title}</p>
- {isOpen ? <ChevronUp size={16} className="text-foreground/30"/> : <ChevronDown size={16} className="text-foreground/30"/>}
+ {isOpen ? <ChevronUp size={16} className="text-muted-foreground"/> : <ChevronDown size={16} className="text-muted-foreground"/>}
  </div>
  <span className="text-[9px] px-1.5 py-0.5 bg-primary/10 text-primary rounded-full font-bold">{tip.stage}</span>
- <p className="text-xs text-foreground/50 mt-2">{tip.situation}</p>
+ <p className="text-xs text-muted-foreground mt-2">{tip.situation}</p>
  </div>
  </button>
 
@@ -123,15 +123,15 @@ export default function SalaryNegotiationPage() {
  <div className="px-5 pb-5 border-t border-border/5 space-y-4">
  <div className="mt-4 p-3 bg-blue-50/50 rounded-lg">
  <p className="text-[10px] font-bold text-blue-700 mb-1 flex items-center gap-1"><Target size={10} /> Strategy</p>
- <p className="text-xs text-foreground/60 leading-relaxed">{tip.strategy}</p>
+ <p className="text-xs text-muted-foreground leading-relaxed">{tip.strategy}</p>
  </div>
  <div className="p-3 bg-primary/5 rounded-lg border border-primary/10">
  <p className="text-[10px] font-bold text-primary mb-1 flex items-center gap-1"><Zap size={10} /> What to Say</p>
- <p className="text-xs text-foreground/70 italic leading-relaxed">&ldquo;{tip.script}&rdquo;</p>
+ <p className="text-xs text-muted-foreground italic leading-relaxed">&ldquo;{tip.script}&rdquo;</p>
  </div>
  <div className="p-3 bg-rose-50/50 rounded-lg">
  <p className="text-[10px] font-bold text-rose-700 mb-1 flex items-center gap-1"><AlertTriangle size={10} /> Common Mistake</p>
- <p className="text-xs text-foreground/60 leading-relaxed">{tip.mistake}</p>
+ <p className="text-xs text-muted-foreground leading-relaxed">{tip.mistake}</p>
  </div>
  </div>
  )}

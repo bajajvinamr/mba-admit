@@ -232,16 +232,16 @@ export default function GmatPlannerPage() {
  <div className="max-w-3xl mx-auto px-6 py-10">
  {/* Input Form */}
  <div className="editorial-card p-8">
- <h2 className="text-sm font-bold uppercase tracking-widest text-foreground/40 mb-6">
+ <h2 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-6">
  Your Details
  </h2>
 
  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
  {/* Current Score */}
  <div>
- <label className="text-xs font-medium text-foreground/50 block mb-2">Current Score</label>
+ <label className="text-xs font-medium text-muted-foreground block mb-2">Current Score</label>
  <div className="flex items-center gap-3 mb-2">
- <label className="flex items-center gap-1.5 text-xs text-foreground/60 cursor-pointer">
+ <label className="flex items-center gap-1.5 text-xs text-muted-foreground cursor-pointer">
  <input
  type="checkbox"
  checked={notTakenYet}
@@ -270,7 +270,7 @@ export default function GmatPlannerPage() {
 
  {/* Target Score */}
  <div>
- <label className="text-xs font-medium text-foreground/50 block mb-2">Target Score</label>
+ <label className="text-xs font-medium text-muted-foreground block mb-2">Target Score</label>
  <input
  type="number"
  min={200}
@@ -280,12 +280,12 @@ export default function GmatPlannerPage() {
  onChange={(e) => setTargetScore(+e.target.value)}
  className="w-full px-4 py-3 text-lg font-bold border border-border/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
  />
- <p className="text-[10px] text-foreground/30 mt-1">200 - 800</p>
+ <p className="text-[10px] text-muted-foreground mt-1">200 - 800</p>
  </div>
 
  {/* Hours per week */}
  <div>
- <label className="text-xs font-medium text-foreground/50 block mb-2">Study Hours / Week</label>
+ <label className="text-xs font-medium text-muted-foreground block mb-2">Study Hours / Week</label>
  <input
  type="number"
  min={1}
@@ -294,12 +294,12 @@ export default function GmatPlannerPage() {
  onChange={(e) => setHoursPerWeek(+e.target.value)}
  className="w-full px-4 py-3 text-lg font-bold border border-border/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
  />
- <p className="text-[10px] text-foreground/30 mt-1">Most successful test-takers study 10-20 hrs/week</p>
+ <p className="text-[10px] text-muted-foreground mt-1">Most successful test-takers study 10-20 hrs/week</p>
  </div>
 
  {/* Test Date */}
  <div>
- <label className="text-xs font-medium text-foreground/50 block mb-2">Target Test Date</label>
+ <label className="text-xs font-medium text-muted-foreground block mb-2">Target Test Date</label>
  <input
  type="date"
  min={minDate}
@@ -321,7 +321,7 @@ export default function GmatPlannerPage() {
  {plan && (
  <button
  onClick={clearPlan}
- className="px-6 py-3 border border-border/10 text-foreground/50 font-medium rounded-lg hover:border-border/30 transition-all"
+ className="px-6 py-3 border border-border/10 text-muted-foreground font-medium rounded-lg hover:border-border/30 transition-all"
  >
  Clear
  </button>
@@ -349,7 +349,7 @@ export default function GmatPlannerPage() {
  <p className="text-2xl font-bold text-foreground heading-serif font-[family-name:var(--font-heading)]">
  {stat.value}
  </p>
- <p className="text-[10px] text-foreground/40 font-medium uppercase tracking-wider">{stat.label}</p>
+ <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-wider">{stat.label}</p>
  </div>
  ))}
  </div>
@@ -367,11 +367,11 @@ export default function GmatPlannerPage() {
  {plan.gapLabel}
  </span>
  </div>
- <p className="text-sm text-foreground/70">{plan.gapAdvice}</p>
+ <p className="text-sm text-muted-foreground">{plan.gapAdvice}</p>
  </div>
 
  {/* Phase Timeline */}
- <h2 className="text-xs font-bold uppercase tracking-widest text-foreground/40 mt-10 mb-4">
+ <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mt-10 mb-4">
  Week-by-Week Breakdown
  </h2>
  <div className="relative">
@@ -393,7 +393,7 @@ export default function GmatPlannerPage() {
  </h3>
  <ul className="mt-3 space-y-1.5">
  {phase.tasks.map((task, j) => (
- <li key={j} className="flex items-start gap-2 text-xs text-foreground/60">
+ <li key={j} className="flex items-start gap-2 text-xs text-muted-foreground">
  <CheckCircle2 size={12} className="text-primary mt-0.5 shrink-0"/>
  {task}
  </li>
@@ -406,7 +406,7 @@ export default function GmatPlannerPage() {
  </div>
 
  {/* Milestones */}
- <h2 className="text-xs font-bold uppercase tracking-widest text-foreground/40 mt-10 mb-4">
+ <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mt-10 mb-4">
  Milestones
  </h2>
  <div className="editorial-card p-5">
@@ -417,7 +417,7 @@ export default function GmatPlannerPage() {
  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium border ${
  m.label ==="Test Day"
  ?"bg-primary/10 text-primary border-primary/30"
- :"bg-foreground/3 text-foreground/60 border-border/8"
+ :"bg-foreground/3 text-muted-foreground border-border/8"
  }`}
  >
  {m.label ==="Test Day" ? <GraduationCap size={14} /> : <Target size={14} />}
@@ -428,13 +428,13 @@ export default function GmatPlannerPage() {
  </div>
 
  {/* Resources */}
- <h2 className="text-xs font-bold uppercase tracking-widest text-foreground/40 mt-10 mb-4">
+ <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mt-10 mb-4">
  Recommended Resources
  </h2>
  <div className="editorial-card p-5">
  <ul className="space-y-2">
  {plan.resources.map((r, i) => (
- <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+ <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
  <CheckCircle2 size={14} className="text-primary mt-0.5 shrink-0"/>
  {r}
  </li>

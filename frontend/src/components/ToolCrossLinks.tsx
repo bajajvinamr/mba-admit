@@ -94,7 +94,7 @@ export function ToolCrossLinks({ current, count = 6 }: { current: string; count?
 
  return (
  <div className="border-t border-border/5 mt-12 pt-8">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30 mb-4">More Tools</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-4">More Tools</p>
  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
  {others.map((t) => (
  <Link
@@ -104,9 +104,9 @@ export function ToolCrossLinks({ current, count = 6 }: { current: string; count?
  >
  <div>
  <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">{t.label}</p>
- <p className="text-[10px] text-foreground/30">{t.desc}</p>
+ <p className="text-[10px] text-muted-foreground">{t.desc}</p>
  </div>
- <ArrowRight size={12} className="text-foreground/10 group-hover:text-primary transition-colors"/>
+ <ArrowRight size={12} className="text-muted-foreground group-hover:text-primary transition-colors"/>
  </Link>
  ))}
  </div>
@@ -117,7 +117,7 @@ export function ToolCrossLinks({ current, count = 6 }: { current: string; count?
  {isFree && (
  <Link
  href="/pricing"
- className="flex items-center gap-1 text-xs text-foreground/40 hover:text-primary transition-colors"
+ className="flex items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors"
  >
  <Zap size={10} /> Unlock unlimited
  </Link>

@@ -24,7 +24,7 @@ const CAT_COLORS: Record<string, string> = {
  Travel:"bg-blue-50 text-blue-600",
  Materials:"bg-emerald-50 text-emerald-600",
  Consulting:"bg-orange-50 text-orange-600",
- Other:"bg-foreground/5 text-foreground/40",
+ Other:"bg-foreground/5 text-muted-foreground",
 };
 
 export default function BudgetPage() {
@@ -61,7 +61,7 @@ export default function BudgetPage() {
  <div className="max-w-4xl mx-auto px-6 py-10">
  {/* Total */}
  <div className="editorial-card p-8 text-center mb-8">
- <p className="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-2">Estimated Total Budget</p>
+ <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">Estimated Total Budget</p>
  <p className="text-5xl font-bold text-primary">${total.toLocaleString()}</p>
  </div>
 
@@ -88,7 +88,7 @@ export default function BudgetPage() {
  </span>
  <span className="flex-1 text-sm text-foreground">{item.label}</span>
  <span className="text-sm font-bold text-foreground">${item.amount.toLocaleString()}</span>
- <button onClick={() => setItems(items.filter((_, idx) => idx !== i))} className="text-foreground/20 hover:text-red-400">
+ <button onClick={() => setItems(items.filter((_, idx) => idx !== i))} className="text-muted-foreground hover:text-red-400">
  <X size={12} />
  </button>
  </div>
@@ -98,7 +98,7 @@ export default function BudgetPage() {
 
  {/* Add item */}
  <button onClick={() => setShowAdd(!showAdd)}
- className="mb-4 px-4 py-2 border border-border/10 text-sm text-foreground/50 rounded-lg hover:border-border/30 flex items-center gap-1">
+ className="mb-4 px-4 py-2 border border-border/10 text-sm text-muted-foreground rounded-lg hover:border-border/30 flex items-center gap-1">
  <Plus size={14} /> Add Expense
  </button>
 

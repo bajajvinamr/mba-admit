@@ -66,7 +66,7 @@ export default function FeeCalculatorPage() {
  <div className="max-w-4xl mx-auto px-6 py-10">
  {/* School selector */}
  <div className="editorial-card p-5 mb-6">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30 mb-3">Select Schools</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">Select Schools</p>
  <div className="flex flex-wrap gap-2 mb-4">
  {POPULAR.map((id) => (
  <button
@@ -74,7 +74,7 @@ export default function FeeCalculatorPage() {
  onClick={() => toggle(id)}
  aria-pressed={selected.includes(id)}
  className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${
- selected.includes(id) ?"bg-foreground text-white":"bg-foreground/5 text-foreground/40 hover:bg-foreground/10"
+ selected.includes(id) ?"bg-foreground text-white":"bg-foreground/5 text-muted-foreground hover:bg-foreground/10"
  }`}
  >
  {id.toUpperCase()}
@@ -104,7 +104,7 @@ export default function FeeCalculatorPage() {
  <>
  {/* Grand total */}
  <div className="editorial-card p-8 text-center mb-8">
- <p className="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-2">Grand Total ({data.total_schools} schools)</p>
+ <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">Grand Total ({data.total_schools} schools)</p>
  <p className="text-5xl font-bold text-primary">${data.grand_total.toLocaleString()}</p>
  </div>
 
@@ -113,11 +113,11 @@ export default function FeeCalculatorPage() {
  <table className="w-full text-sm">
  <thead>
  <tr className="border-b border-border/10">
- <th className="text-left px-4 py-3 text-[10px] font-bold uppercase tracking-widest text-foreground/40">School</th>
- <th className="px-4 py-3 text-center text-[10px] font-bold uppercase tracking-widest text-foreground/40">App Fee</th>
- <th className="px-4 py-3 text-center text-[10px] font-bold uppercase tracking-widest text-foreground/40">GMAT Report</th>
- <th className="px-4 py-3 text-center text-[10px] font-bold uppercase tracking-widest text-foreground/40">Transcript</th>
- <th className="px-4 py-3 text-center text-[10px] font-bold uppercase tracking-widest text-foreground/40">Total</th>
+ <th className="text-left px-4 py-3 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">School</th>
+ <th className="px-4 py-3 text-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground">App Fee</th>
+ <th className="px-4 py-3 text-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground">GMAT Report</th>
+ <th className="px-4 py-3 text-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Transcript</th>
+ <th className="px-4 py-3 text-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Total</th>
  </tr>
  </thead>
  <tbody>

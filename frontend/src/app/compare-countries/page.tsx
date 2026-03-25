@@ -91,12 +91,12 @@ function CountryCard({
       onClick={onToggle}
       className={`relative text-left rounded-xl border p-5 transition-all ${
         selected
-          ? "border-[#b8860b] bg-[#b8860b]/5 ring-1 ring-[#b8860b]/30"
+          ? "border-[#b8860b] bg-primary/5 ring-1 ring-[#b8860b]/30"
           : "border-border bg-card hover:border-foreground/20"
       }`}
     >
       {selected && (
-        <div className="absolute top-3 right-3 rounded-full bg-[#b8860b] p-0.5">
+        <div className="absolute top-3 right-3 rounded-full bg-primary p-0.5">
           <Check className="size-3 text-white" />
         </div>
       )}

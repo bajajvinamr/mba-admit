@@ -125,7 +125,7 @@ export default function RankingsPage() {
  {/* Filters */}
  <div className="flex flex-wrap gap-3 mb-6">
  <div className="relative flex-1 min-w-[200px]">
- <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground/30"/>
+ <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"/>
  <input
  type="text" placeholder="Search schools..."
  value={search} onChange={(e) => setSearch(e.target.value)}
@@ -136,7 +136,7 @@ export default function RankingsPage() {
  {["all","M7","T15","T25"].map((t) => (
  <button key={t} onClick={() => setTierFilter(t)}
  className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
- tierFilter === t ?"bg-foreground text-white":"bg-card text-foreground/50 border border-border/10 hover:border-border/30"
+ tierFilter === t ?"bg-foreground text-white":"bg-card text-muted-foreground border border-border/10 hover:border-border/30"
  }`}>
  {t ==="all" ?"All": t}
  </button>
@@ -158,16 +158,16 @@ export default function RankingsPage() {
  )}
 
  {/* Stats */}
- <p className="text-xs text-foreground/40 mb-4">{filtered.length} school{filtered.length !== 1 ?"s":""}</p>
+ <p className="text-xs text-muted-foreground mb-4">{filtered.length} school{filtered.length !== 1 ?"s":""}</p>
 
  {loading ? (
- <div className="text-center py-16 text-foreground/40">
+ <div className="text-center py-16 text-muted-foreground">
  <div className="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full mx-auto"/>
  </div>
  ) : (
  <div className="editorial-card overflow-hidden">
  {/* Header */}
- <div className="hidden md:grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr] gap-2 px-6 py-3 bg-foreground/5 text-[10px] font-bold uppercase tracking-widest text-foreground/40">
+ <div className="hidden md:grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr] gap-2 px-6 py-3 bg-foreground/5 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
  <button onClick={() => handleSort("name")} className="flex items-center gap-1 text-left">School <SortIcon k="name"/></button>
  <button onClick={() => handleSort("gmat")} className="flex items-center gap-1">GMAT <SortIcon k="gmat"/></button>
  <button onClick={() => handleSort("acceptance")} className="flex items-center gap-1">Accept % <SortIcon k="acceptance"/></button>
@@ -189,20 +189,20 @@ export default function RankingsPage() {
  className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr] gap-2 px-6 py-4 hover:bg-primary/3 transition-colors items-center"
  >
  <div className="flex items-center gap-3">
- <span className="text-xs text-foreground/20 font-mono w-6">{i + 1}</span>
+ <span className="text-xs text-muted-foreground font-mono w-6">{i + 1}</span>
  <div>
  <Link href={`/school/${s.id}`} className="text-sm font-semibold text-foreground hover:text-primary transition-colors">
  {s.name}
  </Link>
  <div className="flex items-center gap-2 mt-0.5">
- <span className="text-[10px] text-foreground/30 flex items-center gap-0.5">
+ <span className="text-[10px] text-muted-foreground flex items-center gap-0.5">
  <MapPin size={8} /> {s.location}
  </span>
  {tier && (
  <span className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
  tier ==="M7" ?"bg-primary/15 text-primary":
  tier ==="T15" ?"bg-blue-50 text-blue-600":
-"bg-foreground/5 text-foreground/40"
+"bg-foreground/5 text-muted-foreground"
  }`}>{tier}</span>
  )}
  </div>
@@ -211,16 +211,16 @@ export default function RankingsPage() {
  <div className="text-sm font-medium text-foreground md:text-center">
  {s.gmat_avg ||"-"}
  </div>
- <div className="text-sm text-foreground/60 md:text-center">
+ <div className="text-sm text-muted-foreground md:text-center">
  {s.acceptance_rate ? `${s.acceptance_rate}%` :"-"}
  </div>
- <div className="text-sm text-foreground/60 md:text-center">
+ <div className="text-sm text-muted-foreground md:text-center">
  {s.tuition_usd ? `$${(s.tuition_usd / 1000).toFixed(0)}k` :"-"}
  </div>
- <div className="text-sm text-foreground/60 md:text-center">
+ <div className="text-sm text-muted-foreground md:text-center">
  {s.median_salary ||"-"}
  </div>
- <div className="text-sm text-foreground/60 md:text-center">
+ <div className="text-sm text-muted-foreground md:text-center">
  {s.class_size ||"-"}
  </div>
  </motion.div>

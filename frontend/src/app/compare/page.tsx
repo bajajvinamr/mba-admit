@@ -400,7 +400,7 @@ export default function ComparePage() {
  </div>
  )}
  {!schoolsLoading && allSchools.length === 0 && !schoolListError && (
- <p className="text-sm text-foreground/40 py-4 text-center">No schools available.</p>
+ <p className="text-sm text-muted-foreground py-4 text-center">No schools available.</p>
  )}
  {(() => {
  const filtered = allSchools
@@ -410,7 +410,7 @@ export default function ComparePage() {
  .filter((s) => !selectedIds.includes(s.id));
  if (!schoolsLoading && filtered.length === 0 && allSchools.length > 0) {
  return (
- <p className="text-sm text-foreground/40 py-4 text-center">
+ <p className="text-sm text-muted-foreground py-4 text-center">
  No schools match &ldquo;{search}&rdquo;
  </p>
  );
@@ -861,7 +861,7 @@ export default function ComparePage() {
  <h2 className="heading-serif text-2xl text-foreground mb-2">
  Compare programs head-to-head
  </h2>
- <p className="text-foreground/50 mb-6">
+ <p className="text-muted-foreground mb-6">
  Pick 2-4 schools to see GMAT/GPA distributions, admit rates, top
  industries, and your percentile fit - powered by 12K real
  decisions.

@@ -139,7 +139,7 @@ export default function TimelinePage() {
 
  <div className="max-w-4xl mx-auto px-6 py-10">
  <div className="flex items-center justify-between mb-8">
- <p className="text-sm text-foreground/40">
+ <p className="text-sm text-muted-foreground">
  {timelines.length} school{timelines.length !== 1 ?"s":""} tracked
  </p>
  <button onClick={() => setShowNew(!showNew)}
@@ -186,11 +186,11 @@ export default function TimelinePage() {
  <span className="text-xs text-primary font-medium">{tl.round}</span>
  </div>
  <div className="flex items-center gap-3">
- <span className={`text-sm font-bold ${pct === 100 ?"text-emerald-600":"text-foreground/40"}`}>
+ <span className={`text-sm font-bold ${pct === 100 ?"text-emerald-600":"text-muted-foreground"}`}>
  {pct}%
  </span>
  <button onClick={() => removeTimeline(tlIdx)}
- className="text-foreground/20 hover:text-red-500 transition-colors">
+ className="text-muted-foreground hover:text-red-500 transition-colors">
  <X size={16} />
  </button>
  </div>
@@ -225,20 +225,20 @@ export default function TimelinePage() {
  ) : step.status ==="active" ? (
  <div className="w-[18px] h-[18px] rounded-full border-2 border-primary bg-primary/20"/>
  ) : (
- <Circle size={18} className="text-foreground/15"/>
+ <Circle size={18} className="text-muted-foreground"/>
  )}
  </button>
  <div className="flex-1 min-w-0">
  <div className="flex items-center gap-2">
  <span className={`text-sm ${
- step.status ==="done" ?"text-foreground/30 line-through":
+ step.status ==="done" ?"text-muted-foreground line-through":
  step.status ==="active" ?"text-foreground font-medium":
-"text-foreground/30"
+"text-muted-foreground"
  }`}>
  {step.label}
  </span>
  {step.date && (
- <span className="text-[10px] text-foreground/20">{step.date}</span>
+ <span className="text-[10px] text-muted-foreground">{step.date}</span>
  )}
  </div>
  {step.status ==="active" && link && (
@@ -260,7 +260,7 @@ export default function TimelinePage() {
  </div>
 
  {timelines.length === 0 && (
- <div className="text-center py-20 text-foreground/20">
+ <div className="text-center py-20 text-muted-foreground">
  <Calendar size={48} className="mx-auto mb-4 opacity-30"/>
  <p className="text-sm mb-4">Track your application journey step by step</p>
  <button onClick={() => setShowNew(true)}

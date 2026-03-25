@@ -108,7 +108,7 @@ function SubscriptionSuccess({ planId }: { planId: string }) {
  </p>
  <p className="text-[10px] text-muted-foreground/40">{step.desc}</p>
  </div>
- <ChevronRight size={14} className="text-foreground/20 group-hover:text-primary transition-colors"/>
+ <ChevronRight size={14} className="text-muted-foreground group-hover:text-primary transition-colors"/>
  </Link>
  ))}
  </div>

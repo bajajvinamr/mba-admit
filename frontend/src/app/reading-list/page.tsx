@@ -58,18 +58,18 @@ export default function ReadingListPage() {
  <div className="flex flex-wrap gap-2">
  {CATEGORIES.map((cat) => (
  <button key={cat} onClick={() => setCategory(cat)}
- className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${category === cat ?"bg-foreground text-white":"bg-foreground/5 text-foreground/40 hover:bg-foreground/10"}`}>
+ className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${category === cat ?"bg-foreground text-white":"bg-foreground/5 text-muted-foreground hover:bg-foreground/10"}`}>
  {cat}
  </button>
  ))}
  </div>
  <div className="flex gap-1">
  <button onClick={() => setSortBy("rating")}
- className={`text-[10px] px-2 py-1 rounded ${sortBy ==="rating" ?"bg-primary text-white":"bg-foreground/5 text-foreground/40"}`}>
+ className={`text-[10px] px-2 py-1 rounded ${sortBy ==="rating" ?"bg-primary text-white":"bg-foreground/5 text-muted-foreground"}`}>
  By Rating
  </button>
  <button onClick={() => setSortBy("pages")}
- className={`text-[10px] px-2 py-1 rounded ${sortBy ==="pages" ?"bg-primary text-white":"bg-foreground/5 text-foreground/40"}`}>
+ className={`text-[10px] px-2 py-1 rounded ${sortBy ==="pages" ?"bg-primary text-white":"bg-foreground/5 text-muted-foreground"}`}>
  Shortest First
  </button>
  </div>
@@ -82,12 +82,12 @@ export default function ReadingListPage() {
  <BookOpen size={18} className="text-primary mt-0.5 shrink-0"/>
  <div className="flex-1">
  <p className="font-medium text-foreground text-sm">{book.title}</p>
- <p className="text-[10px] text-foreground/40 flex items-center gap-2">
+ <p className="text-[10px] text-muted-foreground flex items-center gap-2">
  <span className="flex items-center gap-0.5"><User size={9} /> {book.author}</span>
  <span className="flex items-center gap-0.5"><Clock size={9} /> {book.pages}p</span>
  <span className="flex items-center gap-0.5"><Star size={9} className="text-primary fill-primary"/> {book.rating}</span>
  </p>
- <p className="text-xs text-foreground/50 mt-2 leading-relaxed">{book.whyRead}</p>
+ <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{book.whyRead}</p>
  <div className="flex items-center gap-2 mt-2">
  <span className="text-[9px] px-1.5 py-0.5 bg-primary/10 text-primary rounded-full font-bold">{book.category}</span>
  <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-bold ${
@@ -96,7 +96,7 @@ export default function ReadingListPage() {
 "bg-rose-50 text-rose-700"
  }`}>{book.difficulty}</span>
  </div>
- <p className="text-[10px] text-foreground/30 mt-2 italic">Best for: {book.bestFor}</p>
+ <p className="text-[10px] text-muted-foreground mt-2 italic">Best for: {book.bestFor}</p>
  </div>
  </div>
  </div>

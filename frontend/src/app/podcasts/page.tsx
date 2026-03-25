@@ -80,7 +80,7 @@ export default function PodcastsPage() {
  <div className="flex flex-wrap gap-2 mb-8">
  {CATEGORIES.map((cat) => (
  <button key={cat} onClick={() => setCategory(cat)}
- className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${category === cat ?"bg-foreground text-white":"bg-foreground/5 text-foreground/40 hover:bg-foreground/10"}`}>
+ className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${category === cat ?"bg-foreground text-white":"bg-foreground/5 text-muted-foreground hover:bg-foreground/10"}`}>
  {cat}
  </button>
  ))}
@@ -93,8 +93,8 @@ export default function PodcastsPage() {
  <Headphones size={20} className="text-primary mt-0.5 shrink-0"/>
  <div className="flex-1">
  <p className="font-medium text-foreground text-sm">{pod.name}</p>
- <p className="text-[10px] text-foreground/40">by {pod.host} &middot; {pod.episodes} episodes</p>
- <p className="text-xs text-foreground/50 mt-2 leading-relaxed">{pod.description}</p>
+ <p className="text-[10px] text-muted-foreground">by {pod.host} &middot; {pod.episodes} episodes</p>
+ <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{pod.description}</p>
  <div className="flex items-center gap-2 mt-2">
  <Star size={10} className="text-primary fill-primary"/>
  <span className="text-[10px] text-primary font-bold">{pod.rating}</span>
@@ -102,10 +102,10 @@ export default function PodcastsPage() {
  </div>
  <div className="flex flex-wrap gap-1 mt-2">
  {pod.topics.map((t) => (
- <span key={t} className="text-[9px] px-1.5 py-0.5 bg-foreground/5 rounded text-foreground/40">{t}</span>
+ <span key={t} className="text-[9px] px-1.5 py-0.5 bg-foreground/5 rounded text-muted-foreground">{t}</span>
  ))}
  </div>
- <p className="text-[10px] text-foreground/30 mt-2 italic">Best for: {pod.bestFor}</p>
+ <p className="text-[10px] text-muted-foreground mt-2 italic">Best for: {pod.bestFor}</p>
  </div>
  </div>
  </div>

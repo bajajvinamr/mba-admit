@@ -109,14 +109,14 @@ export default function EssayThemesPage() {
  {essays.map((essay, idx) => (
  <div key={idx} className="editorial-card p-6">
  <div className="flex items-center justify-between mb-4">
- <h3 className="text-sm font-semibold text-foreground/60 flex items-center gap-2">
+ <h3 className="text-sm font-semibold text-muted-foreground flex items-center gap-2">
  <FileText size={16} />
  Essay {idx + 1}
  </h3>
  {essays.length > 1 && (
  <button
  onClick={() => removeEssay(idx)}
- className="text-foreground/30 hover:text-red-500 transition-colors"
+ className="text-muted-foreground hover:text-red-500 transition-colors"
  aria-label="Remove essay"
  >
  <Trash2 size={16} />
@@ -128,16 +128,16 @@ export default function EssayThemesPage() {
  placeholder="Essay title (optional)"
  value={essay.title}
  onChange={(e) => updateEssay(idx,"title", e.target.value)}
- className="w-full px-4 py-2 mb-3 border border-border/10 rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 bg-card placeholder:text-foreground/20"
+ className="w-full px-4 py-2 mb-3 border border-border/10 rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 bg-card placeholder:text-muted-foreground"
  />
  <textarea
  placeholder="Paste your essay text here..."
  value={essay.content}
  onChange={(e) => updateEssay(idx,"content", e.target.value)}
- className="w-full min-h-[180px] p-4 text-foreground text-[15px] leading-relaxed bg-card border border-border/10 rounded-lg resize-y focus:outline-none focus:ring-2 focus:ring-primary/50 placeholder:text-foreground/20"
+ className="w-full min-h-[180px] p-4 text-foreground text-[15px] leading-relaxed bg-card border border-border/10 rounded-lg resize-y focus:outline-none focus:ring-2 focus:ring-primary/50 placeholder:text-muted-foreground"
  />
  {essay.content.trim() && (
- <p className="text-xs text-foreground/40 mt-2">
+ <p className="text-xs text-muted-foreground mt-2">
  {essay.content.trim().split(/\s+/).length} words
  </p>
  )}
@@ -150,7 +150,7 @@ export default function EssayThemesPage() {
  {canAdd && (
  <button
  onClick={addEssay}
- className="flex items-center gap-2 px-4 py-2.5 border border-border/10 rounded-lg text-sm font-medium text-foreground/60 hover:border-border/30 transition-colors bg-card"
+ className="flex items-center gap-2 px-4 py-2.5 border border-border/10 rounded-lg text-sm font-medium text-muted-foreground hover:border-border/30 transition-colors bg-card"
  >
  <Plus size={16} /> Add Essay
  </button>
@@ -193,7 +193,7 @@ export default function EssayThemesPage() {
  <div className="flex items-center justify-between mb-1">
  <span
  className={`text-sm font-medium ${
- isDominant ?"text-primary": isGap ?"text-red-400":"text-foreground/70"
+ isDominant ?"text-primary": isGap ?"text-red-400":"text-muted-foreground"
  }`}
  >
  {theme}
@@ -242,23 +242,23 @@ export default function EssayThemesPage() {
  >
  <div className="flex items-start justify-between mb-3">
  <h3 className="text-sm font-semibold text-foreground">{essay.title}</h3>
- <span className="text-xs text-foreground/40">{essay.word_count} words</span>
+ <span className="text-xs text-muted-foreground">{essay.word_count} words</span>
  </div>
- <p className="text-xs text-foreground/50 mb-3">
+ <p className="text-xs text-muted-foreground mb-3">
  Dominant:{""}
  <span className="font-semibold text-primary">{essay.dominant}</span>
  </p>
  <div className="space-y-2">
  {sorted.slice(0, 5).map(([theme, pct]) => (
  <div key={theme} className="flex items-center gap-2">
- <span className="text-xs text-foreground/50 w-24 shrink-0">{theme}</span>
+ <span className="text-xs text-muted-foreground w-24 shrink-0">{theme}</span>
  <div className="flex-1 bg-foreground/5 rounded-full h-1.5 overflow-hidden">
  <div
  className={`h-full rounded-full ${THEME_COLORS[theme] ||"bg-foreground/30"}`}
  style={{ width: `${Math.max(pct, 1)}%` }}
  />
  </div>
- <span className="text-xs text-foreground/40 w-8 text-right">{pct}%</span>
+ <span className="text-xs text-muted-foreground w-8 text-right">{pct}%</span>
  </div>
  ))}
  </div>
@@ -275,7 +275,7 @@ export default function EssayThemesPage() {
  <AlertTriangle size={20} className="text-amber-500"/>
  Thematic Gaps
  </h2>
- <p className="text-sm text-foreground/60 mb-3">
+ <p className="text-sm text-muted-foreground mb-3">
  These themes have little or no representation across your essays:
  </p>
  <div className="flex flex-wrap gap-2">
@@ -302,7 +302,7 @@ export default function EssayThemesPage() {
  {result.tips.map((tip, idx) => (
  <li
  key={idx}
- className="flex items-start gap-2 text-sm text-foreground/70"
+ className="flex items-start gap-2 text-sm text-muted-foreground"
  >
  <CheckCircle2 size={16} className="text-primary mt-0.5 shrink-0"/>
  {tip}

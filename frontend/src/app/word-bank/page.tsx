@@ -116,7 +116,7 @@ export default function WordBankPage() {
  key={cat.id}
  onClick={() => setActiveCategory(cat.id)}
  className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${
- activeCategory === cat.id ?"bg-foreground text-white":"bg-foreground/5 text-foreground/40 hover:bg-foreground/10"
+ activeCategory === cat.id ?"bg-foreground text-white":"bg-foreground/5 text-muted-foreground hover:bg-foreground/10"
  }`}
  >
  {cat.label}
@@ -129,20 +129,20 @@ export default function WordBankPage() {
  <BookOpen size={18} className="text-primary mt-0.5 shrink-0"/>
  <div>
  <p className="font-medium text-foreground text-sm">{category.label}</p>
- <p className="text-xs text-foreground/40 mt-0.5">{category.description}</p>
+ <p className="text-xs text-muted-foreground mt-0.5">{category.description}</p>
  </div>
  </div>
 
  {/* Word sections */}
  {category.sections.map((section) => (
  <div key={section.title} className="mb-6">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30 mb-3">{section.title}</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">{section.title}</p>
  <div className="flex flex-wrap gap-2">
  {section.words.map((word) => (
  <button
  key={word}
  onClick={() => copyWord(word)}
- className="group relative text-xs px-3 py-1.5 bg-card border border-border/10 rounded-lg hover:border-primary hover:bg-primary/5 transition-all text-foreground/70 hover:text-foreground"
+ className="group relative text-xs px-3 py-1.5 bg-card border border-border/10 rounded-lg hover:border-primary hover:bg-primary/5 transition-all text-muted-foreground hover:text-foreground"
  >
  {word}
  <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[9px] bg-foreground text-white px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">

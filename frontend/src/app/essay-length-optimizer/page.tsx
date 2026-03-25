@@ -48,7 +48,7 @@ export default function EssayLengthOptimizerPage() {
  <div className="flex gap-1">
  {schools.map((s) => (
  <button key={s} onClick={() => setSelectedSchool(s)}
- className={`text-[10px] px-2 py-1 rounded-full ${selectedSchool === s ?"bg-foreground text-white":"bg-foreground/5 text-foreground/40"}`}>{s}</button>
+ className={`text-[10px] px-2 py-1 rounded-full ${selectedSchool === s ?"bg-foreground text-white":"bg-foreground/5 text-muted-foreground"}`}>{s}</button>
  ))}
  </div>
  </div>
@@ -64,10 +64,10 @@ export default function EssayLengthOptimizerPage() {
  <div className="flex items-center justify-between mb-1">
  <div>
  <span className="text-[10px] font-bold text-primary mr-2">{l.school}</span>
- <span className="text-xs text-foreground/70">{l.prompt.slice(0, 60)}{l.prompt.length > 60 ?"...":""}</span>
+ <span className="text-xs text-muted-foreground">{l.prompt.slice(0, 60)}{l.prompt.length > 60 ?"...":""}</span>
  </div>
  <div className="flex items-center gap-2">
- <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${status ==="over" ?"bg-red-100 text-red-600": status ==="good" ?"bg-emerald-100 text-emerald-600":"bg-foreground/5 text-foreground/40"}`}>
+ <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${status ==="over" ?"bg-red-100 text-red-600": status ==="good" ?"bg-emerald-100 text-emerald-600":"bg-foreground/5 text-muted-foreground"}`}>
  {labels[status]}
  </span>
  <span className="text-xs font-bold text-foreground tabular-nums">{wordCount}/{l.limit}</span>

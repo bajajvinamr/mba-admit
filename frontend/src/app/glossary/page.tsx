@@ -73,7 +73,7 @@ export default function GlossaryPage() {
  <div className="max-w-4xl mx-auto px-6 py-10">
  {/* Search */}
  <div className="relative mb-6">
- <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground/20"/>
+ <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"/>
  <input
  type="text"
  placeholder="Search terms..."
@@ -90,7 +90,7 @@ export default function GlossaryPage() {
  key={cat}
  onClick={() => setCategory(cat)}
  className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${
- category === cat ?"bg-foreground text-white":"bg-foreground/5 text-foreground/40 hover:bg-foreground/10"
+ category === cat ?"bg-foreground text-white":"bg-foreground/5 text-muted-foreground hover:bg-foreground/10"
  }`}
  >
  {cat}
@@ -98,7 +98,7 @@ export default function GlossaryPage() {
  ))}
  </div>
 
- <p className="text-xs text-foreground/30 mb-4">{filtered.length} terms</p>
+ <p className="text-xs text-muted-foreground mb-4">{filtered.length} terms</p>
 
  {/* Terms */}
  <div className="space-y-3">
@@ -107,7 +107,7 @@ export default function GlossaryPage() {
  <div className="flex items-start justify-between gap-3">
  <div>
  <p className="font-medium text-foreground text-sm">{t.term}</p>
- <p className="text-xs text-foreground/50 mt-1 leading-relaxed">{t.definition}</p>
+ <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{t.definition}</p>
  </div>
  <span className="text-[9px] px-1.5 py-0.5 bg-primary/10 text-primary rounded-full font-bold shrink-0">
  {t.category}
@@ -118,8 +118,8 @@ export default function GlossaryPage() {
  </div>
 
  {filtered.length === 0 && (
- <div className="text-center py-12 text-foreground/30">
- <BookOpen size={40} className="mx-auto mb-3 text-foreground/10"/>
+ <div className="text-center py-12 text-muted-foreground">
+ <BookOpen size={40} className="mx-auto mb-3 text-muted-foreground"/>
  <p className="text-sm">No matching terms found.</p>
  </div>
  )}

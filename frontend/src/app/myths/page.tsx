@@ -121,7 +121,7 @@ export default function MythsPage() {
  key={cat}
  onClick={() => setCategory(cat)}
  className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${
- category === cat ?"bg-foreground text-white":"bg-foreground/5 text-foreground/40 hover:bg-foreground/10"
+ category === cat ?"bg-foreground text-white":"bg-foreground/5 text-muted-foreground hover:bg-foreground/10"
  }`}
  >
  {cat}
@@ -145,18 +145,18 @@ export default function MythsPage() {
  <p className="font-medium text-foreground text-sm">&ldquo;{myth.myth}&rdquo;</p>
  <div className="flex gap-2 mt-1">
  <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-bold ${cfg.color}`}>{cfg.label}</span>
- <span className="text-[9px] px-1.5 py-0.5 bg-foreground/5 text-foreground/30 rounded-full font-bold">{myth.category}</span>
+ <span className="text-[9px] px-1.5 py-0.5 bg-foreground/5 text-muted-foreground rounded-full font-bold">{myth.category}</span>
  </div>
  </div>
- {expanded ? <ChevronUp size={16} className="text-foreground/20 mt-1"/> : <ChevronDown size={16} className="text-foreground/20 mt-1"/>}
+ {expanded ? <ChevronUp size={16} className="text-muted-foreground mt-1"/> : <ChevronDown size={16} className="text-muted-foreground mt-1"/>}
  </button>
 
  {expanded && (
  <div className="border-t border-border/5 px-5 py-4">
  <p className="text-sm font-medium text-foreground mb-1">Reality:</p>
- <p className="text-xs text-foreground/50 leading-relaxed mb-3">{myth.reality}</p>
+ <p className="text-xs text-muted-foreground leading-relaxed mb-3">{myth.reality}</p>
  <p className="text-sm font-medium text-foreground mb-1">Evidence:</p>
- <p className="text-xs text-foreground/50 leading-relaxed">{myth.evidence}</p>
+ <p className="text-xs text-muted-foreground leading-relaxed">{myth.evidence}</p>
  </div>
  )}
  </div>

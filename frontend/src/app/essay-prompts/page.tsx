@@ -83,7 +83,7 @@ export default function EssayPromptsPage() {
  {/* Filters */}
  <div className="flex flex-wrap gap-3 mb-8">
  <div className="relative flex-1 min-w-[200px]">
- <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground/30"/>
+ <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"/>
  <input type="text" placeholder="Search prompts..."
  value={search} onChange={(e) => setSearch(e.target.value)}
  className="w-full pl-9 pr-4 py-2.5 border border-border/10 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"/>
@@ -97,7 +97,7 @@ export default function EssayPromptsPage() {
  </select>
  </div>
 
- <p className="text-xs text-foreground/40 mb-4">{filtered.length} prompts</p>
+ <p className="text-xs text-muted-foreground mb-4">{filtered.length} prompts</p>
 
  {error && (
  <div className="editorial-card p-4 mb-6 border-red-200 bg-red-50 flex items-start gap-3" role="alert">
@@ -151,7 +151,7 @@ export default function EssayPromptsPage() {
  {p.school_name}
  </Link>
  {p.word_limit && (
- <span className="text-[10px] px-1.5 py-0.5 bg-foreground/5 text-foreground/40 rounded">
+ <span className="text-[10px] px-1.5 py-0.5 bg-foreground/5 text-muted-foreground rounded">
  {p.word_limit} words
  </span>
  )}
@@ -161,13 +161,13 @@ export default function EssayPromptsPage() {
  <div className="flex items-center gap-2 flex-shrink-0">
  <button
  onClick={() => copyPrompt(p.prompt_text, key)}
- className="p-2 text-foreground/20 hover:text-foreground/60 transition-colors"
+ className="p-2 text-muted-foreground hover:text-muted-foreground transition-colors"
  title="Copy prompt"
  >
  {copied === key ? <CheckCircle2 size={14} className="text-emerald-500"/> : <Copy size={14} />}
  </button>
  <Link href={`/essay-drafts`}
- className="p-2 text-foreground/20 hover:text-primary transition-colors" title="Start writing">
+ className="p-2 text-muted-foreground hover:text-primary transition-colors" title="Start writing">
  <FileText size={14} />
  </Link>
  </div>

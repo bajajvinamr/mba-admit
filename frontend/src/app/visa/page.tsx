@@ -58,7 +58,7 @@ export default function VisaPage() {
  )}
  {/* Country selector */}
  <div className="editorial-card p-6 mb-8">
- <label className="text-sm font-medium text-foreground/60 block mb-2">Select Country</label>
+ <label className="text-sm font-medium text-muted-foreground block mb-2">Select Country</label>
  <select value={selected} onChange={(e) => setSelected(e.target.value)}
  className="w-full px-4 py-3 border border-border/10 rounded-lg text-lg font-bold focus:outline-none focus:ring-2 focus:ring-primary/50">
  {countries.map((c) => <option key={c} value={c}>{c}</option>)}
@@ -77,7 +77,7 @@ export default function VisaPage() {
  <div className="editorial-card p-5">
  <div className="flex items-center gap-2 mb-2 text-primary">
  <Plane size={18} />
- <span className="text-xs font-bold uppercase tracking-widest text-foreground/40">Student Visa</span>
+ <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Student Visa</span>
  </div>
  <p className="text-lg font-bold text-foreground">{info.student_visa}</p>
  </div>
@@ -85,7 +85,7 @@ export default function VisaPage() {
  <div className="editorial-card p-5">
  <div className="flex items-center gap-2 mb-2 text-primary">
  <Briefcase size={18} />
- <span className="text-xs font-bold uppercase tracking-widest text-foreground/40">Work Permit</span>
+ <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Work Permit</span>
  </div>
  <p className="text-lg font-bold text-foreground">{info.work_permit}</p>
  </div>
@@ -93,7 +93,7 @@ export default function VisaPage() {
  <div className="editorial-card p-5">
  <div className="flex items-center gap-2 mb-2 text-primary">
  <Users size={18} />
- <span className="text-xs font-bold uppercase tracking-widest text-foreground/40">Spouse Work</span>
+ <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Spouse Work</span>
  </div>
  <p className="text-sm text-foreground">{info.spouse_work}</p>
  </div>
@@ -101,7 +101,7 @@ export default function VisaPage() {
  <div className="editorial-card p-5">
  <div className="flex items-center gap-2 mb-2 text-primary">
  <Globe size={18} />
- <span className="text-xs font-bold uppercase tracking-widest text-foreground/40">STEM Extension</span>
+ <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">STEM Extension</span>
  </div>
  <p className="text-lg font-bold text-foreground">{info.stem_extension ?"Yes - 36 months":"Not applicable"}</p>
  </div>
@@ -109,7 +109,7 @@ export default function VisaPage() {
 
  {info.post_grad_options && (
  <div className="editorial-card p-5">
- <h3 className="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-3">Post-Graduation Pathways</h3>
+ <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Post-Graduation Pathways</h3>
  <div className="flex flex-wrap gap-2">
  {info.post_grad_options.map((opt) => (
  <span key={opt} className="px-3 py-1.5 bg-primary/10 text-primary text-sm rounded-full font-medium">{opt}</span>
@@ -120,7 +120,7 @@ export default function VisaPage() {
 
  {info.tips && info.tips.length > 0 && (
  <div className="editorial-card p-5">
- <h3 className="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-3">Key Tips</h3>
+ <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Key Tips</h3>
  <ul className="space-y-2">
  {info.tips.map((tip, i) => (
  <li key={i} className="flex items-start gap-2 text-sm text-foreground">
@@ -136,7 +136,7 @@ export default function VisaPage() {
 
  {info && !info.available && !loading && (
  <div className="editorial-card p-8 text-center">
- <p className="text-foreground/50 mb-2">{info.message}</p>
+ <p className="text-muted-foreground mb-2">{info.message}</p>
  </div>
  )}
 

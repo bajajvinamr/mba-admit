@@ -120,7 +120,7 @@ export default function ToolsPage() {
  <h3 className="font-bold text-foreground text-base group-hover:text-primary transition-colors mb-1">
  {tool.label}
  </h3>
- <p className="text-xs text-foreground/50 mb-3">{tool.desc}</p>
+ <p className="text-xs text-muted-foreground mb-3">{tool.desc}</p>
  <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
  {tool.cta} →
  </span>
@@ -163,9 +163,9 @@ export default function ToolsPage() {
  </span>
  )}
  </div>
- <p className="text-xs text-foreground/50 mt-0.5">{tool.desc}</p>
+ <p className="text-xs text-muted-foreground mt-0.5">{tool.desc}</p>
  </div>
- <ArrowRight size={14} className="text-foreground/10 group-hover:text-primary transition-colors mt-1"/>
+ <ArrowRight size={14} className="text-muted-foreground group-hover:text-primary transition-colors mt-1"/>
  </div>
  </Link>
  </motion.div>

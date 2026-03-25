@@ -62,8 +62,8 @@ export default function ClassSizePage() {
  <div className="max-w-5xl mx-auto px-6 py-10">
  {/* Sort control */}
  <div className="editorial-card p-4 mb-8 flex items-center gap-4">
- <ArrowUpDown size={16} className="text-foreground/30"/>
- <span className="text-xs font-bold uppercase tracking-widest text-foreground/40">Sort by</span>
+ <ArrowUpDown size={16} className="text-muted-foreground"/>
+ <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Sort by</span>
  <select
  value={sortBy}
  onChange={(e) => setSortBy(e.target.value)}
@@ -80,19 +80,19 @@ export default function ClassSizePage() {
  )}
 
  {loading ? (
- <div className="text-center py-16 text-foreground/30">Loading class size data...</div>
+ <div className="text-center py-16 text-muted-foreground">Loading class size data...</div>
  ) : (
  <div className="editorial-card overflow-hidden">
  <div className="overflow-x-auto">
  <table className="w-full text-sm">
  <thead>
  <tr className="border-b border-border/10">
- <th className="text-left px-5 py-3 text-[10px] font-bold uppercase tracking-widest text-foreground/40">School</th>
- <th className="text-right px-5 py-3 text-[10px] font-bold uppercase tracking-widest text-foreground/40">Class Size</th>
- <th className="text-right px-5 py-3 text-[10px] font-bold uppercase tracking-widest text-foreground/40 hidden md:table-cell">Sections</th>
- <th className="text-right px-5 py-3 text-[10px] font-bold uppercase tracking-widest text-foreground/40 hidden md:table-cell">Avg Section</th>
- <th className="text-right px-5 py-3 text-[10px] font-bold uppercase tracking-widest text-foreground/40">Student:Faculty</th>
- <th className="text-right px-5 py-3 text-[10px] font-bold uppercase tracking-widest text-foreground/40">Intl %</th>
+ <th className="text-left px-5 py-3 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">School</th>
+ <th className="text-right px-5 py-3 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Class Size</th>
+ <th className="text-right px-5 py-3 text-[10px] font-bold uppercase tracking-widest text-muted-foreground hidden md:table-cell">Sections</th>
+ <th className="text-right px-5 py-3 text-[10px] font-bold uppercase tracking-widest text-muted-foreground hidden md:table-cell">Avg Section</th>
+ <th className="text-right px-5 py-3 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Student:Faculty</th>
+ <th className="text-right px-5 py-3 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Intl %</th>
  </tr>
  </thead>
  <tbody>
@@ -104,14 +104,14 @@ export default function ClassSizePage() {
  <td className="text-right px-5 py-4">
  <span className="font-bold text-foreground text-lg">{s.class_size.toLocaleString()}</span>
  </td>
- <td className="text-right px-5 py-4 text-foreground/60 hidden md:table-cell">
+ <td className="text-right px-5 py-4 text-muted-foreground hidden md:table-cell">
  {s.sections ||"Flexible"}
  </td>
- <td className="text-right px-5 py-4 text-foreground/60 hidden md:table-cell">
+ <td className="text-right px-5 py-4 text-muted-foreground hidden md:table-cell">
  {s.avg_section_size ||"N/A"}
  </td>
  <td className="text-right px-5 py-4">
- <span className={`font-medium ${s.student_faculty_ratio <= 4.5 ?"text-emerald-600":"text-foreground/70"}`}>
+ <span className={`font-medium ${s.student_faculty_ratio <= 4.5 ?"text-emerald-600":"text-muted-foreground"}`}>
  {s.student_faculty_ratio}:1
  </span>
  </td>
@@ -130,19 +130,19 @@ export default function ClassSizePage() {
  {!loading && schools.length > 0 && (
  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
  <div className="editorial-card p-5 text-center">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 mb-1">Largest Class</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">Largest Class</p>
  <p className="text-2xl font-bold text-foreground">{Math.max(...schools.map(s => s.class_size)).toLocaleString()}</p>
  </div>
  <div className="editorial-card p-5 text-center">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 mb-1">Smallest Class</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">Smallest Class</p>
  <p className="text-2xl font-bold text-foreground">{Math.min(...schools.map(s => s.class_size)).toLocaleString()}</p>
  </div>
  <div className="editorial-card p-5 text-center">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 mb-1">Avg Class Size</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">Avg Class Size</p>
  <p className="text-2xl font-bold text-foreground">{Math.round(schools.reduce((a, s) => a + s.class_size, 0) / schools.length).toLocaleString()}</p>
  </div>
  <div className="editorial-card p-5 text-center">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 mb-1">Avg Intl %</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">Avg Intl %</p>
  <p className="text-2xl font-bold text-primary">{Math.round(schools.reduce((a, s) => a + s.international_pct, 0) / schools.length)}%</p>
  </div>
  </div>

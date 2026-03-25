@@ -145,7 +145,7 @@ export default function RoasterPage() {
  <div className="shrink-0 text-center md:text-left">
  <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground/50 font-bold mb-2">Adcom Score</p>
  <p className={`heading-serif text-8xl md:text-9xl leading-none tracking-tighter ${getScoreColor(result.score)}`}>
- {result.score}<span className="text-4xl text-foreground/20 font-sans">/10</span>
+ {result.score}<span className="text-4xl text-muted-foreground font-sans">/10</span>
  </p>
  </div>
  <div className="flex-1">

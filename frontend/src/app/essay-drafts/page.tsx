@@ -106,7 +106,7 @@ export default function EssayDraftsPage() {
 
  <div className="max-w-4xl mx-auto px-6 py-10">
  <div className="flex items-center justify-between mb-6">
- <p className="text-sm text-foreground/40">{drafts.length} draft{drafts.length !== 1 ?"s":""}</p>
+ <p className="text-sm text-muted-foreground">{drafts.length} draft{drafts.length !== 1 ?"s":""}</p>
  <button
  onClick={() => setShowNew(!showNew)}
  className="flex items-center gap-1.5 px-4 py-2 bg-foreground text-white text-sm font-medium rounded-lg hover:bg-foreground/80"
@@ -127,13 +127,13 @@ export default function EssayDraftsPage() {
  <div className="editorial-card p-6">
  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
  <div>
- <label className="text-xs font-medium text-foreground/60 block mb-1">School</label>
+ <label className="text-xs font-medium text-muted-foreground block mb-1">School</label>
  <input type="text" placeholder="e.g., Harvard Business School"
  value={newSchool} onChange={(e) => setNewSchool(e.target.value)}
  className="w-full px-3 py-2 border border-border/10 rounded text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"/>
  </div>
  <div>
- <label className="text-xs font-medium text-foreground/60 block mb-1">Essay Prompt</label>
+ <label className="text-xs font-medium text-muted-foreground block mb-1">Essay Prompt</label>
  <input type="text" placeholder="e.g., What more would you like us to know?"
  value={newPrompt} onChange={(e) => setNewPrompt(e.target.value)}
  className="w-full px-3 py-2 border border-border/10 rounded text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"/>
@@ -145,7 +145,7 @@ export default function EssayDraftsPage() {
  Create Draft
  </button>
  <button onClick={() => setShowNew(false)}
- className="px-4 py-2 text-foreground/40 text-sm hover:text-foreground/60">
+ className="px-4 py-2 text-muted-foreground text-sm hover:text-muted-foreground">
  Cancel
  </button>
  </div>
@@ -159,7 +159,7 @@ export default function EssayDraftsPage() {
  <div className="space-y-4">
  {Object.entries(bySchool).map(([school, schoolDrafts]) => (
  <div key={school}>
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30 mb-2 px-1">
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-2 px-1">
  {school}
  </p>
  <div className="space-y-1">
@@ -174,7 +174,7 @@ export default function EssayDraftsPage() {
  }`}
  >
  <p className="text-sm font-medium text-foreground line-clamp-1">{d.prompt}</p>
- <div className="flex items-center gap-2 mt-1 text-[10px] text-foreground/30">
+ <div className="flex items-center gap-2 mt-1 text-[10px] text-muted-foreground">
  <span>{d.wordCount} words</span>
  <span>·</span>
  <span>{new Date(d.updatedAt).toLocaleDateString()}</span>
@@ -186,7 +186,7 @@ export default function EssayDraftsPage() {
  ))}
 
  {drafts.length === 0 && (
- <div className="text-center py-12 text-foreground/20">
+ <div className="text-center py-12 text-muted-foreground">
  <FileText size={32} className="mx-auto mb-3 opacity-30"/>
  <p className="text-sm">No drafts yet</p>
  </div>
@@ -209,7 +209,7 @@ export default function EssayDraftsPage() {
  </div>
  <div className="flex items-center gap-2">
  <button onClick={() => copyToClipboard(activeDraft.content)}
- className="p-2 text-foreground/30 hover:text-foreground/60 transition-colors" title="Copy">
+ className="p-2 text-muted-foreground hover:text-muted-foreground transition-colors" title="Copy">
  <Copy size={14} />
  </button>
  <button onClick={() => deleteDraft(activeDraft.id)}
@@ -222,9 +222,9 @@ export default function EssayDraftsPage() {
  value={activeDraft.content}
  onChange={(e) => updateContent(activeDraft.id, e.target.value)}
  placeholder="Start writing your essay..."
- className="w-full min-h-[400px] p-6 text-[15px] leading-relaxed text-foreground bg-card resize-y focus:outline-none placeholder:text-foreground/15"
+ className="w-full min-h-[400px] p-6 text-[15px] leading-relaxed text-foreground bg-card resize-y focus:outline-none placeholder:text-muted-foreground"
  />
- <div className="px-6 py-3 bg-foreground/3 border-t border-border/5 flex items-center justify-between text-xs text-foreground/40">
+ <div className="px-6 py-3 bg-foreground/3 border-t border-border/5 flex items-center justify-between text-xs text-muted-foreground">
  <span>{activeDraft.wordCount} words · {activeDraft.content.length} characters</span>
  <div className="flex items-center gap-3">
  <span className="flex items-center gap-1"><CheckCircle2 size={10} className="text-emerald-500"/> Auto-saved</span>
@@ -238,7 +238,7 @@ export default function EssayDraftsPage() {
  </div>
  </motion.div>
  ) : (
- <div className="editorial-card p-16 text-center text-foreground/20">
+ <div className="editorial-card p-16 text-center text-muted-foreground">
  <Edit3 size={32} className="mx-auto mb-3 opacity-30"/>
  <p className="text-sm">Select a draft or create a new one</p>
  </div>

@@ -257,7 +257,7 @@ export default function DecidePage() {
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
                   <Scale size={16} className="text-primary" />
-                  <span className="text-sm font-semibold text-foreground/60">
+                  <span className="text-sm font-semibold text-muted-foreground">
                     School {idx + 1}
                   </span>
                 </div>
@@ -273,7 +273,7 @@ export default function DecidePage() {
                   {entries.length > 1 && (
                     <button
                       onClick={() => removeEntry(idx)}
-                      className="text-foreground/30 hover:text-red-500"
+                      className="text-muted-foreground hover:text-red-500"
                     >
                       <X size={16} />
                     </button>
@@ -284,7 +284,7 @@ export default function DecidePage() {
               {!entry.schoolData ? (
                 <div className="relative">
                   <div className="flex items-center gap-2">
-                    <Search size={16} className="text-foreground/30" />
+                    <Search size={16} className="text-muted-foreground" />
                     <input
                       type="text"
                       placeholder="Search for a school..."
@@ -294,7 +294,7 @@ export default function DecidePage() {
                         setSearchingIdx(idx);
                         setSchoolSearch(e.target.value);
                       }}
-                      className="w-full px-3 py-2 border border-border/10 rounded-lg text-sm bg-card text-foreground focus:ring-2 focus:ring-primary/50 focus:outline-none placeholder:text-foreground/20"
+                      className="w-full px-3 py-2 border border-border/10 rounded-lg text-sm bg-card text-foreground focus:ring-2 focus:ring-primary/50 focus:outline-none placeholder:text-muted-foreground"
                     />
                   </div>
                   {searchingIdx === idx && schoolResults.length > 0 && (
@@ -317,18 +317,18 @@ export default function DecidePage() {
                     <h3 className="font-semibold text-foreground">{entry.schoolData.name}</h3>
                     <button
                       onClick={() => updateEntry(idx, "schoolData", null)}
-                      className="text-xs text-foreground/40 hover:text-foreground/70"
+                      className="text-xs text-muted-foreground hover:text-muted-foreground"
                     >
                       Change
                     </button>
                   </div>
                   <div className="grid gap-3 md:grid-cols-3">
                     <div>
-                      <label className="text-xs text-foreground/40 block mb-1">
+                      <label className="text-xs text-muted-foreground block mb-1">
                         Financial Aid / Scholarship
                       </label>
                       <div className="relative">
-                        <DollarSign size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground/30" />
+                        <DollarSign size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
                         <input
                           type="number"
                           placeholder="0"
@@ -341,7 +341,7 @@ export default function DecidePage() {
                       </div>
                     </div>
                     <div>
-                      <label className="text-xs text-foreground/40 block mb-1">
+                      <label className="text-xs text-muted-foreground block mb-1">
                         Deposit Deadline
                       </label>
                       <input
@@ -353,7 +353,7 @@ export default function DecidePage() {
                     </div>
                     {entry.status === "waitlisted" && (
                       <div>
-                        <label className="text-xs text-foreground/40 block mb-1">
+                        <label className="text-xs text-muted-foreground block mb-1">
                           Waitlist Notes
                         </label>
                         <input
@@ -361,7 +361,7 @@ export default function DecidePage() {
                           placeholder="Strategy notes..."
                           value={entry.waitlistStrategy}
                           onChange={(e) => updateEntry(idx, "waitlistStrategy", e.target.value)}
-                          className="w-full px-3 py-2 border border-border/10 rounded-lg text-sm bg-card text-foreground focus:ring-2 focus:ring-primary/50 focus:outline-none placeholder:text-foreground/20"
+                          className="w-full px-3 py-2 border border-border/10 rounded-lg text-sm bg-card text-foreground focus:ring-2 focus:ring-primary/50 focus:outline-none placeholder:text-muted-foreground"
                         />
                       </div>
                     )}
@@ -374,7 +374,7 @@ export default function DecidePage() {
           {entries.length < 6 && (
             <button
               onClick={addEntry}
-              className="flex items-center gap-2 px-4 py-2.5 border border-border/10 rounded-lg text-sm font-medium text-foreground/60 hover:border-border/30 transition-colors bg-card w-full justify-center"
+              className="flex items-center gap-2 px-4 py-2.5 border border-border/10 rounded-lg text-sm font-medium text-muted-foreground hover:border-border/30 transition-colors bg-card w-full justify-center"
             >
               <Plus size={16} /> Add School
             </button>
@@ -395,7 +395,7 @@ export default function DecidePage() {
                   Nearest Deposit Deadline:{" "}
                   {nearestDeadline.schoolData?.name || nearestDeadline.schoolId}
                 </p>
-                <p className="text-xs text-foreground/50">
+                <p className="text-xs text-muted-foreground">
                   {daysUntil(nearestDeadline.depositDeadline) > 0
                     ? `${daysUntil(nearestDeadline.depositDeadline)} days remaining`
                     : "Deadline has passed!"}
@@ -435,7 +435,7 @@ export default function DecidePage() {
                 <div className="space-y-4 mt-4">
                   {dimensions.map((d) => (
                     <div key={d.key} className="flex items-center gap-4">
-                      <span className="text-sm text-foreground/60 w-36 shrink-0 flex items-center gap-2">
+                      <span className="text-sm text-muted-foreground w-36 shrink-0 flex items-center gap-2">
                         {d.icon} {d.label}
                       </span>
                       <input
@@ -473,11 +473,11 @@ export default function DecidePage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr>
-                    <th className="text-left py-2 pr-4 text-foreground/50 font-medium">Dimension</th>
+                    <th className="text-left py-2 pr-4 text-muted-foreground font-medium">Dimension</th>
                     {scored.map((e) => (
                       <th
                         key={e.schoolId}
-                        className="text-center py-2 px-4 text-foreground/50 font-medium min-w-[120px]"
+                        className="text-center py-2 px-4 text-muted-foreground font-medium min-w-[120px]"
                       >
                         {e.schoolData?.name}
                       </th>
@@ -493,7 +493,7 @@ export default function DecidePage() {
 
                     return (
                       <tr key={dim.key} className="border-t border-border/5">
-                        <td className="py-3 pr-4 text-foreground/70 flex items-center gap-2">
+                        <td className="py-3 pr-4 text-muted-foreground flex items-center gap-2">
                           {dim.icon} {dim.label}
                         </td>
                         {scored.map((e, i) => {
@@ -505,7 +505,7 @@ export default function DecidePage() {
                               className={`py-3 px-4 text-center ${
                                 isBest
                                   ? "bg-emerald-50 dark:bg-emerald-900/20 font-semibold text-emerald-700 dark:text-emerald-400"
-                                  : "text-foreground/70"
+                                  : "text-muted-foreground"
                               }`}
                             >
                               {dim.format(val)}
@@ -524,7 +524,7 @@ export default function DecidePage() {
                         className={`py-3 px-4 text-center font-bold text-lg ${
                           e === topPick
                             ? "text-primary"
-                            : "text-foreground/70"
+                            : "text-muted-foreground"
                         }`}
                       >
                         {e.score}/100
@@ -543,7 +543,7 @@ export default function DecidePage() {
         )}
 
         {scored.length === 1 && (
-          <div className="editorial-card p-6 mb-8 text-center text-foreground/50 text-sm">
+          <div className="editorial-card p-6 mb-8 text-center text-muted-foreground text-sm">
             Add at least 2 admitted schools to see the comparison table.
           </div>
         )}
@@ -570,7 +570,7 @@ export default function DecidePage() {
                       {e.schoolData?.name}
                     </p>
                     {e.waitlistStrategy && (
-                      <p className="text-xs text-foreground/50 mt-0.5">{e.waitlistStrategy}</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">{e.waitlistStrategy}</p>
                     )}
                   </div>
                   <Link
@@ -583,7 +583,7 @@ export default function DecidePage() {
               ))}
             </div>
             <div className="mt-4 p-3 bg-foreground/[0.02] rounded-lg">
-              <p className="text-xs text-foreground/50">
+              <p className="text-xs text-muted-foreground">
                 <strong>Waitlist tips:</strong> Send a letter of continued interest. Update the
                 school on any new achievements. Visit campus if possible. Do not contact admissions
                 excessively.

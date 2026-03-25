@@ -132,7 +132,7 @@ export default function CalendarPage() {
  <div className="max-w-4xl mx-auto px-6 py-10">
  {/* School Pills */}
  <div className="editorial-card p-6 mb-8">
- <p className="text-sm font-medium text-foreground/60 mb-3">Filter by school</p>
+ <p className="text-sm font-medium text-muted-foreground mb-3">Filter by school</p>
  <div className="flex flex-wrap gap-2">
  {TOP_SCHOOLS.map((s) => (
  <button
@@ -141,7 +141,7 @@ export default function CalendarPage() {
  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
  selected.has(s.id)
  ?"bg-foreground text-white"
- :"bg-card text-foreground/50 border border-border/10 hover:border-border/30"
+ :"bg-card text-muted-foreground border border-border/10 hover:border-border/30"
  }`}
  >
  {s.name}
@@ -158,7 +158,7 @@ export default function CalendarPage() {
  className={`px-3 py-1.5 rounded text-xs font-medium transition-all ${
  typeFilter === t
  ?"bg-primary/10 text-primary"
- :"text-foreground/40 hover:text-foreground/60"
+ :"text-muted-foreground hover:text-muted-foreground"
  }`}
  >
  {t ==="all" ?"All Events": t ==="deadline" ?"Deadlines":"Decisions"}
@@ -174,7 +174,7 @@ export default function CalendarPage() {
  )}
 
  {loading && (
- <div className="text-center py-16 text-foreground/40">
+ <div className="text-center py-16 text-muted-foreground">
  <div className="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full mx-auto mb-4"/>
  Loading calendar...
  </div>
@@ -228,9 +228,9 @@ export default function CalendarPage() {
  >
  {ev.school_name}
  </Link>
- <span className="text-xs text-foreground/40">{ev.round}</span>
+ <span className="text-xs text-muted-foreground">{ev.round}</span>
  </div>
- <p className="text-xs text-foreground/50 mt-0.5">{ev.label}</p>
+ <p className="text-xs text-muted-foreground mt-0.5">{ev.label}</p>
  </div>
 
  {/* Date */}
@@ -238,13 +238,13 @@ export default function CalendarPage() {
  <p className="text-sm font-medium text-foreground">{formatDate(ev.date)}</p>
  {!isPast && (
  <span className={`text-xs font-medium ${
- isUrgent ?"text-red-600":"text-foreground/40"
+ isUrgent ?"text-red-600":"text-muted-foreground"
  }`}>
  {days === 0 ?"Today!": `${days}d away`}
  </span>
  )}
  {isPast && (
- <span className="text-xs text-foreground/30">Passed</span>
+ <span className="text-xs text-muted-foreground">Passed</span>
  )}
  </div>
  </motion.div>
@@ -258,14 +258,14 @@ export default function CalendarPage() {
  )}
 
  {data && !loading && sortedMonths.length === 0 && (
- <div className="text-center py-16 text-foreground/30">
+ <div className="text-center py-16 text-muted-foreground">
  <Calendar size={48} className="mx-auto mb-4 opacity-30"/>
  <p>No events found for selected filters</p>
  </div>
  )}
 
  {!loading && selected.size === 0 && (
- <div className="text-center py-16 text-foreground/30">
+ <div className="text-center py-16 text-muted-foreground">
  <Calendar size={48} className="mx-auto mb-4 opacity-30"/>
  <p>Select schools above to see their deadlines</p>
  </div>
@@ -273,7 +273,7 @@ export default function CalendarPage() {
 
  {/* Legend */}
  {data && !loading && sortedMonths.length > 0 && (
- <div className="mt-8 editorial-card p-4 flex items-center gap-6 text-xs text-foreground/50">
+ <div className="mt-8 editorial-card p-4 flex items-center gap-6 text-xs text-muted-foreground">
  <div className="flex items-center gap-2">
  <div className="w-3 h-3 rounded-full bg-red-500"/>
  Application Deadline

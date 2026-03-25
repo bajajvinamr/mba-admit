@@ -44,7 +44,7 @@ export default function RoiPage() {
  apiFetch<School[]>("/api/schools")
  .then((r) => {
    const list = Array.isArray(r) ? r : (r as unknown as { schools: School[] }).schools || [];
-   setSchools(list.filter((s) => s.name && s.id.length <= 20).sort((a, b) => a.name.localeCompare(b.name)).slice(0, 80));
+   setSchools(list.filter((s) => s.name && s.id.length <= 20).sort((a, b) => a.name.localeCompare(b.name)));
  })
  .catch(() => setError("Failed to load school list. Please refresh."));
  }, []);
@@ -103,15 +103,15 @@ export default function RoiPage() {
  <div className="editorial-card p-6 mb-6">
  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
  <div>
- <label className="text-xs font-bold uppercase tracking-widest text-foreground/40 block mb-2">Current Annual Salary</label>
+ <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground block mb-2">Current Annual Salary</label>
  <div className="relative">
- <DollarSign size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground/30"/>
+ <DollarSign size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"/>
  <input type="number" value={salary} onChange={(e) => setSalary(+e.target.value)}
  className="w-full pl-9 pr-4 py-3 border border-border/10 rounded-lg text-lg font-bold focus:outline-none focus:ring-2 focus:ring-primary/50"/>
  </div>
  </div>
  <div>
- <label className="text-xs font-bold uppercase tracking-widest text-foreground/40 block mb-2">Schools to Compare</label>
+ <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground block mb-2">Schools to Compare</label>
  <div className="flex flex-wrap gap-1.5 mb-2">
  {selected.map((id) => {
  const s = schools.find((x) => x.id === id);
@@ -123,7 +123,7 @@ export default function RoiPage() {
  );
  })}
  <button onClick={() => setShowPicker(!showPicker)}
- className="px-2 py-1 border border-border/10 text-xs rounded-full text-foreground/40 hover:border-border/30">
+ className="px-2 py-1 border border-border/10 text-xs rounded-full text-muted-foreground hover:border-border/30">
  <Plus size={10} />
  </button>
  </div>
@@ -180,28 +180,28 @@ export default function RoiPage() {
 
  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
  <div>
- <p className="text-xs text-foreground/40">Total Investment</p>
+ <p className="text-xs text-muted-foreground">Total Investment</p>
  <p className="text-lg font-bold text-foreground">${(r.total_investment / 1000).toFixed(0)}k</p>
  </div>
  <div>
- <p className="text-xs text-foreground/40">Post-MBA Salary</p>
+ <p className="text-xs text-muted-foreground">Post-MBA Salary</p>
  <p className="text-lg font-bold text-foreground">${(r.post_mba_salary / 1000).toFixed(0)}k</p>
  </div>
  <div>
- <p className="text-xs text-foreground/40">10-Year Net Gain</p>
+ <p className="text-xs text-muted-foreground">10-Year Net Gain</p>
  <p className={`text-lg font-bold ${r.net_gain_10yr > 0 ?"text-emerald-600":"text-red-600"}`}>
  ${(r.net_gain_10yr / 1000).toFixed(0)}k
  </p>
  </div>
  <div>
- <p className="text-xs text-foreground/40">Breakeven</p>
+ <p className="text-xs text-muted-foreground">Breakeven</p>
  <p className="text-lg font-bold text-foreground">
  {r.breakeven_year ? `Year ${r.breakeven_year}` :"N/A"}
  </p>
  </div>
  </div>
 
- <p className="text-[10px] text-foreground/20 mt-3">{r.assumptions}</p>
+ <p className="text-[10px] text-muted-foreground mt-3">{r.assumptions}</p>
  </div>
  </motion.div>
  ))}
@@ -213,13 +213,13 @@ export default function RoiPage() {
  <div className="editorial-card text-center py-16">
  {selected.length === 0 ? (
  <>
- <TrendingUp size={48} className="mx-auto mb-4 text-foreground/30"/>
- <p className="text-foreground/30 text-lg">Select schools above to compare ROI</p>
+ <TrendingUp size={48} className="mx-auto mb-4 text-muted-foreground"/>
+ <p className="text-muted-foreground text-lg">Select schools above to compare ROI</p>
  </>
  ) : (
  <>
- <Calculator size={48} className="mx-auto mb-4 text-foreground/30"/>
- <p className="text-foreground/30">No ROI data available for selected schools</p>
+ <Calculator size={48} className="mx-auto mb-4 text-muted-foreground"/>
+ <p className="text-muted-foreground">No ROI data available for selected schools</p>
  </>
  )}
  </div>

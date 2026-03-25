@@ -155,7 +155,7 @@ export default function ScholarshipEstimatePage() {
  <h2 className="font-semibold text-foreground mb-4">Your Profile</h2>
  <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
  <div>
- <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 block mb-1">GMAT</label>
+ <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground block mb-1">GMAT</label>
  <input
  type="number" min={200} max={800}
  value={gmat}
@@ -165,11 +165,11 @@ export default function ScholarshipEstimatePage() {
  {validationErrors.gmat ? (
  <span className="text-[10px] text-red-500 mt-0.5 block">{validationErrors.gmat}</span>
  ) : (
- <span className="text-[10px] text-foreground/30 mt-0.5 block">200 - 800</span>
+ <span className="text-[10px] text-muted-foreground mt-0.5 block">200 - 800</span>
  )}
  </div>
  <div>
- <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 block mb-1">GPA</label>
+ <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground block mb-1">GPA</label>
  <input
  type="number" step="0.1" min={0} max={4.0}
  value={gpa}
@@ -179,11 +179,11 @@ export default function ScholarshipEstimatePage() {
  {validationErrors.gpa ? (
  <span className="text-[10px] text-red-500 mt-0.5 block">{validationErrors.gpa}</span>
  ) : (
- <span className="text-[10px] text-foreground/30 mt-0.5 block">0.0 - 4.0</span>
+ <span className="text-[10px] text-muted-foreground mt-0.5 block">0.0 - 4.0</span>
  )}
  </div>
  <div>
- <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 block mb-1">Work Years</label>
+ <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground block mb-1">Work Years</label>
  <input
  type="number" min={0} max={30}
  value={workYears}
@@ -193,12 +193,12 @@ export default function ScholarshipEstimatePage() {
  {validationErrors.workYears ? (
  <span className="text-[10px] text-red-500 mt-0.5 block">{validationErrors.workYears}</span>
  ) : (
- <span className="text-[10px] text-foreground/30 mt-0.5 block">0 - 30</span>
+ <span className="text-[10px] text-muted-foreground mt-0.5 block">0 - 30</span>
  )}
  </div>
  </div>
  <div className="flex flex-wrap gap-4">
- <label className="flex items-center gap-2 text-sm text-foreground/70 cursor-pointer">
+ <label className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer">
  <input
  type="checkbox"
  checked={isUrm}
@@ -207,7 +207,7 @@ export default function ScholarshipEstimatePage() {
  />
  Underrepresented Minority
  </label>
- <label className="flex items-center gap-2 text-sm text-foreground/70 cursor-pointer">
+ <label className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer">
  <input
  type="checkbox"
  checked={isInternational}
@@ -216,7 +216,7 @@ export default function ScholarshipEstimatePage() {
  />
  International
  </label>
- <label className="flex items-center gap-2 text-sm text-foreground/70 cursor-pointer">
+ <label className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer">
  <input
  type="checkbox"
  checked={financialNeed}
@@ -258,7 +258,7 @@ export default function ScholarshipEstimatePage() {
  {selected.length > 0 && (
  <button
  onClick={() => setSelected([])}
- className="text-xs px-3 py-1 border border-border/10 text-foreground/40 rounded-full hover:bg-foreground/5 transition-colors"
+ className="text-xs px-3 py-1 border border-border/10 text-muted-foreground rounded-full hover:bg-foreground/5 transition-colors"
  >
  Clear
  </button>
@@ -268,7 +268,7 @@ export default function ScholarshipEstimatePage() {
  {showPicker && (
  <div className="mb-4">
  <div className="relative">
- <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground/30"/>
+ <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"/>
  <input
  type="text"
  autoFocus
@@ -297,7 +297,7 @@ export default function ScholarshipEstimatePage() {
  </button>
  ))}
  {filtered.length === 0 && (
- <p className="px-3 py-2 text-sm text-foreground/30">No schools found</p>
+ <p className="px-3 py-2 text-sm text-muted-foreground">No schools found</p>
  )}
  </>
  )}
@@ -321,7 +321,7 @@ export default function ScholarshipEstimatePage() {
  );
  })}
  {selected.length === 0 && (
- <p className="text-sm text-foreground/30">No schools selected - defaults to M7</p>
+ <p className="text-sm text-muted-foreground">No schools selected - defaults to M7</p>
  )}
  </div>
  </div>
@@ -377,17 +377,17 @@ export default function ScholarshipEstimatePage() {
  <h2 className="font-semibold text-foreground mb-4">Summary</h2>
  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
  <div className="bg-primary/5 rounded-lg p-4">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 mb-1">
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">
  Total Potential Savings
  </p>
  <p className="text-3xl font-bold text-primary">
  {formatUSD(results.total_potential_savings)}
  </p>
- <p className="text-xs text-foreground/40 mt-1">across {results.total_schools} schools</p>
+ <p className="text-xs text-muted-foreground mt-1">across {results.total_schools} schools</p>
  </div>
  {results.best_opportunity && (
  <div className="bg-emerald-50 rounded-lg p-4">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 mb-1">
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">
  Best Opportunity
  </p>
  <p className="text-lg font-semibold text-foreground">
@@ -428,7 +428,7 @@ export default function ScholarshipEstimatePage() {
 
  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
  <div>
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40">
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
  Probability
  </p>
  <p className={`text-xl font-bold ${probColor(r.probability_pct ?? 0)}`}>
@@ -436,15 +436,15 @@ export default function ScholarshipEstimatePage() {
  </p>
  </div>
  <div>
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40">
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
  Total Tuition
  </p>
- <p className="text-lg font-semibold text-foreground/70">
+ <p className="text-lg font-semibold text-muted-foreground">
  {r.total_tuition != null ? formatUSD(r.total_tuition) :"\u2014"}
  </p>
  </div>
  <div>
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40">
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
  Net Cost
  </p>
  <p className="text-lg font-semibold text-foreground">
@@ -455,7 +455,7 @@ export default function ScholarshipEstimatePage() {
 
  {/* Award context bar */}
  <div className="mb-3">
- <div className="flex flex-wrap justify-between text-[10px] text-foreground/40 mb-1 gap-1">
+ <div className="flex flex-wrap justify-between text-[10px] text-muted-foreground mb-1 gap-1">
  <span>Estimated vs. Avg Award ({r.school_data?.avg_award != null ? formatUSD(r.school_data.avg_award) :"\u2014"})</span>
  <span>{r.total_tuition ? Math.round((r.estimated_award / r.total_tuition) * 100) : 0}% of tuition</span>
  </div>
@@ -481,7 +481,7 @@ export default function ScholarshipEstimatePage() {
  Need-based
  </span>
  )}
- <span className="text-[10px] px-2 py-0.5 bg-foreground/5 text-foreground/50 rounded-full">
+ <span className="text-[10px] px-2 py-0.5 bg-foreground/5 text-muted-foreground rounded-full">
  {r.school_data?.pct_receiving ??"\u2014"}% receive aid
  </span>
  <span className="text-[10px] px-2 py-0.5 bg-primary/10 text-primary rounded-full">

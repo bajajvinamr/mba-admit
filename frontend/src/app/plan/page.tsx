@@ -70,7 +70,7 @@ export default function PlanPage() {
  {(["R1","R2","R3"] as const).map((r) => (
  <button key={r} onClick={() => setRound(r)}
  className={`px-6 py-2 text-sm font-bold rounded-full border transition-all ${
- round === r ?"bg-foreground text-white border-border":"border-border/10 text-foreground/50 hover:border-border/30"
+ round === r ?"bg-foreground text-white border-border":"border-border/10 text-muted-foreground hover:border-border/30"
  }`}>
  {r} Timeline
  </button>
@@ -99,7 +99,7 @@ export default function PlanPage() {
  </span>
  </div>
  <h3 className="font-semibold text-foreground text-sm">{event.title}</h3>
- <p className="text-xs text-foreground/50 mt-1">{event.desc}</p>
+ <p className="text-xs text-muted-foreground mt-1">{event.desc}</p>
  </div>
  </div>
  ))}
@@ -108,8 +108,8 @@ export default function PlanPage() {
 
  {/* Tips */}
  <div className="editorial-card p-6 mt-8">
- <h3 className="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-3">Pro Tips for {round}</h3>
- <ul className="space-y-2 text-sm text-foreground/70">
+ <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Pro Tips for {round}</h3>
+ <ul className="space-y-2 text-sm text-muted-foreground">
  {round ==="R1" && (
  <>
  <li className="flex items-start gap-2"><CheckCircle2 size={14} className="text-primary mt-0.5 shrink-0"/>R1 has the highest acceptance rate at most schools - worth the effort.</li>

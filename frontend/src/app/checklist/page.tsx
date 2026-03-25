@@ -123,7 +123,7 @@ export default function ChecklistPage() {
  <div className="max-w-3xl mx-auto px-6 py-10">
  {/* School Selector */}
  <div className="editorial-card p-6 mb-8">
- <label className="block text-sm font-medium text-foreground/60 mb-2">Select School</label>
+ <label className="block text-sm font-medium text-muted-foreground mb-2">Select School</label>
  {schoolsError && <p className="text-red-500 text-xs mb-1">{schoolsError}</p>}
  <select
  value={schoolId}
@@ -145,7 +145,7 @@ export default function ChecklistPage() {
  )}
 
  {loading && (
- <div className="text-center py-16 text-foreground/40">
+ <div className="text-center py-16 text-muted-foreground">
  <div className="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full mx-auto mb-4"/>
  Loading checklist...
  </div>
@@ -157,7 +157,7 @@ export default function ChecklistPage() {
  <div className="editorial-card p-6 mb-6">
  <div className="flex items-center justify-between mb-3">
  <h2 className="font-semibold text-foreground">{data.school_name}</h2>
- <span className="text-sm font-medium text-foreground/60">
+ <span className="text-sm font-medium text-muted-foreground">
  {checked.size}/{data.total_items} complete
  </span>
  </div>
@@ -169,7 +169,7 @@ export default function ChecklistPage() {
  transition={{ duration: 0.5 }}
  />
  </div>
- <p className="text-xs text-foreground/40 mt-2">
+ <p className="text-xs text-muted-foreground mt-2">
  {progress === 100 ?"All items complete! You're ready to submit.": `${progress}% complete`}
  </p>
  </div>
@@ -183,7 +183,7 @@ export default function ChecklistPage() {
  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
  filter === cat
  ?"bg-foreground text-white"
- :"bg-card text-foreground/60 hover:bg-foreground/5 border border-border/10"
+ :"bg-card text-muted-foreground hover:bg-foreground/5 border border-border/10"
  }`}
  >
  {cat ==="all" ?"All": cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -214,14 +214,14 @@ export default function ChecklistPage() {
  {checked.has(item.id) ? (
  <CheckCircle2 size={22} className="text-emerald-500"/>
  ) : (
- <Circle size={22} className="text-foreground/20 hover:text-foreground/40"/>
+ <Circle size={22} className="text-muted-foreground hover:text-muted-foreground"/>
  )}
  </button>
  <div className="flex-1 min-w-0">
  <div className="flex items-center gap-2">
  <span
  className={`font-medium text-sm ${
- checked.has(item.id) ?"line-through text-foreground/30":"text-foreground"
+ checked.has(item.id) ?"line-through text-muted-foreground":"text-foreground"
  }`}
  >
  {item.label}
@@ -238,7 +238,7 @@ export default function ChecklistPage() {
  {item.detail && (
  <button
  onClick={() => toggleExpand(item.id)}
- className="text-xs text-foreground/40 hover:text-foreground/60 mt-1 flex items-center gap-1"
+ className="text-xs text-muted-foreground hover:text-muted-foreground mt-1 flex items-center gap-1"
  >
  {expanded.has(item.id) ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
  Details
@@ -250,7 +250,7 @@ export default function ChecklistPage() {
  initial={{ height: 0, opacity: 0 }}
  animate={{ height:"auto", opacity: 1 }}
  exit={{ height: 0, opacity: 0 }}
- className="text-xs text-foreground/50 mt-2 leading-relaxed overflow-hidden"
+ className="text-xs text-muted-foreground mt-2 leading-relaxed overflow-hidden"
  >
  {item.detail}
  </motion.p>
@@ -275,7 +275,7 @@ export default function ChecklistPage() {
  <span className="font-medium text-sm text-foreground">{d.round}</span>
  <div className="text-right text-xs">
  <span className="text-red-600 font-medium">{d.deadline}</span>
- <span className="text-foreground/40 ml-3">Decision: {d.decision}</span>
+ <span className="text-muted-foreground ml-3">Decision: {d.decision}</span>
  </div>
  </div>
  ))}
@@ -296,7 +296,7 @@ export default function ChecklistPage() {
  )}
 
  {!data && !loading && !schoolId && (
- <div className="text-center py-20 text-foreground/30">
+ <div className="text-center py-20 text-muted-foreground">
  <CheckCircle2 size={48} className="mx-auto mb-4 opacity-30"/>
  <p>Select a school to see your application checklist</p>
  </div>

@@ -54,7 +54,7 @@ export default function DeciderDashboard({
         <div className="space-y-2">
           {admits.slice(0, 3).map((a, idx) => (
             <div key={idx} className="flex items-center justify-between">
-              <span className="text-sm text-foreground/70">{a.schoolName}</span>
+              <span className="text-sm text-muted-foreground">{a.schoolName}</span>
               <div className="flex items-center gap-2">
                 <div className="w-20 bg-foreground/5 rounded-full h-1.5 overflow-hidden">
                   <div
@@ -70,7 +70,7 @@ export default function DeciderDashboard({
           ))}
         </div>
       ) : (
-        <p className="text-xs text-foreground/40">
+        <p className="text-xs text-muted-foreground">
           Add admitted schools in the Decision Matrix to see your comparison.
         </p>
       )}
@@ -79,7 +79,7 @@ export default function DeciderDashboard({
       {waitlisted.length > 0 && (
         <div className="flex items-center gap-2 p-2 bg-amber-50 dark:bg-amber-900/10 rounded-lg">
           <AlertTriangle size={14} className="text-amber-500 shrink-0" />
-          <span className="text-xs text-foreground/60">
+          <span className="text-xs text-muted-foreground">
             {waitlisted.length} school{waitlisted.length > 1 ? "s" : ""} waitlisted:{" "}
             {waitlisted.map((w) => w.schoolName).join(", ")}
           </span>
@@ -90,7 +90,7 @@ export default function DeciderDashboard({
       {nearestDeadline && (
         <div className="flex items-center gap-2 p-2 bg-foreground/[0.02] rounded-lg">
           <Clock size={14} className="text-primary shrink-0" />
-          <span className="text-xs text-foreground/60">
+          <span className="text-xs text-muted-foreground">
             {nearestDeadline.schoolName} deposit:{" "}
             <strong>
               {daysUntil(nearestDeadline.date) > 0

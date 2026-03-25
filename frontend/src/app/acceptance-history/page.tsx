@@ -76,7 +76,7 @@ function TrendBadge({ direction, value }: { direction: string; value?: string })
  );
  }
  return (
- <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-foreground/5 text-foreground/40 text-[10px] font-medium">
+ <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-foreground/5 text-muted-foreground text-[10px] font-medium">
  <Minus size={10} /> Stable
  </span>
  );
@@ -157,7 +157,7 @@ export default function AcceptanceHistoryPage() {
  <div className="max-w-5xl mx-auto px-6 py-10">
  {/* School Multi-Select */}
  <div className="editorial-card p-4 mb-6">
- <p className="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-3">
+ <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">
  Select Schools
  </p>
  <div className="flex flex-wrap gap-1.5">
@@ -168,7 +168,7 @@ export default function AcceptanceHistoryPage() {
  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
  selected.includes(s.id)
  ?"text-white"
- :"bg-foreground/5 text-foreground/60 hover:bg-foreground/10"
+ :"bg-foreground/5 text-muted-foreground hover:bg-foreground/10"
  }`}
  style={
  selected.includes(s.id)
@@ -200,13 +200,13 @@ export default function AcceptanceHistoryPage() {
  <>
  {/* CSS Bar Chart */}
  <div className="editorial-card p-6 mb-6">
- <h2 className="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-4">
+ <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">
  Acceptance Rate by Year
  </h2>
 
  {YEARS.map((year) => (
  <div key={year} className="mb-5">
- <p className="text-xs font-semibold text-foreground/50 mb-2">{year}</p>
+ <p className="text-xs font-semibold text-muted-foreground mb-2">{year}</p>
  <div className="space-y-1.5">
  {data.schools.map((school, si) => {
  const yearData = school.years.find((y) => y.year === year);
@@ -218,7 +218,7 @@ export default function AcceptanceHistoryPage() {
 
  return (
  <div key={school.school_id} className="flex items-center gap-2">
- <span className="text-[10px] text-foreground/50 w-28 text-right shrink-0 truncate">
+ <span className="text-[10px] text-muted-foreground w-28 text-right shrink-0 truncate">
  {school.school_name}
  </span>
  <div className="flex-1 bg-foreground/5 rounded-full h-5 relative overflow-hidden">
@@ -233,7 +233,7 @@ export default function AcceptanceHistoryPage() {
  }}
  />
  </div>
- <span className="text-[10px] font-semibold text-foreground/60 w-12 tabular-nums">
+ <span className="text-[10px] font-semibold text-muted-foreground w-12 tabular-nums">
  {yearData.acceptance_rate.toFixed(1)}%
  </span>
  </div>
@@ -246,7 +246,7 @@ export default function AcceptanceHistoryPage() {
 
  {/* YoY Change Cards */}
  <div className="editorial-card p-6 mb-6">
- <h2 className="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-4">
+ <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">
  Year-over-Year Change (2025 to 2026)
  </h2>
  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -266,7 +266,7 @@ export default function AcceptanceHistoryPage() {
  <p className="text-lg font-bold text-foreground tabular-nums">
  {latest.acceptance_rate.toFixed(1)}%
  </p>
- <p className="text-[10px] text-foreground/40">
+ <p className="text-[10px] text-muted-foreground">
  {latest.applications.toLocaleString()} apps
  </p>
  </div>
@@ -283,18 +283,18 @@ export default function AcceptanceHistoryPage() {
  <table className="w-full text-sm">
  <thead>
  <tr className="border-b border-border/10">
- <th className="px-4 py-3 text-left text-[10px] font-bold uppercase tracking-widest text-foreground/40">
+ <th className="px-4 py-3 text-left text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
  School
  </th>
  {YEARS.map((yr) => (
  <th
  key={yr}
- className="px-3 py-3 text-center text-[10px] font-bold uppercase tracking-widest text-foreground/40"
+ className="px-3 py-3 text-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground"
  >
  {yr}
  </th>
  ))}
- <th className="px-3 py-3 text-center text-[10px] font-bold uppercase tracking-widest text-foreground/40">
+ <th className="px-3 py-3 text-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
  Trend
  </th>
  </tr>
@@ -313,11 +313,11 @@ export default function AcceptanceHistoryPage() {
  key={y.year}
  className="px-3 py-3 text-center tabular-nums"
  >
- <span className="text-foreground/70">
+ <span className="text-muted-foreground">
  {y.acceptance_rate.toFixed(1)}%
  </span>
  <br />
- <span className="text-[10px] text-foreground/30">
+ <span className="text-[10px] text-muted-foreground">
  {y.applications.toLocaleString()}
  </span>
  </td>
@@ -334,7 +334,7 @@ export default function AcceptanceHistoryPage() {
 
  {/* Summary Stats */}
  <div className="editorial-card p-6 mb-6">
- <h2 className="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-4">
+ <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">
  2026 Snapshot
  </h2>
  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -352,7 +352,7 @@ export default function AcceptanceHistoryPage() {
  ).toFixed(1)}
  %
  </p>
- <p className="text-[10px] text-foreground/40 uppercase tracking-wider">
+ <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
  Avg Acceptance Rate
  </p>
  </div>
@@ -369,7 +369,7 @@ export default function AcceptanceHistoryPage() {
  )
  .toLocaleString()}
  </p>
- <p className="text-[10px] text-foreground/40 uppercase tracking-wider">
+ <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
  Total Applications
  </p>
  </div>
@@ -386,7 +386,7 @@ export default function AcceptanceHistoryPage() {
  )
  .toLocaleString()}
  </p>
- <p className="text-[10px] text-foreground/40 uppercase tracking-wider">
+ <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
  Total Seats
  </p>
  </div>
@@ -396,7 +396,7 @@ export default function AcceptanceHistoryPage() {
  {data.schools.filter((s) => s.trend ==="down").length}/
  {data.schools.length}
  </p>
- <p className="text-[10px] text-foreground/40 uppercase tracking-wider">
+ <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
  Getting Harder
  </p>
  </div>
@@ -406,7 +406,7 @@ export default function AcceptanceHistoryPage() {
  )}
 
  {!loading && selected.length === 0 && (
- <div className="text-center py-16 text-foreground/20">
+ <div className="text-center py-16 text-muted-foreground">
  <GraduationCap size={48} className="mx-auto mb-4 opacity-30"/>
  <p>Select schools above to view acceptance rate history</p>
  </div>

@@ -138,7 +138,7 @@ export default function AlertsPage() {
  )}
 
  <div className="flex items-center justify-between mb-6">
- <p className="text-sm text-foreground/40">{alerts.length} alert{alerts.length !== 1 ?"s":""} set</p>
+ <p className="text-sm text-muted-foreground">{alerts.length} alert{alerts.length !== 1 ?"s":""} set</p>
  <button onClick={() => setShowAdd(!showAdd)}
  className="flex items-center gap-1.5 px-4 py-2 bg-foreground text-white text-sm font-medium rounded-lg hover:bg-foreground/80">
  <Plus size={14} /> Add Alert
@@ -152,7 +152,7 @@ export default function AlertsPage() {
  <div className="editorial-card p-6">
  <p className="text-sm font-medium text-foreground mb-3">Select a deadline to track</p>
  <div className="max-h-60 overflow-y-auto space-y-1">
- {availableEvents.length === 0 && <p className="text-xs text-foreground/30">No upcoming deadlines available</p>}
+ {availableEvents.length === 0 && <p className="text-xs text-muted-foreground">No upcoming deadlines available</p>}
  {availableEvents.slice(0, 30).map((ev, i) => (
  <button
  key={`${ev.school_id}-${ev.round}-${i}`}
@@ -161,9 +161,9 @@ export default function AlertsPage() {
  >
  <div>
  <span className="text-sm font-medium text-foreground">{ev.school_name}</span>
- <span className="text-xs text-foreground/40 ml-2">{ev.round}</span>
+ <span className="text-xs text-muted-foreground ml-2">{ev.round}</span>
  </div>
- <span className="text-xs text-foreground/30">{new Date(ev.date).toLocaleDateString()}</span>
+ <span className="text-xs text-muted-foreground">{new Date(ev.date).toLocaleDateString()}</span>
  </button>
  ))}
  </div>
@@ -187,7 +187,7 @@ export default function AlertsPage() {
  {a.enabled ? (
  <Bell size={18} className="text-primary"/>
  ) : (
- <BellOff size={18} className="text-foreground/20"/>
+ <BellOff size={18} className="text-muted-foreground"/>
  )}
  </button>
  <div className="flex-1 min-w-0">
@@ -195,9 +195,9 @@ export default function AlertsPage() {
  <Link href={`/school/${a.school_id}`} className="text-sm font-semibold text-foreground hover:text-primary">
  {a.school_name}
  </Link>
- <span className="text-xs text-foreground/30">{a.round}</span>
+ <span className="text-xs text-muted-foreground">{a.round}</span>
  </div>
- <p className="text-xs text-foreground/40 mt-0.5">
+ <p className="text-xs text-muted-foreground mt-0.5">
  {new Date(a.deadline).toLocaleDateString()} ·
  {isPast ?"Passed": ` ${days}d left`}
  </p>
@@ -211,7 +211,7 @@ export default function AlertsPage() {
  <option key={d} value={d}>{d}d before</option>
  ))}
  </select>
- <button onClick={() => removeAlert(a.id)} className="text-foreground/20 hover:text-red-500">
+ <button onClick={() => removeAlert(a.id)} className="text-muted-foreground hover:text-red-500">
  <Trash2 size={14} />
  </button>
  </motion.div>
@@ -220,7 +220,7 @@ export default function AlertsPage() {
  </div>
 
  {alerts.length === 0 && !showAdd && (
- <div className="text-center py-20 text-foreground/20">
+ <div className="text-center py-20 text-muted-foreground">
  <Bell size={48} className="mx-auto mb-4 opacity-30"/>
  <p className="text-sm mb-4">Set alerts for upcoming deadlines</p>
  <Link href="/calendar" className="text-sm text-primary hover:text-primary/80 flex items-center gap-1 justify-center">

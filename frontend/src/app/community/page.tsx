@@ -155,7 +155,7 @@ export default function CommunityPage() {
  key={cat}
  onClick={() => setCategory(cat)}
  className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${
- category === cat ?"bg-foreground text-white":"bg-foreground/5 text-foreground/40 hover:bg-foreground/10"
+ category === cat ?"bg-foreground text-white":"bg-foreground/5 text-muted-foreground hover:bg-foreground/10"
  }`}
  >
  {cat}
@@ -166,7 +166,7 @@ export default function CommunityPage() {
  {/* New post button */}
  {!showNew ? (
  <button onClick={() => setShowNew(true)}
- className="mb-6 px-4 py-2 border border-border/10 text-sm text-foreground/50 rounded-lg hover:border-border/30 flex items-center gap-1">
+ className="mb-6 px-4 py-2 border border-border/10 text-sm text-muted-foreground rounded-lg hover:border-border/30 flex items-center gap-1">
  <Plus size={14} /> Ask a Question
  </button>
  ) : (
@@ -181,7 +181,7 @@ export default function CommunityPage() {
  {CATEGORIES.filter((c) => c !=="All").map((c) => <option key={c} value={c}>{c}</option>)}
  </select>
  <button onClick={addPost} className="px-4 py-1.5 bg-foreground text-white text-sm rounded font-medium">Post</button>
- <button onClick={() => setShowNew(false)} className="px-3 py-1.5 text-sm text-foreground/40">Cancel</button>
+ <button onClick={() => setShowNew(false)} className="px-3 py-1.5 text-sm text-muted-foreground">Cancel</button>
  </div>
  </div>
  )}
@@ -191,7 +191,7 @@ export default function CommunityPage() {
  <div key={post.id} className="editorial-card mb-4 overflow-hidden">
  <div className="flex gap-3 px-5 py-4">
  {/* Vote */}
- <button onClick={() => vote(post.id)} className="flex flex-col items-center gap-0.5 text-foreground/20 hover:text-primary">
+ <button onClick={() => vote(post.id)} className="flex flex-col items-center gap-0.5 text-muted-foreground hover:text-primary">
  <ThumbsUp size={16} />
  <span className="text-xs font-bold">{post.votes}</span>
  </button>
@@ -202,16 +202,16 @@ export default function CommunityPage() {
  <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-bold bg-primary/10 text-primary`}>
  {post.category}
  </span>
- <span className="text-[10px] text-foreground/20 flex items-center gap-1">
+ <span className="text-[10px] text-muted-foreground flex items-center gap-1">
  <User size={10} />{post.author}
  </span>
- <span className="text-[10px] text-foreground/15 flex items-center gap-1">
+ <span className="text-[10px] text-muted-foreground flex items-center gap-1">
  <Clock size={10} />{post.createdAt}
  </span>
  </div>
  <p className="font-medium text-foreground text-sm">{post.title}</p>
- <p className="text-xs text-foreground/50 mt-1 line-clamp-2">{post.body}</p>
- <p className="text-[10px] text-foreground/20 mt-2 flex items-center gap-1">
+ <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{post.body}</p>
+ <p className="text-[10px] text-muted-foreground mt-2 flex items-center gap-1">
  <MessageCircle size={10} />{post.replies.length} {post.replies.length === 1 ?"reply":"replies"}
  </p>
  </div>
@@ -223,15 +223,15 @@ export default function CommunityPage() {
  {post.replies.map((reply) => (
  <div key={reply.id} className="flex gap-3 py-3 border-b border-border/5 last:border-0">
  <div className="w-6 text-center">
- <ThumbsUp size={12} className="text-foreground/15 mx-auto"/>
- <span className="text-[10px] text-foreground/20">{reply.votes}</span>
+ <ThumbsUp size={12} className="text-muted-foreground mx-auto"/>
+ <span className="text-[10px] text-muted-foreground">{reply.votes}</span>
  </div>
  <div className="flex-1">
  <div className="flex items-center gap-2 mb-1">
- <span className="text-[10px] font-bold text-foreground/50">{reply.author}</span>
- <span className="text-[10px] text-foreground/15">{reply.createdAt}</span>
+ <span className="text-[10px] font-bold text-muted-foreground">{reply.author}</span>
+ <span className="text-[10px] text-muted-foreground">{reply.createdAt}</span>
  </div>
- <p className="text-xs text-foreground/70">{reply.body}</p>
+ <p className="text-xs text-muted-foreground">{reply.body}</p>
  </div>
  </div>
  ))}

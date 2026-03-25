@@ -67,8 +67,8 @@ export default function PostMbaLocationsPage() {
  <div className="max-w-5xl mx-auto px-6 py-10">
  {/* Sort control */}
  <div className="editorial-card p-4 mb-8 flex items-center gap-4">
- <ArrowUpDown size={16} className="text-foreground/30"/>
- <span className="text-xs font-bold uppercase tracking-widest text-foreground/40">Sort by</span>
+ <ArrowUpDown size={16} className="text-muted-foreground"/>
+ <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Sort by</span>
  <select
  value={sortBy}
  onChange={(e) => setSortBy(e.target.value)}
@@ -85,7 +85,7 @@ export default function PostMbaLocationsPage() {
  )}
 
  {loading ? (
- <div className="text-center py-16 text-foreground/30">Loading location data...</div>
+ <div className="text-center py-16 text-muted-foreground">Loading location data...</div>
  ) : (
  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
  {locations.map((loc) => (
@@ -97,11 +97,11 @@ export default function PostMbaLocationsPage() {
  <MapPin size={16} className="text-primary"/>
  <h3 className="text-lg font-bold text-foreground">{loc.city}</h3>
  </div>
- <p className="text-xs text-foreground/40 ml-6">{loc.country}</p>
+ <p className="text-xs text-muted-foreground ml-6">{loc.country}</p>
  </div>
  <div className="text-right">
  <p className="text-xl font-bold text-foreground">{fmt(loc.avg_mba_salary)}</p>
- <p className="text-[10px] text-foreground/40">avg MBA salary</p>
+ <p className="text-[10px] text-muted-foreground">avg MBA salary</p>
  </div>
  </div>
 
@@ -110,42 +110,42 @@ export default function PostMbaLocationsPage() {
  <div className="flex items-center gap-1">
  <Star size={12} className="text-primary"/>
  <span className="text-sm font-medium text-foreground">{loc.quality_of_life_score}</span>
- <span className="text-[10px] text-foreground/30">/10 QoL</span>
+ <span className="text-[10px] text-muted-foreground">/10 QoL</span>
  </div>
  <div className="flex items-center gap-1">
- <DollarSign size={12} className="text-foreground/30"/>
+ <DollarSign size={12} className="text-muted-foreground"/>
  <span className="text-sm font-medium text-foreground">{loc.cost_of_living_index}</span>
- <span className="text-[10px] text-foreground/30">CoL index</span>
+ <span className="text-[10px] text-muted-foreground">CoL index</span>
  </div>
  </div>
 
  {/* Industries */}
  <div className="mb-3">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 mb-1">Top Industries</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">Top Industries</p>
  <div className="flex flex-wrap gap-1">
  {loc.top_industries.map((ind) => (
- <span key={ind} className="text-xs bg-foreground/5 text-foreground/60 px-2 py-0.5 rounded">{ind}</span>
+ <span key={ind} className="text-xs bg-foreground/5 text-muted-foreground px-2 py-0.5 rounded">{ind}</span>
  ))}
  </div>
  </div>
 
  {/* Top Employers */}
  <div className="mb-3">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 mb-1">Top Employers</p>
- <p className="text-sm text-foreground/60">{loc.top_employers.join(",")}</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">Top Employers</p>
+ <p className="text-sm text-muted-foreground">{loc.top_employers.join(",")}</p>
  </div>
 
  {/* Feeder Schools */}
  <div className="mb-3">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 mb-1">Feeder Schools</p>
- <p className="text-sm text-foreground/60">{loc.feeder_schools.join(",")}</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">Feeder Schools</p>
+ <p className="text-sm text-muted-foreground">{loc.feeder_schools.join(",")}</p>
  </div>
 
  {/* Visa */}
  <div className="border-t border-border/5 pt-3">
  <div className="flex items-start gap-1">
- <Globe size={12} className="text-foreground/30 mt-0.5 shrink-0"/>
- <p className="text-xs text-foreground/50">{loc.visa_friendliness}</p>
+ <Globe size={12} className="text-muted-foreground mt-0.5 shrink-0"/>
+ <p className="text-xs text-muted-foreground">{loc.visa_friendliness}</p>
  </div>
  </div>
  </div>

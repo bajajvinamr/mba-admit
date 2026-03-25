@@ -125,7 +125,7 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto px-6 py-3.5 flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <Link href="/" className={"font-display text-xl font-semibold tracking-tight transition-colors text-foreground hover:text-foreground/80"}>
+            <Link href="/" className={"font-display text-xl font-semibold tracking-tight transition-colors text-foreground hover:text-muted-foreground"}>
               ADMIT COMPASS.
             </Link>
             <span className="text-[9px] bg-muted text-muted-foreground px-2 py-0.5 uppercase tracking-widest font-medium hidden lg:inline border border-border">

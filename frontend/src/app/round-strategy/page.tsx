@@ -114,16 +114,16 @@ export default function RoundStrategyPage() {
 
  {allAnswered && (
  <div className="editorial-card p-6 mb-6">
- <h2 className="text-xs font-bold uppercase tracking-widest text-foreground/30 mb-4">Recommendation</h2>
+ <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Recommendation</h2>
  <div className="text-center mb-6">
  <p className="text-3xl font-bold text-foreground mb-1">{recommendation}</p>
- <p className="text-xs text-foreground/50">Based on your current readiness across {FACTORS.length} factors</p>
+ <p className="text-xs text-muted-foreground">Based on your current readiness across {FACTORS.length} factors</p>
  </div>
  <div className="grid grid-cols-3 gap-3">
  {[
- { label:"Round 1", score: totals.r1, icon: totals.r1 === max ? CheckCircle2 : totals.r1 >= max * 0.7 ? AlertTriangle : XCircle, color: totals.r1 === max ?"text-emerald-600":"text-foreground/40"},
- { label:"Round 2", score: totals.r2, icon: totals.r2 === max ? CheckCircle2 : totals.r2 >= max * 0.7 ? AlertTriangle : XCircle, color: totals.r2 === max ?"text-emerald-600":"text-foreground/40"},
- { label:"Round 3", score: totals.r3, icon: totals.r3 === max ? CheckCircle2 : totals.r3 >= max * 0.7 ? AlertTriangle : XCircle, color: totals.r3 === max ?"text-emerald-600":"text-foreground/40"},
+ { label:"Round 1", score: totals.r1, icon: totals.r1 === max ? CheckCircle2 : totals.r1 >= max * 0.7 ? AlertTriangle : XCircle, color: totals.r1 === max ?"text-emerald-600":"text-muted-foreground"},
+ { label:"Round 2", score: totals.r2, icon: totals.r2 === max ? CheckCircle2 : totals.r2 >= max * 0.7 ? AlertTriangle : XCircle, color: totals.r2 === max ?"text-emerald-600":"text-muted-foreground"},
+ { label:"Round 3", score: totals.r3, icon: totals.r3 === max ? CheckCircle2 : totals.r3 >= max * 0.7 ? AlertTriangle : XCircle, color: totals.r3 === max ?"text-emerald-600":"text-muted-foreground"},
  ].map((r) => (
  <div key={r.label} className="text-center p-4 rounded-lg bg-foreground/[0.02]">
  <r.icon size={24} className={`mx-auto mb-1 ${r.color}`} />
@@ -137,15 +137,15 @@ export default function RoundStrategyPage() {
 
  {/* Round comparison table */}
  <div className="editorial-card p-5">
- <h3 className="text-xs font-bold uppercase tracking-widest text-foreground/30 mb-3">Round Comparison</h3>
+ <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Round Comparison</h3>
  <div className="overflow-x-auto">
  <table className="w-full text-xs">
  <thead>
  <tr className="border-b border-border/10">
- <th className="py-2 px-3 text-left text-[10px] font-bold uppercase tracking-widest text-foreground/40">Factor</th>
- <th className="py-2 px-3 text-center text-[10px] font-bold uppercase tracking-widest text-foreground/40">R1</th>
- <th className="py-2 px-3 text-center text-[10px] font-bold uppercase tracking-widest text-foreground/40">R2</th>
- <th className="py-2 px-3 text-center text-[10px] font-bold uppercase tracking-widest text-foreground/40">R3</th>
+ <th className="py-2 px-3 text-left text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Factor</th>
+ <th className="py-2 px-3 text-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground">R1</th>
+ <th className="py-2 px-3 text-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground">R2</th>
+ <th className="py-2 px-3 text-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground">R3</th>
  </tr>
  </thead>
  <tbody>
@@ -158,10 +158,10 @@ export default function RoundStrategyPage() {
  { factor:"Best For", r1:"Ready applicants", r2:"Most applicants", r3:"Late deciders"},
  ].map((row) => (
  <tr key={row.factor} className="border-b border-border/5">
- <td className="py-2 px-3 text-foreground/60">{row.factor}</td>
- <td className="py-2 px-3 text-center text-foreground/70">{row.r1}</td>
- <td className="py-2 px-3 text-center text-foreground/70">{row.r2}</td>
- <td className="py-2 px-3 text-center text-foreground/70">{row.r3}</td>
+ <td className="py-2 px-3 text-muted-foreground">{row.factor}</td>
+ <td className="py-2 px-3 text-center text-muted-foreground">{row.r1}</td>
+ <td className="py-2 px-3 text-center text-muted-foreground">{row.r2}</td>
+ <td className="py-2 px-3 text-center text-muted-foreground">{row.r3}</td>
  </tr>
  ))}
  </tbody>

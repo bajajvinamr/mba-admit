@@ -228,8 +228,8 @@ export default function SchoolDetail() {
  />
  ) : (
  <div className="editorial-card mt-10 p-8 text-center">
- <BarChart3 size={40} className="mx-auto mb-4 text-foreground/30"/>
- <p className="text-foreground/30 text-lg mb-2">Complete your profile to see personalized admission insights</p>
+ <BarChart3 size={40} className="mx-auto mb-4 text-muted-foreground"/>
+ <p className="text-muted-foreground text-lg mb-2">Complete your profile to see personalized admission insights</p>
  <Link href="/simulator" className="text-primary hover:text-primary/80 text-sm font-medium transition-colors">
  Go to Simulator &rarr;
  </Link>

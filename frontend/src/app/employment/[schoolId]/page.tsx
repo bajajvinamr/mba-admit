@@ -75,7 +75,7 @@ export default function EmploymentPage() {
  <div key={stat.label} className="editorial-card p-6 text-center">
  <div className="text-primary mb-2 flex justify-center">{stat.icon}</div>
  <p className="text-2xl font-bold text-foreground">{stat.value}</p>
- <p className="text-xs text-foreground/40 mt-1">{stat.label}</p>
+ <p className="text-xs text-muted-foreground mt-1">{stat.label}</p>
  </div>
  ))}
  </div>
@@ -98,7 +98,7 @@ export default function EmploymentPage() {
  transition={{ duration: 0.5, delay: i * 0.05 }}
  />
  </div>
- <span className="text-xs font-medium text-foreground/40 w-10 text-right">{ind.percentage}%</span>
+ <span className="text-xs font-medium text-muted-foreground w-10 text-right">{ind.percentage}%</span>
  </div>
  ))}
  </div>
@@ -130,7 +130,7 @@ export default function EmploymentPage() {
  )}
 
  {data && !loading && !data.has_data && (
- <div className="text-center py-16 text-foreground/30">
+ <div className="text-center py-16 text-muted-foreground">
  <Briefcase size={48} className="mx-auto mb-4 opacity-30"/>
  <p>Employment data not available for this school yet</p>
  </div>

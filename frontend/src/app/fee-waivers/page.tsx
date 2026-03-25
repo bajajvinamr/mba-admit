@@ -66,11 +66,11 @@ export default function FeeWaiverPage() {
  {/* Filters */}
  <div className="editorial-card p-6 mb-8">
  <div className="flex flex-wrap gap-3 mb-4">
- <span className="text-xs font-bold text-foreground/40 uppercase tracking-widest self-center">Schools:</span>
+ <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest self-center">Schools:</span>
  {(["m7","t15","all"] as const).map((p) => (
  <button key={p} onClick={() => setPreset(p)}
  className={`px-4 py-1.5 text-xs font-bold rounded-full border transition-colors ${
- preset === p ?"bg-foreground text-white border-border":"border-border/10 text-foreground/50 hover:border-border/30"
+ preset === p ?"bg-foreground text-white border-border":"border-border/10 text-muted-foreground hover:border-border/30"
  }`}>
  {p ==="all" ?"All Available": p.toUpperCase()}
  </button>
@@ -97,15 +97,15 @@ export default function FeeWaiverPage() {
  <div className="grid grid-cols-3 gap-4 mb-8">
  <div className="editorial-card p-4 text-center">
  <p className="text-3xl font-bold text-primary">{results.total_schools}</p>
- <p className="text-xs text-foreground/40">Schools</p>
+ <p className="text-xs text-muted-foreground">Schools</p>
  </div>
  <div className="editorial-card p-4 text-center">
  <p className="text-3xl font-bold text-emerald-600">{results.military_eligible}</p>
- <p className="text-xs text-foreground/40">Military Eligible</p>
+ <p className="text-xs text-muted-foreground">Military Eligible</p>
  </div>
  <div className="editorial-card p-4 text-center">
  <p className="text-3xl font-bold text-blue-600">{results.consortium_eligible}</p>
- <p className="text-xs text-foreground/40">Consortium Eligible</p>
+ <p className="text-xs text-muted-foreground">Consortium Eligible</p>
  </div>
  </div>
  )}
@@ -145,7 +145,7 @@ export default function FeeWaiverPage() {
  </div>
  <ul className="space-y-1">
  {w.waivers.map((waiver, i) => (
- <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+ <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
  <CheckCircle2 size={14} className="text-primary mt-0.5 shrink-0"/>
  {waiver}
  </li>

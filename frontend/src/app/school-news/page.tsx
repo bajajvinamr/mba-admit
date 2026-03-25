@@ -40,7 +40,7 @@ function categoryColor(cat: string): string {
  case "student_life": return "bg-emerald-50 text-emerald-700";
  case "admissions": return "bg-rose-50 text-rose-700";
  case "career": return "bg-indigo-50 text-indigo-700";
- default: return "bg-foreground/5 text-foreground/60";
+ default: return "bg-foreground/5 text-muted-foreground";
  }
 }
 
@@ -133,7 +133,7 @@ export default function SchoolNewsPage() {
  return (
  <span
  key={sid}
- className="text-[10px] bg-primary/10 text-foreground/60 px-2 py-1 rounded-full font-medium"
+ className="text-[10px] bg-primary/10 text-muted-foreground px-2 py-1 rounded-full font-medium"
  >
  {name}
  </span>
@@ -164,7 +164,7 @@ export default function SchoolNewsPage() {
  <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full ${categoryColor(item.category)}`}>
  {categoryLabel(item.category)}
  </span>
- <div className="flex items-center gap-1.5 text-xs text-foreground/40">
+ <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
  <Calendar size={10} />
  <span>{daysAgo(item.date)}</span>
  </div>
@@ -176,20 +176,20 @@ export default function SchoolNewsPage() {
  </h2>
 
  {/* Summary */}
- <p className="text-sm text-foreground/60 mb-3 leading-relaxed">
+ <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
  {item.summary}
  </p>
 
  {/* School tag */}
  <div className="flex items-center gap-1.5">
  <Tag size={10} className="text-primary"/>
- <span className="text-xs text-foreground/40 font-medium">{item.school_name}</span>
+ <span className="text-xs text-muted-foreground font-medium">{item.school_name}</span>
  </div>
  </motion.article>
  ))}
 
  {filtered.length === 0 && (
- <div className="text-center py-16 text-foreground/30">
+ <div className="text-center py-16 text-muted-foreground">
  <Newspaper size={48} className="mx-auto mb-4 opacity-30"/>
  <p>No news in this category</p>
  </div>

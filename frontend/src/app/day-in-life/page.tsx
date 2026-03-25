@@ -105,7 +105,7 @@ export default function DayInLifePage() {
  <div className="flex flex-wrap gap-2 mb-8">
  {SCHEDULES.map((s, i) => (
  <button key={s.school} onClick={() => setSelected(i)}
- className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${selected === i ?"bg-foreground text-white":"bg-foreground/5 text-foreground/40 hover:bg-foreground/10"}`}>
+ className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${selected === i ?"bg-foreground text-white":"bg-foreground/5 text-muted-foreground hover:bg-foreground/10"}`}>
  {s.school}
  </button>
  ))}
@@ -114,7 +114,7 @@ export default function DayInLifePage() {
  {/* School info */}
  <div className="editorial-card p-5 mb-6">
  <h2 className="font-medium text-foreground text-sm">{schedule.school} - {schedule.type}</h2>
- <p className="text-xs text-foreground/50 mt-1">{schedule.description}</p>
+ <p className="text-xs text-muted-foreground mt-1">{schedule.description}</p>
  </div>
 
  {/* Timeline */}
@@ -135,7 +135,7 @@ export default function DayInLifePage() {
  </span>
  <span className="text-xs font-medium text-foreground">{block.activity}</span>
  </div>
- <p className="text-xs text-foreground/50">{block.detail}</p>
+ <p className="text-xs text-muted-foreground">{block.detail}</p>
  </div>
  </div>
  );

@@ -91,8 +91,7 @@ export default function SimulatorPage() {
  .then((r) => {
  const list = (Array.isArray(r) ? r : [])
  .filter((s: School) => s.name && s.id.length <= 20)
- .sort((a: School, b: School) => a.name.localeCompare(b.name))
- .slice(0, 80);
+ .sort((a: School, b: School) => a.name.localeCompare(b.name));
  setSchools(list);
  })
  .catch(() => setError("Failed to load school list. Please refresh the page."))
@@ -194,7 +193,7 @@ export default function SimulatorPage() {
  <h2 className="font-semibold text-foreground mb-4">Your Profile</h2>
  <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
  <div>
- <label htmlFor="sim-gmat" className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 block mb-1">GMAT Score</label>
+ <label htmlFor="sim-gmat" className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground block mb-1">GMAT Score</label>
  <div className="flex gap-1 mb-1">
    <button type="button" onClick={() => { setGmatVersion("focus"); setGmat(655); }} className={`text-[9px] px-2 py-0.5 rounded-full border transition-colors ${gmatVersion === "focus" ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:border-primary/40"}`}>Focus (205-805)</button>
    <button type="button" onClick={() => { setGmatVersion("classic"); setGmat(700); }} className={`text-[9px] px-2 py-0.5 rounded-full border transition-colors ${gmatVersion === "classic" ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:border-primary/40"}`}>Classic (200-800)</button>
@@ -209,11 +208,11 @@ export default function SimulatorPage() {
  {validationErrors.gmat ? (
  <span className="text-[10px] text-red-500 mt-0.5 block">{validationErrors.gmat}</span>
  ) : (
- <span id="sim-gmat-range" className="text-[10px] text-foreground/30 mt-0.5 block">{gmatVersion === "focus" ? "205 - 805" : "200 - 800"}</span>
+ <span id="sim-gmat-range" className="text-[10px] text-muted-foreground mt-0.5 block">{gmatVersion === "focus" ? "205 - 805" : "200 - 800"}</span>
  )}
  </div>
  <div>
- <label htmlFor="sim-gpa" className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 block mb-1">GPA</label>
+ <label htmlFor="sim-gpa" className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground block mb-1">GPA</label>
  <input
  id="sim-gpa"
  type="number" step="0.1" min={0} max={4.0} value={gpa}
@@ -224,11 +223,11 @@ export default function SimulatorPage() {
  {validationErrors.gpa ? (
  <span className="text-[10px] text-red-500 mt-0.5 block">{validationErrors.gpa}</span>
  ) : (
- <span id="sim-gpa-range" className="text-[10px] text-foreground/30 mt-0.5 block">0.0 - 4.0</span>
+ <span id="sim-gpa-range" className="text-[10px] text-muted-foreground mt-0.5 block">0.0 - 4.0</span>
  )}
  </div>
  <div>
- <label htmlFor="sim-yoe" className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 block mb-1">Work Years</label>
+ <label htmlFor="sim-yoe" className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground block mb-1">Work Years</label>
  <input
  id="sim-yoe"
  type="number" min={0} max={30} value={workYears}
@@ -238,7 +237,7 @@ export default function SimulatorPage() {
  {validationErrors.workYears ? (
  <span className="text-[10px] text-red-500 mt-0.5 block">{validationErrors.workYears}</span>
  ) : (
- <span className="text-[10px] text-foreground/30 mt-0.5 block">0 - 30</span>
+ <span className="text-[10px] text-muted-foreground mt-0.5 block">0 - 30</span>
  )}
  </div>
  </div>
@@ -251,7 +250,7 @@ export default function SimulatorPage() {
  { label:"Military", checked: isMilitary, set: setIsMilitary },
  { label:"Nonprofit", checked: hasNonprofit, set: setHasNonprofit },
  ].map((cb) => (
- <label key={cb.label} className="flex items-center gap-2 text-sm text-foreground/70 cursor-pointer select-none">
+ <label key={cb.label} className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer select-none">
  <input
  type="checkbox" checked={cb.checked}
  onChange={(e) => cb.set(e.target.checked)}
@@ -279,13 +278,13 @@ export default function SimulatorPage() {
  <div className="flex gap-2 mb-3">
  <button
  onClick={() => applyPreset(M7)}
- className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-border/10 hover:bg-primary/10 text-foreground/60 hover:text-foreground transition-colors"
+ className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-border/10 hover:bg-primary/10 text-muted-foreground hover:text-foreground transition-colors"
  >
  M7
  </button>
  <button
  onClick={() => applyPreset(T15)}
- className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-border/10 hover:bg-primary/10 text-foreground/60 hover:text-foreground transition-colors"
+ className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-border/10 hover:bg-primary/10 text-muted-foreground hover:text-foreground transition-colors"
  >
  T15
  </button>
@@ -295,7 +294,7 @@ export default function SimulatorPage() {
  {showPicker && (
  <div className="mb-4">
  <div className="relative">
- <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground/30"/>
+ <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"/>
  <input
  type="text" autoFocus placeholder="Search schools..."
  value={search} onChange={(e) => setSearch(e.target.value)}
@@ -320,7 +319,7 @@ export default function SimulatorPage() {
  </button>
  ))}
  {filtered.length === 0 && (
- <p className="px-3 py-2 text-sm text-foreground/30">No schools found</p>
+ <p className="px-3 py-2 text-sm text-muted-foreground">No schools found</p>
  )}
  </>
  )}
@@ -342,7 +341,7 @@ export default function SimulatorPage() {
  );
  })}
  {selected.length === 0 && (
- <p className="text-sm text-foreground/30">No schools selected - use presets or add manually (max 8)</p>
+ <p className="text-sm text-muted-foreground">No schools selected - use presets or add manually (max 8)</p>
  )}
  </div>
  </div>
@@ -412,7 +411,7 @@ export default function SimulatorPage() {
  <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${verdictStyle(r.verdict)}`}>
  {r.verdict}
  </span>
- <span className="text-xs text-foreground/40">
+ <span className="text-xs text-muted-foreground">
  {r.simulations?.accepted ?? 0}/{(r.simulations?.accepted ?? 0) + (r.simulations?.rejected ?? 0)} accepted
  </span>
  </div>
@@ -424,7 +423,7 @@ export default function SimulatorPage() {
 
  {/* Confidence interval bar */}
  <div className="mb-3">
- <div className="flex items-center justify-between text-[10px] text-foreground/40 mb-1">
+ <div className="flex items-center justify-between text-[10px] text-muted-foreground mb-1">
  <span>Confidence Interval</span>
  <span>{r.confidence_interval?.[0] ?? 0}% &ndash; {r.confidence_interval?.[1] ?? 0}%</span>
  </div>
@@ -446,7 +445,7 @@ export default function SimulatorPage() {
  </div>
 
  {/* Simulation detail */}
- <div className="flex items-center gap-4 text-xs text-foreground/50">
+ <div className="flex items-center gap-4 text-xs text-muted-foreground">
  <div className="flex items-center gap-1">
  <div className="w-2 h-2 rounded-full bg-emerald-500"/>
  {r.simulations?.accepted ?? 0} accepted
@@ -455,7 +454,7 @@ export default function SimulatorPage() {
  <div className="w-2 h-2 rounded-full bg-red-400"/>
  {r.simulations?.rejected ?? 0} rejected
  </div>
- <div className="ml-auto text-[10px] text-foreground/30">
+ <div className="ml-auto text-[10px] text-muted-foreground">
  100 simulation rounds
  </div>
  </div>

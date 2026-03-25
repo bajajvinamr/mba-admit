@@ -95,7 +95,7 @@ export default function ScholarshipTipsPage() {
  <div className="flex flex-wrap gap-2 mb-8">
  {CATEGORIES.map((cat) => (
  <button key={cat} onClick={() => setCategory(cat)}
- className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${category === cat ?"bg-foreground text-white":"bg-foreground/5 text-foreground/40 hover:bg-foreground/10"}`}>
+ className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${category === cat ?"bg-foreground text-white":"bg-foreground/5 text-muted-foreground hover:bg-foreground/10"}`}>
  {cat}
  </button>
  ))}
@@ -112,10 +112,10 @@ export default function ScholarshipTipsPage() {
  <div className="flex-1">
  <div className="flex items-center justify-between">
  <p className="font-medium text-foreground text-sm">{tip.title}</p>
- {isOpen ? <ChevronUp size={16} className="text-foreground/30"/> : <ChevronDown size={16} className="text-foreground/30"/>}
+ {isOpen ? <ChevronUp size={16} className="text-muted-foreground"/> : <ChevronDown size={16} className="text-muted-foreground"/>}
  </div>
  <span className="text-[9px] px-1.5 py-0.5 bg-primary/10 text-primary rounded-full font-bold">{tip.category}</span>
- <p className="text-xs text-foreground/50 mt-2">{tip.advice}</p>
+ <p className="text-xs text-muted-foreground mt-2">{tip.advice}</p>
  </div>
  </button>
 
@@ -128,7 +128,7 @@ export default function ScholarshipTipsPage() {
  </p>
  <ul className="space-y-1">
  {tip.dos.map((d) => (
- <li key={d} className="text-xs text-foreground/60 flex items-start gap-1.5">
+ <li key={d} className="text-xs text-muted-foreground flex items-start gap-1.5">
  <span className="text-emerald-500 mt-0.5">+</span> {d}
  </li>
  ))}
@@ -140,7 +140,7 @@ export default function ScholarshipTipsPage() {
  </p>
  <ul className="space-y-1">
  {tip.donts.map((d) => (
- <li key={d} className="text-xs text-foreground/60 flex items-start gap-1.5">
+ <li key={d} className="text-xs text-muted-foreground flex items-start gap-1.5">
  <span className="text-rose-500 mt-0.5">−</span> {d}
  </li>
  ))}
@@ -151,7 +151,7 @@ export default function ScholarshipTipsPage() {
  <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-1 flex items-center gap-1">
  <Lightbulb size={10} /> Example
  </p>
- <p className="text-xs text-foreground/70 italic leading-relaxed">&ldquo;{tip.example}&rdquo;</p>
+ <p className="text-xs text-muted-foreground italic leading-relaxed">&ldquo;{tip.example}&rdquo;</p>
  </div>
  </div>
  )}

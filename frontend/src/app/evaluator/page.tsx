@@ -217,7 +217,7 @@ export default function EvaluatorPage() {
  
  {/* Massive Score Graphic */}
  <div className="absolute -top-10 -right-10 w-48 h-48 bg-background rounded-full border border-border/5 flex items-center justify-center -z-0">
- <span className="text-8xl font-black text-foreground/5 tracking-tighter">
+ <span className="text-8xl font-black text-muted-foreground tracking-tighter">
  {result.score}
  </span>
  </div>
@@ -259,7 +259,7 @@ export default function EvaluatorPage() {
  <div className="mb-12">
  <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground/40 mb-4">Brutal Feedback</h3>
  <div className="pl-6 border-l-4 border-border">
- <p className="text-xl font-display text-foreground/90 leading-relaxed italic">
+ <p className="text-xl font-display text-foreground leading-relaxed italic">
 "{result.harsh_feedback}"
  </p>
  </div>

@@ -60,7 +60,7 @@ export default function SimilarSchoolsPage() {
  </div>
  )}
  {loading && (
- <div className="text-center py-16 text-foreground/40">
+ <div className="text-center py-16 text-muted-foreground">
  <div className="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full mx-auto mb-4"/>
  </div>
  )}
@@ -95,11 +95,11 @@ export default function SimilarSchoolsPage() {
  </div>
  <div className="text-right flex-shrink-0">
  <span className={`text-2xl font-bold ${
- pct >= 80 ?"text-emerald-600": pct >= 60 ?"text-amber-600":"text-foreground/40"
+ pct >= 80 ?"text-emerald-600": pct >= 60 ?"text-amber-600":"text-muted-foreground"
  }`}>
  {pct}%
  </span>
- <p className="text-[10px] text-foreground/40">match</p>
+ <p className="text-[10px] text-muted-foreground">match</p>
  </div>
  </div>
 
@@ -119,7 +119,7 @@ export default function SimilarSchoolsPage() {
  <Link href={`/school/${s.school_id}`} className="text-xs text-primary hover:text-primary/80 flex items-center gap-1">
  View Profile <ArrowRight size={10} />
  </Link>
- <Link href={`/compare?schools=${schoolId},${s.school_id}`} className="text-xs text-foreground/40 hover:text-foreground/60 flex items-center gap-1">
+ <Link href={`/compare?schools=${schoolId},${s.school_id}`} className="text-xs text-muted-foreground hover:text-muted-foreground flex items-center gap-1">
  Compare <BarChart3 size={10} />
  </Link>
  </div>
@@ -130,7 +130,7 @@ export default function SimilarSchoolsPage() {
  )}
 
  {!loading && !data && (
- <div className="text-center py-16 text-foreground/30">
+ <div className="text-center py-16 text-muted-foreground">
  <GraduationCap size={48} className="mx-auto mb-4 opacity-30"/>
  <p>School not found</p>
  </div>

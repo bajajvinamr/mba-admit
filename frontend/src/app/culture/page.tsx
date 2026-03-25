@@ -95,7 +95,7 @@ export default function CultureMatcherPage() {
  <div key={t.key}>
  <div className="flex items-center justify-between mb-1">
  <label className="text-sm font-medium text-foreground">{t.label}</label>
- <span className="text-xs font-bold text-foreground/40 w-6 text-right">
+ <span className="text-xs font-bold text-muted-foreground w-6 text-right">
  {priorities[t.key]}
  </span>
  </div>
@@ -108,7 +108,7 @@ export default function CultureMatcherPage() {
  onChange={(e) => updatePriority(t.key, +e.target.value)}
  className="w-full h-2 rounded-full appearance-none cursor-pointer accent-primary bg-foreground/10"
  />
- <div className="flex justify-between text-[10px] text-foreground/30 mt-0.5">
+ <div className="flex justify-between text-[10px] text-muted-foreground mt-0.5">
  <span>Low</span>
  <span>High</span>
  </div>
@@ -176,7 +176,7 @@ export default function CultureMatcherPage() {
  {r.weak_traits.map((t) => (
  <span
  key={t}
- className="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full bg-foreground/5 text-foreground/40"
+ className="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full bg-foreground/5 text-muted-foreground"
  >
  {traitLabel(t)}
  </span>
@@ -189,7 +189,7 @@ export default function CultureMatcherPage() {
  </div>
 
  {results.length === 0 && !loading && (
- <div className="text-center py-16 text-foreground/30">
+ <div className="text-center py-16 text-muted-foreground">
  <Heart size={48} className="mx-auto mb-4 opacity-30"/>
  <p>Adjust your priorities and hit Find My Match</p>
  </div>

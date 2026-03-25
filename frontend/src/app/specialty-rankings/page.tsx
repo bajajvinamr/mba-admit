@@ -99,7 +99,7 @@ export default function SpecialtyRankingsPage() {
  )}
  {/* Specialty tabs */}
  <div className="editorial-card p-4 mb-8">
- <label className="text-xs font-bold uppercase tracking-widest text-foreground/40 block mb-3">Select Specialty</label>
+ <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground block mb-3">Select Specialty</label>
  <div className="flex gap-2 flex-wrap">
  {specialties.map((s) => (
  <button
@@ -108,7 +108,7 @@ export default function SpecialtyRankingsPage() {
  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
  selected === s
  ?"bg-primary text-white"
- :"bg-foreground/5 text-foreground/60 hover:bg-foreground/10"
+ :"bg-foreground/5 text-muted-foreground hover:bg-foreground/10"
  }`}
  >
  {SPECIALTY_LABELS[s] || s}
@@ -125,7 +125,7 @@ export default function SpecialtyRankingsPage() {
 
  {!loading && rankings.length > 0 && (
  <div className="space-y-4">
- <p className="text-xs font-bold uppercase tracking-widest text-foreground/40">
+ <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
  {SPECIALTY_LABELS[selected] || selected} - Top {rankings.length} Programs
  </p>
 
@@ -136,7 +136,7 @@ export default function SpecialtyRankingsPage() {
  <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg ${
  school.rank <= 3
  ?"bg-primary text-white"
- :"bg-foreground/5 text-foreground/40"
+ :"bg-foreground/5 text-muted-foreground"
  }`}>
  {school.rank}
  </div>
@@ -164,7 +164,7 @@ export default function SpecialtyRankingsPage() {
  {/* Key faculty / centers */}
  <div className="mt-2 flex flex-wrap gap-1.5">
  {school.key_faculty_or_centers.map((center) => (
- <span key={center} className="inline-flex items-center gap-1 px-2 py-0.5 bg-foreground/5 text-foreground/50 text-xs rounded font-medium">
+ <span key={center} className="inline-flex items-center gap-1 px-2 py-0.5 bg-foreground/5 text-muted-foreground text-xs rounded font-medium">
  <Building2 size={10} />
  {center}
  </span>
@@ -179,7 +179,7 @@ export default function SpecialtyRankingsPage() {
 
  {!loading && rankings.length === 0 && selected && (
  <div className="editorial-card p-8 text-center">
- <p className="text-foreground/50">No rankings available for this specialty.</p>
+ <p className="text-muted-foreground">No rankings available for this specialty.</p>
  </div>
  )}
 

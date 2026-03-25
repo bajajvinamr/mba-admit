@@ -80,14 +80,14 @@ export default function StudyGroupPage() {
  <div className="editorial-card p-6 mb-8">
  <div className="flex items-center justify-between mb-4">
  <div>
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30">Group Skill Coverage</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Group Skill Coverage</p>
  <p className="text-3xl font-bold text-primary">{score}%</p>
- <p className="text-[10px] text-foreground/30">{members.length} members · Ideal: {idealSize}-5</p>
+ <p className="text-[10px] text-muted-foreground">{members.length} members · Ideal: {idealSize}-5</p>
  </div>
  <div className="w-24 h-24 relative">
  <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">
  <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
- fill="none"stroke="currentColor"strokeWidth="3" className="text-foreground/5"/>
+ fill="none"stroke="currentColor"strokeWidth="3" className="text-muted-foreground"/>
  <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
  fill="none"stroke="currentColor"strokeWidth="3" className="text-primary"
  strokeDasharray={`${score}, 100`} />
@@ -127,33 +127,33 @@ export default function StudyGroupPage() {
  <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Name"
  className="text-xs px-3 py-2 border border-border/10 rounded w-full"/>
  <div>
- <p className="text-[10px] font-bold text-foreground/40 mb-1">Strengths (select 2-3)</p>
+ <p className="text-[10px] font-bold text-muted-foreground mb-1">Strengths (select 2-3)</p>
  <div className="flex flex-wrap gap-1">
  {STRENGTH_OPTIONS.map((s) => (
  <button key={s} onClick={() => toggleArr(strengths, s, setStrengths)}
- className={`text-[10px] px-2 py-1 rounded-full transition-colors ${strengths.includes(s) ?"bg-emerald-500 text-white":"bg-foreground/5 text-foreground/40"}`}>
+ className={`text-[10px] px-2 py-1 rounded-full transition-colors ${strengths.includes(s) ?"bg-emerald-500 text-white":"bg-foreground/5 text-muted-foreground"}`}>
  {s}
  </button>
  ))}
  </div>
  </div>
  <div>
- <p className="text-[10px] font-bold text-foreground/40 mb-1">Weaknesses (select 1-2)</p>
+ <p className="text-[10px] font-bold text-muted-foreground mb-1">Weaknesses (select 1-2)</p>
  <div className="flex flex-wrap gap-1">
  {STRENGTH_OPTIONS.map((s) => (
  <button key={s} onClick={() => toggleArr(weaknesses, s, setWeaknesses)}
- className={`text-[10px] px-2 py-1 rounded-full transition-colors ${weaknesses.includes(s) ?"bg-rose-500 text-white":"bg-foreground/5 text-foreground/40"}`}>
+ className={`text-[10px] px-2 py-1 rounded-full transition-colors ${weaknesses.includes(s) ?"bg-rose-500 text-white":"bg-foreground/5 text-muted-foreground"}`}>
  {s}
  </button>
  ))}
  </div>
  </div>
  <div>
- <p className="text-[10px] font-bold text-foreground/40 mb-1">Availability</p>
+ <p className="text-[10px] font-bold text-muted-foreground mb-1">Availability</p>
  <div className="flex flex-wrap gap-1">
  {AVAILABILITY_OPTIONS.map((a) => (
  <button key={a} onClick={() => setAvailability(a)}
- className={`text-[10px] px-2 py-1 rounded-full transition-colors ${availability === a ?"bg-foreground text-white":"bg-foreground/5 text-foreground/40"}`}>
+ className={`text-[10px] px-2 py-1 rounded-full transition-colors ${availability === a ?"bg-foreground text-white":"bg-foreground/5 text-muted-foreground"}`}>
  {a}
  </button>
  ))}
@@ -164,7 +164,7 @@ export default function StudyGroupPage() {
  </div>
  )}
 
- {members.length === 0 && <p className="text-xs text-foreground/30 text-center py-6">No members yet. Add yourself and your classmates.</p>}
+ {members.length === 0 && <p className="text-xs text-muted-foreground text-center py-6">No members yet. Add yourself and your classmates.</p>}
 
  <div className="space-y-3">
  {members.map((m) => (
@@ -179,9 +179,9 @@ export default function StudyGroupPage() {
  <span key={w} className="text-[9px] px-1.5 py-0.5 bg-rose-50 text-rose-600 rounded-full">{w}</span>
  ))}
  </div>
- <p className="text-[10px] text-foreground/30 mt-1">{m.availability}</p>
+ <p className="text-[10px] text-muted-foreground mt-1">{m.availability}</p>
  </div>
- <button onClick={() => remove(m.id)} className="text-foreground/20 hover:text-rose-500"><Trash2 size={14} /></button>
+ <button onClick={() => remove(m.id)} className="text-muted-foreground hover:text-rose-500"><Trash2 size={14} /></button>
  </div>
  ))}
  </div>
@@ -190,7 +190,7 @@ export default function StudyGroupPage() {
  {/* Tips */}
  <div className="editorial-card p-5">
  <h2 className="font-medium text-foreground text-sm mb-3 flex items-center gap-2"><BookOpen size={16} className="text-primary"/> Study Group Best Practices</h2>
- <ul className="space-y-2 text-xs text-foreground/60">
+ <ul className="space-y-2 text-xs text-muted-foreground">
  <li className="flex items-start gap-2"><Star size={10} className="text-primary mt-1 shrink-0"/> 4-5 members is ideal - enough diversity, small enough to coordinate.</li>
  <li className="flex items-start gap-2"><Star size={10} className="text-primary mt-1 shrink-0"/> Assign roles: timekeeper, note-taker, devil&apos;s advocate. Rotate weekly.</li>
  <li className="flex items-start gap-2"><Star size={10} className="text-primary mt-1 shrink-0"/> Meet 3x/week max. Quality over quantity - burned-out groups disband by midterms.</li>

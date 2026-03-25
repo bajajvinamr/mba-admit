@@ -421,7 +421,7 @@ export default function RecommendersPage() {
                                 onClick={() =>
                                   generateBriefing(rec, rec.schools[0])
                                 }
-                                className="text-[10px] px-2 py-0.5 bg-foreground/5 text-foreground/60 border border-border/10 rounded-full hover:bg-foreground/10 transition-colors flex items-center gap-1"
+                                className="text-[10px] px-2 py-0.5 bg-foreground/5 text-muted-foreground border border-border/10 rounded-full hover:bg-foreground/10 transition-colors flex items-center gap-1"
                                 title="Generate briefing document"
                               >
                                 <FileText size={10} /> Brief

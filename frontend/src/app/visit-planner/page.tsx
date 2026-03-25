@@ -78,7 +78,7 @@ export default function VisitPlannerPage() {
  <div className="editorial-card p-6 mb-6">
  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
  <div>
- <label className="text-xs font-medium text-foreground/60 block mb-1">School</label>
+ <label className="text-xs font-medium text-muted-foreground block mb-1">School</label>
  {schoolsError && <p className="text-red-500 text-xs mb-1">{schoolsError}</p>}
  <select value={newVisit.school_id} onChange={(e) => setNewVisit({ ...newVisit, school_id: e.target.value })}
  className="w-full px-3 py-2 border border-border/10 rounded text-sm">
@@ -87,19 +87,19 @@ export default function VisitPlannerPage() {
  </select>
  </div>
  <div>
- <label className="text-xs font-medium text-foreground/60 block mb-1">Date</label>
+ <label className="text-xs font-medium text-muted-foreground block mb-1">Date</label>
  <input type="date" value={newVisit.visit_date} onChange={(e) => setNewVisit({ ...newVisit, visit_date: e.target.value })}
  className="w-full px-3 py-2 border border-border/10 rounded text-sm"/>
  </div>
  <div>
- <label className="text-xs font-medium text-foreground/60 block mb-1">Type</label>
+ <label className="text-xs font-medium text-muted-foreground block mb-1">Type</label>
  <select value={newVisit.visit_type} onChange={(e) => setNewVisit({ ...newVisit, visit_type: e.target.value })}
  className="w-full px-3 py-2 border border-border/10 rounded text-sm">
  {VISIT_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
  </select>
  </div>
  <div>
- <label className="text-xs font-medium text-foreground/60 block mb-1">Notes</label>
+ <label className="text-xs font-medium text-muted-foreground block mb-1">Notes</label>
  <input type="text" placeholder="Optional notes..." value={newVisit.notes}
  onChange={(e) => setNewVisit({ ...newVisit, notes: e.target.value })}
  className="w-full px-3 py-2 border border-border/10 rounded text-sm"/>
@@ -133,11 +133,11 @@ export default function VisitPlannerPage() {
  <span className="text-[10px] px-2 py-0.5 bg-primary/10 text-primary rounded-full font-bold">{v.visit_type}</span>
  </div>
  <div className="flex items-center gap-3 mt-1">
- <span className="text-xs text-foreground/40"><Calendar size={10} className="inline mr-1"/>{v.visit_date}</span>
- {v.notes && <span className="text-xs text-foreground/30">{v.notes}</span>}
+ <span className="text-xs text-muted-foreground"><Calendar size={10} className="inline mr-1"/>{v.visit_date}</span>
+ {v.notes && <span className="text-xs text-muted-foreground">{v.notes}</span>}
  </div>
  </div>
- <button onClick={() => removeVisit(realIdx)} className="text-foreground/20 hover:text-red-400"><X size={14} /></button>
+ <button onClick={() => removeVisit(realIdx)} className="text-muted-foreground hover:text-red-400"><X size={14} /></button>
  </div>
  );
  })}
@@ -148,12 +148,12 @@ export default function VisitPlannerPage() {
  {/* Past */}
  {past.length > 0 && (
  <div className="mb-8">
- <h2 className="text-xs font-bold uppercase tracking-widest text-foreground/30 mb-3">Past Visits ({past.length})</h2>
+ <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Past Visits ({past.length})</h2>
  <div className="space-y-2 opacity-60">
  {past.map((v, i) => (
  <div key={i} className="editorial-card p-3 flex items-center gap-3">
- <CheckCircle2 size={14} className="text-foreground/20"/>
- <span className="text-sm text-foreground/50">{v.school_name} - {v.visit_type} ({v.visit_date})</span>
+ <CheckCircle2 size={14} className="text-muted-foreground"/>
+ <span className="text-sm text-muted-foreground">{v.school_name} - {v.visit_type} ({v.visit_date})</span>
  </div>
  ))}
  </div>
@@ -161,7 +161,7 @@ export default function VisitPlannerPage() {
  )}
 
  {visits.length === 0 && (
- <div className="text-center py-16 text-foreground/20">
+ <div className="text-center py-16 text-muted-foreground">
  <MapPin size={48} className="mx-auto mb-4 opacity-30"/>
  <p>No visits planned yet. Click"Add Visit"to get started.</p>
  </div>

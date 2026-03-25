@@ -104,7 +104,7 @@ export default function AlumniInterviewPage() {
  <div className="max-w-4xl mx-auto px-6 py-10">
  {/* School Selector */}
  <div className="editorial-card p-5 mb-8">
- <div className="flex items-center gap-2 mb-3 text-sm font-semibold text-foreground/60">
+ <div className="flex items-center gap-2 mb-3 text-sm font-semibold text-muted-foreground">
  <GraduationCap size={16} />
  Select a School
  </div>
@@ -146,7 +146,7 @@ export default function AlumniInterviewPage() {
  const isOpen = expandedId === school.school_id;
  const fmt = FORMAT_LABELS[school.interview_format] ?? {
  label: school.interview_format,
- color:"bg-foreground/10 text-foreground/60",
+ color:"bg-foreground/10 text-muted-foreground",
  };
 
  return (
@@ -170,25 +170,25 @@ export default function AlumniInterviewPage() {
  >
  {fmt.label} Interview
  </span>
- <span className="text-xs text-foreground/40 flex items-center gap-1">
+ <span className="text-xs text-muted-foreground flex items-center gap-1">
  <Clock size={10} />
  {school.typical_duration}
  </span>
- <span className="text-xs text-foreground/40 flex items-center gap-1">
+ <span className="text-xs text-muted-foreground flex items-center gap-1">
  <Users size={10} />
  {INTERVIEWER_LABELS[school.interviewer_type] ??
  school.interviewer_type}
  </span>
- <span className="text-xs text-foreground/40 flex items-center gap-1">
+ <span className="text-xs text-muted-foreground flex items-center gap-1">
  <Shirt size={10} />
  {school.dress_code}
  </span>
  </div>
  </div>
  {isOpen ? (
- <ChevronUp size={18} className="text-foreground/30 mt-1 shrink-0"/>
+ <ChevronUp size={18} className="text-muted-foreground mt-1 shrink-0"/>
  ) : (
- <ChevronDown size={18} className="text-foreground/30 mt-1 shrink-0"/>
+ <ChevronDown size={18} className="text-muted-foreground mt-1 shrink-0"/>
  )}
  </button>
 
@@ -198,7 +198,7 @@ export default function AlumniInterviewPage() {
  <div className="border-t border-border/5 pt-4 space-y-5">
  {/* Common Questions */}
  <div>
- <h3 className="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-3 flex items-center gap-1.5">
+ <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3 flex items-center gap-1.5">
  <MessageSquare size={14} className="text-primary"/>
  Common Questions
  </h3>
@@ -206,7 +206,7 @@ export default function AlumniInterviewPage() {
  {school.common_questions.map((q, i) => (
  <li
  key={i}
- className="text-sm text-foreground/70 leading-relaxed"
+ className="text-sm text-muted-foreground leading-relaxed"
  >
  {q}
  </li>
@@ -216,7 +216,7 @@ export default function AlumniInterviewPage() {
 
  {/* Tips */}
  <div>
- <h3 className="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-3 flex items-center gap-1.5">
+ <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3 flex items-center gap-1.5">
  <Lightbulb size={14} className="text-primary"/>
  Insider Tips
  </h3>
@@ -224,7 +224,7 @@ export default function AlumniInterviewPage() {
  {school.tips.map((tip, i) => (
  <li
  key={i}
- className="text-sm text-foreground/70 flex items-start gap-2"
+ className="text-sm text-muted-foreground flex items-start gap-2"
  >
  <span className="w-1 h-1 rounded-full bg-primary mt-2 shrink-0"/>
  {tip}
@@ -235,8 +235,8 @@ export default function AlumniInterviewPage() {
 
  {/* Meta Row */}
  <div className="flex flex-wrap gap-4 pt-2 border-t border-border/5">
- <div className="text-xs text-foreground/40">
- <span className="font-semibold text-foreground/60">Format:</span>{""}
+ <div className="text-xs text-muted-foreground">
+ <span className="font-semibold text-muted-foreground">Format:</span>{""}
  {fmt.label} - interviewer{""}
  {school.interview_format ==="blind"
  ?"has NOT read your application"
@@ -244,8 +244,8 @@ export default function AlumniInterviewPage() {
  ?"has read your application"
  :"observes team dynamics"}
  </div>
- <div className="text-xs text-foreground/40">
- <span className="font-semibold text-foreground/60">Dress Code:</span>{""}
+ <div className="text-xs text-muted-foreground">
+ <span className="font-semibold text-muted-foreground">Dress Code:</span>{""}
  {school.dress_code}
  </div>
  </div>
@@ -258,8 +258,8 @@ export default function AlumniInterviewPage() {
 
  {data.length === 0 && !loading && (
  <div className="text-center py-16">
- <GraduationCap size={48} className="mx-auto mb-4 text-foreground/20"/>
- <p className="text-foreground/40">No interview prep data found.</p>
+ <GraduationCap size={48} className="mx-auto mb-4 text-muted-foreground"/>
+ <p className="text-muted-foreground">No interview prep data found.</p>
  </div>
  )}
  </div>

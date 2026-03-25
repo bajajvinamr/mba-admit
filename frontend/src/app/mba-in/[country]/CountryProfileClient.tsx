@@ -204,7 +204,7 @@ export function CountryProfileClient({ slug }: { slug: string }) {
         </div>
 
         {/* Compare CTA */}
-        <div className="mt-8 rounded-xl border-2 border-[#b8860b]/30 bg-[#b8860b]/5 p-6 flex items-center justify-between">
+        <div className="mt-8 rounded-xl border-2 border-[#b8860b]/30 bg-primary/5 p-6 flex items-center justify-between">
           <div>
             <h3 className="font-semibold text-foreground">Compare with other countries</h3>
             <p className="text-sm text-muted-foreground mt-1">
@@ -213,7 +213,7 @@ export function CountryProfileClient({ slug }: { slug: string }) {
           </div>
           <Link
             href="/compare-countries"
-            className="inline-flex items-center gap-2 rounded-lg bg-[#b8860b] px-4 py-2.5 text-sm font-medium text-white hover:bg-[#a07608] transition-colors"
+            className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
           >
             Compare <ArrowRight className="size-4" />
           </Link>

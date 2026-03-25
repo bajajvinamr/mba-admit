@@ -102,11 +102,11 @@ export default function SalaryPage() {
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
  {/* Current Salary */}
  <div>
- <label className="text-xs font-bold uppercase tracking-widest text-foreground/40 block mb-2">
+ <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground block mb-2">
  Current Salary
  </label>
  <div className="relative">
- <DollarSign size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground/30"/>
+ <DollarSign size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"/>
  <input
  type="number"
  value={salary}
@@ -118,11 +118,11 @@ export default function SalaryPage() {
 
  {/* Target Role */}
  <div>
- <label className="text-xs font-bold uppercase tracking-widest text-foreground/40 block mb-2">
+ <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground block mb-2">
  Target Role
  </label>
  <div className="relative">
- <Briefcase size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground/30"/>
+ <Briefcase size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"/>
  <select
  value={role}
  onChange={(e) => setRole(e.target.value)}
@@ -132,17 +132,17 @@ export default function SalaryPage() {
  <option key={r.value} value={r.value}>{r.label}</option>
  ))}
  </select>
- <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-foreground/30 pointer-events-none"/>
+ <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"/>
  </div>
  </div>
 
  {/* Location */}
  <div>
- <label className="text-xs font-bold uppercase tracking-widest text-foreground/40 block mb-2">
+ <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground block mb-2">
  Location
  </label>
  <div className="relative">
- <MapPin size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground/30"/>
+ <MapPin size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"/>
  <select
  value={location}
  onChange={(e) => setLocation(e.target.value)}
@@ -152,13 +152,13 @@ export default function SalaryPage() {
  <option key={l} value={l}>{l}</option>
  ))}
  </select>
- <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-foreground/30 pointer-events-none"/>
+ <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"/>
  </div>
  </div>
 
  {/* Years of Experience */}
  <div>
- <label className="text-xs font-bold uppercase tracking-widest text-foreground/40 block mb-2">
+ <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground block mb-2">
  Years of Experience
  </label>
  <input
@@ -173,12 +173,12 @@ export default function SalaryPage() {
 
  {/* School (optional) */}
  <div className="md:col-span-2">
- <label className="text-xs font-bold uppercase tracking-widest text-foreground/40 block mb-2">
- MBA School <span className="text-foreground/20">(optional)</span>
+ <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground block mb-2">
+ MBA School <span className="text-muted-foreground">(optional)</span>
  </label>
  {schoolsError && <p className="text-red-500 text-xs mb-1">{schoolsError}</p>}
  <div className="relative">
- <GraduationCap size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground/30"/>
+ <GraduationCap size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"/>
  <select
  value={schoolId}
  onChange={(e) => setSchoolId(e.target.value)}
@@ -189,7 +189,7 @@ export default function SalaryPage() {
  <option key={s.id} value={s.id}>{s.name}</option>
  ))}
  </select>
- <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-foreground/30 pointer-events-none"/>
+ <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"/>
  </div>
  </div>
  </div>
@@ -220,31 +220,31 @@ export default function SalaryPage() {
  {/* Big numbers row */}
  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
  <div className="editorial-card p-6 text-center">
- <p className="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-1">Salary Increase</p>
+ <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Salary Increase</p>
  <p className={`text-4xl font-bold ${result.salary_increase_pct >= 0 ?"text-emerald-600":"text-red-600"}`}>
  {result.salary_increase_pct > 0 ?"+":""}{result.salary_increase_pct}%
  </p>
- <p className="text-[10px] text-foreground/30 mt-1">vs. current salary</p>
+ <p className="text-[10px] text-muted-foreground mt-1">vs. current salary</p>
  </div>
  <div className="editorial-card p-6 text-center">
- <p className="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-1">First-Year Total Comp</p>
+ <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">First-Year Total Comp</p>
  <p className="text-4xl font-bold text-foreground">
  {fmt(result.total_comp_first_year)}
  </p>
- <p className="text-[10px] text-foreground/30 mt-1">base + signing bonus</p>
+ <p className="text-[10px] text-muted-foreground mt-1">base + signing bonus</p>
  </div>
  <div className="editorial-card p-6 text-center">
- <p className="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-1">Signing Bonus</p>
+ <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Signing Bonus</p>
  <p className="text-4xl font-bold text-foreground">
  {fmt(result.signing_bonus)}
  </p>
- <p className="text-[10px] text-foreground/30 mt-1">typical for {role}</p>
+ <p className="text-[10px] text-muted-foreground mt-1">typical for {role}</p>
  </div>
  </div>
 
  {/* Salary range bar */}
  <div className="editorial-card p-6">
- <p className="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-4">
+ <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">
  Market Salary Range (Location-Adjusted)
  </p>
  <div className="relative h-12 bg-foreground/5 rounded-lg overflow-hidden">
@@ -273,9 +273,9 @@ export default function SalaryPage() {
  </div>
  )}
  </div>
- <div className="flex justify-between mt-2 text-[10px] text-foreground/40">
+ <div className="flex justify-between mt-2 text-[10px] text-muted-foreground">
  <span>P25: {fmt(result.adjusted_range.p25)}</span>
- <span className="font-bold text-foreground/60">P50: {fmt(result.adjusted_range.p50)}</span>
+ <span className="font-bold text-muted-foreground">P50: {fmt(result.adjusted_range.p50)}</span>
  <span>P75: {fmt(result.adjusted_range.p75)}</span>
  </div>
  </div>
@@ -289,7 +289,7 @@ export default function SalaryPage() {
  <p className="text-sm font-bold text-foreground">
  School Premium: +{(result.school_premium * 100).toFixed(0)}%
  </p>
- <p className="text-xs text-foreground/50 mt-1">
+ <p className="text-xs text-muted-foreground mt-1">
  {result.school_premium >= 0.05
  ?"M7 school graduates command a significant salary premium. Your adjusted range already reflects this."
  :"T15 school graduates earn above-market rates. Your adjusted range already includes this premium."}
@@ -303,7 +303,7 @@ export default function SalaryPage() {
  <div className="editorial-card p-6">
  <div className="flex items-center gap-2 mb-4">
  <Lightbulb size={16} className="text-primary"/>
- <p className="text-xs font-bold uppercase tracking-widest text-foreground/40">
+ <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
  Negotiation Tips
  </p>
  </div>
@@ -313,7 +313,7 @@ export default function SalaryPage() {
  <span className="shrink-0 w-5 h-5 rounded-full bg-foreground text-white text-[10px] font-bold flex items-center justify-center mt-0.5">
  {i + 1}
  </span>
- <p className="text-sm text-foreground/70 leading-relaxed">{tip}</p>
+ <p className="text-sm text-muted-foreground leading-relaxed">{tip}</p>
  </li>
  ))}
  </ul>
@@ -328,7 +328,7 @@ export default function SalaryPage() {
 
  {/* Empty state */}
  {!result && !loading && !error && (
- <div className="text-center py-16 text-foreground/20">
+ <div className="text-center py-16 text-muted-foreground">
  <TrendingUp size={48} className="mx-auto mb-4 opacity-30"/>
  <p>Enter your details and hit Calculate to see your post-MBA salary range</p>
  </div>

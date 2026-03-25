@@ -154,7 +154,7 @@ export default function InternationalGuidePage() {
  <div className="flex flex-wrap gap-2 mb-8">
  {CATEGORIES.map((cat) => (
  <button key={cat} onClick={() => setCategory(cat)}
- className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${category === cat ?"bg-foreground text-white":"bg-foreground/5 text-foreground/40 hover:bg-foreground/10"}`}>
+ className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${category === cat ?"bg-foreground text-white":"bg-foreground/5 text-muted-foreground hover:bg-foreground/10"}`}>
  {cat}
  </button>
  ))}
@@ -172,22 +172,22 @@ export default function InternationalGuidePage() {
  <div className="flex-1">
  <div className="flex items-center justify-between">
  <p className="font-medium text-foreground text-sm">{section.title}</p>
- {isOpen ? <ChevronUp size={16} className="text-foreground/30"/> : <ChevronDown size={16} className="text-foreground/30"/>}
+ {isOpen ? <ChevronUp size={16} className="text-muted-foreground"/> : <ChevronDown size={16} className="text-muted-foreground"/>}
  </div>
  <span className="text-[9px] px-1.5 py-0.5 bg-primary/10 text-primary rounded-full font-bold">{section.category}</span>
- <p className="text-xs text-foreground/50 mt-2">{section.overview}</p>
+ <p className="text-xs text-muted-foreground mt-2">{section.overview}</p>
  </div>
  </button>
 
  {isOpen && (
  <div className="px-5 pb-5 border-t border-border/5 space-y-4">
  <div className="mt-4">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30 mb-2">Key Points</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-2">Key Points</p>
  <div className="space-y-1.5">
  {section.keyPoints.map((p, i) => (
  <div key={i} className="flex items-start gap-2">
  <CheckCircle2 size={12} className="text-emerald-500 mt-0.5 shrink-0"/>
- <p className="text-xs text-foreground/60">{p}</p>
+ <p className="text-xs text-muted-foreground">{p}</p>
  </div>
  ))}
  </div>
@@ -196,7 +196,7 @@ export default function InternationalGuidePage() {
  <p className="text-[10px] font-bold text-primary mb-2">Pro Tips</p>
  <ul className="space-y-1">
  {section.tips.map((t) => (
- <li key={t} className="text-xs text-foreground/60 flex items-start gap-1.5">
+ <li key={t} className="text-xs text-muted-foreground flex items-start gap-1.5">
  <span className="text-primary mt-0.5">*</span> {t}
  </li>
  ))}
@@ -204,7 +204,7 @@ export default function InternationalGuidePage() {
  </div>
  <div className="p-3 bg-rose-50/50 rounded-lg">
  <p className="text-[10px] font-bold text-rose-700 mb-1 flex items-center gap-1"><AlertTriangle size={10} /> Warning</p>
- <p className="text-xs text-foreground/60">{section.warning}</p>
+ <p className="text-xs text-muted-foreground">{section.warning}</p>
  </div>
  </div>
  )}

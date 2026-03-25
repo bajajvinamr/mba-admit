@@ -195,7 +195,7 @@ export default function LoiBuilderPage() {
  <div className="max-w-4xl mx-auto px-6 py-10">
  {/* Template Selector */}
  <div className="editorial-card p-6 mb-8">
- <span className="text-xs font-bold text-foreground/40 uppercase tracking-widest mb-3 block">
+ <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3 block">
  Choose a Template
  </span>
  <div className="flex flex-wrap gap-3">
@@ -206,7 +206,7 @@ export default function LoiBuilderPage() {
  className={`px-4 py-1.5 text-xs font-bold rounded-full border transition-colors ${
  selectedId === t.id
  ?"bg-foreground text-white border-border"
- :"border-border/10 text-foreground/50 hover:border-border/30"
+ :"border-border/10 text-muted-foreground hover:border-border/30"
  }`}
  >
  {t.title}
@@ -223,7 +223,7 @@ export default function LoiBuilderPage() {
  </div>
  <ol className="space-y-2">
  {template.sections.map((s, i) => (
- <li key={i} className="text-sm text-foreground/70 pl-1">
+ <li key={i} className="text-sm text-muted-foreground pl-1">
  {s}
  </li>
  ))}
@@ -238,7 +238,7 @@ export default function LoiBuilderPage() {
  </div>
  <ul className="space-y-2">
  {template.tips.map((tip, i) => (
- <li key={i} className="text-sm text-foreground/70 flex items-start gap-2">
+ <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
  <span className="text-primary mt-0.5 shrink-0">&bull;</span>
  {tip}
  </li>
@@ -256,7 +256,7 @@ export default function LoiBuilderPage() {
  {template.openers.map((opener, i) => (
  <blockquote
  key={i}
- className="text-sm text-foreground/60 italic border-l-2 border-primary/30 pl-4"
+ className="text-sm text-muted-foreground italic border-l-2 border-primary/30 pl-4"
  >
  &ldquo;{opener}&rdquo;
  </blockquote>
@@ -274,7 +274,7 @@ export default function LoiBuilderPage() {
  <div className="flex items-center gap-3">
  <span
  className={`text-xs font-bold tabular-nums ${
- wordCount > 750 ?"text-red-500":"text-foreground/40"
+ wordCount > 750 ?"text-red-500":"text-muted-foreground"
  }`}
  >
  {wordCount} word{wordCount !== 1 ?"s":""}
@@ -291,13 +291,13 @@ export default function LoiBuilderPage() {
  value={draft}
  onChange={(e) => updateDraft(e.target.value)}
  placeholder={`Start drafting your"${template.title}"essay here...`}
- className="w-full min-h-[320px] p-4 rounded-lg border border-border/10 bg-card text-sm text-foreground leading-relaxed placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/40 resize-y"
+ className="w-full min-h-[320px] p-4 rounded-lg border border-border/10 bg-card text-sm text-foreground leading-relaxed placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/40 resize-y"
  />
 
  <div className="flex items-center justify-between mt-4">
  <button
  onClick={handleReset}
- className="flex items-center gap-1.5 text-xs text-foreground/40 hover:text-red-500 transition-colors"
+ className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-red-500 transition-colors"
  >
  <RotateCcw size={12} />
  Clear draft

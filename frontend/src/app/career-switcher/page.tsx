@@ -131,9 +131,9 @@ export default function CareerSwitcherPage() {
  {!done && (
  <>
  <div className="flex items-center justify-between mb-4">
- <span className="text-xs text-foreground/40">Question {step + 1} of {QUESTIONS.length}</span>
+ <span className="text-xs text-muted-foreground">Question {step + 1} of {QUESTIONS.length}</span>
  {step > 0 && (
- <button onClick={() => { setStep(step - 1); setAnswers(answers.slice(0, -1)); }} className="text-xs text-foreground/40 hover:text-foreground flex items-center gap-1">
+ <button onClick={() => { setStep(step - 1); setAnswers(answers.slice(0, -1)); }} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
  <ArrowLeft size={12} /> Back
  </button>
  )}
@@ -151,7 +151,7 @@ export default function CareerSwitcherPage() {
  <button key={a.label} onClick={() => handleAnswer(a.score)}
  className="editorial-card p-4 w-full text-left hover:border-primary/30 border-2 border-transparent transition-all flex items-center justify-between group">
  <span className="text-sm text-foreground">{a.label}</span>
- <ArrowRight size={14} className="text-foreground/10 group-hover:text-primary transition-colors"/>
+ <ArrowRight size={14} className="text-muted-foreground group-hover:text-primary transition-colors"/>
  </button>
  ))}
  </div>
@@ -163,21 +163,21 @@ export default function CareerSwitcherPage() {
  <div className={`editorial-card p-8 text-center ${verdict.bg}`}>
  <verdict.icon size={48} className={`mx-auto mb-4 ${verdict.color}`} />
  <h2 className={`text-2xl font-bold mb-2 ${verdict.color}`}>{verdict.label}</h2>
- <p className="text-sm text-foreground/60 max-w-md mx-auto mb-4">{verdict.detail}</p>
+ <p className="text-sm text-muted-foreground max-w-md mx-auto mb-4">{verdict.detail}</p>
  <div className="inline-flex items-center gap-2 px-4 py-2 bg-card rounded-full">
- <span className="text-xs text-foreground/40">Readiness Score:</span>
+ <span className="text-xs text-muted-foreground">Readiness Score:</span>
  <span className="text-lg font-bold text-foreground">{pct}%</span>
  </div>
  </div>
 
  {/* Score breakdown */}
  <div className="editorial-card p-6">
- <h3 className="text-xs font-bold uppercase tracking-widest text-foreground/30 mb-4">Score Breakdown</h3>
+ <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Score Breakdown</h3>
  <div className="space-y-3">
  {QUESTIONS.map((q, i) => (
  <div key={i} className="flex items-center gap-3">
  <div className="flex-1">
- <p className="text-xs text-foreground/70 truncate">{q.question}</p>
+ <p className="text-xs text-muted-foreground truncate">{q.question}</p>
  </div>
  <div className="flex gap-0.5">
  {[1, 2, 3].map((v) => (
@@ -190,7 +190,7 @@ export default function CareerSwitcherPage() {
  </div>
 
  <div className="flex gap-3">
- <button onClick={restart} className="flex-1 py-2.5 border border-border/10 text-foreground/60 rounded-full text-sm font-medium hover:bg-foreground/5 transition-colors inline-flex items-center justify-center gap-2">
+ <button onClick={restart} className="flex-1 py-2.5 border border-border/10 text-muted-foreground rounded-full text-sm font-medium hover:bg-foreground/5 transition-colors inline-flex items-center justify-center gap-2">
  <RefreshCw size={14} /> Retake
  </button>
  <button onClick={() => setShowTargets(true)} className="flex-1 py-2.5 bg-foreground text-white rounded-full text-sm font-medium hover:bg-foreground/90 transition-colors">
@@ -202,7 +202,7 @@ export default function CareerSwitcherPage() {
 
  {done && showTargets && (
  <div className="space-y-6">
- <button onClick={() => setShowTargets(false)} className="text-xs text-foreground/40 hover:text-foreground flex items-center gap-1">
+ <button onClick={() => setShowTargets(false)} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
  <ArrowLeft size={12} /> Back to results
  </button>
  <h2 className="text-lg font-medium text-foreground">Career Switch Target Industries</h2>
@@ -212,19 +212,19 @@ export default function CareerSwitcherPage() {
  <h3 className="font-medium text-foreground text-sm mb-2">{t.industry}</h3>
  <div className="grid grid-cols-3 gap-4 mb-3">
  <div>
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30">Switch Difficulty</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Switch Difficulty</p>
  <p className={`text-xs font-medium ${t.switchDifficulty ==="Very High" ?"text-red-500": t.switchDifficulty ==="High" ?"text-amber-600": t.switchDifficulty ==="Medium" ?"text-yellow-600":"text-emerald-600"}`}>{t.switchDifficulty}</p>
  </div>
  <div>
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30">MBA Value</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">MBA Value</p>
  <p className="text-xs font-medium text-foreground">{t.mbaValue}</p>
  </div>
  <div>
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30">Top Schools</p>
- <p className="text-xs text-foreground/70">{t.topSchools}</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Top Schools</p>
+ <p className="text-xs text-muted-foreground">{t.topSchools}</p>
  </div>
  </div>
- <p className="text-xs text-foreground/50">{t.note}</p>
+ <p className="text-xs text-muted-foreground">{t.note}</p>
  </div>
  ))}
  </div>

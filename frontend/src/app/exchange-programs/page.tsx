@@ -96,7 +96,7 @@ export default function ExchangeProgramsPage() {
  <div className="editorial-card p-6 mb-8">
  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
  <div>
- <label className="text-sm font-medium text-foreground/60 block mb-2">Filter by Region</label>
+ <label className="text-sm font-medium text-muted-foreground block mb-2">Filter by Region</label>
  <div className="flex gap-2 flex-wrap">
  {REGIONS.map((r) => (
  <button
@@ -105,7 +105,7 @@ export default function ExchangeProgramsPage() {
  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
  region === r
  ?"bg-primary text-white"
- :"bg-foreground/5 text-foreground/60 hover:bg-foreground/10"
+ :"bg-foreground/5 text-muted-foreground hover:bg-foreground/10"
  }`}
  >
  {r}
@@ -114,7 +114,7 @@ export default function ExchangeProgramsPage() {
  </div>
  </div>
  <div>
- <label className="text-sm font-medium text-foreground/60 block mb-2">Filter by School</label>
+ <label className="text-sm font-medium text-muted-foreground block mb-2">Filter by School</label>
  <select
  value={schoolFilter}
  onChange={(e) => setSchoolFilter(e.target.value)}
@@ -141,13 +141,13 @@ export default function ExchangeProgramsPage() {
 
  {!loading && data && data.programs.length === 0 && (
  <div className="editorial-card p-8 text-center">
- <p className="text-foreground/50">No exchange programs found for this filter combination.</p>
+ <p className="text-muted-foreground">No exchange programs found for this filter combination.</p>
  </div>
  )}
 
  {!loading && data && data.programs.length > 0 && (
  <div className="space-y-8">
- <p className="text-xs font-bold uppercase tracking-widest text-foreground/40">
+ <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
  {data.total} partnership{data.total !== 1 ?"s":""} found
  </p>
 
@@ -164,7 +164,7 @@ export default function ExchangeProgramsPage() {
  <h3 className="font-bold text-foreground text-lg">{p.partner_school}</h3>
  <div className="flex items-center gap-1.5 mt-1">
  <MapPin size={13} className="text-primary"/>
- <span className="text-sm text-foreground/60">
+ <span className="text-sm text-muted-foreground">
  {COUNTRY_FLAGS[p.partner_country] ||""} {p.partner_country}
  </span>
  </div>
@@ -176,18 +176,18 @@ export default function ExchangeProgramsPage() {
 
  <div className="space-y-2 mt-4">
  <div className="flex items-center gap-2">
- <Clock size={13} className="text-foreground/30"/>
- <span className="text-sm text-foreground/60">{p.duration}</span>
+ <Clock size={13} className="text-muted-foreground"/>
+ <span className="text-sm text-muted-foreground">{p.duration}</span>
  </div>
  <div className="flex items-center gap-2">
- <Languages size={13} className="text-foreground/30"/>
- <span className="text-sm text-foreground/60">{p.language}</span>
+ <Languages size={13} className="text-muted-foreground"/>
+ <span className="text-sm text-muted-foreground">{p.language}</span>
  </div>
  <div className="flex items-start gap-2">
- <BookOpen size={13} className="text-foreground/30 mt-0.5"/>
+ <BookOpen size={13} className="text-muted-foreground mt-0.5"/>
  <div className="flex flex-wrap gap-1.5">
  {p.focus_areas.map((area) => (
- <span key={area} className="px-2 py-0.5 bg-foreground/5 text-foreground/60 text-xs rounded font-medium">
+ <span key={area} className="px-2 py-0.5 bg-foreground/5 text-muted-foreground text-xs rounded font-medium">
  {area}
  </span>
  ))}

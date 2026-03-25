@@ -125,14 +125,14 @@ export default function EssayThemesPage() {
           {essays.map((essay, idx) => (
             <div key={idx} className="editorial-card p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-semibold text-foreground/60 flex items-center gap-2">
+                <h3 className="text-sm font-semibold text-muted-foreground flex items-center gap-2">
                   <FileText size={16} />
                   Essay {idx + 1}
                 </h3>
                 {essays.length > 1 && (
                   <button
                     onClick={() => removeEssay(idx)}
-                    className="text-foreground/30 hover:text-red-500 transition-colors"
+                    className="text-muted-foreground hover:text-red-500 transition-colors"
                     aria-label="Remove essay"
                   >
                     <Trash2 size={16} />
@@ -145,24 +145,24 @@ export default function EssayThemesPage() {
                   placeholder="School name (e.g. HBS, Wharton)"
                   value={essay.school}
                   onChange={(e) => updateEssay(idx, "school", e.target.value)}
-                  className="w-full px-4 py-2 border border-border/10 rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 bg-card placeholder:text-foreground/20"
+                  className="w-full px-4 py-2 border border-border/10 rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 bg-card placeholder:text-muted-foreground"
                 />
                 <input
                   type="text"
                   placeholder="Essay prompt (optional)"
                   value={essay.prompt}
                   onChange={(e) => updateEssay(idx, "prompt", e.target.value)}
-                  className="w-full px-4 py-2 border border-border/10 rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 bg-card placeholder:text-foreground/20"
+                  className="w-full px-4 py-2 border border-border/10 rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 bg-card placeholder:text-muted-foreground"
                 />
               </div>
               <textarea
                 placeholder="Paste your essay text here (minimum 100 words)..."
                 value={essay.content}
                 onChange={(e) => updateEssay(idx, "content", e.target.value)}
-                className="w-full min-h-[180px] p-4 text-foreground text-[15px] leading-relaxed bg-card border border-border/10 rounded-lg resize-y focus:outline-none focus:ring-2 focus:ring-primary/50 placeholder:text-foreground/20"
+                className="w-full min-h-[180px] p-4 text-foreground text-[15px] leading-relaxed bg-card border border-border/10 rounded-lg resize-y focus:outline-none focus:ring-2 focus:ring-primary/50 placeholder:text-muted-foreground"
               />
               {essay.content.trim() && (
-                <p className="text-xs text-foreground/40 mt-2">
+                <p className="text-xs text-muted-foreground mt-2">
                   {essay.content.trim().split(/\s+/).length} words
                   {essay.content.trim().split(/\s+/).length < 100 && (
                     <span className="text-amber-500 ml-2">(need at least 100)</span>
@@ -178,7 +178,7 @@ export default function EssayThemesPage() {
           {canAdd && (
             <button
               onClick={addEssay}
-              className="flex items-center gap-2 px-4 py-2.5 border border-border/10 rounded-lg text-sm font-medium text-foreground/60 hover:border-border/30 transition-colors bg-card"
+              className="flex items-center gap-2 px-4 py-2.5 border border-border/10 rounded-lg text-sm font-medium text-muted-foreground hover:border-border/30 transition-colors bg-card"
             >
               <Plus size={16} /> Add School Essay
             </button>
@@ -218,9 +218,9 @@ export default function EssayThemesPage() {
                   <table className="w-full text-sm">
                     <thead>
                       <tr>
-                        <th className="text-left py-2 pr-4 text-foreground/50 font-medium">Theme</th>
+                        <th className="text-left py-2 pr-4 text-muted-foreground font-medium">Theme</th>
                         {schools.map((s) => (
-                          <th key={s} className="text-center py-2 px-3 text-foreground/50 font-medium min-w-[100px]">
+                          <th key={s} className="text-center py-2 px-3 text-muted-foreground font-medium min-w-[100px]">
                             {s}
                           </th>
                         ))}
@@ -248,7 +248,7 @@ export default function EssayThemesPage() {
                                 <td key={school} className={`py-3 px-3 text-center ${intensity} rounded`}>
                                   {cell ? (
                                     <span
-                                      className="text-xs text-foreground/70 cursor-help"
+                                      className="text-xs text-muted-foreground cursor-help"
                                       title={cell.evidence}
                                     >
                                       {cell.evidence.length > 60
@@ -256,7 +256,7 @@ export default function EssayThemesPage() {
                                         : cell.evidence}
                                     </span>
                                   ) : (
-                                    <span className="text-foreground/10">--</span>
+                                    <span className="text-muted-foreground">--</span>
                                   )}
                                 </td>
                               );
@@ -268,7 +268,7 @@ export default function EssayThemesPage() {
                   </table>
                 </div>
               ) : (
-                <p className="text-foreground/40 text-sm">No themes detected.</p>
+                <p className="text-muted-foreground text-sm">No themes detected.</p>
               )}
             </div>
 
@@ -291,14 +291,14 @@ export default function EssayThemesPage() {
                       <span className={`px-2 py-0.5 text-xs font-semibold rounded-full ${getThemeColor(overlap.theme)} text-white`}>
                         {overlap.theme}
                       </span>
-                      <span className="text-xs text-foreground/40">
+                      <span className="text-xs text-muted-foreground">
                         appears in {overlap.schools.length} essays
                       </span>
                     </div>
-                    <p className="text-sm text-foreground/70 mb-2">
+                    <p className="text-sm text-muted-foreground mb-2">
                       Schools: {overlap.schools.join(", ")}
                     </p>
-                    <p className="text-sm text-foreground/60 italic">
+                    <p className="text-sm text-muted-foreground italic">
                       {overlap.suggestion}
                     </p>
                   </motion.div>
@@ -313,7 +313,7 @@ export default function EssayThemesPage() {
                   <Lightbulb size={20} className="text-primary" />
                   Gap Analysis
                 </h2>
-                <p className="text-sm text-foreground/60 mb-4">
+                <p className="text-sm text-muted-foreground mb-4">
                   None of your essays cover these important themes. Consider weaving them in:
                 </p>
                 <div className="space-y-3">
@@ -325,7 +325,7 @@ export default function EssayThemesPage() {
                       <Search size={16} className="text-primary mt-0.5 shrink-0" />
                       <div>
                         <span className="text-sm font-semibold text-foreground">{gap.theme}</span>
-                        <p className="text-xs text-foreground/50 mt-0.5">{gap.description}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">{gap.description}</p>
                       </div>
                     </div>
                   ))}

@@ -128,7 +128,7 @@ export default function StrengthMeterPage() {
  <h2 className="font-semibold text-foreground mb-4">Your Profile</h2>
  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
  <div>
- <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 block mb-1">GMAT</label>
+ <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground block mb-1">GMAT</label>
  <input
  type="number"
  placeholder="740"
@@ -138,7 +138,7 @@ export default function StrengthMeterPage() {
  />
  </div>
  <div>
- <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 block mb-1">GPA</label>
+ <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground block mb-1">GPA</label>
  <input
  type="number"
  step="0.1"
@@ -149,7 +149,7 @@ export default function StrengthMeterPage() {
  />
  </div>
  <div>
- <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 block mb-1">Work Years</label>
+ <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground block mb-1">Work Years</label>
  <input
  type="number"
  placeholder="4"
@@ -159,7 +159,7 @@ export default function StrengthMeterPage() {
  />
  </div>
  <div>
- <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 block mb-1">Leadership Examples</label>
+ <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground block mb-1">Leadership Examples</label>
  <input
  type="number"
  placeholder="3"
@@ -169,7 +169,7 @@ export default function StrengthMeterPage() {
  />
  </div>
  <div>
- <label className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 block mb-1">Extracurriculars</label>
+ <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground block mb-1">Extracurriculars</label>
  <input
  type="number"
  placeholder="2"
@@ -186,7 +186,7 @@ export default function StrengthMeterPage() {
  onChange={(e) => setInternationalExp(e.target.checked)}
  className="w-4 h-4 rounded border-border/20 text-primary focus:ring-primary/50"
  />
- <span className="text-sm text-foreground/70">International experience</span>
+ <span className="text-sm text-muted-foreground">International experience</span>
  </label>
  </div>
  </div>
@@ -209,7 +209,7 @@ export default function StrengthMeterPage() {
  </option>
  ))}
  </select>
- <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-foreground/30 pointer-events-none"/>
+ <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"/>
  </div>
  </div>
 
@@ -235,11 +235,11 @@ export default function StrengthMeterPage() {
  >
  {/* Overall Score */}
  <div className={`editorial-card p-8 text-center border ${overallBg(result.overall_score)}`}>
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 mb-2">Overall Score</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-2">Overall Score</p>
  <p className={`text-6xl font-bold ${overallColor(result.overall_score)} font-[family-name:var(--font-heading)]`}>
  {result.overall_score}
  </p>
- <p className="text-lg font-semibold text-foreground/70 mt-1">{result.overall_label}</p>
+ <p className="text-lg font-semibold text-muted-foreground mt-1">{result.overall_label}</p>
  </div>
 
  {/* Dimension Bars */}
@@ -254,7 +254,7 @@ export default function StrengthMeterPage() {
  return (
  <div key={dim.name}>
  <div className="flex items-center gap-2 mb-1">
- <div className="flex items-center gap-1 w-36 text-xs text-foreground/60">
+ <div className="flex items-center gap-1 w-36 text-xs text-muted-foreground">
  {meta.icon} {dim.name}
  </div>
  <div className="flex-1 bg-foreground/5 rounded-full h-3 overflow-hidden">
@@ -265,14 +265,14 @@ export default function StrengthMeterPage() {
  transition={{ duration: 0.6, delay: i * 0.08 }}
  />
  </div>
- <span className="text-xs font-medium text-foreground/50 w-12 text-right">
+ <span className="text-xs font-medium text-muted-foreground w-12 text-right">
  {dim.score}/{dim.max}
  </span>
  </div>
  {dim.tips.length > 0 && (
  <div className="ml-[152px] mt-1 space-y-0.5">
  {dim.tips.map((tip, j) => (
- <p key={j} className="text-[11px] text-foreground/40 flex items-start gap-1">
+ <p key={j} className="text-[11px] text-muted-foreground flex items-start gap-1">
  <Lightbulb size={10} className="mt-0.5 shrink-0 text-primary"/>
  {tip}
  </p>
@@ -294,8 +294,8 @@ export default function StrengthMeterPage() {
  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
  {result.school_comparison.gmat_avg != null && (
  <div className="bg-foreground/[0.02] rounded-lg p-4">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 mb-1">GMAT</p>
- <p className="text-sm text-foreground/70">
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">GMAT</p>
+ <p className="text-sm text-muted-foreground">
  School avg: <span className="font-semibold text-foreground">{result.school_comparison.gmat_avg}</span>
  </p>
  {result.school_comparison.gmat_diff != null && (
@@ -310,8 +310,8 @@ export default function StrengthMeterPage() {
  )}
  {result.school_comparison.gpa_avg != null && (
  <div className="bg-foreground/[0.02] rounded-lg p-4">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40 mb-1">GPA</p>
- <p className="text-sm text-foreground/70">
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">GPA</p>
+ <p className="text-sm text-muted-foreground">
  School avg: <span className="font-semibold text-foreground">{result.school_comparison.gpa_avg}</span>
  </p>
  {result.school_comparison.gpa_diff != null && (
@@ -335,7 +335,7 @@ export default function StrengthMeterPage() {
 
  {/* Empty state */}
  {!result && !loading && (
- <div className="text-center py-16 text-foreground/30">
+ <div className="text-center py-16 text-muted-foreground">
  <Gauge size={48} className="mx-auto mb-4 opacity-30"/>
  <p>Enter your profile details and hit Analyze</p>
  </div>

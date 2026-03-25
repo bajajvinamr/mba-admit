@@ -66,14 +66,14 @@ export default function ScoreConvertPage() {
  <div className="editorial-card p-8">
  {/* Test selector */}
  <div className="flex items-center justify-center gap-4 mb-8">
- <div className={`text-center ${fromTest ==="gmat" ?"text-foreground":"text-foreground/30"}`}>
+ <div className={`text-center ${fromTest ==="gmat" ?"text-foreground":"text-muted-foreground"}`}>
  <p className="text-2xl font-bold">GMAT</p>
  <p className="text-xs">{fromTest ==="gmat" ?"Your score":"Converted"}</p>
  </div>
  <button onClick={swap} className="p-3 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
  <ArrowLeftRight size={20} />
  </button>
- <div className={`text-center ${fromTest ==="gre" ?"text-foreground":"text-foreground/30"}`}>
+ <div className={`text-center ${fromTest ==="gre" ?"text-foreground":"text-muted-foreground"}`}>
  <p className="text-2xl font-bold">GRE</p>
  <p className="text-xs">{fromTest ==="gre" ?"Your score":"Converted"}</p>
  </div>
@@ -81,7 +81,7 @@ export default function ScoreConvertPage() {
 
  {/* Input */}
  <div className="mb-6">
- <label className="text-xs font-medium text-foreground/40 block mb-2">
+ <label className="text-xs font-medium text-muted-foreground block mb-2">
  Enter your {fromTest.toUpperCase()} score ({range})
  </label>
  <input
@@ -107,7 +107,7 @@ export default function ScoreConvertPage() {
  animate={{ opacity: 1, y: 0 }}
  className="editorial-card p-8 mt-6 text-center"
  >
- <p className="text-sm text-foreground/40 mb-2">Equivalent {result.converted_test.toUpperCase()} Score</p>
+ <p className="text-sm text-muted-foreground mb-2">Equivalent {result.converted_test.toUpperCase()} Score</p>
  <p className="text-6xl font-bold text-foreground heading-serif font-[family-name:var(--font-heading)]">
  {result.converted_score}
  </p>
@@ -116,14 +116,14 @@ export default function ScoreConvertPage() {
  <TrendingUp size={14} /> {result.percentile_estimate}th percentile
  </span>
  </div>
- <p className="text-[10px] text-foreground/30 mt-4 flex items-center justify-center gap-1">
+ <p className="text-[10px] text-muted-foreground mt-4 flex items-center justify-center gap-1">
  <Info size={10} /> {result.note}
  </p>
  </motion.div>
  )}
 
  {/* Info section */}
- <div className="mt-8 editorial-card p-6 text-xs text-foreground/50 space-y-3">
+ <div className="mt-8 editorial-card p-6 text-xs text-muted-foreground space-y-3">
  <h3 className="font-semibold text-foreground text-sm">About This Tool</h3>
  <p>Based on the official ETS/GMAC concordance table used by admissions committees to compare GMAT and GRE scores.</p>
  <p>Most top MBA programs accept both tests equally. However, some programs may have a slight preference - check each school's policy.</p>

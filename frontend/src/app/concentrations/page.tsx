@@ -100,8 +100,8 @@ export default function ConcentrationsPage() {
  {/* Filters */}
  <div className="editorial-card p-5 mb-8 flex flex-col sm:flex-row gap-4">
  <div className="flex items-center gap-2 shrink-0">
- <Filter size={16} className="text-foreground/30"/>
- <span className="text-xs font-bold uppercase tracking-widest text-foreground/40">Filter</span>
+ <Filter size={16} className="text-muted-foreground"/>
+ <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Filter</span>
  </div>
  <select
  value={fieldFilter}
@@ -128,9 +128,9 @@ export default function ConcentrationsPage() {
  )}
 
  {loading ? (
- <div className="text-center py-16 text-foreground/30">Loading concentrations...</div>
+ <div className="text-center py-16 text-muted-foreground">Loading concentrations...</div>
  ) : concentrations.length === 0 ? (
- <div className="text-center py-16 text-foreground/20">
+ <div className="text-center py-16 text-muted-foreground">
  <BookOpen size={48} className="mx-auto mb-4 opacity-30"/>
  <p>No concentrations match your filters.</p>
  </div>
@@ -141,14 +141,14 @@ export default function ConcentrationsPage() {
  <div className="flex items-start justify-between mb-3">
  <div>
  <p className="text-lg font-bold text-foreground">{c.concentration_name}</p>
- <p className="text-sm text-foreground/60">{c.school_name}</p>
+ <p className="text-sm text-muted-foreground">{c.school_name}</p>
  </div>
- <span className={`text-[10px] font-bold uppercase px-2 py-1 rounded ${FIELD_COLORS[c.field] ||"bg-foreground/5 text-foreground/60"}`}>
+ <span className={`text-[10px] font-bold uppercase px-2 py-1 rounded ${FIELD_COLORS[c.field] ||"bg-foreground/5 text-muted-foreground"}`}>
  {fieldLabel(c.field)}
  </span>
  </div>
 
- <div className="flex items-center gap-3 text-xs text-foreground/40 mb-4 pb-3 border-b border-border/5">
+ <div className="flex items-center gap-3 text-xs text-muted-foreground mb-4 pb-3 border-b border-border/5">
  <div className="flex items-center gap-1">
  <BookOpen size={12} />
  <span>{c.courses_required} courses required</span>
@@ -158,17 +158,17 @@ export default function ConcentrationsPage() {
  <div className="space-y-3">
  <div>
  <div className="flex items-center gap-1 mb-1">
- <Users size={12} className="text-foreground/30"/>
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40">Notable Faculty</p>
+ <Users size={12} className="text-muted-foreground"/>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Notable Faculty</p>
  </div>
- <p className="text-sm text-foreground/70">{c.notable_faculty}</p>
+ <p className="text-sm text-muted-foreground">{c.notable_faculty}</p>
  </div>
  <div>
  <div className="flex items-center gap-1 mb-1">
  <Briefcase size={12} className="text-primary"/>
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40">Career Outcomes</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Career Outcomes</p>
  </div>
- <p className="text-sm text-foreground/70 leading-relaxed">{c.career_outcomes}</p>
+ <p className="text-sm text-muted-foreground leading-relaxed">{c.career_outcomes}</p>
  </div>
  </div>
  </div>

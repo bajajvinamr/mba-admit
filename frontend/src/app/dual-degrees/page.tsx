@@ -82,8 +82,8 @@ export default function DualDegreesPage() {
  {/* Filters */}
  <div className="editorial-card p-5 mb-8 flex flex-col sm:flex-row gap-4">
  <div className="flex items-center gap-2 shrink-0">
- <Filter size={16} className="text-foreground/30"/>
- <span className="text-xs font-bold uppercase tracking-widest text-foreground/40">Filter</span>
+ <Filter size={16} className="text-muted-foreground"/>
+ <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Filter</span>
  </div>
  <select
  value={schoolFilter}
@@ -110,9 +110,9 @@ export default function DualDegreesPage() {
  )}
 
  {loading ? (
- <div className="text-center py-16 text-foreground/30">Loading programs...</div>
+ <div className="text-center py-16 text-muted-foreground">Loading programs...</div>
  ) : programs.length === 0 ? (
- <div className="text-center py-16 text-foreground/20">
+ <div className="text-center py-16 text-muted-foreground">
  <GraduationCap size={48} className="mx-auto mb-4 opacity-30"/>
  <p>No dual degree programs match your filters.</p>
  </div>
@@ -123,30 +123,30 @@ export default function DualDegreesPage() {
  <div className="flex items-start justify-between mb-3">
  <div>
  <p className="text-lg font-bold text-foreground">{p.degree_combo}</p>
- <p className="text-sm text-foreground/60">{p.school_name}</p>
+ <p className="text-sm text-muted-foreground">{p.school_name}</p>
  </div>
  <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded">
  {p.duration}
  </span>
  </div>
- <div className="flex items-center gap-1 text-xs text-foreground/40 mb-3">
+ <div className="flex items-center gap-1 text-xs text-muted-foreground mb-3">
  <GraduationCap size={12} />
  <span>Partner: {p.partner_school}</span>
  </div>
  <div className="space-y-3 mt-4">
  <div>
  <div className="flex items-center gap-1 mb-1">
- <Users size={12} className="text-foreground/30"/>
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40">Typical Applicants</p>
+ <Users size={12} className="text-muted-foreground"/>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Typical Applicants</p>
  </div>
- <p className="text-sm text-foreground/70 leading-relaxed">{p.typical_applicants}</p>
+ <p className="text-sm text-muted-foreground leading-relaxed">{p.typical_applicants}</p>
  </div>
  <div>
  <div className="flex items-center gap-1 mb-1">
  <Sparkles size={12} className="text-primary"/>
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/40">Unique Benefits</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Unique Benefits</p>
  </div>
- <p className="text-sm text-foreground/70 leading-relaxed">{p.unique_benefits}</p>
+ <p className="text-sm text-muted-foreground leading-relaxed">{p.unique_benefits}</p>
  </div>
  </div>
  </div>

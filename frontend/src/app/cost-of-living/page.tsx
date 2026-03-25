@@ -165,7 +165,7 @@ export default function CostOfLivingPage() {
  <div className="flex items-center justify-between mb-3">
  <h2 className="font-semibold text-foreground">
  Your Schools{""}
- <span className="text-xs text-foreground/30 font-normal">
+ <span className="text-xs text-muted-foreground font-normal">
  (max 5)
  </span>
  </h2>
@@ -218,7 +218,7 @@ export default function CostOfLivingPage() {
  );
  })}
  {selected.length === 0 && (
- <p className="text-sm text-foreground/30">
+ <p className="text-sm text-muted-foreground">
  Pick schools or use a quick preset above
  </p>
  )}
@@ -238,7 +238,7 @@ export default function CostOfLivingPage() {
  {/* Legend */}
  <div className="flex gap-4 mb-6 justify-center">
  {COST_CATEGORIES.map((cat) => (
- <div key={cat.key} className="flex items-center gap-1.5 text-xs text-foreground/60">
+ <div key={cat.key} className="flex items-center gap-1.5 text-xs text-muted-foreground">
  <span className={`w-2.5 h-2.5 rounded-full ${cat.color}`} />
  {cat.label}
  </div>
@@ -265,7 +265,7 @@ export default function CostOfLivingPage() {
  <h3 className="font-semibold text-foreground text-lg">
  {c.school_name}
  </h3>
- <p className="text-xs text-foreground/40 flex items-center gap-1">
+ <p className="text-xs text-muted-foreground flex items-center gap-1">
  <MapPin size={10} /> {c.location}
  </p>
  </div>
@@ -292,8 +292,8 @@ export default function CostOfLivingPage() {
  const Icon = cat.icon;
  return (
  <div key={cat.key} className="text-center">
- <Icon size={14} className="mx-auto mb-1 text-foreground/30"/>
- <p className="text-xs text-foreground/40">{cat.label}</p>
+ <Icon size={14} className="mx-auto mb-1 text-muted-foreground"/>
+ <p className="text-xs text-muted-foreground">{cat.label}</p>
  <p className="text-sm font-bold text-foreground">
  ${c.monthly[cat.key].toLocaleString()}
  </p>
@@ -305,13 +305,13 @@ export default function CostOfLivingPage() {
  {/* Summary row */}
  <div className="flex items-center justify-between mt-4 pt-3 border-t border-border/5">
  <div>
- <p className="text-xs text-foreground/40">Monthly Total</p>
+ <p className="text-xs text-muted-foreground">Monthly Total</p>
  <p className="text-xl font-bold text-foreground heading-serif font-[family-name:var(--font-heading)]">
  ${c.monthly.total.toLocaleString()}
  </p>
  </div>
  <div className="text-right">
- <p className="text-xs text-foreground/40">
+ <p className="text-xs text-muted-foreground">
  {c.program_years}-Year Program Cost
  </p>
  <p className="text-lg font-bold text-foreground">
@@ -327,7 +327,7 @@ export default function CostOfLivingPage() {
  {/* Bar chart comparing totals */}
  {result.comparisons.length > 1 && (
  <div className="editorial-card p-6 mb-8">
- <h3 className="text-sm font-bold uppercase tracking-wider text-foreground/40 mb-4">
+ <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-4">
  Monthly Total Comparison
  </h3>
  <div className="space-y-3">
@@ -382,7 +382,7 @@ export default function CostOfLivingPage() {
 
  {/* Empty state */}
  {!result && !loading && selected.length === 0 && (
- <div className="text-center py-16 text-foreground/30">
+ <div className="text-center py-16 text-muted-foreground">
  <MapPin size={48} className="mx-auto mb-4 opacity-30"/>
  <p>Add schools to compare cost of living</p>
  </div>

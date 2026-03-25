@@ -152,7 +152,7 @@ export function CompassDashboard({ targetCountries = [], className = "" }: Compa
             <h3 className="text-lg font-semibold text-foreground">Your Target Countries</h3>
             <Link
               href="/compare-countries"
-              className="inline-flex items-center gap-2 rounded-lg bg-[#b8860b] px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-[#a07608]"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-primary/90"
             >
               <Globe className="size-3.5" />
               Quick Compare
@@ -211,7 +211,7 @@ export function CompassDashboard({ targetCountries = [], className = "" }: Compa
       </div>
 
       {/* Compare CTA */}
-      <div className="rounded-xl border-2 border-[#b8860b]/30 bg-[#b8860b]/5 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="rounded-xl border-2 border-[#b8860b]/30 bg-primary/5 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h3 className="font-semibold text-foreground">Not sure where to study?</h3>
           <p className="text-sm text-muted-foreground mt-1">
@@ -220,7 +220,7 @@ export function CompassDashboard({ targetCountries = [], className = "" }: Compa
         </div>
         <Link
           href="/compare-countries"
-          className="inline-flex items-center gap-2 rounded-lg bg-[#b8860b] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#a07608] transition-colors shrink-0"
+          className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-white hover:bg-primary/90 transition-colors shrink-0"
         >
           <Globe className="size-4" />
           Compare Countries

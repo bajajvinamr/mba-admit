@@ -92,15 +92,15 @@ export default function ReapplicantPage() {
  <div className="grid grid-cols-3 gap-4 mb-8">
  <div className="editorial-card p-5 text-center">
  <p className="text-3xl font-bold text-primary">~30%</p>
- <p className="text-[10px] text-foreground/40 font-bold uppercase tracking-widest">Reapplicants admitted at top schools</p>
+ <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Reapplicants admitted at top schools</p>
  </div>
  <div className="editorial-card p-5 text-center">
  <p className="text-3xl font-bold text-blue-600">6-12</p>
- <p className="text-[10px] text-foreground/40 font-bold uppercase tracking-widest">Months to show meaningful growth</p>
+ <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Months to show meaningful growth</p>
  </div>
  <div className="editorial-card p-5 text-center">
  <p className="text-3xl font-bold text-emerald-600">#1</p>
- <p className="text-[10px] text-foreground/40 font-bold uppercase tracking-widest">Factor: tangible progress since last app</p>
+ <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Factor: tangible progress since last app</p>
  </div>
  </div>
 
@@ -116,7 +116,7 @@ export default function ReapplicantPage() {
  >
  <Icon size={18} className={section.color} />
  <p className="font-medium text-foreground text-sm flex-1 text-left">{section.title}</p>
- {isExpanded ? <ChevronUp size={16} className="text-foreground/20"/> : <ChevronDown size={16} className="text-foreground/20"/>}
+ {isExpanded ? <ChevronUp size={16} className="text-muted-foreground"/> : <ChevronDown size={16} className="text-muted-foreground"/>}
  </button>
 
  {isExpanded && (
@@ -124,7 +124,7 @@ export default function ReapplicantPage() {
  {section.content.map((item, i) => (
  <div key={i}>
  <p className="text-sm font-medium text-foreground mb-1">{item.heading}</p>
- <p className="text-xs text-foreground/50 leading-relaxed">{item.body}</p>
+ <p className="text-xs text-muted-foreground leading-relaxed">{item.body}</p>
  </div>
  ))}
  </div>

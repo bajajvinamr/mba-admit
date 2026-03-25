@@ -96,7 +96,7 @@ export default function ProgramFormatsPage() {
  className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
  activeTab === tab.key
  ?"bg-primary text-foreground"
- :"bg-card border border-border/10 text-foreground/60 hover:border-primary/30 hover:text-foreground"
+ :"bg-card border border-border/10 text-muted-foreground hover:border-primary/30 hover:text-foreground"
  }`}
  >
  {tab.icon} {tab.label}
@@ -105,7 +105,7 @@ export default function ProgramFormatsPage() {
  </div>
 
  {loading && (
- <div className="editorial-card p-12 text-center text-foreground/40">Loading program formats...</div>
+ <div className="editorial-card p-12 text-center text-muted-foreground">Loading program formats...</div>
  )}
 
  {error && (
@@ -126,14 +126,14 @@ export default function ProgramFormatsPage() {
  <h2 className="text-xl font-bold text-foreground heading-serif font-[family-name:var(--font-heading)]">
  {activeFormat.display_name}
  </h2>
- <p className="text-sm text-foreground/50 mt-1">
+ <p className="text-sm text-muted-foreground mt-1">
  Typical duration: {activeFormat.typical_duration}
  </p>
  </div>
  <div className="flex items-center gap-2 text-2xl font-bold text-foreground heading-serif font-[family-name:var(--font-heading)]">
  <DollarSign size={20} className="text-primary"/>
  {fmtCost(activeFormat.avg_cost)}
- <span className="text-xs font-normal text-foreground/40 ml-1">avg total</span>
+ <span className="text-xs font-normal text-muted-foreground ml-1">avg total</span>
  </div>
  </div>
  </div>
@@ -143,8 +143,8 @@ export default function ProgramFormatsPage() {
  <div className="flex items-start gap-3">
  <User size={16} className="text-primary mt-0.5 shrink-0"/>
  <div>
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30 mb-1">Best For</p>
- <p className="text-sm text-foreground/70">{activeFormat.best_for}</p>
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">Best For</p>
+ <p className="text-sm text-muted-foreground">{activeFormat.best_for}</p>
  </div>
  </div>
  </div>
@@ -155,7 +155,7 @@ export default function ProgramFormatsPage() {
  <h3 className="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-3">Pros</h3>
  <ul className="space-y-2">
  {activeFormat.pros.map((pro, i) => (
- <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+ <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
  <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0"/>
  {pro}
  </li>
@@ -166,7 +166,7 @@ export default function ProgramFormatsPage() {
  <h3 className="text-xs font-bold uppercase tracking-widest text-red-500 mb-3">Cons</h3>
  <ul className="space-y-2">
  {activeFormat.cons.map((con, i) => (
- <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+ <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
  <XCircle size={14} className="text-red-400 mt-0.5 shrink-0"/>
  {con}
  </li>
@@ -176,13 +176,13 @@ export default function ProgramFormatsPage() {
  </div>
 
  {/* Schools Table */}
- <h2 className="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-4">
+ <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">
  Programs
  </h2>
  <div className="editorial-card overflow-hidden">
  <table className="w-full text-sm">
  <thead>
- <tr className="border-b border-border/5 text-[10px] font-bold uppercase tracking-widest text-foreground/30">
+ <tr className="border-b border-border/5 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
  <th className="text-left px-4 py-3">Program</th>
  <th className="text-left px-4 py-3 hidden md:table-cell">School</th>
  <th className="text-right px-4 py-3">Duration</th>
@@ -193,8 +193,8 @@ export default function ProgramFormatsPage() {
  {activeFormat.schools.map((school, i) => (
  <tr key={i} className="border-b border-border/5 last:border-0">
  <td className="px-4 py-3 font-medium text-foreground">{school.program_name}</td>
- <td className="px-4 py-3 text-foreground/50 hidden md:table-cell">{school.school_name}</td>
- <td className="px-4 py-3 text-right text-foreground/60">{school.duration}</td>
+ <td className="px-4 py-3 text-muted-foreground hidden md:table-cell">{school.school_name}</td>
+ <td className="px-4 py-3 text-right text-muted-foreground">{school.duration}</td>
  <td className="px-4 py-3 text-right font-semibold text-foreground">
  {fmtCost(school.total_cost_estimate)}
  </td>

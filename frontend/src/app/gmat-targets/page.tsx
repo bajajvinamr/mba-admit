@@ -26,7 +26,7 @@ const TIER_COLORS: Record<string, string> = {
  M7:"bg-primary/15 text-primary border-primary/30",
  T15:"bg-blue-50 text-blue-600 border-blue-200",
  T25:"bg-purple-50 text-purple-600 border-purple-200",
- Other:"bg-foreground/5 text-foreground/50 border-border/10",
+ Other:"bg-foreground/5 text-muted-foreground border-border/10",
 };
 
 export default function GmatTargetsPage() {
@@ -62,7 +62,7 @@ export default function GmatTargetsPage() {
 
  {/* My Score Input */}
  <div className="editorial-card p-6 mb-8">
- <label className="text-sm font-medium text-foreground/60 block mb-2">Your GMAT Score (optional)</label>
+ <label className="text-sm font-medium text-muted-foreground block mb-2">Your GMAT Score (optional)</label>
  <input type="number" placeholder="Enter your score to see where you stand"
  value={myScore ??""} onChange={(e) => setMyScore(e.target.value ? +e.target.value : undefined)}
  className="w-full px-4 py-3 border border-border/10 rounded-lg text-lg font-bold focus:outline-none focus:ring-2 focus:ring-primary/50"/>
@@ -77,7 +77,7 @@ export default function GmatTargetsPage() {
  { label:"T25 Average", value: data.summary.T25_avg, color:"text-purple-600"},
  ].map((s) => (
  <div key={s.label} className="editorial-card p-4 text-center">
- <p className="text-xs text-foreground/40 mb-1">{s.label}</p>
+ <p className="text-xs text-muted-foreground mb-1">{s.label}</p>
  <p className={`text-3xl font-bold ${s.color}`}>{s.value}</p>
  {myScore && (
  <p className={`text-xs mt-1 ${myScore >= s.value ?"text-emerald-600":"text-red-500"}`}>
@@ -103,7 +103,7 @@ export default function GmatTargetsPage() {
  <div key={tier} className="mb-8">
  <h2 className="heading-serif text-xl font-[family-name:var(--font-heading)] text-foreground mb-4 flex items-center gap-2">
  <span className={`text-xs px-2 py-1 rounded border font-bold ${TIER_COLORS[tier]}`}>{tier}</span>
- {tier !=="Other" && <span className="text-sm text-foreground/40">({schools.length} schools)</span>}
+ {tier !=="Other" && <span className="text-sm text-muted-foreground">({schools.length} schools)</span>}
  </h2>
  <div className="editorial-card overflow-hidden">
  <div className="divide-y divide-jet/5">
@@ -129,7 +129,7 @@ export default function GmatTargetsPage() {
  </div>
  <span className="text-sm font-bold text-foreground w-12 text-right">{s.gmat_avg}</span>
  {s.acceptance_rate && (
- <span className="text-[10px] text-foreground/30 w-12 text-right">{s.acceptance_rate}%</span>
+ <span className="text-[10px] text-muted-foreground w-12 text-right">{s.acceptance_rate}%</span>
  )}
  </motion.div>
  );

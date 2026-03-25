@@ -442,9 +442,9 @@ export default function CareerSimulatorPage() {
             </div>
 
             {/* ROI Verdict Card */}
-            <div className="rounded-xl border-2 border-[#b8860b]/30 bg-[#b8860b]/5 p-6 sm:p-8">
+            <div className="rounded-xl border-2 border-[#b8860b]/30 bg-primary/5 p-6 sm:p-8">
               <div className="flex items-start gap-4">
-                <div className="rounded-full bg-[#b8860b]/10 p-3">
+                <div className="rounded-full bg-primary/10 p-3">
                   <TrendingUp className="size-6 text-[#b8860b]" />
                 </div>
                 <div className="flex-1">
@@ -482,7 +482,7 @@ export default function CareerSimulatorPage() {
 
                   <Link
                     href="/schools"
-                    className="mt-6 inline-flex items-center gap-2 rounded-lg bg-[#b8860b] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#a07608]"
+                    className="mt-6 inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-primary/90"
                   >
                     Ready to explore schools?
                     <ArrowRight className="size-4" />

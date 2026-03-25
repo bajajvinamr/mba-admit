@@ -68,7 +68,7 @@ const STYLE_COLORS: Record<string, string> = {
 };
 
 function styleColor(style: string) {
-  return STYLE_COLORS[style.toLowerCase()] || "bg-foreground/5 text-foreground/70";
+  return STYLE_COLORS[style.toLowerCase()] || "bg-foreground/5 text-muted-foreground";
 }
 
 /* ── Component ────────────────────────────────────────────────────── */
@@ -81,7 +81,7 @@ export default function InterviewGuideClient({ slug, guide, error }: Props) {
           <h1 className="heading-serif text-3xl mb-4 font-[family-name:var(--font-heading)]">
             Guide Not Found
           </h1>
-          <p className="text-foreground/60 mb-6">{error || "Interview guide unavailable."}</p>
+          <p className="text-muted-foreground mb-6">{error || "Interview guide unavailable."}</p>
           <Link href="/interview" className="text-primary underline">
             Back to Interview Simulator
           </Link>
@@ -125,7 +125,7 @@ export default function InterviewGuideClient({ slug, guide, error }: Props) {
             <div className="flex items-center gap-3">
               <User size={18} className="text-primary shrink-0" />
               <div>
-                <p className="text-xs text-foreground/40">Interviewer</p>
+                <p className="text-xs text-muted-foreground">Interviewer</p>
                 <p className="text-sm font-semibold text-foreground capitalize">
                   {g.format.interviewer_type}
                 </p>
@@ -134,14 +134,14 @@ export default function InterviewGuideClient({ slug, guide, error }: Props) {
             <div className="flex items-center gap-3">
               <Clock size={18} className="text-primary shrink-0" />
               <div>
-                <p className="text-xs text-foreground/40">Duration</p>
+                <p className="text-xs text-muted-foreground">Duration</p>
                 <p className="text-sm font-semibold text-foreground">{g.format.duration}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <Video size={18} className="text-primary shrink-0" />
               <div>
-                <p className="text-xs text-foreground/40">Medium</p>
+                <p className="text-xs text-muted-foreground">Medium</p>
                 <p className="text-sm font-semibold text-foreground capitalize">{g.format.medium}</p>
               </div>
             </div>
@@ -152,7 +152,7 @@ export default function InterviewGuideClient({ slug, guide, error }: Props) {
                 <Eye size={18} className="text-emerald-500 shrink-0" />
               )}
               <div>
-                <p className="text-xs text-foreground/40">Application</p>
+                <p className="text-xs text-muted-foreground">Application</p>
                 <p className="text-sm font-semibold text-foreground">
                   {g.format.is_blind ? "Blind (not read)" : "Informed (read)"}
                 </p>
@@ -222,7 +222,7 @@ export default function InterviewGuideClient({ slug, guide, error }: Props) {
                 <span className="w-6 h-6 shrink-0 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center mt-0.5">
                   {idx + 1}
                 </span>
-                <p className="text-sm text-foreground/80">{q}</p>
+                <p className="text-sm text-muted-foreground">{q}</p>
               </li>
             ))}
           </ol>
@@ -241,7 +241,7 @@ export default function InterviewGuideClient({ slug, guide, error }: Props) {
           </h2>
           <ul className="space-y-2">
             {g.red_flags.map((flag, idx) => (
-              <li key={idx} className="flex items-start gap-2 text-sm text-foreground/70">
+              <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
                 <Shield size={14} className="text-red-400 mt-0.5 shrink-0" />
                 {flag}
               </li>
@@ -262,7 +262,7 @@ export default function InterviewGuideClient({ slug, guide, error }: Props) {
           </h2>
           <ul className="space-y-2">
             {g.tips.map((tip, idx) => (
-              <li key={idx} className="flex items-start gap-2 text-sm text-foreground/70">
+              <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
                 <ArrowRight size={14} className="text-emerald-500 mt-0.5 shrink-0" />
                 {tip}
               </li>
@@ -284,7 +284,7 @@ export default function InterviewGuideClient({ slug, guide, error }: Props) {
             Start Mock Interview
             <ArrowRight size={20} />
           </Link>
-          <p className="text-xs text-foreground/40 mt-3">
+          <p className="text-xs text-muted-foreground mt-3">
             Practice with an AI interviewer tailored to {label}&apos;s style
           </p>
         </motion.div>

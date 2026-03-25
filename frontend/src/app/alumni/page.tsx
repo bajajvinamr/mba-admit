@@ -159,8 +159,8 @@ export default function AlumniNetworkPage() {
  active
  ?"bg-primary text-foreground border-primary"
  : disabled
- ?"border-border/5 text-foreground/20 cursor-not-allowed"
- :"border-border/10 text-foreground/60 hover:border-border/30"
+ ?"border-border/5 text-muted-foreground cursor-not-allowed"
+ :"border-border/10 text-muted-foreground hover:border-border/30"
  }`}
  >
  {s.label}
@@ -197,7 +197,7 @@ export default function AlumniNetworkPage() {
  {/* Header */}
  <div className="flex items-center justify-between mb-4">
  <h3 className="font-semibold text-foreground text-lg">{school.school_name}</h3>
- <div className="flex items-center gap-1.5 text-foreground/50">
+ <div className="flex items-center gap-1.5 text-muted-foreground">
  <Users size={14} />
  <span className="text-sm font-bold text-foreground">
  {school.total_alumni.toLocaleString()}
@@ -208,7 +208,7 @@ export default function AlumniNetworkPage() {
 
  {/* Industry Distribution */}
  <div className="mb-5">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30 mb-3">
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
  Industry Distribution
  </p>
  <div className="space-y-2">
@@ -216,7 +216,7 @@ export default function AlumniNetworkPage() {
  .sort(([, a], [, b]) => b - a)
  .map(([industry, pct]) => (
  <div key={industry} className="flex items-center gap-3">
- <span className="text-xs text-foreground/60 w-28 shrink-0 text-right">{industry}</span>
+ <span className="text-xs text-muted-foreground w-28 shrink-0 text-right">{industry}</span>
  <div className="flex-1 bg-foreground/5 rounded-full h-4 overflow-hidden">
  <motion.div
  className={`h-full rounded-full ${barColor(industry)}`}
@@ -225,7 +225,7 @@ export default function AlumniNetworkPage() {
  transition={{ duration: 0.6, delay: i * 0.08 }}
  />
  </div>
- <span className="text-xs font-bold text-foreground/50 w-8">{pct}%</span>
+ <span className="text-xs font-bold text-muted-foreground w-8">{pct}%</span>
  </div>
  ))}
  </div>
@@ -233,14 +233,14 @@ export default function AlumniNetworkPage() {
 
  {/* Top Companies */}
  <div className="mb-4">
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30 mb-2 flex items-center gap-1">
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-2 flex items-center gap-1">
  <Building2 size={10} /> Top Employers
  </p>
  <div className="flex flex-wrap gap-1.5">
  {school.top_companies.map((c) => (
  <span
  key={c}
- className="px-2.5 py-1 text-xs font-medium rounded-full bg-foreground/5 text-foreground/70"
+ className="px-2.5 py-1 text-xs font-medium rounded-full bg-foreground/5 text-muted-foreground"
  >
  {c}
  </span>
@@ -250,7 +250,7 @@ export default function AlumniNetworkPage() {
 
  {/* Notable Alumni */}
  <div>
- <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30 mb-2 flex items-center gap-1">
+ <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-2 flex items-center gap-1">
  <Star size={10} /> Notable Alumni
  </p>
  <div className="flex flex-wrap gap-1.5">
@@ -282,14 +282,14 @@ export default function AlumniNetworkPage() {
  <div className="space-y-4">
  {allIndustries.map((industry) => (
  <div key={industry}>
- <p className="text-xs font-medium text-foreground/60 mb-1.5">{industry}</p>
+ <p className="text-xs font-medium text-muted-foreground mb-1.5">{industry}</p>
  <div className="space-y-1">
  {results.map((school, idx) => {
  const pct = school.industries[industry] ?? 0;
  const colors = ["bg-primary","bg-violet-500","bg-emerald-500","bg-rose-500"];
  return (
  <div key={school.school_id} className="flex items-center gap-2">
- <span className="text-[10px] text-foreground/40 w-20 shrink-0 truncate text-right">
+ <span className="text-[10px] text-muted-foreground w-20 shrink-0 truncate text-right">
  {school.school_name.split("").slice(-1)[0]}
  </span>
  <div className="flex-1 bg-foreground/5 rounded-full h-3 overflow-hidden">
@@ -300,7 +300,7 @@ export default function AlumniNetworkPage() {
  transition={{ duration: 0.5 }}
  />
  </div>
- <span className="text-[10px] font-bold text-foreground/40 w-7">{pct}%</span>
+ <span className="text-[10px] font-bold text-muted-foreground w-7">{pct}%</span>
  </div>
  );
  })}
@@ -316,7 +316,7 @@ export default function AlumniNetworkPage() {
  return (
  <div key={school.school_id} className="flex items-center gap-1.5">
  <span className={`w-2.5 h-2.5 rounded-full ${dotColors[idx % dotColors.length]}`} />
- <span className="text-xs text-foreground/60">{school.school_name}</span>
+ <span className="text-xs text-muted-foreground">{school.school_name}</span>
  </div>
  );
  })}
@@ -326,7 +326,7 @@ export default function AlumniNetworkPage() {
 
  {/* Empty state */}
  {results.length === 0 && !loading && (
- <div className="text-center py-16 text-foreground/30">
+ <div className="text-center py-16 text-muted-foreground">
  <Users size={48} className="mx-auto mb-4 opacity-30"/>
  <p>Select schools above and hit Explore to compare alumni networks</p>
  </div>

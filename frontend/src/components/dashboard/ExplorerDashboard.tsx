@@ -56,7 +56,7 @@ function UnlockCard({
       href={href}
       className="group rounded-xl border border-border bg-card p-6 transition-all hover:border-foreground/20 hover:shadow-sm"
     >
-      <div className="size-10 rounded-lg bg-[#b8860b]/10 flex items-center justify-center mb-4">
+      <div className="size-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
         <Icon className="size-5 text-[#b8860b]" />
       </div>
       <h3 className="font-semibold text-foreground text-sm">{title}</h3>
@@ -99,7 +99,7 @@ export function ExplorerDashboard({ className = "" }: ExplorerDashboardProps) {
   return (
     <div className={`space-y-8 ${className}`}>
       {/* Hero Card — "Should I MBA?" */}
-      <div className="rounded-xl border-2 border-[#b8860b]/30 bg-[#b8860b]/5 p-6 sm:p-8">
+      <div className="rounded-xl border-2 border-[#b8860b]/30 bg-primary/5 p-6 sm:p-8">
         <div className="flex items-start justify-between gap-4">
           <div>
             <h2 className="text-2xl font-semibold text-foreground tracking-tight">
@@ -110,14 +110,14 @@ export function ExplorerDashboard({ className = "" }: ExplorerDashboardProps) {
             </p>
             <Link
               href="/career-simulator"
-              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[#b8860b] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#a07608]"
+              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-primary/90"
             >
               <TrendingUp className="size-4" />
               Launch Career Simulator
               <ArrowRight className="size-4" />
             </Link>
           </div>
-          <div className="hidden sm:block rounded-full bg-[#b8860b]/10 p-4">
+          <div className="hidden sm:block rounded-full bg-primary/10 p-4">
             <Zap className="size-8 text-[#b8860b]" />
           </div>
         </div>

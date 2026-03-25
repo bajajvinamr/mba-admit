@@ -46,7 +46,7 @@ function ScoreBar({ score, max = 10, color }: { score: number; max?: number; col
 
 function CostBadge({ index }: { index: number }) {
  let label ="Average";
- let bg ="bg-foreground/5 text-foreground/60";
+ let bg ="bg-foreground/5 text-muted-foreground";
  if (index >= 150) { label ="Very High"; bg ="bg-red-50 text-red-700"; }
  else if (index >= 120) { label ="High"; bg ="bg-amber-50 text-amber-700"; }
  else if (index < 100) { label ="Below Avg"; bg ="bg-emerald-50 text-emerald-700"; }
@@ -146,7 +146,7 @@ export default function CampusLifePage() {
  <div className="flex items-start justify-between mb-4">
  <div>
  <h2 className="font-semibold text-foreground text-lg">{s.school_name}</h2>
- <p className="text-xs text-foreground/40 flex items-center gap-1">
+ <p className="text-xs text-muted-foreground flex items-center gap-1">
  <MapPin size={10} /> {s.city}, {s.state_or_country}
  </p>
  </div>
@@ -155,24 +155,24 @@ export default function CampusLifePage() {
 
  {/* Climate */}
  <div className="flex items-start gap-2 mb-4 p-3 bg-foreground/[0.02] rounded-lg">
- <Thermometer size={14} className="text-foreground/30 mt-0.5 shrink-0"/>
- <p className="text-sm text-foreground/60">{s.climate}</p>
+ <Thermometer size={14} className="text-muted-foreground mt-0.5 shrink-0"/>
+ <p className="text-sm text-muted-foreground">{s.climate}</p>
  </div>
 
  {/* Scores */}
  <div className="grid grid-cols-2 gap-4 mb-4">
  <div>
  <div className="flex items-center gap-1.5 mb-1">
- <Building size={12} className="text-foreground/30"/>
- <span className="text-xs text-foreground/40">Walkability</span>
+ <Building size={12} className="text-muted-foreground"/>
+ <span className="text-xs text-muted-foreground">Walkability</span>
  <span className="ml-auto text-sm font-bold text-foreground">{s.walkability_score}/10</span>
  </div>
  <ScoreBar score={s.walkability_score} color="bg-gradient-to-r from-emerald-400 to-emerald-600"/>
  </div>
  <div>
  <div className="flex items-center gap-1.5 mb-1">
- <Moon size={12} className="text-foreground/30"/>
- <span className="text-xs text-foreground/40">Nightlife</span>
+ <Moon size={12} className="text-muted-foreground"/>
+ <span className="text-xs text-muted-foreground">Nightlife</span>
  <span className="ml-auto text-sm font-bold text-foreground">{s.nightlife_score}/10</span>
  </div>
  <ScoreBar score={s.nightlife_score} color="bg-gradient-to-r from-violet-400 to-violet-600"/>
@@ -182,15 +182,15 @@ export default function CampusLifePage() {
  {/* Housing */}
  <div className="flex items-center justify-between p-3 bg-foreground/[0.02] rounded-lg mb-4">
  <div className="flex items-center gap-2">
- <Home size={14} className="text-foreground/30"/>
- <span className="text-sm text-foreground/60">Housing</span>
+ <Home size={14} className="text-muted-foreground"/>
+ <span className="text-sm text-muted-foreground">Housing</span>
  </div>
  <div className="text-right">
  <span className="text-sm font-bold text-foreground">
  ${s.housing.avg_monthly_rent.toLocaleString()}/mo
  </span>
  <span className={`ml-2 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
- s.housing.on_campus_available ?"bg-emerald-50 text-emerald-700":"bg-foreground/5 text-foreground/40"
+ s.housing.on_campus_available ?"bg-emerald-50 text-emerald-700":"bg-foreground/5 text-muted-foreground"
  }`}>
  {s.housing.on_campus_available ?"On-campus":"Off-campus only"}
  </span>
@@ -201,24 +201,24 @@ export default function CampusLifePage() {
  <div className="grid grid-cols-2 gap-4 mb-4">
  <div>
  <div className="flex items-center gap-1.5 mb-2">
- <Users size={12} className="text-foreground/30"/>
- <span className="text-xs text-foreground/40">Student Clubs</span>
+ <Users size={12} className="text-muted-foreground"/>
+ <span className="text-xs text-muted-foreground">Student Clubs</span>
  <span className="ml-auto text-sm font-bold text-foreground">{s.student_clubs_count}</span>
  </div>
  </div>
  <div>
  <div className="flex items-center gap-1.5 mb-2">
- <Dumbbell size={12} className="text-foreground/30"/>
- <span className="text-xs text-foreground/40">Sports Facilities</span>
+ <Dumbbell size={12} className="text-muted-foreground"/>
+ <span className="text-xs text-muted-foreground">Sports Facilities</span>
  </div>
  <div className="flex flex-wrap gap-1">
  {s.sports_facilities.slice(0, 3).map((f) => (
- <span key={f} className="text-[10px] bg-foreground/5 text-foreground/60 px-2 py-0.5 rounded-full">
+ <span key={f} className="text-[10px] bg-foreground/5 text-muted-foreground px-2 py-0.5 rounded-full">
  {f}
  </span>
  ))}
  {s.sports_facilities.length > 3 && (
- <span className="text-[10px] text-foreground/30">+{s.sports_facilities.length - 3}</span>
+ <span className="text-[10px] text-muted-foreground">+{s.sports_facilities.length - 3}</span>
  )}
  </div>
  </div>
@@ -228,11 +228,11 @@ export default function CampusLifePage() {
  <div>
  <div className="flex items-center gap-1.5 mb-2">
  <Star size={12} className="text-primary"/>
- <span className="text-xs text-foreground/40">Nearby Attractions</span>
+ <span className="text-xs text-muted-foreground">Nearby Attractions</span>
  </div>
  <div className="flex flex-wrap gap-1.5">
  {s.nearby_attractions.map((a) => (
- <span key={a} className="text-[10px] bg-primary/10 text-foreground/70 px-2 py-1 rounded-full">
+ <span key={a} className="text-[10px] bg-primary/10 text-muted-foreground px-2 py-1 rounded-full">
  {a}
  </span>
  ))}
@@ -242,7 +242,7 @@ export default function CampusLifePage() {
  ))}
 
  {filtered.length === 0 && !loading && (
- <div className="text-center py-16 text-foreground/30">
+ <div className="text-center py-16 text-muted-foreground">
  <TreePine size={48} className="mx-auto mb-4 opacity-30"/>
  <p>No schools match this filter</p>
  </div>
@@ -254,7 +254,7 @@ export default function CampusLifePage() {
 
  {/* Empty state */}
  {!loading && schools.length === 0 && (
- <div className="text-center py-16 text-foreground/30">
+ <div className="text-center py-16 text-muted-foreground">
  <MapPin size={48} className="mx-auto mb-4 opacity-30"/>
  <p>Campus life data is loading...</p>
  </div>
