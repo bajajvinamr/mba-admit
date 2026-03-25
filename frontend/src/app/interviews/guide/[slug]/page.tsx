@@ -6,9 +6,22 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+async function fetchSchoolName(slug: string): Promise<string> {
+  try {
+    const res = await fetch(`${API_BASE}/api/interviews/guide/${slug}`, {
+      next: { revalidate: 3600 },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return data.school_name || slug.replace(/_/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase());
+    }
+  } catch { /* fallback below */ }
+  return slug.replace(/_/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase());
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const label = slug.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  const label = await fetchSchoolName(slug);
   return {
     title: `${label} Interview Guide | MBA Interview Prep | AdmitCompass`,
     description: `Complete interview intelligence for ${label}: format, style, sample questions, red flags, and expert tips. Prepare for your MBA interview with confidence.`,

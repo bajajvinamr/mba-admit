@@ -20,6 +20,7 @@ type GuideFormat = {
 
 type GuideData = {
   school_slug: string;
+  school_name?: string;
   format: GuideFormat;
   style: string[];
   common_themes: string[];
@@ -91,7 +92,7 @@ export default function InterviewGuideClient({ slug, guide, error }: Props) {
   }
 
   const g = guide as unknown as GuideData;
-  const label = slug.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  const label = g.school_name || slug.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
   return (
     <main className="min-h-screen bg-background">

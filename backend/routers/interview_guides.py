@@ -55,7 +55,11 @@ def get_interview_guide(school_slug: str):
             404,
             detail=f"Interview guide not found for '{slug}'. Available: {', '.join(available)}",
         )
-    return {"school_slug": slug, **guide}
+    # Include school name from SCHOOL_DB if available
+    from agents import SCHOOL_DB
+    school = SCHOOL_DB.get(slug, {})
+    school_name = school.get("name", slug.replace("_", " ").replace("-", " ").title())
+    return {"school_slug": slug, "school_name": school_name, **guide}
 
 
 @router.get("/interviews/guides")
