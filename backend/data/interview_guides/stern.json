@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30 min", "medium": "video or in-person", "is_blind": true },
+  "style": ["behavioral", "career-focused", "conversational"],
+  "common_themes": ["IQ + EQ", "NYC immersion", "finance and media"],
+  "sample_questions": [
+    "Tell me about yourself",
+    "Why NYU Stern?",
+    "Give an example that demonstrates both your IQ and EQ",
+    "How will you leverage NYC during your MBA?",
+    "What clubs or activities interest you at Stern?"
+  ],
+  "red_flags": ["Only mentioning finance career goals", "Not showing emotional intelligence", "Generic NYC answer"],
+  "tips": ["Stern's 'IQ + EQ' philosophy is central - weave both into stories.", "Reference Stern's location and NYC immersion opportunities.", "Know about specific Stern resources: Berkley Center, Social Impact initiatives."],
+  "reports_count": 90
+}

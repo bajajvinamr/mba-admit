@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "student", "duration": "30 min", "medium": "video", "is_blind": true },
+  "style": ["behavioral", "values-based", "conversational"],
+  "common_themes": ["question the status quo", "confidence without attitude", "students always", "beyond yourself"],
+  "sample_questions": [
+    "Tell me about yourself",
+    "Why Haas?",
+    "How do you embody 'Question the Status Quo'?",
+    "Tell me about a time you demonstrated 'Confidence Without Attitude'",
+    "How would you contribute to the Haas community?"
+  ],
+  "red_flags": ["Not knowing the four Defining Leadership Principles", "Arrogance or over-confidence", "Lack of social impact awareness"],
+  "tips": ["Know Haas's four Defining Leadership Principles by heart.", "Frame at least one story around each principle.", "The interview is blind - give a strong self-introduction."],
+  "reports_count": 100
+}

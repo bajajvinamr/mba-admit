@@ -1,0 +1,24 @@
+{
+  "country_name": "Spain",
+  "flag": "🇪🇸",
+  "avg_tuition_usd": 75000,
+  "avg_living_cost_usd": 16000,
+  "program_length_years": 1.5,
+  "post_study_work_visa": {
+    "name": "Post-Study Job Search Visa",
+    "duration": "1 year",
+    "restrictions": "Must find employment related to studies. Minimum salary threshold for work permit conversion."
+  },
+  "avg_post_mba_salary_usd": 95000,
+  "top_schools": [
+    { "slug": "iese", "name": "IESE Business School" },
+    { "slug": "ie", "name": "IE Business School" },
+    { "slug": "esade", "name": "ESADE Business School" }
+  ],
+  "language_requirement": "Programs taught in English. Spanish useful for local networking and employment.",
+  "safety_index": 80,
+  "cost_of_living_index": 62,
+  "scholarship_availability": "Moderate — IESE, IE, and ESADE all offer merit and need-based scholarships. IE offers up to 50% tuition for top applicants.",
+  "path_to_pr": "Work permit → long-term residence after 5 years of legal residence. Spain is one of the more accessible EU countries for PR.",
+  "test_policy": "GMAT or GRE accepted. IE accepts its own Global Admissions Test (IE-GAT) as alternative."
+}

@@ -1,8 +1,10 @@
-"""Essay-related endpoints — roast, evaluate, word count, prompts, theme analysis."""
+"""Essay-related endpoints — roast, evaluate, word count, prompts, theme analysis, AI coach."""
 
+import json
 import re as _re
 
 from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import StreamingResponse
 from middleware import rate_limit
 from agents import (
     SCHOOL_DB,
@@ -14,8 +16,12 @@ from models import (
     EssayEvaluationRequest,
     EssayWordCountRequest,
     ThemeAnalysisRequest,
+    EssayCoachRequest,
 )
 from guardrails import sanitize_for_llm, MAX_BULLET_CHARS, MAX_ESSAY_CHARS, MAX_FIELD_CHARS
+from logging_config import setup_logging
+
+logger = setup_logging()
 
 router = APIRouter(prefix="/api", tags=["essays"])
 
@@ -228,3 +234,131 @@ def analyze_essay_themes(req: ThemeAnalysisRequest):
         "gaps": gaps,
         "tips": tips,
     }
+
+
+# ── Essay Coach (Real Claude API — Streaming) ────────────────────────────────
+
+COACH_SYSTEM_PROMPTS = {
+    "brainstorm": (
+        "You are an expert MBA admissions essay coach. The applicant needs help "
+        "brainstorming ideas for their essay. Ask probing questions to help them "
+        "find their authentic story. Never write the essay for them — guide them "
+        "to discover their own narrative. Be specific, not generic. Reference the "
+        "school's culture and values when relevant."
+    ),
+    "review": (
+        "You are an expert MBA admissions essay coach reviewing a draft. Provide "
+        "specific, actionable feedback on:\n"
+        "1) Story strength and authenticity\n"
+        "2) Structure and flow\n"
+        "3) Whether it answers the prompt directly\n"
+        "4) Specific sentences to improve with concrete suggestions\n"
+        "Be honest but encouraging. Never rewrite their essay — point to exact "
+        "phrases and explain why they need work."
+    ),
+    "tone_check": (
+        "You are an MBA admissions essay authenticity checker. Analyze the essay for:\n"
+        "1) Signs of AI-generated writing (generic phrasing, inflated language, "
+        "rule-of-three patterns, lack of specific detail)\n"
+        "2) Cliches common in MBA essays ('passionate about', 'leveraging my "
+        "experience', 'synergy', 'holistic approach')\n"
+        "3) Vague claims without specific evidence\n"
+        "4) Inconsistent voice or register shifts\n\n"
+        "Score authenticity 0-100 and explain your reasoning with specific examples "
+        "from the text. Format the score clearly at the top of your response."
+    ),
+}
+
+COACH_MODEL = "claude-sonnet-4-20250514"
+
+
+def _build_coach_user_message(req: EssayCoachRequest) -> str:
+    """Build the user message sent to Claude for the essay coach."""
+    school = SCHOOL_DB.get(req.school_id, {})
+    school_name = school.get("name", req.school_id)
+
+    parts = [
+        f"School: {school_name}",
+        f"Essay prompt: {req.prompt_text}",
+    ]
+    if req.word_limit:
+        parts.append(f"Word limit: {req.word_limit}")
+    if req.essay_text.strip():
+        parts.append(f"\nEssay draft:\n{req.essay_text}")
+    else:
+        parts.append("\n(No essay text provided yet — the applicant is looking for brainstorming help.)")
+
+    return "\n".join(parts)
+
+
+async def _stream_coach_response(req: EssayCoachRequest):
+    """Generator that yields SSE events from Claude's streaming response."""
+    from anthropic import Anthropic
+
+    client = Anthropic()
+    system_prompt = COACH_SYSTEM_PROMPTS[req.mode]
+    user_message = _build_coach_user_message(req)
+
+    try:
+        with client.messages.stream(
+            model=COACH_MODEL,
+            max_tokens=1024,
+            system=system_prompt,
+            messages=[{"role": "user", "content": user_message}],
+        ) as stream:
+            for text in stream.text_stream:
+                yield f"data: {json.dumps({'text': text})}\n\n"
+        yield "data: [DONE]\n\n"
+    except Exception as exc:
+        logger.error("Essay coach streaming error: %s", exc)
+        yield f"data: {json.dumps({'error': str(exc)})}\n\n"
+        yield "data: [DONE]\n\n"
+
+
+@router.post("/essay/coach")
+@rate_limit("10/minute")
+async def essay_coach(request: Request, req: EssayCoachRequest):
+    """AI essay coach — real Claude-powered brainstorming, review, and tone checking.
+
+    Returns a Server-Sent Events stream of text chunks. Each event is:
+      data: {"text": "..."}
+    Final event:
+      data: [DONE]
+
+    Usage tracked per tier (free: 5/day, pro: 50/day, premium: unlimited).
+    """
+    from observability import track_ai_interaction
+
+    # Sanitize inputs
+    try:
+        prompt_text = sanitize_for_llm(req.prompt_text, MAX_FIELD_CHARS, "essay prompt")
+        essay_text = sanitize_for_llm(req.essay_text, MAX_ESSAY_CHARS, "essay") if req.essay_text else ""
+    except ValueError as e:
+        raise HTTPException(400, detail=str(e))
+
+    # Validate mode
+    if req.mode not in COACH_SYSTEM_PROMPTS:
+        raise HTTPException(400, detail=f"Invalid mode: {req.mode}. Must be one of: {list(COACH_SYSTEM_PROMPTS.keys())}")
+
+    # Build sanitized request for streaming
+    sanitized_req = EssayCoachRequest(
+        school_id=req.school_id,
+        prompt_text=prompt_text,
+        essay_text=essay_text,
+        mode=req.mode,
+        word_limit=req.word_limit,
+    )
+
+    logger.info(
+        "Essay coach request: school=%s mode=%s essay_len=%d",
+        req.school_id, req.mode, len(essay_text),
+    )
+
+    return StreamingResponse(
+        _stream_coach_response(sanitized_req),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "X-Accel-Buffering": "no",
+        },
+    )

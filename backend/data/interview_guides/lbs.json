@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30-45 min", "medium": "video or in-person", "is_blind": true },
+  "style": ["behavioral", "global-focused", "conversational"],
+  "common_themes": ["global perspective", "diversity", "London as a hub"],
+  "sample_questions": [
+    "Tell me about yourself",
+    "Why London Business School?",
+    "Describe a time you worked across cultures",
+    "What are your short-term and long-term career goals?",
+    "How will you contribute to the LBS community?"
+  ],
+  "red_flags": ["Eurocentrism without global awareness", "Not understanding LBS's diverse cohort", "Vague career goals"],
+  "tips": ["LBS has one of the most internationally diverse cohorts - show you thrive in multicultural settings.", "Reference London's position as a global financial and tech hub.", "Be prepared for alumni who may probe deeply on career clarity."],
+  "reports_count": 100
+}

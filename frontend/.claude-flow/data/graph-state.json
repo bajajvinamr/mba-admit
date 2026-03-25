@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "updatedAt": 1773795725631,
+  "nodeCount": 9,
+  "nodes": {
+    "mem-MEMORY-architecture": {
+      "id": "mem-MEMORY-architecture",
+      "category": "core",
+      "confidence": 0.495,
+      "accessCount": 0,
+      "createdAt": 1773687129906
+    },
+    "mem-MEMORY-key-files": {
+      "id": "mem-MEMORY-key-files",
+      "category": "core",
+      "confidence": 0.495,
+      "accessCount": 0,
+      "createdAt": 1773687129906
+    },
+    "mem-MEMORY-scraper-pipeline--branch--feat": {
+      "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+      "category": "core",
+      "confidence": 0.495,
+      "accessCount": 0,
+      "createdAt": 1773687129906
+    },
+    "mem-MEMORY-data-quality-integration--comp": {
+      "id": "mem-MEMORY-data-quality-integration--comp",
+      "category": "core",
+      "confidence": 0.495,
+      "accessCount": 0,
+      "createdAt": 1773687129906
+    },
+    "mem-MEMORY-school-db": {
+      "id": "mem-MEMORY-school-db",
+      "category": "core",
+      "confidence": 0.495,
+      "accessCount": 0,
+      "createdAt": 1773687129906
+    },
+    "mem-MEMORY-patterns": {
+      "id": "mem-MEMORY-patterns",
+      "category": "core",
+      "confidence": 0.495,
+      "accessCount": 0,
+      "createdAt": 1773687129906
+    },
+    "mem-MEMORY-tooling": {
+      "id": "mem-MEMORY-tooling",
+      "category": "core",
+      "confidence": 0.495,
+      "accessCount": 0,
+      "createdAt": 1773687129906
+    },
+    "mem-project_ruflo_integration----": {
+      "id": "mem-project_ruflo_integration----",
+      "category": "project_ruflo_integration",
+      "confidence": 0.495,
+      "accessCount": 0,
+      "createdAt": 1773687129907
+    },
+    "insight-1773692668657-awto": {
+      "id": "insight-1773692668657-awto",
+      "category": "insights",
+      "confidence": 0.495,
+      "accessCount": 0,
+      "createdAt": 1773692668657
+    }
+  },
+  "edges": [
+    {
+      "sourceId": "mem-MEMORY-architecture",
+      "targetId": "mem-MEMORY-key-files",
+      "type": "temporal",
+      "weight": 0.5
+    },
+    {
+      "sourceId": "mem-MEMORY-key-files",
+      "targetId": "mem-MEMORY-scraper-pipeline--branch--feat",
+      "type": "temporal",
+      "weight": 0.5
+    },
+    {
+      "sourceId": "mem-MEMORY-scraper-pipeline--branch--feat",
+      "targetId": "mem-MEMORY-data-quality-integration--comp",
+      "type": "temporal",
+      "weight": 0.5
+    },
+    {
+      "sourceId": "mem-MEMORY-data-quality-integration--comp",
+      "targetId": "mem-MEMORY-school-db",
+      "type": "temporal",
+      "weight": 0.5
+    },
+    {
+      "sourceId": "mem-MEMORY-school-db",
+      "targetId": "mem-MEMORY-patterns",
+      "type": "temporal",
+      "weight": 0.5
+    },
+    {
+      "sourceId": "mem-MEMORY-patterns",
+      "targetId": "mem-MEMORY-tooling",
+      "type": "temporal",
+      "weight": 0.5
+    }
+  ],
+  "pageRanks": {
+    "mem-MEMORY-architecture": 0.04347902043206393,
+    "mem-MEMORY-key-files": 0.08043617573058126,
+    "mem-MEMORY-scraper-pipeline--branch--feat": 0.11184980072651707,
+    "mem-MEMORY-data-quality-integration--comp": 0.13855145248608602,
+    "mem-MEMORY-school-db": 0.16124789535775155,
+    "mem-MEMORY-patterns": 0.1805398196428332,
+    "mem-MEMORY-tooling": 0.19693779476003911,
+    "mem-project_ruflo_integration----": 0.04347902043206393,
+    "insight-1773692668657-awto": 0.04347902043206393
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "adcom", "duration": "30 min", "medium": "video or in-person", "is_blind": false },
+  "style": ["behavioral", "action-based", "impact-focused"],
+  "common_themes": ["action-based learning", "positive business impact", "leadership"],
+  "sample_questions": [
+    "Walk me through your resume",
+    "Why Ross?",
+    "Tell me about a time you created positive impact",
+    "Describe your most meaningful leadership experience",
+    "How will you contribute to the Ross community?"
+  ],
+  "red_flags": ["Not understanding MAP (Multidisciplinary Action Projects)", "Lacking examples of real-world impact", "Not showing interest in Ann Arbor community"],
+  "tips": ["Ross emphasizes 'action-based learning' - reference MAP and other experiential programs.", "Show how you create positive impact beyond your immediate role.", "Be prepared for a structured behavioral format."],
+  "reports_count": 105
+}

@@ -1,0 +1,27 @@
+{
+  "country_name": "India",
+  "flag": "🇮🇳",
+  "avg_tuition_usd": 30000,
+  "avg_living_cost_usd": 8000,
+  "program_length_years": 2,
+  "post_study_work_visa": {
+    "name": "Not applicable (domestic market)",
+    "duration": "N/A",
+    "restrictions": "Most MBA graduates are Indian nationals. International students receive student visa with no post-study work extension."
+  },
+  "avg_post_mba_salary_usd": 45000,
+  "top_schools": [
+    { "slug": "iima", "name": "IIM Ahmedabad" },
+    { "slug": "iimb", "name": "IIM Bangalore" },
+    { "slug": "iimc", "name": "IIM Calcutta" },
+    { "slug": "isb", "name": "Indian School of Business" },
+    { "slug": "xlri", "name": "XLRI Jamshedpur" },
+    { "slug": "fms-delhi", "name": "Faculty of Management Studies (Delhi)" }
+  ],
+  "language_requirement": "English (primary language of instruction at all top programs)",
+  "safety_index": 60,
+  "cost_of_living_index": 28,
+  "scholarship_availability": "High — merit-based scholarships at IIMs cover 50-100% of tuition. ISB offers significant need-based aid. Fee waivers for top CAT scorers.",
+  "path_to_pr": "Not applicable for domestic students. International students typically do not pursue long-term stay.",
+  "test_policy": "CAT (Common Admission Test) for IIMs. XAT for XLRI. GMAT accepted at ISB and some IIM programs. GRE gaining acceptance."
+}

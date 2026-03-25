@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30 min", "medium": "video or in-person", "is_blind": true },
+  "style": ["behavioral", "healthcare-focused", "conversational"],
+  "common_themes": ["healthcare management", "intimate community", "Nashville ecosystem"],
+  "sample_questions": [
+    "Tell me about yourself",
+    "Why Vanderbilt Owen?",
+    "Describe a time you led a team through change",
+    "What industries interest you post-MBA?",
+    "How will you contribute to Owen?"
+  ],
+  "red_flags": ["Not understanding Nashville's healthcare hub status", "Not valuing Owen's small class experience", "Vague career direction"],
+  "tips": ["Owen is a leader in healthcare management - reference if applicable.", "Nashville is a healthcare capital - leverage this in your narrative.", "The small class size (~175) means every student matters - show community spirit."],
+  "reports_count": 40
+}

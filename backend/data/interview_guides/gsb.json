@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "45 min", "medium": "video or in-person", "is_blind": true },
+  "style": ["behavioral", "self-reflection", "conversational"],
+  "common_themes": ["authenticity", "what matters most", "personal values"],
+  "sample_questions": [
+    "Tell me about yourself",
+    "What matters most to you and why?",
+    "Describe a time you created change in an organization",
+    "Why Stanford GSB?",
+    "Tell me about a failure and what you learned"
+  ],
+  "red_flags": ["Rehearsed answers that lack authenticity", "Inability to articulate personal values", "Not showing vulnerability"],
+  "tips": ["The 'what matters most' question mirrors the essay - ensure consistency.", "Be authentic - Stanford values self-reflection over polish.", "Ask thoughtful questions about their GSB experience."],
+  "reports_count": 130
+}

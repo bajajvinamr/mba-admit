@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "adcom", "duration": "30 min", "medium": "in-person or video", "is_blind": false },
+  "style": ["behavioral", "case-method", "ethical leadership"],
+  "common_themes": ["ethical leadership", "case method learning", "community"],
+  "sample_questions": [
+    "Walk me through your resume",
+    "Why Darden?",
+    "Tell me about an ethical dilemma you faced at work",
+    "How do you approach learning through cases?",
+    "What will you bring to the Darden community?"
+  ],
+  "red_flags": ["Not being comfortable with case-based discussion", "Avoiding ethical complexity", "Not knowing Darden's Charlottesville community"],
+  "tips": ["Darden uses the case method extensively - show you thrive in discussion-based learning.", "Ethical leadership is a core pillar - have a genuine example ready.", "Be prepared for a structured, professional interview format."],
+  "reports_count": 85
+}

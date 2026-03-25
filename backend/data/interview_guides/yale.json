@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30 min", "medium": "video or in-person", "is_blind": false },
+  "style": ["behavioral", "mission-driven", "conversational"],
+  "common_themes": ["business and society", "purpose-driven leadership", "integrated curriculum"],
+  "sample_questions": [
+    "Why Yale SOM?",
+    "Tell me about a time you made a positive impact on an organization",
+    "How do you approach ethical dilemmas?",
+    "Describe your leadership philosophy",
+    "How would you contribute to the Yale SOM community?"
+  ],
+  "red_flags": ["Purely profit-driven motivation", "Not understanding SOM's societal mission", "Lack of purpose in career narrative"],
+  "tips": ["Yale SOM's mission is 'educating leaders for business and society' - align to it.", "Mention the integrated curriculum and cross-Yale opportunities.", "Be ready to discuss ethics - SOM takes this seriously."],
+  "reports_count": 80
+}

@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "adcom", "duration": "35 min", "medium": "in-person (team-based discussion)", "is_blind": false },
+  "style": ["team-based discussion", "behavioral", "case-lite"],
+  "common_themes": ["teamwork", "analytical thinking", "leadership in groups"],
+  "sample_questions": [
+    "Introduce yourself to the group",
+    "Discuss this case scenario as a team and present a recommendation",
+    "What role did you play in the team discussion?",
+    "Why Wharton?",
+    "What unique perspective do you bring?"
+  ],
+  "red_flags": ["Dominating the group discussion", "Not contributing at all", "Being competitive rather than collaborative"],
+  "tips": ["Wharton uses a Team-Based Discussion (TBD) format - practice group dynamics.", "Balance contributing ideas with active listening.", "The 1-on-1 portion is short - be concise."],
+  "reports_count": 140
+}

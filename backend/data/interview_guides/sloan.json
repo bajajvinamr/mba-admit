@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "adcom", "duration": "30 min", "medium": "video or in-person", "is_blind": false },
+  "style": ["behavioral", "innovation-focused", "technical"],
+  "common_themes": ["innovation", "technical leadership", "principled leadership"],
+  "sample_questions": [
+    "Tell me about a time you worked on a complex problem",
+    "Why MIT Sloan?",
+    "How do you approach innovation?",
+    "Describe a project where you combined technical and business skills",
+    "How do you plan to contribute to the Sloan community?"
+  ],
+  "red_flags": ["Lack of technical depth", "Not connecting to MIT's innovation culture", "Being too theoretical without practical examples"],
+  "tips": ["Sloan values 'principled, innovative leaders' - frame stories accordingly.", "Reference MIT's cross-registration, Martin Trust Center, or Action Learning.", "Prepare for behavioral and situational questions equally."],
+  "reports_count": 110
+}

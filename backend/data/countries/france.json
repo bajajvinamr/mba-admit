@@ -1,0 +1,25 @@
+{
+  "country_name": "France",
+  "flag": "🇫🇷",
+  "avg_tuition_usd": 85000,
+  "avg_living_cost_usd": 20000,
+  "program_length_years": 1.5,
+  "post_study_work_visa": {
+    "name": "Temporary Residence Permit (APS)",
+    "duration": "1 year (renewable)",
+    "restrictions": "Job must match MBA specialization. Minimum salary threshold applies. Can convert to Talent Passport for 4 years."
+  },
+  "avg_post_mba_salary_usd": 110000,
+  "top_schools": [
+    { "slug": "insead", "name": "INSEAD" },
+    { "slug": "hec-paris", "name": "HEC Paris" },
+    { "slug": "essec", "name": "ESSEC Business School" },
+    { "slug": "edhec", "name": "EDHEC Business School" }
+  ],
+  "language_requirement": "Programs taught in English. French language ability beneficial for networking and post-MBA employment.",
+  "safety_index": 75,
+  "cost_of_living_index": 78,
+  "scholarship_availability": "Moderate — INSEAD and HEC offer significant scholarships. Eiffel Excellence Scholarship available for international students.",
+  "path_to_pr": "Talent Passport (4 years) → long-term residence after 5 years. EU Blue Card option for high-salary roles.",
+  "test_policy": "GMAT or GRE accepted. INSEAD also accepts EA (Executive Assessment) for experienced candidates."
+}

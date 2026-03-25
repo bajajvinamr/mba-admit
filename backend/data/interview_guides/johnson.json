@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30 min", "medium": "video or in-person", "is_blind": true },
+  "style": ["behavioral", "tech-focused", "conversational"],
+  "common_themes": ["tech entrepreneurship", "experiential learning", "community"],
+  "sample_questions": [
+    "Tell me about yourself",
+    "Why Cornell Johnson?",
+    "Describe a time you took initiative on a project",
+    "How do you plan to leverage Cornell's broader university?",
+    "What will you contribute to the Johnson community?"
+  ],
+  "red_flags": ["Not understanding Johnson's tech and entrepreneurship focus", "Ignoring Ithaca's unique community", "Lacking initiative examples"],
+  "tips": ["Reference Johnson's immersion learning and cross-campus opportunities with Cornell Tech.", "Show you understand and appreciate Ithaca's tight-knit community.", "Johnson values 'hands-on learning' - have experiential examples ready."],
+  "reports_count": 70
+}

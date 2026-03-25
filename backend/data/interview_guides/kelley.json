@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30 min", "medium": "video or in-person", "is_blind": true },
+  "style": ["behavioral", "collaborative", "conversational"],
+  "common_themes": ["marketing excellence", "collaborative culture", "Midwest values"],
+  "sample_questions": [
+    "Tell me about yourself",
+    "Why Indiana Kelley?",
+    "Describe a time you worked collaboratively to achieve a goal",
+    "What are your short-term and long-term career goals?",
+    "How will you contribute to Kelley?"
+  ],
+  "red_flags": ["Dismissive of Midwest location", "Not understanding Kelley's marketing strength", "Lacking teamwork examples"],
+  "tips": ["Kelley is renowned for its marketing program - reference it if relevant.", "The Academy system is unique to Kelley - show you understand it.", "Bloomington's community-oriented culture is part of the experience."],
+  "reports_count": 50
+}

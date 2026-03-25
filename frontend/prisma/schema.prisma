@@ -1,0 +1,140 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  name           String?
+  image          String?
+  profile        Profile?
+  trackedSchools TrackedSchool[]
+  essayDrafts    EssayDraft[]
+  interviews     InterviewSession[]
+  outcomes       OutcomeContribution[]
+  subscription   Subscription?
+  recommenders   Recommender[]
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model Profile {
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  user               User     @relation(fields: [userId], references: [id])
+  journeyStage       String   @default("explore")
+  gmatScore          Int?
+  greScore           Int?
+  testOptional       Boolean  @default(false)
+  gpa                Float?
+  yearsExperience    Int?
+  currentIndustry    String?
+  currentRole        String?
+  targetFormat       String?
+  targetSchools      String[]
+  challenges         String[]
+  archetype          String   @default("explorer")
+  // explorer | compass | listbuilder | strategist | writer | performer | decider
+  citizenshipCountry String?
+  targetCountries    String[]
+  budgetRange        String?   // under50k | 50to100k | 100to150k | over150k
+  motivations        String[]  // career_switch | salary | network | entrepreneurship | credential
+  targetRound        String?   // R1 | R2 | R3 | unsure
+  biggestChallenge   String?   // essays | time | interviews | strategy
+}
+
+model TrackedSchool {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  schoolSlug String
+  priority   Int      @default(0)
+  status     String   @default("researching")
+  // researching | preparing | drafting | submitted | interview | decided
+  nextAction String?
+  result     String? // admitted | rejected | waitlisted | withdrew
+  notes      String?
+  createdAt  DateTime @default(now())
+  @@unique([userId, schoolSlug])
+}
+
+model EssayDraft {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  schoolSlug String
+  promptId   String
+  content    String
+  wordCount  Int
+  version    Int      @default(1)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@index([userId, schoolSlug])
+}
+
+model InterviewSession {
+  id                String   @id @default(cuid())
+  userId            String
+  user              User     @relation(fields: [userId], references: [id])
+  schoolSlug        String
+  mode              String
+  questions         Json
+  overallScore      Int
+  contentScore      Int
+  structureScore    Int
+  authenticityScore Int
+  duration          Int
+  createdAt         DateTime @default(now())
+  @@index([userId, schoolSlug])
+}
+
+model OutcomeContribution {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  schoolSlug  String
+  round       String
+  result      String
+  gmatScore   Int?
+  gpa         Float?
+  yearsExp    Int?
+  industry    String?
+  scholarship Boolean?
+  anonymous   Boolean  @default(true)
+  verified    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  @@index([schoolSlug, result])
+}
+
+model Recommender {
+  id                String   @id @default(cuid())
+  userId            String
+  name              String
+  email             String?
+  relationship      String   // manager | colleague | professor | mentor | other
+  schoolAssignments String[] // school slugs this recommender is assigned to
+  status            String   @default("not_asked") // not_asked | asked | accepted | submitted
+  deadline          DateTime?
+  notes             String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model Subscription {
+  id                   String    @id @default(cuid())
+  userId               String    @unique
+  user                 User      @relation(fields: [userId], references: [id])
+  stripeCustomerId     String    @unique
+  stripeSubscriptionId String?   @unique
+  tier                 String    @default("free")
+  status               String    @default("active")
+  currentPeriodEnd     DateTime?
+  createdAt            DateTime  @default(now())
+}

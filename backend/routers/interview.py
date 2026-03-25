@@ -1,6 +1,7 @@
-"""Interview-related endpoints — simulator, question bank, alumni prep."""
+"""Interview-related endpoints — simulator, question bank, alumni prep, AI evaluation."""
 
 import json as _json
+import logging
 import os as _os
 import random
 
@@ -9,13 +10,18 @@ from pydantic import BaseModel as _BaseModel
 from middleware import rate_limit
 from agents import (
     SCHOOL_DB,
+    get_llm,
     simulate_interview_pass,
 )
 from models import (
     InterviewStartRequest,
     InterviewResponseRequest,
+    InterviewEvaluateRequest,
+    InterviewEvaluateResponse,
 )
 from guardrails import sanitize_for_llm, MAX_CHAT_CHARS
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api", tags=["interview"])
 
@@ -58,6 +64,106 @@ def respond_mock_interview(request: Request, req: InterviewResponseRequest):
         result = simulate_interview_pass(req.school_id, sanitized_history, difficulty=req.difficulty, question_count=req.question_count)
         tracker["output"] = result.get("question", result.get("feedback", ""))
         return result
+
+
+# ── Interview Answer Evaluation (Claude API) ─────────────────────────────
+
+def _get_school_interview_context(school_id: str) -> str:
+    """Load school-specific interview context from interview_questions.json."""
+    data = _load_questions()
+    school_info = data.get("school_specific", {}).get(school_id)
+    if not school_info:
+        return ""
+
+    parts = [f"School: {school_info.get('school_name', school_id)}"]
+    if school_info.get("interview_format"):
+        parts.append(f"Interview format: {school_info['interview_format']}")
+    if school_info.get("unique_elements"):
+        parts.append(f"Unique elements: {', '.join(school_info['unique_elements'])}")
+    if school_info.get("prep_tip"):
+        parts.append(f"Key context: {school_info['prep_tip']}")
+    return "\n".join(parts)
+
+
+_INTERVIEW_EVAL_PROMPT = """You are an expert MBA interview evaluator with deep knowledge of top business school admissions. Score this interview answer on two dimensions:
+
+1. CONTENT (0-100): Relevance to the question, specificity of examples, depth of insight, authenticity, and self-awareness. Higher scores require concrete details, quantified impact, and genuine reflection.
+2. STRUCTURE (0-100): STAR format adherence (Situation, Task, Action, Result), clarity of narrative arc, conciseness, and logical flow. Higher scores require a clear beginning-middle-end with smooth transitions.
+
+{school_context}
+
+Question type: {question_type}
+Question: {question}
+Answer: {answer}
+
+Evaluate rigorously but fairly. Top-tier answers (80+) have specific examples with quantified outcomes and clear school fit. Average answers (50-70) are generic or lack specifics. Weak answers (below 50) are vague, off-topic, or formulaic.
+
+Respond in this exact JSON format with no other text:
+{{"content_score": <number 0-100>, "structure_score": <number 0-100>, "overall_score": <number 0-100>, "feedback": "<2-3 sentences of specific, actionable feedback>", "strengths": ["<strength 1>", "<strength 2>"], "improvements": ["<improvement 1>", "<improvement 2>"]}}"""
+
+
+@router.post("/interview/evaluate", response_model=InterviewEvaluateResponse)
+@rate_limit("10/minute")
+def evaluate_interview_answer(request: Request, req: InterviewEvaluateRequest):
+    """Evaluate a single interview answer using Claude API for real scoring."""
+    from langchain_core.messages import HumanMessage
+    from observability import track_ai_interaction
+
+    # Sanitize inputs
+    try:
+        sanitized_answer = sanitize_for_llm(req.answer, MAX_CHAT_CHARS * 2, "interview answer")
+        sanitized_question = sanitize_for_llm(req.question, MAX_CHAT_CHARS, "interview question")
+    except ValueError as e:
+        raise HTTPException(400, detail=str(e))
+
+    # Build school-specific context
+    school_context = _get_school_interview_context(req.school_id)
+    if not school_context:
+        school_name = SCHOOL_DB.get(req.school_id, {}).get("name", req.school_id)
+        school_context = f"School: {school_name}"
+
+    prompt = _INTERVIEW_EVAL_PROMPT.format(
+        school_context=school_context,
+        question_type=req.question_type,
+        question=sanitized_question,
+        answer=sanitized_answer,
+    )
+
+    with track_ai_interaction(
+        user_input=f"evaluate:{req.school_id}:{req.question_type}",
+        endpoint="interview/evaluate",
+    ) as tracker:
+        try:
+            llm = get_llm()
+            response = llm.invoke([HumanMessage(content=prompt)])
+            content = response.content
+
+            # Strip markdown code fences if present
+            if "```json" in content:
+                content = content.split("```json")[1].split("```")[0].strip()
+            elif "```" in content:
+                content = content.split("```")[1].strip()
+
+            result = _json.loads(content)
+
+            # Clamp scores to 0-100 range
+            for key in ("content_score", "structure_score", "overall_score"):
+                result[key] = max(0, min(100, int(result.get(key, 50))))
+
+            # Ensure lists
+            result.setdefault("strengths", ["Answer provided"])
+            result.setdefault("improvements", ["Add more specific details"])
+            result.setdefault("feedback", "Review your answer for specificity and structure.")
+
+            tracker["output"] = result.get("feedback", "")
+            return result
+
+        except _json.JSONDecodeError as e:
+            logger.error("Interview evaluate JSON parse failed: %s | raw: %s", e, content[:500] if content else "empty")
+            raise HTTPException(502, detail="AI evaluation returned invalid format. Please try again.")
+        except Exception as e:
+            logger.error("Interview evaluate failed: %s", e)
+            raise HTTPException(502, detail="AI evaluation temporarily unavailable. Please try again.")
 
 
 # ── Interview Question Bank (JSON file) ──────────────────────────────────

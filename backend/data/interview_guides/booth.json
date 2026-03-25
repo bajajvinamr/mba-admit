@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30-45 min", "medium": "video or in-person", "is_blind": false },
+  "style": ["behavioral", "conversational", "data-driven"],
+  "common_themes": ["analytical thinking", "intellectual curiosity", "flexible thinking"],
+  "sample_questions": [
+    "Walk me through your resume",
+    "Why Booth specifically?",
+    "Describe a time you used data to make a decision",
+    "Tell me about a professional accomplishment you're proud of",
+    "How do you handle ambiguity?"
+  ],
+  "red_flags": ["Not demonstrating analytical thinking", "Generic 'why Booth' answer", "Lack of intellectual curiosity"],
+  "tips": ["Interviewer has read your application - avoid repeating essays verbatim.", "Booth values analytical thinking - have quant-heavy examples ready.", "Reference the flexible curriculum and LEAD program."],
+  "reports_count": 120
+}

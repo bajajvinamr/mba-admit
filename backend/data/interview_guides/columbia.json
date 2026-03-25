@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30 min", "medium": "video or in-person", "is_blind": false },
+  "style": ["behavioral", "career-focused", "conversational"],
+  "common_themes": ["career clarity", "NYC leverage", "entrepreneurship"],
+  "sample_questions": [
+    "Walk me through your resume",
+    "Why Columbia?",
+    "Tell me about a time you overcame an obstacle",
+    "What industry do you want to work in post-MBA?",
+    "How would you take advantage of being in New York City?"
+  ],
+  "red_flags": ["Not leveraging NYC in your narrative", "Vague career goals", "Not researching CBS-specific resources"],
+  "tips": ["Leverage the NYC location in your 'Why CBS' answer.", "CBS values entrepreneurship - mention relevant experiences.", "Be specific about CBS resources: Chazen Institute, Lang Center."],
+  "reports_count": 115
+}

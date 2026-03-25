@@ -1,0 +1,120 @@
+[
+  {
+    "id": "mem-MEMORY-architecture",
+    "key": "architecture",
+    "content": "- **Backend**: Python FastAPI (`backend/`) — routers pattern, loaded from `backend/main.py`\n- **Frontend**: Next.js 16 + React 19 + TypeScript + Tailwind v4 (`frontend/`)\n- **Scraper Pipeline**: Python CLI tool (`backend/scraper/`) — 4-stage pipeline\n- **Data**: `backend/data/` — JSON files, raw HTML cache",
+    "summary": "Architecture",
+    "namespace": "core",
+    "type": "semantic",
+    "metadata": {
+      "sourceFile": "/Users/vinamr/.claude/projects/-Users-vinamr-Documents-mba-admissions-ai/memory/MEMORY.md",
+      "bootstrapped": true
+    },
+    "createdAt": 1773687129906
+  },
+  {
+    "id": "mem-MEMORY-key-files",
+    "key": "key-files",
+    "content": "- `backend/agents.py` — School DB loader, LangChain agents, RAG engine\n- `backend/routers/schools.py` — School directory + odds calculator API\n- `backend/routers/scraper.py` — Pipeline status/stats endpoints (NEW)\n- `backend/scraper/run.py` — CLI orchestrator: `python -m backend.scraper.run <cmd>`\n- `frontend/src/app/school/[schoolId]/page.tsx` — School detail page\n- `frontend/src/app/schools/page.tsx` — School directory listing\n- `docs/plans/2026-03-12-mba-scraper-pipeline.md` — Implementation ",
+    "summary": "Key Files",
+    "namespace": "core",
+    "type": "semantic",
+    "metadata": {
+      "sourceFile": "/Users/vinamr/.claude/projects/-Users-vinamr-Documents-mba-admissions-ai/memory/MEMORY.md",
+      "bootstrapped": true
+    },
+    "createdAt": 1773687129906
+  },
+  {
+    "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+    "key": "scraper-pipeline-branch-feat-scraper-pipeline-",
+    "content": "- **Stage 1**: Discovery — ranking site scraping, seed schools, dedup\n- **Stage 1.5**: URL Resolution — Google search for missing websites\n- **Stage 2**: Crawl — Playwright page capture with resume support\n- **Stage 3**: Extract — Claude API structured extraction\n- **Stage 4**: Merge — overlay scraped data on existing DB\n- **Tests**: 12 unit tests in `backend/scraper/test_*.py`\n- **Blocker**: No `.env` with ANTHROPIC_API_KEY — extraction fails",
+    "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+    "namespace": "core",
+    "type": "semantic",
+    "metadata": {
+      "sourceFile": "/Users/vinamr/.claude/projects/-Users-vinamr-Documents-mba-admissions-ai/memory/MEMORY.md",
+      "bootstrapped": true
+    },
+    "createdAt": 1773687129906
+  },
+  {
+    "id": "mem-MEMORY-data-quality-integration--comp",
+    "key": "data-quality-integration-completed-2026-03-13-",
+    "content": "- `agents.py` now overlays scraped data at load time (`_overlay_scraped_data`)\n- School API responses include `data_source` and `data_confidence` fields\n- School detail API includes full `data_quality_summary` object\n- Frontend shows \"Verified Data\" / \"AI-Generated Data\" badges\n- Per-section verified indicators on essay prompts, deadlines, placement stats\n- New endpoints: `/api/scraper/status`, `/api/scraper/stats`",
+    "summary": "Data Quality Integration (completed 2026-03-13)",
+    "namespace": "core",
+    "type": "semantic",
+    "metadata": {
+      "sourceFile": "/Users/vinamr/.claude/projects/-Users-vinamr-Documents-mba-admissions-ai/memory/MEMORY.md",
+      "bootstrapped": true
+    },
+    "createdAt": 1773687129906
+  },
+  {
+    "id": "mem-MEMORY-school-db",
+    "key": "school-db",
+    "content": "- 1,198 total entries in `school_db_full.json` (mostly synthetic)\n- 254 \"real\" schools after hex-ID filtering\n- 4 schools crawled (HBS, Stanford, Wharton, IIM Ahmedabad)\n- 0 successfully extracted (API key missing)",
+    "summary": "School DB",
+    "namespace": "core",
+    "type": "semantic",
+    "metadata": {
+      "sourceFile": "/Users/vinamr/.claude/projects/-Users-vinamr-Documents-mba-admissions-ai/memory/MEMORY.md",
+      "bootstrapped": true
+    },
+    "createdAt": 1773687129906
+  },
+  {
+    "id": "mem-MEMORY-patterns",
+    "key": "patterns",
+    "content": "- School IDs: lowercase slugs (e.g., `hbs`, `gsb`, `wharton`, `iima`)\n- Synthetic schools: hex-hash IDs > 6 chars, filtered at load time\n- Data quality: `data_quality` dict with `verified_fields`, `confidence`, `last_scraped`\n- Frontend: editorial design system with `heading-serif`, `editorial-card`, gold/jet colors",
+    "summary": "Patterns",
+    "namespace": "core",
+    "type": "semantic",
+    "metadata": {
+      "sourceFile": "/Users/vinamr/.claude/projects/-Users-vinamr-Documents-mba-admissions-ai/memory/MEMORY.md",
+      "bootstrapped": true
+    },
+    "createdAt": 1773687129906
+  },
+  {
+    "id": "mem-MEMORY-tooling",
+    "key": "tooling",
+    "content": "- [Ruflo v3.5 Integration](project_ruflo_integration.md) — agent orchestration, self-learning, cost optimization\n- [Competitive Analysis](../../docs/research/2026-03-15-competitive-analysis.md) — market research on MBA admissions platforms",
+    "summary": "Tooling",
+    "namespace": "core",
+    "type": "semantic",
+    "metadata": {
+      "sourceFile": "/Users/vinamr/.claude/projects/-Users-vinamr-Documents-mba-admissions-ai/memory/MEMORY.md",
+      "bootstrapped": true
+    },
+    "createdAt": 1773687129906
+  },
+  {
+    "id": "mem-project_ruflo_integration----",
+    "key": "-",
+    "content": "name: ruflo-integration\ndescription: Ruflo v3.5 agent orchestration platform integrated into project for multi-agent swarms, self-learning, and cost optimization\ntype: project\n---\n\nRuflo v3.5.15 installed globally and initialized in the MBA admissions project (2026-03-15).\n\n**Why:** Increase development productivity via multi-agent coordination, persistent learning across sessions, and intelligent task routing (simple tasks to Haiku, complex to Opus).\n\n**How to apply:**\n- Daemon runs in backgrou",
+    "summary": "---",
+    "namespace": "project_ruflo_integration",
+    "type": "semantic",
+    "metadata": {
+      "sourceFile": "/Users/vinamr/.claude/projects/-Users-vinamr-Documents-mba-admissions-ai/memory/project_ruflo_integration.md",
+      "bootstrapped": true
+    },
+    "createdAt": 1773687129907
+  },
+  {
+    "id": "insight-1773692668657-awto",
+    "key": "frequent-edit-unknown",
+    "content": "File unknown was edited 190 times this session — likely a hot path worth monitoring.",
+    "summary": "Frequently edited: unknown (190x)",
+    "namespace": "insights",
+    "type": "procedural",
+    "metadata": {
+      "sourceFile": "unknown",
+      "editCount": 190,
+      "autoGenerated": true
+    },
+    "createdAt": 1773692668657
+  }
+]

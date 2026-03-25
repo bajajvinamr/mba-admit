@@ -1,0 +1,26 @@
+{
+  "country_name": "Canada",
+  "flag": "🇨🇦",
+  "avg_tuition_usd": 75000,
+  "avg_living_cost_usd": 22000,
+  "program_length_years": 1.5,
+  "post_study_work_visa": {
+    "name": "Post-Graduation Work Permit (PGWP)",
+    "duration": "3 years",
+    "restrictions": "Open work permit — no employer sponsorship needed. Can work for any employer in any field."
+  },
+  "avg_post_mba_salary_usd": 105000,
+  "top_schools": [
+    { "slug": "rotman", "name": "Rotman School of Management" },
+    { "slug": "ivey", "name": "Ivey Business School" },
+    { "slug": "queens-smith", "name": "Smith School of Business (Queen's)" },
+    { "slug": "desautels", "name": "Desautels Faculty of Management (McGill)" },
+    { "slug": "schulich", "name": "Schulich School of Business" }
+  ],
+  "language_requirement": "English or French depending on province. IELTS/TOEFL required for international students.",
+  "safety_index": 85,
+  "cost_of_living_index": 73,
+  "scholarship_availability": "Moderate — merit-based scholarships available. Vanier Canada Graduate Scholarships for top candidates.",
+  "path_to_pr": "Express Entry (CRS score). Canadian MBA + PGWP work experience = strong PR pathway. Typical timeline: 2-3 years after graduation.",
+  "test_policy": "GMAT or GRE accepted. Some schools waive for candidates with 5+ years experience."
+}

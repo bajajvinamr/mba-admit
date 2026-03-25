@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30 min", "medium": "video or in-person", "is_blind": true },
+  "style": ["behavioral", "collaborative", "conversational"],
+  "common_themes": ["experiential learning", "small community", "entrepreneurship"],
+  "sample_questions": [
+    "Tell me about yourself",
+    "Why WashU Olin?",
+    "Describe a time you worked on a cross-functional team",
+    "What are your career goals?",
+    "How will you contribute to the Olin community?"
+  ],
+  "red_flags": ["Not appreciating the small class size advantage", "Lacking collaborative examples", "Not researching Olin-specific programs"],
+  "tips": ["Olin's small class size creates a tight-knit community - show you value that.", "Reference experiential learning opportunities and the Skandalaris Center.", "St. Louis has a growing startup scene - mention if relevant to your goals."],
+  "reports_count": 45
+}

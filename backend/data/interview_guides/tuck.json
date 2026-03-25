@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30-45 min", "medium": "video or in-person", "is_blind": false },
+  "style": ["behavioral", "community-focused", "conversational"],
+  "common_themes": ["community", "general management", "personal character"],
+  "sample_questions": [
+    "Why an MBA? Why now?",
+    "Why Tuck?",
+    "Tell me about a time you made an impact in your community",
+    "Describe a challenge you faced in a team setting",
+    "How does Tuck fit into your long-term plan?"
+  ],
+  "red_flags": ["Not valuing community and small-school culture", "Inability to explain why Hanover", "Purely career-transactional mindset"],
+  "tips": ["Tuck has the strongest alumni network per capita - mention that.", "The tight-knit Hanover community is central - show you'd thrive there.", "Tuck interviews tend to be warm and conversational."],
+  "reports_count": 95
+}

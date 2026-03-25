@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30 min", "medium": "video or in-person", "is_blind": true },
+  "style": ["behavioral", "teamwork-focused", "conversational"],
+  "common_themes": ["collaboration", "empathy", "community building"],
+  "sample_questions": [
+    "Tell me about yourself",
+    "Why Kellogg?",
+    "Give an example of a time you worked on a diverse team",
+    "Describe a leadership moment you're proud of",
+    "How do you build relationships in professional settings?"
+  ],
+  "red_flags": ["Overly competitive framing", "Not showing collaborative spirit", "Lacking specific Kellogg knowledge"],
+  "tips": ["Kellogg prizes collaboration and empathy - emphasize teamwork.", "Alumni interviewers are enthusiastic - match their energy.", "Know Kellogg's clubs, GIM trips, and social impact initiatives."],
+  "reports_count": 135
+}

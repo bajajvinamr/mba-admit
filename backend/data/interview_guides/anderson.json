@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30 min", "medium": "video or in-person", "is_blind": true },
+  "style": ["behavioral", "entrepreneurial", "conversational"],
+  "common_themes": ["entrepreneurship", "entertainment and tech", "social impact"],
+  "sample_questions": [
+    "Tell me about yourself",
+    "Why UCLA Anderson?",
+    "Describe a time you took an entrepreneurial approach",
+    "How will you leverage LA and the West Coast during your MBA?",
+    "What will you contribute to the Anderson community?"
+  ],
+  "red_flags": ["Not connecting to LA's unique industries", "Lacking entrepreneurial mindset examples", "Not showing interest in Anderson's specific programs"],
+  "tips": ["Reference Anderson's strengths in entertainment, tech, and real estate.", "Know about the Price Center for Entrepreneurship.", "LA's diverse economy is a differentiator - weave it into your 'why Anderson'."],
+  "reports_count": 75
+}

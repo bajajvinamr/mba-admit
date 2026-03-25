@@ -23,6 +23,7 @@ logger = setup_logging()
 TIERS = {
     "free": {
         "essay_eval": 5,
+        "essay_coach": 5,
         "resume_roast": 3,
         "interview_session": 2,
         "interview_respond": 10,
@@ -38,6 +39,7 @@ TIERS = {
     },
     "pro": {
         "essay_eval": 50,
+        "essay_coach": 50,
         "resume_roast": 30,
         "interview_session": 20,
         "interview_respond": 100,
@@ -71,6 +73,7 @@ ENDPOINT_FEATURE_MAP: dict[str, str] = {
     "/api/goals/sculpt": "goals_sculpt",
     "/api/admit-simulator": "admit_simulator",
     "/api/profile/analyze": "profile_analyze",
+    "/api/essay/coach": "essay_coach",
 }
 
 # ── In-Memory Store ──────────────────────────────────────────────────────────

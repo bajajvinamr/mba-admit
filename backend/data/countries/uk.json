@@ -1,0 +1,26 @@
+{
+  "country_name": "United Kingdom",
+  "flag": "🇬🇧",
+  "avg_tuition_usd": 95000,
+  "avg_living_cost_usd": 28000,
+  "program_length_years": 1,
+  "post_study_work_visa": {
+    "name": "Graduate Route Visa",
+    "duration": "2 years",
+    "restrictions": "No employer sponsorship required. Can work any job. Must switch to Skilled Worker visa for long-term stay."
+  },
+  "avg_post_mba_salary_usd": 130000,
+  "top_schools": [
+    { "slug": "lbs", "name": "London Business School" },
+    { "slug": "oxford-said", "name": "Oxford Said Business School" },
+    { "slug": "cambridge-judge", "name": "Cambridge Judge Business School" },
+    { "slug": "imperial", "name": "Imperial College Business School" },
+    { "slug": "warwick", "name": "Warwick Business School" }
+  ],
+  "language_requirement": "English (IELTS 7.0+ typically required for non-native speakers)",
+  "safety_index": 78,
+  "cost_of_living_index": 88,
+  "scholarship_availability": "Moderate — Chevening scholarships for international students, school-specific awards. LBS offers significant merit aid.",
+  "path_to_pr": "Skilled Worker visa → ILR (Indefinite Leave to Remain) after 5 years. Graduate route counts toward settlement timeline.",
+  "test_policy": "GMAT or GRE accepted. Some programs accept GMAT Focus Edition. LBS requires GMAT/GRE with no waiver option."
+}

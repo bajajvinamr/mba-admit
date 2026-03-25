@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "adcom", "duration": "30 min", "medium": "in-person or video", "is_blind": false },
+  "style": ["behavioral", "post-interview reflection"],
+  "common_themes": ["leadership", "community contribution", "self-awareness"],
+  "sample_questions": [
+    "Tell me about a time you led a team through ambiguity",
+    "Walk me through your resume",
+    "What will you contribute to the HBS community?",
+    "Describe a situation where you had to influence without authority",
+    "Tell me about your most significant leadership experience"
+  ],
+  "red_flags": ["Being too rehearsed", "Not asking thoughtful questions", "Focusing only on career achievements without personal depth"],
+  "tips": ["HBS does a post-interview written reflection. Practice writing under time pressure.", "The interviewer has NOT read your application - introduce yourself clearly.", "Prepare a concise 2-minute personal pitch."],
+  "reports_count": 150
+}

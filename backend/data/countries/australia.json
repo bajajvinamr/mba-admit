@@ -1,0 +1,25 @@
+{
+  "country_name": "Australia",
+  "flag": "🇦🇺",
+  "avg_tuition_usd": 70000,
+  "avg_living_cost_usd": 22000,
+  "program_length_years": 1.5,
+  "post_study_work_visa": {
+    "name": "Temporary Graduate Visa (subclass 485)",
+    "duration": "2-4 years",
+    "restrictions": "Open work rights — no employer sponsorship needed. Duration depends on qualification level and study location."
+  },
+  "avg_post_mba_salary_usd": 105000,
+  "top_schools": [
+    { "slug": "agsm", "name": "AGSM (UNSW Business School)" },
+    { "slug": "melbourne-business", "name": "Melbourne Business School" },
+    { "slug": "mbs-monash", "name": "Monash Business School" },
+    { "slug": "macquarie", "name": "Macquarie Business School" }
+  ],
+  "language_requirement": "English (IELTS 6.5+ overall, 6.0+ per band typically required)",
+  "safety_index": 84,
+  "cost_of_living_index": 82,
+  "scholarship_availability": "Moderate — Australia Awards for developing country nationals. University-specific merit scholarships. Destination Australia for regional campus programs.",
+  "path_to_pr": "Points-based skilled migration (subclass 189/190). MBA + Australian work experience = competitive PR application. Typical timeline: 2-4 years.",
+  "test_policy": "GMAT or GRE accepted at all major programs. Some offer waivers for 5+ years professional experience."
+}

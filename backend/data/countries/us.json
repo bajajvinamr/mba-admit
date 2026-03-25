@@ -1,0 +1,28 @@
+{
+  "country_name": "United States",
+  "flag": "🇺🇸",
+  "avg_tuition_usd": 155000,
+  "avg_living_cost_usd": 35000,
+  "program_length_years": 2,
+  "post_study_work_visa": {
+    "name": "OPT (Optional Practical Training)",
+    "duration": "3 years (STEM MBA)",
+    "restrictions": "Employer sponsorship required for H-1B after OPT. Annual H-1B lottery with ~30% selection rate."
+  },
+  "avg_post_mba_salary_usd": 165000,
+  "top_schools": [
+    { "slug": "hbs", "name": "Harvard Business School" },
+    { "slug": "gsb", "name": "Stanford GSB" },
+    { "slug": "wharton", "name": "Wharton School" },
+    { "slug": "booth", "name": "Chicago Booth" },
+    { "slug": "kellogg", "name": "Kellogg School of Management" },
+    { "slug": "cbs", "name": "Columbia Business School" },
+    { "slug": "sloan", "name": "MIT Sloan" }
+  ],
+  "language_requirement": "English (TOEFL/IELTS for non-native speakers)",
+  "safety_index": 72,
+  "cost_of_living_index": 100,
+  "scholarship_availability": "High — merit-based and need-based grants common at top programs. Average scholarship covers 25-40% of tuition.",
+  "path_to_pr": "No direct MBA-to-green-card pathway. Requires employer sponsorship (EB-2/EB-3). Typical timeline: 3-10+ years depending on country of birth.",
+  "test_policy": "GMAT or GRE accepted at all schools. Some offer test waivers for experienced candidates."
+}

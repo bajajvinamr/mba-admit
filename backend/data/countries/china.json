@@ -1,0 +1,25 @@
+{
+  "country_name": "China",
+  "flag": "🇨🇳",
+  "avg_tuition_usd": 55000,
+  "avg_living_cost_usd": 12000,
+  "program_length_years": 2,
+  "post_study_work_visa": {
+    "name": "Work Permit (Z Visa)",
+    "duration": "1-5 years (renewable)",
+    "restrictions": "Requires employer sponsorship. 2 years work experience typically required. Easier in special economic zones."
+  },
+  "avg_post_mba_salary_usd": 65000,
+  "top_schools": [
+    { "slug": "ceibs", "name": "CEIBS (China Europe International Business School)" },
+    { "slug": "tsinghua-sem", "name": "Tsinghua University SEM" },
+    { "slug": "peking-gsm", "name": "Peking University Guanghua School" },
+    { "slug": "hkust", "name": "HKUST Business School" }
+  ],
+  "language_requirement": "Mandarin Chinese required for most domestic programs. CEIBS and joint programs taught in English.",
+  "safety_index": 75,
+  "cost_of_living_index": 42,
+  "scholarship_availability": "Moderate — Chinese Government Scholarship (CSC) for international students. CEIBS offers merit-based grants. Some programs offer full tuition scholarships.",
+  "path_to_pr": "Chinese Green Card (very difficult to obtain). Most expats work on renewable work permits. Permanent residence requires 4+ years continuous residence.",
+  "test_policy": "GMAT accepted at international programs. Domestic programs require national MBA entrance exam (MBA联考). GRE increasingly accepted."
+}

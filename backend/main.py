@@ -28,7 +28,7 @@ app.add_exception_handler(Exception, global_exception_handler)
 
 # ── CORS ───────────────────────────────────────────────────────────────────────
 
-ALLOWED_ORIGINS = os.environ.get("ALLOWED_ORIGINS", "http://localhost:3000,http://localhost:3001,http://127.0.0.1:3000,http://127.0.0.1:3001").split(",")
+ALLOWED_ORIGINS = os.environ.get("ALLOWED_ORIGINS", "http://localhost:3000,http://localhost:3001,http://127.0.0.1:3000,http://127.0.0.1:3001,https://mba-admit.vercel.app").split(",")
 
 app.add_middleware(
     CORSMiddleware,
@@ -58,6 +58,12 @@ from routers.applicant_data import router as applicant_data_router
 from routers.simulator import router as simulator_router
 from routers.search import router as search_router
 from routers.outcomes import router as outcomes_router
+from routers.essay_themes import router as essay_themes_router
+from routers.recommenders import router as recommenders_router
+from routers.financial_aid import router as financial_aid_router
+from routers.career import router as career_router
+from routers.countries import router as countries_router
+from routers.interview_guides import router as interview_guides_router
 
 app.include_router(auth_router)
 app.include_router(schools_router)
@@ -77,6 +83,12 @@ app.include_router(applicant_data_router)
 app.include_router(simulator_router)
 app.include_router(search_router)
 app.include_router(outcomes_router)
+app.include_router(essay_themes_router)
+app.include_router(recommenders_router)
+app.include_router(financial_aid_router)
+app.include_router(career_router)
+app.include_router(countries_router)
+app.include_router(interview_guides_router)
 
 
 @app.get("/")

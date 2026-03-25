@@ -98,6 +98,22 @@ class InterviewResponseRequest(BaseModel):
     question_count: int = Field(default=5, ge=3, le=10)
 
 
+class InterviewEvaluateRequest(BaseModel):
+    question: str = Field(min_length=5, max_length=2000, description="The interview question asked")
+    answer: str = Field(min_length=10, max_length=10000, description="The candidate's answer to evaluate")
+    school_id: str = Field(default="general", description="School ID for school-specific context")
+    question_type: str = Field(default="behavioral", description="Question type: behavioral, why_mba, leadership, etc.")
+
+
+class InterviewEvaluateResponse(BaseModel):
+    content_score: int = Field(ge=0, le=100)
+    structure_score: int = Field(ge=0, le=100)
+    overall_score: int = Field(ge=0, le=100)
+    feedback: str
+    strengths: List[str]
+    improvements: List[str]
+
+
 # ── Control Center ────────────────────────────────────────────────────────────
 
 class ControlCenterInitRequest(BaseModel):
@@ -301,3 +317,13 @@ class AppStrengthRequest(BaseModel):
     extracurriculars: Optional[int] = 0
     international_exp: bool = False
     target_school_id: Optional[str] = None
+
+
+# ── Essay Coach (Real Claude API) ─────────────────────────────────────────
+
+class EssayCoachRequest(BaseModel):
+    school_id: str = Field(max_length=100)
+    prompt_text: str = Field(min_length=1, max_length=2000)
+    essay_text: str = Field(default="", max_length=15000)
+    mode: Literal["brainstorm", "review", "tone_check"] = "brainstorm"
+    word_limit: Optional[int] = Field(default=None, ge=50, le=5000)

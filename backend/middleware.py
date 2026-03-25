@@ -70,6 +70,7 @@ LLM_ENDPOINTS: set[str] = {
     "/api/financial/compare",
     "/api/negotiate_scholarship",
     "/api/essays/storyteller",
+    "/api/essay/coach",
 }
 
 DEFAULT_TIMEOUT_S = 30    # Quick data endpoints

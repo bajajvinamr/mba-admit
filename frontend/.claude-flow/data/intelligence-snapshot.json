@@ -1,0 +1,1490 @@
+[
+  {
+    "timestamp": 1773692668662,
+    "nodes": 9,
+    "edges": 6,
+    "pageRankSum": 1,
+    "confidences": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "accessCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "topPatterns": [
+      {
+        "id": "mem-MEMORY-tooling",
+        "summary": "Tooling",
+        "confidence": 0.5,
+        "pageRank": 0.19693779476003911,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-patterns",
+        "summary": "Patterns",
+        "confidence": 0.5,
+        "pageRank": 0.1805398196428332,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-school-db",
+        "summary": "School DB",
+        "confidence": 0.5,
+        "pageRank": 0.16124789535775155,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-data-quality-integration--comp",
+        "summary": "Data Quality Integration (completed 2026-03-13)",
+        "confidence": 0.5,
+        "pageRank": 0.13855145248608602,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+        "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+        "confidence": 0.5,
+        "pageRank": 0.11184980072651707,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-key-files",
+        "summary": "Key Files",
+        "confidence": 0.5,
+        "pageRank": 0.08043617573058126,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-architecture",
+        "summary": "Architecture",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-project_ruflo_integration----",
+        "summary": "---",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "insight-1773692668657-awto",
+        "summary": "Frequently edited: unknown (190x)",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1773694684161,
+    "nodes": 9,
+    "edges": 6,
+    "pageRankSum": 1,
+    "confidences": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "accessCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "topPatterns": [
+      {
+        "id": "mem-MEMORY-tooling",
+        "summary": "Tooling",
+        "confidence": 0.5,
+        "pageRank": 0.19693779476003911,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-patterns",
+        "summary": "Patterns",
+        "confidence": 0.5,
+        "pageRank": 0.1805398196428332,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-school-db",
+        "summary": "School DB",
+        "confidence": 0.5,
+        "pageRank": 0.16124789535775155,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-data-quality-integration--comp",
+        "summary": "Data Quality Integration (completed 2026-03-13)",
+        "confidence": 0.5,
+        "pageRank": 0.13855145248608602,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+        "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+        "confidence": 0.5,
+        "pageRank": 0.11184980072651707,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-key-files",
+        "summary": "Key Files",
+        "confidence": 0.5,
+        "pageRank": 0.08043617573058126,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-architecture",
+        "summary": "Architecture",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-project_ruflo_integration----",
+        "summary": "---",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "insight-1773692668657-awto",
+        "summary": "Frequently edited: unknown (190x)",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1773695437068,
+    "nodes": 9,
+    "edges": 6,
+    "pageRankSum": 1,
+    "confidences": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "accessCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "topPatterns": [
+      {
+        "id": "mem-MEMORY-tooling",
+        "summary": "Tooling",
+        "confidence": 0.5,
+        "pageRank": 0.19693779476003911,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-patterns",
+        "summary": "Patterns",
+        "confidence": 0.5,
+        "pageRank": 0.1805398196428332,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-school-db",
+        "summary": "School DB",
+        "confidence": 0.5,
+        "pageRank": 0.16124789535775155,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-data-quality-integration--comp",
+        "summary": "Data Quality Integration (completed 2026-03-13)",
+        "confidence": 0.5,
+        "pageRank": 0.13855145248608602,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+        "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+        "confidence": 0.5,
+        "pageRank": 0.11184980072651707,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-key-files",
+        "summary": "Key Files",
+        "confidence": 0.5,
+        "pageRank": 0.08043617573058126,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-architecture",
+        "summary": "Architecture",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-project_ruflo_integration----",
+        "summary": "---",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "insight-1773692668657-awto",
+        "summary": "Frequently edited: unknown (190x)",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1773699276445,
+    "nodes": 9,
+    "edges": 6,
+    "pageRankSum": 1,
+    "confidences": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "accessCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "topPatterns": [
+      {
+        "id": "mem-MEMORY-tooling",
+        "summary": "Tooling",
+        "confidence": 0.5,
+        "pageRank": 0.19693779476003911,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-patterns",
+        "summary": "Patterns",
+        "confidence": 0.5,
+        "pageRank": 0.1805398196428332,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-school-db",
+        "summary": "School DB",
+        "confidence": 0.5,
+        "pageRank": 0.16124789535775155,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-data-quality-integration--comp",
+        "summary": "Data Quality Integration (completed 2026-03-13)",
+        "confidence": 0.5,
+        "pageRank": 0.13855145248608602,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+        "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+        "confidence": 0.5,
+        "pageRank": 0.11184980072651707,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-key-files",
+        "summary": "Key Files",
+        "confidence": 0.5,
+        "pageRank": 0.08043617573058126,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-architecture",
+        "summary": "Architecture",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-project_ruflo_integration----",
+        "summary": "---",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "insight-1773692668657-awto",
+        "summary": "Frequently edited: unknown (190x)",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1773702768506,
+    "nodes": 9,
+    "edges": 6,
+    "pageRankSum": 1,
+    "confidences": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "accessCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "topPatterns": [
+      {
+        "id": "mem-MEMORY-tooling",
+        "summary": "Tooling",
+        "confidence": 0.5,
+        "pageRank": 0.19693779476003911,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-patterns",
+        "summary": "Patterns",
+        "confidence": 0.5,
+        "pageRank": 0.1805398196428332,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-school-db",
+        "summary": "School DB",
+        "confidence": 0.5,
+        "pageRank": 0.16124789535775155,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-data-quality-integration--comp",
+        "summary": "Data Quality Integration (completed 2026-03-13)",
+        "confidence": 0.5,
+        "pageRank": 0.13855145248608602,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+        "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+        "confidence": 0.5,
+        "pageRank": 0.11184980072651707,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-key-files",
+        "summary": "Key Files",
+        "confidence": 0.5,
+        "pageRank": 0.08043617573058126,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-architecture",
+        "summary": "Architecture",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-project_ruflo_integration----",
+        "summary": "---",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "insight-1773692668657-awto",
+        "summary": "Frequently edited: unknown (190x)",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1773704089771,
+    "nodes": 9,
+    "edges": 6,
+    "pageRankSum": 1,
+    "confidences": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "accessCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "topPatterns": [
+      {
+        "id": "mem-MEMORY-tooling",
+        "summary": "Tooling",
+        "confidence": 0.5,
+        "pageRank": 0.19693779476003911,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-patterns",
+        "summary": "Patterns",
+        "confidence": 0.5,
+        "pageRank": 0.1805398196428332,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-school-db",
+        "summary": "School DB",
+        "confidence": 0.5,
+        "pageRank": 0.16124789535775155,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-data-quality-integration--comp",
+        "summary": "Data Quality Integration (completed 2026-03-13)",
+        "confidence": 0.5,
+        "pageRank": 0.13855145248608602,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+        "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+        "confidence": 0.5,
+        "pageRank": 0.11184980072651707,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-key-files",
+        "summary": "Key Files",
+        "confidence": 0.5,
+        "pageRank": 0.08043617573058126,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-architecture",
+        "summary": "Architecture",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-project_ruflo_integration----",
+        "summary": "---",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "insight-1773692668657-awto",
+        "summary": "Frequently edited: unknown (190x)",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1773705612687,
+    "nodes": 9,
+    "edges": 6,
+    "pageRankSum": 1,
+    "confidences": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "accessCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "topPatterns": [
+      {
+        "id": "mem-MEMORY-tooling",
+        "summary": "Tooling",
+        "confidence": 0.5,
+        "pageRank": 0.19693779476003911,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-patterns",
+        "summary": "Patterns",
+        "confidence": 0.5,
+        "pageRank": 0.1805398196428332,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-school-db",
+        "summary": "School DB",
+        "confidence": 0.5,
+        "pageRank": 0.16124789535775155,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-data-quality-integration--comp",
+        "summary": "Data Quality Integration (completed 2026-03-13)",
+        "confidence": 0.5,
+        "pageRank": 0.13855145248608602,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+        "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+        "confidence": 0.5,
+        "pageRank": 0.11184980072651707,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-key-files",
+        "summary": "Key Files",
+        "confidence": 0.5,
+        "pageRank": 0.08043617573058126,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-architecture",
+        "summary": "Architecture",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-project_ruflo_integration----",
+        "summary": "---",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "insight-1773692668657-awto",
+        "summary": "Frequently edited: unknown (190x)",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1773706589266,
+    "nodes": 9,
+    "edges": 6,
+    "pageRankSum": 1,
+    "confidences": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "accessCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "topPatterns": [
+      {
+        "id": "mem-MEMORY-tooling",
+        "summary": "Tooling",
+        "confidence": 0.5,
+        "pageRank": 0.19693779476003911,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-patterns",
+        "summary": "Patterns",
+        "confidence": 0.5,
+        "pageRank": 0.1805398196428332,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-school-db",
+        "summary": "School DB",
+        "confidence": 0.5,
+        "pageRank": 0.16124789535775155,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-data-quality-integration--comp",
+        "summary": "Data Quality Integration (completed 2026-03-13)",
+        "confidence": 0.5,
+        "pageRank": 0.13855145248608602,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+        "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+        "confidence": 0.5,
+        "pageRank": 0.11184980072651707,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-key-files",
+        "summary": "Key Files",
+        "confidence": 0.5,
+        "pageRank": 0.08043617573058126,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-architecture",
+        "summary": "Architecture",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-project_ruflo_integration----",
+        "summary": "---",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "insight-1773692668657-awto",
+        "summary": "Frequently edited: unknown (190x)",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1773708007470,
+    "nodes": 9,
+    "edges": 6,
+    "pageRankSum": 1,
+    "confidences": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "accessCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "topPatterns": [
+      {
+        "id": "mem-MEMORY-tooling",
+        "summary": "Tooling",
+        "confidence": 0.5,
+        "pageRank": 0.19693779476003911,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-patterns",
+        "summary": "Patterns",
+        "confidence": 0.5,
+        "pageRank": 0.1805398196428332,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-school-db",
+        "summary": "School DB",
+        "confidence": 0.5,
+        "pageRank": 0.16124789535775155,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-data-quality-integration--comp",
+        "summary": "Data Quality Integration (completed 2026-03-13)",
+        "confidence": 0.5,
+        "pageRank": 0.13855145248608602,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+        "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+        "confidence": 0.5,
+        "pageRank": 0.11184980072651707,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-key-files",
+        "summary": "Key Files",
+        "confidence": 0.5,
+        "pageRank": 0.08043617573058126,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-architecture",
+        "summary": "Architecture",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-project_ruflo_integration----",
+        "summary": "---",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "insight-1773692668657-awto",
+        "summary": "Frequently edited: unknown (190x)",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1773709380137,
+    "nodes": 9,
+    "edges": 6,
+    "pageRankSum": 1,
+    "confidences": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "accessCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "topPatterns": [
+      {
+        "id": "mem-MEMORY-tooling",
+        "summary": "Tooling",
+        "confidence": 0.5,
+        "pageRank": 0.19693779476003911,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-patterns",
+        "summary": "Patterns",
+        "confidence": 0.5,
+        "pageRank": 0.1805398196428332,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-school-db",
+        "summary": "School DB",
+        "confidence": 0.5,
+        "pageRank": 0.16124789535775155,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-data-quality-integration--comp",
+        "summary": "Data Quality Integration (completed 2026-03-13)",
+        "confidence": 0.5,
+        "pageRank": 0.13855145248608602,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+        "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+        "confidence": 0.5,
+        "pageRank": 0.11184980072651707,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-key-files",
+        "summary": "Key Files",
+        "confidence": 0.5,
+        "pageRank": 0.08043617573058126,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-architecture",
+        "summary": "Architecture",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-project_ruflo_integration----",
+        "summary": "---",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "insight-1773692668657-awto",
+        "summary": "Frequently edited: unknown (190x)",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1773713227859,
+    "nodes": 9,
+    "edges": 6,
+    "pageRankSum": 1,
+    "confidences": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "accessCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "topPatterns": [
+      {
+        "id": "mem-MEMORY-tooling",
+        "summary": "Tooling",
+        "confidence": 0.5,
+        "pageRank": 0.19693779476003911,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-patterns",
+        "summary": "Patterns",
+        "confidence": 0.5,
+        "pageRank": 0.1805398196428332,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-school-db",
+        "summary": "School DB",
+        "confidence": 0.5,
+        "pageRank": 0.16124789535775155,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-data-quality-integration--comp",
+        "summary": "Data Quality Integration (completed 2026-03-13)",
+        "confidence": 0.5,
+        "pageRank": 0.13855145248608602,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+        "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+        "confidence": 0.5,
+        "pageRank": 0.11184980072651707,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-key-files",
+        "summary": "Key Files",
+        "confidence": 0.5,
+        "pageRank": 0.08043617573058126,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-architecture",
+        "summary": "Architecture",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-project_ruflo_integration----",
+        "summary": "---",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "insight-1773692668657-awto",
+        "summary": "Frequently edited: unknown (190x)",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1773713776114,
+    "nodes": 9,
+    "edges": 6,
+    "pageRankSum": 1,
+    "confidences": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "accessCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "topPatterns": [
+      {
+        "id": "mem-MEMORY-tooling",
+        "summary": "Tooling",
+        "confidence": 0.5,
+        "pageRank": 0.19693779476003911,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-patterns",
+        "summary": "Patterns",
+        "confidence": 0.5,
+        "pageRank": 0.1805398196428332,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-school-db",
+        "summary": "School DB",
+        "confidence": 0.5,
+        "pageRank": 0.16124789535775155,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-data-quality-integration--comp",
+        "summary": "Data Quality Integration (completed 2026-03-13)",
+        "confidence": 0.5,
+        "pageRank": 0.13855145248608602,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+        "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+        "confidence": 0.5,
+        "pageRank": 0.11184980072651707,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-key-files",
+        "summary": "Key Files",
+        "confidence": 0.5,
+        "pageRank": 0.08043617573058126,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-architecture",
+        "summary": "Architecture",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-project_ruflo_integration----",
+        "summary": "---",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "insight-1773692668657-awto",
+        "summary": "Frequently edited: unknown (190x)",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1773740818899,
+    "nodes": 9,
+    "edges": 6,
+    "pageRankSum": 1,
+    "confidences": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "accessCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "topPatterns": [
+      {
+        "id": "mem-MEMORY-tooling",
+        "summary": "Tooling",
+        "confidence": 0.5,
+        "pageRank": 0.19693779476003911,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-patterns",
+        "summary": "Patterns",
+        "confidence": 0.5,
+        "pageRank": 0.1805398196428332,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-school-db",
+        "summary": "School DB",
+        "confidence": 0.5,
+        "pageRank": 0.16124789535775155,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-data-quality-integration--comp",
+        "summary": "Data Quality Integration (completed 2026-03-13)",
+        "confidence": 0.5,
+        "pageRank": 0.13855145248608602,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+        "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+        "confidence": 0.5,
+        "pageRank": 0.11184980072651707,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-key-files",
+        "summary": "Key Files",
+        "confidence": 0.5,
+        "pageRank": 0.08043617573058126,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-architecture",
+        "summary": "Architecture",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-project_ruflo_integration----",
+        "summary": "---",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "insight-1773692668657-awto",
+        "summary": "Frequently edited: unknown (190x)",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1773743487441,
+    "nodes": 9,
+    "edges": 6,
+    "pageRankSum": 1,
+    "confidences": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "accessCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "topPatterns": [
+      {
+        "id": "mem-MEMORY-tooling",
+        "summary": "Tooling",
+        "confidence": 0.5,
+        "pageRank": 0.19693779476003911,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-patterns",
+        "summary": "Patterns",
+        "confidence": 0.5,
+        "pageRank": 0.1805398196428332,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-school-db",
+        "summary": "School DB",
+        "confidence": 0.5,
+        "pageRank": 0.16124789535775155,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-data-quality-integration--comp",
+        "summary": "Data Quality Integration (completed 2026-03-13)",
+        "confidence": 0.5,
+        "pageRank": 0.13855145248608602,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+        "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+        "confidence": 0.5,
+        "pageRank": 0.11184980072651707,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-key-files",
+        "summary": "Key Files",
+        "confidence": 0.5,
+        "pageRank": 0.08043617573058126,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-architecture",
+        "summary": "Architecture",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-project_ruflo_integration----",
+        "summary": "---",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "insight-1773692668657-awto",
+        "summary": "Frequently edited: unknown (190x)",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1773746855713,
+    "nodes": 9,
+    "edges": 6,
+    "pageRankSum": 1,
+    "confidences": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "accessCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "topPatterns": [
+      {
+        "id": "mem-MEMORY-tooling",
+        "summary": "Tooling",
+        "confidence": 0.5,
+        "pageRank": 0.19693779476003911,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-patterns",
+        "summary": "Patterns",
+        "confidence": 0.5,
+        "pageRank": 0.1805398196428332,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-school-db",
+        "summary": "School DB",
+        "confidence": 0.5,
+        "pageRank": 0.16124789535775155,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-data-quality-integration--comp",
+        "summary": "Data Quality Integration (completed 2026-03-13)",
+        "confidence": 0.5,
+        "pageRank": 0.13855145248608602,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+        "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+        "confidence": 0.5,
+        "pageRank": 0.11184980072651707,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-key-files",
+        "summary": "Key Files",
+        "confidence": 0.5,
+        "pageRank": 0.08043617573058126,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-architecture",
+        "summary": "Architecture",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-project_ruflo_integration----",
+        "summary": "---",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "insight-1773692668657-awto",
+        "summary": "Frequently edited: unknown (190x)",
+        "confidence": 0.5,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1773795725633,
+    "nodes": 9,
+    "edges": 6,
+    "pageRankSum": 1,
+    "confidences": [
+      0.495,
+      0.495,
+      0.495,
+      0.495,
+      0.495,
+      0.495,
+      0.495,
+      0.495,
+      0.495
+    ],
+    "accessCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "topPatterns": [
+      {
+        "id": "mem-MEMORY-tooling",
+        "summary": "Tooling",
+        "confidence": 0.495,
+        "pageRank": 0.19693779476003911,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-patterns",
+        "summary": "Patterns",
+        "confidence": 0.495,
+        "pageRank": 0.1805398196428332,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-school-db",
+        "summary": "School DB",
+        "confidence": 0.495,
+        "pageRank": 0.16124789535775155,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-data-quality-integration--comp",
+        "summary": "Data Quality Integration (completed 2026-03-13)",
+        "confidence": 0.495,
+        "pageRank": 0.13855145248608602,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-scraper-pipeline--branch--feat",
+        "summary": "Scraper Pipeline (branch: feat/scraper-pipeline)",
+        "confidence": 0.495,
+        "pageRank": 0.11184980072651707,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-key-files",
+        "summary": "Key Files",
+        "confidence": 0.495,
+        "pageRank": 0.08043617573058126,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-MEMORY-architecture",
+        "summary": "Architecture",
+        "confidence": 0.495,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "mem-project_ruflo_integration----",
+        "summary": "---",
+        "confidence": 0.495,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      },
+      {
+        "id": "insight-1773692668657-awto",
+        "summary": "Frequently edited: unknown (190x)",
+        "confidence": 0.495,
+        "pageRank": 0.04347902043206393,
+        "accessCount": 0
+      }
+    ]
+  }
+]

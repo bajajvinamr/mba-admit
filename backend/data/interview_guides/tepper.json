@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "adcom", "duration": "30 min", "medium": "video or in-person", "is_blind": false },
+  "style": ["behavioral", "analytical", "structured"],
+  "common_themes": ["analytical rigor", "technology", "leadership"],
+  "sample_questions": [
+    "Walk me through your resume",
+    "Why Carnegie Mellon Tepper?",
+    "Describe a time you used data to drive a decision",
+    "Tell me about a leadership challenge you faced",
+    "How will you contribute to Tepper?"
+  ],
+  "red_flags": ["Not demonstrating analytical skills", "Ignoring Tepper's tech and data strengths", "Being too soft on quantitative examples"],
+  "tips": ["Tepper is known for its quantitative and analytical approach - lead with data.", "Reference the intersection of business and technology at CMU.", "Know about Tepper's focus on AI and business intelligence."],
+  "reports_count": 65
+}

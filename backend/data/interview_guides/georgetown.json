@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30 min", "medium": "video or in-person", "is_blind": true },
+  "style": ["behavioral", "service-oriented", "conversational"],
+  "common_themes": ["principled leadership", "global affairs", "service to others"],
+  "sample_questions": [
+    "Tell me about yourself",
+    "Why Georgetown McDonough?",
+    "Describe a time you served your community",
+    "How does your career align with Georgetown's Jesuit values?",
+    "What will you contribute to McDonough?"
+  ],
+  "red_flags": ["Not connecting to Georgetown's service mission", "Ignoring DC's policy and government ecosystem", "Purely profit-driven motivation"],
+  "tips": ["Georgetown's Jesuit values emphasize service and ethics - weave these in.", "DC location is ideal for policy, government, and international careers.", "Reference specific McDonough programs and centers."],
+  "reports_count": 50
+}

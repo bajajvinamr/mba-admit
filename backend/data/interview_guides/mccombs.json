@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30 min", "medium": "video or in-person", "is_blind": true },
+  "style": ["behavioral", "conversational", "community-focused"],
+  "common_themes": ["Texas business culture", "energy and tech", "community"],
+  "sample_questions": [
+    "Tell me about yourself",
+    "Why McCombs?",
+    "Describe a time you built a relationship that led to a business outcome",
+    "What are your career goals?",
+    "How will you contribute to the McCombs community?"
+  ],
+  "red_flags": ["Not understanding Austin's growing tech scene", "Dismissive of Texas business culture", "Lacking community involvement"],
+  "tips": ["McCombs benefits from Austin's booming tech and startup ecosystem.", "Show genuine interest in the Texas business community.", "Reference specific McCombs programs and clubs."],
+  "reports_count": 60
+}

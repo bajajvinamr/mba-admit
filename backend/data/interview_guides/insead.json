@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30-45 min", "medium": "video or in-person", "is_blind": true },
+  "style": ["behavioral", "diversity-focused", "fast-paced"],
+  "common_themes": ["diversity", "international experience", "adaptability"],
+  "sample_questions": [
+    "Tell me about yourself in 2 minutes",
+    "Why INSEAD?",
+    "Give an example of working in a multicultural team",
+    "Why the one-year format vs. two-year MBA?",
+    "How do you handle rapid change?"
+  ],
+  "red_flags": ["Lack of international experience or curiosity", "Not explaining why one-year format", "Being inflexible or narrow-minded"],
+  "tips": ["INSEAD values diversity above all - highlight cross-cultural experiences.", "Be clear about why you prefer the intensive one-year format.", "Know that INSEAD has campuses in Fontainebleau, Singapore, and Abu Dhabi."],
+  "reports_count": 110
+}

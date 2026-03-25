@@ -1,0 +1,25 @@
+{
+  "country_name": "Germany",
+  "flag": "🇩🇪",
+  "avg_tuition_usd": 45000,
+  "avg_living_cost_usd": 18000,
+  "program_length_years": 1.5,
+  "post_study_work_visa": {
+    "name": "Job Seeker Visa (§20 AufenthG)",
+    "duration": "18 months",
+    "restrictions": "Must find employment matching qualification level. No employer sponsorship required during search period."
+  },
+  "avg_post_mba_salary_usd": 100000,
+  "top_schools": [
+    { "slug": "mannheim", "name": "Mannheim Business School" },
+    { "slug": "esmt-berlin", "name": "ESMT Berlin" },
+    { "slug": "hhl-leipzig", "name": "HHL Leipzig" },
+    { "slug": "whu", "name": "WHU Otto Beisheim School of Management" }
+  ],
+  "language_requirement": "Programs taught in English. German proficiency (B1+) significantly improves job prospects.",
+  "safety_index": 82,
+  "cost_of_living_index": 68,
+  "scholarship_availability": "Moderate — DAAD scholarships for international students. Some public universities offer low or no tuition. ESMT offers merit scholarships.",
+  "path_to_pr": "EU Blue Card → settlement permit after 21 months (with B1 German) or 33 months. One of the fastest PR paths in Europe.",
+  "test_policy": "GMAT or GRE accepted. Some schools accept TAGE MAGE or their own admissions tests."
+}

@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30 min", "medium": "video or in-person", "is_blind": true },
+  "style": ["behavioral", "values-based", "conversational"],
+  "common_themes": ["Team Fuqua", "consequential leadership", "collaboration"],
+  "sample_questions": [
+    "Tell me about yourself",
+    "Why Duke Fuqua?",
+    "What does 'Team Fuqua' mean to you?",
+    "Describe a time you demonstrated consequential leadership",
+    "How will you contribute to the Fuqua community?"
+  ],
+  "red_flags": ["Not understanding Team Fuqua culture", "Individualistic framing", "Lack of community involvement examples"],
+  "tips": ["'Team Fuqua' is central to the culture - show genuine understanding.", "Research COLE (Center on Leadership and Ethics).", "Alumni interviewers are very engaged - have good questions ready."],
+  "reports_count": 90
+}

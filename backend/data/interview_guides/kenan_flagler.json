@@ -1,0 +1,15 @@
+{
+  "format": { "interviewer_type": "alumni", "duration": "30 min", "medium": "video or in-person", "is_blind": true },
+  "style": ["behavioral", "values-driven", "conversational"],
+  "common_themes": ["leadership", "community", "values-driven business"],
+  "sample_questions": [
+    "Tell me about yourself",
+    "Why UNC Kenan-Flagler?",
+    "Describe a time you demonstrated integrity at work",
+    "How do you approach teamwork?",
+    "What will you bring to the KF community?"
+  ],
+  "red_flags": ["Not understanding KF's values-driven culture", "Lacking community examples", "Overly aggressive career framing"],
+  "tips": ["Kenan-Flagler emphasizes 'leading with purpose' - align your stories.", "Reference the Research Triangle and its impact on the business ecosystem.", "Show you value the collaborative, supportive culture."],
+  "reports_count": 55
+}

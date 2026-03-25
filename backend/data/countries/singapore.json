@@ -1,0 +1,24 @@
+{
+  "country_name": "Singapore",
+  "flag": "🇸🇬",
+  "avg_tuition_usd": 90000,
+  "avg_living_cost_usd": 25000,
+  "program_length_years": 1.5,
+  "post_study_work_visa": {
+    "name": "Long-Term Visit Pass (LTVP) / Employment Pass",
+    "duration": "1 year LTVP, then Employment Pass",
+    "restrictions": "Must secure job offer for Employment Pass. Minimum salary S$5,000/month. No lottery — merit-based."
+  },
+  "avg_post_mba_salary_usd": 120000,
+  "top_schools": [
+    { "slug": "insead-singapore", "name": "INSEAD Asia Campus" },
+    { "slug": "nus", "name": "NUS Business School" },
+    { "slug": "nanyang", "name": "Nanyang Business School (NTU)" }
+  ],
+  "language_requirement": "English (primary business language in Singapore). No additional language requirement.",
+  "safety_index": 95,
+  "cost_of_living_index": 92,
+  "scholarship_availability": "Low to moderate — NUS and NTU offer government-funded scholarships with service bonds (3-6 years). INSEAD has its own scholarship programs.",
+  "path_to_pr": "Employment Pass → PR application after 6 months of working. High approval rate for MBA graduates from top schools.",
+  "test_policy": "GMAT or GRE required at all programs. No waiver options."
+}
