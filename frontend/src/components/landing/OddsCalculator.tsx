@@ -127,17 +127,17 @@ export function OddsCalculator() {
  initial={{ opacity: 0, height: 0 }}
  animate={{ opacity: 1, height:"auto"}}
  exit={{ opacity: 0, height: 0 }}
- className="bg-jet text-white"
+ className="bg-muted text-foreground"
  id="calculator"
  >
  <div className="max-w-3xl mx-auto p-12">
  <h2 className="heading-serif text-3xl mb-2">Instant Odds Calculator</h2>
- <p className="text-white/50 mb-8 text-sm">Enter your stats. See your tier against every program.</p>
+ <p className="text-muted-foreground mb-8 text-sm">Enter your stats. See your tier against every program.</p>
 
  <form onSubmit={handleCalculate} className="space-y-6">
  <div className="grid grid-cols-3 gap-4">
  <div>
- <label className="block text-xs font-medium text-white/60 mb-2 uppercase tracking-wider">Test Type</label>
+ <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Test Type</label>
  <select value={testType} onChange={e => {
  const tt = e.target.value;
  setTestType(tt); setGmat(""); setTestScore("");
@@ -145,7 +145,7 @@ export function OddsCalculator() {
  if (tt ==="cat" || tt ==="xat") setDegreeType("MBA (CAT)");
  else if (degreeType ==="MBA (CAT)" && (tt ==="gmat" || tt ==="gre")) setDegreeType("");
  }}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors mb-2">
+ className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors mb-2">
  <option value="gmat" className="text-foreground">GMAT</option>
  <option value="gre" className="text-foreground">GRE</option>
  <option value="cat" className="text-foreground">CAT Percentile</option>
@@ -156,27 +156,27 @@ export function OddsCalculator() {
  <>
  <input type="number" value={gmat} onChange={e => setGmat(e.target.value)}
  min={200} max={800}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-gold transition-colors"
+ className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-gold transition-colors"
  placeholder="e.g. 740"/>
- <p className="text-[10px] text-white/30 mt-1">Optional, we&apos;ll estimate if blank</p>
+ <p className="text-[10px] text-muted-foreground/40 mt-1">Optional, we&apos;ll estimate if blank</p>
  </>
  )}
  {testType ==="gre" && (
  <input type="number" value={testScore} onChange={e => setTestScore(e.target.value)}
  min={260} max={340}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-gold transition-colors"
+ className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-gold transition-colors"
  placeholder="e.g. 325"/>
  )}
  {testType ==="cat" && (
  <input type="number" value={testScore} onChange={e => setTestScore(e.target.value)}
  min={0} max={100}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-gold transition-colors"
+ className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-gold transition-colors"
  placeholder="e.g. 98"/>
  )}
  {testType ==="xat" && (
  <input type="number" value={testScore} onChange={e => setTestScore(e.target.value)}
  min={0} max={100}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-gold transition-colors"
+ className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-gold transition-colors"
  placeholder="e.g. 95"/>
  )}
  {testType ==="waiver" && (
@@ -184,12 +184,12 @@ export function OddsCalculator() {
  )}
  </div>
  <div>
- <label className="block text-xs font-medium text-white/60 mb-2 uppercase tracking-wider">Undergrad GPA</label>
+ <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Undergrad GPA</label>
  <input type="number" step="0.01" max={10} required value={gpa} onChange={e => setGpa(e.target.value)}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-gold transition-colors"
+ className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-gold transition-colors"
  placeholder="e.g. 3.8"/>
  <select value={gpaScale} onChange={e => setGpaScale(e.target.value)}
- className="mt-1 w-full bg-card/5 border border-white/20 px-4 py-2 text-white text-xs focus:outline-none focus:border-gold transition-colors">
+ className="mt-1 w-full bg-background border border-border px-4 py-2 text-foreground text-xs focus:outline-none focus:border-gold transition-colors">
  <option value="4.0" className="text-foreground">US (4.0 scale)</option>
  <option value="10.0" className="text-foreground">India (10-point)</option>
  <option value="5.0" className="text-foreground">Germany (1-5, lower better)</option>
@@ -197,9 +197,9 @@ export function OddsCalculator() {
  </select>
  </div>
  <div>
- <label className="block text-xs font-medium text-white/60 mb-2 uppercase tracking-wider">Work Experience (yrs)</label>
+ <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Work Experience (yrs)</label>
  <input type="number" value={workExp} onChange={e => setWorkExp(e.target.value)}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-gold transition-colors"
+ className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-gold transition-colors"
  placeholder="e.g. 4"/>
  </div>
  </div>
@@ -217,10 +217,10 @@ export function OddsCalculator() {
  className="grid grid-cols-2 gap-4 pt-2"
  >
  <div>
- <label className="block text-xs font-medium text-white/60 mb-2 uppercase tracking-wider">Undergrad Institution Tier</label>
+ <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Undergrad Institution Tier</label>
  <select value={advancedFields.undergrad_tier}
  onChange={e => setAdvancedFields({ ...advancedFields, undergrad_tier: e.target.value })}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors">
+ className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors">
  <option value="" className="text-foreground">Not Specified</option>
  <option value="top_10" className="text-foreground">Top 10 Globally (IIT, MIT, Stanford...)</option>
  <option value="top_50" className="text-foreground">Top 50 Globally</option>
@@ -229,10 +229,10 @@ export function OddsCalculator() {
  </select>
  </div>
  <div>
- <label className="block text-xs font-medium text-white/60 mb-2 uppercase tracking-wider">Industry</label>
+ <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Industry</label>
  <select value={advancedFields.industry}
  onChange={e => setAdvancedFields({ ...advancedFields, industry: e.target.value })}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors">
+ className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors">
  <option value="" className="text-foreground">Not Specified</option>
  <option value="consulting" className="text-foreground">Management Consulting (MBB)</option>
  <option value="finance" className="text-foreground">Investment Banking / PE / VC</option>
@@ -246,10 +246,10 @@ export function OddsCalculator() {
  </select>
  </div>
  <div>
- <label className="block text-xs font-medium text-white/60 mb-2 uppercase tracking-wider">Leadership Roles</label>
+ <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Leadership Roles</label>
  <select value={advancedFields.leadership_roles}
  onChange={e => setAdvancedFields({ ...advancedFields, leadership_roles: e.target.value })}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors">
+ className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors">
  <option value="" className="text-foreground">Not Specified</option>
  <option value="cxo" className="text-foreground">C-Suite / Founder</option>
  <option value="director" className="text-foreground">Director / VP Level</option>
@@ -259,10 +259,10 @@ export function OddsCalculator() {
  </select>
  </div>
  <div>
- <label className="block text-xs font-medium text-white/60 mb-2 uppercase tracking-wider">Target Intake Year</label>
+ <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Target Intake Year</label>
  <select value={advancedFields.target_intake}
  onChange={e => setAdvancedFields({ ...advancedFields, target_intake: e.target.value })}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors">
+ className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors">
  <option value="" className="text-foreground">Not Specified</option>
  <option value="2026" className="text-foreground">Fall 2026</option>
  <option value="2027" className="text-foreground">Fall 2027</option>
@@ -270,9 +270,9 @@ export function OddsCalculator() {
  </select>
  </div>
  <div>
- <label className="block text-xs font-medium text-white/60 mb-2 uppercase tracking-wider">Program Type</label>
+ <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Program Type</label>
  <select value={degreeType} onChange={e => setDegreeType(e.target.value)}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors">
+ className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors">
  <option value="" className="text-foreground">Auto-detect from test type</option>
  <option value="MBA" className="text-foreground">MBA (Full-Time)</option>
  <option value="MiM" className="text-foreground">Masters in Management</option>
@@ -286,7 +286,7 @@ export function OddsCalculator() {
  { key:"community_service", label:"Community Service / Volunteering"},
  { key:"publications", label:"Publications / Patents"},
  ].map(({ key, label }) => (
- <label key={key} className="flex items-center gap-2 text-sm text-white/60 cursor-pointer hover:text-white/80 transition-colors">
+ <label key={key} className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer hover:text-foreground transition-colors">
  <input type="checkbox"
  checked={advancedFields[key as keyof typeof advancedFields] as boolean}
  onChange={e => setAdvancedFields({ ...advancedFields, [key]: e.target.checked })}
@@ -304,9 +304,9 @@ export function OddsCalculator() {
  </button>
 
  {oddsError && (
- <div className="bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm text-red-300">
+ <div className="bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm text-red-600">
  {oddsError}
- <button onClick={() => setOddsError("")} className="ml-3 text-red-400 hover:text-red-200 underline text-xs">Dismiss</button>
+ <button onClick={() => setOddsError("")} className="ml-3 text-red-500 hover:text-red-200 underline text-xs">Dismiss</button>
  </div>
  )}
  </form>
@@ -326,7 +326,7 @@ export function OddsCalculator() {
  return (
  <div className="mt-8">
  <p className="text-sm text-gold mb-2">Your top matches across {odds.length} programs:</p>
- <div className="flex gap-3 mb-4 text-[10px] text-white/40">
+ <div className="flex gap-3 mb-4 text-[10px] text-muted-foreground/60">
  {(() => {
  const counts: Record<string, number> = {};
  odds.forEach(o => { counts[o.degree_type ||"MBA"] = (counts[o.degree_type ||"MBA"] || 0) + 1; });
@@ -339,11 +339,11 @@ export function OddsCalculator() {
  {topSchools.map(o => (
  <div key={o.school_id}
  onClick={() => router.push(`/school/${o.school_id}`)}
- className="bg-card/5 border border-white/10 p-3 cursor-pointer hover:bg-card/10 transition-colors">
- <p className="text-xs text-white/80 font-medium truncate">{o.school}</p>
+ className="bg-background border border-border p-3 cursor-pointer hover:bg-accent transition-colors">
+ <p className="text-xs text-foreground font-medium truncate">{o.school}</p>
  <div className="flex justify-between items-center mt-2">
  <span className={`text-[10px] px-2 py-0.5 border font-bold uppercase ${tierColor(o.tier)}`}>{o.tier}</span>
- <span className="text-[10px] text-white/40">{o.prob}%</span>
+ <span className="text-[10px] text-muted-foreground/60">{o.prob}%</span>
  </div>
  {o.degree_type && o.degree_type !=="MBA" && (
  <span className="text-[9px] text-gold/60 uppercase tracking-wider mt-1 block">{o.degree_type}</span>
@@ -362,20 +362,20 @@ export function OddsCalculator() {
  <TrendingUp size={14} /> Full Profile Analysis
  </button>
  <button onClick={() => router.push("/schools")}
- className="text-xs font-bold px-4 py-2 bg-card/5 text-white/70 border border-white/10 hover:bg-card/10 transition-colors flex items-center gap-2">
+ className="text-xs font-bold px-4 py-2 bg-background text-muted-foreground border border-border hover:bg-accent transition-colors flex items-center gap-2">
  Browse all {odds.length} matches <ArrowRight size={14} />
  </button>
  <button onClick={() => router.push("/my-schools")}
- className="text-xs font-bold px-4 py-2 bg-card/5 text-white/70 border border-white/10 hover:bg-card/10 transition-colors flex items-center gap-2">
+ className="text-xs font-bold px-4 py-2 bg-background text-muted-foreground border border-border hover:bg-accent transition-colors flex items-center gap-2">
  <Star size={14} /> Track Applications
  </button>
  </div>
  </div>
 
- <div className="mt-8 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+ <div className="mt-8 pt-6 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
  <div>
- <p className="text-sm font-bold text-white mb-1"><Share2 size={16} className="inline mr-2 text-gold"/>Share Your Odds</p>
- <p className="text-xs text-white/50">Compare with friends or get feedback from the community.</p>
+ <p className="text-sm font-bold text-foreground mb-1"><Share2 size={16} className="inline mr-2 text-gold"/>Share Your Odds</p>
+ <p className="text-xs text-muted-foreground">Compare with friends or get feedback from the community.</p>
  </div>
  <div className="flex gap-3">
  <a

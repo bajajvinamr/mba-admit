@@ -77,7 +77,7 @@ export function FeaturedSchools({
                 </h3>
                 <div className="flex flex-wrap gap-1.5 mb-6">
                   {school.specializations.slice(0, 3).map(s => (
-                    <span key={s} className="text-[10px] bg-[#141414] border border-border px-2 py-0.5 text-muted-foreground uppercase tracking-wider">{s}</span>
+                    <span key={s} className="text-[10px] bg-muted border border-border px-2 py-0.5 text-muted-foreground uppercase tracking-wider">{s}</span>
                   ))}
                 </div>
                 <div className="grid grid-cols-3 gap-4 border-t border-border pt-5 text-center">

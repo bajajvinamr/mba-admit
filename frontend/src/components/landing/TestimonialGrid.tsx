@@ -44,7 +44,7 @@ const TESTIMONIALS = [
 
 function TestimonialCard({ t }: { t: typeof TESTIMONIALS[number] }) {
  return (
- <div className="w-[340px] shrink-0 bg-[#141414] border border-border p-6 flex flex-col">
+ <div className="w-[340px] shrink-0 bg-muted border border-border p-6 flex flex-col">
  <Quote size={16} className="text-primary/30 mb-3" />
  <p className="text-sm text-foreground/70 italic leading-relaxed flex-1">
  &ldquo;{t.quote}&rdquo;
