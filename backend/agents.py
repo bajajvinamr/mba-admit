@@ -34,6 +34,7 @@ class AgentType(str, Enum):
 
 # ── School Database — loaded from generated JSON + scraped overlay ────────
 _DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+_PROD_DB_PATH = os.path.join(_DATA_DIR, "school_db_production.json")
 _SCHOOL_DB_PATH = os.path.join(_DATA_DIR, "school_db_full.json")
 _SCRAPED_DB_PATH = os.path.join(_DATA_DIR, "school_db_scraped.json")
 _DISCOVERY_LIST_PATH = os.path.join(_DATA_DIR, "discovery_list.json")
@@ -44,14 +45,20 @@ _HEX_PATTERN = re.compile(r'^[0-9a-f]{6,}$')
 
 
 def _load_school_db():
-    """Load school DB from JSON, filtering out AI-generated placeholder schools,
-    then overlay any scraped data on top.
+    """Load school DB from JSON, preferring the production-cleaned database.
 
-    Real schools have human-readable IDs (e.g. 'hbs', 'insead', 'iim_mumbai').
-    Fake/generated schools have hex-hash IDs (e.g. '5495916da71a').
-    Scraped data from the pipeline takes priority over synthetic data.
+    Priority order:
+    1. school_db_production.json — curated, synthetic schools removed
+    2. school_db_full.json — runtime hex-filter as fallback
+    3. Minimal hardcoded fallback
+
+    Scraped data from the pipeline is overlaid on top in all cases.
     """
-    if os.path.exists(_SCHOOL_DB_PATH):
+    if os.path.exists(_PROD_DB_PATH):
+        with open(_PROD_DB_PATH, "r") as f:
+            db = json.load(f)
+        logger.info("Loaded %d schools from production DB %s", len(db), _PROD_DB_PATH)
+    elif os.path.exists(_SCHOOL_DB_PATH):
         with open(_SCHOOL_DB_PATH, "r") as f:
             raw_db = json.load(f)
         db = {sid: school for sid, school in raw_db.items() if not _HEX_PATTERN.match(sid)}
@@ -497,7 +504,7 @@ def get_llm():
             '{"analysis": "Tough.", "update_letter": "Dear Adcom...", "tactical_plan": ["Wait.", "Pray.", "Update resume."]}',
             '{"leverage_analysis": "Good leverage.", "leverage_score": 8, "appeal_letter": "Dear Financial Aid...", "pro_tips": ["Be polite.", "Ask clearly."]}'
         ])
-    return ChatAnthropic(model="claude-3-5-sonnet-20240620", max_tokens=2000)
+    return ChatAnthropic(model="claude-3-5-sonnet-20240620", max_tokens=2000, timeout=60, max_retries=1)
 
 # ── Agent Nodes ──────────────────────────────────────────────────────────────
 def chief_of_staff_node(state: ApplicationState) -> ApplicationState:
