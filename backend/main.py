@@ -66,6 +66,7 @@ from routers.countries import router as countries_router
 from routers.interview_guides import router as interview_guides_router
 from routers.peer_comparison import router as peer_comparison_router
 from routers.mentors import router as mentors_router
+from routers.essay_examples import router as essay_examples_router
 
 app.include_router(auth_router)
 app.include_router(schools_router)
@@ -93,6 +94,7 @@ app.include_router(countries_router)
 app.include_router(interview_guides_router)
 app.include_router(peer_comparison_router)
 app.include_router(mentors_router)
+app.include_router(essay_examples_router)
 
 
 @app.get("/")

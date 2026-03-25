@@ -24,6 +24,7 @@ const ALL_TOOLS: CrossLink[] = [
  { href:"/goals", label:"Goal Sculptor", desc:"Post-MBA story", cat:"build"},
  { href:"/essay-drafts", label:"Essay Drafts", desc:"Manage all essays", cat:"build"},
  { href:"/essay-prompts", label:"Essay Prompts", desc:"School-specific prompts", cat:"build"},
+ { href:"/essays/examples", label:"Essay Examples", desc:"Real admitted essays", cat:"build"},
  // Apply
  { href:"/my-schools", label:"Application Tracker", desc:"Track every school", cat:"apply"},
  { href:"/calendar", label:"Deadline Calendar", desc:"Never miss a date", cat:"apply"},

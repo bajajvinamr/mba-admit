@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from"react";
 import { motion } from"framer-motion";
-import { FileText, Sparkles } from"lucide-react";
+import { FileText, Sparkles, BookOpen } from"lucide-react";
+import Link from"next/link";
 import { Button } from"@/components/ui/button";
 import { Badge } from"@/components/ui/badge";
 import { fadeIn } from"@/lib/motion";
@@ -128,6 +129,12 @@ export default function EssayCoachPage() {
  <Badge variant="secondary" className="text-xs">
  Beta
  </Badge>
+ <Link href="/essays/examples">
+ <Button variant="outline" size="sm" className="text-xs ml-2">
+ <BookOpen className="mr-1 size-3.5"/>
+ Examples
+ </Button>
+ </Link>
  </div>
 
  {/* Mobile panel toggle */}
