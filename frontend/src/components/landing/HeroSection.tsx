@@ -85,7 +85,7 @@ function FloatingBadges() {
             opacity: 0,
           }}
         >
-          <div className="px-3 py-1.5 bg-white/[0.06] backdrop-blur-sm border border-white/[0.1] text-white/70 text-xs font-medium whitespace-nowrap hover:bg-white/[0.12] hover:text-white hover:border-[#C9A962]/40 transition-all cursor-default">
+          <div className="px-3 py-1.5 bg-card border border-border text-muted-foreground text-xs font-medium whitespace-nowrap hover:bg-accent hover:text-foreground hover:border-primary/40 transition-all cursor-default rounded-md shadow-sm">
             {badge.name}
           </div>
         </div>
@@ -94,7 +94,7 @@ function FloatingBadges() {
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(201,169,98,0.15) 0%, transparent 70%)",
+          background: "radial-gradient(circle, hsl(42 50% 57% / 0.1) 0%, transparent 70%)",
           animation: "glow-pulse 4s ease-in-out infinite",
         }}
       />
@@ -107,22 +107,15 @@ export function HeroSection(_props: {
   onToggleCalc: () => void;
 }) {
   return (
-    <section className="relative bg-[#0A0A0A] overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: "radial-gradient(circle, rgba(201,169,98,0.06) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-        }}
-      />
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_30%,var(--background)_75%)]" />
+    <section className="relative bg-background overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,hsl(42_50%_57%/0.05),transparent_60%)]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-8 pt-24 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left">
             {/* Badge */}
             <div
-              className="inline-flex items-center gap-2 mb-8 px-4 py-2 border border-[#C9A96240] bg-[#C9A96215] animate-[fade-in_0.5s_ease-out_forwards]"
+              className="inline-flex items-center gap-2 mb-8 px-4 py-2 border border-primary/25 bg-primary/10 animate-[fade-in_0.5s_ease-out_forwards]"
               style={{ opacity: 0 }}
             >
               <span className="text-xs font-medium tracking-wide text-primary">
@@ -135,14 +128,14 @@ export function HeroSection(_props: {
               className="font-display text-5xl lg:text-7xl leading-[1.1] tracking-tight mb-6 animate-[fade-in_0.6s_ease-out_0.1s_forwards]"
               style={{ opacity: 0 }}
             >
-              <span className="text-white">Will you get into</span>
+              <span className="text-foreground">Will you get into</span>
               <br />
               <span className="italic text-primary">your dream school?</span>
             </h1>
 
             {/* Subheadline */}
             <p
-              className="text-lg font-sans text-white/50 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10 animate-[fade-in_0.6s_ease-out_0.2s_forwards]"
+              className="text-lg font-sans text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10 animate-[fade-in_0.6s_ease-out_0.2s_forwards]"
               style={{ opacity: 0 }}
             >
               Check your odds against 840+ MBA programs using 12,000+ real
@@ -158,14 +151,14 @@ export function HeroSection(_props: {
               <Link
                 href="/simulator"
                 onClick={() => track("hero_cta_clicked", { target: "simulator" })}
-                className="bg-[#C9A962] text-[#0A0A0A] font-semibold px-8 py-3.5 transition-colors hover:bg-[#C9A962]/90 flex items-center justify-center gap-2 text-sm tracking-wide"
+                className="bg-primary text-primary-foreground font-semibold px-8 py-3.5 transition-colors hover:bg-primary/90 flex items-center justify-center gap-2 text-sm tracking-wide rounded-md"
               >
                 Check My Odds - Free <ArrowRight size={16} />
               </Link>
               <Link
                 href="/tools"
                 onClick={() => track("hero_cta_clicked", { target: "tools" })}
-                className="border border-white/20 text-white font-medium px-8 py-3.5 transition-all hover:bg-white/5 flex items-center justify-center gap-2 text-sm tracking-wide"
+                className="border border-border text-foreground font-medium px-8 py-3.5 transition-all hover:bg-accent flex items-center justify-center gap-2 text-sm tracking-wide rounded-md"
               >
                 <BarChart3 size={16} /> Explore All Tools
               </Link>
@@ -173,7 +166,7 @@ export function HeroSection(_props: {
 
             {/* Micro-trust */}
             <div
-              className="mt-6 flex items-center justify-center lg:justify-start gap-4 text-xs text-[#6A6A6A] animate-[fade-in_0.6s_ease-out_0.4s_forwards]"
+              className="mt-6 flex items-center justify-center lg:justify-start gap-4 text-xs text-muted-foreground animate-[fade-in_0.6s_ease-out_0.4s_forwards]"
               style={{ opacity: 0 }}
             >
               <span className="flex items-center gap-1">
@@ -194,7 +187,7 @@ export function HeroSection(_props: {
       </div>
 
       {/* Trust Stats Bar */}
-      <div className="relative z-10 border-t border-white/10">
+      <div className="relative z-10 border-t border-border">
         <div className="max-w-5xl mx-auto px-8 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {TRUST_STATS.map((stat) => (
             <div key={stat.label}>
