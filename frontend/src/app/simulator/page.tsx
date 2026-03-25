@@ -17,6 +17,18 @@ import { EmptyState } from"@/components/EmptyState";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
+type SimResultRaw = {
+ school_id: string;
+ school_name: string;
+ admit_probability: number;
+ outcome: string;
+ outcome_label: string;
+ simulations_run: number;
+ percentiles: { p10: number; p25: number; p50: number; p75: number; p90: number };
+ factors: { gmat_strength: number; gpa_strength: number; profile_strength: number };
+ school_stats: { gmat_avg: number; acceptance_rate: number };
+};
+
 type SimResult = {
  school_id: string;
  school_name: string;
@@ -26,7 +38,27 @@ type SimResult = {
  simulations: { accepted: number; rejected: number };
 };
 
-type SimResponse = { results: SimResult[]; simulation_rounds: number };
+type SimResponse = { results: SimResultRaw[] };
+
+function mapResult(r: SimResultRaw): SimResult {
+ const verdict: SimResult["verdict"] =
+   r.outcome === "likely" ? "Safety"
+   : r.outcome === "competitive" ? "Target"
+   : "Reach";
+ const n = r.simulations_run || 10000;
+ const accepted = Math.round(n * r.admit_probability / 100);
+ return {
+   school_id: r.school_id,
+   school_name: r.school_name,
+   probability_pct: r.admit_probability,
+   confidence_interval: [
+     Math.max(0, Math.round(r.percentiles.p25 * 100)),
+     Math.min(100, Math.round(r.percentiles.p75 * 100)),
+   ],
+   verdict,
+   simulations: { accepted, rejected: n - accepted },
+ };
+}
 
 type School = { id: string; name: string };
 
@@ -137,20 +169,19 @@ export default function SimulatorPage() {
  const normalizedGmat = gmatVersion === "focus" ? Math.round((gmat - 205) / 600 * 600 + 200) : gmat;
  const body = {
  gmat: normalizedGmat,
- gmat_version: gmatVersion,
  gpa,
- work_years: workYears,
+ work_exp_years: workYears,
  school_ids: selected,
- is_urm: isUrm,
- is_international: isInternational,
- is_military: isMilitary,
- has_nonprofit: hasNonprofit,
+ undergrad_tier: undefined,
+ industry: isMilitary ? "military" : undefined,
+ intl_experience: isInternational,
+ community_service: hasNonprofit,
  };
  const res = await apiFetch<SimResponse>("/api/admit-simulator", {
  method:"POST",
  body: JSON.stringify(body),
  });
- const sorted = res.results.sort((a, b) => b.probability_pct - a.probability_pct);
+ const sorted = res.results.map(mapResult).sort((a, b) => b.probability_pct - a.probability_pct);
  setResults(sorted);
  usage.recordUse();
  track("simulation_completed", {
