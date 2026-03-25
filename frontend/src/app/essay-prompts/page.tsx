@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect, useMemo } from"react";
-import { motion } from"framer-motion";
+import { useState, useEffect, useMemo, useCallback } from"react";
 import {
  FileText, Search,
- Copy, CheckCircle2, AlertTriangle,
+ Copy, CheckCircle2, AlertTriangle, ChevronDown,
 } from"lucide-react";
 import Link from"next/link";
 import { apiFetch } from"@/lib/api";
@@ -26,6 +25,8 @@ type PromptsResponse = {
  school_count: number;
 };
 
+const PAGE_SIZE = 50;
+
 export default function EssayPromptsPage() {
  const [data, setData] = useState<PromptsResponse | null>(null);
  const [loading, setLoading] = useState(true);
@@ -33,6 +34,7 @@ export default function EssayPromptsPage() {
  const [search, setSearch] = useState("");
  const [schoolFilter, setSchoolFilter] = useState("");
  const [copied, setCopied] = useState<string | null>(null);
+ const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
  useEffect(() => {
  apiFetch<PromptsResponse>("/api/essay-prompts")
@@ -57,6 +59,18 @@ export default function EssayPromptsPage() {
  return true;
  });
  }, [data, search, schoolFilter]);
+
+ // Reset visible count when filters change
+ useEffect(() => {
+ setVisibleCount(PAGE_SIZE);
+ }, [search, schoolFilter]);
+
+ const visiblePrompts = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
+ const hasMore = visibleCount < filtered.length;
+
+ const loadMore = useCallback(() => {
+ setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, filtered.length));
+ }, [filtered.length]);
 
  const copyPrompt = (text: string, key: string) => {
  navigator.clipboard.writeText(text);
@@ -133,15 +147,12 @@ export default function EssayPromptsPage() {
 
  {/* Prompt Cards */}
  <div className="space-y-4">
- {filtered.map((p, i) => {
+ {visiblePrompts.map((p) => {
  const key = `${p.school_id}-${p.prompt_index}`;
  return (
- <motion.div
+ <div
  key={key}
- initial={{ opacity: 0, y: 8 }}
- animate={{ opacity: 1, y: 0 }}
- transition={{ delay: Math.min(i * 0.02, 0.5) }}
- className="editorial-card p-6"
+ className="editorial-card p-6 animate-in fade-in slide-in-from-bottom-1 duration-300"
  >
  <div className="flex items-start justify-between gap-4">
  <div className="flex-1">
@@ -172,10 +183,22 @@ export default function EssayPromptsPage() {
  </Link>
  </div>
  </div>
- </motion.div>
+ </div>
  );
  })}
  </div>
+
+ {hasMore && (
+ <div className="text-center py-6">
+ <button
+ onClick={loadMore}
+ className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-medium border border-border/10 rounded-lg hover:bg-foreground/5 transition-colors"
+ >
+ <ChevronDown size={16} />
+ Show more ({filtered.length - visibleCount} remaining)
+ </button>
+ </div>
+ )}
 
  {!loading && !error && data && filtered.length === 0 && (
  <EmptyState

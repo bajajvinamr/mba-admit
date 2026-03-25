@@ -20,17 +20,24 @@ function SignInContent() {
  setError("");
  setLoading(true);
 
- const result = await signIn("credentials", {
- email,
- password,
- redirect: false,
- });
+ try {
+ const timeout = new Promise<never>((_, reject) =>
+ setTimeout(() => reject(new Error("timeout")), 10000)
+ );
+ const result = await Promise.race([
+ signIn("credentials", { email, password, redirect: false }),
+ timeout,
+ ]);
 
  if (result?.error) {
  setError("Invalid email or password");
  setLoading(false);
  } else {
  router.push(callbackUrl);
+ }
+ } catch {
+ setError("Unable to sign in. Please try again.");
+ setLoading(false);
  }
  };
 

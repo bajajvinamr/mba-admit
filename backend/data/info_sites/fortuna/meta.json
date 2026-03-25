@@ -1,6 +1,12 @@
 {
-  "urls": {
-    "school_insead": "https://www.fortunaadmissions.com/business-school-profiles/insead/"
-  },
-  "crawled_at": "2026-03-17T21:42:50.959200"
+  "site": "fortuna",
+  "success": 4,
+  "fail": 16,
+  "pages": [
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/fortuna/kellogg-essays.txt",
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/fortuna/ross-essays.txt",
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/fortuna/darden-essays.txt",
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/fortuna/yale-som-essays.txt"
+  ],
+  "scraped_at": "2026-03-25T23:26:25.895438+00:00"
 }

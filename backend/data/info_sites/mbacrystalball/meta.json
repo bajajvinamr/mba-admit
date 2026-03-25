@@ -1,0 +1,22 @@
+{
+  "site": "mbacrystalball",
+  "success": 14,
+  "fail": 6,
+  "pages": [
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/mbacrystalball/best-mba-in-canada.txt",
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/mbacrystalball/mba-rankings.txt",
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/mbacrystalball/mba-acceptance-rate.txt",
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/mbacrystalball/mba-essay-tips.txt",
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/mbacrystalball/harvard-business-school.txt",
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/mbacrystalball/stanford-gsb.txt",
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/mbacrystalball/wharton.txt",
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/mbacrystalball/chicago-booth.txt",
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/mbacrystalball/kellogg.txt",
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/mbacrystalball/columbia-business-school.txt",
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/mbacrystalball/mit-sloan.txt",
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/mbacrystalball/insead.txt",
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/mbacrystalball/london-business-school.txt",
+    "/Users/vinamr/Documents/mba-admissions-ai/backend/data/info_sites/mbacrystalball/isb.txt"
+  ],
+  "scraped_at": "2026-03-25T23:25:51.172865+00:00"
+}

@@ -6,6 +6,15 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+/** Format a slug into a human-readable label. Short slugs (<=5 chars, no
+ *  separators) are treated as acronyms and uppercased entirely (hbs -> HBS). */
+function formatSlug(slug: string): string {
+  if (slug.length <= 5 && !slug.includes("_") && !slug.includes("-")) {
+    return slug.toUpperCase();
+  }
+  return slug.replace(/[_-]/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase());
+}
+
 async function fetchSchoolName(slug: string): Promise<string> {
   try {
     const res = await fetch(`${API_BASE}/api/interviews/guide/${slug}`, {
@@ -13,10 +22,10 @@ async function fetchSchoolName(slug: string): Promise<string> {
     });
     if (res.ok) {
       const data = await res.json();
-      return data.school_name || slug.replace(/_/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase());
+      return data.school_name || formatSlug(slug);
     }
   } catch { /* fallback below */ }
-  return slug.replace(/_/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase());
+  return formatSlug(slug);
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -567,6 +567,34 @@ def get_school(school_id: str):
             })
         school["admission_deadlines"] = merged
 
+    # Normalize placement_stats field names for frontend compatibility
+    raw_ps = school.get("placement_stats") or {}
+    if raw_ps:
+        top_industries = raw_ps.get("top_industries") or []
+        # Convert flat industry list to industry_breakdown format if needed
+        industry_breakdown = raw_ps.get("industry_breakdown")
+        if not industry_breakdown and isinstance(top_industries, list) and top_industries:
+            industry_breakdown = [
+                {"industry": ind, "percentage": 0} if isinstance(ind, str) else ind
+                for ind in top_industries
+            ]
+        elif isinstance(industry_breakdown, dict):
+            industry_breakdown = [{"industry": k, "percentage": v} for k, v in industry_breakdown.items()]
+
+        # Format employment rate as display string with % if it's a bare number
+        emp_rate = raw_ps.get("employment_rate_3_months") or raw_ps.get("employment_rate_3mo_pct")
+        if emp_rate is not None and isinstance(emp_rate, (int, float)):
+            emp_rate = f"{emp_rate}%"
+
+        school["placement_stats"] = {
+            "employment_rate_3_months": emp_rate,
+            "median_base_salary": raw_ps.get("median_base_salary") or raw_ps.get("median_base_salary_usd"),
+            "median_signing_bonus": raw_ps.get("median_signing_bonus") or raw_ps.get("median_signing_bonus_usd"),
+            "industry_breakdown": industry_breakdown or [],
+            "top_recruiters": raw_ps.get("top_recruiters") or raw_ps.get("top_employers") or [],
+            "internship_rate": raw_ps.get("internship_rate"),
+        }
+
     # Inline community data if available
     community = get_applicant_data_summary(school_id)
 

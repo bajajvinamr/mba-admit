@@ -92,7 +92,11 @@ export default function InterviewGuideClient({ slug, guide, error }: Props) {
   }
 
   const g = guide as unknown as GuideData;
-  const label = g.school_name || slug.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  const label = g.school_name || (
+    slug.length <= 5 && !slug.includes("_") && !slug.includes("-")
+      ? slug.toUpperCase()
+      : slug.replace(/[_-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+  );
 
   return (
     <main className="min-h-screen bg-background">
