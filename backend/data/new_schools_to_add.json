@@ -1,0 +1,110 @@
+[
+  {
+    "id": "ntu_taiwan",
+    "name": "National Taiwan University College of Management",
+    "country": "Taiwan",
+    "location": "Taipei, Taiwan",
+    "website": "https://management.ntu.edu.tw/en/MBA",
+    "program_type": "MBA",
+    "tier": "T50"
+  },
+  {
+    "id": "city_university_hk",
+    "name": "City University of Hong Kong College of Business",
+    "country": "Hong Kong",
+    "location": "Kowloon, Hong Kong",
+    "website": "https://www.cb.cityu.edu.hk/mba/",
+    "program_type": "MBA",
+    "tier": "T50"
+  },
+  {
+    "id": "lums_lahore",
+    "name": "LUMS - Lahore University of Management Sciences",
+    "country": "Pakistan",
+    "location": "Lahore, Pakistan",
+    "website": "https://sdsb.lums.edu.pk/programme/mba",
+    "program_type": "MBA",
+    "tier": "Regional"
+  },
+  {
+    "id": "waikato_nz",
+    "name": "University of Waikato Management School",
+    "country": "New Zealand",
+    "location": "Hamilton, New Zealand",
+    "website": "https://www.waikato.ac.nz/study/qualifications/master-of-business-administration",
+    "program_type": "MBA",
+    "tier": "Regional"
+  },
+  {
+    "id": "victoria_wellington",
+    "name": "Victoria University of Wellington School of Business",
+    "country": "New Zealand",
+    "location": "Wellington, New Zealand",
+    "website": "https://www.wgtn.ac.nz/explore/postgraduate-programmes/master-of-business-administration/overview",
+    "program_type": "MBA",
+    "tier": "Regional"
+  },
+  {
+    "id": "bond_university",
+    "name": "Bond University Business School",
+    "country": "Australia",
+    "location": "Gold Coast, Australia",
+    "website": "https://bond.edu.au/program/master-business-administration",
+    "program_type": "MBA",
+    "tier": "Regional"
+  },
+  {
+    "id": "qut_brisbane",
+    "name": "QUT Graduate School of Business",
+    "country": "Australia",
+    "location": "Brisbane, Australia",
+    "website": "https://www.qut.edu.au/courses/master-of-business-administration",
+    "program_type": "MBA",
+    "tier": "Regional"
+  },
+  {
+    "id": "nitie_mumbai",
+    "name": "NITIE Mumbai (National Institute of Industrial Engineering)",
+    "country": "India",
+    "location": "Mumbai, India",
+    "website": "https://www.nitie.ac.in/pgdim",
+    "program_type": "PGDIM/MBA",
+    "tier": "T25_India"
+  },
+  {
+    "id": "tapmi_manipal",
+    "name": "T.A. Pai Management Institute (TAPMI)",
+    "country": "India",
+    "location": "Manipal, India",
+    "website": "https://www.tapmi.edu.in/programs/pgdm/",
+    "program_type": "PGDM/MBA",
+    "tier": "T25_India"
+  },
+  {
+    "id": "catolica_lisbon",
+    "name": "Catolica Lisbon School of Business & Economics",
+    "country": "Portugal",
+    "location": "Lisbon, Portugal",
+    "website": "https://www.clsbe.lisboa.ucp.pt/mba",
+    "program_type": "MBA",
+    "tier": "T50_Europe"
+  },
+  {
+    "id": "ebs_germany",
+    "name": "EBS Universitat fur Wirtschaft und Recht",
+    "country": "Germany",
+    "location": "Oestrich-Winkel, Germany",
+    "website": "https://www.ebs.edu/en/programs/mba",
+    "program_type": "MBA",
+    "tier": "T50_Europe"
+  },
+  {
+    "id": "pforzheim_germany",
+    "name": "Pforzheim University Business School",
+    "country": "Germany",
+    "location": "Pforzheim, Germany",
+    "website": "https://businesspf.hs-pforzheim.de/en/programs/master/mba",
+    "program_type": "MBA",
+    "tier": "Regional_Europe"
+  }
+]
