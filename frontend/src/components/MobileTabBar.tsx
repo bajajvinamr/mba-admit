@@ -26,7 +26,7 @@ import {
 
 const PRIMARY_TABS = [
   { href: "/dashboard", label: "Home", icon: LayoutDashboard },
-  { href: "/schools", label: "Schools", icon: GraduationCap },
+  { href: "/schools", label: "Explore", icon: Compass },
   { href: "/essays/examples", label: "Essays", icon: FileText },
   { href: "/interview", label: "Interview", icon: Mic },
 ] as const;

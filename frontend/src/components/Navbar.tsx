@@ -4,17 +4,18 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { usePageView } from "@/hooks/usePageView";
 import Link from "next/link";
-import { Search, GraduationCap, FileText, Mic, DollarSign } from "lucide-react";
+import { Search, LayoutDashboard, Compass, GraduationCap, FileText, Mic, DollarSign } from "lucide-react";
 import { AuthButton } from "@/components/AuthButton";
 import { ProfilePill } from "@/components/ProfilePill";
 import { PlanPill } from "@/components/PlanPill";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 const NAV_LINKS = [
-  { href: "/schools", label: "Schools", icon: GraduationCap },
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/schools", label: "Explore", icon: Compass },
   { href: "/essays/examples", label: "Essays", icon: FileText },
   { href: "/interview", label: "Interview", icon: Mic },
-  { href: "/roi", label: "Finances", icon: DollarSign },
+  { href: "/finances", label: "Finances", icon: DollarSign },
 ] as const;
 
 export function Navbar() {
