@@ -15,8 +15,8 @@ router = APIRouter(prefix="/api", tags=["search"])
 
 # ── Tier Classification ───────────────────────────────────────────────────────
 
-TIER_M7 = {"hbs", "gsb", "wharton", "booth", "kellogg", "columbia", "sloan"}
-TIER_T15 = {"tuck", "haas", "ross", "fuqua", "darden", "stern", "yale", "johnson"}
+TIER_M7 = {"hbs", "gsb", "wharton", "booth", "kellogg", "cbs", "sloan"}
+TIER_T15 = {"tuck", "haas", "ross", "fuqua", "darden", "stern", "yale_som", "johnson"}
 TIER_T25 = {
     "anderson", "tepper", "mccombs", "kenan_flagler", "georgetown",
     "olin", "marshall", "kelley", "mendoza", "foster",

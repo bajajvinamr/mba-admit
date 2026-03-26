@@ -249,14 +249,14 @@ export default function PortfolioPage() {
 
   const { data, isLoading } = useQuery<PortfolioData>({
     queryKey: ["portfolio"],
-    queryFn: () => apiFetch<PortfolioData>("/api/portfolio"),
+    queryFn: () => apiFetch<PortfolioData>("/api/user/portfolio"),
     staleTime: 2 * 60 * 1000,
   });
 
   const updateStatus = useMutation({
     mutationFn: (args: { id: string; status: string }) =>
-      apiFetch(`/api/tracked-schools/${args.id}/status`, {
-        method: "PATCH",
+      apiFetch(`/api/user/schools/${args.id}`, {
+        method: "PUT",
         body: JSON.stringify({ status: args.status }),
       }),
     onMutate: async (args) => {

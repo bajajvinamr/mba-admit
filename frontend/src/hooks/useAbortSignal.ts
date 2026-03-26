@@ -11,8 +11,11 @@ import { useEffect, useRef } from "react";
 export function useAbortSignal(): AbortSignal {
   const controllerRef = useRef<AbortController>(null!);
 
-  // Lazy-init so we don't create a new controller on every render
-  if (controllerRef.current === null) {
+  // Create a new controller if none exists OR if the previous one was aborted.
+  // The aborted case handles React Strict Mode: mount → cleanup (abort) → remount.
+  // Without this, the remount would reuse the aborted signal and all fetches
+  // would fail immediately.
+  if (controllerRef.current === null || controllerRef.current.signal.aborted) {
     controllerRef.current = new AbortController();
   }
 

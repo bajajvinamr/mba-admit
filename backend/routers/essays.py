@@ -125,12 +125,17 @@ def get_essay_prompts(school_id: str = None):
             continue
         for i, prompt in enumerate(prompts):
             word_limit = None
-            text = prompt if isinstance(prompt, str) else str(prompt)
-            # Try to extract word limit from prompt text
-            import re
-            wl_match = re.search(r"(\d+)\s*word", text.lower())
-            if wl_match:
-                word_limit = int(wl_match.group(1))
+            if isinstance(prompt, dict):
+                text = prompt.get("prompt", "")
+                word_limit = prompt.get("word_limit")
+            else:
+                text = str(prompt)
+            # Fallback: try to extract word limit from prompt text if not set
+            if word_limit is None:
+                import re
+                wl_match = re.search(r"(\d+)\s*word", text.lower())
+                if wl_match:
+                    word_limit = int(wl_match.group(1))
             results.append({
                 "school_id": sid,
                 "school_name": school.get("name", sid),

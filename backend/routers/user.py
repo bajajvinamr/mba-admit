@@ -195,3 +195,81 @@ def _suggest_next_action(status: str, school_data: dict) -> dict:
         },
     }
     return actions.get(status, actions["researching"])
+
+
+# ── Portfolio endpoint (for Kanban board) ─────────────────────────────────────
+
+# Map user-school statuses to Kanban columns
+_STATUS_TO_COLUMN = {
+    "researching": "researching",
+    "preparing": "preparing",
+    "drafting": "drafting",
+    "submitted": "submitted",
+    "interview": "interview",
+    "decision": "decided",
+    "decided": "decided",
+    "waitlisted": "decided",
+}
+
+# Completion percentages by column
+_COLUMN_COMPLETION = {
+    "researching": 10,
+    "preparing": 25,
+    "drafting": 50,
+    "submitted": 70,
+    "interview": 85,
+    "decided": 100,
+}
+
+
+@router.get("/portfolio")
+def get_portfolio(user: Dict = Depends(get_optional_user)):
+    """Return user's tracked schools formatted for the Kanban portfolio board."""
+    if not user:
+        return {"schools": []}
+
+    user_schools = db.get_user_schools(user["sub"])
+    schools = []
+
+    for entry in user_schools:
+        sid = entry.get("school_id", "")
+        raw_status = entry.get("status", "researching")
+        column = _STATUS_TO_COLUMN.get(raw_status, "researching")
+
+        school_data = SCHOOL_DB.get(sid, {})
+        school_name = school_data.get("name", sid)
+
+        # Find next deadline
+        next_deadline_iso = None
+        deadlines = school_data.get("admission_deadlines", [])
+        for dl in deadlines:
+            parsed = _parse_month_year(dl.get("deadline", ""))
+            if parsed and parsed >= datetime.now():
+                next_deadline_iso = parsed.strftime("%Y-%m-%d")
+                break
+
+        # Determine next action text
+        action = _suggest_next_action(raw_status, school_data)
+
+        # Determine result for decided column
+        result = None
+        if column == "decided":
+            if raw_status == "waitlisted":
+                result = "waitlisted"
+            elif raw_status in ("decision", "decided"):
+                result = entry.get("notes", "").lower() if entry.get("notes") else None
+                if result not in ("admitted", "rejected", "waitlisted", "withdrew"):
+                    result = "admitted"  # default for decided
+
+        schools.append({
+            "id": entry.get("id", sid),
+            "schoolSlug": sid,
+            "name": school_name,
+            "status": column,
+            "nextAction": action.get("label"),
+            "nextDeadline": next_deadline_iso,
+            "completionPct": _COLUMN_COMPLETION.get(column, 10),
+            "result": result,
+        })
+
+    return {"schools": schools}

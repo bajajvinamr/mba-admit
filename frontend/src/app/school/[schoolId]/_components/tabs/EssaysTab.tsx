@@ -17,7 +17,8 @@ function VerifiedBadge() {
 }
 
 export function EssaysTab({ school, onStartApplication }: Props) {
- const questions = school.application_questions || school.essay_prompts || [];
+ // Prefer essay_prompts (scraped, structured with word_limit) over application_questions (often generic)
+ const questions = school.essay_prompts?.length ? school.essay_prompts : school.application_questions || [];
  const dq = school.data_quality_summary;
  const isVerified = dq?.verified_fields?.includes("essay_prompts") ?? false;
 
