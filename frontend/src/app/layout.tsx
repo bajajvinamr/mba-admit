@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans, JetBrains_Mono, Geist } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/components/AuthProvider";
 import { Navbar } from "@/components/Navbar";
-import { EmailCapture } from "@/components/EmailCapture";
 import { ToastContainer } from "@/components/Toast";
 import { CommandPalette } from "@/components/CommandPalette";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
@@ -19,14 +18,10 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { validateEnv } from "@/lib/env";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
-
 // Validate environment on server startup (runs once at module load)
 validateEnv();
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-display" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
@@ -67,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)} suppressHydrationWarning>
+    <html lang="en" className={cn("font-sans", inter.variable, jetbrainsMono.variable)} suppressHydrationWarning>
       <head>
         {/* Preconnect to API for faster first request */}
         <link rel="preconnect" href={process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"} />
@@ -112,7 +107,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${plusJakartaSans.variable} ${jetbrainsMono.variable} min-h-screen flex flex-col bg-background`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} min-h-screen flex flex-col bg-background`}>
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-foreground focus:text-white focus:px-4 focus:py-2 focus:text-sm focus:font-bold">
           Skip to content
         </a>
@@ -158,7 +153,6 @@ export default function RootLayout({
               <div>
                 <p className="text-xs uppercase tracking-widest text-primary-foreground/30 dark:text-muted-foreground/50 mb-4 font-bold">Stay Updated</p>
                 <p className="text-sm text-primary-foreground/40 dark:text-muted-foreground mb-4">Join the beta waitlist. Free during early access.</p>
-                <EmailCapture variant="compact" source="footer" />
                 <ul className="space-y-2 text-sm text-primary-foreground/50 dark:text-muted-foreground mt-6">
                   <li><a href="/about" className="hover:text-primary-foreground dark:hover:text-foreground transition-colors">About</a></li>
                   <li><a href="/privacy" className="hover:text-primary-foreground dark:hover:text-foreground transition-colors">Privacy</a></li>

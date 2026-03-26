@@ -13,9 +13,7 @@ import {
 } from"@/components/search/FilterPanel";
 import { FilterChip } from"@/components/search/FilterChip";
 import { SchoolCard, SchoolCardSkeleton, type SchoolSearchResult } from"@/components/search/SchoolCard";
-import { SchoolCard3D } from"@/components/search/SchoolCard3D";
 import { EmptyState } from"@/components/EmptyState";
-import { EmailCapture } from"@/components/EmailCapture";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
 import { useDebounce } from"@/hooks/useDebounce";
 import { apiFetch } from"@/lib/api";
@@ -406,7 +404,7 @@ export default function SchoolsSearchPage() {
  {!isLoading && schools.length > 0 && (
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
  {schools.map((school) => (
- <SchoolCard3D key={school.id} school={school} />
+ <SchoolCard key={school.id} school={school} />
  ))}
 
  {/* Infinite scroll loading skeletons */}
@@ -429,7 +427,6 @@ export default function SchoolsSearchPage() {
  </div>
  </div>
 
- <EmailCapture variant="contextual"source="schools-directory"/>
  <ToolCrossLinks current="/schools"/>
  </div>
  );

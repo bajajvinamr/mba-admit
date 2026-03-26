@@ -3,7 +3,6 @@
 import { useState, useEffect, useMemo } from"react";
 import { MessageCircle, ThumbsUp, Clock, Tag, Plus, Send, User } from"lucide-react";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 type Post = {
  id: string;
@@ -255,7 +254,6 @@ export default function CommunityPage() {
  </div>
  ))}
 
- <EmailCapture variant="contextual"source="community"/>
  <ToolCrossLinks current="/community"/>
  </div>
  </main>

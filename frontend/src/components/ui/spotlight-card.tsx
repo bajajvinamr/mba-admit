@@ -7,14 +7,14 @@ import { cn } from "@/lib/utils";
 type SpotlightCardProps = {
   children: ReactNode;
   className?: string;
-  /** Spotlight gradient color. Defaults to gold */
+  /** Spotlight gradient color. Defaults to indigo */
   spotlightColor?: string;
 };
 
 export function SpotlightCard({
   children,
   className,
-  spotlightColor = "rgba(196, 163, 90, 0.15)",
+  spotlightColor = "rgba(99, 102, 241, 0.15)",
 }: SpotlightCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });

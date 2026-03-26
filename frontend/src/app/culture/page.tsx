@@ -6,7 +6,6 @@ import { Heart, ArrowRight } from"lucide-react";
 import Link from"next/link";
 import { apiFetch } from"@/lib/api";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -195,7 +194,6 @@ export default function CultureMatcherPage() {
  </div>
  )}
 
- <EmailCapture variant="contextual"source="culture"/>
  <ToolCrossLinks current="/culture"/>
  </div>
  </main>

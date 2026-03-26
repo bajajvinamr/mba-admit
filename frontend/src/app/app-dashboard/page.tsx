@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default function AppDashboardPage() {
-  redirect("/dashboard");
+export default function Page() {
+  redirect("/portfolio");
 }

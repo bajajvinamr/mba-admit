@@ -2,7 +2,6 @@
 
 import Link from"next/link";
 import { Target, Shield, Zap, Users, Globe, Heart } from"lucide-react";
-import { EmailCapture } from"@/components/EmailCapture";
 
 export default function AboutPage() {
  return (
@@ -80,7 +79,6 @@ export default function AboutPage() {
  </section>
 
  <div className="max-w-3xl mx-auto px-8 pb-16">
- <EmailCapture variant="contextual"source="about"/>
  </div>
  </div>
  );

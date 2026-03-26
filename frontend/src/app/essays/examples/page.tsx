@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { apiFetch } from "@/lib/api";
 import { ToolCrossLinks } from "@/components/ToolCrossLinks";
-import { EmailCapture } from "@/components/EmailCapture";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -202,6 +202,10 @@ export default function EssayExamplesPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <Breadcrumb items={[
+          { label: "Essays", href: "/essays/examples" },
+          { label: "Examples" },
+        ]} />
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -535,7 +539,6 @@ export default function EssayExamplesPage() {
         {/* Cross-links & CTA */}
         <div className="mt-16 space-y-8">
           <ToolCrossLinks current="/essays/examples" />
-          <EmailCapture source="essay-examples" />
         </div>
       </div>
     </div>

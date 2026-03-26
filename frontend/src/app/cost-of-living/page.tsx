@@ -9,7 +9,6 @@ import {
 import { apiFetch } from"@/lib/api";
 import { useSchoolNames } from"@/hooks/useSchoolNames";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -375,7 +374,6 @@ export default function CostOfLivingPage() {
  </div>
  )}
 
- <EmailCapture variant="contextual"source="cost-of-living"/>
  <ToolCrossLinks current="/cost-of-living"/>
  </motion.div>
  )}

@@ -41,151 +41,95 @@ interface GeoMeta {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
-  // ── Static pages ──────────────────────────────────────────────────────
+  // ── Static pages (consolidated routes) ───────────────────────────────
   const staticPages: MetadataRoute.Sitemap = [
+    // Core
     { url: SITE, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
     { url: `${SITE}/schools`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${SITE}/rankings`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE}/decisions`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE}/compare`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/compare-countries`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE}/profile-report`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE}/evaluator`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/simulator`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    // Consolidated hubs
+    { url: `${SITE}/portfolio`, lastModified: now, changeFrequency: "daily", priority: 0.8 },
+    { url: `${SITE}/essays`, lastModified: now, changeFrequency: "daily", priority: 0.8 },
+    { url: `${SITE}/finances`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/test-prep`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    // Application support
     { url: `${SITE}/interview`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/interview/questions`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE}/roaster`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/scholarships`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/storyteller`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/goals`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE}/recommenders`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${SITE}/rec-tracker`, lastModified: now, changeFrequency: "daily", priority: 0.5 },
+    { url: `${SITE}/loi-builder`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE}/outreach`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE}/waitlist`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${SITE}/guide`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/dashboard`, lastModified: now, changeFrequency: "daily", priority: 0.4 },
-    { url: `${SITE}/pricing`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    // Batch 1+2+3 tools
-    { url: `${SITE}/rankings`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${SITE}/tools`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE}/calendar`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${SITE}/checklist`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/essay-length-optimizer`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/fit-score`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    // /fees consolidated → /fee-calculator
-    { url: `${SITE}/essay-prompts`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${SITE}/score-convert`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE}/roi`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE}/essay-drafts`, lastModified: now, changeFrequency: "daily", priority: 0.4 },
-    { url: `${SITE}/timeline`, lastModified: now, changeFrequency: "daily", priority: 0.4 },
-    { url: `${SITE}/alerts`, lastModified: now, changeFrequency: "daily", priority: 0.4 },
-    { url: `${SITE}/interview/questions`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/class-profile`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE}/gmat-targets`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    // /radar consolidated → /compare
-    // /tracker consolidated → /my-schools
-    { url: `${SITE}/strength`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/cost-of-living`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/essay-themes`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/simulator`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE}/culture`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/salary`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/visa`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/fee-waivers`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/alumni`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/scholarship-estimate`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE}/plan`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/resume-keywords`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/gmat-planner`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    // /peer-compare consolidated → /compare
-    { url: `${SITE}/visit-planner`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${SITE}/budget`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${SITE}/diversity`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    // Batch 9
-    { url: `${SITE}/rec-tracker`, lastModified: now, changeFrequency: "daily", priority: 0.5 },
-    { url: `${SITE}/events`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    // interview-bank consolidated into /interview/questions (already listed above)
-    { url: `${SITE}/careers`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    // app-checklist consolidated into /checklist (already listed above)
-    // Batch 10
-    { url: `${SITE}/exchange-programs`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/specialty-rankings`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE}/fee-calculator`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/loi-builder`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/community`, lastModified: now, changeFrequency: "daily", priority: 0.6 },
-    // Batch 11
-    // /salary-database consolidated → /salary
-    { url: `${SITE}/admission-trends`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE}/word-bank`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/culture-quiz`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/reapplicant`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    // Batch 12
-    { url: `${SITE}/glossary`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    // /countdown consolidated → /timeline
-    { url: `${SITE}/gmat-predictor`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/program-formats`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE}/myths`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    // Batch 13
-    { url: `${SITE}/podcasts`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/campus-life`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/school-news`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${SITE}/essay-templates`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    // /timeline-viz consolidated → /timeline
-    // Batch 14
-    { url: `${SITE}/dual-degrees`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/class-size`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    // /gmat-vs-gre consolidated → /score-convert
-    { url: `${SITE}/reading-list`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/scholarship-tips`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    // Batch 15
-    // /fee-tracker consolidated → /my-schools
-    { url: `${SITE}/post-mba-locations`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE}/concentrations`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    // /pre-mba-checklist consolidated → /checklist
-    // /admit-rate-calc consolidated → /simulator
-    // Batch 16
-    // /networking-guide consolidated → /outreach
-    { url: `${SITE}/salary-negotiation`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE}/study-group`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${SITE}/alumni-interview`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE}/acceptance-history`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    // Batch 17
-    // /app-dashboard consolidated → /dashboard
-    // /waitlist-guide consolidated → /waitlist
-    { url: `${SITE}/international-guide`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE}/day-in-life`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    // /employment-reports consolidated → /careers
-    // Batch 18
-    // /mba-glossary-quiz consolidated → /glossary
-    { url: `${SITE}/career-switcher`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    // /essay-word-frequency consolidated → /evaluator
-    // /school-culture-map consolidated → /culture
-    // /recommendation-letter-tips consolidated → /recommenders
-    // Batch 19
-    // /mba-myths-quiz consolidated → /myths
-    // /school-visit-checklist consolidated → /visit-planner
-    // /essay-tone-checker consolidated → /evaluator
-    { url: `${SITE}/financial-aid-comparison`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    // /mba-roi-by-industry consolidated → /roi
-    // Batch 20
-    // /application-timeline-builder consolidated → /timeline
-    // /gmat-score-breakdown consolidated → /gmat-targets
-    // /mba-networking-tracker consolidated → /outreach
-    // /essay-length-optimizer already listed in Batch 1+2+3
     { url: `${SITE}/round-strategy`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    // Previously unlisted
-    { url: `${SITE}/my-schools`, lastModified: now, changeFrequency: "daily", priority: 0.5 },
+    { url: `${SITE}/checklist`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    // Planning & timeline
+    { url: `${SITE}/timeline`, lastModified: now, changeFrequency: "daily", priority: 0.4 },
+    { url: `${SITE}/calendar`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${SITE}/alerts`, lastModified: now, changeFrequency: "daily", priority: 0.4 },
+    { url: `${SITE}/plan`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/goals`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${SITE}/decide`, lastModified: now, changeFrequency: "daily", priority: 0.7 },
+    // Research & data
+    { url: `${SITE}/class-profile`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/admission-trends`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/acceptance-history`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/diversity`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/specialty-rankings`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/concentrations`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/dual-degrees`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/program-formats`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/class-size`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/culture`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/culture-quiz`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/fit-score`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/strength`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    // Career
+    { url: `${SITE}/careers`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/career-simulator`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/career-switcher`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/post-mba-locations`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/resume-keywords`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    // Life & community
+    { url: `${SITE}/campus-life`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/day-in-life`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/alumni`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/alumni-interview`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/events`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/community`, lastModified: now, changeFrequency: "daily", priority: 0.6 },
+    { url: `${SITE}/exchange-programs`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/visit-planner`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${SITE}/study-group`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    // International
+    { url: `${SITE}/international-guide`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/visa`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/cost-of-living`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    // Resources
+    { url: `${SITE}/guide`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/glossary`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/myths`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/podcasts`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/reading-list`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/school-news`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${SITE}/reapplicant`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE}/financial-aid-comparison`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     // Program landing pages
     { url: `${SITE}/programs`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE}/programs/mba`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE}/programs/mim`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE}/programs/emba`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE}/programs/cat`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    // Info pages
+    // Info & account
     { url: `${SITE}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE}/privacy`, lastModified: now, changeFrequency: "monthly", priority: 0.3 },
     { url: `${SITE}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.4 },
-    // Phase 2 Sprint 3
-    { url: `${SITE}/career-simulator`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE}/compare-countries`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE}/portfolio`, lastModified: now, changeFrequency: "daily", priority: 0.5 },
-    { url: `${SITE}/essays/themes`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE}/decide`, lastModified: now, changeFrequency: "daily", priority: 0.7 },
+    { url: `${SITE}/pricing`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE}/dashboard`, lastModified: now, changeFrequency: "daily", priority: 0.4 },
   ];
 
   // ── Dynamic school pages (with TOP_100 priority boost) ────────────────

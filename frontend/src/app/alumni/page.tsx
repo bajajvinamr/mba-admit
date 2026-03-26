@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from"framer-motion";
 import { Users, Building2, Star, X } from"lucide-react";
 import { apiFetch } from"@/lib/api";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -332,7 +331,6 @@ export default function AlumniNetworkPage() {
  </div>
  )}
 
- <EmailCapture variant="contextual"source="alumni"/>
  <ToolCrossLinks current="/alumni"/>
  </div>
  </main>

@@ -1,0 +1,20 @@
+{"event": "page_view", "properties": {"path": "/", "url": "/", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:16.671Z"}
+{"event": "web_vital", "properties": {"name": "FCP", "value": 5912, "rating": "good", "navigationType": "navigate", "url": "/", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:16.687Z"}
+{"event": "web_vital", "properties": {"name": "TTFB", "value": 100, "rating": "good", "navigationType": "navigate", "url": "/", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:16.687Z"}
+{"event": "homepage_loaded", "properties": {"school_count": 894, "returning_user": false, "url": "/", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:19.417Z"}
+{"event": "web_vital", "properties": {"name": "FID", "value": 4, "rating": "good", "navigationType": "navigate", "url": "/", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:28.109Z"}
+{"event": "web_vital", "properties": {"name": "LCP", "value": 5912, "rating": "needs-improvement", "navigationType": "navigate", "url": "/", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:28.119Z"}
+{"event": "page_view", "properties": {"path": "/scholarships", "url": "/scholarships", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:33.909Z"}
+{"event": "web_vital", "properties": {"name": "INP", "value": 40, "rating": "good", "navigationType": "navigate", "url": "/scholarships", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:34.527Z"}
+{"event": "web_vital", "properties": {"name": "CLS", "value": 534, "rating": "poor", "navigationType": "navigate", "url": "/scholarships", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:34.527Z"}
+{"event": "page_view", "properties": {"path": "/roi", "url": "/roi", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:46.962Z"}
+{"event": "page_view", "properties": {"path": "/roi", "url": "/roi", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:51.457Z"}
+{"event": "web_vital", "properties": {"name": "TTFB", "value": 31, "rating": "good", "navigationType": "reload", "url": "/roi", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:51.463Z"}
+{"event": "web_vital", "properties": {"name": "FCP", "value": 784, "rating": "good", "navigationType": "reload", "url": "/roi", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:51.473Z"}
+{"event": "web_vital", "properties": {"name": "FID", "value": 5, "rating": "good", "navigationType": "reload", "url": "/roi", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:52.805Z"}
+{"event": "web_vital", "properties": {"name": "LCP", "value": 784, "rating": "good", "navigationType": "reload", "url": "/roi", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:52.805Z"}
+{"event": "page_view", "properties": {"path": "/pricing", "url": "/pricing", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:53.829Z"}
+{"event": "pricing_viewed", "properties": {"source": "https://vercel.com/", "url": "/pricing", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:32:53.830Z"}
+{"event": "pricing_interval_changed", "properties": {"interval": "monthly", "url": "/pricing", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:33:05.196Z"}
+{"event": "web_vital", "properties": {"name": "INP", "value": 40, "rating": "good", "navigationType": "reload", "url": "/pricing", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:33:07.407Z"}
+{"event": "web_vital", "properties": {"name": "CLS", "value": 15, "rating": "good", "navigationType": "reload", "url": "/pricing", "referrer": "https://vercel.com/"}, "timestamp": "2026-03-25T22:33:07.407Z"}

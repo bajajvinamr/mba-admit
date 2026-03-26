@@ -1,7 +1,6 @@
 import { Metadata } from"next";
 import Link from"next/link";
 import guideMeta from"@/content/guides/meta.json";
-import { EmailCapture } from"@/components/EmailCapture";
 
 export const metadata: Metadata = {
  title:"MBA Admissions Guides - Expert Advice & Analysis",
@@ -67,7 +66,6 @@ export default function GuidesIndex() {
  <p className="text-muted-foreground/40 text-center py-20">Guides coming soon.</p>
  )}
 
- <EmailCapture variant="contextual"source="guides"/>
  </div>
  );
 }

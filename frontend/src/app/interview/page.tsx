@@ -23,7 +23,6 @@ import {
 } from"lucide-react";
 import Link from"next/link";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 import { apiFetch } from"@/lib/api";
 import { track } from"@/lib/analytics";
 import { useAbortSignal } from"@/hooks/useAbortSignal";
@@ -186,7 +185,7 @@ function TimerRing({
  const strokeColor = isCritical
  ?"#EF4444"
  : isWarning
- ?"#C9A962"
+ ?"#6366F1"
  :"#FFFFFF";
 
  const mins = Math.floor(seconds / 60);
@@ -243,7 +242,7 @@ function TimerRing({
  isCritical
  ?"text-red-400"
  : isWarning
- ?"text-gold"
+ ?"text-primary"
  :"text-white"
  }`}
  >
@@ -426,7 +425,7 @@ function ScoreFlash({
  <span className="text-xs text-white/50 uppercase tracking-wider font-bold">
  {label}
  </span>
- <span className="text-lg font-black text-gold">{score}</span>
+ <span className="text-lg font-black text-primary">{score}</span>
  </div>
  );
 }
@@ -794,8 +793,8 @@ export default function InterviewPage() {
  {!isStarted && (
  <div className="w-full min-h-screen flex flex-col items-center justify-center p-4 md:p-8 animate-fade-in">
  <div className="bg-[#0A0A0A] w-full max-w-xl p-10 border border-white/10 shadow-2xl text-center">
- <div className="w-20 h-20 bg-gold/10 flex items-center justify-center mx-auto mb-8 border border-gold/20">
- <Video size={32} className="text-gold"/>
+ <div className="w-20 h-20 bg-primary/10 flex items-center justify-center mx-auto mb-8 border border-primary/20">
+ <Video size={32} className="text-primary"/>
  </div>
  <h1 className="font-display text-4xl text-white mb-4 font-semibold">
  Adcom Interview Simulator
@@ -817,7 +816,7 @@ export default function InterviewPage() {
  id="school-select"
  value={selectedSchoolId}
  onChange={(e) => setSelectedSchoolId(e.target.value)}
- className="w-full bg-[#141414] border border-white/10 px-6 py-4 focus:border-gold focus:outline-none text-white font-medium"
+ className="w-full bg-[#141414] border border-white/10 px-6 py-4 focus:border-primary focus:outline-none text-white font-medium"
  >
  <option value="">Select a school...</option>
  {schools.map((s) => (
@@ -852,14 +851,14 @@ export default function InterviewPage() {
  onClick={() => setDifficulty(opt.value)}
  className={`relative bg-[#141414] border p-4 text-center transition-all duration-200 ${
  selected
- ?"border-gold ring-2 ring-gold/20"
+ ?"border-primary ring-2 ring-primary/20"
  :"border-white/10 hover:border-white/20"
  }`}
  >
  <div
  className={`w-10 h-10 flex items-center justify-center mx-auto mb-2 ${
  selected
- ?"bg-gold text-[#0A0A0A]"
+ ?"bg-primary text-[#0A0A0A]"
  :"bg-white/5 text-white/30"
  } transition-colors`}
  >
@@ -898,7 +897,7 @@ export default function InterviewPage() {
  onClick={() => setQuestionCount(count)}
  className={`flex-1 py-3 font-bold text-sm transition-all duration-200 ${
  questionCount === count
- ?"bg-gold text-[#0A0A0A]"
+ ?"bg-primary text-[#0A0A0A]"
  :"bg-[#141414] border border-white/10 text-white hover:border-white/20"
  }`}
  >
@@ -920,7 +919,7 @@ export default function InterviewPage() {
  <button
  onClick={handleStart}
  disabled={!selectedSchoolId}
- className="w-full bg-gold text-[#0A0A0A] font-bold uppercase tracking-widest py-5 flex items-center justify-center gap-3 hover:bg-gold/90 transition-all disabled:opacity-50 group"
+ className="w-full bg-primary text-[#0A0A0A] font-bold uppercase tracking-widest py-5 flex items-center justify-center gap-3 hover:bg-primary/90 transition-all disabled:opacity-50 group"
  >
  Start Mock Interview{""}
  <Play
@@ -1001,9 +1000,6 @@ export default function InterviewPage() {
  {/* ── IMMERSIVE Active Interview ── */}
  {isStarted && !isFinished && (
  <div className="fixed inset-0 z-50 bg-[#0A0A0A] flex flex-col interview-immersive">
- {/* Animated grain overlay */}
- <div className="grain-overlay" aria-hidden="true"/>
-
  {/* Deep gradient background */}
  <div
  className="absolute inset-0"
@@ -1043,7 +1039,7 @@ export default function InterviewPage() {
  {/* Category badge */}
  {questionCategory && (
  <div className="mb-6 animate-fade-in">
- <span className="text-[10px] text-gold/80 uppercase font-bold tracking-widest bg-gold/5 border border-gold/20 px-4 py-1.5">
+ <span className="text-[10px] text-primary/80 uppercase font-bold tracking-widest bg-primary/5 border border-primary/20 px-4 py-1.5">
  {CATEGORY_LABELS[questionCategory] || questionCategory}
  </span>
  </div>
@@ -1062,15 +1058,15 @@ export default function InterviewPage() {
  <div className="max-w-3xl text-center mb-8 min-h-[80px]">
  {loading ? (
  <div className="flex gap-1.5 justify-center py-4">
- <div className="w-2 h-2 bg-gold rounded-full animate-bounce [animation-delay:-0.3s]"/>
- <div className="w-2 h-2 bg-gold rounded-full animate-bounce [animation-delay:-0.15s]"/>
- <div className="w-2 h-2 bg-gold rounded-full animate-bounce"/>
+ <div className="w-2 h-2 bg-primary rounded-full animate-bounce [animation-delay:-0.3s]"/>
+ <div className="w-2 h-2 bg-primary rounded-full animate-bounce [animation-delay:-0.15s]"/>
+ <div className="w-2 h-2 bg-primary rounded-full animate-bounce"/>
  </div>
  ) : (
  <p className="font-display text-2xl md:text-3xl text-white leading-snug font-medium">
  {typewriter.displayed}
  {!typewriter.done && (
- <span className="animate-blink text-gold">|</span>
+ <span className="animate-blink text-primary">|</span>
  )}
  </p>
  )}
@@ -1158,7 +1154,7 @@ export default function InterviewPage() {
  }
  }}
  placeholder="Type your answer... (Enter to submit, Shift+Enter for new line)"
- className="w-full bg-white/5 border border-white/10 p-5 text-white text-sm leading-relaxed placeholder:text-white/20 focus:border-gold/50 focus:outline-none resize-none min-h-[100px] max-h-[200px]"
+ className="w-full bg-white/5 border border-white/10 p-5 text-white text-sm leading-relaxed placeholder:text-white/20 focus:border-primary/50 focus:outline-none resize-none min-h-[100px] max-h-[200px]"
  disabled={loading}
  rows={3}
  />
@@ -1176,7 +1172,7 @@ export default function InterviewPage() {
  key={i}
  className={`rounded-full transition-all duration-300 ${
  i + 1 === questionNumber
- ?"w-3.5 h-3.5 bg-gold shadow-[0_0_8px_rgba(201,169,98,0.4)]"
+ ?"w-3.5 h-3.5 bg-primary shadow-[0_0_8px_rgba(201,169,98,0.4)]"
  : i + 1 < questionNumber
  ?"w-2 h-2 bg-emerald-400"
  :"w-2 h-2 border border-white/10 bg-transparent"
@@ -1217,7 +1213,7 @@ export default function InterviewPage() {
  <RippleButton
  onClick={() => handleSend()}
  disabled={!currentInput.trim()}
- className="px-8 py-3 bg-gold text-[#0A0A0A] font-bold uppercase tracking-widest text-sm disabled:opacity-30 transition-all submit-glow"
+ className="px-8 py-3 bg-primary text-[#0A0A0A] font-bold uppercase tracking-widest text-sm disabled:opacity-30 transition-all submit-glow"
  >
  Submit Answer
  </RippleButton>
@@ -1240,7 +1236,7 @@ export default function InterviewPage() {
  }}
  className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
  voiceMode
- ?"bg-gold text-[#0A0A0A] shadow-gold/20"
+ ?"bg-primary text-[#0A0A0A] shadow-primary/20"
  :"bg-white/5 text-white/30 hover:text-white/60"
  }`}
  >
@@ -1283,7 +1279,7 @@ export default function InterviewPage() {
  </div>
  <button
  onClick={handleReset}
- className="text-[10px] uppercase font-black tracking-widest text-gold hover:text-white flex items-center gap-2 transition-colors border border-gold/20 px-4 py-2"
+ className="text-[10px] uppercase font-black tracking-widest text-primary hover:text-white flex items-center gap-2 transition-colors border border-primary/20 px-4 py-2"
  >
  <RefreshCcw size={14} /> Re-Interview
  </button>
@@ -1342,7 +1338,7 @@ export default function InterviewPage() {
  </div>
  <div className="mt-2 h-1 bg-white/5 overflow-hidden">
  <div
- className="h-full bg-gold transition-all duration-500"
+ className="h-full bg-primary transition-all duration-500"
  style={{ width: `${val * 10}%` }}
  />
  </div>
@@ -1357,7 +1353,7 @@ export default function InterviewPage() {
  <h4 className="text-[10px] uppercase font-black tracking-widest text-white/30 mb-4">
  Adcom Debrief
  </h4>
- <div className="pl-6 md:pl-8 border-l-4 border-gold">
+ <div className="pl-6 md:pl-8 border-l-4 border-primary">
  <p className="text-xl md:text-2xl font-display italic text-white/80 leading-relaxed">
  &ldquo;{feedback.overall_feedback}&rdquo;
  </p>
@@ -1402,7 +1398,7 @@ export default function InterviewPage() {
  Q{idx + 1}
  </span>
  {categoryMap[idx + 1] && (
- <span className="text-[9px] uppercase font-bold text-gold bg-gold/10 px-2 py-0.5 border border-gold/20">
+ <span className="text-[9px] uppercase font-bold text-primary bg-primary/10 px-2 py-0.5 border border-primary/20">
  {CATEGORY_LABELS[categoryMap[idx + 1]] ||
  categoryMap[idx + 1]}
  </span>
@@ -1432,7 +1428,7 @@ export default function InterviewPage() {
  </p>
  <button
  onClick={handleReset}
- className="bg-gold text-[#0A0A0A] font-bold uppercase tracking-widest py-4 px-8 flex items-center justify-center gap-3 hover:bg-gold/90 transition-all mx-auto"
+ className="bg-primary text-[#0A0A0A] font-bold uppercase tracking-widest py-4 px-8 flex items-center justify-center gap-3 hover:bg-primary/90 transition-all mx-auto"
  >
  <RefreshCcw size={16} /> Try Again
  </button>
@@ -1452,7 +1448,7 @@ export default function InterviewPage() {
  </p>
  <Link
  href="/checkout"
- className="inline-block bg-gold text-[#0A0A0A] px-10 py-5 font-bold uppercase tracking-[0.2em] text-sm hover:scale-105 transition-transform shadow-xl"
+ className="inline-block bg-primary text-[#0A0A0A] px-10 py-5 font-bold uppercase tracking-[0.2em] text-sm hover:scale-105 transition-transform shadow-xl"
  >
  Book Mentor Mock &mdash; &#8377;1,000
  </Link>
@@ -1462,7 +1458,6 @@ export default function InterviewPage() {
  </div>
  </div>
  )}
- <EmailCapture variant="contextual"source="interview"/>
  </UsageGate>
  {!isStarted && (
  <div className="w-full max-w-4xl mt-8 px-4">

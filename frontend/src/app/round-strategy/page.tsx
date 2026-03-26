@@ -3,7 +3,6 @@
 import { useState } from"react";
 import { CheckCircle2, AlertTriangle, XCircle, ArrowRight } from"lucide-react";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 type Factor = { label: string; options: { text: string; r1: number; r2: number; r3: number }[] };
 
@@ -169,7 +168,6 @@ export default function RoundStrategyPage() {
  </div>
  </div>
 
- <EmailCapture variant="contextual"source="round-strategy"/>
  <ToolCrossLinks current="/round-strategy"/>
  </div>
  </main>

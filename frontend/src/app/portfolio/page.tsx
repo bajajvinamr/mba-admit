@@ -147,7 +147,7 @@ function SchoolCard({ school }: { school: PortfolioSchool }) {
         </div>
         <div className="h-1.5 bg-muted rounded-full overflow-hidden">
           <div
-            className="h-full bg-gold rounded-full transition-all"
+            className="h-full bg-primary rounded-full transition-all"
             style={{ width: `${school.completionPct}%` }}
           />
         </div>
@@ -176,7 +176,7 @@ function SchoolCard({ school }: { school: PortfolioSchool }) {
 function DragOverlayCard({ school }: { school: PortfolioSchool }) {
   const days = daysUntil(school.nextDeadline);
   return (
-    <div className="bg-white border-2 border-gold rounded-lg p-3 shadow-xl space-y-2 w-60">
+    <div className="bg-white border-2 border-primary rounded-lg p-3 shadow-xl space-y-2 w-60">
       <h4 className="text-sm font-semibold text-foreground truncate">
         {school.name}
       </h4>
@@ -188,7 +188,7 @@ function DragOverlayCard({ school }: { school: PortfolioSchool }) {
       )}
       <div className="h-1.5 bg-muted rounded-full overflow-hidden">
         <div
-          className="h-full bg-gold rounded-full"
+          className="h-full bg-primary rounded-full"
           style={{ width: `${school.completionPct}%` }}
         />
       </div>
@@ -211,7 +211,7 @@ function KanbanColumn({
     <div
       className={cn(
         "flex-shrink-0 w-64 lg:w-auto lg:flex-1 flex flex-col rounded-lg",
-        isActive ? "ring-2 ring-gold/40" : ""
+        isActive ? "ring-2 ring-primary/40" : ""
       )}
     >
       <div className="flex items-center justify-between px-3 py-2">

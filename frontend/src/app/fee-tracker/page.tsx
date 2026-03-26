@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default function FeeTrackerPage() {
-  redirect("/my-schools");
+export default function Page() {
+  redirect("/finances?tab=fees");
 }

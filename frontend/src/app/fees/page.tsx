@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default function FeesPage() {
-  redirect("/fee-calculator");
+export default function Page() {
+  redirect("/finances?tab=fees");
 }

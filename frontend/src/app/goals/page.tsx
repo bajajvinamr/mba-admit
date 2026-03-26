@@ -4,7 +4,6 @@ import { useState, useEffect } from"react";
 import { Loader2, Target, CheckCircle2, AlertTriangle, AlertCircle, Copy, Check } from"lucide-react";
 import Link from 'next/link';
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 import { apiFetch } from"@/lib/api";
 import { useAbortSignal } from"@/hooks/useAbortSignal";
 import { useUsage } from"@/hooks/useUsage";
@@ -324,7 +323,6 @@ export default function GoalSculptorPage() {
  </UsageGate>
 
  <div className="max-w-4xl mx-auto px-6 pb-8">
- <EmailCapture variant="contextual"source="goals"/>
  <ToolCrossLinks current="/goals"/>
  </div>
  </>

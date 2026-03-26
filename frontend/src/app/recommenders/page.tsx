@@ -24,7 +24,6 @@ import { useAbortSignal } from "@/hooks/useAbortSignal";
 import { useUsage } from "@/hooks/useUsage";
 import { UsageGate } from "@/components/UsageGate";
 import { ToolCrossLinks } from "@/components/ToolCrossLinks";
-import { EmailCapture } from "@/components/EmailCapture";
 
 type School = { id: string; name: string };
 type Recommender = { title: string; relationship: string; years_known: string };
@@ -983,7 +982,6 @@ export default function RecommendersPage() {
           </div>
         </div>
 
-        <EmailCapture variant="contextual" source="recommenders" />
         <ToolCrossLinks current="/recommenders" />
       </div>
     </div>

@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { ToolCrossLinks } from "@/components/ToolCrossLinks";
-import { EmailCapture } from "@/components/EmailCapture";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -100,6 +100,12 @@ export default function InterviewGuideClient({ slug, guide, error }: Props) {
 
   return (
     <main className="min-h-screen bg-background">
+      <div className="max-w-4xl mx-auto px-6">
+        <Breadcrumb items={[
+          { label: "Interview", href: "/interview" },
+          { label: `${label} Guide` },
+        ]} />
+      </div>
       {/* Hero */}
       <section className="bg-foreground text-white py-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
@@ -294,7 +300,6 @@ export default function InterviewGuideClient({ slug, guide, error }: Props) {
           </p>
         </motion.div>
 
-        <EmailCapture variant="contextual" source={`interview-guide-${slug}`} />
         <ToolCrossLinks current={`/interviews/guide/${slug}`} />
       </div>
     </main>

@@ -598,7 +598,7 @@ export default function OnboardingPage() {
             animate={{ rotate: 0 }}
             transition={{ type: "spring", stiffness: 200 }}
           >
-            <Sparkles className="h-16 w-16 text-gold mb-6" />
+            <Sparkles className="h-16 w-16 text-primary mb-6" />
           </motion.div>
           <h1 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-3">
             Your personalized dashboard is ready
@@ -627,9 +627,9 @@ export default function OnboardingPage() {
             className={cn(
               "h-2 rounded-full transition-all duration-300",
               i === step
-                ? "w-8 bg-gold"
+                ? "w-8 bg-primary"
                 : i < step
-                  ? "w-2 bg-gold/40 cursor-pointer hover:bg-gold/60"
+                  ? "w-2 bg-primary/40 cursor-pointer hover:bg-primary/60"
                   : "w-2 bg-muted-foreground"
             )}
           />

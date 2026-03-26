@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default function TrackRedirect() {
-  redirect("/my-schools");
+export default function Page() {
+  redirect("/portfolio");
 }

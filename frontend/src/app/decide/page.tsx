@@ -10,7 +10,6 @@ import {
 import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import { ToolCrossLinks } from "@/components/ToolCrossLinks";
-import { EmailCapture } from "@/components/EmailCapture";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -592,7 +591,6 @@ export default function DecidePage() {
           </motion.div>
         )}
 
-        <EmailCapture variant="contextual" source="decision-matrix" />
         <ToolCrossLinks current="/decide" />
       </div>
     </main>

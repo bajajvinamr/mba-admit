@@ -13,7 +13,6 @@ import {
 } from"lucide-react";
 import { apiFetch } from"@/lib/api";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 import { useUsage } from"@/hooks/useUsage";
 import { UsageGate } from"@/components/UsageGate";
 
@@ -267,7 +266,6 @@ export default function AlumniInterviewPage() {
 
  </UsageGate>
 
- <EmailCapture variant="contextual"source="alumni-interview"/>
  <ToolCrossLinks current="/alumni-interview"/>
  </div>
  </main>

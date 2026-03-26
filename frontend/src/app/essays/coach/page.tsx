@@ -11,6 +11,7 @@ import { cn } from"@/lib/cn";
 import { EssayEditor } from"@/components/essays/EssayEditor";
 import { AICoach } from"@/components/essays/AICoach";
 import { PromptCard, type EssayPrompt } from"@/components/essays/PromptCard";
+import { Breadcrumb } from"@/components/ui/Breadcrumb";
 
 /* ---- Mock Data ---- */
 
@@ -120,6 +121,12 @@ export default function EssayCoachPage() {
  {...fadeIn}
  className="flex h-dvh flex-col overflow-hidden"
  >
+ <div className="px-4 sm:px-6">
+ <Breadcrumb items={[
+   { label: "Essays", href: "/essays/examples" },
+   { label: "Coach" },
+ ]} />
+ </div>
  {/* Header */}
  <header className="flex shrink-0 flex-col gap-3 border-b px-4 py-3 sm:px-6">
  <div className="flex items-center justify-between">

@@ -4,7 +4,6 @@ import { useState } from"react";
 import { motion, AnimatePresence } from"framer-motion";
 import { CheckCircle2, ChevronRight, Calculator, AlertCircle, Briefcase, GraduationCap, XOctagon, Target, TrendingUp, Globe, Plane, DollarSign, Award, Building2, BookOpen, Clock, UserCheck, Timer } from"lucide-react";
 import Link from"next/link";
-import { EmailCapture } from"@/components/EmailCapture";
 
 type QuizStep = {
  question: string;
@@ -823,7 +822,6 @@ export default function GuidePage() {
  </section>
 
  <div className="max-w-4xl mx-auto px-8 pb-16">
- <EmailCapture variant="contextual"source="guide"/>
  </div>
  </div>
  );

@@ -9,7 +9,7 @@ import {
 import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import { ToolCrossLinks } from "@/components/ToolCrossLinks";
-import { EmailCapture } from "@/components/EmailCapture";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -106,6 +106,12 @@ export default function EssayThemesPage() {
 
   return (
     <main className="min-h-screen bg-background">
+      <div className="max-w-4xl mx-auto px-6">
+        <Breadcrumb items={[
+          { label: "Essays", href: "/essays/examples" },
+          { label: "Themes" },
+        ]} />
+      </div>
       {/* Hero */}
       <section className="bg-foreground text-white py-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
@@ -347,7 +353,6 @@ export default function EssayThemesPage() {
           </motion.div>
         )}
 
-        <EmailCapture variant="contextual" source="essay-themes-cross" />
         <ToolCrossLinks current="/essays/themes" />
       </div>
     </main>

@@ -3,6 +3,7 @@ import { notFound } from"next/navigation";
 import Link from"next/link";
 import { deslugify, slugify, REGIONS } from"@/lib/geo";
 import { API_BASE } from"@/lib/api";
+import { Breadcrumb } from"@/components/ui/Breadcrumb";
 
 type School = {
  id: string; name: string; location: string; country: string;
@@ -59,19 +60,10 @@ export default async function CountryPage({ params }: Props) {
 
  return (
  <div className="max-w-7xl mx-auto px-8">
- <nav className="py-6 text-xs text-muted-foreground/40">
- <Link href="/schools" className="hover:text-foreground">Schools</Link>
- <span className="mx-2">/</span>
- {regionEntry && (
- <>
- <Link href={`/schools/region/${regionEntry[0]}`} className="hover:text-foreground">
- {regionEntry[1].name}
- </Link>
- <span className="mx-2">/</span>
- </>
- )}
- <span className="text-foreground font-medium">{country}</span>
- </nav>
+ <Breadcrumb items={[
+   { label: "Schools", href: "/schools" },
+   { label: country },
+ ]} />
 
  <div className="py-8 border-b border-border/5 mb-8">
  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground/40 mb-3 font-medium">

@@ -51,7 +51,7 @@ function FloatingBadges() {
         <div
           className="absolute w-[300px] h-[300px] rounded-full opacity-20 blur-[80px]"
           style={{
-            background: "radial-gradient(circle, #C9A962, transparent 70%)",
+            background: "radial-gradient(circle, #6366F1, transparent 70%)",
             top: "20%", left: "30%",
             animation: "orb-float-1 8s ease-in-out infinite",
           }}
@@ -59,7 +59,7 @@ function FloatingBadges() {
         <div
           className="absolute w-[250px] h-[250px] rounded-full opacity-15 blur-[60px]"
           style={{
-            background: "radial-gradient(circle, #C9A962, transparent 70%)",
+            background: "radial-gradient(circle, #6366F1, transparent 70%)",
             top: "50%", left: "50%",
             animation: "orb-float-2 10s ease-in-out infinite",
           }}

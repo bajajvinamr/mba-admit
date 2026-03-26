@@ -11,7 +11,6 @@ import Link from"next/link";
 import { apiFetch } from"@/lib/api";
 import { useSchoolNames } from"@/hooks/useSchoolNames";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -302,7 +301,6 @@ export default function ChecklistPage() {
  </div>
  )}
 
- <EmailCapture variant="contextual"source="checklist"/>
  <ToolCrossLinks current="/checklist"/>
  </div>
  </main>

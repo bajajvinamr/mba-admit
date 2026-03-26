@@ -1,0 +1,14 @@
+{
+  "id": "session-1773749640564",
+  "startedAt": "2026-03-17T12:14:00.564Z",
+  "cwd": "/Users/vinamr/Documents/mba-admissions-ai/backend",
+  "context": {},
+  "metrics": {
+    "edits": 105,
+    "commands": 0,
+    "tasks": 0,
+    "errors": 0
+  },
+  "endedAt": "2026-03-17T12:45:33.836Z",
+  "duration": 1893273
+}

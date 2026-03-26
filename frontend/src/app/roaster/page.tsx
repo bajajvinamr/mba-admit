@@ -10,7 +10,6 @@ import { useAbortSignal } from"@/hooks/useAbortSignal";
 import { resumeRoastSchema } from"@/lib/schemas";
 import { useUsage } from"@/hooks/useUsage";
 import { UsageGate } from"@/components/UsageGate";
-import { EmailCapture } from"@/components/EmailCapture";
 
 type RoastResult = {
  score: number;
@@ -208,7 +207,6 @@ export default function RoasterPage() {
  </UsageGate>
 
  <div className="max-w-4xl mx-auto px-6 pb-8">
- <EmailCapture variant="contextual"source="roaster"/>
  <ToolCrossLinks current="/roaster"/>
  </div>
  </>

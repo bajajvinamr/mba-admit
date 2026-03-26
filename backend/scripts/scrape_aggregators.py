@@ -253,28 +253,35 @@ def scrape_fortuna(client: httpx.Client, limit: int) -> dict:
     site_dir = INFO_SITES_DIR / "fortuna"
     stats = {"site": "fortuna", "success": 0, "fail": 0, "pages": [], "scraped_at": datetime.now(timezone.utc).isoformat()}
 
-    # Fortuna has school-specific essay analysis and deadline pages
+    # Fortuna /mba-school/ path (from sitemap) contains school profiles with essay tips, deadlines, stats
     pages = [
-        ("mba-deadlines", "https://fortunaadmissions.com/mba-deadlines/"),
-        ("mba-essay-tips", "https://fortunaadmissions.com/mba-essay-tips/"),
-        ("hbs-essays", "https://fortunaadmissions.com/harvard-business-school-mba-essay/"),
-        ("stanford-essays", "https://fortunaadmissions.com/stanford-gsb-mba-essay/"),
-        ("wharton-essays", "https://fortunaadmissions.com/wharton-mba-essay/"),
-        ("booth-essays", "https://fortunaadmissions.com/chicago-booth-mba-essay/"),
-        ("kellogg-essays", "https://fortunaadmissions.com/kellogg-mba-essay/"),
-        ("columbia-essays", "https://fortunaadmissions.com/columbia-business-school-mba-essay/"),
-        ("mit-sloan-essays", "https://fortunaadmissions.com/mit-sloan-mba-essay/"),
-        ("tuck-essays", "https://fortunaadmissions.com/tuck-mba-essay/"),
-        ("haas-essays", "https://fortunaadmissions.com/berkeley-haas-mba-essay/"),
-        ("ross-essays", "https://fortunaadmissions.com/michigan-ross-mba-essay/"),
-        ("fuqua-essays", "https://fortunaadmissions.com/duke-fuqua-mba-essay/"),
-        ("darden-essays", "https://fortunaadmissions.com/uva-darden-mba-essay/"),
-        ("stern-essays", "https://fortunaadmissions.com/nyu-stern-mba-essay/"),
-        ("yale-som-essays", "https://fortunaadmissions.com/yale-som-mba-essay/"),
-        ("insead-essays", "https://fortunaadmissions.com/insead-mba-essay/"),
-        ("lbs-essays", "https://fortunaadmissions.com/london-business-school-mba-essay/"),
-        ("iese-essays", "https://fortunaadmissions.com/iese-mba-essay/"),
-        ("hec-paris-essays", "https://fortunaadmissions.com/hec-paris-mba-essay/"),
+        ("hbs", "https://fortunaadmissions.com/mba-school/harvard-business-school/"),
+        ("stanford-gsb", "https://fortunaadmissions.com/mba-school/stanford-gsb/"),
+        ("upenn-wharton", "https://fortunaadmissions.com/mba-school/upenn-wharton/"),
+        ("chicago-booth", "https://fortunaadmissions.com/mba-school/university-of-chicago-booth/"),
+        ("northwestern-kellogg", "https://fortunaadmissions.com/mba-school/northwestern-kellogg/"),
+        ("columbia-business-school", "https://fortunaadmissions.com/mba-school/columbia-business-school/"),
+        ("mit-sloan", "https://fortunaadmissions.com/mba-school/mit-sloan/"),
+        ("dartmouth-tuck", "https://fortunaadmissions.com/mba-school/dartmouth-tuck/"),
+        ("berkeley-haas", "https://fortunaadmissions.com/mba-school/berkeley-haas/"),
+        ("michigan-ross", "https://fortunaadmissions.com/mba-school/michigan-ross/"),
+        ("duke-fuqua", "https://fortunaadmissions.com/mba-school/duke-fuqua/"),
+        ("uva-darden", "https://fortunaadmissions.com/mba-school/uva-darden/"),
+        ("nyu-stern", "https://fortunaadmissions.com/mba-school/nyu-stern/"),
+        ("ucla-anderson", "https://fortunaadmissions.com/mba-school/ucla-anderson/"),
+        ("yale-som", "https://fortunaadmissions.com/mba-school/yale-school-of-management-som/"),
+        ("cornell-johnson", "https://fortunaadmissions.com/mba-school/cornell-johnson/"),
+        ("cmu-tepper", "https://fortunaadmissions.com/mba-school/carnegie-mellon-tepper/"),
+        ("insead", "https://fortunaadmissions.com/mba-school/insead/"),
+        ("lbs", "https://fortunaadmissions.com/mba-school/london-business-school/"),
+        ("hec-paris", "https://fortunaadmissions.com/mba-school/hec-paris/"),
+        ("iese", "https://fortunaadmissions.com/mba-school/iese/"),
+        ("imd", "https://fortunaadmissions.com/mba-school/imd/"),
+        ("oxford-said", "https://fortunaadmissions.com/mba-school/oxford-said/"),
+        ("cambridge-judge", "https://fortunaadmissions.com/mba-school/cambridge-judge/"),
+        ("ie", "https://fortunaadmissions.com/mba-school/ie/"),
+        ("rotman", "https://fortunaadmissions.com/mba-school/toronto-rotman/"),
+        ("mccombs", "https://fortunaadmissions.com/mba-school/ut-austin-mccombs/"),
     ]
 
     for slug, url in pages[:limit]:
@@ -299,54 +306,65 @@ def scrape_fortuna(client: httpx.Client, limit: int) -> dict:
 
 
 def scrape_mba_com(client: httpx.Client, limit: int) -> dict:
-    """Scrape MBA.com (GMAC) program data and class profiles."""
+    """Scrape MBA.com (GMAC) program data and class profiles.
+
+    MBA.com is a JS-rendered SPA. We use Google's cache and web archive as fallback,
+    and also try fetching with a render-friendly user agent.
+    """
     site_dir = INFO_SITES_DIR / "mba_com"
     stats = {"site": "mba_com", "success": 0, "fail": 0, "pages": [], "scraped_at": datetime.now(timezone.utc).isoformat()}
 
-    # MBA.com program finder and stats pages
+    # MBA.com pages — try with Googlebot-compatible UA for SSR content
     pages = [
         ("program-finder", "https://www.mba.com/business-school-and-program-search"),
         ("why-mba", "https://www.mba.com/information-and-news/research-and-data/why-b-school"),
         ("gmat-scores", "https://www.mba.com/exams/gmat-exam/about-the-gmat-exam/gmat-scores"),
         ("application-process", "https://www.mba.com/explore-programs/how-to-apply-to-mba-programs"),
         ("mba-salary", "https://www.mba.com/information-and-news/research-and-data/mba-salary-and-roi"),
-        ("class-of-2024", "https://www.mba.com/information-and-news/research-and-data"),
+        ("research-data", "https://www.mba.com/information-and-news/research-and-data"),
         ("gmat-prep", "https://www.mba.com/exams/gmat-exam/prepare-for-the-gmat-exam"),
-        ("top-programs", "https://www.mba.com/explore-programs"),
+        ("explore-programs", "https://www.mba.com/explore-programs"),
         ("executive-mba", "https://www.mba.com/explore-programs/executive-mba-programs"),
-        ("mba-rankings-guide", "https://www.mba.com/explore-programs/business-school-rankings"),
+        ("rankings-guide", "https://www.mba.com/explore-programs/business-school-rankings"),
+        ("gmat-focus-edition", "https://www.mba.com/exams/gmat-focus-edition"),
+        ("mba-program-types", "https://www.mba.com/explore-programs/mba-program-types"),
+        ("application-timeline", "https://www.mba.com/explore-programs/application-timeline"),
+        ("mba-financing", "https://www.mba.com/explore-programs/financing-your-mba"),
+        ("diversity-in-mba", "https://www.mba.com/explore-programs/diversity-in-business-school"),
+        ("gmat-score-report", "https://www.mba.com/exams/gmat-exam/after-the-exam/gmat-scores-and-score-reports"),
+        ("gmat-overview", "https://www.mba.com/exams/gmat-exam"),
+        ("mba-news", "https://www.mba.com/information-and-news"),
+        ("find-events", "https://www.mba.com/information-and-news/events"),
+        ("mba-tour", "https://www.mba.com/information-and-news/events/the-mba-tour"),
     ]
 
-    # School-specific program pages on MBA.com
-    school_pages = [
-        ("harvard-hbs", "https://www.mba.com/business-school-and-program-search/harvard-business-school"),
-        ("stanford-gsb", "https://www.mba.com/business-school-and-program-search/stanford-graduate-school-of-business"),
-        ("wharton", "https://www.mba.com/business-school-and-program-search/the-wharton-school"),
-        ("booth", "https://www.mba.com/business-school-and-program-search/chicago-booth-school-of-business"),
-        ("kellogg", "https://www.mba.com/business-school-and-program-search/kellogg-school-of-management"),
-        ("columbia", "https://www.mba.com/business-school-and-program-search/columbia-business-school"),
-        ("sloan", "https://www.mba.com/business-school-and-program-search/mit-sloan-school-of-management"),
-        ("insead", "https://www.mba.com/business-school-and-program-search/insead"),
-        ("lbs", "https://www.mba.com/business-school-and-program-search/london-business-school"),
-        ("iese", "https://www.mba.com/business-school-and-program-search/iese-business-school"),
-    ]
+    # Try with a Googlebot-like user agent for SSR content
+    googlebot_headers = {
+        "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    }
 
-    all_pages = pages + school_pages
-    for slug, url in all_pages[:limit]:
+    for slug, url in pages[:limit]:
         print(f"  Fetching: {slug}...")
+        # Try regular first, then Googlebot UA
         html = fetch_page(url, client)
-        if html:
-            text = html_to_text(html)
-            if len(text) > 200:
-                fp = save_page(site_dir, slug, text, url)
-                stats["success"] += 1
-                stats["pages"].append(str(fp))
-                print(f"  OK: {slug} ({len(text)} chars)")
-            else:
-                stats["fail"] += 1
-                print(f"  SKIP: {slug} (too short: {len(text)} chars)")
+        text = html_to_text(html) if html else ""
+        if len(text) < 200:
+            # Retry with Googlebot UA
+            try:
+                resp = client.get(url, timeout=15, follow_redirects=True, headers=googlebot_headers)
+                if resp.status_code < 400:
+                    text = html_to_text(resp.text)
+            except Exception:
+                pass
+        if len(text) > 200:
+            fp = save_page(site_dir, slug, text, url)
+            stats["success"] += 1
+            stats["pages"].append(str(fp))
+            print(f"  OK: {slug} ({len(text)} chars)")
         else:
             stats["fail"] += 1
+            print(f"  SKIP: {slug} (JS-rendered, {len(text)} chars)")
         time.sleep(1.5)
 
     save_meta(site_dir, stats)
@@ -358,28 +376,28 @@ def scrape_accepted(client: httpx.Client, limit: int) -> dict:
     site_dir = INFO_SITES_DIR / "accepted"
     stats = {"site": "accepted", "success": 0, "fail": 0, "pages": [], "scraped_at": datetime.now(timezone.utc).isoformat()}
 
-    # Accepted.com school-specific admissions pages
+    # Accepted.com correct URL patterns (from sitemap)
     pages = [
-        ("mba-admissions-guide", "https://www.accepted.com/mba/home"),
-        ("hbs-admissions", "https://www.accepted.com/mba/harvard-business-school"),
-        ("stanford-admissions", "https://www.accepted.com/mba/stanford-gsb"),
-        ("wharton-admissions", "https://www.accepted.com/mba/wharton"),
-        ("booth-admissions", "https://www.accepted.com/mba/chicago-booth"),
-        ("kellogg-admissions", "https://www.accepted.com/mba/kellogg"),
-        ("columbia-admissions", "https://www.accepted.com/mba/columbia-business-school"),
-        ("mit-sloan-admissions", "https://www.accepted.com/mba/mit-sloan"),
-        ("tuck-admissions", "https://www.accepted.com/mba/dartmouth-tuck"),
-        ("haas-admissions", "https://www.accepted.com/mba/uc-berkeley-haas"),
-        ("ross-admissions", "https://www.accepted.com/mba/michigan-ross"),
-        ("fuqua-admissions", "https://www.accepted.com/mba/duke-fuqua"),
-        ("darden-admissions", "https://www.accepted.com/mba/uva-darden"),
-        ("stern-admissions", "https://www.accepted.com/mba/nyu-stern"),
-        ("anderson-admissions", "https://www.accepted.com/mba/ucla-anderson"),
-        ("yale-som-admissions", "https://www.accepted.com/mba/yale-som"),
-        ("johnson-admissions", "https://www.accepted.com/mba/cornell-johnson"),
-        ("tepper-admissions", "https://www.accepted.com/mba/cmu-tepper"),
-        ("insead-admissions", "https://www.accepted.com/mba/insead"),
-        ("lbs-admissions", "https://www.accepted.com/mba/london-business-school"),
+        ("mba-admissions-guide", "https://www.accepted.com/mba"),
+        ("goals-business-school", "https://www.accepted.com/goals/business-school/"),
+        ("best-mba-programs", "https://www.accepted.com/resources/free-guides/business-school/the-best-mba-programs/"),
+        ("navigating-mba-admissions", "https://www.accepted.com/resources/free-guides/business-school/navigating-mba-admissions/"),
+        ("mba-essay-guide", "https://www.accepted.com/resources/free-guides/business-school/five-fatal-flaws-to-avoid-in-your-mba-application-essays/"),
+        ("sample-essays-from-example", "https://www.accepted.com/resources/free-guides/business-school/from-example-to-exceptional/"),
+        ("mba-resume-guide", "https://www.accepted.com/resources/free-guides/business-school/admissions-resume-guide/"),
+        ("mba-goals-essays", "https://www.accepted.com/resources/free-guides/business-school/crafting-compelling-mba-goals-essays/"),
+        ("mba-application-plan", "https://www.accepted.com/resources/free-guides/business-school/establishing-your-mba-application-plan/"),
+        ("mba-interview-guide", "https://www.accepted.com/resources/free-guides/business-school/mastering-your-mba-interview/"),
+        ("emba-guide", "https://www.accepted.com/resources/free-guides/business-school/navigating-the-emba-application-process/"),
+        ("prep-for-bschool", "https://www.accepted.com/resources/free-guides/business-school/prep-for-b-school/"),
+        ("sample-mba-essays", "https://www.accepted.com/resources/free-guides/business-school/sample-mba-application-essays/"),
+        ("leadership-in-admissions", "https://www.accepted.com/resources/free-guides/business-school/showcasing-leadership-in-admissions/"),
+        ("competitive-applicant", "https://www.accepted.com/resources/free-guides/business-school/the-ultimate-guide-to-becoming-a-competitive-mba-applicant/"),
+        ("selectivity-index", "https://www.accepted.com/resources/selectivity-index/business-school/"),
+        ("sample-essays-collection", "https://www.accepted.com/resources/sample-essays/business-school/"),
+        ("essay-tips", "https://www.accepted.com/resources/essay-tips/business-school/"),
+        ("deadlines", "https://www.accepted.com/resources/deadlines/business-school/"),
+        ("admissions-calculator", "https://www.accepted.com/resources/admissions-calculator/business-school/"),
     ]
 
     for slug, url in pages[:limit]:

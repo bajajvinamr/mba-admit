@@ -3,7 +3,6 @@
 import Link from"next/link";
 import { GraduationCap, Briefcase, Globe, Award } from"lucide-react";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 const PROGRAMS = [
  {
@@ -75,7 +74,6 @@ export default function ProgramsIndexPage() {
  </section>
 
  <div className="max-w-4xl mx-auto px-8 pb-16">
- <EmailCapture variant="contextual"source="programs"/>
  <ToolCrossLinks current="/programs"/>
  </div>
  </div>

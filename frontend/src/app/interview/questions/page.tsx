@@ -243,7 +243,7 @@ export default function InterviewQuestionsPage() {
  <div className="bg-background min-h-screen">
  {/* Header */}
  <section className="bg-foreground text-primary-foreground pt-4 pb-16 px-8 relative overflow-hidden">
- <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-gold via-transparent to-transparent"/>
+ <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-primary via-transparent to-transparent"/>
  <div className="max-w-5xl mx-auto relative z-10 text-center">
  <h1 className="heading-serif text-5xl md:text-6xl mb-4">Interview Question Bank</h1>
  <p className="text-lg text-white/60 max-w-2xl mx-auto mb-8">

@@ -3,7 +3,6 @@
 import { useState } from"react";
 import { Calendar, CheckCircle2, Clock, ArrowRight } from"lucide-react";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 type TimelineEvent = { month: string; title: string; desc: string; category: string };
 
@@ -134,7 +133,6 @@ export default function PlanPage() {
  </ul>
  </div>
 
- <EmailCapture variant="contextual"source="plan"/>
  <ToolCrossLinks current="/plan"/>
  </div>
  </main>

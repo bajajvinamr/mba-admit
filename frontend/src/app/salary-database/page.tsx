@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default function SalaryDatabasePage() {
-  redirect("/salary");
+export default function Page() {
+  redirect("/finances?tab=salary");
 }

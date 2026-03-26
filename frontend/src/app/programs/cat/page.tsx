@@ -5,7 +5,6 @@ import Link from"next/link";
 import { MapPin, ArrowRight, Search, Award, Users, TrendingUp } from"lucide-react";
 import { apiFetch } from"@/lib/api";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 type School = {
  id: string; name: string; location: string; country: string;
@@ -121,7 +120,6 @@ export default function CATMBALandingPage() {
  </section>
 
  <div className="max-w-4xl mx-auto px-8 pb-16">
- <EmailCapture variant="contextual"source="programs-cat"/>
  <ToolCrossLinks current="/programs/cat"/>
  </div>
  </div>

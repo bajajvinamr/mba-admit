@@ -12,7 +12,6 @@ import { track } from"@/lib/analytics";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
 import { useUsage } from"@/hooks/useUsage";
 import { UsageGate } from"@/components/UsageGate";
-import { EmailCapture } from"@/components/EmailCapture";
 import { EmptyState } from"@/components/EmptyState";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
@@ -552,7 +551,6 @@ export default function SimulatorPage() {
  </div>
 
  {/* Email capture - highest engagement moment */}
- <EmailCapture variant="contextual"source="simulator"/>
  </div>
  )}
 

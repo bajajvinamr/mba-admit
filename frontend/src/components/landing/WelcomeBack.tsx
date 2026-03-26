@@ -38,8 +38,8 @@ export function WelcomeBack({ profile, onShowCalc }: Props) {
  {/* Left: greeting + stats */}
  <div className="flex-1">
  <div className="flex items-center gap-3 mb-4">
- <div className="w-10 h-10 bg-gold/20 border border-gold/30 flex items-center justify-center">
- <User size={18} className="text-gold"/>
+ <div className="w-10 h-10 bg-primary/20 border border-primary/30 flex items-center justify-center">
+ <User size={18} className="text-primary"/>
  </div>
  <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground/50 font-medium">
  Welcome back
@@ -71,7 +71,7 @@ export function WelcomeBack({ profile, onShowCalc }: Props) {
  ))}
  <button
  onClick={onShowCalc}
- className="bg-background border border-border/5 px-4 py-2.5 text-[10px] uppercase tracking-widest text-muted-foreground/40 font-bold hover:border-gold hover:text-gold transition-colors"
+ className="bg-background border border-border/5 px-4 py-2.5 text-[10px] uppercase tracking-widest text-muted-foreground/40 font-bold hover:border-primary hover:text-primary transition-colors"
  >
  Update Profile
  </button>
@@ -96,17 +96,17 @@ export function WelcomeBack({ profile, onShowCalc }: Props) {
  >
  <Link
  href={link.href}
- className="group block bg-card border border-border/5 p-5 hover:border-gold/30 hover: transition-all"
+ className="group block bg-card border border-border/5 p-5 hover:border-primary/30 hover: transition-all"
  >
  <Icon
  size={20}
- className="text-muted-foreground/30 group-hover:text-gold transition-colors mb-3"
+ className="text-muted-foreground/30 group-hover:text-primary transition-colors mb-3"
  />
  <h3 className="text-sm font-bold text-foreground mb-0.5 flex items-center gap-1">
  {link.label}
  <ArrowRight
  size={12}
- className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-gold"
+ className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-primary"
  />
  </h3>
  <p className="text-[11px] text-muted-foreground/40">{link.desc}</p>
@@ -130,7 +130,7 @@ export function WelcomeBack({ profile, onShowCalc }: Props) {
  <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/30 font-bold">
  Recently Viewed
  </p>
- <Link href="/schools" className="text-[10px] font-bold text-gold hover:text-foreground transition-colors uppercase tracking-wider">
+ <Link href="/schools" className="text-[10px] font-bold text-primary hover:text-foreground transition-colors uppercase tracking-wider">
  Browse All
  </Link>
  </div>
@@ -139,9 +139,9 @@ export function WelcomeBack({ profile, onShowCalc }: Props) {
  <Link
  key={s.id}
  href={`/school/${s.id}`}
- className="shrink-0 bg-card border border-border/5 p-4 hover:border-gold/40 transition-colors group min-w-[180px]"
+ className="shrink-0 bg-card border border-border/5 p-4 hover:border-primary/40 transition-colors group min-w-[180px]"
  >
- <p className="font-bold text-sm text-foreground group-hover:text-gold transition-colors truncate">{s.name}</p>
+ <p className="font-bold text-sm text-foreground group-hover:text-primary transition-colors truncate">{s.name}</p>
  <p className="text-[10px] text-muted-foreground/40 mt-1 flex items-center gap-1">
  <MapPin size={8} /> {s.location}
  </p>

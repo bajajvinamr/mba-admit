@@ -4,7 +4,6 @@ import { useState } from"react";
 import { FileText, Zap, AlertTriangle, CheckCircle2, ArrowRight } from"lucide-react";
 import { apiFetch } from"@/lib/api";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 type CategoryScore = { score: number; found: string[]; suggested: string[] };
 type KeywordResult = {
@@ -155,7 +154,6 @@ export default function ResumeKeywordsPage() {
  </div>
  )}
 
- <EmailCapture variant="contextual"source="resume-keywords"/>
  <ToolCrossLinks current="/resume-keywords"/>
  </div>
  </main>

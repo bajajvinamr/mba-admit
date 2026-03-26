@@ -9,7 +9,6 @@ import {
 import Link from"next/link";
 import { apiFetch } from"@/lib/api";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -285,7 +284,6 @@ export default function CalendarPage() {
  </div>
  )}
 
- <EmailCapture variant="contextual"source="calendar"/>
  <ToolCrossLinks current="/calendar"/>
  </div>
  </main>

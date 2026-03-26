@@ -8,7 +8,6 @@ import { useAbortSignal } from"@/hooks/useAbortSignal";
 import { useUsage } from"@/hooks/useUsage";
 import { UsageGate } from"@/components/UsageGate";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 type School = { id: string; name: string };
 type Template = { subject: string; body: string; pro_tip: string };
@@ -247,7 +246,6 @@ export default function OutreachPage() {
 
  </div>
 
- <EmailCapture variant="contextual"source="outreach"/>
  <ToolCrossLinks current="/outreach"/>
  </div>
  </div>

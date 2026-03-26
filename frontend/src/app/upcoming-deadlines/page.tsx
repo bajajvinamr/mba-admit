@@ -8,7 +8,6 @@ import {
 import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import { ToolCrossLinks } from "@/components/ToolCrossLinks";
-import { EmailCapture } from "@/components/EmailCapture";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -191,7 +190,6 @@ export default function UpcomingDeadlinesPage() {
         {/* Cross-links & CTA */}
         <div className="mt-16 space-y-8">
           <ToolCrossLinks current="/upcoming-deadlines" />
-          <EmailCapture source="upcoming-deadlines" />
         </div>
       </div>
     </div>

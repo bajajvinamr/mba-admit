@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default function GmatScoreBreakdownPage() {
-  redirect("/gmat-targets");
+export default function Page() {
+  redirect("/test-prep?tab=breakdown");
 }

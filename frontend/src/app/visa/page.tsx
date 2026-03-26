@@ -4,7 +4,6 @@ import { useState, useEffect } from"react";
 import { Globe, Plane, Briefcase, Users, ChevronRight } from"lucide-react";
 import { apiFetch } from"@/lib/api";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 type VisaInfo = {
  country: string;
@@ -140,7 +139,6 @@ export default function VisaPage() {
  </div>
  )}
 
- <EmailCapture variant="contextual"source="visa"/>
  <ToolCrossLinks current="/visa"/>
  </div>
  </main>

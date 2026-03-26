@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from"react";
 import { useParams } from"next/navigation";
-import { ArrowLeft, BarChart3, Sparkles } from"lucide-react";
+import { BarChart3, Sparkles } from"lucide-react";
 import Link from"next/link";
 import { apiFetch, ApiError } from"@/lib/api";
 import { useProfile } from"@/hooks/useProfile";
@@ -11,9 +11,9 @@ import { toast } from"@/components/Toast";
 import { useRecentSchools } from"@/hooks/useRecentSchools";
 import { track } from"@/lib/analytics";
 import { notFound } from"next/navigation";
-import { EmailCapture } from"@/components/EmailCapture";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
 import { cn } from"@/lib/cn";
+import { Breadcrumb } from"@/components/ui/Breadcrumb";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from"@/components/ui/tabs";
 
 import type { SchoolData, SchoolInsights, AppState } from"./_components/types";
@@ -210,9 +210,10 @@ export default function SchoolDetail() {
  // ── Render ─────────────────────────────────────────────────────────────
  return (
  <div className="max-w-7xl mx-auto px-8">
- <Link href="/schools" className="inline-flex items-center gap-2 text-muted-foreground/40 hover:text-foreground mb-8 transition-colors text-sm font-medium uppercase tracking-wider">
- <ArrowLeft size={14} /> Back to Directory
- </Link>
+ <Breadcrumb items={[
+   { label: "Schools", href: "/schools" },
+   { label: school.name },
+ ]} />
 
  <SchoolHeader school={school} trackStatus={trackStatus} onAddToSchools={addToMySchools} />
 
@@ -323,7 +324,6 @@ export default function SchoolDetail() {
  </Tabs>
 
  {/* Post-content conversion surfaces */}
- <EmailCapture variant="contextual"source={`school-${schoolId}`} />
  <div className="mt-8">
  <ToolCrossLinks current={`/school/${schoolId}`} />
  </div>

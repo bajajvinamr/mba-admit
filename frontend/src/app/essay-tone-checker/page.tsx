@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default function EssayToneCheckerPage() {
-  redirect("/evaluator");
+export default function Page() {
+  redirect("/essays?tab=coach");
 }

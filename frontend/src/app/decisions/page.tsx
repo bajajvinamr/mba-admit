@@ -10,7 +10,6 @@ import {
 import Link from"next/link";
 import { apiFetch } from"@/lib/api";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 type GmatClubDecision = {
  school_slug: string;
@@ -1101,7 +1100,6 @@ export default function DecisionsPage() {
  </section>
 
  <div className="max-w-6xl mx-auto px-8 pb-12">
- <EmailCapture variant="contextual"source="decisions"/>
  <ToolCrossLinks current="/decisions"/>
  </div>
  </div>

@@ -99,7 +99,7 @@ export function Globe({ className, size = 600 }: GlobeProps) {
       mapSamples: 20000,
       mapBrightness: 6,
       baseColor: [0.97, 0.96, 0.93],
-      markerColor: [0.77, 0.64, 0.35], // #C4A35A gold
+      markerColor: [0.39, 0.4, 0.95], // #6366F1 indigo
       glowColor: [0.95, 0.93, 0.88],
       markers: SCHOOL_MARKERS.map(([lat, lng]) => ({
         location: [lat, lng],

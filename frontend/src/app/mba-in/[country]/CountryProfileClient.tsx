@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { apiFetch } from "@/lib/api";
 import { ToolCrossLinks } from "@/components/ToolCrossLinks";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -109,14 +110,12 @@ export function CountryProfileClient({ slug }: { slug: string }) {
   return (
     <div className="min-h-screen bg-white">
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
-        {/* Header */}
+        {/* Breadcrumb + Header */}
+        <Breadcrumb items={[
+          { label: "Guides", href: "/mba-in/us" },
+          { label: `MBA in ${data.country_name}` },
+        ]} />
         <div className="mb-8">
-          <Link
-            href="/compare-countries"
-            className="text-sm text-muted-foreground hover:text-foreground mb-4 inline-block"
-          >
-            ← Compare Countries
-          </Link>
           <div className="flex items-center gap-4">
             <span className="text-5xl">{data.flag}</span>
             <div>

@@ -14,7 +14,6 @@ import { useProfile } from"@/hooks/useProfile";
 import { useUsage } from"@/hooks/useUsage";
 import { UsageGate } from"@/components/UsageGate";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 type Dimensions = {
  academics: number;
@@ -685,7 +684,6 @@ function ProfileReportContent() {
  <ChevronRight size={14} className="rotate-180"/> Run again with different profile
  </button>
 
- <EmailCapture variant="contextual"source="profile-report"/>
  </motion.div>
  </UsageGate>
  )}

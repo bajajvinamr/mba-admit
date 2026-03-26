@@ -8,7 +8,6 @@ import {
 } from"lucide-react";
 import { apiFetch } from"@/lib/api";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -314,7 +313,6 @@ export default function EssayThemesPage() {
  </motion.div>
  )}
 
- <EmailCapture variant="contextual"source="essay-themes"/>
  <ToolCrossLinks current="/essay-themes"/>
  </div>
  </main>

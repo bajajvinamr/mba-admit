@@ -4,11 +4,8 @@ import * as React from "react";
 import { cn } from "@/lib/cn";
 import { Sidebar } from "./Sidebar";
 import { TopNav } from "./TopNav";
-import type { JourneyStage } from "@/lib/constants";
 
 interface ShellProps extends React.ComponentPropsWithRef<"div"> {
-  currentStage?: JourneyStage;
-  onStageSelect?: (stage: JourneyStage) => void;
   user?: {
     name?: string;
     email?: string;
@@ -23,8 +20,6 @@ const Shell = React.forwardRef<HTMLDivElement, ShellProps>(
     {
       className,
       children,
-      currentStage = "explore",
-      onStageSelect,
       user,
       onSignOut,
       ...props
@@ -41,8 +36,6 @@ const Shell = React.forwardRef<HTMLDivElement, ShellProps>(
       >
         {/* Sidebar */}
         <Sidebar
-          currentStage={currentStage}
-          onStageSelect={onStageSelect}
           mobileOpen={mobileOpen}
           onMobileOpenChange={setMobileOpen}
         />

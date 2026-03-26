@@ -24,7 +24,6 @@ import { useUsage } from"@/hooks/useUsage";
 import { UsageGate } from"@/components/UsageGate";
 import { EmptyState } from"@/components/EmptyState";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 import { GmatDistributionChart } from"@/components/charts/GmatDistributionChart";
 import { GpaDistributionChart } from"@/components/charts/GpaDistributionChart";
 import { IndustryChart } from"@/components/charts/IndustryChart";
@@ -892,7 +891,6 @@ export default function ComparePage() {
  description="Hit the Compare button above to see side-by-side outcomes."
  />
  )}
- <EmailCapture variant="contextual"source="compare"/>
  <ToolCrossLinks current="/compare"/>
  </main>
  </div>

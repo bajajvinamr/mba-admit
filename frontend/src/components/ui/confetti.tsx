@@ -17,10 +17,10 @@ type Particle = {
 };
 
 const CONFETTI_COLORS = [
-  "#C4A35A", // gold (primary)
-  "#D4B86A", // gold-light
-  "#B8963F", // gold-dark
-  "#E8D5A0", // gold-pale
+  "#6366F1", // indigo (primary)
+  "#818CF8", // indigo-light
+  "#4F46E5", // indigo-dark
+  "#C7D2FE", // indigo-pale
   "#3D7A5F", // sage
   "#F59E0B", // amber-500
   "#EC4899", // pink-500

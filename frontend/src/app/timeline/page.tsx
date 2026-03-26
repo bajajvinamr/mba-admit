@@ -9,7 +9,6 @@ import {
 } from"lucide-react";
 import Link from"next/link";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -270,7 +269,6 @@ export default function TimelinePage() {
  </div>
  )}
 
- <EmailCapture variant="contextual"source="timeline"/>
  <ToolCrossLinks current="/timeline"/>
  </div>
  </main>

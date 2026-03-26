@@ -1,174 +1,219 @@
 "use client";
 
-import * as React from"react";
-import { cn } from"@/lib/cn";
-import { JOURNEY_STAGES, type JourneyStage } from"@/lib/constants";
-import { ScrollArea } from"@/components/ui/scroll-area";
-import { Separator } from"@/components/ui/separator";
+import * as React from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { cn } from "@/lib/cn";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 import {
- Sheet,
- SheetContent,
- SheetHeader,
- SheetTitle,
-} from"@/components/ui/sheet";
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import {
- Search,
- BookOpen,
- PenTool,
- Mic,
- Scale,
- Users,
- Check,
-} from"lucide-react";
+  Target,
+  FileText,
+  Flame,
+  BookOpen,
+  Briefcase,
+  BarChart3,
+  Calendar,
+  ClipboardList,
+  GraduationCap,
+  DollarSign,
+  Users,
+} from "lucide-react";
 
-const ICON_MAP = {
- Search,
- BookOpen,
- PenTool,
- Mic,
- Scale,
- Users,
-} as const;
+// ── Sidebar configs per context ────────────────────────────────────────────
 
-type StageStatus ="past"|"current"|"future";
+type SidebarLink = {
+  href: string;
+  label: string;
+  icon: React.ElementType;
+};
 
-function getStageStatus(
- stageId: JourneyStage,
- currentStage: JourneyStage
-): StageStatus {
- const currentIndex = JOURNEY_STAGES.findIndex((s) => s.id === currentStage);
- const stageIndex = JOURNEY_STAGES.findIndex((s) => s.id === stageId);
+type SidebarConfig = {
+  title: string;
+  links: SidebarLink[];
+};
 
- if (stageIndex < currentIndex) return "past";
- if (stageIndex === currentIndex) return "current";
- return "future";
+const DASHBOARD_SIDEBAR: SidebarConfig = {
+  title: "Quick Actions",
+  links: [
+    { href: "/simulator", label: "Odds Calculator", icon: Target },
+    { href: "/evaluator", label: "Essay Evaluator", icon: FileText },
+    { href: "/roaster", label: "Resume Roaster", icon: Flame },
+    { href: "/profile-report", label: "Profile Report", icon: BarChart3 },
+    { href: "/compare", label: "Compare Schools", icon: GraduationCap },
+    { href: "/roi", label: "ROI Calculator", icon: DollarSign },
+  ],
+};
+
+const PORTFOLIO_SIDEBAR: SidebarConfig = {
+  title: "Portfolio",
+  links: [
+    { href: "/my-schools", label: "Tracked Schools", icon: ClipboardList },
+    { href: "/calendar", label: "Deadlines", icon: Calendar },
+    { href: "/checklist", label: "Checklist", icon: ClipboardList },
+    { href: "/recommenders", label: "Recommenders", icon: Users },
+    { href: "/outreach", label: "Networking", icon: Users },
+  ],
+};
+
+const ESSAY_SIDEBAR: SidebarConfig = {
+  title: "Essay Workspace",
+  links: [
+    { href: "/essays/coach", label: "AI Coach", icon: BookOpen },
+    { href: "/essays/examples", label: "Examples Library", icon: FileText },
+    { href: "/essays/themes", label: "Theme Analyzer", icon: BarChart3 },
+    { href: "/evaluator", label: "Essay Evaluator", icon: FileText },
+    { href: "/storyteller", label: "Storyteller", icon: Briefcase },
+    { href: "/goals", label: "Goal Sculptor", icon: Target },
+  ],
+};
+
+// Pages that should NOT show a sidebar
+const NO_SIDEBAR_PATTERNS = [
+  "/schools",
+  "/school/",
+  "/interview",
+  "/simulator",
+  "/roi",
+  "/salary",
+  "/pricing",
+];
+
+function getSidebarConfig(pathname: string): SidebarConfig | null {
+  // No sidebar on specific pages
+  if (NO_SIDEBAR_PATTERNS.some((p) => pathname === p || pathname.startsWith(p + "/"))) {
+    // Exception: essay pages under /essays should still get sidebar
+    if (!pathname.startsWith("/essays")) {
+      return null;
+    }
+  }
+
+  // Essay workspace
+  if (
+    pathname.startsWith("/essays") ||
+    pathname === "/evaluator" ||
+    pathname === "/storyteller" ||
+    pathname === "/goals" ||
+    pathname === "/essay-drafts"
+  ) {
+    return ESSAY_SIDEBAR;
+  }
+
+  // Portfolio
+  if (
+    pathname === "/my-schools" ||
+    pathname.startsWith("/my-schools/") ||
+    pathname === "/calendar" ||
+    pathname === "/checklist" ||
+    pathname === "/recommenders" ||
+    pathname === "/outreach"
+  ) {
+    return PORTFOLIO_SIDEBAR;
+  }
+
+  // Dashboard
+  if (pathname === "/dashboard" || pathname === "/") {
+    return DASHBOARD_SIDEBAR;
+  }
+
+  return null;
 }
 
-interface SidebarNavProps {
- currentStage: JourneyStage;
- onStageSelect?: (stage: JourneyStage) => void;
+// ── Sidebar Nav ────────────────────────────────────────────────────────────
+
+function SidebarNav({
+  config,
+  pathname,
+}: {
+  config: SidebarConfig;
+  pathname: string;
+}) {
+  return (
+    <nav aria-label={config.title} className="flex flex-col gap-1 px-3 py-2">
+      {config.links.map((link) => {
+        const Icon = link.icon;
+        const active = pathname === link.href || pathname.startsWith(link.href + "/");
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={cn(
+              "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+              active
+                ? "bg-primary/10 text-primary"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+            )}
+          >
+            <Icon className="size-4 shrink-0" />
+            <span>{link.label}</span>
+          </Link>
+        );
+      })}
+    </nav>
+  );
 }
 
-function SidebarNav({ currentStage, onStageSelect }: SidebarNavProps) {
- return (
- <nav aria-label="Journey stages" className="flex flex-col gap-1 px-3 py-2">
- {JOURNEY_STAGES.map((stage) => {
- const status = getStageStatus(stage.id, currentStage);
- const Icon = ICON_MAP[stage.icon as keyof typeof ICON_MAP];
-
- return (
- <button
- key={stage.id}
- type="button"
- onClick={() => onStageSelect?.(stage.id)}
- className={cn(
-"group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
- status ==="current" &&
-"bg-primary/10 text-primary",
- status ==="past" &&
-"text-foreground hover:bg-muted",
- status ==="future" &&
-"text-muted-foreground/60 hover:bg-muted hover:text-muted-foreground"
- )}
- >
- <span
- className={cn(
-"flex size-7 shrink-0 items-center justify-center rounded-full",
- status ==="current" &&"bg-primary text-primary-foreground",
- status ==="past" &&"bg-muted text-foreground",
- status ==="future" &&"bg-muted text-muted-foreground/60"
- )}
- >
- {status ==="past" ? (
- <Check className="size-3.5"/>
- ) : (
- <Icon className="size-3.5"/>
- )}
- </span>
-
- <div className="flex flex-col items-start gap-0.5">
- <span>{stage.label}</span>
- {status ==="current" && (
- <span className="text-xs font-normal text-muted-foreground">
- {stage.description}
- </span>
- )}
- </div>
- </button>
- );
- })}
- </nav>
- );
-}
+// ── Main Sidebar ──────────────────────────────────────────────────────────
 
 interface SidebarProps extends React.ComponentPropsWithRef<"aside"> {
- currentStage: JourneyStage;
- onStageSelect?: (stage: JourneyStage) => void;
- mobileOpen?: boolean;
- onMobileOpenChange?: (open: boolean) => void;
+  mobileOpen?: boolean;
+  onMobileOpenChange?: (open: boolean) => void;
 }
 
 const Sidebar = React.forwardRef<HTMLElement, SidebarProps>(
- (
- {
- className,
- currentStage,
- onStageSelect,
- mobileOpen = false,
- onMobileOpenChange,
- ...props
- },
- ref
- ) => {
- return (
- <>
- {/* Desktop sidebar */}
- <aside
- ref={ref}
- className={cn(
-"hidden lg:flex lg:w-64 lg:flex-col lg:border-r lg:bg-background",
- className
- )}
- {...props}
- >
- <div className="flex h-14 items-center px-4">
- <span className="text-lg font-semibold tracking-tight">
- Journey
- </span>
- </div>
- <Separator />
- <ScrollArea className="flex-1">
- <SidebarNav
- currentStage={currentStage}
- onStageSelect={onStageSelect}
- />
- </ScrollArea>
- </aside>
+  ({ className, mobileOpen = false, onMobileOpenChange, ...props }, ref) => {
+    const pathname = usePathname();
+    const config = getSidebarConfig(pathname);
 
- {/* Mobile sidebar (Sheet overlay) */}
- <Sheet open={mobileOpen} onOpenChange={onMobileOpenChange}>
- <SheetContent side="left" className="w-72 p-0">
- <SheetHeader className="px-4 pt-4">
- <SheetTitle>Journey</SheetTitle>
- </SheetHeader>
- <Separator />
- <ScrollArea className="flex-1">
- <SidebarNav
- currentStage={currentStage}
- onStageSelect={(stage) => {
- onStageSelect?.(stage);
- onMobileOpenChange?.(false);
- }}
- />
- </ScrollArea>
- </SheetContent>
- </Sheet>
- </>
- );
- }
+    // Don't render anything if no sidebar for this context
+    if (!config) return null;
+
+    return (
+      <>
+        {/* Desktop sidebar */}
+        <aside
+          ref={ref}
+          className={cn(
+            "hidden lg:flex lg:w-64 lg:flex-col lg:border-r lg:bg-background",
+            className
+          )}
+          {...props}
+        >
+          <div className="flex h-14 items-center px-4">
+            <span className="text-lg font-semibold tracking-tight">
+              {config.title}
+            </span>
+          </div>
+          <Separator />
+          <ScrollArea className="flex-1">
+            <SidebarNav config={config} pathname={pathname} />
+          </ScrollArea>
+        </aside>
+
+        {/* Mobile sidebar (Sheet overlay) */}
+        <Sheet open={mobileOpen} onOpenChange={onMobileOpenChange}>
+          <SheetContent side="left" className="w-72 p-0">
+            <SheetHeader className="px-4 pt-4">
+              <SheetTitle>{config.title}</SheetTitle>
+            </SheetHeader>
+            <Separator />
+            <ScrollArea className="flex-1">
+              <SidebarNav config={config} pathname={pathname} />
+            </ScrollArea>
+          </SheetContent>
+        </Sheet>
+      </>
+    );
+  }
 );
 
-Sidebar.displayName ="Sidebar";
+Sidebar.displayName = "Sidebar";
 
 export { Sidebar, SidebarNav };
-export type { SidebarProps, SidebarNavProps };
+export type { SidebarProps, SidebarConfig };

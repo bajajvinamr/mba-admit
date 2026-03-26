@@ -5,7 +5,6 @@ import Link from"next/link";
 import { GraduationCap, MapPin, TrendingUp, Clock, Globe, ArrowRight, Search } from"lucide-react";
 import { apiFetch } from"@/lib/api";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 type School = {
  id: string; name: string; location: string; country: string;
@@ -147,7 +146,6 @@ export default function MiMLandingPage() {
  </section>
 
  <div className="max-w-4xl mx-auto px-8 pb-16">
- <EmailCapture variant="contextual"source="programs-mim"/>
  <ToolCrossLinks current="/programs/mim"/>
  </div>
  </div>

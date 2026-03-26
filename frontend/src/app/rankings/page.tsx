@@ -10,7 +10,6 @@ import {
 import Link from"next/link";
 import { apiFetch } from"@/lib/api";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 
 type School = {
  id: string;
@@ -229,7 +228,6 @@ export default function RankingsPage() {
  </div>
  </div>
  )}
- <EmailCapture variant="contextual"source="rankings"/>
  <ToolCrossLinks current="/rankings"/>
  </div>
  </main>

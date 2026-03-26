@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import {
-  ArrowLeft,
   Star,
   CheckCircle2,
   GraduationCap,
@@ -19,6 +18,7 @@ import {
 import { apiFetch } from "@/lib/api";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -135,14 +135,11 @@ export default function MentorProfilePage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto px-4 py-8">
-        {/* Back link */}
-        <Link
-          href="/mentors"
-          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors"
-        >
-          <ArrowLeft size={16} />
-          All Mentors
-        </Link>
+        <Breadcrumb items={[
+          { label: "Community", href: "/mentors" },
+          { label: "Mentors", href: "/mentors" },
+          { label: mentor.displayName },
+        ]} />
 
         {/* Hero card */}
         <div className="border border-border rounded-xl bg-white p-6 sm:p-8 mb-6">

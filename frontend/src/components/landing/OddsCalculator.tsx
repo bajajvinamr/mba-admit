@@ -145,7 +145,7 @@ export function OddsCalculator() {
  if (tt ==="cat" || tt ==="xat") setDegreeType("MBA (CAT)");
  else if (degreeType ==="MBA (CAT)" && (tt ==="gmat" || tt ==="gre")) setDegreeType("");
  }}
- className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors mb-2">
+ className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors mb-2">
  <option value="gmat" className="text-foreground">GMAT</option>
  <option value="gre" className="text-foreground">GRE</option>
  <option value="cat" className="text-foreground">CAT Percentile</option>
@@ -156,7 +156,7 @@ export function OddsCalculator() {
  <>
  <input type="number" value={gmat} onChange={e => setGmat(e.target.value)}
  min={200} max={800}
- className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-gold transition-colors"
+ className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
  placeholder="e.g. 740"/>
  <p className="text-[10px] text-muted-foreground/40 mt-1">Optional, we&apos;ll estimate if blank</p>
  </>
@@ -164,32 +164,32 @@ export function OddsCalculator() {
  {testType ==="gre" && (
  <input type="number" value={testScore} onChange={e => setTestScore(e.target.value)}
  min={260} max={340}
- className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-gold transition-colors"
+ className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
  placeholder="e.g. 325"/>
  )}
  {testType ==="cat" && (
  <input type="number" value={testScore} onChange={e => setTestScore(e.target.value)}
  min={0} max={100}
- className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-gold transition-colors"
+ className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
  placeholder="e.g. 98"/>
  )}
  {testType ==="xat" && (
  <input type="number" value={testScore} onChange={e => setTestScore(e.target.value)}
  min={0} max={100}
- className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-gold transition-colors"
+ className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
  placeholder="e.g. 95"/>
  )}
  {testType ==="waiver" && (
- <p className="text-[10px] text-gold/70 mt-1">We&apos;ll estimate your profile strength</p>
+ <p className="text-[10px] text-primary/70 mt-1">We&apos;ll estimate your profile strength</p>
  )}
  </div>
  <div>
  <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Undergrad GPA</label>
  <input type="number" step="0.01" max={10} required value={gpa} onChange={e => setGpa(e.target.value)}
- className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-gold transition-colors"
+ className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
  placeholder="e.g. 3.8"/>
  <select value={gpaScale} onChange={e => setGpaScale(e.target.value)}
- className="mt-1 w-full bg-background border border-border px-4 py-2 text-foreground text-xs focus:outline-none focus:border-gold transition-colors">
+ className="mt-1 w-full bg-background border border-border px-4 py-2 text-foreground text-xs focus:outline-none focus:border-primary transition-colors">
  <option value="4.0" className="text-foreground">US (4.0 scale)</option>
  <option value="10.0" className="text-foreground">India (10-point)</option>
  <option value="5.0" className="text-foreground">Germany (1-5, lower better)</option>
@@ -199,13 +199,13 @@ export function OddsCalculator() {
  <div>
  <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Work Experience (yrs)</label>
  <input type="number" value={workExp} onChange={e => setWorkExp(e.target.value)}
- className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-gold transition-colors"
+ className="w-full bg-background border border-border px-4 py-3 text-foreground placeholder-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
  placeholder="e.g. 4"/>
  </div>
  </div>
 
  <button type="button" onClick={() => setShowAdvanced(!showAdvanced)}
- className="flex items-center gap-2 text-sm text-gold hover:text-gold-light transition-colors">
+ className="flex items-center gap-2 text-sm text-primary hover:text-primary-light transition-colors">
  {showAdvanced ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
  {showAdvanced ?"Hide Advanced Criteria":"Add More Details for Better Results"}
  </button>
@@ -220,7 +220,7 @@ export function OddsCalculator() {
  <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Undergrad Institution Tier</label>
  <select value={advancedFields.undergrad_tier}
  onChange={e => setAdvancedFields({ ...advancedFields, undergrad_tier: e.target.value })}
- className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors">
+ className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors">
  <option value="" className="text-foreground">Not Specified</option>
  <option value="top_10" className="text-foreground">Top 10 Globally (IIT, MIT, Stanford...)</option>
  <option value="top_50" className="text-foreground">Top 50 Globally</option>
@@ -232,7 +232,7 @@ export function OddsCalculator() {
  <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Industry</label>
  <select value={advancedFields.industry}
  onChange={e => setAdvancedFields({ ...advancedFields, industry: e.target.value })}
- className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors">
+ className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors">
  <option value="" className="text-foreground">Not Specified</option>
  <option value="consulting" className="text-foreground">Management Consulting (MBB)</option>
  <option value="finance" className="text-foreground">Investment Banking / PE / VC</option>
@@ -249,7 +249,7 @@ export function OddsCalculator() {
  <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Leadership Roles</label>
  <select value={advancedFields.leadership_roles}
  onChange={e => setAdvancedFields({ ...advancedFields, leadership_roles: e.target.value })}
- className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors">
+ className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors">
  <option value="" className="text-foreground">Not Specified</option>
  <option value="cxo" className="text-foreground">C-Suite / Founder</option>
  <option value="director" className="text-foreground">Director / VP Level</option>
@@ -262,7 +262,7 @@ export function OddsCalculator() {
  <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Target Intake Year</label>
  <select value={advancedFields.target_intake}
  onChange={e => setAdvancedFields({ ...advancedFields, target_intake: e.target.value })}
- className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors">
+ className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors">
  <option value="" className="text-foreground">Not Specified</option>
  <option value="2026" className="text-foreground">Fall 2026</option>
  <option value="2027" className="text-foreground">Fall 2027</option>
@@ -272,7 +272,7 @@ export function OddsCalculator() {
  <div>
  <label className="block text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Program Type</label>
  <select value={degreeType} onChange={e => setDegreeType(e.target.value)}
- className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-gold transition-colors">
+ className="w-full bg-background border border-border px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors">
  <option value="" className="text-foreground">Auto-detect from test type</option>
  <option value="MBA" className="text-foreground">MBA (Full-Time)</option>
  <option value="MiM" className="text-foreground">Masters in Management</option>
@@ -290,7 +290,7 @@ export function OddsCalculator() {
  <input type="checkbox"
  checked={advancedFields[key as keyof typeof advancedFields] as boolean}
  onChange={e => setAdvancedFields({ ...advancedFields, [key]: e.target.checked })}
- className="w-4 h-4 accent-gold"/>
+ className="w-4 h-4 accent-primary"/>
  {label}
  </label>
  ))}
@@ -299,7 +299,7 @@ export function OddsCalculator() {
  )}
 
  <button type="submit" disabled={oddsLoading}
- className="bg-gold text-foreground font-bold px-10 py-3.5 hover:bg-gold-light transition-colors w-full disabled:opacity-50">
+ className="bg-primary text-foreground font-bold px-10 py-3.5 hover:bg-primary-light transition-colors w-full disabled:opacity-50">
  {oddsLoading ?"Evaluating...":"Calculate My Odds"}
  </button>
 
@@ -325,7 +325,7 @@ export function OddsCalculator() {
  }
  return (
  <div className="mt-8">
- <p className="text-sm text-gold mb-2">Your top matches across {odds.length} programs:</p>
+ <p className="text-sm text-primary mb-2">Your top matches across {odds.length} programs:</p>
  <div className="flex gap-3 mb-4 text-[10px] text-muted-foreground/60">
  {(() => {
  const counts: Record<string, number> = {};
@@ -346,19 +346,19 @@ export function OddsCalculator() {
  <span className="text-[10px] text-muted-foreground/60">{o.prob}%</span>
  </div>
  {o.degree_type && o.degree_type !=="MBA" && (
- <span className="text-[9px] text-gold/60 uppercase tracking-wider mt-1 block">{o.degree_type}</span>
+ <span className="text-[9px] text-primary/60 uppercase tracking-wider mt-1 block">{o.degree_type}</span>
  )}
  </div>
  ))}
  </div>
  <div className="mt-6 space-y-3">
  <button onClick={() => router.push("/dashboard")}
- className="w-full text-sm font-bold px-6 py-3 bg-gold text-foreground hover:bg-gold/90 transition-colors flex items-center justify-center gap-2">
+ className="w-full text-sm font-bold px-6 py-3 bg-primary text-foreground hover:bg-primary/90 transition-colors flex items-center justify-center gap-2">
  See Your Personalized Recommendations <ArrowRight size={16} />
  </button>
  <div className="flex flex-wrap gap-3">
  <button onClick={() => router.push("/profile-report")}
- className="text-xs font-bold px-4 py-2 bg-gold/10 text-gold border border-gold/20 hover:bg-gold/20 transition-colors flex items-center gap-2">
+ className="text-xs font-bold px-4 py-2 bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors flex items-center gap-2">
  <TrendingUp size={14} /> Full Profile Analysis
  </button>
  <button onClick={() => router.push("/schools")}
@@ -374,7 +374,7 @@ export function OddsCalculator() {
 
  <div className="mt-8 pt-6 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
  <div>
- <p className="text-sm font-bold text-foreground mb-1"><Share2 size={16} className="inline mr-2 text-gold"/>Share Your Odds</p>
+ <p className="text-sm font-bold text-foreground mb-1"><Share2 size={16} className="inline mr-2 text-primary"/>Share Your Odds</p>
  <p className="text-xs text-muted-foreground">Compare with friends or get feedback from the community.</p>
  </div>
  <div className="flex gap-3">

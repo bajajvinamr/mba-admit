@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from"framer-motion";
 import { Hourglass, FileText, ListChecks, ArrowRight, Copy, Check, RefreshCcw, Landmark, Sparkles, MessageSquare } from"lucide-react";
 import { apiFetch } from"@/lib/api";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 import { useAbortSignal } from"@/hooks/useAbortSignal";
 import { useUsage } from"@/hooks/useUsage";
 import { UsageGate } from"@/components/UsageGate";
@@ -228,7 +227,6 @@ export default function WaitlistPage() {
 
  </div>
 
- <EmailCapture variant="contextual"source="waitlist"/>
  <ToolCrossLinks current="/waitlist"/>
  </div>
  </div>

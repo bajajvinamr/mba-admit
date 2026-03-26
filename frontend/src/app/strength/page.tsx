@@ -9,7 +9,6 @@ import {
 import { apiFetch } from"@/lib/api";
 import { useSchoolNames } from"@/hooks/useSchoolNames";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
-import { EmailCapture } from"@/components/EmailCapture";
 import { useUsage } from"@/hooks/useUsage";
 import { UsageGate } from"@/components/UsageGate";
 
@@ -341,7 +340,6 @@ export default function StrengthMeterPage() {
  </div>
  )}
 
- <EmailCapture variant="contextual"source="strength"/>
  <ToolCrossLinks current="/strength"/>
  </div>
  </main>

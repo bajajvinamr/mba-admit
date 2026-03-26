@@ -4,13 +4,13 @@ import Link from "next/link";
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     h1: ({ children }) => (
-      <h1 className="heading-serif text-4xl md:text-5xl mb-6 mt-12 first:mt-0">{children}</h1>
+      <h1 className="font-sans font-semibold text-4xl md:text-5xl mb-6 mt-12 first:mt-0">{children}</h1>
     ),
     h2: ({ children }) => (
-      <h2 className="heading-serif text-2xl md:text-3xl mb-4 mt-10">{children}</h2>
+      <h2 className="font-sans font-semibold text-2xl md:text-3xl mb-4 mt-10">{children}</h2>
     ),
     h3: ({ children }) => (
-      <h3 className="heading-serif text-xl mb-3 mt-8">{children}</h3>
+      <h3 className="font-sans font-semibold text-xl mb-3 mt-8">{children}</h3>
     ),
     p: ({ children }) => (
       <p className="text-charcoal/70 leading-relaxed mb-4">{children}</p>
@@ -25,12 +25,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <li className="leading-relaxed">{children}</li>
     ),
     a: ({ href, children }) => (
-      <Link href={href || "#"} className="text-gold hover:underline font-medium">
+      <Link href={href || "#"} className="text-primary hover:underline font-medium">
         {children}
       </Link>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="border-l-2 border-gold pl-6 italic text-charcoal/50 my-6">
+      <blockquote className="border-l-2 border-primary pl-6 italic text-charcoal/50 my-6">
         {children}
       </blockquote>
     ),
