@@ -44,7 +44,7 @@ export function IndustryChart({ data, schoolNames }: Props) {
  });
 
  return (
- <div>
+ <div role="img" aria-label="Bar chart showing top industries among admitted applicants">
  <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground/40 mb-4">
  Top Industries - Admitted Applicants
  </h3>

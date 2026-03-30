@@ -210,8 +210,14 @@ def extract_all(schools: list[dict], resume: bool = True) -> dict:
     Returns:
         Combined dict keyed by school_id.
     """
-    db: dict = load_json(SCRAPED_DB_FILE) if resume else {}
+    # Always load existing DB to preserve other schools' data
+    db: dict = load_json(SCRAPED_DB_FILE) or {}
     total = len(schools)
+
+    # When not resuming, only clear entries for the schools we're about to extract
+    if not resume:
+        for school in schools:
+            db.pop(school["id"], None)
 
     for i, school in enumerate(schools, 1):
         sid = school["id"]

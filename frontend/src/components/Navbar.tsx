@@ -36,6 +36,7 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/compare", label: "Compare Schools", icon: <BarChart3 size={16} />, desc: "Side-by-side analysis" },
       { href: "/profile-report", label: "Profile Report", icon: <Target size={16} />, desc: "Your strengths & gaps" },
       { href: "/rankings", label: "Rankings", icon: <GraduationCap size={16} />, desc: "Sort by GMAT, salary, tier" },
+      { href: "/school-matcher", label: "School Matcher", icon: <Target size={16} />, desc: "Best-fit school finder" },
     ],
   },
   {
@@ -52,7 +53,7 @@ const NAV_GROUPS: NavGroup[] = [
     label: "Apply",
     items: [
       { href: "/my-schools", label: "Application Tracker", icon: <ClipboardList size={16} />, desc: "Track every school" },
-      { href: "/calendar", label: "Deadline Calendar", icon: <Calendar size={16} />, desc: "Never miss a deadline" },
+      { href: "/deadlines", label: "Deadline Tracker", icon: <Calendar size={16} />, desc: "Calendar & round tracker" },
       { href: "/checklist", label: "App Checklist", icon: <CheckCircle2 size={16} />, desc: "Requirements per school" },
       { href: "/recommenders", label: "Rec Strategy", icon: <Users size={16} />, desc: "Letter of rec planning" },
       { href: "/outreach", label: "Networking Hub", icon: <Network size={16} />, desc: "Alumni outreach" },
@@ -144,6 +145,8 @@ export function Navbar() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
+                  aria-haspopup="true"
+                  aria-expanded={activeDropdown === group.label}
                   className={`flex items-center gap-1 px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors ${
                     isGroupActive(group) || activeDropdown === group.label
                       ? "text-primary"
@@ -200,6 +203,7 @@ export function Navbar() {
               }}
               className="flex items-center gap-2 px-2.5 py-1.5 text-xs text-muted-foreground border border-border hover:border-primary/30 hover:text-foreground transition-colors ml-1"
               title="Search schools (⌘K)"
+              aria-label="Search schools"
             >
               <Search size={12} />
               <kbd className="hidden lg:inline text-[10px] bg-muted border border-border px-1.5 py-0.5 font-mono">⌘K</kbd>
@@ -233,14 +237,14 @@ export function Navbar() {
 
       {/* Mobile Menu Overlay */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-40 md:hidden">
+        <div className="fixed inset-0 z-[55] md:hidden">
           {/* Backdrop */}
           <div
             className="absolute inset-0 bg-black/70"
             onClick={() => setMobileOpen(false)}
           />
           {/* Drawer - journey-based mobile nav */}
-          <div className="absolute top-0 right-0 w-80 max-w-[85vw] h-full bg-muted border-l border-border overflow-y-auto">
+          <nav aria-label="Mobile navigation" className="absolute top-0 right-0 w-80 max-w-[85vw] h-full bg-muted border-l border-border overflow-y-auto">
             <div className="p-6 pt-20">
               {/* Journey groups */}
               {NAV_GROUPS.map((group) => (
@@ -293,7 +297,7 @@ export function Navbar() {
                 <AuthButton />
               </div>
             </div>
-          </div>
+          </nav>
         </div>
       )}
     </>

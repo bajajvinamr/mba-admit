@@ -453,6 +453,155 @@ def submit_decision(req: SubmitDecisionRequest, user: Dict = Depends(get_optiona
     return db.submit_decision(decision)
 
 
+# ── Community Stats per School ───────────────────────────────────────────────
+
+@router.get("/community/stats/{school_slug}")
+def get_community_stats(school_slug: str):
+    """Aggregated anonymous stats for a single school from real GMAT Club decisions."""
+    data = load_gmatclub_data()
+    school_data = [d for d in data if d.get("school_id") == school_slug]
+
+    if not school_data:
+        raise HTTPException(status_code=404, detail=f"No data for school: {school_slug}")
+
+    # Result distribution
+    result_dist = {"accepted": 0, "rejected": 0, "waitlisted": 0, "interviewed": 0}
+    gmats_accepted, gpas_accepted, work_years_all = [], [], []
+
+    for d in school_data:
+        status = d.get("status", "")
+        if is_admitted(status):
+            result_dist["accepted"] += 1
+            gmat = d.get("gmat_focus") or d.get("gmat")
+            if gmat:
+                gmats_accepted.append(gmat)
+            if d.get("gpa"):
+                gpas_accepted.append(d["gpa"])
+        elif is_denied(status):
+            result_dist["rejected"] += 1
+        elif "waitlist" in status.lower():
+            result_dist["waitlisted"] += 1
+        elif "interview" in status.lower():
+            result_dist["interviewed"] += 1
+
+        yoe = d.get("yoe")
+        if yoe is not None:
+            work_years_all.append(yoe)
+
+    total = len(school_data)
+    resolved = result_dist["accepted"] + result_dist["rejected"]
+    acceptance_rate = round(result_dist["accepted"] / resolved * 100, 1) if resolved > 0 else 0
+
+    # GMAT distribution by 20-point ranges for accepted vs rejected
+    gmat_buckets: dict[str, dict[str, int]] = {}
+    for d in school_data:
+        gmat = d.get("gmat_focus") or d.get("gmat")
+        if not gmat:
+            continue
+        bucket_start = (gmat // 20) * 20
+        bucket_label = f"{bucket_start}-{bucket_start + 19}"
+        if bucket_label not in gmat_buckets:
+            gmat_buckets[bucket_label] = {"accepted": 0, "rejected": 0}
+        status = d.get("status", "")
+        if is_admitted(status):
+            gmat_buckets[bucket_label]["accepted"] += 1
+        elif is_denied(status):
+            gmat_buckets[bucket_label]["rejected"] += 1
+
+    gmat_distribution = sorted(
+        [{"range": k, **v} for k, v in gmat_buckets.items()],
+        key=lambda x: x["range"],
+    )
+
+    # Round breakdown
+    round_map: dict[str, dict[str, int]] = {}
+    for d in school_data:
+        rnd = d.get("round", "Unknown")
+        if rnd not in round_map:
+            round_map[rnd] = {"total": 0, "accepted": 0}
+        round_map[rnd]["total"] += 1
+        if is_admitted(d.get("status", "")):
+            round_map[rnd]["accepted"] += 1
+
+    round_breakdown = sorted(
+        [{"round": k, **v} for k, v in round_map.items()],
+        key=lambda x: x["round"],
+    )
+
+    school = SCHOOL_DB.get(school_slug, {})
+    return {
+        "school_slug": school_slug,
+        "school_name": school.get("name", school_slug),
+        "total_decisions": total,
+        "acceptance_rate": acceptance_rate,
+        "avg_gmat_accepted": round(sum(gmats_accepted) / len(gmats_accepted)) if gmats_accepted else None,
+        "avg_gpa_accepted": round(sum(gpas_accepted) / len(gpas_accepted), 2) if gpas_accepted else None,
+        "avg_work_years": round(sum(work_years_all) / len(work_years_all), 1) if work_years_all else None,
+        "result_distribution": result_dist,
+        "gmat_distribution": gmat_distribution,
+        "round_breakdown": round_breakdown,
+    }
+
+
+# ── Community Leaderboard ────────────────────────────────────────────────────
+
+@router.get("/community/leaderboard")
+def get_community_leaderboard():
+    """Top 20 schools by number of data points contributed."""
+    data = load_gmatclub_data()
+    school_counts = Counter(d.get("school_id", "") for d in data if d.get("school_id"))
+    top_20 = school_counts.most_common(20)
+
+    leaderboard = []
+    for sid, count in top_20:
+        school = SCHOOL_DB.get(sid, {})
+        # Compute quick accept rate
+        school_data = [d for d in data if d.get("school_id") == sid]
+        admitted = sum(1 for d in school_data if is_admitted(d.get("status", "")))
+        denied = sum(1 for d in school_data if is_denied(d.get("status", "")))
+        resolved = admitted + denied
+        rate = round(admitted / resolved * 100, 1) if resolved > 0 else None
+
+        leaderboard.append({
+            "school_slug": sid,
+            "school_name": school.get("name", sid),
+            "data_points": count,
+            "acceptance_rate": rate,
+        })
+
+    return {"leaderboard": leaderboard}
+
+
+# ── Community Trends ─────────────────────────────────────────────────────────
+
+@router.get("/community/trends")
+def get_community_trends():
+    """Year-over-year acceptance rate trends for top schools using curated data."""
+    results = []
+    for sid, school_data in _ADMISSION_TRENDS.items():
+        years_list = []
+        for year in sorted(school_data["years"].keys()):
+            entry = school_data["years"][year]
+            years_list.append({
+                "year": year,
+                "acceptance_rate": entry["acceptance_rate"],
+                "median_gmat": entry["median_gmat"],
+                "avg_gpa": entry["avg_gpa"],
+            })
+
+        rates = [y["acceptance_rate"] for y in years_list]
+        trend = _compute_trend(rates)
+
+        results.append({
+            "school_slug": sid,
+            "school_name": school_data["school_name"],
+            "years": years_list,
+            "trend": trend,
+        })
+
+    return {"trends": results}
+
+
 # ── Admit Probability Simulator ──────────────────────────────────────
 # Moved to routers/simulator.py — full Monte Carlo with 10K simulations,
 # stochastic factor modeling, and percentile bands.

@@ -90,8 +90,9 @@ export default function OutreachPage() {
 
  <div className="space-y-6">
  <div>
- <label className="block text-[10px] uppercase tracking-widest text-muted-foreground/40 font-bold mb-2">Target School</label>
- <select 
+ <label htmlFor="outreach-school" className="block text-[10px] uppercase tracking-widest text-muted-foreground/40 font-bold mb-2">Target School</label>
+ <select
+ id="outreach-school"
  value={selectedSchoolId}
  onChange={e => setSelectedSchoolId(e.target.value)}
  className="w-full bg-background border border-border/5 px-4 py-3 text-sm focus:border-border focus:outline-none rounded-lg"
@@ -104,8 +105,9 @@ export default function OutreachPage() {
  </div>
 
  <div>
- <label className="block text-[10px] uppercase tracking-widest text-muted-foreground/40 font-bold mb-2">Your Background Hook</label>
- <textarea 
+ <label htmlFor="outreach-background" className="block text-[10px] uppercase tracking-widest text-muted-foreground/40 font-bold mb-2">Your Background Hook</label>
+ <textarea
+ id="outreach-background"
  value={background}
  onChange={e => setBackground(e.target.value)}
  placeholder="e.g. Lead Engineer at a FinTech startup, first-gen college grad."
@@ -114,8 +116,9 @@ export default function OutreachPage() {
  </div>
 
  <div>
- <label className="block text-[10px] uppercase tracking-widest text-muted-foreground/40 font-bold mb-2">Networking Goal</label>
- <select 
+ <label htmlFor="outreach-goal" className="block text-[10px] uppercase tracking-widest text-muted-foreground/40 font-bold mb-2">Networking Goal</label>
+ <select
+ id="outreach-goal"
  value={goal}
  onChange={e => setGoal(e.target.value)}
  className="w-full bg-background border border-border/5 px-4 py-3 text-sm focus:border-border focus:outline-none rounded-lg"
@@ -128,7 +131,7 @@ export default function OutreachPage() {
  </div>
 
  {error && (
- <div className="bg-red-50 border border-red-200 text-red-800 p-4 text-sm rounded-lg flex items-center justify-between">
+ <div role="alert" className="bg-red-50 border border-red-200 text-red-800 p-4 text-sm rounded-lg flex items-center justify-between">
  <span>{error}</span>
  <button onClick={() => setError(null)} className="ml-3 text-sm font-bold underline">
  Dismiss

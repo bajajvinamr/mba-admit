@@ -35,17 +35,31 @@ interface SendResult {
 }
 
 // ---------------------------------------------------------------------------
+// HTML Escaping (XSS prevention)
+// ---------------------------------------------------------------------------
+
+function escapeHtml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+// ---------------------------------------------------------------------------
 // Templates
 // ---------------------------------------------------------------------------
 
 function welcomeEmailHtml(name: string): string {
+  const safeName = escapeHtml(name);
   return `
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"><meta name="viewport" content=" width=device-width"></head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #1a1a1a;">
   <h1 style="font-family: Georgia, serif; font-size: 28px; margin-bottom: 16px;">Welcome to Admit Compass</h1>
-  <p>Hi ${name},</p>
+  <p>Hi ${safeName},</p>
   <p>You're all set. Your profile is ready and you now have access to:</p>
   <ul style="line-height: 1.8;">
     <li>840+ MBA, MiM, and EMBA program profiles</li>
@@ -67,14 +81,17 @@ function deadlineAlertHtml(
   deadline: string,
   daysLeft: number,
 ): string {
+  const safeName = escapeHtml(name);
+  const safeSchoolName = escapeHtml(schoolName);
+  const safeDeadline = escapeHtml(deadline);
   return `
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"><meta name="viewport" content=" width=device-width"></head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #1a1a1a;">
   <h1 style="font-family: Georgia, serif; font-size: 28px; margin-bottom: 16px;">Deadline Approaching</h1>
-  <p>Hi ${name},</p>
-  <p><strong>${schoolName}</strong> has a deadline on <strong>${deadline}</strong> — that's <strong>${daysLeft} day${daysLeft === 1 ? "" : "s"}</strong> away.</p>
+  <p>Hi ${safeName},</p>
+  <p><strong>${safeSchoolName}</strong> has a deadline on <strong>${safeDeadline}</strong> — that's <strong>${daysLeft} day${daysLeft === 1 ? "" : "s"}</strong> away.</p>
   <p>Make sure your application materials are ready:</p>
   <ul style="line-height: 1.8;">
     <li>Essays finalized and reviewed</li>
@@ -96,29 +113,33 @@ function paymentReceiptHtml(
   amount: string,
   date: string,
 ): string {
+  const safeName = escapeHtml(name);
+  const safePlan = escapeHtml(plan);
+  const safeAmount = escapeHtml(amount);
+  const safeDate = escapeHtml(date);
   return `
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"><meta name="viewport" content=" width=device-width"></head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #1a1a1a;">
   <h1 style="font-family: Georgia, serif; font-size: 28px; margin-bottom: 16px;">Payment Receipt</h1>
-  <p>Hi ${name},</p>
-  <p>Thanks for subscribing to <strong>Admit Compass ${plan}</strong>.</p>
+  <p>Hi ${safeName},</p>
+  <p>Thanks for subscribing to <strong>Admit Compass ${safePlan}</strong>.</p>
   <table style=" width: 100%; border-collapse: collapse; margin: 24px 0;">
     <tr style="border-bottom: 1px solid #eee;">
       <td style="padding: 12px 0; color: #666;">Plan</td>
-      <td style="padding: 12px 0; text-align: right; font-weight: bold;">${plan}</td>
+      <td style="padding: 12px 0; text-align: right; font-weight: bold;">${safePlan}</td>
     </tr>
     <tr style="border-bottom: 1px solid #eee;">
       <td style="padding: 12px 0; color: #666;">Amount</td>
-      <td style="padding: 12px 0; text-align: right; font-weight: bold;">${amount}</td>
+      <td style="padding: 12px 0; text-align: right; font-weight: bold;">${safeAmount}</td>
     </tr>
     <tr>
       <td style="padding: 12px 0; color: #666;">Date</td>
-      <td style="padding: 12px 0; text-align: right; font-weight: bold;">${date}</td>
+      <td style="padding: 12px 0; text-align: right; font-weight: bold;">${safeDate}</td>
     </tr>
   </table>
-  <p>You now have full access to all ${plan} features. If you have any questions, reply to this email.</p>
+  <p>You now have full access to all ${safePlan} features. If you have any questions, reply to this email.</p>
   <p style="margin-top: 24px;">
     <a href="https://admitcompass.ai/dashboard" style="background: #1a1a1a; color: #fff; padding: 12px 24px; text-decoration: none; font-weight: bold; display: inline-block;">Go to Dashboard</a>
   </p>

@@ -34,7 +34,7 @@ export function GpaDistributionChart({ data, schoolNames }: Props) {
  });
 
  return (
- <div>
+ <div role="img" aria-label="Bar chart showing GPA distribution for admitted vs denied applicants">
  <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground/40 mb-4">
  GPA Distribution - Admits vs Denials
  </h3>

@@ -189,4 +189,84 @@ export async function apiFetchWithHeaders<T>(
   return { data, headers: res.headers };
 }
 
+/**
+ * Fetch a Server-Sent Events (SSE) stream endpoint.
+ * Calls `onEvent` for each parsed SSE `data:` line.
+ * Returns when the stream closes.
+ */
+export async function fetchSSE(
+  path: string,
+  options: RequestInit & { timeoutMs?: number },
+  onEvent: (event: Record<string, unknown>) => void,
+): Promise<void> {
+  const { timeoutMs = 60_000, ...fetchOptions } = options;
+
+  const controller = new AbortController();
+  const timer = timeoutMs > 0
+    ? setTimeout(() => controller.abort(new DOMException("SSE timed out", "TimeoutError")), timeoutMs)
+    : null;
+
+  // Compose with caller signal
+  if (fetchOptions.signal) {
+    fetchOptions.signal.addEventListener("abort", () => controller.abort(fetchOptions.signal?.reason), { once: true });
+  }
+
+  try {
+    const res = await fetch(`${API_BASE}${path}`, {
+      ...fetchOptions,
+      signal: controller.signal,
+      headers: {
+        "Content-Type": "application/json",
+        ...fetchOptions.headers,
+      },
+    });
+
+    if (!res.ok) {
+      const error = await res.json().catch(() => ({ detail: res.statusText }));
+      throw new ApiError(res.status, error.detail || "Stream error", error);
+    }
+
+    const reader = res.body?.getReader();
+    if (!reader) throw new Error("No response body for SSE stream");
+
+    const decoder = new TextDecoder();
+    let buffer = "";
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+
+      // Process complete SSE lines
+      const lines = buffer.split("\n");
+      buffer = lines.pop() || ""; // Keep incomplete line in buffer
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (trimmed.startsWith("data: ")) {
+          try {
+            const parsed = JSON.parse(trimmed.slice(6));
+            onEvent(parsed);
+          } catch {
+            // Skip malformed JSON lines
+          }
+        }
+      }
+    }
+
+    // Process any remaining buffer
+    if (buffer.trim().startsWith("data: ")) {
+      try {
+        const parsed = JSON.parse(buffer.trim().slice(6));
+        onEvent(parsed);
+      } catch {
+        // Skip
+      }
+    }
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
 export { API_BASE };

@@ -77,7 +77,11 @@ function getStore(): UsageStore {
 
 function saveStore(store: UsageStore) {
   if (typeof window === "undefined") return;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+  } catch {
+    // localStorage unavailable (private browsing, quota exceeded, etc.)
+  }
 }
 
 function getResetTimestamp(period: "day" | "month"): number {
@@ -98,9 +102,13 @@ export function useUsage(feature: FeatureKey) {
 
   // Load on mount
   useEffect(() => {
-    const savedTier = localStorage.getItem(TIER_KEY) as Tier | null;
-    if (savedTier && ["free", "pro", "premium"].includes(savedTier)) {
-      setTier(savedTier);
+    try {
+      const savedTier = localStorage.getItem(TIER_KEY) as Tier | null;
+      if (savedTier && ["free", "pro", "premium"].includes(savedTier)) {
+        setTier(savedTier);
+      }
+    } catch {
+      // localStorage unavailable (private browsing, etc.)
     }
 
     const store = getStore();

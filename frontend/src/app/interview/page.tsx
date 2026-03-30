@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from"react";
 import {
  Mic,
+ MicOff,
  Video,
  PhoneOff,
  Play,
@@ -20,11 +21,13 @@ import {
  Award,
  SkipForward,
  Check,
+ Volume2,
+ VolumeX,
 } from"lucide-react";
 import Link from"next/link";
 import { ToolCrossLinks } from"@/components/ToolCrossLinks";
 import { EmailCapture } from"@/components/EmailCapture";
-import { apiFetch } from"@/lib/api";
+import { apiFetch, fetchSSE } from"@/lib/api";
 import { track } from"@/lib/analytics";
 import { useAbortSignal } from"@/hooks/useAbortSignal";
 import { useUsage } from"@/hooks/useUsage";
@@ -533,7 +536,6 @@ export default function InterviewPage() {
  const [expandedNotes, setExpandedNotes] = useState(false);
  const [pastSessions, setPastSessions] = useState<HistoryEntry[]>([]);
  const [voiceMode, setVoiceMode] = useState(false);
- const [autoSpeak, setAutoSpeak] = useState(true);
 
  // Immersive interview state
  const [timerSeconds, setTimerSeconds] = useState(120);
@@ -547,12 +549,27 @@ export default function InterviewPage() {
 
  const scrollRef = useRef<HTMLDivElement>(null);
 
+ const [streamingText, setStreamingText] = useState("");
+ const [voiceState, setVoiceState] = useState<"idle"|"listening"|"thinking"|"speaking">("idle");
+ const [voiceError, setVoiceError] = useState<string | null>(null);
+ const [speakResponses, setSpeakResponses] = useState(true);
+
  const voice = useVoice({
- continuous: false,
+ continuous: true,
+ vadTimeoutMs: 2000,
  onResult: (finalTranscript) => {
  if (voiceMode && finalTranscript.trim()) {
  setCurrentInput(finalTranscript.trim());
  }
+ },
+ onInterim: (interim) => {
+ if (voiceMode) {
+ setCurrentInput(interim);
+ }
+ },
+ onError: (_errType, message) => {
+ setVoiceError(message);
+ setVoiceState("idle");
  },
  });
 
@@ -567,9 +584,26 @@ export default function InterviewPage() {
  scrollRef.current?.scrollTo(0, scrollRef.current.scrollHeight);
  }, [history]);
 
+ // Track voice states
+ useEffect(() => {
+ if (!voiceMode) {
+ setVoiceState("idle");
+ return;
+ }
+ if (voice.isSpeaking) {
+ setVoiceState("speaking");
+ } else if (voice.isListening) {
+ setVoiceState("listening");
+ } else if (loading) {
+ setVoiceState("thinking");
+ } else {
+ setVoiceState("idle");
+ }
+ }, [voiceMode, voice.isListening, voice.isSpeaking, loading]);
+
  // Auto-speak AI messages in voice mode
  useEffect(() => {
- if (!voiceMode || !autoSpeak || history.length === 0) return;
+ if (!voiceMode || !speakResponses || history.length === 0) return;
  const lastMsg = history[history.length - 1];
  if (lastMsg.role ==="ai" && !loading) {
  voice.speak(lastMsg.content).then(() => {
@@ -578,7 +612,41 @@ export default function InterviewPage() {
  }
  });
  }
- }, [history.length, loading, voiceMode, autoSpeak, isFinished]);
+ }, [history.length, loading, voiceMode, speakResponses, isFinished]);
+
+ // Also auto-speak streamed text when streaming completes
+ useEffect(() => {
+ if (!voiceMode || !speakResponses || !streamingText || loading) return;
+ // streamingText is set when stream finishes — the last AI message should match
+ const lastMsg = history[history.length - 1];
+ if (lastMsg?.role === "ai" && lastMsg.content === streamingText) {
+ // Already handled by the history-based effect above
+ setStreamingText("");
+ }
+ }, [streamingText, loading, voiceMode, speakResponses, history]);
+
+ // Keyboard shortcut: Space to toggle recording in voice mode
+ useEffect(() => {
+ if (!voiceMode || !isStarted || isFinished) return;
+
+ const handleKeyDown = (e: KeyboardEvent) => {
+ // Only if not typing in a text field
+ if (e.target instanceof HTMLTextAreaElement || e.target instanceof HTMLInputElement) return;
+ if (e.code === "Space" && !e.repeat) {
+ e.preventDefault();
+ if (voice.isListening) {
+ voice.stopListening();
+ } else if (!voice.isSpeaking && !loading) {
+ voice.stopSpeaking();
+ setCurrentInput("");
+ voice.startListening();
+ }
+ }
+ };
+
+ window.addEventListener("keydown", handleKeyDown);
+ return () => window.removeEventListener("keydown", handleKeyDown);
+ }, [voiceMode, isStarted, isFinished, voice.isListening, voice.isSpeaking, loading]);
 
  // Timer countdown
  useEffect(() => {
@@ -668,24 +736,112 @@ export default function InterviewPage() {
  }
  };
 
+ const handleSendStreaming = async (newHistory: Message[]) => {
+ let streamedMessage = "";
+ setStreamingText("");
+
+ try {
+ await fetchSSE(
+ `/api/interview/respond-stream`,
+ {
+ method: "POST",
+ body: JSON.stringify({
+ school_id: selectedSchoolId,
+ history: newHistory.map((m) => ({ role: m.role, content: m.content })),
+ difficulty,
+ question_count: questionCount,
+ }),
+ timeoutMs: 90_000,
+ signal: abortSignal,
+ },
+ (event) => {
+ if (event.type === "text") {
+ streamedMessage += event.content as string;
+ setStreamingText(streamedMessage);
+ } else if (event.type === "done") {
+ const result = event.result as Record<string, unknown>;
+ // Apply the final parsed data
+ if (result.question_number)
+ setQuestionNumber(result.question_number as number);
+ if (result.total_questions)
+ setTotalQuestions(result.total_questions as number);
+ if (result.question_category) {
+ setQuestionCategory(result.question_category as string);
+ setCategoryMap((prev) => ({
+ ...prev,
+ [(result.question_number as number) || questionNumber + 1]:
+ result.question_category as string,
+ }));
+ }
+
+ const message = (result.message as string) || streamedMessage;
+ const aiMsg: Message = {
+ role: "ai",
+ content: message,
+ category: (result.question_category as string) || undefined,
+ };
+ setHistory([...newHistory, aiMsg]);
+ setStreamingText("");
+
+ if (result.is_finished) {
+ setIsFinished(true);
+ setFeedback((result.feedback as Feedback) || null);
+ track("interview_completed", {
+ school_id: selectedSchoolId,
+ difficulty,
+ overall_score: (result.feedback as Feedback)?.overall_score ?? null,
+ questions_answered: questionNumber,
+ });
+ if (result.feedback) {
+ const entry: HistoryEntry = {
+ date: new Date().toISOString(),
+ school_id: selectedSchoolId,
+ school_name: selectedSchoolName,
+ difficulty,
+ overall_score: (result.feedback as Feedback).overall_score,
+ feedback: result.feedback as Feedback,
+ };
+ saveHistoryEntry(entry);
+ setPastSessions(loadHistory());
+ }
+ }
+ }
+ },
+ );
+ } catch (err) {
+ console.error(err);
+ setStreamingText("");
+ throw err;
+ }
+ };
+
  const handleSend = async (e?: React.FormEvent) => {
  e?.preventDefault();
  if (!currentInput.trim() || loading) return;
 
  setError(null);
+ setVoiceError(null);
  const userMsg: Message = { role:"user", content: currentInput };
  const newHistory = [...history, userMsg];
  setHistory(newHistory);
  setCurrentInput("");
  setLoading(true);
 
- // Show post-question transition
+ // Stop listening while processing
+ if (voice.isListening) voice.stopListening();
+
+ // Show post-question transition (scores populated after API responds)
  setShowPostQuestion(true);
- const mockContent = 60 + Math.floor(Math.random() * 30);
- const mockStructure = 55 + Math.floor(Math.random() * 35);
- setPostQuestionScores({ content: mockContent, structure: mockStructure });
+ setPostQuestionScores(null);
 
  try {
+ if (voiceMode) {
+ // Use streaming endpoint in voice mode for real-time text display
+ await new Promise((resolve) => setTimeout(resolve, 1200));
+ setShowPostQuestion(false);
+ setPostQuestionScores(null);
+ await handleSendStreaming(newHistory);
+ } else {
  const data = await apiFetch<Record<string, unknown>>(`/api/interview/respond`, {
  method:"POST",
  body: JSON.stringify({
@@ -746,6 +902,7 @@ export default function InterviewPage() {
  setPastSessions(loadHistory());
  }
  }
+ }
  } catch (e) {
  console.error(e);
  setShowPostQuestion(false);
@@ -773,6 +930,11 @@ export default function InterviewPage() {
  setTimerSeconds(120);
  setShowPostQuestion(false);
  setPostQuestionScores(null);
+ setStreamingText("");
+ setVoiceState("idle");
+ setVoiceError(null);
+ voice.stopListening();
+ voice.stopSpeaking();
  if (timerRef.current) clearInterval(timerRef.current);
  };
 
@@ -1058,14 +1220,19 @@ export default function InterviewPage() {
  />
  </div>
 
- {/* Question text with typewriter */}
+ {/* Question text with typewriter / streaming */}
  <div className="max-w-3xl text-center mb-8 min-h-[80px]">
- {loading ? (
+ {loading && !streamingText ? (
  <div className="flex gap-1.5 justify-center py-4">
  <div className="w-2 h-2 bg-gold rounded-full animate-bounce [animation-delay:-0.3s]"/>
  <div className="w-2 h-2 bg-gold rounded-full animate-bounce [animation-delay:-0.15s]"/>
  <div className="w-2 h-2 bg-gold rounded-full animate-bounce"/>
  </div>
+ ) : streamingText && loading ? (
+ <p className="font-display text-2xl md:text-3xl text-white leading-snug font-medium">
+ {streamingText}
+ <span className="animate-blink text-gold">|</span>
+ </p>
  ) : (
  <p className="font-display text-2xl md:text-3xl text-white leading-snug font-medium">
  {typewriter.displayed}
@@ -1086,6 +1253,33 @@ export default function InterviewPage() {
  {voice.isListening && (
  <div className="waveform-glow" aria-hidden="true"/>
  )}
+ {/* Voice state indicator */}
+ <div className="mt-3 flex items-center justify-center gap-2">
+ <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+ voiceState === "listening" ? "bg-red-400 animate-pulse"
+ : voiceState === "speaking" ? "bg-gold animate-pulse"
+ : voiceState === "thinking" ? "bg-blue-400 animate-pulse"
+ : "bg-white/20"
+ }`} />
+ <span className="text-[9px] text-white/30 uppercase tracking-widest font-bold">
+ {voiceState === "listening" ? "Listening..."
+ : voiceState === "speaking" ? "Speaking..."
+ : voiceState === "thinking" ? "Thinking..."
+ : "Ready"}
+ </span>
+ </div>
+ </div>
+ )}
+
+ {/* Voice error banner */}
+ {voiceError && voiceMode && (
+ <div className="mb-4 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-2 text-xs max-w-md animate-fade-in">
+ {voiceError}
+ <button
+ type="button"
+ onClick={() => setVoiceError(null)}
+ className="ml-3 text-red-400/60 hover:text-red-400 underline"
+ >dismiss</button>
  </div>
  )}
 
@@ -1094,22 +1288,21 @@ export default function InterviewPage() {
  <div className="w-full max-w-2xl animate-fade-in">
  {voiceMode ? (
  <div className="flex flex-col items-center gap-4">
+ {/* Real-time transcription display */}
  {(voice.isListening || currentInput) && (
- <div className="w-full bg-white/5 border border-white/10 p-4 text-sm min-h-[52px]">
- <span
- className={
- voice.isListening
- ?"text-white"
- :"text-white/50"
- }
- >
- {currentInput ||
- voice.transcript ||
-"Listening..."}
+ <div className="w-full bg-white/5 border border-white/10 p-4 text-sm min-h-[52px] transition-all">
+ <span className={voice.isListening ? "text-white" : "text-white/50"}>
+ {currentInput || voice.transcript || "Listening..."}
  </span>
+ {voice.isListening && voice.interimTranscript && currentInput !== voice.interimTranscript && (
+ <span className="text-white/25 italic ml-1">
+ {voice.interimTranscript.slice(currentInput.length)}
+ </span>
+ )}
  </div>
  )}
  <div className="flex items-center gap-4">
+ {/* Main mic button with pulsing indicator */}
  <button
  type="button"
  onClick={() => {
@@ -1122,21 +1315,44 @@ export default function InterviewPage() {
  }
  }}
  disabled={loading}
- className={`w-16 h-16 rounded-full flex items-center justify-center transition-all ${
+ className={`relative w-16 h-16 rounded-full flex items-center justify-center transition-all ${
  voice.isListening
- ?"bg-red-500 text-white animate-pulse shadow-red-500/30"
- :"bg-white/10 text-white hover:bg-white/20"
+ ? "bg-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.4)]"
+ : "bg-white/10 text-white hover:bg-white/20"
  }`}
  >
- <Mic size={24} />
+ {/* Pulsing ring when listening */}
+ {voice.isListening && (
+ <>
+ <span className="absolute inset-0 rounded-full bg-red-500/30 animate-ping" />
+ <span className="absolute inset-[-4px] rounded-full border-2 border-red-400/40 animate-pulse" />
+ </>
+ )}
+ <Mic size={24} className="relative z-10" />
+ </button>
+ {/* Toggle speak-back */}
+ <button
+ type="button"
+ onClick={() => {
+ setSpeakResponses(!speakResponses);
+ if (voice.isSpeaking) voice.stopSpeaking();
+ }}
+ className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+ speakResponses
+ ? "bg-white/10 text-white/60"
+ : "bg-white/5 text-white/20"
+ }`}
+ title={speakResponses ? "Disable voice responses" : "Enable voice responses"}
+ >
+ {speakResponses ? <Volume2 size={16} /> : <VolumeX size={16} />}
  </button>
  </div>
  <p className="text-[8px] text-white/20 uppercase font-bold tracking-widest">
  {voice.isListening
- ?"Listening... tap to stop"
+ ? "Listening... tap to stop \u00B7 Space to toggle"
  : voice.isSpeaking
- ?"Interviewer speaking..."
- :"Tap mic to respond"}
+ ? "Interviewer speaking..."
+ : "Tap mic or press Space to respond"}
  </p>
  </div>
  ) : (
@@ -1222,29 +1438,33 @@ export default function InterviewPage() {
  Submit Answer
  </RippleButton>
 
- {/* Voice toggle */}
+ {/* Voice Mode toggle */}
  {voice.isSupported && (
  <button
  type="button"
  onClick={() => {
- setVoiceMode(!voiceMode);
- if (!voiceMode) {
+ const newMode = !voiceMode;
+ setVoiceMode(newMode);
+ setVoiceError(null);
+ if (newMode) {
  const lastAi = [...history]
  .reverse()
  .find((m) => m.role ==="ai");
- if (lastAi) voice.speak(lastAi.content);
+ if (lastAi && speakResponses) voice.speak(lastAi.content);
  } else {
  voice.stopListening();
  voice.stopSpeaking();
+ setStreamingText("");
  }
  }}
- className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+ className={`flex items-center gap-2 px-4 py-2 text-xs uppercase tracking-widest font-bold transition-all border ${
  voiceMode
- ?"bg-gold text-[#0A0A0A] shadow-gold/20"
- :"bg-white/5 text-white/30 hover:text-white/60"
+ ? "bg-gold text-[#0A0A0A] border-gold shadow-[0_0_12px_rgba(201,169,98,0.2)]"
+ : "bg-white/5 text-white/30 hover:text-white/60 border-white/10 hover:border-white/20"
  }`}
  >
- <Mic size={16} />
+ {voiceMode ? <MicOff size={14} /> : <Mic size={14} />}
+ {voiceMode ? "Exit Voice" : "Voice Mode"}
  </button>
  )}
 

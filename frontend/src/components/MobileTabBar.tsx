@@ -16,6 +16,7 @@ export function MobileTabBar() {
 
  return (
  <nav
+ aria-label="Mobile navigation"
  className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-card border-t border-border"
  style={{ paddingBottom:"env(safe-area-inset-bottom, 0px)"}}
  >
@@ -27,6 +28,7 @@ export function MobileTabBar() {
  <Link
  key={tab.href}
  href={tab.href}
+ aria-current={active ?"page": undefined}
  className={`flex flex-col items-center justify-center gap-0.5 transition-colors ${
  active ?"text-primary":"text-muted-foreground/40"
  }`}

@@ -1,19 +1,25 @@
-"""Middleware — rate limiting, caching headers, request timeouts, usage tracking, and global error handling.
+"""Middleware — rate limiting, caching headers, Redis cache, request timeouts, usage tracking, and global error handling.
 
 Rate limits protect LLM-heavy endpoints from abuse.
 Cache headers reduce latency for read-heavy school data.
+Redis cache middleware serves responses from cache for read-heavy GET endpoints.
 Request timeouts prevent LLM calls from holding connections open indefinitely.
 Usage tracking enforces per-tier monthly limits on AI features.
 Global error handler prevents 500s from leaking stack traces.
 """
 
 import asyncio
+import json
+import os
 import traceback
+import hashlib
+from urllib.parse import urlencode
 from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.responses import Response
 from fastapi import Request
 from fastapi.responses import JSONResponse
 from logging_config import setup_logging
-from usage import feature_for_path, check_limit, increment_usage
+from usage import feature_for_path, check_limit, increment_usage, async_check_limit, async_increment_usage, async_get_user_tier
 
 logger = setup_logging()
 
@@ -40,6 +46,19 @@ def rate_limit(limit_string: str):
     return lambda f: f
 
 
+if RATE_LIMIT_AVAILABLE:
+    def _custom_rate_limit_exceeded_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
+        """Custom handler for rate limit exceeded that includes Retry-After header."""
+        retry_after = getattr(exc, "retry_after", 60)
+        detail = str(exc.detail) if hasattr(exc, "detail") else "Rate limit exceeded"
+        response = JSONResponse(
+            status_code=429,
+            content={"detail": detail},
+        )
+        response.headers["Retry-After"] = str(retry_after)
+        return response
+
+
 def setup_rate_limiter(app):
     """Attach rate limiter to the FastAPI app."""
     if not RATE_LIMIT_AVAILABLE or limiter is None:
@@ -47,7 +66,7 @@ def setup_rate_limiter(app):
         return
 
     app.state.limiter = limiter
-    app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+    app.add_exception_handler(RateLimitExceeded, _custom_rate_limit_exceeded_handler)
     logger.info("Rate limiting enabled")
 
 
@@ -163,6 +182,127 @@ def setup_cache_headers(app):
     logger.info("Cache-Control headers middleware enabled")
 
 
+# ── Redis Cache Middleware ─────────────────────────────────────────────────
+
+# TTL for Redis-cached responses (seconds). Uses the same CACHE_RULES map above.
+# Only GET endpoints in CACHE_RULES or school detail pages are Redis-cached.
+
+_API_VERSION = os.environ.get("API_VERSION", "1")
+
+
+def _build_cache_key(request: Request) -> str:
+    """Build a deterministic cache key from API version + path + sorted query params."""
+    path = request.url.path
+    params = sorted(request.query_params.items())
+    param_str = urlencode(params) if params else ""
+    return f"http_cache:v{_API_VERSION}:{path}:{param_str}"
+
+
+def _get_redis_ttl(path: str) -> int | None:
+    """Return the Redis TTL for a path, or None if it should not be cached."""
+    if path in CACHE_RULES:
+        max_age, _ = CACHE_RULES[path]
+        return max_age
+    # School detail pages
+    if path.startswith("/api/schools/") and path.count("/") == 3:
+        max_age, _ = SCHOOL_DETAIL_CACHE
+        return max_age
+    return None
+
+
+class RedisCacheMiddleware(BaseHTTPMiddleware):
+    """Serve GET responses from Redis cache when available.
+
+    Sits in front of the CacheHeaderMiddleware and route handlers.
+    On cache hit: returns the cached JSON response immediately.
+    On cache miss: calls the next handler, then caches 2xx responses.
+    """
+
+    async def dispatch(self, request: Request, call_next):
+        # Only cache GET requests
+        if request.method != "GET":
+            return await call_next(request)
+
+        ttl = _get_redis_ttl(request.url.path)
+        if ttl is None:
+            return await call_next(request)
+
+        from cache import cache_get, cache_set
+
+        cache_key = _build_cache_key(request)
+
+        # ── Try cache hit ──
+        try:
+            cached = await cache_get(cache_key)
+            if cached is not None:
+                data = json.loads(cached)
+                return JSONResponse(
+                    content=data["body"],
+                    status_code=data["status"],
+                    headers={**data.get("headers", {}), "X-Cache": "HIT"},
+                )
+        except (ConnectionError, OSError) as e:
+            logger.warning("Redis cache read failed for %s: %s", cache_key, e)
+        except (json.JSONDecodeError, KeyError, TypeError) as e:
+            logger.warning("Cache data corrupted for %s: %s", cache_key, e)
+
+        # ── Cache miss — call handler ──
+        response = await call_next(request)
+
+        # Only cache successful responses
+        if 200 <= response.status_code < 300:
+            try:
+                # Read the streaming response body
+                body_bytes = b""
+                async for chunk in response.body_iterator:
+                    if isinstance(chunk, str):
+                        body_bytes += chunk.encode("utf-8")
+                    else:
+                        body_bytes += chunk
+
+                body_json = json.loads(body_bytes)
+
+                # Cache the response
+                cache_data = json.dumps({
+                    "body": body_json,
+                    "status": response.status_code,
+                    "headers": {
+                        k: v for k, v in response.headers.items()
+                        if k.lower() in ("content-type", "cache-control")
+                    },
+                })
+                # Fire-and-forget cache set (don't await in critical path if it's slow)
+                await cache_set(cache_key, cache_data, ttl=ttl)
+
+                # Return a new response since we consumed the body iterator
+                return Response(
+                    content=body_bytes,
+                    status_code=response.status_code,
+                    headers={**dict(response.headers), "X-Cache": "MISS"},
+                    media_type=response.media_type,
+                )
+            except Exception as e:
+                logger.debug("Redis cache store failed: %s", e)
+                # If we consumed the body but failed to cache, we need to return what we have
+                try:
+                    return Response(
+                        content=body_bytes,
+                        status_code=response.status_code,
+                        headers=dict(response.headers),
+                        media_type=response.media_type,
+                    )
+                except (ConnectionError, OSError, ValueError) as e:
+                    logger.warning("Failed to return cached response body: %s", e)
+
+        return response
+
+
+def setup_redis_cache(app):
+    """Attach Redis cache middleware to the FastAPI app."""
+    app.add_middleware(RedisCacheMiddleware)
+    logger.info("Redis cache middleware enabled")
+
+
 # ── Usage Tracking Middleware ────────────────────────────────────────────────
 
 
@@ -179,8 +319,8 @@ def _get_user_id(request: Request) -> str:
             claims = _decode_token(auth_header[7:])
             if claims and claims.get("sub"):
                 return claims["sub"]
-        except Exception:
-            pass
+        except (ImportError, RuntimeError, ValueError) as e:
+            logger.warning("Failed to decode JWT for usage tracking: %s", e)
     # Dev mode: no JWT secret = always "dev-user" (matches auth.get_optional_user)
     import os
     if not os.environ.get("NEXTAUTH_SECRET"):
@@ -207,16 +347,15 @@ class UsageTrackingMiddleware(BaseHTTPMiddleware):
             return await call_next(request)
 
         user_id = _get_user_id(request)
-        allowed, current, limit = check_limit(user_id, feature)
+        allowed, current, limit = await async_check_limit(user_id, feature)
 
         if not allowed:
-            from usage import get_user_tier
-            tier = get_user_tier(user_id)
+            tier = await async_get_user_tier(user_id)
             logger.info(
                 "Usage limit hit: user=%s tier=%s feature=%s (%d/%d)",
                 user_id, tier, feature, current, limit,
             )
-            return JSONResponse(
+            response = JSONResponse(
                 status_code=429,
                 content={
                     "detail": f"Monthly limit reached for this feature ({current}/{limit}).",
@@ -227,12 +366,14 @@ class UsageTrackingMiddleware(BaseHTTPMiddleware):
                     "upgrade_url": "/pricing",
                 },
             )
+            response.headers["Retry-After"] = "86400"  # Suggest retry after 1 day (monthly limit)
+            return response
 
         response = await call_next(request)
 
         # Only count successful requests (not validation errors, etc.)
         if response.status_code < 400:
-            new_count = increment_usage(user_id, feature)
+            new_count = await async_increment_usage(user_id, feature)
             logger.debug("Usage: user=%s feature=%s count=%d", user_id, feature, new_count)
 
         return response

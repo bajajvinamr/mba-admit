@@ -1,11 +1,14 @@
 """Auth endpoints — verify credentials, create users."""
 
+import os
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 import db
 from logging_config import setup_logging
 
 logger = setup_logging()
+
+_ENVIRONMENT = os.environ.get("ENVIRONMENT", "production")
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
@@ -30,9 +33,12 @@ def verify_credentials(req: VerifyCredentialsRequest):
 
     stored_hash = user["password_hash"]
 
-    # Dev mode placeholder — accept any password
+    # Dev mode placeholder — only accept in explicit development mode
     if stored_hash == "dev":
-        logger.warning("Dev-mode password hash — skipping bcrypt check")
+        if _ENVIRONMENT != "development":
+            logger.error("Dev-mode password hash found in non-development environment for user %s", req.email)
+            raise HTTPException(status_code=401, detail="Invalid credentials")
+        logger.warning("Dev-mode password hash — skipping bcrypt check (development only)")
     else:
         try:
             import bcrypt

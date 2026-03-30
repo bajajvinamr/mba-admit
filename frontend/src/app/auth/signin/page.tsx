@@ -4,7 +4,7 @@ import { Suspense, useState } from"react";
 import { signIn } from"next-auth/react";
 import { useRouter, useSearchParams } from"next/navigation";
 import Link from"next/link";
-import { Loader2, ArrowRight, Mail, Lock } from"lucide-react";
+import { Loader2, ArrowRight, Mail, Lock, Eye, EyeOff } from"lucide-react";
 
 function SignInContent() {
  const router = useRouter();
@@ -12,6 +12,7 @@ function SignInContent() {
  const callbackUrl = searchParams.get("callbackUrl") ||"/dashboard";
  const [email, setEmail] = useState("");
  const [password, setPassword] = useState("");
+ const [showPassword, setShowPassword] = useState(false);
  const [error, setError] = useState("");
  const [loading, setLoading] = useState(false);
 
@@ -46,8 +47,9 @@ function SignInContent() {
 
  <div className="bg-card border border-border/10 p-8">
  {error && (
- <div className="bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 mb-6">
- {error}
+ <div role="alert" className="bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 mb-6 flex items-center justify-between">
+ <span>{error}</span>
+ <button type="button" onClick={() => setError("")} className="ml-3 text-sm font-bold underline">Dismiss</button>
  </div>
  )}
 
@@ -57,7 +59,7 @@ function SignInContent() {
  Email
  </label>
  <div className="relative">
- <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground/30"/>
+ <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground/50"/>
  <input
  id="email"
  type="email"
@@ -75,16 +77,24 @@ function SignInContent() {
  Password
  </label>
  <div className="relative">
- <Lock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground/30"/>
+ <Lock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground/50"/>
  <input
  id="password"
- type="password"
+ type={showPassword ?"text":"password"}
  value={password}
  onChange={(e) => setPassword(e.target.value)}
  required
- className="w-full pl-10 pr-4 py-3 border border-border/15 text-sm text-foreground focus:outline-none focus:border-primary transition-colors"
+ className="w-full pl-10 pr-10 py-3 border border-border/15 text-sm text-foreground focus:outline-none focus:border-primary transition-colors"
  placeholder="••••••••"
  />
+ <button
+ type="button"
+ onClick={() => setShowPassword(v => !v)}
+ className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/40 hover:text-muted-foreground transition-colors"
+ aria-label={showPassword ?"Hide password":"Show password"}
+ >
+ {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+ </button>
  </div>
  </div>
 

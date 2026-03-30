@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from"react";
 import { useRouter } from"next/navigation";
 import { Search, GraduationCap, BarChart3, FileText, ArrowRight } from"lucide-react";
 import { apiFetch } from"@/lib/api";
+import { toast } from"@/components/Toast";
 
 type SchoolResult = {
  id: string;
@@ -66,7 +67,11 @@ export function CommandPalette() {
  setResults(data);
  setSelectedIdx(0);
  })
- .catch(() => {});
+ .catch((err) => {
+ if (err instanceof DOMException && err.name === "AbortError") return;
+ console.error("[CommandPalette] Search failed:", err);
+ toast.error("Search failed. Please try again.");
+ });
  return () => controller.abort();
  }, [query]);
 
@@ -97,9 +102,13 @@ export function CommandPalette() {
 
  return (
  <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh]"
- onClick={() => setOpen(false)}>
- <div className="absolute inset-0 bg-foreground/40"/>
- <div className="relative w-full max-w-lg bg-card border border-border"
+ onClick={() => setOpen(false)}
+ role="dialog"
+ aria-modal="true"
+ aria-label="Search schools and navigate"
+ >
+ <div className="absolute inset-0 bg-foreground/40" aria-hidden="true"/>
+ <div className="relative w-full max-w-lg bg-card border border-border shadow-lg"
  onClick={e => e.stopPropagation()}>
  <div className="flex items-center gap-3 px-4 border-b border-border/10">
  <Search size={18} className="text-muted-foreground/40 shrink-0"/>
@@ -115,13 +124,15 @@ export function CommandPalette() {
  <kbd className="text-[10px] font-mono text-muted-foreground/30 bg-background px-1.5 py-0.5 border border-border">ESC</kbd>
  </div>
 
- <div className="max-h-[300px] overflow-y-auto">
+ <div className="max-h-[300px] overflow-y-auto" role="listbox" aria-live="polite">
  {allItems.length === 0 && query.length >= 2 && (
- <p className="px-4 py-6 text-sm text-muted-foreground/40 text-center">No schools found</p>
+ <p className="px-4 py-6 text-sm text-muted-foreground/40 text-center" role="status">No schools found</p>
  )}
  {allItems.map((item, i) => (
  <button
  key={`${item.type}-${item.href}`}
+ role="option"
+ aria-selected={i === selectedIdx}
  onClick={() => navigate(item.href)}
  className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
  i === selectedIdx ?"bg-primary/10":"hover:bg-background"

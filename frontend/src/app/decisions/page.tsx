@@ -365,6 +365,7 @@ export default function DecisionsPage() {
  <div className="bg-card border-2 border-primary/30">
  <button
  onClick={() => setShowChances(!showChances)}
+ aria-expanded={showChances}
  className="w-full flex items-center justify-between px-6 py-4 hover:bg-primary/5 transition-colors"
  >
  <div className="flex items-center gap-3">
@@ -517,6 +518,7 @@ export default function DecisionsPage() {
  <div className="bg-card border border-border/10">
  <button
  onClick={() => setShowSubmit(!showSubmit)}
+ aria-expanded={showSubmit}
  className="w-full flex items-center justify-between px-6 py-4 hover:bg-primary/5 transition-colors"
  >
  <div className="flex items-center gap-3">
@@ -684,6 +686,7 @@ export default function DecisionsPage() {
  <div className="bg-card border border-border/10">
  <button
  onClick={() => setShowAnalytics(!showAnalytics)}
+ aria-expanded={showAnalytics}
  className="w-full flex items-center justify-between px-6 py-4 hover:bg-primary/5 transition-colors"
  >
  <div className="flex items-center gap-3">
