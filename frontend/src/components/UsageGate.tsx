@@ -29,6 +29,9 @@ const FEATURE_COPY: Partial<Record<FeatureKey, { hook: string; value: string }>>
  waitlist_strategy: { hook:"Your waitlist action plan is ready", value:"Generate strategies for every school you're waitlisted at"},
  roi_calculator: { hook:"You've seen the 10-year return analysis", value:"Compare ROI across every school combination"},
  scholarship_negotiator: { hook:"Your negotiation strategy has been drafted", value:"Run unlimited negotiation strategies as offers come in"},
+ school_matcher: { hook:"You've found your best-fit schools", value:"Match unlimited school combinations as your profile evolves"},
+ essay_ai_feedback: { hook:"Your essay feedback revealed key improvements", value:"Get unlimited AI feedback as you revise every draft"},
+ interview_stream: { hook:"You've completed a mock interview", value:"Practice unlimited interviews across every school and style"},
 };
 
 // ── Upgrade copy builder ────────────────────────────────────────────────────

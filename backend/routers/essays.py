@@ -5,10 +5,12 @@ import re as _re
 from datetime import datetime, timezone
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
+from auth import get_current_user, get_optional_user
 from middleware import rate_limit
+import db
 from agents import (
     SCHOOL_DB,
     evaluate_essay_draft,
@@ -369,8 +371,8 @@ async def essay_coach(request: Request, req: EssayCoachRequest):
 
 # ── Versioned Essay Drafts & AI Feedback ─────────────────────────────────────
 
-# In-memory store for drafts (keyed by school_id → prompt_id → list of versions)
-# In production this would use the Prisma EssayDraft model via the DB.
+# Legacy in-memory fallback store (used only when Supabase is unavailable).
+# Primary persistence is via db.upsert_essay_draft / db.get_essay_drafts_for_school.
 _DRAFT_STORE: dict[str, dict[str, list[dict]]] = {}
 
 
@@ -389,60 +391,80 @@ class AIFeedbackRequest(BaseModel):
 
 
 @router.post("/essay/save-draft")
-def save_essay_draft(req: SaveDraftRequest):
-    """Save a versioned essay draft. Auto-increments version on each save."""
-    school_drafts = _DRAFT_STORE.setdefault(req.school_id, {})
-    prompt_drafts = school_drafts.setdefault(req.prompt_id, [])
+def save_essay_draft(req: SaveDraftRequest, user: dict = Depends(get_current_user)):
+    """Save a versioned essay draft. Auto-increments version on each save.
 
-    # Determine version
-    if prompt_drafts:
-        next_version = max(d["version"] for d in prompt_drafts) + 1
-    else:
-        next_version = 1
-
+    Persists to Supabase EssayDraft table when available, falls back to
+    in-memory store otherwise.
+    """
+    user_id = user["sub"]
     words = req.content.strip().split() if req.content.strip() else []
+    word_count = len(words)
 
-    draft = {
-        "id": f"{req.school_id}_{req.prompt_id}_{next_version}",
-        "school_id": req.school_id,
-        "prompt_id": req.prompt_id,
-        "content": req.content,
-        "word_count": len(words),
-        "version": next_version,
-        "created_at": datetime.now(timezone.utc).isoformat(),
-        "updated_at": datetime.now(timezone.utc).isoformat(),
-    }
-
-    prompt_drafts.append(draft)
+    try:
+        draft = db.upsert_essay_draft(
+            user_id=user_id,
+            school_slug=req.school_id,
+            prompt_id=req.prompt_id,
+            content=req.content,
+            word_count=word_count,
+        )
+    except Exception as exc:
+        logger.error("Supabase draft save failed, using in-memory fallback: %s", exc)
+        # Fallback to legacy in-memory store
+        school_drafts = _DRAFT_STORE.setdefault(req.school_id, {})
+        prompt_drafts = school_drafts.setdefault(req.prompt_id, [])
+        next_version = (max(d["version"] for d in prompt_drafts) + 1) if prompt_drafts else 1
+        draft = {
+            "id": f"{req.school_id}_{req.prompt_id}_{next_version}",
+            "userId": user_id,
+            "schoolSlug": req.school_id,
+            "promptId": req.prompt_id,
+            "content": req.content,
+            "wordCount": word_count,
+            "version": next_version,
+            "createdAt": datetime.now(timezone.utc).isoformat(),
+            "updatedAt": datetime.now(timezone.utc).isoformat(),
+        }
+        prompt_drafts.append(draft)
 
     logger.info(
-        "Essay draft saved: school=%s prompt=%s version=%d words=%d",
-        req.school_id, req.prompt_id, next_version, len(words),
+        "Essay draft saved: user=%s school=%s prompt=%s version=%d words=%d persistent=%s",
+        user_id, req.school_id, req.prompt_id, draft["version"], word_count,
+        db.is_persistent(),
     )
 
     return {
         "draft": draft,
-        "message": f"Draft v{next_version} saved successfully",
+        "message": f"Draft v{draft['version']} saved successfully",
     }
 
 
 @router.get("/essay/drafts/{school_id}")
-def get_essay_drafts(school_id: str):
-    """List all drafts with version history for a school."""
-    school_drafts = _DRAFT_STORE.get(school_id, {})
+def get_essay_drafts(school_id: str, user: dict = Depends(get_current_user)):
+    """List all drafts with version history for a school.
 
-    all_drafts = []
-    for prompt_id, versions in school_drafts.items():
-        for draft in versions:
-            all_drafts.append(draft)
+    Reads from Supabase EssayDraft table when available, falls back to
+    in-memory store otherwise.
+    """
+    user_id = user["sub"]
 
-    # Sort by prompt_id, then version descending
-    all_drafts.sort(key=lambda d: (d["prompt_id"], -d["version"]))
+    try:
+        all_drafts = db.get_essay_drafts_for_school(user_id, school_id)
+    except Exception as exc:
+        logger.error("Supabase draft fetch failed, using in-memory fallback: %s", exc)
+        # Fallback to legacy in-memory store
+        school_drafts = _DRAFT_STORE.get(school_id, {})
+        all_drafts = []
+        for prompt_id, versions in school_drafts.items():
+            all_drafts.extend(versions)
+        all_drafts.sort(key=lambda d: (d.get("promptId", d.get("prompt_id", "")), -d["version"]))
 
     # Group by prompt
     by_prompt: dict[str, list[dict]] = {}
     for draft in all_drafts:
-        by_prompt.setdefault(draft["prompt_id"], []).append(draft)
+        pid = draft.get("promptId", draft.get("prompt_id", ""))
+        by_prompt.setdefault(pid, []).append(draft)
 
     return {
         "school_id": school_id,

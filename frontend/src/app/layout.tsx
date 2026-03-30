@@ -69,6 +69,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("font-sans", geist.variable)} suppressHydrationWarning>
       <head>
+        {/* PWA manifest and meta tags */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0f172a" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="AdmitCompass" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
         {/* Preconnect to API for faster first request */}
         <link rel="preconnect" href={process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"} />
         <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"} />
@@ -109,6 +116,24 @@ export default function RootLayout({
                 },
               ],
             }),
+          }}
+        />
+        {/* Register service worker */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js')
+                    .then(function(reg) {
+                      console.log('SW registered:', reg.scope);
+                    })
+                    .catch(function(err) {
+                      console.log('SW registration failed:', err);
+                    });
+                });
+              }
+            `,
           }}
         />
       </head>

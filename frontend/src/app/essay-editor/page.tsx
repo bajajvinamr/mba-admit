@@ -11,6 +11,8 @@ import Link from "next/link";
 import { ToolCrossLinks } from "@/components/ToolCrossLinks";
 import { EmailCapture } from "@/components/EmailCapture";
 import { apiFetch } from "@/lib/api";
+import { useUsage } from "@/hooks/useUsage";
+import { UsageGate } from "@/components/UsageGate";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -79,6 +81,8 @@ const SUGGESTION_COLORS = {
 /* ── Page ──────────────────────────────────────────────────────────── */
 
 export default function EssayEditorPage() {
+  const usage = useUsage("essay_ai_feedback");
+
   // School & prompt state
   const [schools, setSchools] = useState<School[]>([]);
   const [selectedSchoolId, setSelectedSchoolId] = useState("");
@@ -242,6 +246,7 @@ export default function EssayEditorPage() {
         timeoutMs: 60_000,
       });
       setFeedback(data);
+      usage.recordUse();
     } catch (e) {
       console.error(e);
       setFeedbackError("Failed to get AI feedback. Please try again.");
@@ -364,6 +369,7 @@ export default function EssayEditorPage() {
         )}
 
         {/* Main Editor + Feedback Layout */}
+        <UsageGate feature="essay_ai_feedback">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6">
           {/* Left: Editor */}
           <div className="space-y-4">
@@ -631,6 +637,7 @@ export default function EssayEditorPage() {
             </div>
           </div>
         </div>
+        </UsageGate>
 
         <div className="mt-12">
           <EmailCapture variant="contextual" source="essay-editor" />

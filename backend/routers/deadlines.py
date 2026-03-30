@@ -1,8 +1,11 @@
 """Deadline & Round Tracker — deadlines for user's tracked schools."""
 
+import json
 import logging
+import os
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
+from pathlib import Path
 from typing import Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
@@ -15,6 +18,39 @@ import db
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/deadlines", tags=["deadlines"])
+
+# ── Subscriber storage (file-backed) ────────────────────────────────────────
+
+_SUBSCRIBERS_PATH = Path(os.path.dirname(__file__)).parent / "data" / "deadline_subscribers.json"
+_subscribers: Dict[str, Dict] = {}  # email -> {email, user_id, subscribed_at}
+
+
+def _load_subscribers() -> None:
+    """Load subscribers from JSON file into memory."""
+    global _subscribers
+    if _SUBSCRIBERS_PATH.exists():
+        try:
+            data = json.loads(_SUBSCRIBERS_PATH.read_text())
+            _subscribers = {entry["email"]: entry for entry in data}
+            logger.info("Loaded %d deadline subscribers from disk", len(_subscribers))
+        except Exception as e:
+            logger.warning("Could not load subscribers file: %s", e)
+            _subscribers = {}
+    else:
+        _subscribers = {}
+
+
+def _save_subscribers() -> None:
+    """Persist subscribers to JSON file."""
+    try:
+        _SUBSCRIBERS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        _SUBSCRIBERS_PATH.write_text(json.dumps(list(_subscribers.values()), indent=2))
+    except Exception as e:
+        logger.warning("Could not save subscribers file: %s", e)
+
+
+# Load on module import
+_load_subscribers()
 
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
@@ -181,10 +217,75 @@ def subscribe_to_reminders(req: SubscribeRequest, user: Dict = Depends(get_optio
     user_id = user.get("sub", "anonymous") if user else "anonymous"
     logger.info("Deadline reminder subscription: user=%s email=%s", user_id, email)
 
-    # In production, this would store in DB and set up email triggers.
-    # For now, acknowledge the subscription.
+    already_subscribed = email in _subscribers
+    _subscribers[email] = {
+        "email": email,
+        "user_id": user_id,
+        "subscribed_at": datetime.now().isoformat(),
+    }
+    _save_subscribers()
+
     return {
         "ok": True,
         "email": email,
+        "already_subscribed": already_subscribed,
         "message": "You'll receive deadline reminders at this email address.",
+    }
+
+
+# ── POST /api/deadlines/send-reminders ────────────────────────────────────
+
+
+@router.post("/send-reminders")
+def send_reminders():
+    """Find deadlines within 7 days for all subscribers and return formatted reminder data.
+
+    Returns a list of email payloads (one per subscriber) containing the
+    subscriber's upcoming deadlines.  An external email service or cron job
+    can call this endpoint and actually dispatch the emails.
+    """
+    now = datetime.now()
+    window_end = now + timedelta(days=7)
+    emails_to_send: List[dict] = []
+
+    for subscriber in _subscribers.values():
+        email = subscriber["email"]
+        user_id = subscriber.get("user_id", "anonymous")
+
+        # Determine which schools this user tracks
+        if user_id and user_id != "anonymous":
+            user_schools = db.get_user_schools(user_id)
+            school_ids = {entry.get("school_id", "") for entry in user_schools}
+        else:
+            # For anonymous subscribers, check top schools
+            school_ids = set(list(SCHOOL_DB.keys())[:50])
+
+        # Collect deadlines within the 7-day window
+        upcoming: List[dict] = []
+        for sid in school_ids:
+            school_data = SCHOOL_DB.get(sid, {})
+            if not school_data:
+                continue
+            entries = _build_deadline_entries(sid, school_data, now)
+            for entry in entries:
+                if 0 <= entry["days_remaining"] <= 7:
+                    upcoming.append(entry)
+
+        if not upcoming:
+            continue
+
+        # Sort by closest deadline first
+        upcoming.sort(key=lambda d: d["days_remaining"])
+
+        emails_to_send.append({
+            "to": email,
+            "user_id": user_id,
+            "subject": f"MBA Deadline Reminder: {len(upcoming)} deadline{'s' if len(upcoming) != 1 else ''} within 7 days",
+            "deadlines": upcoming,
+        })
+
+    return {
+        "emails_to_send": emails_to_send,
+        "total_subscribers": len(_subscribers),
+        "total_emails": len(emails_to_send),
     }

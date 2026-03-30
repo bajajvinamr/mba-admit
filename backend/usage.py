@@ -9,8 +9,10 @@ Redis keys:
   tier:{user_id}              — string with tier name
 
 Tier limits (monthly):
-  Free:    5 essay evals, 3 roasts, 2 interview sessions, 3 strategy calls
-  Pro:     50 essay evals, 30 roasts, 20 interview sessions, 30 strategy calls
+  Free:    5 essay evals, 3 roasts, 2 interview sessions, 3 strategy calls,
+           3 school matches, 2 essay AI feedback, 3 interview streams
+  Pro:     50 essay evals, 30 roasts, 20 interview sessions, 30 strategy calls,
+           30 school matches, 20 essay AI feedback, 25 interview streams
   Premium: unlimited
 """
 
@@ -41,6 +43,9 @@ TIERS = {
         "goals_sculpt": 3,
         "admit_simulator": 3,
         "profile_analyze": 3,
+        "school_match": 3,
+        "essay_ai_feedback": 2,
+        "interview_stream": 3,
     },
     "pro": {
         "essay_eval": 50,
@@ -57,6 +62,9 @@ TIERS = {
         "goals_sculpt": 30,
         "admit_simulator": 50,
         "profile_analyze": 50,
+        "school_match": 30,
+        "essay_ai_feedback": 20,
+        "interview_stream": 25,
     },
     "premium": {},  # empty = unlimited
 }
@@ -79,6 +87,9 @@ ENDPOINT_FEATURE_MAP: dict[str, str] = {
     "/api/admit-simulator": "admit_simulator",
     "/api/profile/analyze": "profile_analyze",
     "/api/essay/coach": "essay_coach",
+    "/api/match": "school_match",
+    "/api/essay/ai-feedback": "essay_ai_feedback",
+    "/api/interview/respond-stream": "interview_stream",
 }
 
 # ── In-Memory Fallback Store ────────────────────────────────────────────────

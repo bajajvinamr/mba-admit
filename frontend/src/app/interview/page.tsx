@@ -517,6 +517,7 @@ function RippleButton({
 export default function InterviewPage() {
  const abortSignal = useAbortSignal();
  const usage = useUsage("interview_simulator");
+ const streamUsage = useUsage("interview_stream");
  const [schools, setSchools] = useState<School[]>([]);
  const [selectedSchoolId, setSelectedSchoolId] = useState("");
  const [history, setHistory] = useState<Message[]>([]);
@@ -782,6 +783,7 @@ export default function InterviewPage() {
  };
  setHistory([...newHistory, aiMsg]);
  setStreamingText("");
+ streamUsage.recordUse();
 
  if (result.is_finished) {
  setIsFinished(true);

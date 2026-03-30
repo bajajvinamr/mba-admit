@@ -6,6 +6,7 @@ Without them, falls back to an in-memory dict (sessions lost on restart).
 
 import os
 import uuid
+from datetime import datetime
 from typing import Dict, Any, Optional, List
 from logging_config import setup_logging
 
@@ -347,3 +348,95 @@ def get_community_decisions(
     if status:
         results = [d for d in results if d.get("status") == status]
     return results[:limit]
+
+
+# ── Essay Draft CRUD ─────────────────────────────────────────────────────────
+
+_MEMORY_ESSAY_DRAFTS: Dict[str, List[Dict[str, Any]]] = {}
+
+
+def upsert_essay_draft(
+    user_id: str,
+    school_slug: str,
+    prompt_id: str,
+    content: str,
+    word_count: int,
+) -> Dict[str, Any]:
+    """Upsert an essay draft, auto-incrementing the version.
+
+    Matches on (userId, schoolSlug, promptId) to find existing drafts and
+    determine the next version number.
+    """
+    sb = _get_supabase()
+    now = datetime.utcnow().isoformat() + "Z"
+
+    if sb:
+        # Find the current max version for this user+school+prompt
+        existing = (
+            sb.table("EssayDraft")
+            .select("version")
+            .eq("userId", user_id)
+            .eq("schoolSlug", school_slug)
+            .eq("promptId", prompt_id)
+            .order("version", desc=True)
+            .limit(1)
+            .execute()
+        )
+        next_version = (existing.data[0]["version"] + 1) if existing.data else 1
+
+        draft = {
+            "userId": user_id,
+            "schoolSlug": school_slug,
+            "promptId": prompt_id,
+            "content": content,
+            "wordCount": word_count,
+            "version": next_version,
+        }
+        result = sb.table("EssayDraft").insert(draft).execute()
+        return result.data[0]
+
+    # In-memory fallback
+    key = f"{user_id}:{school_slug}:{prompt_id}"
+    drafts = _MEMORY_ESSAY_DRAFTS.setdefault(key, [])
+    next_version = (max(d["version"] for d in drafts) + 1) if drafts else 1
+
+    draft = {
+        "id": str(uuid.uuid4()),
+        "userId": user_id,
+        "schoolSlug": school_slug,
+        "promptId": prompt_id,
+        "content": content,
+        "wordCount": word_count,
+        "version": next_version,
+        "createdAt": now,
+        "updatedAt": now,
+    }
+    drafts.append(draft)
+    return draft
+
+
+def get_essay_drafts_for_school(
+    user_id: str, school_slug: str
+) -> List[Dict[str, Any]]:
+    """Return all essay drafts for a user+school, ordered by promptId and version."""
+    sb = _get_supabase()
+    if sb:
+        result = (
+            sb.table("EssayDraft")
+            .select("*")
+            .eq("userId", user_id)
+            .eq("schoolSlug", school_slug)
+            .order("promptId")
+            .order("version", desc=True)
+            .execute()
+        )
+        return result.data
+
+    # In-memory fallback — collect all keys matching user_id:school_slug:*
+    results = []
+    prefix = f"{user_id}:{school_slug}:"
+    for key, drafts in _MEMORY_ESSAY_DRAFTS.items():
+        if key.startswith(prefix):
+            results.extend(drafts)
+    results.sort(key=lambda d: (d["promptId"], -d["version"]))
+    return results

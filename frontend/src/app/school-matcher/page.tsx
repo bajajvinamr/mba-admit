@@ -11,6 +11,8 @@ import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import { track } from "@/lib/analytics";
 import { ToolCrossLinks } from "@/components/ToolCrossLinks";
+import { useUsage } from "@/hooks/useUsage";
+import { UsageGate } from "@/components/UsageGate";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -332,6 +334,8 @@ function TierColumn({
 /* ── Page ──────────────────────────────────────────────────────────── */
 
 export default function SchoolMatcherPage() {
+  const usage = useUsage("school_matcher");
+
   /* Form state */
   const [gmat, setGmat] = useState(700);
   const [gpa, setGpa] = useState(3.5);
@@ -367,6 +371,7 @@ export default function SchoolMatcherPage() {
       });
       setResults(res.matches);
       setTierCounts(res.tier_counts);
+      usage.recordUse();
       track("school_match_completed", {
         gmat,
         gpa,
@@ -402,6 +407,7 @@ export default function SchoolMatcherPage() {
       </section>
 
       <div className="max-w-6xl mx-auto px-6 py-10">
+        <UsageGate feature="school_matcher">
         {/* ── Profile Form ───────────────────────────────────────── */}
         <div className="border border-border rounded-lg p-6 mb-8 bg-card shadow-[var(--shadow-card)]">
           <h2 className="font-semibold text-foreground mb-5 flex items-center gap-2">
@@ -593,6 +599,7 @@ export default function SchoolMatcherPage() {
         <div className="mt-16">
           <ToolCrossLinks current="/school-matcher" />
         </div>
+        </UsageGate>
       </div>
     </main>
   );
