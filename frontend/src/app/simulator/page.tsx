@@ -335,7 +335,16 @@ export default function SimulatorPage() {
  </div>
  </div>
 
- {/* ── Run Button ─────────────────────────────────────────── */}
+ {/* ── Run Button (gated at limit) ─────────────────────────── */}
+ {usage.isAtLimit ? (
+ <div className="w-full py-4 mb-8 text-center editorial-card">
+ <p className="text-sm font-medium text-foreground mb-1">You've used your {usage.limit} free daily simulations</p>
+ <p className="text-xs text-muted-foreground/50 mb-3">Upgrade for unlimited runs as your profile evolves</p>
+ <a href="/pricing" className="inline-flex items-center gap-2 bg-foreground text-white px-6 py-2.5 font-bold text-sm hover:bg-foreground/80 transition-colors rounded-lg">
+ Upgrade to Pro - $29/mo
+ </a>
+ </div>
+ ) : (
  <button
  onClick={runSimulation} disabled={loading || selected.length === 0}
  aria-busy={loading}
@@ -355,9 +364,11 @@ export default function SimulatorPage() {
  <>
  <Dices size={18} />
  Run Simulation
+ {!usage.isUnlimited && <span className="text-xs opacity-60">({usage.remaining} left today)</span>}
  </>
  )}
  </button>
+ )}
 
  {error && (
  <div className="editorial-card p-4 mb-6 border-red-200 bg-red-50 flex items-start gap-3" role="alert">
@@ -374,8 +385,7 @@ export default function SimulatorPage() {
  </div>
  )}
 
- {/* ── Results (gated - users invest effort filling the form before seeing paywall) */}
- <UsageGate feature="odds_calculator">
+ {/* ── Results (always visible - gate is on the Run button, not on results) */}
  <div className="space-y-4" aria-live="polite" aria-label="Simulation results">
  <AnimatePresence>
  {results.map((r, i) => (
@@ -514,7 +524,6 @@ export default function SimulatorPage() {
  </div>
  )}
 
- </UsageGate>
 
  {/* ── Cross Links ────────────────────────────────────────── */}
  <ToolCrossLinks current="/simulator"/>
