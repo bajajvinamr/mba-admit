@@ -14,6 +14,13 @@ logger = setup_logging()
 # NextAuth signs JWTs with this secret — must match frontend NEXTAUTH_SECRET
 _JWT_SECRET = os.environ.get("NEXTAUTH_SECRET", "")
 _JWT_ALGORITHM = "HS256"
+_IS_PRODUCTION = os.environ.get("ENVIRONMENT", "").lower() in ("production", "prod")
+
+if _IS_PRODUCTION and not _JWT_SECRET:
+    raise RuntimeError(
+        "NEXTAUTH_SECRET is required in production. "
+        "Set ENVIRONMENT=development to use dev mode with auth disabled."
+    )
 
 
 def _decode_token(token: str) -> Optional[Dict[str, Any]]:
