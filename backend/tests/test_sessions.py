@@ -50,7 +50,23 @@ def test_chat_session_not_found(client):
     assert resp.status_code == 404
 
 
-def test_unlock_sets_paid(client, mock_run_agent_graph, seeded_session):
+def test_unlock_sets_paid(client, mock_run_agent_graph, seeded_session, monkeypatch):
+    """Unlock with verified Stripe payment intent."""
+    import types
+    mock_stripe = types.ModuleType("stripe")
+    mock_stripe.error = types.ModuleType("stripe.error")
+    mock_stripe.error.InvalidRequestError = type("InvalidRequestError", (Exception,), {})
+    mock_stripe.error.AuthenticationError = type("AuthenticationError", (Exception,), {})
+
+    class MockIntent:
+        status = "succeeded"
+        amount = 2900
+
+    mock_stripe.PaymentIntent = types.SimpleNamespace(retrieve=lambda _: MockIntent())
+    monkeypatch.setitem(__import__("sys").modules, "stripe", mock_stripe)
+    monkeypatch.setitem(__import__("sys").modules, "stripe.error", mock_stripe.error)
+    monkeypatch.setenv("STRIPE_SECRET_KEY", "sk_test_fake")
+
     resp = client.post("/api/unlock", json={
         "session_id": "test-session-1",
         "stripe_payment_intent_id": "pi_test_123",
@@ -60,9 +76,18 @@ def test_unlock_sets_paid(client, mock_run_agent_graph, seeded_session):
     assert data["is_paid"] is True
 
 
+def test_unlock_missing_payment_id(client, seeded_session):
+    """Unlock without payment intent ID returns 400."""
+    resp = client.post("/api/unlock", json={
+        "session_id": "test-session-1",
+    })
+    assert resp.status_code == 400
+
+
 def test_unlock_session_not_found(client):
     resp = client.post("/api/unlock", json={
         "session_id": "nonexistent",
+        "stripe_payment_intent_id": "pi_test_123",
     })
     assert resp.status_code == 404
 
