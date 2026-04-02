@@ -20,7 +20,7 @@ const QUICK_LINKS = [
 
 export function WelcomeBack({ profile, onShowCalc }: Props) {
  const { recentSchools } = useRecentSchools();
- const firstName = profile.name?.split("")[0] ||"there";
+ const firstName = profile.name?.split(" ")[0] ||"there";
  const stats = [
  profile.gmat && { label:"GMAT", value: String(profile.gmat) },
  profile.gpa && { label:"GPA", value: profile.gpa.toFixed(1) },

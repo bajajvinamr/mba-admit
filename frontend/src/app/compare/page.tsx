@@ -196,7 +196,7 @@ export default function ComparePage() {
  const profileFits: { schoolId: string; name: string; fit: ProfileFit }[] = [];
 
  for (const s of compared) {
- schoolNames[s.school_id] = s.name.split("").slice(0, 2).join(""); // short name for chart labels
+ schoolNames[s.school_id] = s.name.split(" ").slice(0, 2).join(""); // short name for chart labels
  if (s.outcomes) {
  gmatDistData[s.school_id] = s.outcomes.gmat_distribution;
  gpaDistData[s.school_id] = s.outcomes.gpa_distribution;
@@ -843,7 +843,7 @@ export default function ComparePage() {
  href={`/my-schools`}
  className="bg-primary text-foreground px-4 py-2 text-xs font-bold hover:bg-primary/80 transition-colors whitespace-nowrap"
  >
- Track {s.name.split("").slice(0, 2).join("")}
+ Track {s.name.split(" ").slice(0, 2).join("")}
  </a>
  ))}
  </div>

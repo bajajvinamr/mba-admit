@@ -123,7 +123,7 @@ export function DeadlinesTab({ school }: Props) {
  <p className="text-[10px] uppercase tracking-widest text-muted-foreground/40 font-bold mb-2">Official Application</p>
  <a href={school.application_url} target="_blank" rel="noopener noreferrer"
  className="btn-primary w-full text-center block">
- Apply on {school.name.split("").slice(0, 2).join("")}&apos;s Website &rarr;
+ Apply on {school.name.split(" ").slice(0, 2).join("")}&apos;s Website &rarr;
  </a>
  {school.application_fee_usd && (
  <p className="text-xs text-muted-foreground/40 mt-2 text-center">Application fee: ${school.application_fee_usd}</p>
