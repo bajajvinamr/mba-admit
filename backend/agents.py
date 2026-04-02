@@ -583,7 +583,9 @@ Be supportive but rigorous. Embody a premium, 'Elite Editorial' tone."""
         if not history:
             messages.append(HumanMessage(content="Start the interview by introducing yourself and asking the first question about my defining background or a tough career challenge."))
         else:
-            for msg in history:
+            # Keep last 10 messages to bound context window and cost
+            recent = history[-10:] if len(history) > 10 else history
+            for msg in recent:
                 if msg["role"] == "user":
                     messages.append(HumanMessage(content=msg["content"]))
                 else:
