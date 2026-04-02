@@ -538,7 +538,7 @@ def consultant_node(state: ApplicationState) -> ApplicationState:
 
     matches = []
     for sid, school in SCHOOL_DB.items():
-        diff = gmat - school["gmat_avg"]
+        diff = gmat - school.get("gmat_avg", 700)
         if diff >= 10:
             tier = "Safety"
             prob = min(85, 55 + diff)
