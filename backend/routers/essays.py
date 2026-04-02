@@ -8,6 +8,7 @@ from fastapi.responses import StreamingResponse
 from middleware import rate_limit
 from agents import (
     SCHOOL_DB,
+    CLAUDE_MODEL,
     evaluate_essay_draft,
     roast_resume_bullet,
 )
@@ -269,7 +270,7 @@ COACH_SYSTEM_PROMPTS = {
     ),
 }
 
-COACH_MODEL = "claude-sonnet-4-20250514"
+COACH_MODEL = CLAUDE_MODEL
 
 
 def _build_coach_user_message(req: EssayCoachRequest) -> str:

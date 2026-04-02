@@ -6,6 +6,10 @@ from logging_config import setup_logging
 
 logger = setup_logging()
 
+# ── Model Configuration ──────────────────────────────────────────────────────
+CLAUDE_MODEL = os.environ.get("CLAUDE_MODEL", "claude-sonnet-4-20250514")
+CLAUDE_MAX_TOKENS = 2000
+
 # LangChain & LLM Integration
 from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
@@ -497,7 +501,7 @@ def get_llm():
             '{"analysis": "Tough.", "update_letter": "Dear Adcom...", "tactical_plan": ["Wait.", "Pray.", "Update resume."]}',
             '{"leverage_analysis": "Good leverage.", "leverage_score": 8, "appeal_letter": "Dear Financial Aid...", "pro_tips": ["Be polite.", "Ask clearly."]}'
         ])
-    return ChatAnthropic(model="claude-3-5-sonnet-20240620", max_tokens=2000)
+    return ChatAnthropic(model=CLAUDE_MODEL, max_tokens=CLAUDE_MAX_TOKENS)
 
 # ── Agent Nodes ──────────────────────────────────────────────────────────────
 def chief_of_staff_node(state: ApplicationState) -> ApplicationState:
