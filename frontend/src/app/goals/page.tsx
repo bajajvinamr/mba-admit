@@ -128,47 +128,51 @@ export default function GoalSculptorPage() {
  <div className="space-y-6 pt-6 p-6">
  
  <div className="space-y-2">
- <label className="text-sm font-semibold text-gray-700">Current Role</label>
- <input 
+ <label htmlFor="goals-current-role" className="text-sm font-semibold text-gray-700">Current Role</label>
+ <input
+ id="goals-current-role"
  type="text"
  placeholder="e.g., Senior Strategy Analyst"
  value={currentRole}
- onChange={(e: any) => setCurrentRole(e.target.value)}
+ onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentRole(e.target.value)}
  className="w-full flex h-10 rounded-md border border-border bg-muted px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
  />
  </div>
 
  <div className="space-y-2">
- <label className="text-sm font-semibold text-gray-700">Current Industry</label>
- <input 
+ <label htmlFor="goals-industry" className="text-sm font-semibold text-gray-700">Current Industry</label>
+ <input
+ id="goals-industry"
  type="text"
  placeholder="e.g., CPG / Retail"
  value={industry}
- onChange={(e: any) => setIndustry(e.target.value)}
+ onChange={(e: React.ChangeEvent<HTMLInputElement>) => setIndustry(e.target.value)}
  className="w-full flex h-10 rounded-md border border-border bg-muted px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
  />
  </div>
 
  <div className="space-y-2">
- <label className="text-sm font-semibold text-gray-700 mt-2 flex items-center justify-between">
+ <label htmlFor="goals-vague-goal" className="text-sm font-semibold text-gray-700 mt-2 flex items-center justify-between">
  <span>Your Unfiltered Goal</span>
  <span className="text-xs text-muted-foreground font-normal">Be honest. No jargon needed.</span>
  </label>
- <textarea 
+ <textarea
+ id="goals-vague-goal"
  placeholder="e.g., honestly I just want to switch into a big tech PM role to make more money and build cool products."
  className="w-full flex min-h-[112px] rounded-md border border-border bg-muted px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent resize-none transition-all"
  value={vagueGoal}
- onChange={(e: any) => setVagueGoal(e.target.value)}
+ onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setVagueGoal(e.target.value)}
  />
  </div>
 
  <div className="space-y-2">
- <label className="text-sm font-semibold text-gray-700">Target School Context</label>
- <select 
+ <label htmlFor="goals-target-school" className="text-sm font-semibold text-gray-700">Target School Context</label>
+ <select
+ id="goals-target-school"
  className="w-full flex h-10 rounded-md border border-border bg-muted px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
  disabled={loadingSchools} 
  value={targetSchoolId} 
- onChange={(e: any) => setTargetSchoolId(e.target.value)}
+ onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setTargetSchoolId(e.target.value)}
  >
  <option value="" disabled>{loadingSchools ?"Loading schools...":"Select the school you're writing for..."}</option>
  {schools.map((school) => (
@@ -180,7 +184,7 @@ export default function GoalSculptorPage() {
  </div>
 
  {error && (
- <div className="p-3 bg-red-50 text-red-700 text-sm border border-red-200 rounded-md flex items-start gap-2">
+ <div role="alert" className="p-3 bg-red-50 text-red-700 text-sm border border-red-200 rounded-md flex items-start gap-2">
  <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0"/>
  <p className="flex-1">{error}</p>
  <button onClick={() => setError(null)} className="ml-3 text-sm font-bold underline flex-shrink-0">

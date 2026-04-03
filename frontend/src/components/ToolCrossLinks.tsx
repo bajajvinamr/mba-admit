@@ -17,6 +17,7 @@ const ALL_TOOLS: CrossLink[] = [
  { href:"/profile-report", label:"Profile Report", desc:"Strengths & fit scores", cat:"explore"},
  { href:"/rankings", label:"Rankings", desc:"Sort by stats", cat:"explore"},
  { href:"/gmat-targets", label:"GMAT Targets", desc:"Score by tier", cat:"explore"},
+ { href:"/school-matcher", label:"School Matcher", desc:"Best-fit school finder", cat:"explore"},
  // Build
  { href:"/evaluator", label:"Essay Evaluator", desc:"AI essay feedback", cat:"build"},
  { href:"/roaster", label:"Resume Roaster", desc:"Bullet critique", cat:"build"},
@@ -26,6 +27,7 @@ const ALL_TOOLS: CrossLink[] = [
  { href:"/essay-prompts", label:"Essay Prompts", desc:"School-specific prompts", cat:"build"},
  // Apply
  { href:"/my-schools", label:"Application Tracker", desc:"Track every school", cat:"apply"},
+ { href:"/deadlines", label:"Deadline Tracker", desc:"Calendar & round tracker", cat:"apply"},
  { href:"/calendar", label:"Deadline Calendar", desc:"Never miss a date", cat:"apply"},
  { href:"/checklist", label:"App Checklist", desc:"Requirements per school", cat:"apply"},
  { href:"/recommenders", label:"Rec Strategy", desc:"Letter planning & tracking", cat:"apply"},

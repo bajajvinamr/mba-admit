@@ -257,6 +257,7 @@ export default function MySchoolsPage() {
  </Link>
  <button
  onClick={() => removeSchool(entry.id)}
+ aria-label={`Remove ${info?.name || "school"} from tracker`}
  className="md:opacity-0 md:group-hover:opacity-100 text-red-400 hover:text-red-600 transition-all"
  >
  <Trash2 size={12} />
@@ -357,8 +358,13 @@ export default function MySchoolsPage() {
  exit={{ opacity: 0 }}
  className="fixed inset-0 bg-foreground/50 z-50 flex items-center justify-center p-4"
  onClick={() => setShowAddModal(false)}
+ onKeyDown={(e) => { if (e.key === "Escape") setShowAddModal(false); }}
+ aria-hidden="true"
  >
  <motion.div
+ role="dialog"
+ aria-modal="true"
+ aria-label="Add school to tracker"
  initial={{ scale: 0.95 }}
  animate={{ scale: 1 }}
  exit={{ scale: 0.95 }}
@@ -372,6 +378,7 @@ export default function MySchoolsPage() {
  <input
  type="text"
  placeholder="Search schools..."
+ aria-label="Search schools by name"
  className="w-full pl-10 pr-4 py-3 border border-border/10 focus:border-border focus:outline-none text-sm"
  value={search}
  onChange={(e) => setSearch(e.target.value)}

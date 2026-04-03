@@ -45,6 +45,9 @@ model Profile {
   motivations        String[]  // career_switch | salary | network | entrepreneurship | credential
   targetRound        String?   // R1 | R2 | R3 | unsure
   biggestChallenge   String?   // essays | time | interviews | strategy
+
+  @@index([archetype])
+  @@index([journeyStage])
 }
 
 model TrackedSchool {
@@ -60,6 +63,8 @@ model TrackedSchool {
   notes      String?
   createdAt  DateTime @default(now())
   @@unique([userId, schoolSlug])
+  @@index([userId])
+  @@index([status])
 }
 
 model EssayDraft {
@@ -90,6 +95,7 @@ model InterviewSession {
   duration          Int
   createdAt         DateTime @default(now())
   @@index([userId, schoolSlug])
+  @@index([createdAt])
 }
 
 model OutcomeContribution {
@@ -125,6 +131,7 @@ model Recommender {
   user              User     @relation(fields: [userId], references: [id])
 
   @@index([userId])
+  @@index([status])
 }
 
 model Subscription {

@@ -106,7 +106,11 @@ const TIERS: Tier[] = [
 
 // ── Checkout helper ─────────────────────────────────────────────────────────
 
-async function handleCheckout(tier: TierId, interval: BillingInterval) {
+async function handleCheckout(
+  tier: TierId,
+  interval: BillingInterval,
+  onError: (msg: string) => void,
+) {
   try {
     const res = await fetch("/api/create-checkout", {
       method: "POST",
@@ -118,6 +122,7 @@ async function handleCheckout(tier: TierId, interval: BillingInterval) {
 
     if (!res.ok || !data.url) {
       console.error("Checkout error:", data.error);
+      onError(data.error || "Could not start checkout. Please try again.");
       return;
     }
 
@@ -125,6 +130,7 @@ async function handleCheckout(tier: TierId, interval: BillingInterval) {
     window.location.href = data.url;
   } catch (err) {
     console.error("Failed to start checkout:", err);
+    onError("Network error. Please check your connection and try again.");
   }
 }
 
@@ -133,6 +139,7 @@ async function handleCheckout(tier: TierId, interval: BillingInterval) {
 export default function PricingPage() {
   const [loading, setLoading] = useState<TierId | null>(null);
   const [interval, setInterval] = useState<BillingInterval>("annual");
+  const [checkoutError, setCheckoutError] = useState("");
 
   useEffect(() => {
     track("pricing_viewed", { source: typeof document !== "undefined" ? document.referrer : "" });
@@ -149,8 +156,9 @@ export default function PricingPage() {
   }, []);
 
   const onUpgrade = async (tier: TierId) => {
+    setCheckoutError("");
     setLoading(tier);
-    await handleCheckout(tier, interval);
+    await handleCheckout(tier, interval, setCheckoutError);
     setLoading(null);
   };
 
@@ -220,6 +228,12 @@ export default function PricingPage() {
 
       {/* Pricing cards */}
       <section className="max-w-5xl mx-auto px-8 -mt-12 pb-20">
+        {checkoutError && (
+          <div role="alert" className="bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 mb-6 flex items-center justify-between rounded">
+            <span>{checkoutError}</span>
+            <button onClick={() => setCheckoutError("")} className="ml-3 text-sm font-bold underline">Dismiss</button>
+          </div>
+        )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {TIERS.map((tier) => (
             <Card
@@ -267,22 +281,24 @@ export default function PricingPage() {
                   {tier.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2 text-sm">
                       <Check size={16} className="text-emerald-500 shrink-0 mt-0.5" />
-                      <span className="text-muted-foreground/70">{feature}</span>
+                      <span className="text-muted-foreground">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
                 {/* CTA */}
                 {tier.id === "free" ? (
-                  <Button variant="outline" size="lg" className="w-full" disabled>
-                    Current Plan
-                  </Button>
+                  <a href="/auth/signup" className="w-full">
+                    <Button variant="outline" size="lg" className="w-full">
+                      Get Started Free
+                    </Button>
+                  </a>
                 ) : (
                   <Button
                     variant={tier.highlighted ? "default" : "outline"}
                     size="lg"
                     className="w-full"
-                    disabled={loading !== null}
+                    disabled={loading === tier.id}
                     onClick={() => onUpgrade(tier.id)}
                   >
                     {loading === tier.id ? "Loading..." : tier.cta}
@@ -290,6 +306,24 @@ export default function PricingPage() {
                 )}
               </CardContent>
             </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="max-w-3xl mx-auto px-8 pb-16">
+        <h2 className="heading-serif text-2xl text-center mb-8">Frequently Asked Questions</h2>
+        <div className="space-y-6">
+          {[
+            { q: "Can I change plans later?", a: "Yes. Upgrade or downgrade anytime from your account settings. Changes take effect on your next billing cycle." },
+            { q: "What happens if I cancel?", a: "You keep access until the end of your current billing period. Your data (essays, tracked schools) is preserved if you resubscribe." },
+            { q: "Is there a free trial for paid plans?", a: "All plans include a 7-day money-back guarantee. Try risk-free and get a full refund if it's not for you." },
+            { q: "What counts as an AI tool use?", a: "Each essay evaluation, odds calculation, mock interview session, or resume review counts as one use. Browsing school data and the directory is always free." },
+          ].map(({ q, a }) => (
+            <div key={q} className="border-b border-border/10 pb-4">
+              <h3 className="font-semibold text-sm text-foreground mb-1">{q}</h3>
+              <p className="text-sm text-muted-foreground">{a}</p>
+            </div>
           ))}
         </div>
       </section>

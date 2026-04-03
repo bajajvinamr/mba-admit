@@ -639,6 +639,7 @@ export default function OnboardingPage() {
       {/* Step counter */}
       <p className="text-center text-xs text-muted-foreground mb-6">
         {step + 1} of {totalSteps}
+        <span className="text-muted-foreground/40 ml-2">&middot; ~{Math.max(1, Math.ceil((totalSteps - step) * 0.5))} min left</span>
       </p>
 
       {/* Question area */}

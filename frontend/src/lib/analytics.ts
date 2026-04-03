@@ -53,6 +53,11 @@ function scheduleFlush() {
   }, 1000); // Batch events within 1s window
 }
 
+// Flush pending events on page unload so nothing is lost
+if (typeof window !== "undefined") {
+  window.addEventListener("beforeunload", flush);
+}
+
 /**
  * Track a user event.
  * Events are batched and sent every ~1 second.

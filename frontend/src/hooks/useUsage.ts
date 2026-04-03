@@ -26,7 +26,10 @@ export type FeatureKey =
   | "loi_builder"
   | "waitlist_strategy"
   | "roi_calculator"
-  | "scholarship_negotiator";
+  | "scholarship_negotiator"
+  | "school_matcher"
+  | "essay_ai_feedback"
+  | "interview_stream";
 
 type FeatureLimit = {
   free: number;       // uses per day (or per month for some)
@@ -57,6 +60,9 @@ const FEATURE_LIMITS: Record<FeatureKey, FeatureLimit> = {
   waitlist_strategy:   { free: 1,  pro: 5,  premium: -1, period: "month", label: "Waitlist Strategy" },
   roi_calculator:      { free: 2,  pro: -1, premium: -1, period: "month", label: "ROI Calculator" },
   scholarship_negotiator: { free: 1, pro: 5, premium: -1, period: "month", label: "Scholarship Negotiator" },
+  school_matcher:          { free: 3,  pro: 30, premium: -1, period: "month", label: "School Matcher" },
+  essay_ai_feedback:       { free: 2,  pro: 20, premium: -1, period: "month", label: "Essay AI Feedback" },
+  interview_stream:        { free: 3,  pro: 25, premium: -1, period: "month", label: "Interview Simulator" },
 };
 
 // ── Storage helpers ─────────────────────────────────────────────────────────
@@ -77,7 +83,11 @@ function getStore(): UsageStore {
 
 function saveStore(store: UsageStore) {
   if (typeof window === "undefined") return;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+  } catch {
+    // localStorage unavailable (private browsing, quota exceeded, etc.)
+  }
 }
 
 function getResetTimestamp(period: "day" | "month"): number {
@@ -98,9 +108,13 @@ export function useUsage(feature: FeatureKey) {
 
   // Load on mount
   useEffect(() => {
-    const savedTier = localStorage.getItem(TIER_KEY) as Tier | null;
-    if (savedTier && ["free", "pro", "premium"].includes(savedTier)) {
-      setTier(savedTier);
+    try {
+      const savedTier = localStorage.getItem(TIER_KEY) as Tier | null;
+      if (savedTier && ["free", "pro", "premium"].includes(savedTier)) {
+        setTier(savedTier);
+      }
+    } catch {
+      // localStorage unavailable (private browsing, etc.)
     }
 
     const store = getStore();

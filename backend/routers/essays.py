@@ -1,11 +1,16 @@
-"""Essay-related endpoints — roast, evaluate, word count, prompts, theme analysis, AI coach."""
+"""Essay-related endpoints — roast, evaluate, word count, prompts, theme analysis, AI coach, versioned drafts, AI feedback."""
 
 import json
 import re as _re
+from datetime import datetime, timezone
+from typing import Optional
 
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import StreamingResponse
+from pydantic import BaseModel, Field
+from auth import get_current_user, get_optional_user
 from middleware import rate_limit
+import db
 from agents import (
     SCHOOL_DB,
     evaluate_essay_draft,
@@ -362,3 +367,265 @@ async def essay_coach(request: Request, req: EssayCoachRequest):
             "X-Accel-Buffering": "no",
         },
     )
+
+
+# ── Versioned Essay Drafts & AI Feedback ─────────────────────────────────────
+
+# Legacy in-memory fallback store (used only when Supabase is unavailable).
+# Primary persistence is via db.upsert_essay_draft / db.get_essay_drafts_for_school.
+_DRAFT_STORE: dict[str, dict[str, list[dict]]] = {}
+
+
+class SaveDraftRequest(BaseModel):
+    school_id: str = Field(min_length=1, max_length=100)
+    prompt_id: str = Field(min_length=1, max_length=200)
+    content: str = Field(min_length=1, max_length=15000)
+    version: Optional[int] = None  # Auto-incremented if not provided
+
+
+class AIFeedbackRequest(BaseModel):
+    school_id: str = Field(min_length=1, max_length=100)
+    prompt_text: str = Field(min_length=1, max_length=2000)
+    content: str = Field(min_length=50, max_length=15000)
+    word_limit: Optional[int] = Field(default=None, ge=50, le=5000)
+
+
+@router.post("/essay/save-draft")
+def save_essay_draft(req: SaveDraftRequest, user: dict = Depends(get_current_user)):
+    """Save a versioned essay draft. Auto-increments version on each save.
+
+    Persists to Supabase EssayDraft table when available, falls back to
+    in-memory store otherwise.
+    """
+    user_id = user["sub"]
+    words = req.content.strip().split() if req.content.strip() else []
+    word_count = len(words)
+
+    try:
+        draft = db.upsert_essay_draft(
+            user_id=user_id,
+            school_slug=req.school_id,
+            prompt_id=req.prompt_id,
+            content=req.content,
+            word_count=word_count,
+        )
+    except Exception as exc:
+        logger.error("Supabase draft save failed, using in-memory fallback: %s", exc)
+        # Fallback to legacy in-memory store
+        school_drafts = _DRAFT_STORE.setdefault(req.school_id, {})
+        prompt_drafts = school_drafts.setdefault(req.prompt_id, [])
+        next_version = (max(d["version"] for d in prompt_drafts) + 1) if prompt_drafts else 1
+        draft = {
+            "id": f"{req.school_id}_{req.prompt_id}_{next_version}",
+            "userId": user_id,
+            "schoolSlug": req.school_id,
+            "promptId": req.prompt_id,
+            "content": req.content,
+            "wordCount": word_count,
+            "version": next_version,
+            "createdAt": datetime.now(timezone.utc).isoformat(),
+            "updatedAt": datetime.now(timezone.utc).isoformat(),
+        }
+        prompt_drafts.append(draft)
+
+    logger.info(
+        "Essay draft saved: user=%s school=%s prompt=%s version=%d words=%d persistent=%s",
+        user_id, req.school_id, req.prompt_id, draft["version"], word_count,
+        db.is_persistent(),
+    )
+
+    return {
+        "draft": draft,
+        "message": f"Draft v{draft['version']} saved successfully",
+    }
+
+
+@router.get("/essay/drafts/{school_id}")
+def get_essay_drafts(school_id: str, user: dict = Depends(get_current_user)):
+    """List all drafts with version history for a school.
+
+    Reads from Supabase EssayDraft table when available, falls back to
+    in-memory store otherwise.
+    """
+    user_id = user["sub"]
+
+    try:
+        all_drafts = db.get_essay_drafts_for_school(user_id, school_id)
+    except Exception as exc:
+        logger.error("Supabase draft fetch failed, using in-memory fallback: %s", exc)
+        # Fallback to legacy in-memory store
+        school_drafts = _DRAFT_STORE.get(school_id, {})
+        all_drafts = []
+        for prompt_id, versions in school_drafts.items():
+            all_drafts.extend(versions)
+        all_drafts.sort(key=lambda d: (d.get("promptId", d.get("prompt_id", "")), -d["version"]))
+
+    # Group by prompt
+    by_prompt: dict[str, list[dict]] = {}
+    for draft in all_drafts:
+        pid = draft.get("promptId", draft.get("prompt_id", ""))
+        by_prompt.setdefault(pid, []).append(draft)
+
+    return {
+        "school_id": school_id,
+        "drafts": all_drafts,
+        "by_prompt": by_prompt,
+        "total_drafts": len(all_drafts),
+    }
+
+
+@router.get("/essay/prompts/{school_id}")
+def get_school_essay_prompts(school_id: str):
+    """Return essay prompts + word limits from scraped school data."""
+    school = SCHOOL_DB.get(school_id)
+    if not school:
+        raise HTTPException(404, detail=f"School not found: {school_id}")
+
+    raw_prompts = school.get("essay_prompts") or []
+    prompts = []
+    for i, prompt in enumerate(raw_prompts):
+        text = prompt if isinstance(prompt, str) else str(prompt)
+        # Try to extract word limit from prompt text
+        import re
+        wl_match = re.search(r"(\d+)\s*word", text.lower())
+        word_limit = int(wl_match.group(1)) if wl_match else None
+
+        prompts.append({
+            "prompt_id": f"prompt_{i}",
+            "prompt_index": i,
+            "prompt_text": text,
+            "word_limit": word_limit,
+        })
+
+    return {
+        "school_id": school_id,
+        "school_name": school.get("name", school_id),
+        "prompts": prompts,
+        "total_prompts": len(prompts),
+    }
+
+
+AI_FEEDBACK_MODEL = "claude-sonnet-4-20250514"
+
+AI_FEEDBACK_SYSTEM = """You are an expert MBA admissions essay reviewer. Analyze the essay and provide structured feedback.
+
+You MUST return valid JSON with this exact structure:
+{
+  "overall_score": <integer 0-100>,
+  "readiness": "<one of: draft, review, ready>",
+  "suggestions": [
+    {
+      "start": <integer - approximate word position where suggestion starts>,
+      "end": <integer - approximate word position where suggestion ends>,
+      "type": "<one of: strengthen, cut, rephrase>",
+      "text": "<specific suggestion text>"
+    }
+  ],
+  "strengths": ["<strength 1>", "<strength 2>", ...],
+  "improvements": ["<improvement 1>", "<improvement 2>", ...]
+}
+
+Scoring guide:
+- 0-40 (draft): Early draft, needs significant work
+- 41-70 (review): Solid draft, needs refinement
+- 71-100 (ready): Near submission quality
+
+Provide 3-6 inline suggestions, 2-4 strengths, and 2-4 improvements.
+Be specific and reference actual content from the essay. Do not be generic."""
+
+
+@router.post("/essay/ai-feedback")
+@rate_limit("10/minute")
+def essay_ai_feedback(request: Request, req: AIFeedbackRequest):
+    """AI-powered essay feedback with inline suggestions, scores, and readiness assessment."""
+    from anthropic import Anthropic
+    from observability import track_ai_interaction
+
+    try:
+        content = sanitize_for_llm(req.content, MAX_ESSAY_CHARS, "essay")
+        prompt_text = sanitize_for_llm(req.prompt_text, MAX_FIELD_CHARS, "essay prompt")
+    except ValueError as e:
+        raise HTTPException(400, detail=str(e))
+
+    # Build school context
+    school = SCHOOL_DB.get(req.school_id, {})
+    school_name = school.get("name", req.school_id)
+
+    words = content.strip().split() if content.strip() else []
+    word_count = len(words)
+
+    user_message_parts = [
+        f"School: {school_name}",
+        f"Essay Prompt: {prompt_text}",
+        f"Word Count: {word_count}",
+    ]
+    if req.word_limit:
+        user_message_parts.append(f"Word Limit: {req.word_limit}")
+    user_message_parts.append(f"\nEssay:\n{content}")
+
+    user_message = "\n".join(user_message_parts)
+
+    with track_ai_interaction(
+        user_input=f"ai_feedback:{req.school_id}:{prompt_text[:100]}",
+        endpoint="essay_ai_feedback",
+    ) as tracker:
+        try:
+            client = Anthropic()
+            response = client.messages.create(
+                model=AI_FEEDBACK_MODEL,
+                max_tokens=2048,
+                system=AI_FEEDBACK_SYSTEM,
+                messages=[{"role": "user", "content": user_message}],
+            )
+
+            # Parse the JSON response
+            raw_text = response.content[0].text.strip()
+
+            # Extract JSON from the response (handle markdown code blocks)
+            if raw_text.startswith("```"):
+                # Strip markdown code fence
+                lines = raw_text.split("\n")
+                json_lines = []
+                in_block = False
+                for line in lines:
+                    if line.strip().startswith("```") and not in_block:
+                        in_block = True
+                        continue
+                    elif line.strip() == "```" and in_block:
+                        break
+                    elif in_block:
+                        json_lines.append(line)
+                raw_text = "\n".join(json_lines)
+
+            feedback = json.loads(raw_text)
+
+            # Validate and normalize the response
+            result = {
+                "overall_score": max(0, min(100, int(feedback.get("overall_score", 50)))),
+                "readiness": feedback.get("readiness", "draft"),
+                "suggestions": feedback.get("suggestions", []),
+                "strengths": feedback.get("strengths", []),
+                "improvements": feedback.get("improvements", []),
+                "word_count": word_count,
+                "word_limit": req.word_limit,
+            }
+
+            if result["readiness"] not in ("draft", "review", "ready"):
+                result["readiness"] = "draft"
+
+            tracker["output"] = f"score={result['overall_score']} readiness={result['readiness']}"
+
+            logger.info(
+                "AI feedback: school=%s score=%d readiness=%s suggestions=%d",
+                req.school_id, result["overall_score"], result["readiness"],
+                len(result["suggestions"]),
+            )
+
+            return result
+
+        except json.JSONDecodeError as exc:
+            logger.error("AI feedback JSON parse error: %s | raw=%s", exc, raw_text[:500])
+            raise HTTPException(502, detail="AI returned invalid feedback format. Please try again.")
+        except Exception as exc:
+            logger.error("AI feedback error: %s", exc)
+            raise HTTPException(502, detail=f"AI feedback failed: {str(exc)}")

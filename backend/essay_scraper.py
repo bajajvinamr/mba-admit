@@ -14,10 +14,8 @@ import re
 import os
 import ssl
 
-# Disable SSL verification for scraping (some sites have cert issues)
+# Use default SSL context with full verification enabled
 SSL_CTX = ssl.create_default_context()
-SSL_CTX.check_hostname = False
-SSL_CTX.verify_mode = ssl.CERT_NONE
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"

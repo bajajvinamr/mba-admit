@@ -20,7 +20,7 @@ export function middleware(request: NextRequest) {
   const apiOrigin = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
   const csp = [
     "default-src 'self'",
-    `script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://www.googletagmanager.com`,
+    `script-src 'self' 'unsafe-inline' https://js.stripe.com https://www.googletagmanager.com`,
     `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com`,
     `font-src 'self' https://fonts.gstatic.com`,
     `img-src 'self' data: blob: https:`,

@@ -241,6 +241,291 @@ MBA_INFO_SITES: dict[str, dict] = {
             ("best_bschools", "/business-schools/"),
         ],
     },
+
+    # ── MBA Crystal Ball ──────────────────────────────────────────────────
+    "mba_crystal_ball": {
+        "name": "MBA Crystal Ball",
+        "base_url": "https://www.mbacrystalball.com",
+        "pages": [
+            ("top_mba_programs", "/top-mba-programs/"),
+            ("mba_rankings", "/mba-rankings/"),
+            ("gmat_scores", "/gmat-scores-for-top-mba-programs/"),
+            ("acceptance_rates", "/mba-acceptance-rates/"),
+            ("deadlines", "/mba-application-deadlines/"),
+            ("essays", "/mba-essay-questions/"),
+            ("salary_roi", "/mba-salary/"),
+            ("mba_india", "/mba-in-india/"),
+            ("mba_usa", "/mba-in-usa/"),
+            ("mba_europe", "/mba-in-europe/"),
+            ("mba_canada", "/mba-in-canada/"),
+            ("class_profiles", "/class-profile/"),
+            ("scholarship", "/mba-scholarships/"),
+            ("interview_tips", "/mba-interview/"),
+        ],
+    },
+
+    # ── TopMBA (QS owned) ─────────────────────────────────────────────────
+    "topmba": {
+        "name": "TopMBA",
+        "base_url": "https://www.topmba.com",
+        "pages": [
+            ("mba_rankings", "/mba-rankings"),
+            ("emba_rankings", "/emba-rankings"),
+            ("salary_stats", "/jobs/salary-trends"),
+            ("mba_roi", "/mba-programs/mba-roi"),
+            ("scholarships", "/student-info/mba-scholarships"),
+            ("gmat_guide", "/gmat/gmat-prep"),
+            ("career_guide", "/jobs/career-development"),
+            ("mba_fairs", "/events"),
+            ("school_profiles_us", "/mba-programs/united-states"),
+            ("school_profiles_europe", "/mba-programs/europe"),
+            ("school_profiles_asia", "/mba-programs/asia"),
+        ],
+    },
+
+    # ── BusinessBecause ───────────────────────────────────────────────────
+    "businessbecause": {
+        "name": "BusinessBecause",
+        "base_url": "https://www.businessbecause.com",
+        "pages": [
+            ("mba_rankings", "/rankings"),
+            ("school_hbs", "/schools/harvard-business-school"),
+            ("school_gsb", "/schools/stanford-graduate-school-of-business"),
+            ("school_wharton", "/schools/wharton-school"),
+            ("school_insead", "/schools/insead"),
+            ("school_lbs", "/schools/london-business-school"),
+            ("school_iese", "/schools/iese-business-school"),
+            ("school_hec", "/schools/hec-paris"),
+            ("school_cbs", "/schools/columbia-business-school"),
+            ("mba_salaries", "/mba-salaries"),
+            ("career_outcomes", "/mba-career-prospects"),
+            ("application_advice", "/mba-applications"),
+            ("essay_tips", "/mba-essay-tips"),
+            ("scholarships", "/mba-scholarships"),
+        ],
+    },
+
+    # ── Accepted.com ──────────────────────────────────────────────────────
+    "accepted": {
+        "name": "Accepted.com",
+        "base_url": "https://www.accepted.com",
+        "pages": [
+            ("mba_overview", "/mba/"),
+            ("school_hbs", "/mba/harvard-business-school/"),
+            ("school_gsb", "/mba/stanford-gsb/"),
+            ("school_wharton", "/mba/wharton/"),
+            ("school_booth", "/mba/chicago-booth/"),
+            ("school_kellogg", "/mba/kellogg/"),
+            ("school_sloan", "/mba/mit-sloan/"),
+            ("school_columbia", "/mba/columbia/"),
+            ("deadlines", "/mba/mba-application-deadlines/"),
+            ("essays", "/mba/mba-essay-tips/"),
+            ("interview_guide", "/mba/mba-interview-guide/"),
+            ("waitlist_guide", "/mba/mba-waitlist/"),
+            ("reapplicant_guide", "/mba/reapplicant-guide/"),
+        ],
+    },
+
+    # ── GMAT Club ─────────────────────────────────────────────────────────
+    "gmat_club": {
+        "name": "GMAT Club",
+        "base_url": "https://gmatclub.com",
+        "pages": [
+            ("school_rankings", "/reviews/ranking"),
+            ("school_reviews", "/reviews"),
+            ("school_hbs", "/reviews/harvard-business-school-reviews-57"),
+            ("school_gsb", "/reviews/stanford-graduate-school-of-business-reviews-58"),
+            ("school_wharton", "/reviews/wharton-school-reviews-59"),
+            ("school_booth", "/reviews/chicago-booth-reviews-56"),
+            ("school_kellogg", "/reviews/kellogg-school-of-management-reviews-54"),
+            ("school_insead", "/reviews/insead-reviews-62"),
+            ("school_lbs", "/reviews/london-business-school-reviews-63"),
+            ("decision_tracker", "/forum/pair-up-with-applicants-buddies-pair-up-tracker-324.html"),
+            ("gmat_avg_scores", "/forum/gmat-scores-for-top-mba-programs-264.html"),
+        ],
+    },
+
+    # ── Beat The GMAT ─────────────────────────────────────────────────────
+    "beat_the_gmat": {
+        "name": "Beat The GMAT",
+        "base_url": "https://www.beatthegmat.com",
+        "pages": [
+            ("mba_rankings", "/mba-rankings/"),
+            ("school_profiles", "/mba-programs/"),
+            ("gmat_prep", "/gmat-prep/"),
+            ("mba_admissions", "/mba-admissions/"),
+            ("mba_essays", "/mba-essays/"),
+            ("mba_interviews", "/mba-interview/"),
+        ],
+    },
+
+    # ── Wall Street Oasis ─────────────────────────────────────────────────
+    "wall_street_oasis": {
+        "name": "Wall Street Oasis",
+        "base_url": "https://www.wallstreetoasis.com",
+        "pages": [
+            ("mba_rankings", "/resources/mba-rankings"),
+            ("school_reviews", "/forum/mba-applicants"),
+            ("salary_data", "/resources/mba-salary"),
+            ("consulting_salaries", "/resources/consulting-salaries"),
+            ("ib_salaries", "/resources/investment-banking-salary"),
+        ],
+    },
+
+    # ── FindMBA ───────────────────────────────────────────────────────────
+    "findmba": {
+        "name": "FindMBA",
+        "base_url": "https://find-mba.com",
+        "pages": [
+            ("school_search", "/schools"),
+            ("rankings", "/rankings"),
+            ("usa_schools", "/schools/united-states"),
+            ("uk_schools", "/schools/united-kingdom"),
+            ("europe_schools", "/schools/europe"),
+            ("asia_schools", "/schools/asia"),
+            ("canada_schools", "/schools/canada"),
+            ("scholarships", "/scholarships"),
+            ("salary_stats", "/salary-statistics"),
+        ],
+    },
+
+    # ── Studyportals / Mastersportal ──────────────────────────────────────
+    "studyportals": {
+        "name": "Studyportals (Mastersportal)",
+        "base_url": "https://www.mastersportal.com",
+        "pages": [
+            ("mba_programs", "/study-options/268927835/mbas-business-administration.html"),
+            ("mba_usa", "/study-options/268927835/mbas-business-administration-united-states.html"),
+            ("mba_uk", "/study-options/268927835/mbas-business-administration-united-kingdom.html"),
+            ("mba_europe", "/study-options/268927835/mbas-business-administration-europe.html"),
+            ("mba_scholarships", "/scholarships/mba/"),
+        ],
+    },
+
+    # ── Peterson's ────────────────────────────────────────────────────────
+    "petersons": {
+        "name": "Peterson's",
+        "base_url": "https://www.petersons.com",
+        "pages": [
+            ("mba_programs", "/graduate-schools/mba-programs"),
+            ("top_mba", "/graduate-schools/best-mba-programs"),
+            ("online_mba", "/graduate-schools/online-mba-programs"),
+            ("scholarship_search", "/scholarship-search"),
+        ],
+    },
+
+    # ── Economist MBA Rankings ────────────────────────────────────────────
+    "economist": {
+        "name": "The Economist MBA Ranking",
+        "base_url": "https://www.economist.com",
+        "pages": [
+            ("whichmba", "/whichmba"),
+            ("mba_rankings", "/whichmba/mba-rankings"),
+        ],
+    },
+
+    # ── Forbes MBA Rankings ───────────────────────────────────────────────
+    "forbes_mba": {
+        "name": "Forbes MBA Ranking",
+        "base_url": "https://www.forbes.com",
+        "pages": [
+            ("best_business_schools", "/lists/best-business-schools/"),
+            ("mba_roi", "/sites/business-school/"),
+        ],
+    },
+
+    # ── InsideIIM ─────────────────────────────────────────────────────────
+    "insideiim": {
+        "name": "InsideIIM",
+        "base_url": "https://insideiim.com",
+        "pages": [
+            ("top_mba_india", "/top-mba-colleges-in-india/"),
+            ("iim_rankings", "/iim-rankings/"),
+            ("placements", "/mba-placements/"),
+            ("cat_colleges", "/top-mba-colleges-accepting-cat-score/"),
+            ("salary_data", "/mba-salary/"),
+            ("iim_ahmedabad", "/colleges/iim-ahmedabad/"),
+            ("iim_bangalore", "/colleges/iim-bangalore/"),
+            ("iim_calcutta", "/colleges/iim-calcutta/"),
+            ("isb", "/colleges/isb/"),
+            ("xlri", "/colleges/xlri-jamshedpur/"),
+        ],
+    },
+
+    # ── Pagalguy ──────────────────────────────────────────────────────────
+    "pagalguy": {
+        "name": "Pagalguy",
+        "base_url": "https://www.pagalguy.com",
+        "pages": [
+            ("mba_colleges", "/mba-colleges-india"),
+            ("iim_rankings", "/iim-rankings"),
+            ("cat_prep", "/cat"),
+            ("placements", "/mba-placements"),
+            ("top_50_india", "/top-50-mba-colleges-india"),
+        ],
+    },
+
+    # ── Shiksha MBA ───────────────────────────────────────────────────────
+    "shiksha": {
+        "name": "Shiksha MBA",
+        "base_url": "https://www.shiksha.com",
+        "pages": [
+            ("mba_colleges", "/mba/colleges"),
+            ("mba_rankings", "/mba/ranking"),
+            ("mba_placements", "/mba/placements"),
+            ("mba_fees", "/mba/fees"),
+            ("cat_colleges", "/mba/cat-colleges"),
+            ("abroad_mba", "/studyabroad/mba"),
+        ],
+    },
+
+    # ── Career Launcher / CL Education ────────────────────────────────────
+    "career_launcher": {
+        "name": "Career Launcher MBA",
+        "base_url": "https://www.interscholar.com",
+        "pages": [
+            ("top_mba", "/mba-colleges"),
+            ("mba_rankings", "/mba-rankings"),
+            ("placements", "/mba-placements"),
+        ],
+    },
+
+    # ── ApplicantLab ──────────────────────────────────────────────────────
+    "applicantlab": {
+        "name": "ApplicantLab",
+        "base_url": "https://www.applicantlab.com",
+        "pages": [
+            ("blog", "/blog/"),
+            ("essay_tips", "/blog/category/mba-essay-tips/"),
+            ("interview_tips", "/blog/category/mba-interview/"),
+            ("school_hbs", "/blog/tag/harvard-business-school/"),
+            ("school_gsb", "/blog/tag/stanford-gsb/"),
+            ("school_wharton", "/blog/tag/wharton/"),
+            ("deadlines", "/blog/category/mba-application-deadlines/"),
+            ("strategy", "/blog/category/mba-application-strategy/"),
+        ],
+    },
+
+    # ── Unimy ─────────────────────────────────────────────────────────────
+    "unimy": {
+        "name": "Unimy",
+        "base_url": "https://unimy.com",
+        "pages": [
+            ("mba_programs", "/mba"),
+            ("mba_rankings", "/rankings/mba"),
+            ("compare", "/compare/mba"),
+        ],
+    },
+
+    # ── Fishbowl ──────────────────────────────────────────────────────────
+    "fishbowl": {
+        "name": "Fishbowl App",
+        "base_url": "https://www.fishbowlapp.com",
+        "pages": [
+            ("mba_bowl", "/bowl/mba"),
+            ("consulting", "/bowl/consulting"),
+        ],
+    },
 }
 
 
@@ -348,6 +633,165 @@ async def crawl_all_sites(
 
     logger.info("🏁 Info sites complete: crawled=%d, skipped=%d, failed=%d",
                 total_stats["crawled"], total_stats["skipped"], total_stats["failed"])
+
+
+# ---------------------------------------------------------------------------
+# Playwright crawl engine (for JS-heavy sites)
+# ---------------------------------------------------------------------------
+
+async def crawl_site_playwright(
+    site_id: str,
+    site_config: dict,
+    resume: bool = True,
+) -> dict[str, int]:
+    """Crawl all pages for a single info site using Playwright headless Chromium.
+
+    Designed for JS-heavy sites where httpx returns empty or broken content.
+    Returns stats: {"crawled": N, "skipped": N, "failed": N}
+    """
+    from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeout
+
+    site_dir = INFO_SITES_DIR / site_id
+    site_dir.mkdir(parents=True, exist_ok=True)
+    base_url = site_config["base_url"]
+    pages = site_config["pages"]
+    stats = {"crawled": 0, "skipped": 0, "failed": 0}
+
+    async with async_playwright() as pw:
+        browser = await pw.chromium.launch(headless=True)
+        context = await browser.new_context(
+            user_agent=_HEADERS["User-Agent"],
+            locale="en-US",
+            viewport={"width": 1280, "height": 720},
+        )
+
+        try:
+            page = await context.new_page()
+
+            for page_name, path in pages:
+                # Resume support: skip already-crawled pages
+                txt_path = site_dir / f"{page_name}.txt"
+                if resume and txt_path.exists():
+                    stats["skipped"] += 1
+                    continue
+
+                url = f"{base_url}{path}"
+                try:
+                    await asyncio.sleep(2)  # polite delay between pages
+                    response = await page.goto(url, timeout=30_000, wait_until="networkidle")
+
+                    if response is None or response.status >= 400:
+                        status = response.status if response else "no response"
+                        logger.debug("%s/%s: HTTP %s", site_id, page_name, status)
+                        stats["failed"] += 1
+                        continue
+
+                    html = await page.content()
+                    text = _html_to_text(html)
+
+                    if len(text.strip()) < 100:
+                        logger.debug(
+                            "%s/%s: too little content (%d chars)",
+                            site_id, page_name, len(text),
+                        )
+                        stats["failed"] += 1
+                        continue
+
+                    # Save HTML + text
+                    (site_dir / f"{page_name}.html").write_text(html, encoding="utf-8")
+                    txt_path.write_text(text, encoding="utf-8")
+
+                    # Save metadata
+                    meta_path = site_dir / "meta.json"
+                    meta: dict = {}
+                    if meta_path.exists():
+                        meta = json.loads(meta_path.read_text(encoding="utf-8"))
+                    meta.setdefault("urls", {})
+                    meta["urls"][page_name] = url
+                    meta["crawled_at"] = datetime.now().isoformat()
+                    meta["crawler"] = "playwright"
+                    meta_path.write_text(json.dumps(meta, indent=2), encoding="utf-8")
+
+                    stats["crawled"] += 1
+                    logger.info("  [pw] %s/%s: %d chars", site_id, page_name, len(text))
+
+                except PlaywrightTimeout:
+                    logger.warning("  [pw] %s/%s: timeout (30s)", site_id, page_name)
+                    stats["failed"] += 1
+                except Exception as exc:
+                    logger.warning("  [pw] %s/%s: %s", site_id, page_name, exc)
+                    stats["failed"] += 1
+
+        finally:
+            await browser.close()
+
+    return stats
+
+
+async def crawl_js_sites(
+    sites: list[str] | None = None,
+    resume: bool = True,
+    max_concurrent: int = 3,
+) -> None:
+    """Crawl JS-heavy MBA info sites using Playwright.
+
+    Args:
+        sites: List of site IDs to crawl. If None, defaults to sites that
+               yielded 0 pages from the httpx crawl (i.e. empty site dirs).
+        resume: Skip already-crawled pages.
+        max_concurrent: Max number of concurrent browser instances.
+    """
+    if sites is None:
+        # Default: sites whose directories are missing or have zero .txt files
+        sites = []
+        for site_id in MBA_INFO_SITES:
+            site_dir = INFO_SITES_DIR / site_id
+            crawled = len(list(site_dir.glob("*.txt"))) if site_dir.exists() else 0
+            if crawled == 0:
+                sites.append(site_id)
+        if not sites:
+            logger.info("[pw] All sites already have content — nothing to crawl.")
+            return
+        logger.info(
+            "[pw] Auto-detected %d sites with 0 pages: %s",
+            len(sites), ", ".join(sites),
+        )
+
+    semaphore = asyncio.Semaphore(max_concurrent)
+
+    async def _crawl_with_sem(site_id: str, config: dict) -> tuple[str, dict[str, int]]:
+        async with semaphore:
+            logger.info("[pw] Starting %s (%s)...", config["name"], site_id)
+            stats = await crawl_site_playwright(site_id, config, resume=resume)
+            return site_id, stats
+
+    tasks = []
+    for site_id in sites:
+        config = MBA_INFO_SITES.get(site_id)
+        if not config:
+            logger.warning("Unknown site: %s", site_id)
+            continue
+        tasks.append(_crawl_with_sem(site_id, config))
+
+    total_stats = {"crawled": 0, "skipped": 0, "failed": 0}
+    results = await asyncio.gather(*tasks, return_exceptions=True)
+
+    for result in results:
+        if isinstance(result, Exception):
+            logger.error("[pw] Task failed: %s", result)
+            continue
+        site_id, stats = result
+        for k in total_stats:
+            total_stats[k] += stats[k]
+        logger.info(
+            "  [pw] %s: crawled=%d, skipped=%d, failed=%d",
+            site_id, stats["crawled"], stats["skipped"], stats["failed"],
+        )
+
+    logger.info(
+        "[pw] Playwright crawl complete: crawled=%d, skipped=%d, failed=%d",
+        total_stats["crawled"], total_stats["skipped"], total_stats["failed"],
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -546,6 +990,8 @@ def main():
     parser.add_argument("--sites", type=str, help="Comma-separated site IDs")
     parser.add_argument("--extract", action="store_true", help="Run Claude API extraction after crawl")
     parser.add_argument("--fresh", action="store_true", help="Re-crawl all pages (ignore cache)")
+    parser.add_argument("--playwright", action="store_true",
+                        help="Use Playwright (headless Chromium) instead of httpx for JS-heavy sites")
     parser.add_argument("--list", action="store_true", help="List available sites")
     args = parser.parse_args()
 
@@ -562,7 +1008,10 @@ def main():
     sites = args.sites.split(",") if args.sites else None
 
     # Crawl
-    asyncio.run(crawl_all_sites(sites=sites, resume=not args.fresh))
+    if args.playwright:
+        asyncio.run(crawl_js_sites(sites=sites, resume=not args.fresh))
+    else:
+        asyncio.run(crawl_all_sites(sites=sites, resume=not args.fresh))
 
     # Optional extraction
     if args.extract:
