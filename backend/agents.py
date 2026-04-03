@@ -6,6 +6,10 @@ from logging_config import setup_logging
 
 logger = setup_logging()
 
+# ── Model Configuration ──────────────────────────────────────────────────────
+CLAUDE_MODEL = os.environ.get("CLAUDE_MODEL", "claude-sonnet-4-20250514")
+CLAUDE_MAX_TOKENS = 2000
+
 # LangChain & LLM Integration
 from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
@@ -497,7 +501,7 @@ def get_llm():
             '{"analysis": "Tough.", "update_letter": "Dear Adcom...", "tactical_plan": ["Wait.", "Pray.", "Update resume."]}',
             '{"leverage_analysis": "Good leverage.", "leverage_score": 8, "appeal_letter": "Dear Financial Aid...", "pro_tips": ["Be polite.", "Ask clearly."]}'
         ])
-    return ChatAnthropic(model="claude-3-5-sonnet-20240620", max_tokens=2000)
+    return ChatAnthropic(model=CLAUDE_MODEL, max_tokens=CLAUDE_MAX_TOKENS)
 
 # ── Agent Nodes ──────────────────────────────────────────────────────────────
 def chief_of_staff_node(state: ApplicationState) -> ApplicationState:
@@ -538,7 +542,7 @@ def consultant_node(state: ApplicationState) -> ApplicationState:
 
     matches = []
     for sid, school in SCHOOL_DB.items():
-        diff = gmat - school["gmat_avg"]
+        diff = gmat - school.get("gmat_avg", 700)
         if diff >= 10:
             tier = "Safety"
             prob = min(85, 55 + diff)
@@ -579,7 +583,9 @@ Be supportive but rigorous. Embody a premium, 'Elite Editorial' tone."""
         if not history:
             messages.append(HumanMessage(content="Start the interview by introducing yourself and asking the first question about my defining background or a tough career challenge."))
         else:
-            for msg in history:
+            # Keep last 10 messages to bound context window and cost
+            recent = history[-10:] if len(history) > 10 else history
+            for msg in recent:
                 if msg["role"] == "user":
                     messages.append(HumanMessage(content=msg["content"]))
                 else:

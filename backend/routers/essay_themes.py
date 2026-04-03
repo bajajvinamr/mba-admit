@@ -7,6 +7,7 @@ from typing import List, Optional
 from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, Field
 from middleware import rate_limit
+from agents import CLAUDE_MODEL
 from logging_config import setup_logging
 
 logger = setup_logging()
@@ -85,7 +86,7 @@ def _extract_themes_from_essay(essay_content: str, school: str, prompt: str) -> 
 
     try:
         response = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model=CLAUDE_MODEL,
             max_tokens=512,
             system=system,
             messages=[{"role": "user", "content": (

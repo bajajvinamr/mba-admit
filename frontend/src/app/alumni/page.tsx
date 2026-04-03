@@ -290,7 +290,7 @@ export default function AlumniNetworkPage() {
  return (
  <div key={school.school_id} className="flex items-center gap-2">
  <span className="text-[10px] text-foreground/40 w-20 shrink-0 truncate text-right">
- {school.school_name.split("").slice(-1)[0]}
+ {school.school_name.split(" ").slice(-1)[0]}
  </span>
  <div className="flex-1 bg-foreground/5 rounded-full h-3 overflow-hidden">
  <motion.div

@@ -22,6 +22,13 @@ def _is_dev_mode() -> bool:
     return _ENVIRONMENT == "development"
 
 
+if not _is_dev_mode() and not _JWT_SECRET:
+    raise RuntimeError(
+        "NEXTAUTH_SECRET is required in production. "
+        "Set ENVIRONMENT=development to use dev mode with auth disabled."
+    )
+
+
 def _decode_token(token: str) -> Optional[Dict[str, Any]]:
     """Decode a NextAuth JWT token. Returns claims dict or None."""
     if not _JWT_SECRET:

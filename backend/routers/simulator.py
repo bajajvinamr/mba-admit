@@ -44,7 +44,7 @@ def _normalize_gpa(gpa: float, scale: str) -> float:
     """Normalize GPA to 4.0 scale."""
     s = float(scale) if scale else 4.0
     if s == 5.0:
-        return max(0, min(4.0, (5.0 - gpa) / 4.0 * 4.0))
+        return max(0, min(4.0, gpa / 5.0 * 4.0))
     elif s == 100:
         return max(0, min(4.0, (gpa - 50) / 50 * 4.0))
     elif s == 10.0:

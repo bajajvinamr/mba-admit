@@ -114,7 +114,7 @@ export default function RoiPage() {
  const s = schools.find((x) => x.id === id);
  return (
  <span key={id} className="inline-flex items-center gap-1 px-2 py-1 bg-foreground text-white text-xs rounded-full">
- {s?.name?.split("").slice(0, 2).join("") || id}
+ {s?.name?.split(" ").slice(0, 2).join("") || id}
  <button onClick={() => setSelected((p) => p.filter((x) => x !== id))}><X size={10} /></button>
  </span>
  );

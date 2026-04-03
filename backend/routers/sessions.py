@@ -140,22 +140,42 @@ def chat(request: Request, req: ChatMessageRequest, user: Dict = Depends(get_opt
 @router.post("/unlock")
 def unlock_essays(req: PaymentRequest, user: Dict = Depends(get_optional_user)):
     """Unlock essay generation after Stripe payment verification."""
+    import os
+    import stripe
+
     _validate_session_id(req.session_id)
     session = db.get_session(req.session_id)
     if not session:
         raise HTTPException(status_code=404, detail="Session not found")
     _check_session_ownership(session, user)
 
-    # Record the payment if stripe_payment_intent_id provided (from webhook)
-    if req.stripe_payment_intent_id:
-        db.create_payment(
-            user_id=session.get("user_id", ""),
-            session_id=req.session_id,
-            stripe_checkout_session_id=req.stripe_payment_intent_id,
-            amount_cents=100000,
-            product_type="consult_call",
-        )
-        db.update_payment_status(req.stripe_payment_intent_id, "succeeded")
+    if not req.stripe_payment_intent_id:
+        raise HTTPException(status_code=400, detail="Payment intent ID required")
+
+    # Verify payment server-side with Stripe API
+    stripe_key = os.environ.get("STRIPE_SECRET_KEY")
+    if not stripe_key:
+        raise HTTPException(status_code=503, detail="Payment processing unavailable")
+
+    stripe.api_key = stripe_key
+    try:
+        intent = stripe.PaymentIntent.retrieve(req.stripe_payment_intent_id)
+    except stripe.error.InvalidRequestError:
+        raise HTTPException(status_code=400, detail="Invalid payment intent")
+    except stripe.error.AuthenticationError:
+        raise HTTPException(status_code=503, detail="Payment processing misconfigured")
+
+    if intent.status != "succeeded":
+        raise HTTPException(status_code=402, detail=f"Payment not completed (status: {intent.status})")
+
+    db.create_payment(
+        user_id=session.get("user_id", ""),
+        session_id=req.session_id,
+        stripe_checkout_session_id=req.stripe_payment_intent_id,
+        amount_cents=intent.amount,
+        product_type="consult_call",
+    )
+    db.update_payment_status(req.stripe_payment_intent_id, "succeeded")
 
     state = _session_to_state(session)
     state["is_paid"] = True
