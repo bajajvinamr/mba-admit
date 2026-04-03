@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from"react";
+import { useState, useMemo, useEffect } from"react";
 import { motion } from"framer-motion";
 import { FileText, Sparkles } from"lucide-react";
 import { Button } from"@/components/ui/button";
@@ -10,10 +10,11 @@ import { cn } from"@/lib/cn";
 import { EssayEditor } from"@/components/essays/EssayEditor";
 import { AICoach } from"@/components/essays/AICoach";
 import { PromptCard, type EssayPrompt } from"@/components/essays/PromptCard";
+import { apiFetch } from"@/lib/api";
 
-/* ---- Mock Data ---- */
+type School = { id: string; name: string };
 
-const MOCK_SCHOOLS = [
+const FALLBACK_SCHOOLS: School[] = [
  { id:"hbs", name:"Harvard Business School"},
  { id:"gsb", name:"Stanford GSB"},
  { id:"wharton", name:"Wharton"},
@@ -21,97 +22,59 @@ const MOCK_SCHOOLS = [
  { id:"kellogg", name:"Kellogg"},
 ];
 
-const MOCK_PROMPTS: EssayPrompt[] = [
- {
- id:"hbs-1",
- schoolName:"Harvard Business School",
- promptText:
-"As we review your application, what more would you like us to know as we consider your candidacy for the Harvard Business School MBA program?",
- wordLimit: 900,
- required: true,
- },
- {
- id:"gsb-1",
- schoolName:"Stanford GSB",
- promptText:"What matters most to you, and why?",
- wordLimit: 650,
- required: true,
- },
- {
- id:"gsb-2",
- schoolName:"Stanford GSB",
- promptText:"Why Stanford?",
- wordLimit: 400,
- required: true,
- },
- {
- id:"wharton-1",
- schoolName:"Wharton",
- promptText:
-"How do you plan to use the Wharton MBA program to help you achieve your future professional goals? You might consider your past experience, short and long-term goals, and how Wharton's resources can help.",
- wordLimit: 500,
- required: true,
- },
- {
- id:"booth-1",
- schoolName:"Chicago Booth",
- promptText:
-"How will a Booth MBA help you achieve your immediate and long-term post-MBA career goals?",
- wordLimit: 250,
- required: true,
- },
- {
- id:"kellogg-1",
- schoolName:"Kellogg",
- promptText:
-"Kellogg leaders are primed to tackle challenges everywhere. Describe a time you have demonstrated leadership and created lasting value. What challenges did you face, and what did you learn?",
- wordLimit: 450,
- required: true,
- },
- {
- id:"kellogg-2",
- schoolName:"Kellogg",
- promptText:
-"Values are what guide you in your life and work. What values are important to you and how have they influenced you?",
- wordLimit: 450,
- required: false,
- },
-];
-
-const SCHOOL_CONTEXT: Record<string, string> = {
- hbs:"Looks for: leadership under ambiguity, habit of going beyond expectations, personal growth through challenge.",
- gsb:"Looks for: deep self-awareness, clarity of purpose, authentic personal narrative.",
- wharton:"Looks for: analytical rigor, collaborative spirit, specific knowledge of Wharton resources.",
- booth:"Looks for: intellectual curiosity, data-driven thinking, clear career vision with Booth-specific fit.",
- kellogg:"Looks for: teamwork & empathy, values-driven leadership, community impact.",
-};
-
 /* ---- Page Component ---- */
 
 export default function EssayCoachPage() {
+ const [schools, setSchools] = useState<School[]>(FALLBACK_SCHOOLS);
+ const [prompts, setPrompts] = useState<EssayPrompt[]>([]);
  const [selectedSchool, setSelectedSchool] = useState<string>("hbs");
- const [selectedPrompt, setSelectedPrompt] = useState<EssayPrompt>(
- MOCK_PROMPTS[0]
- );
+ const [selectedPrompt, setSelectedPrompt] = useState<EssayPrompt | null>(null);
  const [essayText, setEssayText] = useState("");
  const [mobilePanel, setMobilePanel] = useState<"editor"|"coach">("editor");
 
- const filteredPrompts = useMemo(
- () =>
- MOCK_PROMPTS.filter(
- (p) =>
- p.schoolName ===
- MOCK_SCHOOLS.find((s) => s.id === selectedSchool)?.name
- ),
- [selectedSchool]
- );
+ // Fetch top schools on mount
+ useEffect(() => {
+ apiFetch("/api/schools?limit=10&sort=ranking")
+  .then((r) => r.json())
+  .then((data) => {
+   const list = (data.schools || data.results || []).slice(0, 10);
+   if (list.length > 0) {
+    setSchools(list.map((s: { id?: string; school_id?: string; name: string }) => ({
+     id: s.id || s.school_id || "",
+     name: s.name,
+    })));
+   }
+  })
+  .catch(() => {}); // keep fallback
+ }, []);
+
+ // Fetch essay prompts when school changes
+ useEffect(() => {
+ apiFetch(`/api/essay-prompts?school_id=${selectedSchool}`)
+  .then((r) => r.json())
+  .then((data) => {
+   const raw = data.prompts || data || [];
+   const mapped: EssayPrompt[] = raw.map((p: { prompt?: string; prompt_text?: string; word_limit?: number; required?: boolean }, i: number) => ({
+    id: `${selectedSchool}-${i}`,
+    schoolName: schools.find((s) => s.id === selectedSchool)?.name || selectedSchool,
+    promptText: p.prompt || p.prompt_text || String(p),
+    wordLimit: p.word_limit || null,
+    required: p.required ?? true,
+   }));
+   setPrompts(mapped);
+   if (mapped.length > 0) setSelectedPrompt(mapped[0]);
+  })
+  .catch(() => setPrompts([]));
+ }, [selectedSchool, schools]);
+
+ const filteredPrompts = prompts;
 
  const schoolContext = useMemo(
  () => ({
- name: MOCK_SCHOOLS.find((s) => s.id === selectedSchool)?.name ??"",
- lookingFor: SCHOOL_CONTEXT[selectedSchool] ??"",
+ name: schools.find((s) => s.id === selectedSchool)?.name ??"",
+ lookingFor:"",
  }),
- [selectedSchool]
+ [selectedSchool, schools]
  );
 
  return (
@@ -154,17 +117,13 @@ export default function EssayCoachPage() {
  {/* School selector + prompt selector */}
  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
  <div className="flex flex-wrap gap-1.5">
- {MOCK_SCHOOLS.map((school) => (
+ {schools.map((school) => (
  <Button
  key={school.id}
  variant={selectedSchool === school.id ?"default":"outline"}
  size="sm"
  onClick={() => {
  setSelectedSchool(school.id);
- const first = MOCK_PROMPTS.find(
- (p) => p.schoolName === school.name
- );
- if (first) setSelectedPrompt(first);
  setEssayText("");
  }}
  className="text-xs"
@@ -228,7 +187,13 @@ export default function EssayCoachPage() {
  mobilePanel ==="coach" ?"flex w-full":"hidden"
  )}
  >
- <AICoach essayText={essayText} schoolContext={schoolContext} />
+ <AICoach
+ essayText={essayText}
+ promptText={selectedPrompt?.promptText}
+ schoolId={selectedSchool}
+ schoolContext={schoolContext}
+ wordLimit={selectedPrompt?.wordLimit || undefined}
+ />
  </div>
  </div>
  </motion.div>

@@ -8,9 +8,10 @@ import { Input } from"@/components/ui/input";
 import { ScrollArea } from"@/components/ui/scroll-area";
 import { Avatar, AvatarFallback } from"@/components/ui/avatar";
 import { Separator } from"@/components/ui/separator";
-import { Send, Sparkles, Brain, Eye, Palette } from"lucide-react";
+import { Send, Sparkles, Brain, Eye, Palette, Loader2 } from"lucide-react";
 import { cn } from"@/lib/cn";
 import { ToneChecker } from"./ToneChecker";
+import { apiFetch } from"@/lib/api";
 
 type Message = {
  id: string;
@@ -26,32 +27,13 @@ type SchoolContext = {
 
 type AICoachProps = {
  essayText: string;
+ promptText?: string;
+ schoolId?: string;
  schoolContext: SchoolContext | null;
+ wordLimit?: number;
 };
 
-const MOCK_RESPONSES: Record<string, string[]> = {
- brainstorm: [
-"That's a great starting point. Can you think of a specific moment that crystallized this goal for you? The more concrete and sensory the detail, the more the reader will connect with your story.",
-"I notice you're focused on the 'what' — but admissions readers care about the 'why.' What was the turning point that made this path feel inevitable rather than just interesting?",
-"Consider the 'before and after' structure: Who were you before this experience, and how did it fundamentally shift your perspective?",
- ],
- review: [
-"Your opening paragraph tells rather than shows. Instead of stating 'I am passionate about finance,' could you open with a scene that demonstrates that passion in action?",
-"The transition between paragraphs 2 and 3 feels abrupt. What connects these two ideas? Finding that bridge will strengthen your narrative arc.",
-"Your conclusion restates your intro. Try ending with a forward-looking vision that builds on everything you've shared — where is this story going next?",
- ],
- tone: [
-"I'm detecting a few phrases that read as formulaic. Let me run a tone check to highlight specific areas where your authentic voice could shine through more.",
-"Your second paragraph has a different energy than the rest — it feels more genuinely you. Can you bring that same conversational quality to the opening?",
- ],
-};
-
-function generateMockResponse(mode: string): string {
- const responses = MOCK_RESPONSES[mode] ?? MOCK_RESPONSES.brainstorm;
- return responses[Math.floor(Math.random() * responses.length)];
-}
-
-export function AICoach({ essayText, schoolContext }: AICoachProps) {
+export function AICoach({ essayText, promptText, schoolId, schoolContext, wordLimit }: AICoachProps) {
  const [messages, setMessages] = useState<Message[]>([
  {
  id:"welcome",
@@ -63,6 +45,7 @@ export function AICoach({ essayText, schoolContext }: AICoachProps) {
  ]);
  const [input, setInput] = useState("");
  const [mode, setMode] = useState("brainstorm");
+ const [isStreaming, setIsStreaming] = useState(false);
  const scrollRef = useRef<HTMLDivElement>(null);
 
  useEffect(() => {
@@ -71,9 +54,9 @@ export function AICoach({ essayText, schoolContext }: AICoachProps) {
  }
  }, [messages]);
 
- const handleSend = useCallback(() => {
+ const handleSend = useCallback(async () => {
  const trimmed = input.trim();
- if (!trimmed) return;
+ if (!trimmed || isStreaming) return;
 
  const userMsg: Message = {
  id: `user-${Date.now()}`,
@@ -82,16 +65,83 @@ export function AICoach({ essayText, schoolContext }: AICoachProps) {
  timestamp: new Date(),
  };
 
+ const assistantMsgId = `assistant-${Date.now()}`;
  const assistantMsg: Message = {
- id: `assistant-${Date.now()}`,
+ id: assistantMsgId,
  role:"assistant",
- content: generateMockResponse(mode),
+ content:"",
  timestamp: new Date(),
  };
 
  setMessages((prev) => [...prev, userMsg, assistantMsg]);
  setInput("");
- }, [input, mode]);
+ setIsStreaming(true);
+
+ try {
+ const combinedText = essayText
+  ? `${trimmed}\n\nCurrent essay draft:\n${essayText}`
+  : trimmed;
+
+ const res = await apiFetch("/api/essay/coach", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+   school_id: schoolId || "unknown",
+   prompt_text: promptText || "General essay",
+   essay_text: combinedText,
+   mode,
+   word_limit: wordLimit || null,
+  }),
+ });
+
+ if (!res.ok) {
+  const err = await res.text();
+  setMessages((prev) =>
+   prev.map((m) => m.id === assistantMsgId ? { ...m, content: `Error: ${err}` } : m)
+  );
+  return;
+ }
+
+ const reader = res.body?.getReader();
+ const decoder = new TextDecoder();
+ if (!reader) return;
+
+ let accumulated = "";
+ while (true) {
+  const { done, value } = await reader.read();
+  if (done) break;
+  const chunk = decoder.decode(value, { stream: true });
+  for (const line of chunk.split("\n")) {
+   if (!line.startsWith("data: ")) continue;
+   const payload = line.slice(6).trim();
+   if (payload === "[DONE]") break;
+   try {
+    const parsed = JSON.parse(payload);
+    if (parsed.text) {
+     accumulated += parsed.text;
+     setMessages((prev) =>
+      prev.map((m) => m.id === assistantMsgId ? { ...m, content: accumulated } : m)
+     );
+    }
+    if (parsed.error) {
+     accumulated += `\n\nError: ${parsed.error}`;
+     setMessages((prev) =>
+      prev.map((m) => m.id === assistantMsgId ? { ...m, content: accumulated } : m)
+     );
+    }
+   } catch {}
+  }
+ }
+ } catch (err) {
+ setMessages((prev) =>
+  prev.map((m) => m.id === assistantMsgId
+   ? { ...m, content:"Sorry, I couldn't connect to the AI coach. Please try again." }
+   : m)
+ );
+ } finally {
+ setIsStreaming(false);
+ }
+ }, [input, mode, essayText, promptText, schoolId, wordLimit, isStreaming]);
 
  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
  if (e.key ==="Enter" && !e.shiftKey) {
