@@ -1,15 +1,60 @@
-"""User-specific endpoints — school shortlist, dashboard."""
+"""User-specific endpoints — school shortlist, dashboard, tier management."""
 
+import os
 from datetime import datetime
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
+from pydantic import BaseModel
 from typing import Dict, Optional
 from auth import get_current_user, get_optional_user
 from models import AddSchoolRequest, UpdateSchoolStatusRequest
 from agents import SCHOOL_DB
 from compare_engine import load_gmatclub_data, get_decisions_for_school, compute_profile_fit
+from usage import set_user_tier, get_user_tier
+from logging_config import setup_logging
 import db
 
+logger = setup_logging()
+
 router = APIRouter(prefix="/api/user", tags=["user"])
+
+# ── Internal webhook secret for tier updates from frontend ───────────────────
+_INTERNAL_WEBHOOK_SECRET = os.environ.get("INTERNAL_WEBHOOK_SECRET", "")
+
+
+class TierUpdateRequest(BaseModel):
+    user_id: str
+    tier: str
+    stripe_customer_id: Optional[str] = None
+    stripe_subscription_id: Optional[str] = None
+
+
+@router.post("/tier")
+def update_user_tier(req: TierUpdateRequest, request: Request):
+    """Update a user's subscription tier. Called by the frontend Stripe webhook handler.
+
+    Authenticated via INTERNAL_WEBHOOK_SECRET header (shared secret between
+    frontend and backend, NOT user JWT).
+    """
+    secret = request.headers.get("X-Internal-Secret", "")
+    if not _INTERNAL_WEBHOOK_SECRET or secret != _INTERNAL_WEBHOOK_SECRET:
+        if os.environ.get("ENVIRONMENT", "").lower() in ("production", "prod"):
+            raise HTTPException(status_code=403, detail="Invalid internal secret")
+        logger.warning("Tier update accepted without secret (dev mode)")
+
+    if req.tier not in ("free", "pro", "premium"):
+        raise HTTPException(status_code=400, detail=f"Invalid tier: {req.tier}")
+
+    set_user_tier(req.user_id, req.tier)
+    logger.info("Tier updated: user=%s tier=%s stripe_customer=%s",
+                req.user_id, req.tier, req.stripe_customer_id)
+    return {"ok": True, "user_id": req.user_id, "tier": req.tier}
+
+
+@router.get("/tier")
+def get_tier(user: Dict = Depends(get_current_user)):
+    """Get the current user's subscription tier."""
+    tier = get_user_tier(user["sub"])
+    return {"user_id": user["sub"], "tier": tier}
 
 
 @router.get("/schools")

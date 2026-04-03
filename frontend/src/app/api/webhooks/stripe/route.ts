@@ -23,6 +23,31 @@ function getWebhookSecret(): string {
 
 // ── Event handlers ───────────────────────────────────────────────────────────
 
+async function updateBackendTier(userId: string, tier: string, stripeCustomerId?: string, stripeSubscriptionId?: string) {
+  const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  const secret = process.env.INTERNAL_WEBHOOK_SECRET || "";
+  try {
+    const res = await fetch(`${apiBase}/api/user/tier`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Internal-Secret": secret,
+      },
+      body: JSON.stringify({
+        user_id: userId,
+        tier,
+        stripe_customer_id: stripeCustomerId,
+        stripe_subscription_id: stripeSubscriptionId,
+      }),
+    });
+    if (!res.ok) {
+      console.error(`[Stripe] Backend tier update failed: ${res.status} ${await res.text()}`);
+    }
+  } catch (err) {
+    console.error("[Stripe] Backend tier update error:", err);
+  }
+}
+
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const plan = session.metadata?.plan;
   const billing = session.metadata?.billing;
@@ -36,22 +61,14 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       ? session.subscription
       : session.subscription?.id;
     const email = session.customer_details?.email || session.customer_email;
+    const userId = email || customerId || "unknown";
 
     console.log(
       `[Stripe] Subscription activated: plan=${plan}, billing=${billing}, ` +
       `customer=${customerId}, subscription=${subscriptionId}, email=${email}`
     );
 
-    // TODO: When Supabase is integrated (Phase 1), persist subscription:
-    // await db.users.updateSubscription({
-    //   email,
-    //   stripeCustomerId: customerId,
-    //   stripeSubscriptionId: subscriptionId,
-    //   tier: plan,
-    //   billing,
-    //   status: "active",
-    // });
-
+    await updateBackendTier(userId, plan, customerId || undefined, subscriptionId || undefined);
     return;
   }
 
@@ -89,11 +106,10 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
     `[Stripe] Subscription updated: customer=${customerId}, status=${status}`
   );
 
-  // TODO: When Supabase is integrated, update subscription status:
-  // await db.users.updateSubscriptionStatus({
-  //   stripeCustomerId: customerId,
-  //   status: status === "active" ? "active" : status === "past_due" ? "past_due" : "canceled",
-  // });
+  // If subscription is no longer active, downgrade to free
+  if (status !== "active" && status !== "trialing") {
+    await updateBackendTier(customerId, "free", customerId);
+  }
 }
 
 async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
@@ -102,9 +118,7 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
     : subscription.customer.id;
 
   console.log(`[Stripe] Subscription canceled: customer=${customerId}`);
-
-  // TODO: When Supabase is integrated, downgrade user to free:
-  // await db.users.downgradeToFree({ stripeCustomerId: customerId });
+  await updateBackendTier(customerId, "free", customerId);
 }
 
 // ── Webhook entry point ──────────────────────────────────────────────────────
