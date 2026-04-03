@@ -36,8 +36,23 @@ function getServerSnapshot(): RecentSchool[] {
 
 function subscribe(listener: () => void): () => void {
   listeners.push(listener);
+
+  // Listen for cross-tab localStorage changes to avoid stale cache
+  const onStorage = (e: StorageEvent) => {
+    if (e.key === STORAGE_KEY) {
+      cached = null; // invalidate cache so getSnapshot re-reads
+      emit();
+    }
+  };
+  if (typeof window !== "undefined") {
+    window.addEventListener("storage", onStorage);
+  }
+
   return () => {
     listeners = listeners.filter((l) => l !== listener);
+    if (typeof window !== "undefined") {
+      window.removeEventListener("storage", onStorage);
+    }
   };
 }
 

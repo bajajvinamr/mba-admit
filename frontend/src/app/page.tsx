@@ -15,9 +15,12 @@ import { useProfile } from"@/hooks/useProfile";
 import { RecommendedSchools } from"@/components/dashboard/RecommendedSchools";
 
 // Lazy-load below-fold sections - only downloaded when the user scrolls
-const HowItWorks = dynamic(() => import("@/components/landing/HowItWorks").then(m => ({ default: m.HowItWorks })), { ssr: true });
-const TestimonialGrid = dynamic(() => import("@/components/landing/TestimonialGrid").then(m => ({ default: m.TestimonialGrid })), { ssr: true });
-const FeaturedSchools = dynamic(() => import("@/components/landing/FeaturedSchools").then(m => ({ default: m.FeaturedSchools })), { ssr: true });
+function SectionSkeleton() {
+ return <div className="py-20 px-8"><div className="max-w-5xl mx-auto space-y-4"><div className="h-8 w-48 bg-foreground/5 rounded animate-pulse mx-auto"/><div className="h-4 w-96 max-w-full bg-foreground/5 rounded animate-pulse mx-auto"/><div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">{[...Array(3)].map((_, i) => <div key={i} className="h-40 bg-foreground/5 rounded animate-pulse"/>)}</div></div></div>;
+}
+const HowItWorks = dynamic(() => import("@/components/landing/HowItWorks").then(m => ({ default: m.HowItWorks })), { ssr: true, loading: () => <SectionSkeleton /> });
+const TestimonialGrid = dynamic(() => import("@/components/landing/TestimonialGrid").then(m => ({ default: m.TestimonialGrid })), { ssr: true, loading: () => <SectionSkeleton /> });
+const FeaturedSchools = dynamic(() => import("@/components/landing/FeaturedSchools").then(m => ({ default: m.FeaturedSchools })), { ssr: true, loading: () => <SectionSkeleton /> });
 
 type School = {
  id: string; name: string; location: string; country: string;

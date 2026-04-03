@@ -471,52 +471,74 @@ export default function RecommendersPage() {
                   {addingRec ? (
                     <div className="pt-4 space-y-3">
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <input
-                          type="text"
-                          placeholder="Name *"
-                          value={newRecName}
-                          onChange={(e) => setNewRecName(e.target.value)}
-                          className="border border-border/15 px-3 py-2 text-sm focus:border-primary focus:outline-none"
-                        />
-                        <input
-                          type="email"
-                          placeholder="Email (optional)"
-                          value={newRecEmail}
-                          onChange={(e) => setNewRecEmail(e.target.value)}
-                          className="border border-border/15 px-3 py-2 text-sm focus:border-primary focus:outline-none"
-                        />
-                        <select
-                          value={newRecRelationship}
-                          onChange={(e) =>
-                            setNewRecRelationship(e.target.value)
-                          }
-                          className="border border-border/15 px-3 py-2 text-sm focus:border-primary focus:outline-none"
-                        >
-                          {RELATIONSHIP_OPTIONS.map((opt) => (
-                            <option key={opt.value} value={opt.value}>
-                              {opt.label}
-                            </option>
-                          ))}
-                        </select>
+                        <div>
+                          <label htmlFor="rec-name" className="sr-only">Name</label>
+                          <input
+                            id="rec-name"
+                            type="text"
+                            placeholder="Name *"
+                            value={newRecName}
+                            onChange={(e) => setNewRecName(e.target.value)}
+                            className="border border-border/15 px-3 py-2 text-sm focus:border-primary focus:outline-none w-full"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="rec-email" className="sr-only">Email</label>
+                          <input
+                            id="rec-email"
+                            type="email"
+                            placeholder="Email (optional)"
+                            value={newRecEmail}
+                            onChange={(e) => setNewRecEmail(e.target.value)}
+                            className="border border-border/15 px-3 py-2 text-sm focus:border-primary focus:outline-none w-full"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="rec-relationship" className="sr-only">Relationship</label>
+                          <select
+                            id="rec-relationship"
+                            value={newRecRelationship}
+                            onChange={(e) =>
+                              setNewRecRelationship(e.target.value)
+                            }
+                            className="border border-border/15 px-3 py-2 text-sm focus:border-primary focus:outline-none w-full"
+                          >
+                            {RELATIONSHIP_OPTIONS.map((opt) => (
+                              <option key={opt.value} value={opt.value}>
+                                {opt.label}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <input
-                          type="text"
-                          placeholder="Title/Role"
-                          value={newRecTitle}
-                          onChange={(e) => setNewRecTitle(e.target.value)}
-                          className="border border-border/15 px-3 py-2 text-sm focus:border-primary focus:outline-none"
-                        />
-                        <input
-                          type="date"
-                          placeholder="Deadline"
-                          value={newRecDeadline}
-                          onChange={(e) => setNewRecDeadline(e.target.value)}
-                          className="border border-border/15 px-3 py-2 text-sm focus:border-primary focus:outline-none"
-                        />
+                        <div>
+                          <label htmlFor="rec-title" className="sr-only">Title/Role</label>
+                          <input
+                            id="rec-title"
+                            type="text"
+                            placeholder="Title/Role"
+                            value={newRecTitle}
+                            onChange={(e) => setNewRecTitle(e.target.value)}
+                            className="border border-border/15 px-3 py-2 text-sm focus:border-primary focus:outline-none w-full"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="rec-deadline" className="sr-only">Deadline</label>
+                          <input
+                            id="rec-deadline"
+                            type="date"
+                            placeholder="Deadline"
+                            value={newRecDeadline}
+                            onChange={(e) => setNewRecDeadline(e.target.value)}
+                            className="border border-border/15 px-3 py-2 text-sm focus:border-primary focus:outline-none w-full"
+                          />
+                        </div>
                         {/* School multi-select */}
                         <div className="relative">
+                          <label htmlFor="rec-schools" className="sr-only">Assign schools</label>
                           <select
+                            id="rec-schools"
                             onChange={(e) => {
                               const val = e.target.value;
                               if (val && !newRecSchools.includes(val)) {
@@ -769,10 +791,11 @@ export default function RecommendersPage() {
                       </button>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                          <label className="block text-[8px] font-bold uppercase tracking-widest text-muted-foreground/40 mb-1">
+                          <label htmlFor={`rec-strategy-title-${idx}`} className="block text-[8px] font-bold uppercase tracking-widest text-muted-foreground/40 mb-1">
                             Title/Role
                           </label>
                           <input
+                            id={`rec-strategy-title-${idx}`}
                             type="text"
                             placeholder="e.g. CEO, Senior VP"
                             value={rec.title}
@@ -783,10 +806,11 @@ export default function RecommendersPage() {
                           />
                         </div>
                         <div>
-                          <label className="block text-[8px] font-bold uppercase tracking-widest text-muted-foreground/40 mb-1">
+                          <label htmlFor={`rec-strategy-relationship-${idx}`} className="block text-[8px] font-bold uppercase tracking-widest text-muted-foreground/40 mb-1">
                             Relationship
                           </label>
                           <input
+                            id={`rec-strategy-relationship-${idx}`}
                             type="text"
                             placeholder="e.g. Current Boss"
                             value={rec.relationship}
@@ -801,10 +825,11 @@ export default function RecommendersPage() {
                           />
                         </div>
                         <div>
-                          <label className="block text-[8px] font-bold uppercase tracking-widest text-muted-foreground/40 mb-1">
+                          <label htmlFor={`rec-strategy-years-${idx}`} className="block text-[8px] font-bold uppercase tracking-widest text-muted-foreground/40 mb-1">
                             Years Known
                           </label>
                           <input
+                            id={`rec-strategy-years-${idx}`}
                             type="text"
                             placeholder="e.g. 3 years"
                             value={rec.years_known}
@@ -825,7 +850,7 @@ export default function RecommendersPage() {
               </div>
 
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-800 p-4 text-sm mt-6 flex items-center justify-between">
+                <div role="alert" className="bg-red-50 border border-red-200 text-red-800 p-4 text-sm mt-6 flex items-center justify-between">
                   <span>{error}</span>
                   <button
                     onClick={() => setError(null)}

@@ -2,11 +2,17 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 
+type VoiceError = "not-supported" | "permission-denied" | "network" | "aborted" | "unknown";
+
 interface UseVoiceOptions {
   lang?: string;
   continuous?: boolean;
   onResult?: (transcript: string) => void;
+  onInterim?: (transcript: string) => void;
   onEnd?: () => void;
+  onError?: (error: VoiceError, message: string) => void;
+  /** Voice activity detection: auto-stop after N ms of silence. 0 = disabled. Default: 0 */
+  vadTimeoutMs?: number;
 }
 
 interface UseVoiceReturn {
@@ -14,6 +20,8 @@ interface UseVoiceReturn {
   isSpeaking: boolean;
   isSupported: boolean;
   transcript: string;
+  interimTranscript: string;
+  error: VoiceError | null;
   startListening: () => void;
   stopListening: () => void;
   speak: (text: string) => Promise<void>;
@@ -21,16 +29,57 @@ interface UseVoiceReturn {
 }
 
 export function useVoice(options: UseVoiceOptions = {}): UseVoiceReturn {
-  const { lang = "en-US", continuous = false, onResult, onEnd } = options;
+  const {
+    lang = "en-US",
+    continuous = false,
+    onResult,
+    onInterim,
+    onEnd,
+    onError,
+    vadTimeoutMs = 0,
+  } = options;
 
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [transcript, setTranscript] = useState("");
+  const [interimTranscript, setInterimTranscript] = useState("");
   const [isSupported, setIsSupported] = useState(false);
+  const [error, setError] = useState<VoiceError | null>(null);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recognitionRef = useRef<any>(null);
   const synthRef = useRef<SpeechSynthesis | null>(null);
+  const vadTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastSpeechTimeRef = useRef<number>(0);
+
+  // Store callbacks in refs to avoid re-creating recognition on every render
+  const onResultRef = useRef(onResult);
+  const onInterimRef = useRef(onInterim);
+  const onEndRef = useRef(onEnd);
+  const onErrorRef = useRef(onError);
+  onResultRef.current = onResult;
+  onInterimRef.current = onInterim;
+  onEndRef.current = onEnd;
+  onErrorRef.current = onError;
+
+  const clearVadTimer = useCallback(() => {
+    if (vadTimerRef.current) {
+      clearTimeout(vadTimerRef.current);
+      vadTimerRef.current = null;
+    }
+  }, []);
+
+  const resetVadTimer = useCallback(() => {
+    clearVadTimer();
+    if (vadTimeoutMs > 0 && recognitionRef.current) {
+      vadTimerRef.current = setTimeout(() => {
+        // Silence detected — stop listening
+        if (recognitionRef.current && isListening) {
+          recognitionRef.current.stop();
+        }
+      }, vadTimeoutMs);
+    }
+  }, [vadTimeoutMs, clearVadTimer, isListening]);
 
   useEffect(() => {
     const SpeechRecognition =
@@ -59,24 +108,92 @@ export function useVoice(options: UseVoiceOptions = {}): UseVoiceReturn {
             interim += result[0].transcript;
           }
         }
+
+        // Update interim display
+        setInterimTranscript(interim);
+        if (interim) {
+          onInterimRef.current?.(interim);
+        }
+
+        // Track speech activity for VAD
+        if (interim || final) {
+          lastSpeechTimeRef.current = Date.now();
+        }
+
         const combined = final || interim;
         setTranscript(combined);
-        if (final && onResult) {
-          onResult(final);
+        if (final && onResultRef.current) {
+          onResultRef.current(final);
+          setInterimTranscript("");
+        }
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      recognition.onspeechstart = () => {
+        lastSpeechTimeRef.current = Date.now();
+        clearVadTimer();
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      recognition.onspeechend = () => {
+        // Speech ended — start VAD timer
+        if (vadTimeoutMs > 0) {
+          vadTimerRef.current = setTimeout(() => {
+            if (recognitionRef.current) {
+              recognitionRef.current.stop();
+            }
+          }, vadTimeoutMs);
         }
       };
 
       recognition.onend = () => {
         setIsListening(false);
-        onEnd?.();
+        clearVadTimer();
+        onEndRef.current?.();
       };
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       recognition.onerror = (event: any) => {
+        let voiceError: VoiceError = "unknown";
+        let message = "Speech recognition error";
+
+        switch (event.error) {
+          case "not-allowed":
+          case "service-not-allowed":
+            voiceError = "permission-denied";
+            message = "Microphone access denied. Please allow microphone permission in your browser settings.";
+            break;
+          case "network":
+            voiceError = "network";
+            message = "Network error during speech recognition. Please check your connection.";
+            break;
+          case "aborted":
+            voiceError = "aborted";
+            message = "Speech recognition was aborted.";
+            break;
+          case "no-speech":
+            // Not a real error — just no speech detected, restart if continuous
+            if (continuous && isListening) {
+              try {
+                recognition.start();
+              } catch {
+                // already started
+              }
+              return;
+            }
+            message = "No speech detected.";
+            break;
+          default:
+            message = `Speech recognition error: ${event.error}`;
+        }
+
         if (event.error !== "aborted") {
-          console.warn("Speech recognition error:", event.error);
+          setError(voiceError);
+          onErrorRef.current?.(voiceError, message);
+          console.warn("Speech recognition error:", event.error, message);
         }
         setIsListening(false);
+        clearVadTimer();
       };
 
       recognitionRef.current = recognition;
@@ -89,25 +206,38 @@ export function useVoice(options: UseVoiceOptions = {}): UseVoiceReturn {
     return () => {
       recognitionRef.current?.abort();
       synthRef.current?.cancel();
+      clearVadTimer();
     };
-  }, [lang, continuous, onResult, onEnd]);
+  }, [lang, continuous, vadTimeoutMs, clearVadTimer]);
 
   const startListening = useCallback(() => {
     if (!recognitionRef.current) return;
     setTranscript("");
+    setInterimTranscript("");
+    setError(null);
     try {
       recognitionRef.current.start();
       setIsListening(true);
+      lastSpeechTimeRef.current = Date.now();
+      // Start VAD timer from the beginning
+      if (vadTimeoutMs > 0) {
+        vadTimerRef.current = setTimeout(() => {
+          if (recognitionRef.current) {
+            recognitionRef.current.stop();
+          }
+        }, vadTimeoutMs);
+      }
     } catch {
       // Already started
     }
-  }, []);
+  }, [vadTimeoutMs]);
 
   const stopListening = useCallback(() => {
     if (!recognitionRef.current) return;
     recognitionRef.current.stop();
     setIsListening(false);
-  }, []);
+    clearVadTimer();
+  }, [clearVadTimer]);
 
   const speak = useCallback(
     (text: string): Promise<void> => {
@@ -164,6 +294,8 @@ export function useVoice(options: UseVoiceOptions = {}): UseVoiceReturn {
     isSpeaking,
     isSupported,
     transcript,
+    interimTranscript,
+    error,
     startListening,
     stopListening,
     speak,

@@ -719,6 +719,13 @@ function DashboardContent() {
     }
   }, [schoolId, sessionId, router]);
 
+  // Redirect to onboarding if not completed
+  useEffect(() => {
+    if (!onboardingCompleted) {
+      router.replace("/onboarding");
+    }
+  }, [onboardingCompleted, router]);
+
   const profileQuery = useMemo(
     () => ({
       gmat: savedProfile.gmat ?? undefined,
@@ -940,6 +947,22 @@ function DashboardContent() {
               }
             />
           </section>
+
+          {/* Application Tracker CTA — shown when user hasn't tracked any schools */}
+          {totalSchools === 0 && (
+            <section className="bg-primary/5 border border-primary/20 rounded-lg p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <h3 className="text-base font-display font-bold text-foreground mb-1">Start tracking your target schools</h3>
+                <p className="text-sm text-muted-foreground">Add schools to your Application Tracker to manage deadlines, rounds, and essays in one place.</p>
+              </div>
+              <Link
+                href="/my-schools"
+                className="shrink-0 px-5 py-2.5 bg-primary text-foreground text-sm font-semibold rounded-md hover:bg-primary/90 transition-colors"
+              >
+                Open Tracker
+              </Link>
+            </section>
+          )}
 
           {/* Archetype-specific content */}
           <motion.section

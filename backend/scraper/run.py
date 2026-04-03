@@ -6,7 +6,8 @@ Usage:
 Commands:
     discover   Stage 1: discover schools from ranking sites
     resolve    Resolve missing website URLs via Google search
-    crawl      Stage 2: crawl school websites with Playwright
+    crawl      Stage 2: crawl school websites (httpx + Playwright fallback)
+    crawl-js   Re-crawl low-confidence schools using Playwright only
     extract    Stage 3: extract structured data with Claude
     merge      Stage 4: merge scraped data into the main DB
     all        Run the full pipeline end-to-end
@@ -154,6 +155,65 @@ def cmd_crawl(args: argparse.Namespace) -> None:
 
     asyncio.run(crawl_all(with_website, resume=resume))
     print("\nCrawl complete.")
+
+
+def cmd_crawl_js(args: argparse.Namespace) -> None:
+    """Re-crawl low-confidence schools using Playwright (JS rendering)."""
+    from scraper.crawl import crawl_js_schools
+
+    _header("Crawl JS-Heavy Schools (Playwright)")
+
+    # Load scraped DB to find low-confidence schools
+    scraped = load_json(SCRAPED_DB_FILE)
+    if not scraped or not isinstance(scraped, dict):
+        print("No scraped DB found. Run 'extract' first to identify low-confidence schools.")
+        sys.exit(1)
+
+    threshold = getattr(args, "threshold", 0.3)
+
+    # Identify low-confidence school IDs
+    low_conf_ids: set[str] = set()
+    for sid, data in scraped.items():
+        meta = data.get("_meta", {})
+        conf = data.get("confidence") or meta.get("confidence")
+        if conf is not None and float(conf) < threshold:
+            low_conf_ids.add(sid)
+
+    if not low_conf_ids:
+        print(f"No schools with confidence < {threshold} found. Nothing to re-crawl.")
+        return
+
+    print(f"Found {len(low_conf_ids)} schools with confidence < {threshold}")
+
+    # Load discovery list to get website URLs
+    discovery = load_json(DISCOVERY_LIST_FILE)
+    if isinstance(discovery, dict):
+        schools = _schools_dict_to_list(discovery)
+    else:
+        schools = discovery or []
+
+    # Filter to only low-confidence schools that have a website
+    js_schools = [s for s in schools if s.get("id") in low_conf_ids and s.get("website")]
+
+    # Optional --schools filter
+    school_ids = getattr(args, "schools", None)
+    if school_ids:
+        ids = {s.strip() for s in school_ids.split(",")}
+        js_schools = [s for s in js_schools if s.get("id") in ids]
+
+    # Optional --limit
+    limit = getattr(args, "limit", None)
+    if limit and limit > 0:
+        js_schools = js_schools[:limit]
+
+    if not js_schools:
+        print("No matching schools with websites found for Playwright re-crawl.")
+        return
+
+    print(f"Re-crawling {len(js_schools)} schools with Playwright...")
+    fresh = getattr(args, "fresh", False)
+    asyncio.run(crawl_js_schools(js_schools, resume=not fresh))
+    print("\nPlaywright crawl complete.")
 
 
 def cmd_extract(args: argparse.Namespace) -> None:
@@ -365,6 +425,13 @@ def build_parser() -> argparse.ArgumentParser:
     p_crawl.add_argument("--schools", type=str, help="Comma-separated school IDs to crawl")
     p_crawl.add_argument("--fresh", action="store_true", help="Re-crawl all pages (ignore cache)")
 
+    # crawl-js
+    p_crawl_js = sub.add_parser("crawl-js", help="Re-crawl low-confidence schools with Playwright (JS rendering)")
+    p_crawl_js.add_argument("--schools", type=str, help="Comma-separated school IDs to crawl")
+    p_crawl_js.add_argument("--threshold", type=float, default=0.3, help="Confidence threshold (default: 0.3)")
+    p_crawl_js.add_argument("--limit", type=int, default=0, help="Max schools to crawl (0 = all)")
+    p_crawl_js.add_argument("--fresh", action="store_true", help="Re-crawl all pages (ignore cache)")
+
     # extract
     p_ext = sub.add_parser("extract", help="Stage 3: extract data with Claude")
     p_ext.add_argument("--schools", type=str, help="Comma-separated school IDs to extract")
@@ -411,6 +478,7 @@ def main():
         "expand": cmd_expand,
         "resolve": cmd_resolve,
         "crawl": cmd_crawl,
+        "crawl-js": cmd_crawl_js,
         "extract": cmd_extract,
         "merge": cmd_merge,
         "all": cmd_all,

@@ -6,12 +6,14 @@ import os as _os
 import random
 
 from fastapi import APIRouter, HTTPException, Query, Request
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel as _BaseModel
 from middleware import rate_limit
 from agents import (
     SCHOOL_DB,
     get_llm,
     simulate_interview_pass,
+    stream_interview_pass,
 )
 from models import (
     InterviewStartRequest,
@@ -64,6 +66,58 @@ def respond_mock_interview(request: Request, req: InterviewResponseRequest):
         result = simulate_interview_pass(req.school_id, sanitized_history, difficulty=req.difficulty, question_count=req.question_count)
         tracker["output"] = result.get("question", result.get("feedback", ""))
         return result
+
+
+# ── Streaming Interview Response (SSE) ────────────────────────────────────
+
+def _sse_event(event_type: str, data: dict) -> str:
+    """Format a Server-Sent Event line."""
+    return f"data: {_json.dumps({'type': event_type, **data})}\n\n"
+
+
+def _stream_interview_generator(school_id: str, history: list[dict], difficulty: str, question_count: int):
+    """Generator that yields SSE events from the streaming interview."""
+    for event_type, data in stream_interview_pass(school_id, history, difficulty=difficulty, question_count=question_count):
+        if event_type == "text":
+            yield _sse_event("text", {"content": data})
+        elif event_type == "done":
+            # Send the parsed result with scores and metadata
+            yield _sse_event("done", {"result": data})
+
+
+@router.post("/interview/respond-stream")
+@rate_limit("20/minute")
+def respond_mock_interview_stream(request: Request, req: InterviewResponseRequest):
+    """Streaming version of /interview/respond. Returns Server-Sent Events.
+
+    Events:
+        data: {"type": "text", "content": "..."}\n\n    — incremental text chunks
+        data: {"type": "done", "result": {...}}\n\n     — final parsed result with scores
+    """
+    from observability import track_ai_interaction
+
+    # Sanitize the latest user message in history
+    sanitized_history = []
+    for msg in req.history:
+        entry = dict(msg) if isinstance(msg, dict) else msg
+        if isinstance(entry, dict) and entry.get("role") == "user":
+            try:
+                entry["content"] = sanitize_for_llm(
+                    entry.get("content", ""), MAX_CHAT_CHARS, "interview response"
+                )
+            except ValueError as e:
+                raise HTTPException(400, detail=str(e))
+        sanitized_history.append(entry)
+
+    return StreamingResponse(
+        _stream_interview_generator(req.school_id, sanitized_history, req.difficulty, req.question_count),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+        },
+    )
 
 
 # ── Interview Answer Evaluation (Claude API) ─────────────────────────────

@@ -97,10 +97,10 @@ def seeded_user():
 
 @pytest.fixture()
 def seeded_session(seeded_user):
-    """Create a test session tied to the seeded user."""
+    """Create a test session tied to the dev-user (matches auth mock in dev mode)."""
     return db.create_session(
         session_id="test-session-1",
-        user_id=seeded_user["id"],
+        user_id="dev-user",
         school_id="hbs",
         profile={"name": "Test", "gmat": 740, "gpa": 3.8, "industry_background": "Consulting"},
     )

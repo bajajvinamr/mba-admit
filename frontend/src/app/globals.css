@@ -23,6 +23,8 @@
   --color-warning: hsl(38 92% 50%);
   --color-border: hsl(220 13% 91%);
   --color-ring: hsl(42 50% 57%);
+  --color-primary-light: hsl(42 50% 65%);
+  --color-primary-dark: hsl(42 50% 45%);
   --color-card: hsl(0 0% 100%);
   --color-card-foreground: hsl(222 47% 11%);
 
@@ -84,21 +86,6 @@
   /* Design system utilities */
   .heading-display {
     @apply font-display font-semibold text-4xl leading-tight tracking-tight;
-  }
-  .heading-1 {
-    @apply font-display font-semibold text-3xl leading-snug tracking-tight;
-  }
-  .heading-2 {
-    @apply font-display font-medium text-2xl leading-snug;
-  }
-  .heading-3 {
-    @apply font-sans font-semibold text-xl leading-snug;
-  }
-  .body-small {
-    @apply text-sm text-muted-foreground;
-  }
-  .label-text {
-    @apply text-sm font-medium tracking-wide;
   }
 }
 

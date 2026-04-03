@@ -47,7 +47,7 @@ function FloatingBadges() {
   return (
     <div ref={containerRef} className="relative w-full h-full min-h-[480px]">
       {/* Animated gradient orbs */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0" aria-hidden="true">
         <div
           className="absolute w-[300px] h-[300px] rounded-full opacity-20 blur-[80px]"
           style={{
@@ -122,7 +122,7 @@ export function HeroSection(_props: {
           <div className="text-center lg:text-left">
             {/* Badge */}
             <div
-              className="inline-flex items-center gap-2 mb-8 px-4 py-2 border border-[#C9A96240] bg-[#C9A96215] animate-[fade-in_0.5s_ease-out_forwards]"
+              className="inline-flex items-center gap-2 mb-8 px-4 py-2 border border-primary/25 bg-primary/8 animate-[fade-in_0.5s_ease-out_forwards]"
               style={{ opacity: 0 }}
             >
               <span className="text-xs font-medium tracking-wide text-primary">
@@ -158,14 +158,14 @@ export function HeroSection(_props: {
               <Link
                 href="/simulator"
                 onClick={() => track("hero_cta_clicked", { target: "simulator" })}
-                className="bg-[#C9A962] text-[#0A0A0A] font-semibold px-8 py-3.5 transition-colors hover:bg-[#C9A962]/90 flex items-center justify-center gap-2 text-sm tracking-wide"
+                className="bg-primary text-foreground font-semibold px-8 py-3.5 transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[#0A0A0A] flex items-center justify-center gap-2 text-sm tracking-wide"
               >
                 Check My Odds - Free <ArrowRight size={16} />
               </Link>
               <Link
                 href="/tools"
                 onClick={() => track("hero_cta_clicked", { target: "tools" })}
-                className="border border-white/20 text-white font-medium px-8 py-3.5 transition-all hover:bg-white/5 flex items-center justify-center gap-2 text-sm tracking-wide"
+                className="border border-white/20 text-white font-medium px-8 py-3.5 transition-all hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[#0A0A0A] flex items-center justify-center gap-2 text-sm tracking-wide"
               >
                 <BarChart3 size={16} /> Explore All Tools
               </Link>

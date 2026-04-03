@@ -1218,6 +1218,121 @@ DO NOT return Markdown outside JSON. Return ONLY the raw JSON object."""
         }
 
 
+def stream_interview_pass(school_id: str, history: list[dict], difficulty: str = "standard", question_count: int = 5):
+    """Streaming version of simulate_interview_pass. Yields (event_type, data) tuples.
+
+    Yields:
+        ("text", chunk_str)  — incremental text from the LLM
+        ("done", parsed_dict) — final parsed JSON result with scores/metadata
+    """
+    school = SCHOOL_DB.get(school_id, {})
+    school_name = school.get("name", "Unknown School")
+
+    llm = get_llm()
+
+    # Resolve persona
+    persona_prompt = INTERVIEW_PERSONAS.get(school_id)
+    if persona_prompt is None:
+        for pid, pprompt in INTERVIEW_PERSONAS.items():
+            db_school = SCHOOL_DB.get(pid, {})
+            if db_school.get("name", "").lower() in school_name.lower() or school_name.lower() in db_school.get("name", "").lower():
+                persona_prompt = pprompt
+                break
+    if persona_prompt is None:
+        persona_prompt = _build_dynamic_persona(school_id, school)
+
+    difficulty_instructions = _get_difficulty_instructions(difficulty)
+
+    user_msg_count = sum(1 for m in history if m.get("role") == "user")
+    current_question_number = user_msg_count + 1
+    is_final = user_msg_count >= question_count
+
+    category_plan = []
+    for i in range(question_count):
+        cat_index = i % len(QUESTION_CATEGORIES)
+        category_plan.append(f"  Q{i+1}: {QUESTION_CATEGORIES[cat_index]}")
+    category_plan_text = "\n".join(category_plan)
+
+    system_prompt = f"""{persona_prompt}
+You are conducting a formal admissions interview for {school_name}.
+
+{difficulty_instructions}
+
+QUESTION DISTRIBUTION — You must cover these categories across the {question_count} questions:
+{category_plan_text}
+
+You are currently on question {current_question_number} of {question_count}.
+{"The category for this question should be: " + QUESTION_CATEGORIES[(current_question_number - 1) % len(QUESTION_CATEGORIES)] + "." if not is_final else ""}
+
+RULES:
+1. Ask ONE question at a time. Never ask multiple questions in a single turn.
+2. If the user's previous answer was short or vague, probe for more detail before moving on.
+3. {"This is the FINAL turn. Do NOT ask another question. Provide comprehensive feedback." if is_final else "Ask your next question in the designated category."}
+
+Return a JSON object with these EXACT keys:
+- "message": Your next interview question (or a concluding thank-you if this is the final turn).
+- "question_number": {current_question_number}
+- "total_questions": {question_count}
+- "question_category": The category of this question from the plan above.
+- "feedback": null UNLESS this is the final turn. If final, provide an object with:
+    - "conciseness": (1-10) How concise and focused were their answers?
+    - "star_method": (1-10) Did they use structured storytelling (Situation, Task, Action, Result)?
+    - "narrative_strength": (1-10) How compelling and memorable were their stories?
+    - "communication_clarity": (1-10) How clear and articulate was their communication?
+    - "authenticity": (1-10) Did they sound genuine, or rehearsed and generic?
+    - "self_awareness": (1-10) Did they show honest reflection on strengths and weaknesses?
+    - "school_fit": (1-10) Did they demonstrate genuine knowledge and fit for {school_name}?
+    - "overall_score": (1-100) A holistic score for the entire interview.
+    - "overall_feedback": A 3-4 sentence summary of how they performed, with specific praise and actionable improvement areas.
+    - "per_question_notes": A list of brief notes (one per answered question) highlighting what worked and what didn't.
+- "is_finished": boolean (true only on the final turn).
+
+DO NOT return Markdown outside JSON. Return ONLY the raw JSON object."""
+
+    try:
+        messages = [SystemMessage(content=system_prompt)]
+        for m in history:
+            if m["role"] == "user":
+                messages.append(HumanMessage(content=m["content"]))
+            else:
+                messages.append(AIMessage(content=m["content"]))
+
+        full_content = ""
+        # Stream token-by-token from langchain
+        for chunk in llm.stream(messages):
+            token = chunk.content if hasattr(chunk, "content") else str(chunk)
+            if token:
+                full_content += token
+                yield ("text", token)
+
+        # Parse the complete response
+        content = full_content
+        if "```json" in content:
+            content = content.split("```json")[1].split("```")[0].strip()
+        elif "```" in content:
+            content = content.split("```")[1].strip()
+
+        result = json.loads(content)
+        result.setdefault("question_number", current_question_number)
+        result.setdefault("total_questions", question_count)
+        result.setdefault("question_category", QUESTION_CATEGORIES[(current_question_number - 1) % len(QUESTION_CATEGORIES)])
+        result.setdefault("feedback", None)
+        result.setdefault("is_finished", is_final)
+
+        yield ("done", result)
+    except Exception as e:
+        logger.error("Interview Simulator stream failed: %s", e)
+        fallback = {
+            "message": "Thank you for sharing that. Why do you want an MBA at this stage of your career?",
+            "feedback": None,
+            "is_finished": False,
+            "question_number": current_question_number,
+            "total_questions": question_count,
+            "question_category": QUESTION_CATEGORIES[(current_question_number - 1) % len(QUESTION_CATEGORIES)],
+        }
+        yield ("done", fallback)
+
+
 # ── Outreach Strategist (Phase 19 - Roadmap v5) ──────────────────────────────
 def generate_outreach_strategy(school_id: str, background: str, goal: str) -> dict:
     """Drafts high-conversion networking templates for alumni/student outreach."""

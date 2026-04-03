@@ -90,6 +90,8 @@ export default function RoasterPage() {
  <div className="w-full max-w-3xl relative z-10">
  <form onSubmit={handleRoast} className="relative">
  <textarea
+ id="roast-bullet"
+ aria-label="Resume bullet point to roast"
  required
  value={bullet}
  onChange={(e) => setBullet(e.target.value)}
@@ -114,7 +116,7 @@ export default function RoasterPage() {
  </button>
  </form>
  {error && (
- <div className="mt-4 p-4 bg-red-950/50 border border-red-900 text-red-400 text-sm flex items-center gap-2">
+ <div role="alert" className="mt-4 p-4 bg-red-950/50 border border-red-900 text-red-400 text-sm flex items-center gap-2">
  <ShieldAlert size={16} /> {error}
  </div>
  )}

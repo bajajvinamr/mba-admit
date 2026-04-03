@@ -11,7 +11,7 @@ import { Separator } from"@/components/ui/separator";
 import { Send, Sparkles, Brain, Eye, Palette, Loader2 } from"lucide-react";
 import { cn } from"@/lib/cn";
 import { ToneChecker } from"./ToneChecker";
-import { apiFetch } from"@/lib/api";
+import { API_BASE } from"@/lib/api";
 
 type Message = {
  id: string;
@@ -82,7 +82,7 @@ export function AICoach({ essayText, promptText, schoolId, schoolContext, wordLi
   ? `${trimmed}\n\nCurrent essay draft:\n${essayText}`
   : trimmed;
 
- const res = await apiFetch("/api/essay/coach", {
+ const res = await fetch(`${API_BASE}/api/essay/coach`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({

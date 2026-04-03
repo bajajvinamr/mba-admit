@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.gzip import GZipMiddleware
 from logging_config import setup_logging
 
-from middleware import setup_rate_limiter, setup_cache_headers, setup_request_timeout, setup_usage_tracking, global_exception_handler
+from middleware import setup_rate_limiter, setup_cache_headers, setup_redis_cache, setup_request_timeout, setup_usage_tracking, global_exception_handler
 
 logger = setup_logging()
 
@@ -21,6 +21,7 @@ app = FastAPI(title="Chief of Staff — MBA Admissions API v2")
 
 setup_rate_limiter(app)
 setup_cache_headers(app)
+setup_redis_cache(app)
 setup_request_timeout(app)
 setup_usage_tracking(app)
 app.add_middleware(GZipMiddleware, minimum_size=1000)  # Compress responses > 1KB
@@ -64,6 +65,8 @@ from routers.financial_aid import router as financial_aid_router
 from routers.career import router as career_router
 from routers.countries import router as countries_router
 from routers.interview_guides import router as interview_guides_router
+from routers.deadlines import router as deadlines_router
+from routers.matching import router as matching_router
 
 app.include_router(auth_router)
 app.include_router(schools_router)
@@ -89,6 +92,8 @@ app.include_router(financial_aid_router)
 app.include_router(career_router)
 app.include_router(countries_router)
 app.include_router(interview_guides_router)
+app.include_router(deadlines_router)
+app.include_router(matching_router)
 
 
 @app.get("/")
@@ -179,6 +184,13 @@ def get_tiers():
             for name, limits in TIERS.items()
         }
     }
+
+
+@app.get("/api/cache/health")
+async def cache_health():
+    """Cache layer health check — Redis status, latency, memory usage."""
+    from cache import health_check as _cache_health
+    return await _cache_health()
 
 
 @app.get("/health")

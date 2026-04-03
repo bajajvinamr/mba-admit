@@ -19,6 +19,13 @@ USER_AGENT = (
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 )
 
+# Playwright (JS-rendering fallback) settings
+PLAYWRIGHT_TIMEOUT_MS = 30_000              # Per-page navigation timeout
+PLAYWRIGHT_VIEWPORT = {"width": 1440, "height": 900}
+PLAYWRIGHT_CONCURRENCY = 5                  # Lower than httpx — heavier resource usage
+PLAYWRIGHT_MIN_DELAY_SEC = 1.0              # Min random delay between pages
+PLAYWRIGHT_MAX_DELAY_SEC = 3.0              # Max random delay between pages
+
 # Extraction settings
 ANTHROPIC_MODEL = "claude-sonnet-4-20250514"
 EXTRACT_MAX_TOKENS = 4096

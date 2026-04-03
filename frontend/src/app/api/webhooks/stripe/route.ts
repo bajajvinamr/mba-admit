@@ -49,8 +49,10 @@ async function updateBackendTier(userId: string, tier: string, stripeCustomerId?
 }
 
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
-  const plan = session.metadata?.plan;
-  const billing = session.metadata?.billing;
+  // Support both metadata shapes: {plan, billing} and {tier, interval, userId}
+  const plan = session.metadata?.plan || session.metadata?.tier;
+  const billing = session.metadata?.billing || session.metadata?.interval;
+  const metadataUserId = session.metadata?.userId;
 
   // ── Subscription checkout (Pro/Premium) ──────────────────────────────────
   if (plan && (plan === "pro" || plan === "premium")) {
@@ -61,11 +63,12 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       ? session.subscription
       : session.subscription?.id;
     const email = session.customer_details?.email || session.customer_email;
-    const userId = email || customerId || "unknown";
+    // Prefer metadata userId (matches backend auth sub), then email, then Stripe customer ID
+    const userId = metadataUserId || email || customerId || "unknown";
 
     console.log(
       `[Stripe] Subscription activated: plan=${plan}, billing=${billing}, ` +
-      `customer=${customerId}, subscription=${subscriptionId}, email=${email}`
+      `customer=${customerId}, subscription=${subscriptionId}, userId=${userId}`
     );
 
     await updateBackendTier(userId, plan, customerId || undefined, subscriptionId || undefined);

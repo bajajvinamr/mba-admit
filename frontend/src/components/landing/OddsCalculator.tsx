@@ -135,17 +135,17 @@ export function OddsCalculator() {
  <p className="text-white/50 mb-8 text-sm">Enter your stats. See your tier against every program.</p>
 
  <form onSubmit={handleCalculate} className="space-y-6">
- <div className="grid grid-cols-3 gap-4">
+ <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
  <div>
- <label className="block text-xs font-medium text-white/60 mb-2 uppercase tracking-wider">Test Type</label>
- <select value={testType} onChange={e => {
+ <label htmlFor="calc-test-type" className="block text-xs font-medium text-white/60 mb-2 uppercase tracking-wider">Test Type</label>
+ <select id="calc-test-type" value={testType} onChange={e => {
  const tt = e.target.value;
  setTestType(tt); setGmat(""); setTestScore("");
  // Auto-set program type based on test type
  if (tt ==="cat" || tt ==="xat") setDegreeType("MBA (CAT)");
  else if (degreeType ==="MBA (CAT)" && (tt ==="gmat" || tt ==="gre")) setDegreeType("");
  }}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors mb-2">
+ className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-gold transition-colors mb-2">
  <option value="gmat" className="text-foreground">GMAT</option>
  <option value="gre" className="text-foreground">GRE</option>
  <option value="cat" className="text-foreground">CAT Percentile</option>
@@ -156,7 +156,7 @@ export function OddsCalculator() {
  <>
  <input type="number" value={gmat} onChange={e => setGmat(e.target.value)}
  min={200} max={800}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-gold transition-colors"
+ className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-gold transition-colors"
  placeholder="e.g. 740"/>
  <p className="text-[10px] text-white/30 mt-1">Optional, we&apos;ll estimate if blank</p>
  </>
@@ -164,19 +164,19 @@ export function OddsCalculator() {
  {testType ==="gre" && (
  <input type="number" value={testScore} onChange={e => setTestScore(e.target.value)}
  min={260} max={340}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-gold transition-colors"
+ className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-gold transition-colors"
  placeholder="e.g. 325"/>
  )}
  {testType ==="cat" && (
  <input type="number" value={testScore} onChange={e => setTestScore(e.target.value)}
  min={0} max={100}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-gold transition-colors"
+ className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-gold transition-colors"
  placeholder="e.g. 98"/>
  )}
  {testType ==="xat" && (
  <input type="number" value={testScore} onChange={e => setTestScore(e.target.value)}
  min={0} max={100}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-gold transition-colors"
+ className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-gold transition-colors"
  placeholder="e.g. 95"/>
  )}
  {testType ==="waiver" && (
@@ -184,9 +184,9 @@ export function OddsCalculator() {
  )}
  </div>
  <div>
- <label className="block text-xs font-medium text-white/60 mb-2 uppercase tracking-wider">Undergrad GPA</label>
- <input type="number" step="0.01" max={10} required value={gpa} onChange={e => setGpa(e.target.value)}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-gold transition-colors"
+ <label htmlFor="calc-gpa" className="block text-xs font-medium text-white/60 mb-2 uppercase tracking-wider">Undergrad GPA</label>
+ <input id="calc-gpa" type="number" step="0.01" max={10} required value={gpa} onChange={e => setGpa(e.target.value)}
+ className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-gold transition-colors"
  placeholder="e.g. 3.8"/>
  <select value={gpaScale} onChange={e => setGpaScale(e.target.value)}
  className="mt-1 w-full bg-card/5 border border-white/20 px-4 py-2 text-white text-xs focus:outline-none focus:border-gold transition-colors">
@@ -197,9 +197,9 @@ export function OddsCalculator() {
  </select>
  </div>
  <div>
- <label className="block text-xs font-medium text-white/60 mb-2 uppercase tracking-wider">Work Experience (yrs)</label>
- <input type="number" value={workExp} onChange={e => setWorkExp(e.target.value)}
- className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-gold transition-colors"
+ <label htmlFor="calc-work-exp" className="block text-xs font-medium text-white/60 mb-2 uppercase tracking-wider">Work Experience (yrs)</label>
+ <input id="calc-work-exp" type="number" value={workExp} onChange={e => setWorkExp(e.target.value)}
+ className="w-full bg-card/5 border border-white/20 px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-gold transition-colors"
  placeholder="e.g. 4"/>
  </div>
  </div>
@@ -299,12 +299,12 @@ export function OddsCalculator() {
  )}
 
  <button type="submit" disabled={oddsLoading}
- className="bg-gold text-foreground font-bold px-10 py-3.5 hover:bg-gold-light transition-colors w-full disabled:opacity-50">
+ className="bg-gold text-foreground font-bold px-10 py-3.5 hover:bg-gold-light transition-colors w-full disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary/50">
  {oddsLoading ?"Evaluating...":"Calculate My Odds"}
  </button>
 
  {oddsError && (
- <div className="bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm text-red-300">
+ <div role="alert" aria-live="assertive" className="bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm text-red-300">
  {oddsError}
  <button onClick={() => setOddsError("")} className="ml-3 text-red-400 hover:text-red-200 underline text-xs">Dismiss</button>
  </div>

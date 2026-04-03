@@ -34,7 +34,7 @@ export function GmatDistributionChart({ data, schoolNames }: Props) {
  });
 
  return (
- <div>
+ <div role="img" aria-label="Bar chart showing GMAT score distribution for admitted vs denied applicants">
  <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground/40 mb-4">
  GMAT Distribution - Admits vs Denials
  </h3>

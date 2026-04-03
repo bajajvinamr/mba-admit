@@ -123,6 +123,16 @@ export default function EvaluatorPage() {
 
  <UsageGate feature="essay_evaluator">
 
+ {!result && !error && !essayText && (
+ <div className="mb-8 bg-muted/50 border border-border/10 p-6 text-center">
+ <FileText size={32} className="mx-auto text-muted-foreground/30 mb-3" />
+ <h3 className="text-sm font-semibold text-foreground mb-1">Paste your essay draft below</h3>
+ <p className="text-xs text-muted-foreground/60 max-w-md mx-auto">
+ Our AI evaluator will scan for AI-generated language, clich&eacute;s, and generic framing that admissions committees flag. Optionally select a target school for prompt-specific feedback.
+ </p>
+ </div>
+ )}
+
  {error && (
  <div role="alert" className="bg-red-50 border border-red-200 text-red-800 p-4 text-sm mb-6 flex items-center justify-between">
  <span>{error}</span>
@@ -184,10 +194,12 @@ export default function EvaluatorPage() {
  </span>
  </label>
  <textarea
+ id="eval-essay"
+ aria-label="Your essay draft"
  value={essayText}
  onChange={e => setEssayText(e.target.value)}
  placeholder="Paste your essay draft here... Don't worry, we don't save or train on your data."
- className="w-full h-64 border border-border/10 p-4 focus:border-border focus:outline-none resize-y text-foreground font-display leading-relaxed"
+ className="w-full h-64 border border-border/10 p-4 focus:border-border focus:outline-none focus:ring-2 focus:ring-primary/30 resize-y text-foreground font-display leading-relaxed"
  disabled={loading}
  required
  />
@@ -252,7 +264,8 @@ export default function EvaluatorPage() {
  <AlertTriangle size={14} /> Cliche Count
  </h3>
  <div className="text-4xl heading-serif font-bold text-red-900">{result.cliche_count}</div>
- <p className="text-xs text-red-700/80 mt-1">Buzzwords, AI structures, or generic"impact"framing detected.</p>
+ <p className="text-xs text-red-700/80 mt-1">Buzzwords, AI structures, or generic&nbsp;&ldquo;impact&rdquo; framing detected.</p>
+ <p className="text-[10px] text-red-600/50 mt-2">Avg. essay: 8&ndash;12 clich&eacute;s. Under 5 is strong.</p>
  </div>
  </div>
 
