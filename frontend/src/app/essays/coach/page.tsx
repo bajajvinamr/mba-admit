@@ -34,8 +34,8 @@ export default function EssayCoachPage() {
 
  // Fetch top schools on mount
  useEffect(() => {
- apiFetch("/api/schools?limit=10&sort=ranking")
-  .then((r) => r.json())
+ // eslint-disable-next-line @typescript-eslint/no-explicit-any
+ apiFetch<any>("/api/schools?limit=10&sort=ranking")
   .then((data) => {
    const list = (data.schools || data.results || []).slice(0, 10);
    if (list.length > 0) {
@@ -50,8 +50,8 @@ export default function EssayCoachPage() {
 
  // Fetch essay prompts when school changes
  useEffect(() => {
- apiFetch(`/api/essay-prompts?school_id=${selectedSchool}`)
-  .then((r) => r.json())
+ // eslint-disable-next-line @typescript-eslint/no-explicit-any
+ apiFetch<any>(`/api/essay-prompts?school_id=${selectedSchool}`)
   .then((data) => {
    const raw = data.prompts || data || [];
    const mapped: EssayPrompt[] = raw.map((p: { prompt?: string; prompt_text?: string; word_limit?: number; required?: boolean }, i: number) => ({
@@ -141,7 +141,7 @@ export default function EssayCoachPage() {
  <div key={prompt.id} className="min-w-[280px] shrink-0">
  <PromptCard
  prompt={prompt}
- selected={selectedPrompt.id === prompt.id}
+ selected={selectedPrompt?.id === prompt.id}
  onSelect={(p) => {
  setSelectedPrompt(p);
  setEssayText("");
@@ -169,13 +169,13 @@ export default function EssayCoachPage() {
  )}
  >
  <div className="mb-2 text-xs text-muted-foreground">
- {selectedPrompt.promptText}
+ {selectedPrompt?.promptText}
  </div>
  <EssayEditor
  value={essayText}
  onChange={setEssayText}
- wordLimit={selectedPrompt.wordLimit}
- placeholder={`Write your ${selectedPrompt.schoolName} essay here...`}
+ wordLimit={selectedPrompt?.wordLimit ?? null}
+ placeholder={`Write your ${selectedPrompt?.schoolName ?? "your"} essay here...`}
  />
  </div>
 
