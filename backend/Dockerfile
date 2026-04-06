@@ -1,5 +1,6 @@
 FROM python:3.11-slim
 
+# Cache bust: 2026-04-06-v2
 WORKDIR /app
 
 # Install system deps for building packages
