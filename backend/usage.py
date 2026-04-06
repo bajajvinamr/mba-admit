@@ -37,6 +37,10 @@ TIERS = {
         "admit_simulator": 3,
         "profile_analyze": 3,
         "peer_comparison": 5,
+        "strategy_ai": 1,
+        "recommender_briefing": 2,
+        "narrative_generate": 1,
+        "narrative_consistency": 2,
     },
     "pro": {
         "essay_eval": 50,
@@ -54,6 +58,10 @@ TIERS = {
         "admit_simulator": 50,
         "profile_analyze": 50,
         "peer_comparison": 50,
+        "strategy_ai": 5,
+        "recommender_briefing": 20,
+        "narrative_generate": 5,
+        "narrative_consistency": 20,
     },
     "premium": {},  # empty = unlimited
 }
@@ -77,6 +85,8 @@ ENDPOINT_FEATURE_MAP: dict[str, str] = {
     "/api/profile/analyze": "profile_analyze",
     "/api/essay/coach": "essay_coach",
     "/api/peer-comparison": "peer_comparison",
+    "/api/strategy/generate": "strategy_ai",
+    "/api/strategy/follow-up": "strategy_ai",
 }
 
 # ── In-Memory Store ──────────────────────────────────────────────────────────

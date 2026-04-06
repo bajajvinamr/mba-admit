@@ -46,5 +46,11 @@
     "description": "The complete MBA application timeline with specific deadlines for M7, T15, and European programs. When to take the GMAT, start essays, request recommendations, and submit each round.",
     "date": "2026-03-14",
     "readingTime": "11 min"
+  },
+  "mba-essay-tips": {
+    "title": "MBA Essay Tips: What Admissions Committees Actually Want",
+    "description": "Data-driven essay writing advice from analyzing 341 real successful MBA essays and 67,000+ admissions decisions.",
+    "date": "2026-04-06",
+    "readingTime": "7 min"
   }
 }

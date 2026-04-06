@@ -32,10 +32,10 @@ const PRIMARY_TABS = [
 ] as const;
 
 const MORE_ITEMS = [
-  { href: "/roi", label: "Finances", icon: DollarSign },
-  { href: "/my-schools", label: "Portfolio", icon: Briefcase },
-  { href: "/test-prep", label: "Test Prep", icon: BookOpen },
-  { href: "/mba-in/us", label: "Guides", icon: Compass },
+  { href: "/finances", label: "Finances", icon: DollarSign },
+  { href: "/sprint-plan", label: "Sprint Planner", icon: Briefcase },
+  { href: "/waivers", label: "Fee & Test Waivers", icon: BookOpen },
+  { href: "/my-schools", label: "Portfolio", icon: Compass },
   { href: "/mentors", label: "Community", icon: Users },
   { href: "/profile-report", label: "Profile", icon: User },
   { href: "/settings", label: "Settings", icon: Settings },

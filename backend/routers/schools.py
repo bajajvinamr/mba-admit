@@ -678,7 +678,7 @@ def calculate_odds(req: OddsRequest):
     for sid, school in SCHOOL_DB.items():
         if allowed_types and school.get("degree_type", "MBA") not in allowed_types:
             continue
-        school_gmat = school.get("gmat_avg", 720)
+        school_gmat = school.get("gmat_avg") or 720
         # Cap GMAT advantage to prevent it from dominating
         gmat_diff = max(-80, min(30, gmat_value - school_gmat))
 
@@ -1363,4 +1363,239 @@ def upcoming_deadlines(
         "deadlines": upcoming[:limit],
         "total": len(upcoming),
         "window_days": days,
+    }
+
+
+# ── Geo-Aware Recommendations ───────────────────────────────────────────────
+
+REGION_MAP = {
+    "north-america": {"USA", "United States", "Canada"},
+    "europe": {
+        "United Kingdom", "France", "Spain", "Germany", "Italy", "Netherlands",
+        "Switzerland", "Belgium", "Sweden", "Denmark", "Norway", "Finland",
+        "Ireland", "Portugal", "Austria",
+    },
+    "asia-pacific": {
+        "India", "China", "Singapore", "Japan", "South Korea", "Hong Kong",
+        "Thailand", "Philippines", "Indonesia", "Malaysia", "Taiwan", "Australia",
+    },
+    "latin-america": {"Brazil", "Mexico", "Colombia", "Chile", "Argentina", "Peru"},
+    "middle-east-africa": {
+        "UAE", "Saudi Arabia", "Israel", "Turkey", "South Africa", "Kenya",
+        "Nigeria", "Egypt",
+    },
+}
+
+
+@router.get("/schools/by-region/{region}")
+def schools_by_region(
+    region: str,
+    sort: str = Query("gmat_avg", pattern="^(gmat_avg|acceptance_rate|tuition_usd|name)$"),
+    limit: int = Query(20, ge=1, le=100),
+):
+    """Get top schools in a region, sorted by ranking metrics."""
+    countries = REGION_MAP.get(region)
+    if not countries:
+        raise HTTPException(404, f"Unknown region: {region}. Valid: {list(REGION_MAP.keys())}")
+
+    schools = []
+    for sid, school in SCHOOL_DB.items():
+        country = school.get("country", "")
+        if country in countries:
+            schools.append({
+                "id": sid,
+                "name": school.get("name", sid),
+                "country": country,
+                "location": school.get("location", ""),
+                "gmat_avg": school.get("gmat_avg"),
+                "acceptance_rate": school.get("acceptance_rate"),
+                "tuition_usd": school.get("tuition_usd"),
+                "median_salary": school.get("median_salary"),
+                "degree_type": school.get("degree_type", "MBA"),
+            })
+
+    reverse = sort != "acceptance_rate"  # Higher GMAT/tuition = better; lower acceptance = more selective
+    schools.sort(
+        key=lambda x: x.get(sort) or (0 if reverse else 999999),
+        reverse=reverse,
+    )
+
+    return {
+        "region": region,
+        "countries": sorted(countries),
+        "schools": schools[:limit],
+        "total": len(schools),
+    }
+
+
+@router.get("/schools/by-country/{country_slug}")
+def schools_by_country(
+    country_slug: str,
+    sort: str = Query("gmat_avg", pattern="^(gmat_avg|acceptance_rate|tuition_usd|name)$"),
+    limit: int = Query(50, ge=1, le=200),
+):
+    """Get all schools in a specific country."""
+    # Normalize slug to country name
+    slug_lower = country_slug.lower().replace("-", " ")
+
+    schools = []
+    matched_country = None
+    for sid, school in SCHOOL_DB.items():
+        country = school.get("country", "")
+        if country.lower().replace("-", " ") == slug_lower or country.lower() == slug_lower:
+            matched_country = country
+            schools.append({
+                "id": sid,
+                "name": school.get("name", sid),
+                "location": school.get("location", ""),
+                "gmat_avg": school.get("gmat_avg"),
+                "acceptance_rate": school.get("acceptance_rate"),
+                "tuition_usd": school.get("tuition_usd"),
+                "median_salary": school.get("median_salary"),
+                "degree_type": school.get("degree_type", "MBA"),
+                "class_size": school.get("class_size"),
+            })
+
+    if not schools:
+        raise HTTPException(404, f"No schools found for country: {country_slug}")
+
+    reverse = sort != "acceptance_rate"
+    schools.sort(
+        key=lambda x: x.get(sort) or (0 if reverse else 999999),
+        reverse=reverse,
+    )
+
+    return {
+        "country": matched_country or country_slug,
+        "schools": schools[:limit],
+        "total": len(schools),
+    }
+
+
+@router.get("/geo/popular-by-applicant-origin")
+def popular_by_origin(
+    nationality: str = Query(..., description="Applicant nationality/country"),
+    limit: int = Query(10, ge=1, le=30),
+):
+    """Schools most popular with applicants from a specific country.
+
+    Uses GMAT Club decision tracker data to find where applicants
+    from a given country most commonly apply and get admitted.
+    """
+    import json
+    from collections import Counter
+    from pathlib import Path
+
+    decisions_file = Path(__file__).resolve().parent.parent / "data" / "gmatclub_decisions.json"
+    if not decisions_file.exists():
+        raise HTTPException(503, "Decision data not available")
+
+    decisions = json.load(open(decisions_file))
+    nat_lower = nationality.lower()
+
+    # Filter decisions by nationality
+    matched = [
+        d for d in decisions
+        if (d.get("location") or "").lower() == nat_lower
+    ]
+
+    if not matched:
+        raise HTTPException(404, f"No decision data for nationality: {nationality}")
+
+    # Count admits by school
+    school_admits = Counter()
+    school_total = Counter()
+    for d in matched:
+        sid = d.get("school_id", "")
+        school_total[sid] += 1
+        if "admitted" in (d.get("status", "")).lower() or "matriculating" in (d.get("status", "")).lower():
+            school_admits[sid] += 1
+
+    results = []
+    for sid, total in school_total.most_common(limit):
+        school = SCHOOL_DB.get(sid, {})
+        admits = school_admits.get(sid, 0)
+        results.append({
+            "school_id": sid,
+            "school_name": school.get("name", sid),
+            "applicants_from_country": total,
+            "admitted": admits,
+            "admit_rate_for_nationality": round(admits / total * 100, 1) if total > 0 else 0,
+            "country": school.get("country", ""),
+        })
+
+    return {
+        "nationality": nationality,
+        "total_applicants": len(matched),
+        "popular_schools": results,
+    }
+
+
+# ── Waitlist Intelligence ────────────────────────────────────────────────────
+
+
+@router.get("/waitlist-stats")
+def waitlist_stats(school_ids: str | None = None, limit: int = Query(20, ge=1, le=50)):
+    """Waitlist conversion rates by school from real decision data."""
+    import json
+    from collections import Counter
+    from pathlib import Path
+
+    decisions_file = Path(__file__).resolve().parent.parent / "data" / "gmatclub_decisions.json"
+    if not decisions_file.exists():
+        raise HTTPException(503, "Decision data not available")
+
+    decisions = json.load(open(decisions_file))
+
+    target_ids = None
+    if school_ids:
+        target_ids = set(s.strip() for s in school_ids.split(","))
+
+    school_wl: dict[str, dict] = {}
+
+    for d in decisions:
+        sid = d.get("school_id", "")
+        if target_ids and sid not in target_ids:
+            continue
+        status = d.get("status", "").lower()
+
+        if "waitlist" not in status and "admitted from wl" not in status:
+            continue
+
+        if sid not in school_wl:
+            school_wl[sid] = {"waitlisted": 0, "admitted_from_wl": 0, "gmat_scores": []}
+
+        if "admitted from wl" in status:
+            school_wl[sid]["admitted_from_wl"] += 1
+        school_wl[sid]["waitlisted"] += 1
+
+        gmat = d.get("gmat") or d.get("gmat_focus")
+        if gmat:
+            school_wl[sid]["gmat_scores"].append(gmat)
+
+    results = []
+    for sid, data in school_wl.items():
+        if data["waitlisted"] < 5:
+            continue
+        school = SCHOOL_DB.get(sid, {})
+        avg_gmat = round(sum(data["gmat_scores"]) / len(data["gmat_scores"])) if data["gmat_scores"] else None
+        conversion = round(data["admitted_from_wl"] / data["waitlisted"] * 100, 1)
+        results.append({
+            "school_id": sid,
+            "school_name": school.get("name", sid),
+            "total_waitlisted": data["waitlisted"],
+            "admitted_from_waitlist": data["admitted_from_wl"],
+            "conversion_rate_pct": conversion,
+            "avg_gmat_waitlisted": avg_gmat,
+        })
+
+    results.sort(key=lambda x: -x["conversion_rate_pct"])
+
+    return {
+        "schools": results[:limit],
+        "total_schools": len(results),
+        "overall_conversion": round(
+            sum(r["admitted_from_waitlist"] for r in results) /
+            max(1, sum(r["total_waitlisted"] for r in results)) * 100, 1
+        ),
     }

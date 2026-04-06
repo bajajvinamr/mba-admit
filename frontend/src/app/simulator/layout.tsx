@@ -34,7 +34,7 @@ export default function SimulatorLayout({ children }: { children: React.ReactNod
             },
             "featureList": [
               "Monte Carlo simulation with 100 rounds",
-              "840+ MBA programs supported",
+              "905 MBA programs supported",
               "GMAT, GPA, work experience factors",
               "URM, military, international adjustments",
               "Confidence intervals for each school",

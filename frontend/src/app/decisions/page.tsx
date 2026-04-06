@@ -145,6 +145,260 @@ function getTestScore(d: GmatClubDecision): string {
  return "";
 }
 
+// ── Live Feed Stats Banner ────────────────────────────────────────────────
+
+function LiveFeedBanner() {
+  const [feedStats, setFeedStats] = useState<{
+    total: number;
+    admitted: number;
+    rejected: number;
+    waitlisted: number;
+    most_active_school: string;
+  } | null>(null);
+
+  useEffect(() => {
+    apiFetch<{
+      total: number;
+      admitted: number;
+      rejected: number;
+      waitlisted: number;
+      most_active_school: string;
+    }>("/api/outcomes/feed/stats")
+      .then(setFeedStats)
+      .catch(() => {});
+  }, []);
+
+  if (!feedStats || feedStats.total === 0) return null;
+
+  return (
+    <div className="max-w-6xl mx-auto px-8 mt-4 mb-0">
+      <div className="flex items-center gap-4 flex-wrap px-4 py-3 bg-primary/5 border border-primary/20">
+        <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-primary">
+          <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+          Community Feed
+        </span>
+        <span className="text-xs text-muted-foreground">
+          <span className="font-bold text-emerald-600">{feedStats.admitted}</span> admits
+          {" / "}
+          <span className="font-bold text-red-600">{feedStats.rejected}</span> rejects
+          {" / "}
+          <span className="font-bold text-amber-600">{feedStats.waitlisted}</span> waitlists
+        </span>
+        {feedStats.most_active_school && (
+          <span className="text-[10px] text-muted-foreground/50">
+            Most active: {(SCHOOL_NAMES as Record<string, string>)[feedStats.most_active_school] || feedStats.most_active_school}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── Contribute Decision FAB ──────────────────────────────────────────────
+
+function ContributeDecisionFAB() {
+  const [open, setOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    school_slug: "",
+    round: "R1",
+    result: "admitted",
+    gmat_score: "",
+    gpa: "",
+    years_exp: "",
+    industry: "",
+    scholarship: false,
+    international: false,
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const handleSubmit = async () => {
+    if (!formData.school_slug) return;
+    setSubmitting(true);
+    try {
+      const payload: Record<string, unknown> = {
+        school_slug: formData.school_slug,
+        round: formData.round,
+        result: formData.result,
+        scholarship: formData.scholarship,
+        international: formData.international,
+      };
+      if (formData.gmat_score) payload.gmat_score = parseInt(formData.gmat_score);
+      if (formData.gpa) payload.gpa = parseFloat(formData.gpa);
+      if (formData.years_exp) payload.years_exp = parseInt(formData.years_exp);
+      if (formData.industry) payload.industry = formData.industry;
+
+      await apiFetch("/api/outcomes/feed/contribute", {
+        method: "POST",
+        body: JSON.stringify(payload),
+      });
+      setSuccess(true);
+      setTimeout(() => { setSuccess(false); setOpen(false); }, 2000);
+    } catch {
+      // silently fail
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <>
+      {/* FAB Button */}
+      <button
+        onClick={() => setOpen(true)}
+        className="fixed bottom-24 right-6 z-40 flex items-center gap-2 px-5 py-3 bg-foreground text-background font-bold text-xs uppercase tracking-wider shadow-lg hover:bg-foreground/90 transition-colors md:bottom-8"
+      >
+        <Plus size={16} /> Report Your Decision
+      </button>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+            onClick={() => setOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-card border border-border w-full max-w-md max-h-[80vh] overflow-y-auto"
+            >
+              <div className="flex items-center justify-between px-6 py-4 border-b border-border">
+                <h3 className="font-bold text-sm uppercase tracking-wider">Report Your Decision</h3>
+                <button onClick={() => setOpen(false)}><X size={16} /></button>
+              </div>
+              <div className="p-6 space-y-4">
+                {success ? (
+                  <div className="text-center py-8">
+                    <CheckCircle2 size={32} className="text-emerald-500 mx-auto mb-3" />
+                    <p className="font-bold text-sm">Thank you! Your decision helps the community.</p>
+                  </div>
+                ) : (
+                  <>
+                    <div>
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1 block">School</label>
+                      <select
+                        value={formData.school_slug}
+                        onChange={(e) => setFormData({ ...formData, school_slug: e.target.value })}
+                        className="w-full px-3 py-2 border border-border bg-background text-sm"
+                      >
+                        <option value="">Select school...</option>
+                        {Object.entries(SCHOOL_NAMES).map(([slug, name]) => (
+                          <option key={slug} value={slug}>{name}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1 block">Round</label>
+                        <select
+                          value={formData.round}
+                          onChange={(e) => setFormData({ ...formData, round: e.target.value })}
+                          className="w-full px-3 py-2 border border-border bg-background text-sm"
+                        >
+                          {["R1", "R2", "R3", "ED", "Rolling"].map((r) => (
+                            <option key={r} value={r}>{r}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1 block">Result</label>
+                        <select
+                          value={formData.result}
+                          onChange={(e) => setFormData({ ...formData, result: e.target.value })}
+                          className="w-full px-3 py-2 border border-border bg-background text-sm"
+                        >
+                          {["admitted", "rejected", "waitlisted", "withdrew"].map((r) => (
+                            <option key={r} value={r}>{r.charAt(0).toUpperCase() + r.slice(1)}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-3 gap-3">
+                      <div>
+                        <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1 block">GMAT</label>
+                        <input
+                          type="number"
+                          value={formData.gmat_score}
+                          onChange={(e) => setFormData({ ...formData, gmat_score: e.target.value })}
+                          placeholder="740"
+                          className="w-full px-3 py-2 border border-border bg-background text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1 block">GPA</label>
+                        <input
+                          type="number"
+                          step="0.01"
+                          value={formData.gpa}
+                          onChange={(e) => setFormData({ ...formData, gpa: e.target.value })}
+                          placeholder="3.7"
+                          className="w-full px-3 py-2 border border-border bg-background text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1 block">YoE</label>
+                        <input
+                          type="number"
+                          value={formData.years_exp}
+                          onChange={(e) => setFormData({ ...formData, years_exp: e.target.value })}
+                          placeholder="5"
+                          className="w-full px-3 py-2 border border-border bg-background text-sm"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1 block">Industry</label>
+                      <input
+                        value={formData.industry}
+                        onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
+                        placeholder="Consulting, Tech, Finance..."
+                        className="w-full px-3 py-2 border border-border bg-background text-sm"
+                      />
+                    </div>
+                    <div className="flex gap-4">
+                      <label className="flex items-center gap-2 text-xs">
+                        <input
+                          type="checkbox"
+                          checked={formData.scholarship}
+                          onChange={(e) => setFormData({ ...formData, scholarship: e.target.checked })}
+                          className="accent-primary"
+                        />
+                        Scholarship
+                      </label>
+                      <label className="flex items-center gap-2 text-xs">
+                        <input
+                          type="checkbox"
+                          checked={formData.international}
+                          onChange={(e) => setFormData({ ...formData, international: e.target.checked })}
+                          className="accent-primary"
+                        />
+                        International
+                      </label>
+                    </div>
+                    <button
+                      onClick={handleSubmit}
+                      disabled={!formData.school_slug || submitting}
+                      className="w-full py-3 bg-foreground text-background font-bold text-xs uppercase tracking-wider hover:bg-foreground/90 disabled:opacity-40 transition-colors"
+                    >
+                      {submitting ? "Submitting..." : "Submit Decision"}
+                    </button>
+                  </>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
 export default function DecisionsPage() {
  const [decisions, setDecisions] = useState<GmatClubDecision[]>([]);
  const [stats, setStats] = useState<DecisionStats | null>(null);
@@ -359,6 +613,9 @@ export default function DecisionsPage() {
  </div>
  </section>
 
+ {/* ── Live Feed Stats Banner ──────────────────────────────── */}
+ <LiveFeedBanner />
+
  {/* ── What Are My Chances? ──────────────────────────────────── */}
  <section className="max-w-6xl mx-auto px-8 -mt-8 relative z-20 mb-0">
  <div className="bg-card border-2 border-primary/30">
@@ -370,7 +627,7 @@ export default function DecisionsPage() {
  <Target size={20} className="text-primary"/>
  <span className="font-display text-lg font-bold">What Are My Chances?</span>
  <span className="text-[10px] uppercase tracking-widest text-muted-foreground/40 font-bold bg-primary/10 px-2 py-0.5">
- Powered by {stats?.total_decisions.toLocaleString() ||"12K"} real decisions
+ Powered by {stats?.total_decisions.toLocaleString() ||"67K"} real decisions
  </span>
  </div>
  <ChevronRight size={18} className={`text-muted-foreground/40 transition-transform ${showChances ?"rotate-90":""}`} />
@@ -1102,6 +1359,9 @@ export default function DecisionsPage() {
  <div className="max-w-6xl mx-auto px-8 pb-12">
  <ToolCrossLinks current="/decisions"/>
  </div>
+
+ {/* Contribute Decision FAB */}
+ <ContributeDecisionFAB />
  </div>
  );
 }

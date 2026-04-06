@@ -273,6 +273,12 @@ export default function ComparePage() {
  s.static.tuition_usd ? `$${s.static.tuition_usd.toLocaleString()}` :"-",
  },
  {
+ label:"Scholarship Rate",
+ icon: <Award size={14} />,
+ getValue: (s) =>
+ s.outcomes?.scholarship_rate ? `${s.outcomes.scholarship_rate}%` :"-",
+ },
+ {
  label:"Application Fee",
  icon: <DollarSign size={14} />,
  getValue: (s) =>
@@ -315,7 +321,7 @@ export default function ComparePage() {
  Compare Schools
  </h1>
  <p className="text-lg text-white/60 max-w-xl mx-auto">
- Side-by-side outcomes from 12K real admission decisions.
+ Side-by-side outcomes from 67K+ real admission decisions.
  </p>
  </div>
  </section>

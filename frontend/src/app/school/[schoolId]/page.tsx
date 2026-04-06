@@ -21,6 +21,8 @@ import type { QuickFormData } from"./_components/ApplicationSection";
 import { SchoolHeader } from"./_components/SchoolHeader";
 import { ApplicantInsights } from"./_components/ApplicantInsights";
 import { RealApplicantData } from"./_components/RealApplicantData";
+import { NationalityInsights } from"./_components/NationalityInsights";
+import { MLPredictionCard } from"./_components/MLPredictionCard";
 import { ApplicationSection } from"./_components/ApplicationSection";
 import {
  OverviewTab,
@@ -29,6 +31,7 @@ import {
  AdmissionsTab,
  EmploymentTab,
  CostsTab,
+ ActivityTab,
 } from"./_components/tabs";
 
 const TAB_ITEMS = [
@@ -38,6 +41,7 @@ const TAB_ITEMS = [
  { value: 3, label:"Admissions"},
  { value: 4, label:"Employment"},
  { value: 5, label:"Costs"},
+ { value: 6, label:"Activity"},
 ] as const;
 
 export default function SchoolDetail() {
@@ -299,6 +303,8 @@ export default function SchoolDetail() {
 
  <TabsContent value={0} className="mt-10">
  <OverviewTab school={school} />
+ <MLPredictionCard schoolId={schoolId} />
+ <NationalityInsights schoolId={schoolId} />
  <RealApplicantData schoolId={schoolId} />
  </TabsContent>
 
@@ -320,6 +326,10 @@ export default function SchoolDetail() {
 
  <TabsContent value={5} className="mt-10">
  <CostsTab school={school} />
+ </TabsContent>
+
+ <TabsContent value={6} className="mt-10">
+ <ActivityTab schoolId={schoolId} />
  </TabsContent>
  </Tabs>
 

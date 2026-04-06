@@ -67,6 +67,28 @@ from routers.interview_guides import router as interview_guides_router
 from routers.peer_comparison import router as peer_comparison_router
 from routers.mentors import router as mentors_router
 from routers.essay_examples import router as essay_examples_router
+from routers.strategy_ai import router as strategy_ai_router
+from routers.notifications import router as notifications_router
+from routers.profile_review import router as profile_review_router
+from routers.narrative import router as narrative_router
+from routers.interview_reports import router as interview_reports_router
+from routers.events import router as school_events_router
+from routers.cycle_feed import router as cycle_feed_router
+from routers.scholarship_intelligence import router as scholarship_intel_router
+from routers.smart_planner import router as smart_planner_router
+from routers.ml_predictions import router as ml_predictions_router
+from routers.video_essay import router as video_essay_router
+from routers.email_drip import router as email_drip_router
+from routers.list_health import router as list_health_router
+from routers.ical_export import router as ical_export_router
+from routers.essay_match import router as essay_match_router
+from routers.student_connect import router as student_connect_router
+from routers.recommender_mgmt import router as recommender_mgmt_router
+from routers.accelerator import router as accelerator_router
+from routers.compass_advisor import router as compass_advisor_router
+from routers.live_feed import router as live_feed_router
+from routers.accountability import router as accountability_router
+from routers.outcomes_trust import router as outcomes_trust_router
 
 app.include_router(auth_router)
 app.include_router(schools_router)
@@ -95,6 +117,28 @@ app.include_router(interview_guides_router)
 app.include_router(peer_comparison_router)
 app.include_router(mentors_router)
 app.include_router(essay_examples_router)
+app.include_router(strategy_ai_router)
+app.include_router(notifications_router)
+app.include_router(profile_review_router)
+app.include_router(narrative_router)
+app.include_router(interview_reports_router)
+app.include_router(school_events_router)
+app.include_router(cycle_feed_router)
+app.include_router(scholarship_intel_router)
+app.include_router(smart_planner_router)
+app.include_router(ml_predictions_router)
+app.include_router(video_essay_router)
+app.include_router(email_drip_router)
+app.include_router(list_health_router)
+app.include_router(ical_export_router)
+app.include_router(essay_match_router)
+app.include_router(student_connect_router)
+app.include_router(recommender_mgmt_router)
+app.include_router(accelerator_router)
+app.include_router(live_feed_router)
+app.include_router(accountability_router)
+app.include_router(outcomes_trust_router)
+app.include_router(compass_advisor_router)
 
 
 @app.get("/")

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "MBA School Directory - 840+ Programs Ranked & Compared";
+export const alt = "MBA School Directory - 905 Programs Ranked & Compared";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -30,7 +30,7 @@ export default async function Image() {
         </div>
 
         <div style={{ fontSize: 22, color: "rgba(255,255,255,0.5)", textAlign: "center", marginBottom: 48, maxWidth: 700 }}>
-          Filter by GMAT, salary, class size, location, and more across 840+ programs worldwide
+          Filter by GMAT, salary, class size, location, and more across 905 programs worldwide
         </div>
 
         {/* School name samples */}
@@ -53,7 +53,7 @@ export default async function Image() {
         </div>
 
         <div style={{ marginTop: 32, fontSize: 14, color: "#D4AF37", fontWeight: 700 }}>
-          840+ Programs · GMAT · Salary · Rankings · Essays
+          905 Programs · GMAT · Salary · Rankings · Essays
         </div>
 
         <div style={{ position: "absolute", bottom: 30, fontSize: 14, color: "rgba(255,255,255,0.25)", letterSpacing: 1 }}>

@@ -26,7 +26,7 @@ export default function SchoolNotFound() {
  We couldn&apos;t find that program
  </h1>
  <p className="text-muted-foreground/60 mb-8">
- The school you&apos;re looking for may have been removed, renamed, or doesn&apos;t exist in our database of 840+ programs.
+ The school you&apos;re looking for may have been removed, renamed, or doesn&apos;t exist in our database of 905 programs.
  </p>
 
  <div className="mb-8">

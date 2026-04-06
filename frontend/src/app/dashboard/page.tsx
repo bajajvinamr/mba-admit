@@ -22,6 +22,7 @@ import { cn } from "@/lib/cn";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { JourneyProgress } from "@/components/dashboard/JourneyProgress";
 import { StageToolGrid } from "@/components/dashboard/StageToolGrid";
+import { QuickInsights } from "@/components/dashboard/QuickInsights";
 
 // Archetype-specific dashboards
 import { ExplorerDashboard } from "@/components/dashboard/ExplorerDashboard";
@@ -209,12 +210,20 @@ function DashboardContent() {
   const router = useRouter();
   const { profile: savedProfile } = useProfile();
   const storeArchetype = useOnboardingStore((s) => s.archetype);
+  const onboardingCompleted = useOnboardingStore((s) => s.completed);
   const targetCountries = useOnboardingStore((s) => s.targetCountries);
 
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [archetypeOverride, setArchetypeOverride] = useState<Archetype | null>(null);
 
   const archetype = archetypeOverride ?? storeArchetype;
+
+  // Redirect new users to onboarding
+  useEffect(() => {
+    if (!onboardingCompleted) {
+      router.replace("/onboarding");
+    }
+  }, [onboardingCompleted, router]);
 
   // Legacy redirect
   const schoolId = searchParams.get("school_id");
@@ -494,6 +503,14 @@ function DashboardContent() {
           <section>
             <JourneyProgress currentStage={displayStage} />
           </section>
+
+          {/* Quick Insights — scholarship, ML prediction, sprint planner */}
+          <QuickInsights
+            gmat={savedProfile.gmat ?? undefined}
+            gpa={savedProfile.gpa ?? undefined}
+            yoe={savedProfile.yoe ?? undefined}
+            schoolIds={schools.map((s) => s.school_id).slice(0, 5)}
+          />
 
           {/* Archetype-specific content — THE dashboard */}
           <motion.section

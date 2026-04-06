@@ -12,6 +12,7 @@ import { KeyboardShortcuts } from "@/components/KeyboardShortcuts";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { OfflineBanner } from "@/components/OfflineBanner";
 import { MobileTabBar } from "@/components/MobileTabBar";
+import { CompassAdvisor } from "@/components/CompassAdvisor";
 import { QueryProvider } from "@/components/providers/QueryProvider";
 import { PostHogProvider } from "@/components/providers/PostHogProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     template: "%s | Admit Compass",
   },
   description:
-    "AI-powered MBA admissions platform. Odds calculator, essay evaluator, interview prep, school comparison, and application tracking for 840+ programs worldwide.",
+    "AI-powered MBA admissions platform. Odds calculator, essay evaluator, interview prep, school comparison, and application tracking for 905 programs worldwide.",
   metadataBase: new URL("https://admitcompass.ai"),
   openGraph: {
     title: "Admit Compass - AI-Powered MBA Admissions",
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Admit Compass - AI-Powered MBA Admissions",
     description:
-      "840+ programs. 12K+ real decisions. AI essay feedback. Free odds calculator.",
+      "905 programs. 67K+ real decisions. AI essay feedback. Free odds calculator.",
   },
   robots: {
     index: true,
@@ -78,7 +79,7 @@ export default function RootLayout({
                   "@type": "WebSite",
                   "name": "Admit Compass",
                   "url": "https://admitcompass.ai",
-                  "description": "AI-powered MBA admissions platform with 100+ tools for 840+ programs worldwide.",
+                  "description": "AI-powered MBA admissions platform with 100+ tools for 905 programs worldwide.",
                   "potentialAction": {
                     "@type": "SearchAction",
                     "target": "https://admitcompass.ai/schools?q={search_term_string}",
@@ -127,8 +128,9 @@ export default function RootLayout({
               <div className="md:col-span-2">
                 <span className="font-display text-2xl font-bold">ADMIT COMPASS.</span>
                 <p className="text-primary-foreground/40 dark:text-muted-foreground text-sm mt-3 max-w-sm leading-relaxed">
-                  840+ MBA, MiM, and EMBA programs. School research, essay drafting,
-                  interview prep, and odds calculation. Everything you need, in one place.
+                  905 MBA programs. 67,000+ real admissions decisions. School research,
+                  essay coaching, interview prep, and scholarship intelligence. Your
+                  complete admissions advantage.
                 </p>
               </div>
               <div>
@@ -174,6 +176,7 @@ export default function RootLayout({
         <ToastContainer />
         <OfflineBanner />
         <MobileTabBar />
+        <CompassAdvisor />
         </PostHogProvider>
         </QueryProvider>
         </AuthProvider>

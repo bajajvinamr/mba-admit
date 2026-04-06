@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Plus, X, Search, Scale, Trophy, Clock, AlertTriangle,
   Sliders, DollarSign, MapPin, Users, TrendingUp, GraduationCap,
-  ChevronDown, ChevronUp, ArrowRight,
+  ChevronDown, ChevronUp, ArrowRight, FileText, Loader2, Send,
 } from "lucide-react";
 import Link from "next/link";
 import { apiFetch } from "@/lib/api";
@@ -547,52 +547,358 @@ export default function DecidePage() {
           </div>
         )}
 
-        {/* Waitlist Section */}
+        {/* Waitlist Section with LOCI Generator */}
         {waitlisted.length > 0 && (
-          <motion.div
-            className="editorial-card p-6 mb-8"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <h2 className="heading-serif text-xl mb-4 font-[family-name:var(--font-heading)] text-foreground flex items-center gap-2">
-              <AlertTriangle size={20} className="text-amber-500" />
-              Waitlisted Schools
-            </h2>
-            <div className="space-y-3">
-              {waitlisted.map((e) => (
-                <div
-                  key={e.schoolId}
-                  className="flex items-center justify-between p-3 bg-amber-50 dark:bg-amber-900/10 rounded-lg"
-                >
-                  <div>
-                    <p className="font-semibold text-foreground text-sm">
-                      {e.schoolData?.name}
-                    </p>
-                    {e.waitlistStrategy && (
-                      <p className="text-xs text-muted-foreground mt-0.5">{e.waitlistStrategy}</p>
-                    )}
-                  </div>
-                  <Link
-                    href="/waitlist"
-                    className="text-xs text-primary font-medium flex items-center gap-1"
-                  >
-                    Strategy Tips <ArrowRight size={12} />
-                  </Link>
-                </div>
-              ))}
-            </div>
-            <div className="mt-4 p-3 bg-foreground/[0.02] rounded-lg">
-              <p className="text-xs text-muted-foreground">
-                <strong>Waitlist tips:</strong> Send a letter of continued interest. Update the
-                school on any new achievements. Visit campus if possible. Do not contact admissions
-                excessively.
-              </p>
-            </div>
-          </motion.div>
+          <WaitlistSection waitlisted={waitlisted} />
         )}
 
         <ToolCrossLinks current="/decide" />
       </div>
     </main>
+  );
+}
+
+
+/* ── LOCI Generator — Waitlist Section ────────────────────────────── */
+
+type LociResult = {
+  structure?: string[];
+  tips?: string[];
+  clarifying_questions?: string[];
+  word_target?: number;
+  tone_guidance?: string;
+  avoid?: string[];
+  // Review mode
+  strengths?: string[];
+  improvements?: { issue: string; suggestion: string }[];
+  word_count?: number;
+  tone_assessment?: string;
+  overall_grade?: string;
+  rewrite_suggestions?: string[];
+};
+
+function WaitlistSection({ waitlisted }: { waitlisted: AdmitEntry[] }) {
+  const [activeLoci, setActiveLoci] = useState<string | null>(null);
+  const [lociForm, setLociForm] = useState({
+    whats_changed: "",
+    new_achievements: "",
+    school_interactions: "",
+    draft: "",
+  });
+  const [lociResult, setLociResult] = useState<LociResult | null>(null);
+  const [lociLoading, setLociLoading] = useState(false);
+  const [lociMode, setLociMode] = useState<"coach" | "review">("coach");
+
+  const wordCount = lociForm.draft.trim().split(/\s+/).filter(Boolean).length;
+
+  async function handleLoci(schoolId: string) {
+    setLociLoading(true);
+    setLociResult(null);
+
+    try {
+      const payload = {
+        school_slug: schoolId,
+        whats_changed: lociForm.whats_changed,
+        new_achievements: lociForm.new_achievements,
+        school_interactions: lociForm.school_interactions,
+        draft: lociMode === "review" ? lociForm.draft : undefined,
+        mode: lociMode,
+      };
+      const data = await apiFetch<LociResult>("/api/strategy/waitlist/loci-coach", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        timeoutMs: 60_000,
+      });
+      setLociResult(data);
+    } catch {
+      setLociResult(null);
+    } finally {
+      setLociLoading(false);
+    }
+  }
+
+  return (
+    <motion.div
+      className="editorial-card p-6 mb-8"
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+    >
+      <h2 className="heading-serif text-xl mb-4 font-[family-name:var(--font-heading)] text-foreground flex items-center gap-2">
+        <AlertTriangle size={20} className="text-amber-500" />
+        Waitlisted Schools
+      </h2>
+      <div className="space-y-3">
+        {waitlisted.map((e) => (
+          <div key={e.schoolId}>
+            <div className="flex items-center justify-between p-3 bg-amber-50 dark:bg-amber-900/10 rounded-lg">
+              <div>
+                <p className="font-semibold text-foreground text-sm">{e.schoolData?.name}</p>
+                {e.waitlistStrategy && (
+                  <p className="text-xs text-muted-foreground mt-0.5">{e.waitlistStrategy}</p>
+                )}
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setActiveLoci(activeLoci === e.schoolId ? null : e.schoolId)}
+                  className="text-xs bg-primary text-white px-3 py-1.5 rounded-md font-medium flex items-center gap-1 hover:bg-primary/90 transition-colors"
+                >
+                  <FileText size={12} />
+                  LOCI Generator
+                </button>
+                <Link
+                  href="/waitlist"
+                  className="text-xs text-primary font-medium flex items-center gap-1"
+                >
+                  Tips <ArrowRight size={12} />
+                </Link>
+              </div>
+            </div>
+
+            {/* LOCI Generator Panel */}
+            <AnimatePresence>
+              {activeLoci === e.schoolId && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  className="overflow-hidden"
+                >
+                  <div className="p-4 border border-amber-200 border-t-0 rounded-b-lg bg-white dark:bg-card space-y-4">
+                    {/* Mode Toggle */}
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => { setLociMode("coach"); setLociResult(null); }}
+                        className={`px-3 py-1 text-xs rounded-md font-medium transition-colors ${
+                          lociMode === "coach"
+                            ? "bg-primary text-white"
+                            : "bg-foreground/5 text-muted-foreground"
+                        }`}
+                      >
+                        Get Coached
+                      </button>
+                      <button
+                        onClick={() => { setLociMode("review"); setLociResult(null); }}
+                        className={`px-3 py-1 text-xs rounded-md font-medium transition-colors ${
+                          lociMode === "review"
+                            ? "bg-primary text-white"
+                            : "bg-foreground/5 text-muted-foreground"
+                        }`}
+                      >
+                        Review My Draft
+                      </button>
+                    </div>
+
+                    {lociMode === "coach" ? (
+                      <div className="space-y-3">
+                        <div>
+                          <label className="text-xs text-muted-foreground block mb-1">
+                            What has changed since you applied?
+                          </label>
+                          <textarea
+                            placeholder="Promotion, new project, achievements..."
+                            value={lociForm.whats_changed}
+                            onChange={(ev) =>
+                              setLociForm((p) => ({ ...p, whats_changed: ev.target.value }))
+                            }
+                            rows={2}
+                            className="w-full px-3 py-2 border border-border/10 rounded-lg text-sm bg-card text-foreground focus:ring-2 focus:ring-primary/50 focus:outline-none resize-none placeholder:text-muted-foreground"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs text-muted-foreground block mb-1">
+                            New achievements
+                          </label>
+                          <textarea
+                            placeholder="Awards, certifications, leadership roles..."
+                            value={lociForm.new_achievements}
+                            onChange={(ev) =>
+                              setLociForm((p) => ({ ...p, new_achievements: ev.target.value }))
+                            }
+                            rows={2}
+                            className="w-full px-3 py-2 border border-border/10 rounded-lg text-sm bg-card text-foreground focus:ring-2 focus:ring-primary/50 focus:outline-none resize-none placeholder:text-muted-foreground"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs text-muted-foreground block mb-1">
+                            School interactions (visits, events, conversations)
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="Visited campus, attended info session..."
+                            value={lociForm.school_interactions}
+                            onChange={(ev) =>
+                              setLociForm((p) => ({ ...p, school_interactions: ev.target.value }))
+                            }
+                            className="w-full px-3 py-2 border border-border/10 rounded-lg text-sm bg-card text-foreground focus:ring-2 focus:ring-primary/50 focus:outline-none placeholder:text-muted-foreground"
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <label className="text-xs text-muted-foreground block mb-1">
+                          Your LOCI Draft
+                        </label>
+                        <textarea
+                          placeholder="Paste your letter of continued interest draft here..."
+                          value={lociForm.draft}
+                          onChange={(ev) =>
+                            setLociForm((p) => ({ ...p, draft: ev.target.value }))
+                          }
+                          rows={8}
+                          className="w-full px-3 py-2 border border-border/10 rounded-lg text-sm bg-card text-foreground focus:ring-2 focus:ring-primary/50 focus:outline-none resize-none placeholder:text-muted-foreground"
+                        />
+                        <div className="flex items-center justify-between mt-1">
+                          <span
+                            className={`text-xs ${
+                              wordCount > 500 ? "text-red-500 font-semibold" : "text-muted-foreground"
+                            }`}
+                          >
+                            {wordCount} / 500 words
+                          </span>
+                          {wordCount > 500 && (
+                            <span className="text-xs text-red-500">Over target word count</span>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    <button
+                      onClick={() => handleLoci(e.schoolId)}
+                      disabled={lociLoading}
+                      className="w-full py-2 bg-foreground text-white rounded-lg text-sm font-medium hover:bg-foreground/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                    >
+                      {lociLoading ? (
+                        <>
+                          <Loader2 size={14} className="animate-spin" />
+                          {lociMode === "coach" ? "Getting coaching..." : "Reviewing draft..."}
+                        </>
+                      ) : (
+                        <>
+                          <Send size={14} />
+                          {lociMode === "coach" ? "Get LOCI Coaching" : "Review My Draft"}
+                        </>
+                      )}
+                    </button>
+
+                    {/* Results */}
+                    {lociResult && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="space-y-3 pt-2 border-t border-border/10"
+                      >
+                        {lociMode === "coach" && lociResult.structure && (
+                          <>
+                            <div>
+                              <p className="text-xs font-semibold text-foreground mb-2">
+                                Recommended Structure
+                              </p>
+                              <ol className="space-y-1">
+                                {lociResult.structure.map((s, i) => (
+                                  <li key={i} className="text-xs text-muted-foreground flex gap-2">
+                                    <span className="text-primary font-bold">{i + 1}.</span> {s}
+                                  </li>
+                                ))}
+                              </ol>
+                            </div>
+                            {lociResult.tips && (
+                              <div>
+                                <p className="text-xs font-semibold text-foreground mb-2">Tips</p>
+                                <ul className="space-y-1">
+                                  {lociResult.tips.map((t, i) => (
+                                    <li key={i} className="text-xs text-muted-foreground flex gap-1">
+                                      <span className="text-emerald-500">-</span> {t}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                            {lociResult.clarifying_questions && (
+                              <div>
+                                <p className="text-xs font-semibold text-foreground mb-2">
+                                  Think about these:
+                                </p>
+                                <ul className="space-y-1">
+                                  {lociResult.clarifying_questions.map((q, i) => (
+                                    <li key={i} className="text-xs text-amber-700 bg-amber-50 p-2 rounded">
+                                      {q}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                            {lociResult.avoid && (
+                              <div>
+                                <p className="text-xs font-semibold text-red-600 mb-2">Avoid</p>
+                                <ul className="space-y-1">
+                                  {lociResult.avoid.map((a, i) => (
+                                    <li key={i} className="text-xs text-red-600 flex gap-1">
+                                      <X size={12} className="shrink-0 mt-0.5" /> {a}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                          </>
+                        )}
+
+                        {lociMode === "review" && lociResult.overall_grade && (
+                          <>
+                            <div className="flex items-center gap-3">
+                              <span className={`text-2xl font-bold ${
+                                lociResult.overall_grade === "A" ? "text-emerald-600" :
+                                lociResult.overall_grade === "B" ? "text-blue-600" :
+                                lociResult.overall_grade === "C" ? "text-amber-600" : "text-red-600"
+                              }`}>
+                                {lociResult.overall_grade}
+                              </span>
+                              <span className="text-xs text-muted-foreground">
+                                {lociResult.word_count} words | {lociResult.tone_assessment}
+                              </span>
+                            </div>
+                            {lociResult.strengths && lociResult.strengths.length > 0 && (
+                              <div>
+                                <p className="text-xs font-semibold text-emerald-600 mb-1">Strengths</p>
+                                <ul className="space-y-1">
+                                  {lociResult.strengths.map((s, i) => (
+                                    <li key={i} className="text-xs text-emerald-700 bg-emerald-50 p-2 rounded">
+                                      {s}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                            {lociResult.improvements && lociResult.improvements.length > 0 && (
+                              <div>
+                                <p className="text-xs font-semibold text-amber-600 mb-1">Improvements</p>
+                                <ul className="space-y-1">
+                                  {lociResult.improvements.map((imp, i) => (
+                                    <li key={i} className="text-xs p-2 bg-amber-50 rounded">
+                                      <span className="font-semibold text-amber-800">{imp.issue}:</span>{" "}
+                                      <span className="text-amber-700">{imp.suggestion}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                          </>
+                        )}
+                      </motion.div>
+                    )}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        ))}
+      </div>
+      <div className="mt-4 p-3 bg-foreground/[0.02] rounded-lg">
+        <p className="text-xs text-muted-foreground">
+          <strong>Waitlist tips:</strong> Send a letter of continued interest. Update the
+          school on any new achievements. Visit campus if possible. Do not contact admissions
+          excessively.
+        </p>
+      </div>
+    </motion.div>
   );
 }

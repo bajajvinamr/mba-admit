@@ -23,7 +23,7 @@ export default function AboutPage() {
  <h2 className="heading-serif text-2xl mb-8">What We Do</h2>
  <div className="grid md:grid-cols-3 gap-6">
  {[
- { icon: <Target size={24} />, title:"Odds Engine", desc:"Calculate your admission probability against 840+ programs using real community data from 12,000+ decisions."},
+ { icon: <Target size={24} />, title:"Odds Engine", desc:"Calculate your admission probability against 905 programs using real community data from 67,000+ decisions."},
  { icon: <Zap size={24} />, title:"AI Essay Tools", desc:"Draft, evaluate, and refine your essays with AI that understands what admissions committees look for."},
  { icon: <Users size={24} />, title:"Interview Prep", desc:"Practice with AI mock interviews tailored to each school's format and question style."},
  ].map((f, i) => (
@@ -40,7 +40,7 @@ export default function AboutPage() {
  <h2 className="heading-serif text-2xl mb-8">Our Coverage</h2>
  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
  {[
- { value:"840+", label:"Programs"},
+ { value:"905", label:"Programs"},
  { value:"66", label:"Countries"},
  { value:"4", label:"Program Types"},
  { value:"120+", label:"Tools"},

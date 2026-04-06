@@ -57,9 +57,9 @@ export default async function Image() {
           }}
         >
           {[
-            { value: "840+", label: "Programs" },
+            { value: "905", label: "Programs" },
             { value: "100+", label: "AI Tools" },
-            { value: "12K+", label: "Real Decisions" },
+            { value: "67K+", label: "Real Decisions" },
           ].map((stat) => (
             <div
               key={stat.label}

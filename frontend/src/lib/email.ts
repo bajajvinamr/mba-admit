@@ -48,7 +48,7 @@ function welcomeEmailHtml(name: string): string {
   <p>Hi ${name},</p>
   <p>You're all set. Your profile is ready and you now have access to:</p>
   <ul style="line-height: 1.8;">
-    <li>840+ MBA, MiM, and EMBA program profiles</li>
+    <li>905 MBA, MiM, and EMBA program profiles</li>
     <li>AI-powered essay feedback</li>
     <li>Interview simulator with voice mode</li>
     <li>Personalized school recommendations</li>

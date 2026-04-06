@@ -131,7 +131,7 @@ def get_essay_prompts(school_id: str = None):
             else:
                 text = str(prompt)
             # Fallback: try to extract word limit from prompt text if not set
-            if word_limit is None:
+            if word_limit is None and text:
                 import re
                 wl_match = re.search(r"(\d+)\s*word", text.lower())
                 if wl_match:

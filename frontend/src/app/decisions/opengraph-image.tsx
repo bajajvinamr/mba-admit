@@ -28,11 +28,11 @@ export default async function Image() {
           Real results from real applicants.
         </div>
         <div style={{ fontSize: 22, color: "rgba(255,255,255,0.5)", textAlign: "center", marginBottom: 48, maxWidth: 700 }}>
-          Browse 12,000+ anonymous admissions decisions - filter by school, GMAT, GPA, and round
+          Browse 67,000+ anonymous admissions decisions - filter by school, GMAT, GPA, and round
         </div>
         <div style={{ display: "flex", gap: 32 }}>
           {[
-            { label: "Decisions", value: "12K+" },
+            { label: "Decisions", value: "67K+" },
             { label: "Schools", value: "250+" },
             { label: "Rounds", value: "R1-R3" },
           ].map((stat) => (

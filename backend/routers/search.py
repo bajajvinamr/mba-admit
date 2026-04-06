@@ -1,10 +1,11 @@
-"""Advanced school search API with multi-filter support and sorting."""
+"""Advanced school search API with multi-filter support, sorting, and natural language query parsing."""
 
 import logging
 import math
+import re
 from typing import Optional
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 from pydantic import BaseModel, Field
 
 from agents import SCHOOL_DB
@@ -322,3 +323,129 @@ def search_schools(req: SearchRequest):
         per_page=req.per_page,
         filters_applied=filters_applied,
     )
+
+
+# ── Natural Language Query Parser ────────────────────────────────────────────
+
+# Patterns: "GMAT under 700", "acceptance rate above 30%", "tuition below 60000",
+# "in Europe", "in USA", "STEM", "part-time", "class size over 200"
+_NL_PATTERNS: list[tuple[re.Pattern, str, str]] = [
+    # GMAT
+    (re.compile(r"gmat\s*(?:under|below|<|less than)\s*(\d{3})", re.I), "gmat_max", "int"),
+    (re.compile(r"gmat\s*(?:above|over|>|greater than|more than|at least)\s*(\d{3})", re.I), "gmat_min", "int"),
+    (re.compile(r"gmat\s*(\d{3})\s*[-–to]+\s*(\d{3})", re.I), "gmat_range", "range"),
+    # Acceptance rate
+    (re.compile(r"accept(?:ance)?\s*(?:rate)?\s*(?:above|over|>|greater than|more than|at least)\s*(\d{1,3})%?", re.I), "acceptance_min", "float"),
+    (re.compile(r"accept(?:ance)?\s*(?:rate)?\s*(?:under|below|<|less than)\s*(\d{1,3})%?", re.I), "acceptance_max", "float"),
+    # Tuition
+    (re.compile(r"tuition\s*(?:under|below|<|less than|cheaper than)\s*\$?(\d[\d,]*)", re.I), "tuition_max", "money"),
+    (re.compile(r"tuition\s*(?:above|over|>|more than|at least)\s*\$?(\d[\d,]*)", re.I), "tuition_min", "money"),
+    # Countries/regions
+    (re.compile(r"\bin\s+(usa|us|united states|america)", re.I), "country", "USA"),
+    (re.compile(r"\bin\s+(uk|united kingdom|england|britain)", re.I), "country", "United Kingdom"),
+    (re.compile(r"\bin\s+(europe|eu)\b", re.I), "region", "europe"),
+    (re.compile(r"\bin\s+(asia)\b", re.I), "region", "asia"),
+    (re.compile(r"\bin\s+(canada)\b", re.I), "country", "Canada"),
+    (re.compile(r"\bin\s+(india)\b", re.I), "country", "India"),
+    (re.compile(r"\bin\s+(france)\b", re.I), "country", "France"),
+    (re.compile(r"\bin\s+(spain)\b", re.I), "country", "Spain"),
+    (re.compile(r"\bin\s+(singapore)\b", re.I), "country", "Singapore"),
+    # Format
+    (re.compile(r"\b(part[- ]?time)\b", re.I), "format", "part-time"),
+    (re.compile(r"\b(full[- ]?time)\b", re.I), "format", "full-time"),
+    (re.compile(r"\b(online|remote)\b", re.I), "format", "online"),
+    (re.compile(r"\b(executive|emba)\b", re.I), "format", "executive"),
+    # STEM
+    (re.compile(r"\bstem\b", re.I), "stem", "true"),
+]
+
+EUROPEAN_COUNTRIES = {
+    "United Kingdom", "France", "Spain", "Germany", "Italy", "Netherlands",
+    "Switzerland", "Belgium", "Sweden", "Denmark", "Norway", "Finland",
+    "Ireland", "Portugal", "Austria",
+}
+ASIAN_COUNTRIES = {
+    "India", "China", "Singapore", "Japan", "South Korea", "Hong Kong",
+    "Thailand", "Philippines", "Indonesia", "Malaysia", "Taiwan",
+}
+
+
+def _parse_natural_language(q: str) -> tuple[SearchFilters, str]:
+    """Parse natural language query into structured filters + remaining text query."""
+    filters = SearchFilters()
+    remaining = q
+
+    for pattern, field, field_type in _NL_PATTERNS:
+        match = pattern.search(remaining)
+        if not match:
+            continue
+
+        # Remove matched portion from remaining text
+        remaining = remaining[:match.start()] + remaining[match.end():]
+
+        if field == "gmat_max" and field_type == "int":
+            filters.gmat_max = int(match.group(1))
+        elif field == "gmat_min" and field_type == "int":
+            filters.gmat_min = int(match.group(1))
+        elif field == "gmat_range":
+            filters.gmat_min = int(match.group(1))
+            filters.gmat_max = int(match.group(2))
+        elif field == "acceptance_min":
+            filters.acceptance_min = float(match.group(1))
+        elif field == "acceptance_max":
+            filters.acceptance_max = float(match.group(1))
+        elif field == "tuition_max" and field_type == "money":
+            filters.tuition_max = int(match.group(1).replace(",", ""))
+        elif field == "tuition_min" and field_type == "money":
+            filters.tuition_min = int(match.group(1).replace(",", ""))
+        elif field == "country":
+            filters.countries = filters.countries or []
+            filters.countries.append(field_type)
+        elif field == "region":
+            if field_type == "europe":
+                filters.countries = list(EUROPEAN_COUNTRIES)
+            elif field_type == "asia":
+                filters.countries = list(ASIAN_COUNTRIES)
+        elif field == "format":
+            filters.formats = filters.formats or []
+            filters.formats.append(field_type)
+
+    # Clean up remaining text
+    remaining = re.sub(r"\s+", " ", remaining).strip()
+    # Remove dangling conjunctions
+    remaining = re.sub(r"^(and|with|that have|where|which)\s+", "", remaining, flags=re.I)
+    remaining = re.sub(r"\s+(and|with)$", "", remaining, flags=re.I)
+
+    return filters, remaining if remaining else None
+
+
+@router.get("/search/smart")
+def smart_search(
+    q: str = Query(..., min_length=2, description="Natural language search query"),
+    page: int = Query(1, ge=1),
+    per_page: int = Query(20, ge=1, le=100),
+    sort: str = Query("ranking"),
+):
+    """Natural language school search.
+
+    Parses queries like:
+    - "schools with GMAT under 700 and acceptance rate above 30%"
+    - "MBA programs in Europe with tuition below $60,000"
+    - "part-time MBA in USA"
+    - "STEM programs in Asia"
+
+    Extracts structured filters from the query and applies them.
+    Any remaining text is used as a free-text search.
+    """
+    filters, remaining_text = _parse_natural_language(q)
+
+    req = SearchRequest(
+        query=remaining_text,
+        filters=filters,
+        sort=sort,
+        page=page,
+        per_page=per_page,
+    )
+
+    # Reuse existing search logic
+    return search_schools(req)

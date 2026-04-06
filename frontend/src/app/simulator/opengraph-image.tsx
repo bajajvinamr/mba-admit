@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "MBA Odds Calculator - Check Your Chances at 840+ Programs";
+export const alt = "MBA Odds Calculator - Check Your Chances at 905 Programs";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -30,14 +30,14 @@ export default async function Image() {
         </div>
 
         <div style={{ fontSize: 22, color: "rgba(255,255,255,0.5)", textAlign: "center", marginBottom: 48, maxWidth: 700 }}>
-          Check your odds against 840+ MBA programs using 12,000+ real admissions decisions
+          Check your odds against 905 MBA programs using 67,000+ real admissions decisions
         </div>
 
         {/* Stats row */}
         <div style={{ display: "flex", gap: 32 }}>
           {[
-            { label: "Programs", value: "840+" },
-            { label: "Real Decisions", value: "12K+" },
+            { label: "Programs", value: "905" },
+            { label: "Real Decisions", value: "67K+" },
             { label: "Accuracy", value: "92%" },
           ].map((stat) => (
             <div

@@ -11,28 +11,61 @@ logger = setup_logging()
 
 router = APIRouter(prefix="/api/essays", tags=["essay-examples"])
 
-_DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "essay_examples.json")
+_DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 _examples_cache: list[dict] | None = None
 
 
+def _load_json(path: str) -> list[dict]:
+    """Safely load a JSON array file."""
+    if not os.path.isfile(path):
+        return []
+    try:
+        with open(path) as f:
+            data = json.load(f)
+        return data if isinstance(data, list) else []
+    except Exception:
+        return []
+
+
 def _load_examples() -> list[dict]:
-    """Load essay examples from JSON file with caching."""
+    """Load essay examples from all sources with caching."""
     global _examples_cache
     if _examples_cache is not None:
         return _examples_cache
 
-    if not os.path.isfile(_DATA_PATH):
-        logger.warning("Essay examples data file not found: %s", _DATA_PATH)
-        return []
+    all_essays: list[dict] = []
 
-    try:
-        with open(_DATA_PATH) as f:
-            _examples_cache = json.load(f)
-        logger.info("Loaded %d essay examples", len(_examples_cache))
-        return _examples_cache
-    except Exception as e:
-        logger.error("Failed to load essay examples: %s", e)
-        return []
+    # 1. Hand-crafted examples (highest quality, with coach notes)
+    curated = _load_json(os.path.join(_DATA_DIR, "essay_examples.json"))
+    for e in curated:
+        e.setdefault("source_type", "curated")
+        e.setdefault("quality", "featured")
+    all_essays.extend(curated)
+
+    # 2. ARINGO real essays (scraped from public site)
+    aringo = _load_json(os.path.join(_DATA_DIR, "aringo_essays.json"))
+    for e in aringo:
+        e.setdefault("source_type", "real")
+        e.setdefault("quality", "real_example")
+        # Normalize fields to match curated schema
+        e.setdefault("school", e.get("school_id"))
+        e.setdefault("school_name", e.get("page_title", ""))
+    all_essays.extend(aringo)
+
+    # 3. Claude-generated corpus (diverse, labeled with outcomes)
+    generated = _load_json(os.path.join(_DATA_DIR, "essay_corpus.json"))
+    for e in generated:
+        e.setdefault("source_type", "generated")
+        e.setdefault("quality", "ai_generated")
+        e.setdefault("school", e.get("school_id"))
+    all_essays.extend(generated)
+
+    _examples_cache = all_essays
+    logger.info(
+        "Loaded %d essay examples (curated=%d, real=%d, generated=%d)",
+        len(all_essays), len(curated), len(aringo), len(generated),
+    )
+    return _examples_cache
 
 
 @router.get("/examples")
@@ -76,14 +109,16 @@ def list_examples(
     for ex in paginated:
         cards.append({
             "id": ex["id"],
-            "school": ex["school"],
-            "school_name": ex["school_name"],
-            "prompt": ex["prompt"],
-            "year": ex["year"],
-            "word_count": ex["word_count"],
+            "school": ex.get("school", ""),
+            "school_name": ex.get("school_name", ""),
+            "prompt": ex.get("prompt", ""),
+            "year": ex.get("year", ""),
+            "word_count": ex.get("word_count", 0),
             "background": ex.get("background", {}),
             "themes": ex.get("themes", []),
             "strengths": ex.get("strengths", []),
+            "source_type": ex.get("source_type", ""),
+            "quality": ex.get("quality", ""),
         })
 
     return {

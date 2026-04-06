@@ -33,8 +33,8 @@ export function FeaturedSchools({
     <section className="bg-background max-w-7xl mx-auto px-8 py-20 border-b border-border">
       <div className="flex justify-between items-end mb-12">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-2 font-medium">Featured Programs</p>
-          <h2 className="heading-serif text-4xl text-foreground">Schools We Cover</h2>
+          <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2 font-semibold">Featured Programs</p>
+          <h2 className="text-3xl sm:text-4xl font-semibold text-foreground tracking-tight">Deep Data on Every School</h2>
         </div>
         <button onClick={() => router.push("/schools")}
           className="text-sm font-medium uppercase tracking-wider text-muted-foreground hover:text-primary flex items-center gap-2 transition-colors">

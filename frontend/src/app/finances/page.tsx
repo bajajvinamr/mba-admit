@@ -21,6 +21,14 @@ const FeesPanel = dynamic(
   () => import("@/app/fee-calculator/FeeCalcContent"),
   { loading: () => <TabSkeleton /> },
 );
+const NegotiatePanel = dynamic(
+  () => import("@/app/finances/NegotiateContent"),
+  { loading: () => <TabSkeleton /> },
+);
+const ScholarshipIntelPanel = dynamic(
+  () => import("@/app/finances/ScholarshipIntelContent"),
+  { loading: () => <TabSkeleton /> },
+);
 
 function TabSkeleton() {
   return (
@@ -36,6 +44,8 @@ const TABS = [
   { id: "salary", label: "Salary Data" },
   { id: "scholarships", label: "Scholarships & Aid" },
   { id: "fees", label: "Fees & Budget" },
+  { id: "negotiate", label: "Negotiate" },
+  { id: "scholarship-intel", label: "Scholarship Intel" },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
@@ -94,6 +104,8 @@ function FinancesContent() {
         {activeTab === "salary" && <SalaryPanel />}
         {activeTab === "scholarships" && <ScholarshipsPanel />}
         {activeTab === "fees" && <FeesPanel />}
+        {activeTab === "negotiate" && <NegotiatePanel />}
+        {activeTab === "scholarship-intel" && <ScholarshipIntelPanel />}
       </div>
     </div>
   );

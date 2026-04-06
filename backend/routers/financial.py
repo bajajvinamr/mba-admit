@@ -559,6 +559,99 @@ def get_fee_waivers(school_ids: str | None = None, is_military: bool = False, is
     }
 
 
+# ── GMAT/GRE Test Waivers ───────────────────────────────────────────────────
+
+# Schools known to offer test-optional or GMAT/GRE waivers
+TEST_WAIVER_DATA: dict[str, dict] = {
+    "hbs": {"test_optional": False, "waiver_available": False, "notes": "GMAT/GRE required. No waivers. HBS values standardized testing."},
+    "gsb": {"test_optional": False, "waiver_available": False, "notes": "GMAT/GRE required. Stanford does not grant test waivers."},
+    "wharton": {"test_optional": False, "waiver_available": False, "notes": "GMAT/GRE required. Wharton accepts both GMAT Focus and Classic."},
+    "booth": {"test_optional": False, "waiver_available": True, "notes": "Test waivers available for candidates with strong academic/professional records. Submit waiver request through application portal."},
+    "kellogg": {"test_optional": False, "waiver_available": True, "notes": "Test waivers considered on case-by-case basis. Strong quantitative background + professional experience required."},
+    "sloan": {"test_optional": False, "waiver_available": False, "notes": "GMAT/GRE required. MIT Sloan accepts Executive Assessment for Sloan Fellows."},
+    "columbia": {"test_optional": False, "waiver_available": True, "notes": "Test waivers available for select candidates with strong quantitative background and 5+ years experience."},
+    "tuck": {"test_optional": False, "waiver_available": False, "notes": "GMAT/GRE required. Tuck encourages retaking for a higher score."},
+    "ross": {"test_optional": False, "waiver_available": True, "notes": "Test waivers may be available. Contact admissions to discuss eligibility."},
+    "fuqua": {"test_optional": False, "waiver_available": True, "notes": "Test waivers available for candidates with quantitative graduate degrees or CFA/CPA."},
+    "darden": {"test_optional": False, "waiver_available": True, "notes": "Test waivers considered for candidates with advanced degrees, CFA, or strong quantitative records."},
+    "stern": {"test_optional": False, "waiver_available": True, "notes": "Test waivers available for candidates with 5+ years experience and quantitative credentials."},
+    "yale_som": {"test_optional": False, "waiver_available": True, "notes": "Yale SOM offers test waivers for select candidates with strong academic records."},
+    "insead": {"test_optional": False, "waiver_available": False, "notes": "GMAT/GRE required. INSEAD has no test waiver policy."},
+    "lbs": {"test_optional": False, "waiver_available": True, "notes": "GMAT/GRE waivers available for candidates with advanced degrees or professional certifications."},
+    "isb": {"test_optional": False, "waiver_available": True, "notes": "ISB accepts GMAT/GRE waivers for candidates with strong academic + professional profiles."},
+}
+
+
+@router.get("/test-waivers")
+def get_test_waivers(school_ids: str | None = None):
+    """Find GMAT/GRE test waiver opportunities at target schools."""
+    ids = [s.strip().lower() for s in school_ids.split(",") if s.strip()] if school_ids else list(TEST_WAIVER_DATA.keys())
+    results = []
+    for sid in ids:
+        data = TEST_WAIVER_DATA.get(sid)
+        school = SCHOOL_DB.get(sid)
+        name = school.get("name", sid) if school else sid
+        if data:
+            results.append({"school_id": sid, "school_name": name, **data})
+        else:
+            results.append({
+                "school_id": sid, "school_name": name,
+                "test_optional": False, "waiver_available": False,
+                "notes": "Contact admissions for test waiver policy.",
+            })
+    waiver_schools = [r for r in results if r["waiver_available"]]
+    return {
+        "schools": results,
+        "total": len(results),
+        "waiver_available_count": len(waiver_schools),
+    }
+
+
+class WaiverEmailRequest(_BaseModel):
+    school_id: str
+    waiver_type: str = "fee"  # "fee" | "test"
+    applicant_name: str
+    reason: str = "financial_hardship"  # financial_hardship | military | conference | campus_visit | professional_credentials
+
+
+@router.post("/waiver-email-template")
+def generate_waiver_email(req: WaiverEmailRequest):
+    """Generate a professional waiver request email template."""
+    school = SCHOOL_DB.get(req.school_id)
+    school_name = school.get("name", req.school_id) if school else req.school_id
+
+    if req.waiver_type == "fee":
+        subject = f"Application Fee Waiver Request — {school_name} MBA Program"
+        reasons = {
+            "financial_hardship": f"I am writing to respectfully request an application fee waiver for the {school_name} MBA program. As a candidate facing financial constraints, the application fee presents a significant barrier to my ability to apply. I am deeply committed to attending {school_name} and believe I would be a strong addition to your incoming class.",
+            "military": f"As a current/former member of the armed forces, I am writing to inquire about the military fee waiver for the {school_name} MBA program. I understand {school_name} values the leadership and service experience that military candidates bring to the classroom.",
+            "conference": f"I recently attended [event name] hosted by {school_name} and was informed that attendees may be eligible for an application fee waiver. I would like to request this waiver as I prepare my application.",
+            "campus_visit": f"I recently visited the {school_name} campus and spoke with [admissions representative name]. I was told that campus visitors may be eligible for an application fee waiver, and I would like to request one.",
+        }
+    else:  # test waiver
+        subject = f"GMAT/GRE Test Waiver Request — {school_name} MBA Program"
+        reasons = {
+            "professional_credentials": f"I am writing to request a GMAT/GRE waiver for my application to {school_name}'s MBA program. I hold [CFA/CPA/advanced degree] which I believe demonstrates strong quantitative capabilities. My professional track record of [X years] in [industry] further supports my readiness for the academic rigor of your program.",
+            "financial_hardship": f"I am requesting a GMAT/GRE waiver for {school_name}'s MBA program. The cost and preparation time for standardized testing presents a significant challenge given my current circumstances. My academic record (GPA: [X.XX] from [university]) and [X years] of progressive professional experience demonstrate the analytical skills needed for your program.",
+            "military": f"As a military service member/veteran, I am requesting a GMAT/GRE waiver for my application to {school_name}'s MBA program. My military experience has developed strong analytical and leadership capabilities that I believe are equivalent to what standardized testing measures.",
+        }
+
+    body_template = reasons.get(req.reason, reasons.get("financial_hardship", ""))
+    closing = f"\n\nI have attached my resume for your reference and am happy to provide any additional information. Thank you for your consideration.\n\nSincerely,\n{req.applicant_name}"
+
+    return {
+        "subject": subject,
+        "body": f"Dear {school_name} Admissions Committee,\n\n{body_template}{closing}",
+        "tips": [
+            "Personalize the template with specific details about your background",
+            "Reference any interactions with the school (campus visit, info session, event)",
+            "Be concise — admissions teams read hundreds of these",
+            "Send to the admissions email address found on the school's official website",
+            f"For {school_name}: check their admissions FAQ page for the correct contact",
+        ],
+    }
+
+
 # ── Scholarship Estimator ─────────────────────────────────────────────────────
 
 from routers.schools import SCHOOL_DB as _SCHOL_SCHOOL_DB, SCHOOL_ALIASES as _SCHOL_ALIASES

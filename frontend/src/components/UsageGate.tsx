@@ -30,6 +30,9 @@ const FEATURE_COPY: Partial<Record<FeatureKey, { hook: string; value: string }>>
   roi_calculator: { hook: "You've seen the 10-year return analysis", value: "Compare ROI across every school combination" },
   scholarship_negotiator: { hook: "Your negotiation strategy has been drafted", value: "Run unlimited negotiation strategies as offers come in" },
   peer_comparison: { hook: "You've seen how you stack up against peers", value: "Compare your profile across unlimited dimensions" },
+  strategy_ai: { hook: "Your personalized strategy has been generated", value: "Get unlimited AI-powered application strategies" },
+  recommender_briefing: { hook: "Your AI recommender briefing is ready", value: "Generate personalized briefings for every recommender and school" },
+  narrative_arc: { hook: "Your narrative arc has been mapped — the consultant-level output", value: "Rebuild and refine your narrative for every application cycle" },
 };
 
 // ── Default free trial counts per feature ─────────────────────────────────
@@ -38,6 +41,8 @@ const DEFAULT_FREE_TRIAL: Partial<Record<FeatureKey, number>> = {
   odds_calculator: 2,
   essay_evaluator: 1,
   interview_simulator: 1,
+  strategy_ai: 1,
+  recommender_briefing: 2,
   roi_calculator: 2,
   school_compare: 2,
   peer_comparison: 2,

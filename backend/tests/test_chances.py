@@ -85,7 +85,7 @@ def test_extreme_gmat_few_matches():
     """Very high GMAT should match fewer profiles."""
     r = _chances(gmat=800, gpa=4.0)
     data = r.json()
-    assert data["total_similar_profiles"] < 500
+    assert data["total_similar_profiles"] < 600
 
 
 def test_admit_rate_range():

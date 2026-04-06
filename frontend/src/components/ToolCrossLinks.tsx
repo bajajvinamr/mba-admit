@@ -10,7 +10,7 @@ type CrossLink = { href: string; label: string; desc: string; cat: string };
 // Organized by journey stage: Explore → Build → Apply → Interview → Decide → Utility
 const ALL_TOOLS: CrossLink[] = [
  // Explore
- { href:"/schools", label:"School Directory", desc:"Browse 840+ programs", cat:"explore"},
+ { href:"/schools", label:"School Directory", desc:"Browse 905 programs", cat:"explore"},
  { href:"/simulator", label:"Odds Calculator", desc:"Your admit chances", cat:"explore"},
  { href:"/decisions", label:"Community Decisions", desc:"Real outcomes", cat:"explore"},
  { href:"/compare", label:"Compare Schools", desc:"Side-by-side analysis", cat:"explore"},
@@ -30,13 +30,17 @@ const ALL_TOOLS: CrossLink[] = [
  { href:"/calendar", label:"Deadline Calendar", desc:"Never miss a date", cat:"apply"},
  { href:"/checklist", label:"App Checklist", desc:"Requirements per school", cat:"apply"},
  { href:"/recommenders", label:"Rec Strategy", desc:"Letter planning & tracking", cat:"apply"},
+ { href:"/sprint-plan", label:"Sprint Planner", desc:"Smart deadlines + nudges", cat:"apply"},
  { href:"/outreach", label:"Networking Hub", desc:"Alumni outreach", cat:"apply"},
  // Interview
  { href:"/interview", label:"Mock Interview", desc:"AI interview practice", cat:"interview"},
  { href:"/interview/questions", label:"Question Bank", desc:"100+ curated questions", cat:"interview"},
+ { href:"/video-essay", label:"Video Essay Prep", desc:"Practice timed video essays", cat:"interview"},
  // Decide
  { href:"/scholarships", label:"Scholarships & Aid", desc:"Financial aid strategy", cat:"decide"},
  { href:"/waitlist", label:"Waitlist Strategy", desc:"Post-waitlist plan", cat:"decide"},
+ { href:"/list-check", label:"List Health Check", desc:"Is your list balanced?", cat:"explore"},
+ { href:"/connect", label:"Talk to Students", desc:"Chat with real students", cat:"explore"},
  { href:"/roi", label:"ROI Calculator", desc:"10-year returns", cat:"decide"},
  { href:"/salary", label:"Salary Calculator", desc:"Post-MBA pay", cat:"decide"},
  // Utility
@@ -44,6 +48,7 @@ const ALL_TOOLS: CrossLink[] = [
  { href:"/gmat-planner", label:"GMAT Planner", desc:"Study schedule", cat:"utility"},
  { href:"/fee-calculator", label:"Fee Calculator", desc:"Application costs", cat:"utility"},
  { href:"/round-strategy", label:"Round Strategy", desc:"R1 vs R2 vs R3", cat:"utility"},
+ { href:"/waivers", label:"Fee & Test Waivers", desc:"Save on fees + GMAT", cat:"utility"},
 ];
 
 /** Deterministic seeded hash for consistent shuffling per page. */

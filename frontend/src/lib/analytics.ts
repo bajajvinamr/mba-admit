@@ -13,8 +13,8 @@
 type EventProperties = Record<string, string | number | boolean | null>;
 
 const IS_PROD = process.env.NODE_ENV === "production";
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-const ENDPOINT = `${API_BASE}/api/analytics/event`;
+const ANALYTICS_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const ENDPOINT = `${ANALYTICS_BASE}/api/analytics/event`;
 
 // Queue events during page load, flush on idle
 let queue: Array<{ event: string; properties: EventProperties; timestamp: string }> = [];

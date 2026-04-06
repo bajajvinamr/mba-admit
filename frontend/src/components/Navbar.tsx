@@ -4,11 +4,12 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { usePageView } from "@/hooks/usePageView";
 import Link from "next/link";
-import { Search, LayoutDashboard, Compass, GraduationCap, FileText, Mic, DollarSign } from "lucide-react";
+import { Search, LayoutDashboard, Compass, GraduationCap, FileText, Mic, DollarSign, Bell } from "lucide-react";
 import { AuthButton } from "@/components/AuthButton";
 import { ProfilePill } from "@/components/ProfilePill";
 import { PlanPill } from "@/components/PlanPill";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { NotificationBell } from "@/components/NotificationBell";
 
 const NAV_LINKS = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -82,6 +83,7 @@ export function Navbar() {
           </button>
 
           <ThemeToggle />
+          <NotificationBell />
 
           <div className="w-px h-5 bg-border mx-1.5" />
 

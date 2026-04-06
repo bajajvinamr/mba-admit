@@ -1,0 +1,212 @@
+[
+  {
+    "slug": "anderson",
+    "forum_id": 187,
+    "name": "Anderson (UCLA)"
+  },
+  {
+    "slug": "babson",
+    "forum_id": 224,
+    "name": "Babson"
+  },
+  {
+    "slug": "booth",
+    "forum_id": 189,
+    "name": "Booth (Chicago)"
+  },
+  {
+    "slug": "columbia",
+    "forum_id": 190,
+    "name": "CBS (Columbia)"
+  },
+  {
+    "slug": "darden",
+    "forum_id": 197,
+    "name": "Darden (UVA)"
+  },
+  {
+    "slug": "fuqua",
+    "forum_id": 193,
+    "name": "Fuqua (Duke)"
+  },
+  {
+    "slug": "goizueta",
+    "forum_id": 210,
+    "name": "Goizueta (Emory)"
+  },
+  {
+    "slug": "graphs-and-tables-g-t",
+    "forum_id": 457,
+    "name": "G&T"
+  },
+  {
+    "slug": "haas",
+    "forum_id": 195,
+    "name": "Haas (Berkeley)"
+  },
+  {
+    "slug": "harvard",
+    "forum_id": 184,
+    "name": "Harvard"
+  },
+  {
+    "slug": "hec-paris",
+    "forum_id": 221,
+    "name": "HEC Paris"
+  },
+  {
+    "slug": "iim-ahmedabad",
+    "forum_id": 453,
+    "name": "IIM  Ahmedabad"
+  },
+  {
+    "slug": "iim-group-discussions",
+    "forum_id": 328,
+    "name": "IIM  Calcutta"
+  },
+  {
+    "slug": "insead",
+    "forum_id": 201,
+    "name": "INSEAD"
+  },
+  {
+    "slug": "isb",
+    "forum_id": 204,
+    "name": "ISB"
+  },
+  {
+    "slug": "johnson",
+    "forum_id": 198,
+    "name": "Johnson (Cornell)"
+  },
+  {
+    "slug": "jones-rice-university",
+    "forum_id": 214,
+    "name": "Jones (Rice)"
+  },
+  {
+    "slug": "judge-cambridge",
+    "forum_id": 217,
+    "name": "Judge (Cambridge)"
+  },
+  {
+    "slug": "kelley",
+    "forum_id": 212,
+    "name": "Kelley (IU)"
+  },
+  {
+    "slug": "kellogg",
+    "forum_id": 191,
+    "name": "Kellogg (Northwestern)"
+  },
+  {
+    "slug": "kenan-flagler",
+    "forum_id": 206,
+    "name": "Kenan-Flagler (UNC)"
+  },
+  {
+    "slug": "lbs",
+    "forum_id": 202,
+    "name": "LBS"
+  },
+  {
+    "slug": "marshall",
+    "forum_id": 208,
+    "name": "Marshall (USC)"
+  },
+  {
+    "slug": "mcdonough",
+    "forum_id": 207,
+    "name": "McDonough (Georgetown)"
+  },
+  {
+    "slug": "multi-source-reasoning-msr",
+    "forum_id": 456,
+    "name": "MSR"
+  },
+  {
+    "slug": "ntu-mba",
+    "forum_id": 230,
+    "name": "NTU"
+  },
+  {
+    "slug": "nus",
+    "forum_id": 209,
+    "name": "NUS (Singapore)"
+  },
+  {
+    "slug": "owen-vanderbilt",
+    "forum_id": 216,
+    "name": "Owen (Vanderbilt)"
+  },
+  {
+    "slug": "ross",
+    "forum_id": 196,
+    "name": "Ross (Michigan)"
+  },
+  {
+    "slug": "rotman-toronto",
+    "forum_id": 218,
+    "name": "Rotman (Toronto)"
+  },
+  {
+    "slug": "said",
+    "forum_id": 211,
+    "name": "Said (Oxford)"
+  },
+  {
+    "slug": "simon-rochester",
+    "forum_id": 232,
+    "name": "Simon (Rochester)"
+  },
+  {
+    "slug": "sloan",
+    "forum_id": 185,
+    "name": "Sloan (MIT)"
+  },
+  {
+    "slug": "stanford-gsb",
+    "forum_id": 186,
+    "name": "Stanford"
+  },
+  {
+    "slug": "stern",
+    "forum_id": 199,
+    "name": "Stern (NYU)"
+  },
+  {
+    "slug": "tepper",
+    "forum_id": 205,
+    "name": "Tepper (CMU)"
+  },
+  {
+    "slug": "tuck",
+    "forum_id": 194,
+    "name": "Tuck (Dartmouth)"
+  },
+  {
+    "slug": "two-part-analysis-tpa",
+    "forum_id": 455,
+    "name": "TPA"
+  },
+  {
+    "slug": "ucla-anderson",
+    "forum_id": 187,
+    "name": "Anderson (UCLA)"
+  },
+  {
+    "slug": "ucr-business",
+    "forum_id": 394,
+    "name": "UC Riverside"
+  },
+  {
+    "slug": "wharton",
+    "forum_id": 188,
+    "name": "Wharton (Upenn)"
+  },
+  {
+    "slug": "yale",
+    "forum_id": 200,
+    "name": "Yale SOM"
+  }
+]

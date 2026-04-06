@@ -27,7 +27,10 @@ export type FeatureKey =
   | "waitlist_strategy"
   | "roi_calculator"
   | "scholarship_negotiator"
-  | "peer_comparison";
+  | "peer_comparison"
+  | "strategy_ai"
+  | "recommender_briefing"
+  | "narrative_arc";
 
 type FeatureLimit = {
   free: number;       // uses per day (or per month for some)
@@ -59,6 +62,9 @@ const FEATURE_LIMITS: Record<FeatureKey, FeatureLimit> = {
   roi_calculator:      { free: 2,  pro: -1, premium: -1, period: "month", label: "ROI Calculator" },
   scholarship_negotiator: { free: 1, pro: 5, premium: -1, period: "month", label: "Scholarship Negotiator" },
   peer_comparison:        { free: 3, pro: -1, premium: -1, period: "day",   label: "Peer Comparison" },
+  strategy_ai:            { free: 1, pro: 5,  premium: -1, period: "month", label: "AI Profile Strategist" },
+  recommender_briefing:   { free: 2, pro: 20, premium: -1, period: "month", label: "AI Recommender Briefing" },
+  narrative_arc:          { free: 1, pro: 5,  premium: -1, period: "month", label: "Narrative Arc Builder" },
 };
 
 // ── Storage helpers ─────────────────────────────────────────────────────────

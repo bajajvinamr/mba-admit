@@ -1,13 +1,17 @@
 """Financial aid comparison — scholarship negotiation + ROI calculator."""
 
+import json
 import logging
 import re
 from typing import Optional, List
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, Field
 
-from agents import SCHOOL_DB
+from agents import SCHOOL_DB, get_llm
+from middleware import rate_limit
+from guardrails import sanitize_for_llm, MAX_STRATEGY_CHARS
+from langchain_core.messages import SystemMessage, HumanMessage
 
 router = APIRouter(prefix="/api", tags=["financial-aid"])
 logger = logging.getLogger(__name__)
@@ -228,3 +232,131 @@ def compare_financial_aid(req: FinancialAidCompareRequest):
             ],
         },
     }
+
+
+# ── Enhanced Negotiation Strategy (AI-powered) ──────────────────────────────
+
+class AdmittedSchoolInput(BaseModel):
+    slug: str = Field(max_length=100)
+    scholarship_amount: float = Field(default=0, ge=0)
+
+
+class NegotiationStrategyRequest(BaseModel):
+    admitted_schools: List[AdmittedSchoolInput] = Field(min_length=2, max_length=6)
+    preferred_school: str = Field(max_length=100)
+
+
+def _parse_json_response(content: str) -> dict:
+    """Parse JSON from LLM response, handling markdown code fences."""
+    if "```json" in content:
+        content = content.split("```json")[1].split("```")[0].strip()
+    elif "```" in content:
+        content = content.split("```")[1].strip()
+    return json.loads(content)
+
+
+@router.post("/financial-aid/negotiation-strategy")
+@rate_limit("10/minute")
+def negotiation_strategy(request: Request, req: NegotiationStrategyRequest):
+    """Generate a detailed, AI-powered scholarship negotiation strategy."""
+    from observability import track_ai_interaction
+
+    # Resolve school names and data
+    schools_info = []
+    preferred_name = req.preferred_school
+    for s in req.admitted_schools:
+        school = SCHOOL_DB.get(s.slug, {})
+        name = school.get("name", s.slug)
+        if s.slug == req.preferred_school:
+            preferred_name = name
+        schools_info.append({
+            "slug": s.slug,
+            "name": name,
+            "scholarship": s.scholarship_amount,
+            "tuition": school.get("tuition_usd", 0),
+            "ranking_tier": "M7" if school.get("acceptance_rate", 50) < 15 else "T15" if school.get("acceptance_rate", 50) < 25 else "T25+",
+            "country": school.get("country", "Unknown"),
+        })
+
+    llm = get_llm()
+
+    schools_summary = "\n".join([
+        f"- {s['name']} ({s['ranking_tier']}): ${s['scholarship']:,.0f} scholarship, ${s['tuition']:,.0f} tuition"
+        for s in schools_info
+    ])
+
+    system_prompt = f"""You are an MBA financial aid negotiation specialist. The applicant has been admitted to multiple schools and wants to negotiate their scholarship at their preferred school: {preferred_name}.
+
+Admitted schools and current offers:
+{schools_summary}
+
+Preferred school: {preferred_name}
+
+Analyze the leverage situation and create a comprehensive negotiation plan.
+
+Return a JSON object with EXACTLY these fields:
+- "strategy": string (detailed 3-5 paragraph step-by-step negotiation strategy)
+- "email_template": string (a fully customized, ready-to-send email template referencing the actual schools and amounts)
+- "timing": string (specific timing advice for when to send, follow up, etc.)
+- "expected_outcome": string (realistic expectation of what they can achieve)
+- "leverage_analysis": array of {{"school": string, "leverage": "strong"|"moderate"|"weak", "reason": string}} (one per admitted school)
+- "dos_and_donts": {{"dos": array of strings, "donts": array of strings}} (5 each, specific to this situation)
+
+DO NOT return any text outside the JSON object. No markdown fences."""
+
+    with track_ai_interaction(
+        user_input=f"negotiation_strategy:{req.preferred_school}",
+        endpoint="financial_aid_negotiation",
+    ) as tracker:
+        try:
+            response = llm.invoke([
+                SystemMessage(content=system_prompt),
+                HumanMessage(content=f"Generate negotiation strategy for {preferred_name} using leverage from other admits."),
+            ])
+            result = _parse_json_response(response.content)
+            tracker["output"] = "negotiation_generated"
+            return result
+        except Exception as e:
+            logger.error("Negotiation strategy failed: %s", e)
+            tracker["output"] = f"error:{e}"
+            # Structured fallback
+            return {
+                "strategy": (
+                    f"Step 1: Compile all your offer letters, especially the strongest scholarship from your admits. "
+                    f"Step 2: Draft a concise, professional email to {preferred_name}'s financial aid office. "
+                    f"Step 3: Lead with genuine enthusiasm for {preferred_name}, then mention the competing offer. "
+                    f"Step 4: Be specific about the dollar amount gap you'd like bridged. "
+                    f"Step 5: Follow up once after 7-10 business days if no response."
+                ),
+                "email_template": (
+                    f"Subject: Financial Aid Reconsideration — [Your Name]\n\n"
+                    f"Dear Financial Aid Committee,\n\n"
+                    f"I am thrilled to have been admitted to {preferred_name} and it remains my top choice. "
+                    f"I recently received a scholarship offer from another admitted program that has created "
+                    f"a meaningful financial gap. I would be grateful if the committee could reconsider my "
+                    f"financial aid package.\n\n"
+                    f"Warm regards,\n[Your Name]"
+                ),
+                "timing": "Send within 2 weeks of receiving your last offer. Follow up after 7-10 business days.",
+                "expected_outcome": "Most schools will at least review your case. Expect a 10-30% increase in scholarship if you have strong competing offers from peer schools.",
+                "leverage_analysis": [
+                    {"school": s["name"], "leverage": "moderate", "reason": f"${s['scholarship']:,.0f} offer provides baseline leverage"}
+                    for s in schools_info
+                ],
+                "dos_and_donts": {
+                    "dos": [
+                        "Express genuine enthusiasm for the preferred school",
+                        "Be specific about the competing offer amount",
+                        "Frame it as making the decision easier, not a threat",
+                        "Thank them regardless of the outcome",
+                        "Keep the email concise (under 300 words)",
+                    ],
+                    "donts": [
+                        "Never issue ultimatums",
+                        "Don't negotiate with schools you won't attend",
+                        "Don't exaggerate competing offers",
+                        "Don't contact admissions and financial aid separately about the same issue",
+                        "Don't negotiate after paying the deposit",
+                    ],
+                },
+            }

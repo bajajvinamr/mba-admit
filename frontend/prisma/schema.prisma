@@ -18,6 +18,8 @@ model User {
   outcomes       OutcomeContribution[]
   subscription   Subscription?
   recommenders   Recommender[]
+  notifications  Notification[]
+  interviewReports InterviewReport[]
   mentor         Mentor?
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
@@ -166,4 +168,39 @@ model Mentor {
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
   user              User     @relation(fields: [userId], references: [id])
+}
+
+model Notification {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String   // weekly_recap | deadline_alert | inactivity | achievement
+  title       String
+  body        String
+  read        Boolean  @default(false)
+  actionUrl   String?
+  actionLabel String?
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@index([userId, read])
+  @@index([userId, createdAt])
+}
+
+model InterviewReport {
+  id         String   @id @default(cuid())
+  userId     String
+  schoolSlug String
+  round      String
+  date       DateTime
+  format     String   // virtual_alumni | virtual_adcom | inperson_alumni | inperson_adcom
+  duration   Int
+  questions  String[]
+  style      String   // conversational | challenging | case_based | by_the_book
+  feeling    String   // great | good | okay | rough
+  advice     String
+  outcome    String?  // admitted | rejected | waitlisted
+  anonymous  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id])
+  @@index([schoolSlug, round])
 }

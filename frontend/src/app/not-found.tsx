@@ -29,7 +29,7 @@ export default function NotFound() {
  School Directory
  </span>
  <span className="text-[11px] text-muted-foreground/40">
- Browse 840+ programs
+ Browse 905 programs
  </span>
  </Link>
  <Link

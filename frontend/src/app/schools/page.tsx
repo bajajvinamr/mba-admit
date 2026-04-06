@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef, useMemo } from"react";
 import { useInfiniteQuery } from"@tanstack/react-query";
 import { ArrowUpDown, SearchX, RefreshCw } from"lucide-react";
 import { SearchBar } from"@/components/search/SearchBar";
+import { SmartSearchHints } from"@/components/search/SmartSearchHints";
 import {
  FilterPanel,
  MobileFilterTrigger,
@@ -285,8 +286,10 @@ export default function SchoolsSearchPage() {
  <SearchBar
  value={searchQuery}
  onChange={setSearchQuery}
- className="mb-6"
+ className="mb-3"
  />
+ <SmartSearchHints onSelect={(q) => setSearchQuery(q)} onFiltersChange={handleFiltersChange} />
+ <div className="mb-6" />
 
  {/* Layout: FilterPanel (left) + Results (right) */}
  <div className="flex gap-8 items-start">

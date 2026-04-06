@@ -1,0 +1,258 @@
+[
+  {
+    "id": 14,
+    "name": "Anderson"
+  },
+  {
+    "id": 5,
+    "name": "Booth"
+  },
+  {
+    "id": 78,
+    "name": "Broad"
+  },
+  {
+    "id": 47,
+    "name": "BU Questrom"
+  },
+  {
+    "id": 79,
+    "name": "Carlson"
+  },
+  {
+    "id": 64,
+    "name": "CEIBS"
+  },
+  {
+    "id": 7,
+    "name": "Columbia"
+  },
+  {
+    "id": 15,
+    "name": "Darden"
+  },
+  {
+    "id": 75,
+    "name": "Desautels McGill"
+  },
+  {
+    "id": 74,
+    "name": "ESADE"
+  },
+  {
+    "id": 127,
+    "name": "ESSEC"
+  },
+  {
+    "id": 53,
+    "name": "Fisher"
+  },
+  {
+    "id": 58,
+    "name": "Foster"
+  },
+  {
+    "id": 13,
+    "name": "Fuqua"
+  },
+  {
+    "id": 34,
+    "name": "Goizueta"
+  },
+  {
+    "id": 9,
+    "name": "Haas"
+  },
+  {
+    "id": 1,
+    "name": "Harvard"
+  },
+  {
+    "id": 76,
+    "name": "HEC Montreal"
+  },
+  {
+    "id": 27,
+    "name": "HEC Paris"
+  },
+  {
+    "id": 68,
+    "name": "IE"
+  },
+  {
+    "id": 29,
+    "name": "IESE"
+  },
+  {
+    "id": 137,
+    "name": "IIM (All Schools)"
+  },
+  {
+    "id": 69,
+    "name": "IIM Ahmedabad"
+  },
+  {
+    "id": 70,
+    "name": "IIM Bangalore"
+  },
+  {
+    "id": 71,
+    "name": "IIM Calcutta"
+  },
+  {
+    "id": 28,
+    "name": "IMD"
+  },
+  {
+    "id": 84,
+    "name": "Imperial College"
+  },
+  {
+    "id": 24,
+    "name": "INSEAD"
+  },
+  {
+    "id": 31,
+    "name": "ISB"
+  },
+  {
+    "id": 49,
+    "name": "Ivey Business School"
+  },
+  {
+    "id": 16,
+    "name": "Johnson (Cornell)"
+  },
+  {
+    "id": 55,
+    "name": "Jones Rice"
+  },
+  {
+    "id": 26,
+    "name": "Judge Cambridge"
+  },
+  {
+    "id": 17,
+    "name": "Kelley"
+  },
+  {
+    "id": 4,
+    "name": "Kellogg"
+  },
+  {
+    "id": 20,
+    "name": "Kenan-Flagler"
+  },
+  {
+    "id": 23,
+    "name": "LBS"
+  },
+  {
+    "id": 21,
+    "name": "Marshall (USC)"
+  },
+  {
+    "id": 18,
+    "name": "McCombs"
+  },
+  {
+    "id": 22,
+    "name": "McDonough"
+  },
+  {
+    "id": 63,
+    "name": "Mendoza"
+  },
+  {
+    "id": 87,
+    "name": "Nanyang MBA"
+  },
+  {
+    "id": 60,
+    "name": "NUS Singapore"
+  },
+  {
+    "id": 61,
+    "name": "Olin St. Louis"
+  },
+  {
+    "id": 35,
+    "name": "Owen Vanderbilt"
+  },
+  {
+    "id": 8,
+    "name": "Ross (Michigan)"
+  },
+  {
+    "id": 43,
+    "name": "Rotman"
+  },
+  {
+    "id": 62,
+    "name": "Rotterdam"
+  },
+  {
+    "id": 25,
+    "name": "Said"
+  },
+  {
+    "id": 80,
+    "name": "Sauder"
+  },
+  {
+    "id": 41,
+    "name": "Scheller"
+  },
+  {
+    "id": 51,
+    "name": "Schulich"
+  },
+  {
+    "id": 92,
+    "name": "SDA Bocconi"
+  },
+  {
+    "id": 65,
+    "name": "Simon"
+  },
+  {
+    "id": 6,
+    "name": "Sloan MIT"
+  },
+  {
+    "id": 101,
+    "name": "Smith (Queen's)"
+  },
+  {
+    "id": 2,
+    "name": "Stanford GSB"
+  },
+  {
+    "id": 11,
+    "name": "Stern"
+  },
+  {
+    "id": 19,
+    "name": "Tepper"
+  },
+  {
+    "id": 83,
+    "name": "Terry Georgia"
+  },
+  {
+    "id": 10,
+    "name": "Tuck"
+  },
+  {
+    "id": 164,
+    "name": "UCR Business"
+  },
+  {
+    "id": 3,
+    "name": "Wharton"
+  },
+  {
+    "id": 12,
+    "name": "Yale"
+  }
+]

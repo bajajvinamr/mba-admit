@@ -3,10 +3,10 @@
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 
 const STATS = [
-  { value: 0, suffix: "+", label: "Schools Indexed", dynamic: true },
-  { value: 100, suffix: "+", label: "Free Tools", dynamic: false },
-  { value: 12000, suffix: "+", label: "Real Decisions", dynamic: false },
-  { value: 5000, suffix: "+", label: "Applicants", dynamic: false },
+  { value: 0, suffix: "+", label: "Programs", dynamic: true },
+  { value: 67856, suffix: "+", label: "Real Decisions", dynamic: false },
+  { value: 56, suffix: "", label: "Schools Tracked", dynamic: false },
+  { value: 100, suffix: "+", label: "Tools", dynamic: false },
 ] as const;
 
 export function TrustBar({ totalSchools }: { totalSchools: number }) {

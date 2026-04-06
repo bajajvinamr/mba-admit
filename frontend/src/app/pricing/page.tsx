@@ -37,8 +37,8 @@ const TIERS: Tier[] = [
     description: "Explore the platform. No credit card required.",
     cta: "Current Plan",
     features: [
-      "School directory (840+ programs)",
-      "Real outcome data (12K decisions)",
+      "School directory (905 programs)",
+      "Real outcome data (67K decisions)",
       "3 odds calculations / day",
       "1 essay evaluation / month",
       "3 mock interviews / month",

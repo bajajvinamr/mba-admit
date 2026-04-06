@@ -51,7 +51,7 @@ export default function ProgramsIndexPage() {
  <p className="text-xs uppercase tracking-[0.2em] text-primary mb-4">Choose Your Path</p>
  <h1 className="heading-serif text-4xl md:text-5xl mb-4">Browse by Program Type</h1>
  <p className="text-white/60 text-lg max-w-2xl mx-auto">
- 840+ programs across MBA, MiM, Executive MBA, and Indian MBA. Find the right program for your career stage.
+ 905 programs across MBA, MiM, Executive MBA, and Indian MBA. Find the right program for your career stage.
  </p>
  </div>
  </section>

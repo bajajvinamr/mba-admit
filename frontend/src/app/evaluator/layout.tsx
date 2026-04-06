@@ -3,7 +3,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "MBA Essay Evaluator - AI Feedback on Your Application Essays | Admit Compass",
   description:
-    "Get instant AI feedback on your MBA application essays. Our evaluator scores structure, authenticity, storytelling, and provides actionable rewrites. Works for HBS, Stanford, Wharton, and 840+ programs.",
+    "Get instant AI feedback on your MBA application essays. Our evaluator scores structure, authenticity, storytelling, and provides actionable rewrites. Works for HBS, Stanford, Wharton, and 905 programs.",
   alternates: { canonical: "/evaluator" },
   openGraph: {
     title: "MBA Essay Evaluator | Admit Compass",
@@ -37,7 +37,7 @@ export default function EvaluatorLayout({ children }: { children: React.ReactNod
               "AI scoring on 6 dimensions",
               "School-specific prompt matching",
               "Actionable rewrite suggestions",
-              "Works for 840+ MBA programs",
+              "Works for 905 MBA programs",
             ],
           }),
         }}

@@ -6,7 +6,22 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/auth/", "/checkout", "/evals", "/success"],
+        disallow: [
+          "/api/",
+          "/auth/",
+          "/checkout",
+          "/evals",
+          "/success",
+          "/dashboard",
+          "/portfolio",
+          "/onboarding",
+          "/settings",
+        ],
+      },
+      {
+        userAgent: "GPTBot",
+        allow: ["/school/", "/schools", "/programs", "/rankings"],
+        disallow: "/",
       },
     ],
     sitemap: "https://admitcompass.ai/sitemap.xml",

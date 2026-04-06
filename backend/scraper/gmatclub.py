@@ -25,7 +25,9 @@ OUTPUT_FILE = DATA_DIR / "gmatclub_decisions.json"
 
 # School slug → forum_id mapping for per-school tracker pages.
 # URL pattern: https://gmatclub.com/forum/{slug}-{forum_id}/decision-tracker.html
+# Discovered via GMAT Club business school discussions + decision tracker dropdown.
 SCHOOL_FORUMS: dict[str, int] = {
+    # M7
     "harvard": 184,
     "stanford-gsb": 186,
     "wharton": 188,
@@ -33,6 +35,7 @@ SCHOOL_FORUMS: dict[str, int] = {
     "kellogg": 191,
     "sloan": 185,
     "columbia": 190,
+    # T15
     "tuck": 194,
     "haas": 195,
     "ross": 196,
@@ -41,16 +44,62 @@ SCHOOL_FORUMS: dict[str, int] = {
     "stern": 199,
     "yale": 200,
     "johnson": 198,
+    # T25
     "kenan-flagler": 206,
     "ucla-anderson": 187,
     "kelley": 212,
     "goizueta": 210,
+    "tepper": 205,
+    "mcdonough": 207,
+    "marshall": 208,
+    "jones-rice-university": 214,
+    "owen-vanderbilt": 216,
+    # International
     "lbs": 202,
     "insead": 201,
     "isb": 204,
+    "hec-paris": 221,
+    "judge-cambridge": 217,
+    "said": 211,
+    "rotman-toronto": 218,
+    "nus": 209,
+    "ntu-mba": 230,
+    "iim-ahmedabad": 453,
+    "iim-bangalore": 454,
+    "iim-calcutta": 455,
+    "imd": 244,
+    "imperial": 258,
+    "esade": 235,
+    "iese": 238,
+    "ie-business-school": 241,
+    "essec": 263,
+    "sda-bocconi": 250,
+    "ceibs": 246,
+    "hec-montreal": 260,
+    "rotterdam": 264,
+    # Other US
+    "mccombs": 203,
+    "mendoza": 222,
+    "fisher": 227,
+    "foster": 231,
+    "broad": 252,
+    "questrom": 254,
+    "carlson": 256,
+    "olin": 272,
+    "scheller": 268,
+    "terry": 274,
+    "babson": 224,
+    "simon-rochester": 232,
+    "ucr-business": 394,
+    # Canada
+    "ivey": 248,
+    "desautels": 261,
+    "sauder": 266,
+    "schulich": 270,
+    "smith-queens": 276,
 }
 
-# Maps GMAT Club school names to our school DB IDs
+# Maps GMAT Club school slugs to our school DB IDs
 GMATCLUB_TO_SCHOOL_ID: dict[str, str] = {
     "harvard": "hbs",
     "stanford-gsb": "gsb",
@@ -71,9 +120,51 @@ GMATCLUB_TO_SCHOOL_ID: dict[str, str] = {
     "ucla-anderson": "ucla_anderson",
     "kelley": "indiana_kelley",
     "goizueta": "emory_goizueta",
+    "tepper": "cmu_tepper",
+    "mcdonough": "georgetown_mcdonough",
+    "marshall": "usc_marshall",
+    "jones-rice-university": "rice_jones",
+    "owen-vanderbilt": "vanderbilt_owen",
     "lbs": "london_business_school",
     "insead": "insead",
     "isb": "isb",
+    "hec-paris": "hec_paris",
+    "judge-cambridge": "cambridge_judge",
+    "said": "oxford_said",
+    "rotman-toronto": "toronto_rotman",
+    "nus": "nus_business",
+    "ntu-mba": "ntu_business",
+    "iim-ahmedabad": "iima",
+    "iim-bangalore": "iimb",
+    "iim-calcutta": "iimc",
+    "imd": "imd",
+    "imperial": "imperial_college",
+    "esade": "esade",
+    "iese": "iese",
+    "ie-business-school": "ie_business",
+    "essec": "essec",
+    "sda-bocconi": "sda_bocconi",
+    "ceibs": "ceibs",
+    "hec-montreal": "hec_montreal",
+    "rotterdam": "erasmus_rotterdam",
+    "mccombs": "texas_mccombs",
+    "mendoza": "notre_dame_mendoza",
+    "fisher": "ohio_state_fisher",
+    "foster": "washington_foster",
+    "broad": "michigan_state_broad",
+    "questrom": "bu_questrom",
+    "carlson": "minnesota_carlson",
+    "olin": "wustl_olin",
+    "scheller": "gatech_scheller",
+    "terry": "uga_terry",
+    "babson": "babson_olin",
+    "simon-rochester": "rochester_simon",
+    "ucr-business": "ucr_business",
+    "ivey": "ivey_western",
+    "desautels": "mcgill_desautels",
+    "sauder": "ubc_sauder",
+    "schulich": "york_schulich",
+    "smith-queens": "queens_smith",
 }
 
 
@@ -276,23 +367,34 @@ async def scrape_school_tracker(
 
 async def run(
     schools: list[str] | None = None,
-    max_pages: int = 200,
+    max_pages: int = 25,
     fresh: bool = False,
+    min_entries: int = 500,
 ):
-    """Run the GMAT Club scraper."""
+    """Run the GMAT Club scraper.
+
+    Args:
+        schools: Specific school slugs to scrape. None = all.
+        max_pages: Max pages per school (25 pages = ~500 entries).
+        fresh: Ignore existing data and start from scratch.
+        min_entries: Skip schools that already have this many entries.
+    """
 
     # Load existing data if not fresh
     existing = {}
+    existing_by_school: dict[str, int] = {}
     if not fresh and OUTPUT_FILE.exists():
         with open(OUTPUT_FILE) as f:
             existing_list = json.load(f)
         for entry in existing_list:
             key = f"{entry.get('school_slug','')}_{entry.get('date','')}_{entry.get('status','')}_{entry.get('gpa','')}"
             existing[key] = entry
+            slug = entry.get("school_slug", "")
+            existing_by_school[slug] = existing_by_school.get(slug, 0) + 1
         logger.info(f"Loaded {len(existing)} existing entries")
 
     target_schools = schools or list(SCHOOL_FORUMS.keys())
-    logger.info(f"Scraping {len(target_schools)} schools (max {max_pages} pages each)")
+    logger.info(f"Scraping {len(target_schools)} schools (max {max_pages} pages each, skip if >= {min_entries} entries)")
 
     async with async_playwright() as pw:
         all_entries = list(existing.values()) if existing else []
@@ -303,7 +405,13 @@ async def run(
                 logger.warning(f"Unknown school slug: {slug}")
                 continue
 
-            logger.info(f"[{i+1}/{len(target_schools)}] Scraping {slug} (forum_id={forum_id})")
+            # Skip schools with enough data
+            current_count = existing_by_school.get(slug, 0)
+            if current_count >= min_entries and not fresh:
+                logger.info(f"[{i+1}/{len(target_schools)}] Skipping {slug} — already has {current_count} entries")
+                continue
+
+            logger.info(f"[{i+1}/{len(target_schools)}] Scraping {slug} (forum_id={forum_id}, existing={current_count})")
 
             entries = await scrape_school_tracker(pw, slug, forum_id, max_pages)
             logger.info(f"  {slug}: {len(entries)} entries scraped")
@@ -343,12 +451,13 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(description="Scrape GMAT Club Decision Tracker")
     parser.add_argument("--schools", type=str, help="Comma-separated school slugs")
-    parser.add_argument("--max-pages", type=int, default=200, help="Max pages per school")
+    parser.add_argument("--max-pages", type=int, default=25, help="Max pages per school (25 = ~500 entries)")
+    parser.add_argument("--min-entries", type=int, default=500, help="Skip schools with >= this many entries")
     parser.add_argument("--fresh", action="store_true", help="Ignore existing data")
     args = parser.parse_args()
 
     schools = args.schools.split(",") if args.schools else None
-    asyncio.run(run(schools=schools, max_pages=args.max_pages, fresh=args.fresh))
+    asyncio.run(run(schools=schools, max_pages=args.max_pages, fresh=args.fresh, min_entries=args.min_entries))
 
 
 if __name__ == "__main__":

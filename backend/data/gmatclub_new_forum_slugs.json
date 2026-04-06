@@ -1,0 +1,110 @@
+{
+  "McCombs": {
+    "slug": "mccombs",
+    "forum_id": 203
+  },
+  "Mendoza": {
+    "slug": "mendoza",
+    "forum_id": 222
+  },
+  "Fisher": {
+    "slug": "fisher",
+    "forum_id": 227
+  },
+  "Foster": {
+    "slug": "foster",
+    "forum_id": 231
+  },
+  "ESADE": {
+    "slug": "esade",
+    "forum_id": 235
+  },
+  "IESE": {
+    "slug": "iese",
+    "forum_id": 238
+  },
+  "IE": {
+    "slug": "ie-business-school",
+    "forum_id": 241
+  },
+  "IMD": {
+    "slug": "imd",
+    "forum_id": 244
+  },
+  "CEIBS": {
+    "slug": "ceibs",
+    "forum_id": 246
+  },
+  "Ivey Business School": {
+    "slug": "ivey",
+    "forum_id": 248
+  },
+  "SDA Bocconi": {
+    "slug": "sda-bocconi",
+    "forum_id": 250
+  },
+  "Broad": {
+    "slug": "broad",
+    "forum_id": 252
+  },
+  "BU Questrom": {
+    "slug": "questrom",
+    "forum_id": 254
+  },
+  "Carlson": {
+    "slug": "carlson",
+    "forum_id": 256
+  },
+  "IIM Bangalore": {
+    "slug": "iim-bangalore",
+    "forum_id": 454
+  },
+  "IIM Calcutta": {
+    "slug": "iim-calcutta",
+    "forum_id": 455
+  },
+  "Imperial College": {
+    "slug": "imperial",
+    "forum_id": 258
+  },
+  "HEC Montreal": {
+    "slug": "hec-montreal",
+    "forum_id": 260
+  },
+  "Desautels McGill": {
+    "slug": "desautels",
+    "forum_id": 261
+  },
+  "ESSEC": {
+    "slug": "essec",
+    "forum_id": 263
+  },
+  "Rotterdam": {
+    "slug": "rotterdam",
+    "forum_id": 264
+  },
+  "Sauder": {
+    "slug": "sauder",
+    "forum_id": 266
+  },
+  "Scheller": {
+    "slug": "scheller",
+    "forum_id": 268
+  },
+  "Schulich": {
+    "slug": "schulich",
+    "forum_id": 270
+  },
+  "Olin StL": {
+    "slug": "olin",
+    "forum_id": 272
+  },
+  "Terry Georgia": {
+    "slug": "terry",
+    "forum_id": 274
+  },
+  "Smith Queens": {
+    "slug": "smith-queens",
+    "forum_id": 276
+  }
+}

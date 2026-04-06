@@ -147,6 +147,15 @@ export default function RecommendersPage() {
   );
   const [briefingSchool, setBriefingSchool] = useState("");
   const [briefingContent, setBriefingContent] = useState<string | null>(null);
+  const [briefingData, setBriefingData] = useState<{
+    ai_generated?: boolean;
+    briefing_html?: string;
+    key_themes?: string[];
+    what_to_emphasize?: string[];
+    what_to_avoid?: string[];
+    school_specific_tips?: string[];
+    suggested_anecdotes?: string[];
+  } | null>(null);
   const [briefingLoading, setBriefingLoading] = useState(false);
 
   useEffect(() => {
@@ -224,12 +233,23 @@ export default function RecommendersPage() {
     setBriefingSchool(schoolId);
     setBriefingLoading(true);
     setBriefingContent(null);
+    setBriefingData(null);
     try {
-      const data = await apiFetch<{ template: string }>(
+      const data = await apiFetch<{
+        template: string;
+        ai_generated?: boolean;
+        briefing_html?: string;
+        key_themes?: string[];
+        what_to_emphasize?: string[];
+        what_to_avoid?: string[];
+        school_specific_tips?: string[];
+        suggested_anecdotes?: string[];
+      }>(
         `/api/recommenders/${rec.id}/briefing?school_id=${schoolId}`,
-        { method: "POST", noRetry: true },
+        { method: "POST", noRetry: true, timeoutMs: 60_000 },
       );
       setBriefingContent(data.template);
+      setBriefingData(data);
     } catch {
       // Generate a local fallback
       const schoolName = schoolMap[schoolId] || schoolId;
@@ -628,14 +648,92 @@ export default function RecommendersPage() {
                 {briefingLoading ? (
                   <div className="py-12 text-center text-muted-foreground/40">
                     <RefreshCcw className="animate-spin mx-auto mb-2" size={24} />
-                    Generating briefing...
+                    <p className="text-sm">Generating AI-powered briefing...</p>
+                    <p className="text-[10px] text-muted-foreground/30 mt-1">Analyzing school values and recommender fit</p>
                   </div>
                 ) : briefingContent ? (
-                  <div className="space-y-4">
-                    <pre className="text-sm text-foreground leading-relaxed whitespace-pre-wrap font-display bg-background/50 p-6 border border-border/10">
-                      {briefingContent}
-                    </pre>
-                    <div className="flex gap-3">
+                  <div className="space-y-5">
+                    {briefingData?.ai_generated && (
+                      <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 bg-primary/10 text-primary border border-primary/20">
+                        <Sparkles size={10} /> AI-Generated Briefing
+                      </span>
+                    )}
+
+                    {/* Rich AI sections */}
+                    {briefingData?.key_themes && briefingData.key_themes.length > 0 && (
+                      <div>
+                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50 mb-2">Key Themes to Weave In</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {briefingData.key_themes.map((theme, i) => (
+                            <span key={i} className="text-xs px-2 py-1 bg-primary/10 text-primary border border-primary/20">{theme}</span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {briefingData?.what_to_emphasize && briefingData.what_to_emphasize.length > 0 && (
+                      <div>
+                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 mb-2">What to Emphasize</h4>
+                        <ul className="space-y-1">
+                          {briefingData.what_to_emphasize.map((item, i) => (
+                            <li key={i} className="text-sm flex gap-2">
+                              <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {briefingData?.what_to_avoid && briefingData.what_to_avoid.length > 0 && (
+                      <div>
+                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-red-600 mb-2">What to Avoid</h4>
+                        <ul className="space-y-1">
+                          {briefingData.what_to_avoid.map((item, i) => (
+                            <li key={i} className="text-sm flex gap-2 text-red-700">
+                              <AlertCircle size={14} className="text-red-500 mt-0.5 shrink-0" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {briefingData?.suggested_anecdotes && briefingData.suggested_anecdotes.length > 0 && (
+                      <div>
+                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50 mb-2">Suggested Stories/Anecdotes</h4>
+                        <ul className="space-y-1">
+                          {briefingData.suggested_anecdotes.map((item, i) => (
+                            <li key={i} className="text-sm text-muted-foreground">{`${i + 1}. ${item}`}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Briefing HTML or Template text */}
+                    {briefingData?.briefing_html ? (
+                      <div
+                        className="text-sm leading-relaxed bg-background/50 p-6 border border-border/10"
+                        dangerouslySetInnerHTML={{ __html: briefingData.briefing_html }}
+                      />
+                    ) : (
+                      <pre className="text-sm text-foreground leading-relaxed whitespace-pre-wrap font-display bg-background/50 p-6 border border-border/10">
+                        {briefingContent}
+                      </pre>
+                    )}
+
+                    {briefingData?.school_specific_tips && briefingData.school_specific_tips.length > 0 && (
+                      <div className="p-4 bg-muted/50 border border-border">
+                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50 mb-2">School-Specific Tips</h4>
+                        <ul className="space-y-1">
+                          {briefingData.school_specific_tips.map((tip, i) => (
+                            <li key={i} className="text-xs text-muted-foreground">{tip}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    <div className="flex gap-3 flex-wrap">
                       <button
                         onClick={() =>
                           navigator.clipboard.writeText(briefingContent || "")
@@ -652,6 +750,12 @@ export default function RecommendersPage() {
                         className="text-xs font-bold px-4 py-2 border border-border/20 hover:bg-foreground/5 transition-colors flex items-center gap-2"
                       >
                         <Send size={14} /> Open in Email
+                      </button>
+                      <button
+                        onClick={() => window.print()}
+                        className="text-xs font-bold px-4 py-2 border border-border/20 hover:bg-foreground/5 transition-colors flex items-center gap-2"
+                      >
+                        <Download size={14} /> Download PDF
                       </button>
                     </div>
                   </div>

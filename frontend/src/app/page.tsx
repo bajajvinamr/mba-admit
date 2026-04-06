@@ -55,7 +55,7 @@ export default function HomePage() {
  .catch(err => {
  if (err.name !=="AbortError") {
  // Fallback: show placeholder count so UI isn't empty
- setTotalSchools(840);
+ setTotalSchools(905);
  }
  });
  return () => controller.abort();
@@ -94,12 +94,13 @@ export default function HomePage() {
  {/* Pricing teaser - links to full /pricing page */}
  <section className="bg-foreground text-white py-20 px-8">
  <div className="max-w-3xl mx-auto text-center">
- <p className="text-xs uppercase tracking-[0.3em] text-white/30 mb-4 font-medium">Pricing</p>
- <h2 className="heading-serif text-4xl md:text-5xl mb-4">
- Better than a $10,000 consultant.
+ <p className="text-xs uppercase tracking-[0.2em] text-white/30 mb-4 font-semibold">Pricing</p>
+ <h2 className="text-4xl md:text-5xl font-semibold mb-4 tracking-tight">
+ Consultants charge ₹10-15 lakhs.<br/>We charge ₹2,400/month.
  </h2>
  <p className="text-white/50 text-lg mb-8 max-w-xl mx-auto">
- Free tools to explore. Pro for $29/mo. Premium for $79/mo. Cancel anytime.
+ Same school research. Same essay strategy. Better data.
+ Free to start. Pro for $29/mo. Cancel anytime.
  </p>
  <Link href="/pricing" onClick={() => track("landing_pricing_cta_clicked")} className="inline-flex items-center gap-2 bg-primary text-foreground px-8 py-4 font-bold text-sm uppercase tracking-widest hover:bg-primary/90 transition-colors">
  See All Plans <ArrowRight size={14} />

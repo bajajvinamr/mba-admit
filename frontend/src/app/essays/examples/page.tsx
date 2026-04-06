@@ -29,6 +29,8 @@ type EssayCard = {
   background: Background;
   themes: string[];
   strengths: string[];
+  source_type?: "curated" | "real" | "generated";
+  quality?: string;
 };
 
 type EssayFull = EssayCard & {
@@ -376,9 +378,17 @@ export default function EssayExamplesPage() {
                       <GraduationCap size={14} className="text-primary" />
                       {essay.school_name}
                     </span>
-                    <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium uppercase ${OUTCOME_COLORS[essay.background.outcome] ?? "bg-foreground/10 text-foreground/50"}`}>
-                      {essay.background.outcome}
-                    </span>
+                    <div className="flex items-center gap-1.5">
+                      {essay.source_type === "real" && (
+                        <span className="rounded-full px-2 py-0.5 text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">Real</span>
+                      )}
+                      {essay.source_type === "curated" && (
+                        <span className="rounded-full px-2 py-0.5 text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">Featured</span>
+                      )}
+                      <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium uppercase ${OUTCOME_COLORS[essay.background?.outcome] ?? "bg-foreground/10 text-foreground/50"}`}>
+                        {essay.background?.outcome ?? "—"}
+                      </span>
+                    </div>
                   </div>
 
                   {/* Prompt */}
