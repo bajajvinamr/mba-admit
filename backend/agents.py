@@ -6,9 +6,16 @@ from logging_config import setup_logging
 
 logger = setup_logging()
 
-# LangChain & LLM Integration
-from langchain_anthropic import ChatAnthropic
-from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
+# LangChain & LLM Integration (lazy import — optional for Railway free tier)
+try:
+    from langchain_anthropic import ChatAnthropic
+    from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
+    HAS_LANGCHAIN = True
+except ImportError:
+    logger.warning("langchain not available — LLM features disabled. Install langchain-anthropic for full functionality.")
+    ChatAnthropic = None
+    SystemMessage = HumanMessage = AIMessage = None
+    HAS_LANGCHAIN = False
 
 # LlamaIndex & RAG Integration (Optional for Evals)
 try:
