@@ -55,6 +55,7 @@ type Outcomes = {
  gpa_distribution: GpaBucket[];
  top_industries: IndustryEntry[];
  yoe_distribution: YoeBucket[];
+ scholarship_rate?: number;
 };
 
 type ProfileFit = {
